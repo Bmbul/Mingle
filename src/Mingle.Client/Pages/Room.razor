@@ -53,6 +53,22 @@ else if (room.Stage == RoomStage.Lobby)
             <p class="muted">@T["Lobby_Waiting"]</p>
         }
 
+        @if (room.Topics is { } topics)
+        {
+            <h2 class="label">@T["Lobby_YourTopics"]</h2>
+            <p class="muted small">@T["Lobby_YourTopicsHint", topics.MaxPicks]</p>
+            <div class="chips" role="group" aria-label="@T["Lobby_YourTopics"]">
+                @foreach (var topic in topics.Offer)
+                {
+                    var on = topics.Picked.Contains(topic.Code);
+                    var full = !on && topics.Picked.Length >= topics.MaxPicks;
+                    <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@full"
+                            @onclick="() => ToggleTopic(topics, topic.Code)">@topic.Name</button>
+                }
+            </div>
+            <button class="ghost" @onclick="Rooms.NewTopics"><Icon Name="refresh" Size="18" />@T["Lobby_NewTopics"]</button>
+        }
+
         @if (EveryoneBrings(room))
         {
             <h2 class="label">@T["Lobby_YourDeck"]</h2>
@@ -75,14 +91,23 @@ else if (room.Stage == RoomStage.Lobby)
         @if (room.YouAreHost)
         {
             var noDecks = EveryoneBrings(room) && room.Players.All(p => p.DeckId is null);
-            <p class="muted center" role="status">@(room.Players.Length < Game.MinPlayers ? T["Lobby_NeedTwo"] : noDecks ? T["Lobby_PickDecks"] : T["Lobby_EveryoneIn"])</p>
-            <button class="btn" disabled="@(room.Players.Length < Game.MinPlayers || noDecks)" @onclick="Rooms.StartGame">@T["Setup_Start"]</button>
+            var noTopics = room.Settings.Source == DeckSource.Topics && room.Players.All(p => !p.PickedTopics);
+            <p class="muted center" role="status">@(room.Players.Length < Game.MinPlayers ? T["Lobby_NeedTwo"] : noDecks ? T["Lobby_PickDecks"] : noTopics ? T["Lobby_PickTopics"] : T["Lobby_EveryoneIn"])</p>
+            <button class="btn" disabled="@(room.Players.Length < Game.MinPlayers || noDecks || noTopics)" @onclick="Rooms.StartGame">@T["Setup_Start"]</button>
         }
         else
         {
             <p class="muted center" role="status">@T["Lobby_WaitingHost"]</p>
         }
     </footer>
+}
+else if (room.Stage == RoomStage.Writing)
+{
+    <main class="main center-screen" role="status">
+        <div class="spinner" aria-hidden="true"></div>
+        <p class="h2 center">@T["Writing_Title"]</p>
+        <p class="muted center">@T["Writing_Hint"]</p>
+    </main>
 }
 else if (room.Stage == RoomStage.Playing && room.Game is { } game)
 {
@@ -103,6 +128,10 @@ else if (room.Stage == RoomStage.Playing && room.Game is { } game)
     }
 
     <main class="main">
+        @if (room.LibraryCards && game.CardNumber == 1)
+        {
+            <p class="muted small">@T["Writing_Library"]</p>
+        }
         <p class="who">@WhoLine.For(T, game, room.Settings.Game.TurnStyle)</p>
         @if (game.Phase == GamePhase.Answering)
         {
@@ -201,12 +230,17 @@ else if (room.Summary is { } summary)
         catch (ContentUnavailableException) { decks = []; }
     }
 
+    private Task ToggleTopic(TopicChoice topics, string code) =>
+        Rooms.PickTopics(topics.Picked.Contains(code) ? topics.Picked.Remove(code) : topics.Picked.Add(code));
+
     private static bool EveryoneBrings(RoomView room) => room.Settings.Source == DeckSource.Everyone;
 
     private IEnumerable<string> PlayerNotes(RoomView room, RoomPlayer player)
     {
         if (player.IsHost) yield return T["Lobby_Host"];
         if (!player.Connected) yield return T["Lobby_Offline"];
+        if (room.Settings.Source == DeckSource.Topics)
+            yield return player.PickedTopics ? T["Lobby_TopicsPicked"] : T["Lobby_TopicsPicking"];
         if (EveryoneBrings(room))
             yield return decks.FirstOrDefault(d => d.Id == player.DeckId)?.NameFor(Text.UiLang) ?? T["Lobby_NoDeck"];
     }

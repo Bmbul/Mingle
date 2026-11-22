@@ -76,6 +76,19 @@ Armenian and Russian change names by grammatical case.
   connection. Rooms nobody is connected to are removed after two hours of inactivity.
 - Rooms live in one server's memory; running several instances would need a shared store such as Redis.
 
+## Game types (online)
+
+The host picks where the cards come from when creating a room:
+
+- **Our topics** (default): each player gets 10 random topics, picks up to 3 (nobody sees who picked
+  what), and Claude writes 20 cards about all picks in every language at the table. Without an API key,
+  on an error or past the daily limit, library cards on the picked topics are used instead.
+- **Everyone's decks**: each player picks a deck in the lobby; 10 random cards from each are shuffled together.
+- **Decks I pick**: the host chooses the decks.
+
+AI settings live in the `Ai` configuration section (`Ai__Model`, `Ai__Effort`, `Ai__MaxGenerationsPerDay`,
+defaults: `claude-opus-5-5`, `low`, 100). The key comes from `ANTHROPIC_API_KEY` (or `Ai__ApiKey`).
+
 ## Deploying
 
 The live app runs on **Azure Container Apps** (Germany West Central, consumption plan, one copy at
@@ -104,3 +117,10 @@ One-time setup:
    az containerapp update --name mingle-app --resource-group mingle-rg --set-env-vars "SECRET_ROTATED=$(date +%s)"
    ```
    On first start the app creates the tables and imports the starter decks.
+5. Optional, for AI-written cards in "Our topics": store the Anthropic API key the same way and point
+   the app at it:
+   ```bash
+   az containerapp secret set --name mingle-app --resource-group mingle-rg --secrets "anthropic-key=<your key>"
+   az containerapp update --name mingle-app --resource-group mingle-rg \
+     --set-env-vars "ANTHROPIC_API_KEY=secretref:anthropic-key"
+   ```

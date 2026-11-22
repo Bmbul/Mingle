@@ -19,6 +19,16 @@ internal sealed class TestDecks : IDeckSource
     public Task<ImmutableArray<Deck>> GetDecksAsync(CancellationToken ct = default) => Task.FromResult(All);
 }
 
+/// <summary>A few topics, so "Our topics" rooms need no database.</summary>
+internal sealed class TestTopics : ITopicSource
+{
+    public static readonly ImmutableArray<TopicInfo> All =
+        [.. Enumerable.Range(1, 12).Select(i => new TopicInfo($"topic-{i:00}",
+            Langs.All.ToImmutableDictionary(l => l, l => $"Topic {i} in {l.Code()}")))];
+
+    public Task<ImmutableArray<TopicInfo>> GetPickableTopicsAsync(CancellationToken ct = default) => Task.FromResult(All);
+}
+
 /// <summary>A clock the tests move by hand.</summary>
 internal sealed class ManualClock : TimeProvider
 {

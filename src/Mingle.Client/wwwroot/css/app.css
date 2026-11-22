@@ -281,3 +281,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     display: none; left: 0; padding: 0.6rem 1.25rem 0.7rem 1.25rem; position: fixed; width: 100%; z-index: 1000;
 }
 #blazor-error-ui .dismiss { cursor: pointer; position: absolute; right: 0.75rem; top: 0.5rem; }
+
+/* "Our topics": waiting while the cards are written */
+.center-screen { justify-content: center; align-items: center; text-align: center; gap: 12px; min-height: 60vh; }
+.spinner {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 3px solid var(--border-dashed); border-top-color: var(--accent);
+    animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 3s; } }
+.chip:disabled { opacity: 0.45; }

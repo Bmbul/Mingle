@@ -12,6 +12,7 @@ public static class ServiceCollectionExtensions
         services.AddDbContext<MingleDbContext>(options => UsePostgres(options, connectionString));
         services.AddScoped<DeckSeeder>();
         services.AddScoped<IDeckSource, DbDeckSource>();
+        services.AddScoped<ITopicSource, DbTopicSource>();
         return services;
     }
 

@@ -12,10 +12,12 @@ public static class HubRoutes
 /// <summary>What a player gets back after creating or joining a room. Keep the token to rejoin later.</summary>
 public sealed record JoinResult(string RoomCode, string PlayerId, string Token);
 
-public enum RoomStage { Lobby, Playing, Ended }
+/// <summary>Writing: the "Our topics" cards are being written; it comes between the lobby and play.</summary>
+public enum RoomStage { Lobby, Playing, Ended, Writing }
 
 /// <param name="DeckId">The deck this player brings to an "Everyone's decks" game, if chosen yet.</param>
-public sealed record RoomPlayer(string Id, string Name, Lang Lang, bool IsHost, bool Connected, string? DeckId = null);
+/// <param name="PickedTopics">Whether this player has picked topics; never which ones.</param>
+public sealed record RoomPlayer(string Id, string Name, Lang Lang, bool IsHost, bool Connected, string? DeckId = null, bool PickedTopics = false);
 
 /// <summary>Where a room's cards come from.</summary>
 public enum DeckSource
@@ -24,7 +26,14 @@ public enum DeckSource
     Chosen,
     /// <summary>Every player brings one deck; a few random cards from each are shuffled together.</summary>
     Everyone,
+    /// <summary>Every player picks topics; AI writes the cards (library cards if it cannot).</summary>
+    Topics,
 }
+
+public sealed record TopicOption(string Code, string Name);
+
+/// <summary>Your own topic offer and picks in an "Our topics" lobby. Other players' picks are never sent.</summary>
+public sealed record TopicChoice(ImmutableArray<TopicOption> Offer, ImmutableArray<string> Picked, int MaxPicks);
 
 /// <summary>The game settings chosen in the lobby, plus which decks to play.</summary>
 public sealed record RoomSettings(GameSettings Game, ImmutableArray<string> DeckIds, DeckSource Source = DeckSource.Chosen);
@@ -44,7 +53,9 @@ public sealed record RoomView(
     ImmutableArray<RoomPlayer> Players,
     RoomSettings Settings,
     GameView? Game,
-    GameSummary? Summary)
+    GameSummary? Summary,
+    TopicChoice? Topics = null,
+    bool LibraryCards = false)
 {
     [JsonIgnore] public RoomPlayer? You => Players.FirstOrDefault(p => p.Id == YouId);
     [JsonIgnore] public bool YouAreHost => You?.IsHost == true;
@@ -59,6 +70,10 @@ public interface IGameHub
     Task UpdateSettings(RoomSettings settings);
     /// <summary>Picks the deck you bring to an "Everyone's decks" game; null takes it back.</summary>
     Task BringDeck(string? deckId);
+    /// <summary>Sets your topic picks (up to three, from your offer) in an "Our topics" lobby.</summary>
+    Task PickTopics(ImmutableArray<string> codes);
+    /// <summary>Deals you a new topic offer; your picks stay.</summary>
+    Task NewTopics();
     Task StartGame();
     Task SubmitAnswer(Answer answer);
     Task Pass();

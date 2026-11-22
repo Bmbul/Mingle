@@ -74,16 +74,18 @@
     {
         <section class="stack">
             <h2 class="label">@T["Setup_Source"]</h2>
-            <div class="two" role="group" aria-label="@T["Setup_Source"]">
-                <OptionCard Selected="@(source == DeckSource.Chosen)" OnSelect="() => source = DeckSource.Chosen"
-                            Title="@T["Setup_SourceChosen"]" Description="@T["Setup_SourceChosenDesc"]" />
+            <div class="stack" role="group" aria-label="@T["Setup_Source"]">
+                <OptionCard Selected="@(source == DeckSource.Topics)" OnSelect="() => source = DeckSource.Topics"
+                            Title="@T["Setup_SourceTopics"]" Description="@T["Setup_SourceTopicsDesc"]" />
                 <OptionCard Selected="@(source == DeckSource.Everyone)" OnSelect="() => source = DeckSource.Everyone"
                             Title="@T["Setup_SourceEveryone"]" Description="@T["Setup_SourceEveryoneDesc"]" />
+                <OptionCard Selected="@(source == DeckSource.Chosen)" OnSelect="() => source = DeckSource.Chosen"
+                            Title="@T["Setup_SourceChosen"]" Description="@T["Setup_SourceChosenDesc"]" />
             </div>
         </section>
     }
 
-    @if (!EveryoneBrings)
+    @if (!PicksInLobby)
     {
     <section class="stack">
         <h2 class="label">@T["Setup_Decks"]</h2>
@@ -121,7 +123,7 @@
         </div>
     </section>
 
-    @if (!EveryoneBrings)
+    @if (!PicksInLobby)
     {
     <section class="stack">
         <h2 class="label">@T["Setup_CardCount"]</h2>
@@ -167,10 +169,10 @@
     private bool loadFailed;
     private int cardCount = 20;
     private CardOrder order = CardOrder.LightToDeep;
-    private DeckSource source = DeckSource.Chosen;
+    private DeckSource source = DeckSource.Topics;
 
-    /// <summary>Each player brings a deck in the lobby, so no decks, order or card count are chosen here.</summary>
-    private bool EveryoneBrings => Online && source == DeckSource.Everyone;
+    /// <summary>Players pick topics or bring decks in the lobby, so no decks, order or card count are chosen here.</summary>
+    private bool PicksInLobby => Online && source != DeckSource.Chosen;
 
     protected override async Task OnInitializedAsync()
     {
@@ -223,13 +225,13 @@
 
     private int NeededPlayers => Online ? 1 : Game.MinPlayers;
 
-    private bool CanStart => NamedPlayers.Length >= NeededPlayers && (EveryoneBrings ? !decks.IsEmpty : MatchingCards > 0);
+    private bool CanStart => NamedPlayers.Length >= NeededPlayers && (PicksInLobby ? !decks.IsEmpty : MatchingCards > 0);
 
     private string Summary =>
         loadFailed ? T["Setup_LoadFailed"]
         : createError is not null ? createError
         : NamedPlayers.Length < NeededPlayers ? (Online ? T["Setup_NeedName"] : T["Setup_NeedPlayers"])
-        : EveryoneBrings ? T["Setup_SourceEveryoneSummary"]
+        : PicksInLobby ? T[source == DeckSource.Topics ? "Setup_SourceTopicsSummary" : "Setup_SourceEveryoneSummary"]
         : MatchingCards == 0 ? T["Setup_NoCards"]
         : T.Plural("Setup_Matches", MatchingCards);
 

@@ -18,6 +18,7 @@ namespace Mingle.Contracts;
 [JsonSerializable(typeof(bool))]
 [JsonSerializable(typeof(bool?))]
 [JsonSerializable(typeof(string))]
+[JsonSerializable(typeof(System.Collections.Immutable.ImmutableArray<string>))]
 public sealed partial class ContractsJsonContext : JsonSerializerContext
 {
     /// <summary>Puts the generated code first in a serializer's lookup chain.</summary>

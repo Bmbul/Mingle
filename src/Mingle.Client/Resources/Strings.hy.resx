@@ -129,4 +129,16 @@
   <data name="Lobby_YourDeckHint" xml:space="preserve"><value>Դրանից 10 պատահական քարտ կմտնի խաղի մեջ։</value></data>
   <data name="Lobby_NoDeck" xml:space="preserve"><value>հավաքածուն դեռ ընտրված չէ</value></data>
   <data name="Lobby_PickDecks" xml:space="preserve"><value>Ընտրեք հավաքածու՝ սկսելու համար։</value></data>
+  <data name="Setup_SourceTopics" xml:space="preserve"><value>Մեր թեմաները</value></data>
+  <data name="Setup_SourceTopicsDesc" xml:space="preserve"><value>Յուրաքանչյուրն ընտրում է թեմաներ, իսկ AI-ն դրանց մասին քարտեր է գրում</value></data>
+  <data name="Setup_SourceTopicsSummary" xml:space="preserve"><value>Յուրաքանչյուրը թեմաներ կընտրի սենյակում</value></data>
+  <data name="Lobby_YourTopics" xml:space="preserve"><value>Քո թեմաները</value></data>
+  <data name="Lobby_YourTopicsHint" xml:space="preserve"><value>Ընտրիր մինչև {0}։ Ոչ ոք չի տեսնի, թե ինչ ես ընտրել։</value></data>
+  <data name="Lobby_NewTopics" xml:space="preserve"><value>Ցույց տալ այլ թեմաներ</value></data>
+  <data name="Lobby_PickTopics" xml:space="preserve"><value>Ընտրեք թեմա՝ սկսելու համար։</value></data>
+  <data name="Lobby_TopicsPicked" xml:space="preserve"><value>թեմաներն ընտրված են</value></data>
+  <data name="Lobby_TopicsPicking" xml:space="preserve"><value>ընտրում է թեմաներ…</value></data>
+  <data name="Writing_Title" xml:space="preserve"><value>Գրում ենք ձեր քարտերը…</value></data>
+  <data name="Writing_Hint" xml:space="preserve"><value>Սա կարող է տևել մինչև մեկ րոպե։</value></data>
+  <data name="Writing_Library" xml:space="preserve"><value>AI-ն հասանելի չէր, ուստի սրանք ձեր թեմաներով պատրաստի քարտեր են։</value></data>
 </root>

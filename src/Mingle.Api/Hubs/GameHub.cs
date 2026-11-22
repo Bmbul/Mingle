@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+using Mingle.Api.Ai;
 using Microsoft.AspNetCore.SignalR;
 using Mingle.Api.Rooms;
 using Mingle.Contracts;
@@ -10,7 +12,7 @@ namespace Mingle.Api.Hubs;
 /// Real-time rooms. The server holds the game; each connection is bound to one seat, and after
 /// every change each player receives only their own view.
 /// </summary>
-public sealed class GameHub(RoomRegistry rooms, IDeckSource decks) : Hub<IGameClient>, IGameHub
+public sealed class GameHub(RoomRegistry rooms, IDeckSource decks, ITopicSource topics, ICardWriter writer, ILogger<GameHub> log) : Hub<IGameClient>, IGameHub
 {
     private const string RoomKey = "room";
     private const string PlayerKey = "player";
@@ -18,6 +20,7 @@ public sealed class GameHub(RoomRegistry rooms, IDeckSource decks) : Hub<IGameCl
     public async Task<JoinResult> CreateRoom(string name, Lang lang, RoomSettings settings)
     {
         var room = rooms.Create();
+        room.UseTopics(await topics.GetPickableTopicsAsync(Context.ConnectionAborted), Random.Shared.Next());
         var member = Guard(() => room.Join(name, lang, Context.ConnectionId));
         Guard(() => room.UpdateSettings(member.Id, settings));
         Bind(room, member.Id);
@@ -47,11 +50,56 @@ public sealed class GameHub(RoomRegistry rooms, IDeckSource decks) : Hub<IGameCl
 
     public Task BringDeck(string? deckId) => Change((room, me) => room.BringDeck(me, deckId));
 
+    public Task PickTopics(ImmutableArray<string> codes) => Change((room, me) => room.PickTopics(me, codes.IsDefault ? [] : codes));
+    public Task NewTopics() => Change((room, me) => room.NewTopics(me));
+
     public async Task StartGame()
     {
         var (room, me) = Seat();
+        if (room.Source == DeckSource.Topics)
+        {
+            await StartTopicsGame(room, me);
+            return;
+        }
         var available = await decks.GetDecksAsync(Context.ConnectionAborted);
         Guard(() => room.Start(me, available, Random.Shared.Next()));
+        await Broadcast(room);
+    }
+
+    /// <summary>
+    /// Everyone sees "writing your cards" while the AI works. If it cannot (no key, error, daily
+    /// limit), library cards on the picked topics are used, so the game always starts.
+    /// </summary>
+    private async Task StartTopicsGame(Room room, string me)
+    {
+        var (picked, languages, playerCount) = Guard(() => room.BeginWriting(me));
+        await Broadcast(room);
+
+        var seed = Random.Shared.Next();
+        try
+        {
+            Deck cards;
+            var fromLibrary = false;
+            try
+            {
+                // Not tied to the host's connection: if the host drops, the room still gets its cards.
+                var written = await writer.WriteAsync(new CardRequest(picked, languages, playerCount), CancellationToken.None);
+                cards = new Deck("topics", ImmutableDictionary<Lang, string>.Empty, written);
+            }
+            catch (CardWriterException ex)
+            {
+                if (writer.IsAvailable) log.LogWarning("Using library cards: {Reason}", ex.Message);
+                cards = TopicDeal.FromLibrary(await decks.GetDecksAsync(CancellationToken.None), [.. picked.Select(t => t.Code)], languages, seed);
+                fromLibrary = true;
+            }
+            Guard(() => room.FinishWriting(cards, fromLibrary, seed));
+        }
+        catch
+        {
+            room.CancelWriting();
+            await Broadcast(room);
+            throw;
+        }
         await Broadcast(room);
     }
 

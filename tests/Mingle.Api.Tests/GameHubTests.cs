@@ -19,7 +19,12 @@ public class GameHubTests(GameHubTests.App app) : IClassFixture<GameHubTests.App
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.UseSetting("Database:MigrateOnStartup", "false");
-            builder.ConfigureServices(services => services.Replace(ServiceDescriptor.Singleton<IDeckSource, TestDecks>()));
+            builder.UseSetting("Ai:ApiKey", ""); // never call the real AI from tests: topics games use library cards
+            builder.ConfigureServices(services =>
+            {
+                services.Replace(ServiceDescriptor.Singleton<IDeckSource, TestDecks>());
+                services.Replace(ServiceDescriptor.Singleton<ITopicSource, TestTopics>());
+            });
         }
     }
 
@@ -127,5 +132,31 @@ public class GameHubTests(GameHubTests.App app) : IClassFixture<GameHubTests.App
         var ex = await Assert.ThrowsAsync<Microsoft.AspNetCore.SignalR.HubException>(
             () => ani.Hub.InvokeAsync<JoinResult>(nameof(IGameHub.JoinRoom), "ZZZZ", "Ani", Lang.Hy));
         Assert.Contains("Room not found", ex.Message);
+    }
+
+    [Fact]
+    public async Task A_topics_game_without_ai_starts_with_library_cards()
+    {
+        await using var ani = new Player(app);
+        await using var arman = new Player(app);
+        await ani.Hub.StartAsync();
+        await arman.Hub.StartAsync();
+
+        var settings = new RoomSettings(new GameSettings(), [], DeckSource.Topics);
+        var created = await ani.Hub.InvokeAsync<JoinResult>(nameof(IGameHub.CreateRoom), "Ani", Lang.Hy, settings);
+        await arman.Hub.InvokeAsync<JoinResult>(nameof(IGameHub.JoinRoom), created.RoomCode, "Arman", Lang.En);
+
+        var armanLobby = await arman.WaitFor(v => v.Players.Length == 2 && v.Topics is not null);
+        Assert.Equal(10, armanLobby.Topics!.Offer.Length);
+        Assert.EndsWith("in en", armanLobby.Topics.Offer[0].Name);
+
+        await arman.Hub.InvokeAsync(nameof(IGameHub.PickTopics), System.Collections.Immutable.ImmutableArray.Create(armanLobby.Topics.Offer[0].Code));
+        var aniLobby = await ani.WaitFor(v => v.Players.Any(p => p.PickedTopics));
+        Assert.Empty(aniLobby.Topics!.Picked); // Arman's picks are never shown to Ani
+
+        await ani.Hub.InvokeAsync(nameof(IGameHub.StartGame));
+        var playing = await arman.WaitFor(v => v.Stage == RoomStage.Playing);
+        Assert.True(playing.LibraryCards);
+        Assert.Equal(TestDecks.Deck.Cards.Length, playing.Game!.CardCount);
     }
 }

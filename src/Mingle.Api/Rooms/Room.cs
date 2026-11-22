@@ -19,10 +19,18 @@ public sealed class Room(string code, TimeProvider clock)
     private string? hostId;
     private RoomSettings settings = new(new GameSettings(), []);
     private GameState? game;
+    private ImmutableArray<TopicInfo> topicPool = [];
+    private Random topicRandom = new(0);
+    private bool libraryCards;
 
     public string Code { get; } = code;
     public RoomStage Stage { get; private set; } = RoomStage.Lobby;
     public DateTimeOffset LastActivity { get; private set; } = clock.GetUtcNow();
+
+    public DeckSource Source
+    {
+        get { lock (gate) return settings.Source; }
+    }
 
     public bool AnyoneConnected
     {
@@ -42,6 +50,7 @@ public sealed class Room(string code, TimeProvider clock)
 
             var member = new RoomMember(Guid.NewGuid().ToString("N")[..12], trimmed, lang, RoomCodes.NewToken());
             member.Connections.Add(connectionId);
+            if (!topicPool.IsEmpty) member.TopicOffer = TopicDeal.Offer(topicPool, topicRandom.Next());
             members.Add(member);
             hostId ??= member.Id;
             Touch();
@@ -96,6 +105,97 @@ public sealed class Room(string code, TimeProvider clock)
         }
     }
 
+    /// <summary>The topics players can be offered; every seat gets its own random offer.</summary>
+    public void UseTopics(ImmutableArray<TopicInfo> pool, int seed)
+    {
+        lock (gate)
+        {
+            topicPool = pool;
+            topicRandom = new Random(seed);
+            foreach (var member in members) member.TopicOffer = TopicDeal.Offer(topicPool, topicRandom.Next());
+        }
+    }
+
+    public void PickTopics(string playerId, IEnumerable<string> codes)
+    {
+        lock (gate)
+        {
+            if (Stage != RoomStage.Lobby) throw new RoomException("Topics can only change before the game starts.");
+            var member = Member(playerId);
+            var picks = (codes ?? []).Distinct(StringComparer.Ordinal).ToImmutableArray();
+            if (picks.Length > TopicDeal.MaxPicks) throw new RoomException($"Pick up to {TopicDeal.MaxPicks} topics.");
+            // A pick must be in the current offer, or kept from an earlier one.
+            if (picks.Any(c => !member.TopicOffer.Contains(c) && !member.TopicPicks.Contains(c)))
+                throw new RoomException("Pick from the topics you were offered.");
+            member.TopicPicks = picks;
+            Touch();
+        }
+    }
+
+    public void NewTopics(string playerId)
+    {
+        lock (gate)
+        {
+            if (Stage != RoomStage.Lobby) throw new RoomException("Topics can only change before the game starts.");
+            var member = Member(playerId);
+            member.TopicOffer = TopicDeal.Offer(topicPool, topicRandom.Next(), avoid: [.. member.TopicOffer, .. member.TopicPicks]);
+            Touch();
+        }
+    }
+
+    /// <summary>
+    /// Host starts an "Our topics" game: the room waits while cards are written. Returns what to write.
+    /// Finish with <see cref="FinishWriting"/>, or <see cref="CancelWriting"/> if no cards could be found.
+    /// </summary>
+    public (ImmutableArray<TopicInfo> Topics, ImmutableArray<Lang> Languages, int PlayerCount) BeginWriting(string playerId)
+    {
+        lock (gate)
+        {
+            RequireHost(playerId);
+            if (Stage != RoomStage.Lobby) throw new RoomException("The game has already started.");
+            if (settings.Source != DeckSource.Topics) throw new RoomException("This room does not play topics.");
+            if (members.Count < Game.MinPlayers) throw new RoomException($"At least {Game.MinPlayers} players are needed.");
+
+            var picked = members.SelectMany(m => m.TopicPicks).ToHashSet(StringComparer.Ordinal);
+            if (picked.Count == 0) throw new RoomException("Nobody has picked a topic yet.");
+
+            Stage = RoomStage.Writing;
+            Touch();
+            return ([.. topicPool.Where(t => picked.Contains(t.Code))],
+                    [.. members.Select(m => m.Lang).Distinct().Order()],
+                    members.Count);
+        }
+    }
+
+    public void FinishWriting(Deck cards, bool fromLibrary, int seed)
+    {
+        lock (gate)
+        {
+            if (Stage != RoomStage.Writing) throw new RoomException("No cards are being written.");
+            try
+            {
+                game = Game.Start(members.Select(m => m.ToPlayer()), TopicDeal.SettingsFor(settings.Game, cards), [cards], seed);
+            }
+            catch (GameRuleException ex)
+            {
+                Stage = RoomStage.Lobby;
+                throw new RoomException(ex.Message);
+            }
+            libraryCards = fromLibrary;
+            Stage = game.Phase == GamePhase.Ended ? RoomStage.Ended : RoomStage.Playing;
+            Touch();
+        }
+    }
+
+    public void CancelWriting()
+    {
+        lock (gate)
+        {
+            if (Stage == RoomStage.Writing) Stage = RoomStage.Lobby;
+            Touch();
+        }
+    }
+
     public void BringDeck(string playerId, string? deckId)
     {
         lock (gate)
@@ -114,6 +214,7 @@ public sealed class Room(string code, TimeProvider clock)
             RequireHost(playerId);
             if (Stage != RoomStage.Lobby) throw new RoomException("The game has already started.");
             if (members.Count < Game.MinPlayers) throw new RoomException($"At least {Game.MinPlayers} players are needed.");
+            if (settings.Source == DeckSource.Topics) throw new RoomException("Topics games start by writing cards.");
 
             var available = decks.ToList();
             var gameSettings = settings.Game;
@@ -186,13 +287,24 @@ public sealed class Room(string code, TimeProvider clock)
     private RoomView BuildView(RoomMember viewer)
     {
         var players = members
-            .Select(m => new RoomPlayer(m.Id, m.Name, m.Lang, m.Id == hostId, m.Connected, m.DeckId))
+            .Select(m => new RoomPlayer(m.Id, m.Name, m.Lang, m.Id == hostId, m.Connected, m.DeckId, !m.TopicPicks.IsEmpty))
             .ToImmutableArray();
 
         GameView? gameView = Stage == RoomStage.Playing && game is not null ? GameViews.ForPlayer(game, viewer.Id) : null;
         GameSummary? summary = Stage == RoomStage.Ended && game is not null ? Summarize(game, viewer.Lang) : null;
 
-        return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary);
+        TopicChoice? topics = null;
+        if (settings.Source == DeckSource.Topics && Stage == RoomStage.Lobby)
+        {
+            var byCode = topicPool.ToDictionary(t => t.Code);
+            var shown = viewer.TopicOffer.Concat(viewer.TopicPicks.Where(p => !viewer.TopicOffer.Contains(p)));
+            topics = new TopicChoice(
+                [.. shown.Where(byCode.ContainsKey).Select(c => new TopicOption(c, byCode[c].NameFor(viewer.Lang)))],
+                viewer.TopicPicks,
+                TopicDeal.MaxPicks);
+        }
+
+        return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary, topics, libraryCards);
     }
 
     private static GameSummary Summarize(GameState state, Lang lang) => new(

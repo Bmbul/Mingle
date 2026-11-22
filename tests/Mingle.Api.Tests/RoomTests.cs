@@ -183,4 +183,84 @@ public class RoomTests
         Assert.Equal(10, room.ViewFor(ani.Id).Game!.CardCount);
         Assert.Throws<RoomException>(() => room.BringDeck(ani.Id, "party"));
     }
+
+    private static (Room Room, RoomMember Ani, RoomMember Arman) TopicsLobby()
+    {
+        var room = new Room("TOPS", new ManualClock());
+        room.UseTopics(TestTopics.All, 1);
+        var ani = room.Join("Ani", Lang.Hy, "c-ani");
+        var arman = room.Join("Arman", Lang.En, "c-arman");
+        room.UpdateSettings(ani.Id, new RoomSettings(new GameSettings(), [], DeckSource.Topics));
+        return (room, ani, arman);
+    }
+
+    [Fact]
+    public void Topic_picks_come_from_your_own_offer_and_stay_private()
+    {
+        var (room, ani, arman) = TopicsLobby();
+        var offer = room.ViewFor(ani.Id).Topics!.Offer;
+
+        Assert.Equal(10, offer.Length);
+        Assert.StartsWith("Topic", offer[0].Name);
+        Assert.EndsWith("in hy", offer[0].Name);
+        Assert.Throws<RoomException>(() => room.PickTopics(ani.Id, offer.Take(4).Select(o => o.Code)));
+
+        var notOffered = TestTopics.All.Select(t => t.Code).Except(offer.Select(o => o.Code)).First();
+        Assert.Throws<RoomException>(() => room.PickTopics(ani.Id, [notOffered]));
+
+        room.PickTopics(ani.Id, [offer[0].Code, offer[1].Code]);
+        Assert.Equal(2, room.ViewFor(ani.Id).Topics!.Picked.Length);
+        Assert.Empty(room.ViewFor(arman.Id).Topics!.Picked);
+        Assert.True(room.ViewFor(arman.Id).Players.Single(p => p.Id == ani.Id).PickedTopics);
+    }
+
+    [Fact]
+    public void A_new_offer_keeps_your_picks()
+    {
+        var (room, ani, _) = TopicsLobby();
+        var first = room.ViewFor(ani.Id).Topics!.Offer;
+        room.PickTopics(ani.Id, [first[0].Code]);
+
+        room.NewTopics(ani.Id);
+        var view = room.ViewFor(ani.Id).Topics!;
+
+        Assert.Contains(first[0].Code, view.Picked);
+        Assert.Contains(view.Offer, o => o.Code == first[0].Code); // still shown, so it can be unpicked
+        room.PickTopics(ani.Id, [first[0].Code, view.Offer[0].Code]);
+    }
+
+    [Fact]
+    public void Writing_waits_between_the_lobby_and_play()
+    {
+        var (room, ani, arman) = TopicsLobby();
+        Assert.Throws<RoomException>(() => room.BeginWriting(ani.Id)); // nobody picked yet
+
+        var code = room.ViewFor(arman.Id).Topics!.Offer[0].Code;
+        room.PickTopics(arman.Id, [code]);
+        Assert.Throws<RoomException>(() => room.BeginWriting(arman.Id)); // only the host
+
+        var (topics, languages, players) = room.BeginWriting(ani.Id);
+        Assert.Equal([code], topics.Select(t => t.Code).ToArray());
+        Assert.Equal([Lang.En, Lang.Hy], languages.Order().ToArray());
+        Assert.Equal(2, players);
+        Assert.Equal(RoomStage.Writing, room.Stage);
+        Assert.Throws<RoomException>(() => room.Join("Late", Lang.Ru, "c-late"));
+
+        room.FinishWriting(TestDecks.Deck, fromLibrary: false, seed: 1);
+        Assert.Equal(RoomStage.Playing, room.Stage);
+        Assert.Equal(10, room.ViewFor(ani.Id).Game!.CardCount);
+        Assert.False(room.ViewFor(ani.Id).LibraryCards);
+    }
+
+    [Fact]
+    public void Writing_can_be_cancelled_back_to_the_lobby()
+    {
+        var (room, ani, arman) = TopicsLobby();
+        room.PickTopics(arman.Id, [room.ViewFor(arman.Id).Topics!.Offer[0].Code]);
+        room.BeginWriting(ani.Id);
+
+        room.CancelWriting();
+
+        Assert.Equal(RoomStage.Lobby, room.Stage);
+    }
 }

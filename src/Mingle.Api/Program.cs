@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
+using Anthropic;
+using Mingle.Api.Ai;
 using Mingle.Api.Hubs;
 using Mingle.Api.Rooms;
 using Mingle.Contracts;
@@ -13,6 +15,20 @@ builder.Services.AddMingleDal(builder.Configuration.GetConnectionString("Mingle"
     ?? throw new InvalidOperationException("Missing connection string 'Mingle'."));
 builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<RoomRegistry>();
+
+// AI card writing for the "Our topics" game. Without a key, games use library cards instead.
+builder.Services.Configure<AiOptions>(builder.Configuration.GetSection(AiOptions.Section));
+builder.Services.AddSingleton<DailyLimit>();
+var aiKey = builder.Configuration[$"{AiOptions.Section}:ApiKey"] ?? builder.Configuration["ANTHROPIC_API_KEY"];
+if (!string.IsNullOrWhiteSpace(aiKey))
+{
+    builder.Services.AddSingleton(new AnthropicClient { ApiKey = aiKey });
+    builder.Services.AddSingleton<ICardWriter, ClaudeCardWriter>();
+}
+else
+{
+    builder.Services.AddSingleton<ICardWriter, NoCardWriter>();
+}
 builder.Services.AddHostedService<RoomCleanupService>();
 // Behind Azure Container Apps the app sees plain HTTP; the proxy's headers say the visitor used HTTPS.
 builder.Services.Configure<ForwardedHeadersOptions>(o =>

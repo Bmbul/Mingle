@@ -129,4 +129,16 @@
   <data name="Lobby_YourDeckHint" xml:space="preserve"><value>10 random cards from it go into the game.</value></data>
   <data name="Lobby_NoDeck" xml:space="preserve"><value>no deck yet</value></data>
   <data name="Lobby_PickDecks" xml:space="preserve"><value>Pick a deck to start.</value></data>
+  <data name="Setup_SourceTopics" xml:space="preserve"><value>Our topics</value></data>
+  <data name="Setup_SourceTopicsDesc" xml:space="preserve"><value>Everyone picks topics; AI writes cards about them</value></data>
+  <data name="Setup_SourceTopicsSummary" xml:space="preserve"><value>Everyone picks topics in the room</value></data>
+  <data name="Lobby_YourTopics" xml:space="preserve"><value>Your topics</value></data>
+  <data name="Lobby_YourTopicsHint" xml:space="preserve"><value>Pick up to {0}. Nobody sees what you picked.</value></data>
+  <data name="Lobby_NewTopics" xml:space="preserve"><value>Show other topics</value></data>
+  <data name="Lobby_PickTopics" xml:space="preserve"><value>Pick a topic to start.</value></data>
+  <data name="Lobby_TopicsPicked" xml:space="preserve"><value>topics picked</value></data>
+  <data name="Lobby_TopicsPicking" xml:space="preserve"><value>picking topics…</value></data>
+  <data name="Writing_Title" xml:space="preserve"><value>Writing your cards…</value></data>
+  <data name="Writing_Hint" xml:space="preserve"><value>This can take up to a minute.</value></data>
+  <data name="Writing_Library" xml:space="preserve"><value>AI wasn't available, so these are library cards on your topics.</value></data>
 </root>

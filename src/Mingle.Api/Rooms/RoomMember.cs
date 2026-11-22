@@ -18,5 +18,9 @@ public sealed class RoomMember(string id, string name, Lang lang, string token)
     /// <summary>The deck this player brings when everyone brings a deck.</summary>
     public string? DeckId { get; set; }
 
+    /// <summary>The topics this player is offered in an "Our topics" game, and the ones picked.</summary>
+    public System.Collections.Immutable.ImmutableArray<string> TopicOffer { get; set; } = [];
+    public System.Collections.Immutable.ImmutableArray<string> TopicPicks { get; set; } = [];
+
     public Player ToPlayer() => new(Id, Name, Lang);
 }
