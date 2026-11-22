@@ -52,15 +52,23 @@ if [ -z "$APP_ID" ]; then
 fi
 az ad sp show --id "$APP_ID" --output none 2>/dev/null || az ad sp create --id "$APP_ID" --output none
 
-SUBJECT="repo:${REPO}:environment:production"
-if [ -z "$(az ad app federated-credential list --id "$APP_ID" --query "[?subject=='$SUBJECT'].name" -o tsv)" ]; then
-  az ad app federated-credential create --id "$APP_ID" --parameters "{
-    \"name\": \"github-production\",
-    \"issuer\": \"https://token.actions.githubusercontent.com\",
-    \"subject\": \"$SUBJECT\",
-    \"audiences\": [\"api://AzureADTokenExchange\"]
-  }" --output none
-fi
+# GitHub identifies a workflow either by names ("repo:owner/repo:...") or, for newer setups, by ids
+# ("repo:owner@<owner id>/repo@<repo id>:..."). Trust both, so the deploy works whichever GitHub sends.
+OWNER_ID="$(gh api "users/${REPO%%/*}" --jq .id)"
+REPO_ID="$(gh api "repos/$REPO" --jq .id)"
+trust_subject() {
+  local name="$1" subject="$2"
+  if [ -z "$(az ad app federated-credential list --id "$APP_ID" --query "[?subject=='$subject'].name" -o tsv)" ]; then
+    az ad app federated-credential create --id "$APP_ID" --parameters "{
+      \"name\": \"$name\",
+      \"issuer\": \"https://token.actions.githubusercontent.com\",
+      \"subject\": \"$subject\",
+      \"audiences\": [\"api://AzureADTokenExchange\"]
+    }" --output none
+  fi
+}
+trust_subject github-production "repo:${REPO}:environment:production"
+trust_subject github-production-ids "repo:${REPO%%/*}@${OWNER_ID}/${REPO##*/}@${REPO_ID}:environment:production"
 
 RG_ID="$(az group show --name "$RG" --query id -o tsv)"
 az role assignment create --assignee "$APP_ID" --role Contributor --scope "$RG_ID" --output none 2>/dev/null || true
