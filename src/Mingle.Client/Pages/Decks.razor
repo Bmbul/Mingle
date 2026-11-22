@@ -1,0 +1,54 @@
+@page "/decks"
+@inject Text T
+@inject ContentService Content
+@inject DeviceDeckStore DeviceDecks
+
+<PageTitle>@T["Decks_Title"] · Mingle</PageTitle>
+
+<header class="top">
+    <a class="icon" href="" aria-label="@T["Common_Back"]"><Icon Name="back" /></a>
+    <h1 class="h1">@T["Decks_Title"]</h1>
+</header>
+
+<main class="main">
+    <a class="btn" href="decks/new"><Icon Name="plus" Size="18" />@T["Decks_New"]</a>
+
+    @if (loading)
+    {
+        <p class="muted center">@T["Online_Connecting"]</p>
+    }
+    else if (rows.Count == 0)
+    {
+        <p class="muted">@T["Decks_Empty"]</p>
+    }
+    else
+    {
+        <section class="stack">
+            @foreach (var (entry, deck) in rows)
+            {
+                <a class="check-row" href="@(entry.CanEdit ? $"decks/{entry.Id}/edit" : $"d/{entry.Id}")">
+                    <span class="grow">
+                        <span class="row-title">@(deck?.NameFor(Text.UiLang) ?? T["Decks_Missing"])</span>
+                        <span class="muted small">
+                            @(deck is null ? "" : T.Plural("Cards", deck.Cards.Length))@(entry.CanEdit ? "" : $" · {T["Decks_ViewOnly"]}")
+                        </span>
+                    </span>
+                    @if (entry.CanEdit) { <span class="accent-text small">@T["Decks_Edit"]</span> }
+                </a>
+            }
+        </section>
+        <p class="muted small">@T["Decks_DeviceNote"]</p>
+    }
+</main>
+
+@code {
+    private bool loading = true;
+    private List<(DeviceDeck Entry, Deck? Deck)> rows = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        foreach (var entry in await DeviceDecks.ListAsync())
+            rows.Add((entry, await Content.GetDeckAsync(entry.Id)));
+        loading = false;
+    }
+}

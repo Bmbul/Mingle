@@ -1,9 +1,9 @@
 using System.Collections.Immutable;
 using System.Text.Json;
-using Mingle.Api.Ai;
+using Mingle.API.Ai;
 using Mingle.Engine;
 
-namespace Mingle.Api.Tests;
+namespace Mingle.API.Tests;
 
 public class CardWriterTests
 {

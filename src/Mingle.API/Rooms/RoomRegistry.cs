@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 
-namespace Mingle.Api.Rooms;
+namespace Mingle.API.Rooms;
 
 /// <summary>
 /// All open rooms, kept in memory. Fine for one server instance; with several instances the rooms

@@ -2,7 +2,7 @@ using System.Text;
 using System.Text.Json;
 using Mingle.Engine;
 
-namespace Mingle.Api.Ai;
+namespace Mingle.API.Ai;
 
 /// <summary>The instructions and output schema for writing cards. Pure, so it can be tested.</summary>
 public static class CardPrompt

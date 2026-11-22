@@ -9,7 +9,7 @@ using Mingle.Contracts;
 using Mingle.DAL;
 using Mingle.Engine;
 
-namespace Mingle.Api.Tests;
+namespace Mingle.API.Tests;
 
 /// <summary>Two real SignalR clients play through the hub, end to end, without a database.</summary>
 public class GameHubTests(GameHubTests.App app) : IClassFixture<GameHubTests.App>

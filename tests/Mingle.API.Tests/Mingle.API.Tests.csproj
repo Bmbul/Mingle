@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Mingle.Api\Mingle.Api.csproj" />
+    <ProjectReference Include="..\..\src\Mingle.API\Mingle.API.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 using Mingle.Contracts;
 using Mingle.Engine;
 
-namespace Mingle.Api.Rooms;
+namespace Mingle.API.Rooms;
 
 /// <summary>
 /// One online room: its seats, its settings and, once started, its game. All changes go through
@@ -194,6 +194,13 @@ public sealed class Room(string code, TimeProvider clock)
             if (Stage == RoomStage.Writing) Stage = RoomStage.Lobby;
             Touch();
         }
+    }
+
+    /// <summary>Every deck id the settings or the players refer to.</summary>
+    public IReadOnlyList<string> WantedDeckIds()
+    {
+        lock (gate)
+            return [.. (settings.DeckIds.IsDefault ? [] : settings.DeckIds).Concat(members.Select(m => m.DeckId).OfType<string>()).Distinct()];
     }
 
     public void BringDeck(string playerId, string? deckId)

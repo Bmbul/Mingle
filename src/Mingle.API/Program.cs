@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Anthropic;
-using Mingle.Api.Ai;
-using Mingle.Api.Hubs;
-using Mingle.Api.Rooms;
+using Mingle.API.Controllers;
+using Mingle.API.Ai;
+using Mingle.API.Hubs;
+using Mingle.API.Rooms;
 using Mingle.Contracts;
 using Mingle.DAL;
 using Mingle.DAL.Seeding;
@@ -15,6 +16,8 @@ builder.Services.AddMingleDal(builder.Configuration.GetConnectionString("Mingle"
     ?? throw new InvalidOperationException("Missing connection string 'Mingle'."));
 builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<RoomRegistry>();
+builder.Services.AddControllers();
+builder.Services.AddRateLimiter(DecksController.AddWriteLimit);
 
 // AI card writing for the "Our topics" game. Without a key, games use library cards instead.
 builder.Services.Configure<AiOptions>(builder.Configuration.GetSection(AiOptions.Section));
@@ -43,6 +46,7 @@ builder.Services.AddSignalR()
 var app = builder.Build();
 
 app.UseForwardedHeaders();
+app.UseRateLimiter();
 
 if (app.Environment.IsDevelopment())
 {
@@ -60,8 +64,7 @@ if (app.Configuration.GetValue("Database:MigrateOnStartup", true))
 // Serves the Blazor WebAssembly client (framework files included) with fingerprinting and compression.
 app.MapStaticAssets();
 
-app.MapGet("/api/decks", async (IDeckSource decks, CancellationToken ct) =>
-    Results.Text(DeckJson.WriteMany(await decks.GetDecksAsync(ct)), "application/json; charset=utf-8"));
+app.MapControllers();
 
 app.MapHub<GameHub>(HubRoutes.Game);
 

@@ -1,4 +1,4 @@
-namespace Mingle.Api.Ai;
+namespace Mingle.API.Ai;
 
 /// <summary>Counts generations per UTC day in memory (the app runs as one copy).</summary>
 public sealed class DailyLimit(TimeProvider clock)

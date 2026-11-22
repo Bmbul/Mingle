@@ -1,18 +1,18 @@
 using System.Collections.Immutable;
-using Mingle.Api.Ai;
+using Mingle.API.Ai;
 using Microsoft.AspNetCore.SignalR;
-using Mingle.Api.Rooms;
+using Mingle.API.Rooms;
 using Mingle.Contracts;
 using Mingle.DAL;
 using Mingle.Engine;
 
-namespace Mingle.Api.Hubs;
+namespace Mingle.API.Hubs;
 
 /// <summary>
 /// Real-time rooms. The server holds the game; each connection is bound to one seat, and after
 /// every change each player receives only their own view.
 /// </summary>
-public sealed class GameHub(RoomRegistry rooms, IDeckSource decks, ITopicSource topics, ICardWriter writer, ILogger<GameHub> log) : Hub<IGameClient>, IGameHub
+public sealed class GameHub(RoomRegistry rooms, IDeckSource decks, UserDeckStore userDecks, ITopicSource topics, ICardWriter writer, ILogger<GameHub> log) : Hub<IGameClient>, IGameHub
 {
     private const string RoomKey = "room";
     private const string PlayerKey = "player";
@@ -62,6 +62,13 @@ public sealed class GameHub(RoomRegistry rooms, IDeckSource decks, ITopicSource 
             return;
         }
         var available = await decks.GetDecksAsync(Context.ConnectionAborted);
+        // Decks made in the editor are not in the starter list; load the ones this room uses by id.
+        var userDeckIds = room.WantedDeckIds()
+            .Where(id => available.All(d => d.Id != id))
+            .Select(id => Guid.TryParse(id, out var g) ? g : Guid.Empty)
+            .Where(g => g != Guid.Empty)
+            .ToList();
+        if (userDeckIds.Count > 0) available = available.AddRange(await userDecks.GetManyAsync(userDeckIds, Context.ConnectionAborted));
         Guard(() => room.Start(me, available, Random.Shared.Next()));
         await Broadcast(room);
     }

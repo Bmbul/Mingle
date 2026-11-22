@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 using System.Text.Json;
 using Mingle.Engine;
 
-namespace Mingle.Api.Ai;
+namespace Mingle.API.Ai;
 
 /// <summary>
 /// Turns the model's JSON into game cards, keeping only cards that pass every check. AI output is

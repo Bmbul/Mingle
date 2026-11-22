@@ -4,7 +4,7 @@
     {
       "name": "mingle",
       "runtimeExecutable": "dotnet",
-      "runtimeArgs": ["run", "--project", "src/Mingle.Api", "--launch-profile", "http"],
+      "runtimeArgs": ["run", "--project", "src/Mingle.API", "--launch-profile", "http"],
       "port": 5243
     }
   ]

@@ -1,0 +1,305 @@
+@page "/decks/new"
+@page "/decks/{Id}/edit"
+@inject Text T
+@inject ContentService Content
+@inject DeviceDeckStore DeviceDecks
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+<PageTitle>@Title · Mingle</PageTitle>
+
+<header class="top">
+    <a class="icon" href="decks" aria-label="@T["Common_Back"]"><Icon Name="back" /></a>
+    <h1 class="h1">@Title</h1>
+</header>
+
+<main class="main">
+    @if (loading)
+    {
+        <p class="muted center">@T["Online_Connecting"]</p>
+    }
+    else if (notAllowed)
+    {
+        <p class="muted">@T["Editor_NoKey"]</p>
+    }
+    else
+    {
+        <section class="stack">
+            <label class="label" for="deck-name">@T["Editor_Name"]</label>
+            <input id="deck-name" class="field" maxlength="60" autocomplete="off" placeholder="@T["Editor_NamePlaceholder"]"
+                   @bind="name" @bind:event="oninput" />
+        </section>
+
+        <section class="stack">
+            <h2 class="label">@T.Plural("Cards", cards.Count)</h2>
+            @foreach (var card in cards)
+            {
+                var c = card;
+                if (ReferenceEquals(open, c))
+                {
+                    <div class="card stack">
+                        <div class="row gap">
+                            <label class="visually-hidden" for="kind-@c.Key">@T["Editor_Kind"]</label>
+                            <select id="kind-@c.Key" class="field grow" @bind="c.KindId">
+                                @foreach (var kind in CardKinds.All)
+                                {
+                                    <option value="@kind.Id">@T.KindName(kind.Id)</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="chips" role="group" aria-label="@T["Editor_Depth"]">
+                            @for (var depth = 1; depth <= 3; depth++)
+                            {
+                                var d = depth;
+                                <button class="chip @(c.Depth == d ? "on" : "")" aria-pressed="@(c.Depth == d ? "true" : "false")"
+                                        @onclick="() => c.Depth = d">@T[$"Depth_{d}"]</button>
+                            }
+                        </div>
+                        @foreach (var lang in EditOrder)
+                        {
+                            var l = lang;
+                            <div class="stack">
+                                <span class="label" lang="@l.Code()">@Text.LangName(l)</span>
+                                @if (c.IsChoice)
+                                {
+                                    <input class="field" lang="@l.Code()" maxlength="120" placeholder="@T["Editor_OptionA"]"
+                                           value="@c.Option(l, 0)" @oninput="e => c.SetOption(l, 0, e.Value as string)" />
+                                    <input class="field" lang="@l.Code()" maxlength="120" placeholder="@T["Editor_OptionB"]"
+                                           value="@c.Option(l, 1)" @oninput="e => c.SetOption(l, 1, e.Value as string)" />
+                                }
+                                else
+                                {
+                                    <textarea class="field area" lang="@l.Code()" maxlength="300" placeholder="@T[$"Editor_Hint_{c.KindId}"]"
+                                              value="@c.Text(l)" @oninput="e => c.SetText(l, e.Value as string)"></textarea>
+                                }
+                            </div>
+                        }
+                        <p class="muted small">@T["Editor_LangHint"]</p>
+                        <div class="row gap">
+                            <button class="btn2 grow" @onclick="() => Remove(c)">@T["Editor_RemoveCard"]</button>
+                            <button class="btn grow" @onclick="() => open = null">@T["Editor_Done"]</button>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <button class="check-row @(c.IsComplete ? "" : "incomplete")" @onclick="() => open = c">
+                        <span class="grow">
+                            <span class="row-title">@(c.Preview(Text.UiLang) is { Length: > 0 } p ? p : T["Editor_EmptyCard"])</span>
+                            <span class="muted small">@T.KindName(c.KindId) · @T[$"Depth_{c.Depth}"] · @string.Join(" ", c.Languages.Select(l => l.Code().ToUpperInvariant()))</span>
+                        </span>
+                    </button>
+                }
+            }
+            <button class="ghost" @onclick="AddCard"><Icon Name="plus" Size="18" />@T["Editor_AddCard"]</button>
+        </section>
+
+        @if (Id is not null)
+        {
+            <section class="stack">
+                <button class="btn2" @onclick="Share">@T["Decks_Share"]</button>
+                @if (confirmDelete)
+                {
+                    <div class="row gap">
+                        <button class="btn2 grow" @onclick="() => confirmDelete = false">@T["Play_KeepPlaying"]</button>
+                        <button class="btn grow danger" @onclick="Delete">@T["Editor_DeleteConfirm"]</button>
+                    </div>
+                }
+                else
+                {
+                    <button class="text-btn" @onclick="() => confirmDelete = true">@T["Editor_Delete"]</button>
+                }
+            </section>
+        }
+    }
+</main>
+
+@if (!loading && !notAllowed)
+{
+    <footer class="foot">
+        <p class="muted center" role="status">@Status</p>
+        <button class="btn" disabled="@(!CanSave || busy)" @onclick="Save">@T["Editor_Save"]</button>
+    </footer>
+}
+
+@code {
+    [Parameter] public string? Id { get; set; }
+
+    /// <summary>One card while it is edited: texts per language; "would you rather" has two options instead.</summary>
+    private sealed class EditCard
+    {
+        private static int next;
+        public int Key { get; } = ++next;
+        public string Id { get; init; } = "";
+        public string KindId { get; set; } = "open";
+        public int Depth { get; set; } = 1;
+        public Dictionary<Lang, string> Texts { get; } = [];
+        public Dictionary<Lang, string[]> Options { get; } = [];
+
+        public bool IsChoice => KindId == CardKinds.WouldYouRather.Id;
+        public string Text(Lang l) => Texts.GetValueOrDefault(l, "");
+        public void SetText(Lang l, string? v) => Texts[l] = v ?? "";
+        public string Option(Lang l, int i) => Options.TryGetValue(l, out var o) ? o[i] : "";
+        public void SetOption(Lang l, int i, string? v)
+        {
+            if (!Options.TryGetValue(l, out var o)) Options[l] = o = ["", ""];
+            o[i] = v ?? "";
+        }
+
+        /// <summary>A language counts once its text (or both options) is filled in.</summary>
+        public IEnumerable<Lang> Languages => Langs.All.Where(l => IsChoice
+            ? Options.TryGetValue(l, out var o) && o.All(x => !string.IsNullOrWhiteSpace(x))
+            : !string.IsNullOrWhiteSpace(Text(l)));
+
+        public bool IsComplete => Languages.Any();
+
+        public string Preview(Lang ui)
+        {
+            var lang = Languages.Contains(ui) ? ui : Languages.FirstOrDefault();
+            if (!IsComplete) return "";
+            return IsChoice ? string.Join(" / ", Options[lang]) : Text(lang);
+        }
+
+        public static EditCard From(Card card)
+        {
+            var edit = new EditCard { Id = card.Id, KindId = card.KindId, Depth = card.Depth };
+            foreach (var (lang, text) in card.Texts)
+            {
+                edit.Texts[lang] = text.Text;
+                if (text.Options.Length == 2) edit.Options[lang] = [text.Options[0], text.Options[1]];
+            }
+            return edit;
+        }
+
+        public Card ToCard(int position)
+        {
+            var texts = Languages.ToImmutableDictionary(l => l, l => IsChoice
+                ? new CardText(WouldYouRather(l), [Options[l][0].Trim(), Options[l][1].Trim()])
+                : new CardText(Text(l).Trim()));
+            return new Card(Id.Length > 0 ? Id : $"new-{position}", KindId, Depth, [], texts);
+        }
+
+        private static string WouldYouRather(Lang l) => l switch
+        {
+            Lang.Hy => "Ո՞րն ես նախընտրում",
+            Lang.Ru => "Что ты выберешь?",
+            _ => "Would you rather…",
+        };
+    }
+
+    private string Title => Id is null ? T["Decks_New"] : T["Editor_Title"];
+    private Lang[] EditOrder => [Text.UiLang, .. Langs.All.Where(l => l != Text.UiLang)];
+
+    private bool loading = true;
+    private bool notAllowed;
+    private bool busy;
+    private bool confirmDelete;
+    private string name = "";
+    private string? editKey;
+    private List<EditCard> cards = [];
+    private EditCard? open;
+    private string? error;
+    private string? note;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        loading = true;
+        if (Id is not null)
+        {
+            editKey = (await DeviceDecks.FindAsync(Id))?.EditKey;
+            var deck = editKey is null ? null : await Content.GetDeckAsync(Id, fresh: true);
+            notAllowed = deck is null;
+            if (deck is not null)
+            {
+                name = deck.NameFor(Text.UiLang);
+                cards = [.. deck.Cards.Select(EditCard.From)];
+            }
+        }
+        else if (cards.Count == 0)
+        {
+            AddCard();
+        }
+        loading = false;
+    }
+
+    private bool CanSave => name.Trim().Length > 0 && cards.Count > 0 && cards.All(c => c.IsComplete);
+
+    private string Status =>
+        error ?? note
+        ?? (name.Trim().Length == 0 ? T["Editor_NeedName"]
+            : cards.Count == 0 ? T["Editor_NeedCard"]
+            : cards.Any(c => !c.IsComplete) ? T["Editor_Incomplete"]
+            : "");
+
+    private void AddCard()
+    {
+        var card = new EditCard();
+        cards.Add(card);
+        open = card;
+    }
+
+    private void Remove(EditCard card)
+    {
+        cards.Remove(card);
+        if (ReferenceEquals(open, card)) open = null;
+    }
+
+    private Deck Build() => new(
+        Id ?? "new",
+        ImmutableDictionary<Lang, string>.Empty.Add(Text.UiLang, name.Trim()),
+        [.. cards.Select((c, i) => c.ToCard(i))]);
+
+    private async Task Save()
+    {
+        if (!CanSave) return;
+        busy = true;
+        error = note = null;
+        try
+        {
+            var result = Id is null
+                ? await Content.CreateAsync(Build())
+                : await Content.SaveAsync(Id, editKey!, Build());
+            if (result.Error is { } problem)
+            {
+                error = problem switch
+                {
+                    "403" => T["Editor_NoKey"],
+                    "429" => T["Editor_TooMany"],
+                    _ => $"{T["Editor_SaveFailed"]} {problem}",
+                };
+                return;
+            }
+            if (Id is null)
+            {
+                Nav.NavigateTo($"decks/{result.Id}/edit", replace: true);
+                return;
+            }
+            // Reload so new cards get their saved ids and later saves update them in place.
+            if (await Content.GetDeckAsync(Id) is { } deck) cards = [.. deck.Cards.Select(EditCard.From)];
+            open = null;
+            note = T["Editor_Saved"];
+        }
+        catch (HttpRequestException)
+        {
+            error = T["Online_ConnectFailed"];
+        }
+        finally
+        {
+            busy = false;
+        }
+    }
+
+    private async Task Delete()
+    {
+        if (Id is null || editKey is null) return;
+        if (await Content.DeleteAsync(Id, editKey)) Nav.NavigateTo("decks");
+        else error = T["Editor_SaveFailed"];
+    }
+
+    private async Task Share()
+    {
+        var url = Nav.ToAbsoluteUri($"d/{Id}").ToString();
+        var result = await JS.InvokeAsync<string>("mingle.share", url, name);
+        note = result switch { "copied" => T["Lobby_Copied"], "failed" => url, _ => null };
+    }
+}

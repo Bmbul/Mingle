@@ -1,0 +1,87 @@
+@page "/d/{Id}"
+@inject Text T
+@inject ContentService Content
+@inject DeviceDeckStore DeviceDecks
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+<PageTitle>@(deck?.NameFor(Text.UiLang) ?? "Mingle") · Mingle</PageTitle>
+
+<header class="top">
+    <a class="icon" href="decks" aria-label="@T["Common_Back"]"><Icon Name="back" /></a>
+    <h1 class="h1">@(deck?.NameFor(Text.UiLang) ?? "")</h1>
+</header>
+
+<main class="main">
+    @if (loading)
+    {
+        <p class="muted center">@T["Online_Connecting"]</p>
+    }
+    else if (deck is null)
+    {
+        <p class="muted">@T["Decks_NotFound"]</p>
+    }
+    else
+    {
+        <p class="muted">@T.Plural("Cards", deck.Cards.Length)</p>
+        <section class="stack">
+            @foreach (var card in deck.Cards)
+            {
+                var text = card.TextFor(Text.UiLang);
+                <div class="card">
+                    <span class="row-title">@(text.Options.IsEmpty ? text.Text : string.Join(" / ", text.Options))</span>
+                    <span class="muted small">@T.KindName(card.KindId) · @T[$"Depth_{card.Depth}"]</span>
+                </div>
+            }
+        </section>
+    }
+</main>
+
+@if (deck is not null)
+{
+    <footer class="foot">
+        @if (shareNote is not null)
+        {
+            <p class="muted small center" role="status">@shareNote</p>
+        }
+        @if (saved)
+        {
+            <button class="btn2" @onclick="Share">@T["Decks_Share"]</button>
+            <a class="btn" href="decks">@T["Decks_Title"]</a>
+        }
+        else
+        {
+            <button class="btn" @onclick="Add">@T["Decks_Add"]</button>
+        }
+    </footer>
+}
+
+@code {
+    [Parameter] public string Id { get; set; } = "";
+
+    private Deck? deck;
+    private bool loading = true;
+    private bool saved;
+    private string? shareNote;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        loading = true;
+        deck = await Content.GetDeckAsync(Id);
+        saved = await DeviceDecks.FindAsync(Id) is not null;
+        loading = false;
+    }
+
+    private async Task Add()
+    {
+        await DeviceDecks.AddAsync(Id, null);
+        Nav.NavigateTo("decks");
+    }
+
+    private async Task Share()
+    {
+        var url = Nav.ToAbsoluteUri($"d/{Id}").ToString();
+        var result = await JS.InvokeAsync<string>("mingle.share", url, deck?.NameFor(Text.UiLang) ?? "Mingle");
+        shareNote = result switch { "copied" => T["Lobby_Copied"], "failed" => url, _ => null };
+    }
+}

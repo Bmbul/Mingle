@@ -6,10 +6,10 @@ COPY src/Mingle.Engine/Mingle.Engine.csproj src/Mingle.Engine/
 COPY src/Mingle.Client/Mingle.Client.csproj src/Mingle.Client/
 COPY src/Mingle.DAL/Mingle.DAL.csproj src/Mingle.DAL/
 COPY src/Mingle.Contracts/Mingle.Contracts.csproj src/Mingle.Contracts/
-COPY src/Mingle.Api/Mingle.Api.csproj src/Mingle.Api/
-RUN dotnet restore src/Mingle.Api/Mingle.Api.csproj
+COPY src/Mingle.API/Mingle.API.csproj src/Mingle.API/
+RUN dotnet restore src/Mingle.API/Mingle.API.csproj
 COPY src/ src/
-RUN dotnet publish src/Mingle.Api/Mingle.Api.csproj -c Release -o /app --no-restore
+RUN dotnet publish src/Mingle.API/Mingle.API.csproj -c Release -o /app --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
@@ -17,4 +17,4 @@ COPY --from=build /app .
 ENV ASPNETCORE_HTTP_PORTS=8080
 EXPOSE 8080
 USER $APP_UID
-ENTRYPOINT ["dotnet", "Mingle.Api.dll"]
+ENTRYPOINT ["dotnet", "Mingle.API.dll"]

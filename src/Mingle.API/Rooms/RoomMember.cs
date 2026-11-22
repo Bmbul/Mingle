@@ -1,6 +1,6 @@
 using Mingle.Engine;
 
-namespace Mingle.Api.Rooms;
+namespace Mingle.API.Rooms;
 
 /// <summary>A player's seat in a room. A seat survives disconnects; the token reclaims it.</summary>
 public sealed class RoomMember(string id, string name, Lang lang, string token)

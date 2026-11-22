@@ -13,6 +13,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<DeckSeeder>();
         services.AddScoped<IDeckSource, DbDeckSource>();
         services.AddScoped<ITopicSource, DbTopicSource>();
+        services.AddScoped<UserDeckStore>();
         return services;
     }
 

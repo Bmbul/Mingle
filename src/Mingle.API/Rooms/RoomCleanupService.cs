@@ -1,4 +1,4 @@
-namespace Mingle.Api.Rooms;
+namespace Mingle.API.Rooms;
 
 /// <summary>Every few minutes, drops rooms that everyone has left.</summary>
 public sealed class RoomCleanupService(RoomRegistry rooms, ILogger<RoomCleanupService> log) : BackgroundService

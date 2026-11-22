@@ -6,7 +6,7 @@ using Anthropic.Models.Messages;
 using Microsoft.Extensions.Options;
 using Mingle.Engine;
 
-namespace Mingle.Api.Ai;
+namespace Mingle.API.Ai;
 
 /// <summary>Writes cards with Claude: one structured call returns every card in every language at the table.</summary>
 public sealed class ClaudeCardWriter(AnthropicClient client, IOptions<AiOptions> options, DailyLimit limit, ILogger<ClaudeCardWriter> log) : ICardWriter

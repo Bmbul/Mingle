@@ -11,6 +11,8 @@ internal sealed class DeckConfiguration : IEntityTypeConfiguration<Deck>
         deck.ToTable("decks");
         deck.HasKey(d => d.Id);
         LocalizedColumns.Text(deck, d => d.Name, "name", maxLength: 100);
+        deck.Property(d => d.EditKeyHash).HasMaxLength(64).IsFixedLength();
+        deck.Ignore(d => d.IsUserDeck);
         deck.HasMany(d => d.Cards).WithOne().HasForeignKey(c => c.DeckId).OnDelete(DeleteBehavior.Cascade);
     }
 }

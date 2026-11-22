@@ -242,7 +242,7 @@ else if (room.Summary is { } summary)
         if (room.Settings.Source == DeckSource.Topics)
             yield return player.PickedTopics ? T["Lobby_TopicsPicked"] : T["Lobby_TopicsPicking"];
         if (EveryoneBrings(room))
-            yield return decks.FirstOrDefault(d => d.Id == player.DeckId)?.NameFor(Text.UiLang) ?? T["Lobby_NoDeck"];
+            yield return player.DeckId is null ? T["Lobby_NoDeck"] : decks.FirstOrDefault(d => d.Id == player.DeckId)?.NameFor(Text.UiLang) ?? T["Lobby_OwnDeck"];
     }
 
     private static ImmutableArray<Player> Players(RoomView room) =>

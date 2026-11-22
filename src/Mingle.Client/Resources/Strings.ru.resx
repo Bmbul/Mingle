@@ -145,4 +145,43 @@
   <data name="Writing_Title" xml:space="preserve"><value>Пишем ваши карточки…</value></data>
   <data name="Writing_Hint" xml:space="preserve"><value>Это может занять до минуты.</value></data>
   <data name="Writing_Library" xml:space="preserve"><value>AI был недоступен, поэтому здесь готовые карточки на ваши темы.</value></data>
+  <data name="Home_MyDecks" xml:space="preserve"><value>Мои колоды</value></data>
+  <data name="Decks_Title" xml:space="preserve"><value>Мои колоды</value></data>
+  <data name="Decks_New" xml:space="preserve"><value>Новая колода</value></data>
+  <data name="Decks_Empty" xml:space="preserve"><value>Колод пока нет. Создай свою или открой ссылку на колоду от друзей.</value></data>
+  <data name="Decks_Missing" xml:space="preserve"><value>Колода больше не существует</value></data>
+  <data name="Decks_ViewOnly" xml:space="preserve"><value>только просмотр</value></data>
+  <data name="Decks_Edit" xml:space="preserve"><value>Изменить</value></data>
+  <data name="Decks_DeviceNote" xml:space="preserve"><value>Свои колоды можно изменять только на этом устройстве; играть с ними может любой, у кого есть ссылка.</value></data>
+  <data name="Decks_NotFound" xml:space="preserve"><value>Этой колоды больше нет.</value></data>
+  <data name="Decks_Add" xml:space="preserve"><value>Добавить в мои колоды</value></data>
+  <data name="Decks_Share" xml:space="preserve"><value>Поделиться ссылкой</value></data>
+  <data name="Editor_Title" xml:space="preserve"><value>Изменить колоду</value></data>
+  <data name="Editor_Name" xml:space="preserve"><value>Название колоды</value></data>
+  <data name="Editor_NamePlaceholder" xml:space="preserve"><value>Например: Наше лето</value></data>
+  <data name="Editor_Kind" xml:space="preserve"><value>Тип карточки</value></data>
+  <data name="Editor_Depth" xml:space="preserve"><value>Глубина</value></data>
+  <data name="Editor_OptionA" xml:space="preserve"><value>Первый вариант</value></data>
+  <data name="Editor_OptionB" xml:space="preserve"><value>Второй вариант</value></data>
+  <data name="Editor_Hint_open" xml:space="preserve"><value>Напиши открытый вопрос…</value></data>
+  <data name="Editor_Hint_finish" xml:space="preserve"><value>Напиши начало фразы…</value></data>
+  <data name="Editor_Hint_likely" xml:space="preserve"><value>Кто скорее всего…</value></data>
+  <data name="Editor_Hint_guess" xml:space="preserve"><value>Вопрос, ответ на который остальные будут угадывать…</value></data>
+  <data name="Editor_Hint_rate" xml:space="preserve"><value>От 1 до 10: насколько…</value></data>
+  <data name="Editor_LangHint" xml:space="preserve"><value>Заполни хотя бы один язык. Игроки получают карточки только на языках, которые они читают.</value></data>
+  <data name="Editor_RemoveCard" xml:space="preserve"><value>Удалить карточку</value></data>
+  <data name="Editor_Done" xml:space="preserve"><value>Готово</value></data>
+  <data name="Editor_EmptyCard" xml:space="preserve"><value>Пустая карточка</value></data>
+  <data name="Editor_AddCard" xml:space="preserve"><value>Добавить карточку</value></data>
+  <data name="Editor_Save" xml:space="preserve"><value>Сохранить колоду</value></data>
+  <data name="Editor_Saved" xml:space="preserve"><value>Сохранено.</value></data>
+  <data name="Editor_NeedName" xml:space="preserve"><value>Дай колоде название.</value></data>
+  <data name="Editor_NeedCard" xml:space="preserve"><value>Добавь хотя бы одну карточку.</value></data>
+  <data name="Editor_Incomplete" xml:space="preserve"><value>У некоторых карточек ещё нет текста.</value></data>
+  <data name="Editor_SaveFailed" xml:space="preserve"><value>Не удалось сохранить.</value></data>
+  <data name="Editor_TooMany" xml:space="preserve"><value>Слишком много изменений сразу; попробуй через несколько минут.</value></data>
+  <data name="Editor_NoKey" xml:space="preserve"><value>Эту колоду можно изменять только на устройстве, где она создана.</value></data>
+  <data name="Editor_Delete" xml:space="preserve"><value>Удалить колоду</value></data>
+  <data name="Editor_DeleteConfirm" xml:space="preserve"><value>Удалить для всех</value></data>
+  <data name="Lobby_OwnDeck" xml:space="preserve"><value>своя колода</value></data>
 </root>

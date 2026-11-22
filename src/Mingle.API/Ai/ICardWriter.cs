@@ -1,7 +1,7 @@
 using System.Collections.Immutable;
 using Mingle.Engine;
 
-namespace Mingle.Api.Ai;
+namespace Mingle.API.Ai;
 
 /// <summary>What the table picked, in the languages the table reads.</summary>
 public sealed record CardRequest(ImmutableArray<TopicInfo> Topics, ImmutableArray<Lang> Languages, int PlayerCount, int Count = TopicDeal.CardCount);

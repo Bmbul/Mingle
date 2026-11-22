@@ -141,4 +141,43 @@
   <data name="Writing_Title" xml:space="preserve"><value>Writing your cards…</value></data>
   <data name="Writing_Hint" xml:space="preserve"><value>This can take up to a minute.</value></data>
   <data name="Writing_Library" xml:space="preserve"><value>AI wasn't available, so these are library cards on your topics.</value></data>
+  <data name="Home_MyDecks" xml:space="preserve"><value>My decks</value></data>
+  <data name="Decks_Title" xml:space="preserve"><value>My decks</value></data>
+  <data name="Decks_New" xml:space="preserve"><value>New deck</value></data>
+  <data name="Decks_Empty" xml:space="preserve"><value>No decks yet. Make one, or open a deck link a friend sent you.</value></data>
+  <data name="Decks_Missing" xml:space="preserve"><value>Deck no longer exists</value></data>
+  <data name="Decks_ViewOnly" xml:space="preserve"><value>view only</value></data>
+  <data name="Decks_Edit" xml:space="preserve"><value>Edit</value></data>
+  <data name="Decks_DeviceNote" xml:space="preserve"><value>Decks you make can be edited only on this device; anyone with the link can play them.</value></data>
+  <data name="Decks_NotFound" xml:space="preserve"><value>This deck doesn't exist anymore.</value></data>
+  <data name="Decks_Add" xml:space="preserve"><value>Add to my decks</value></data>
+  <data name="Decks_Share" xml:space="preserve"><value>Share deck link</value></data>
+  <data name="Editor_Title" xml:space="preserve"><value>Edit deck</value></data>
+  <data name="Editor_Name" xml:space="preserve"><value>Deck name</value></data>
+  <data name="Editor_NamePlaceholder" xml:space="preserve"><value>For example: Our summer</value></data>
+  <data name="Editor_Kind" xml:space="preserve"><value>Card type</value></data>
+  <data name="Editor_Depth" xml:space="preserve"><value>Depth</value></data>
+  <data name="Editor_OptionA" xml:space="preserve"><value>First option</value></data>
+  <data name="Editor_OptionB" xml:space="preserve"><value>Second option</value></data>
+  <data name="Editor_Hint_open" xml:space="preserve"><value>Write an open question…</value></data>
+  <data name="Editor_Hint_finish" xml:space="preserve"><value>Write the start of a sentence…</value></data>
+  <data name="Editor_Hint_likely" xml:space="preserve"><value>Who is most likely to…</value></data>
+  <data name="Editor_Hint_guess" xml:space="preserve"><value>A question the others will guess your answer to…</value></data>
+  <data name="Editor_Hint_rate" xml:space="preserve"><value>From 1 to 10, how…</value></data>
+  <data name="Editor_LangHint" xml:space="preserve"><value>Fill in at least one language. Players only get cards in languages they read.</value></data>
+  <data name="Editor_RemoveCard" xml:space="preserve"><value>Remove card</value></data>
+  <data name="Editor_Done" xml:space="preserve"><value>Done</value></data>
+  <data name="Editor_EmptyCard" xml:space="preserve"><value>Empty card</value></data>
+  <data name="Editor_AddCard" xml:space="preserve"><value>Add card</value></data>
+  <data name="Editor_Save" xml:space="preserve"><value>Save deck</value></data>
+  <data name="Editor_Saved" xml:space="preserve"><value>Saved.</value></data>
+  <data name="Editor_NeedName" xml:space="preserve"><value>Give the deck a name.</value></data>
+  <data name="Editor_NeedCard" xml:space="preserve"><value>Add at least one card.</value></data>
+  <data name="Editor_Incomplete" xml:space="preserve"><value>Some cards have no text yet.</value></data>
+  <data name="Editor_SaveFailed" xml:space="preserve"><value>Could not save.</value></data>
+  <data name="Editor_TooMany" xml:space="preserve"><value>Too many changes at once; try again in a few minutes.</value></data>
+  <data name="Editor_NoKey" xml:space="preserve"><value>This deck can only be edited on the device that made it.</value></data>
+  <data name="Editor_Delete" xml:space="preserve"><value>Delete deck</value></data>
+  <data name="Editor_DeleteConfirm" xml:space="preserve"><value>Delete for everyone</value></data>
+  <data name="Lobby_OwnDeck" xml:space="preserve"><value>their own deck</value></data>
 </root>

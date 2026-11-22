@@ -292,3 +292,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 3s; } }
 .chip:disabled { opacity: 0.45; }
+
+/* Deck editor */
+.check-row.incomplete { border-style: dashed; }
+.btn.danger { background: #C2412F; border-color: #C2412F; color: #fff; }

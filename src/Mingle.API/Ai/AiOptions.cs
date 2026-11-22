@@ -1,4 +1,4 @@
-namespace Mingle.Api.Ai;
+namespace Mingle.API.Ai;
 
 /// <summary>
 /// How cards are written with AI. Bound from the "Ai" configuration section; the API key comes

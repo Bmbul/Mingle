@@ -22,7 +22,7 @@ Start only PostgreSQL in Docker, then run the API (which also serves the app) wi
 
 ```bash
 docker compose up -d db
-dotnet run --project src/Mingle.Api --launch-profile http
+dotnet run --project src/Mingle.API --launch-profile http
 ```
 
 Open http://localhost:5243. On first start the API creates the tables and imports the
@@ -36,7 +36,7 @@ dotnet test
 ```
 
 The SDK is pinned to .NET 10 in `global.json`. EF Core migrations:
-`dotnet ef migrations add <Name> --project src/Mingle.DAL --startup-project src/Mingle.Api --output-dir Migrations`.
+`dotnet ef migrations add <Name> --project src/Mingle.DAL --startup-project src/Mingle.API --output-dir Migrations`.
 
 ## Layout
 
@@ -45,11 +45,11 @@ The SDK is pinned to .NET 10 in `global.json`. EF Core migrations:
 | `src/Mingle.Engine` | Pure game rules: cards and card kinds, `Game.Apply` reducer, per-player views, card selector, plural rules, deck JSON reader. No I/O. |
 | `src/Mingle.Client` | Blazor WebAssembly PWA: Home, New game, Play screens; UI strings in `Resources/Strings*.resx`. Loads decks from `/api/decks` and keeps the last copy for offline play. |
 | `src/Mingle.Contracts` | Messages shared by the API and the client for online rooms (`IGameHub`, `IGameClient`, `RoomView`). |
-| `src/Mingle.Api` | ASP.NET Core host: serves the client, `GET /api/decks`, and the SignalR game hub (`/hubs/game`). `Rooms/` holds the in-memory rooms. |
+| `src/Mingle.API` | ASP.NET Core host: serves the client, `Controllers/` (decks API), the SignalR game hub (`/hubs/game`), `Rooms/` (in-memory rooms) and `Ai/` (card writing). |
 | `src/Mingle.DAL` | Data access: EF Core + PostgreSQL. `Entities/` and `Configurations/` hold one file per table (card_kinds, topics, decks, cards, card_options, card_topics, deck_cards); texts are stored as one column per language (`text_hy`, `text_ru`, `text_en`). `Migrations/`; `Seeding/`. |
 | `src/Mingle.DAL/Seed` | Starter content: `topics.json` (21 topics in hy/ru/en) and `Decks/` (`icebreakers.json`, `couples.json`, 20 cards each). |
 | `tests/Mingle.Engine.Tests` | xUnit tests for the engine and for the seed decks. |
-| `tests/Mingle.Api.Tests` | Room rules, plus end-to-end hub tests with two real SignalR clients (no database needed). |
+| `tests/Mingle.API.Tests` | Room rules, plus end-to-end hub tests with two real SignalR clients (no database needed). |
 | `tests/Mingle.DAL.Tests` | Seed file checks, plus migration, seeding, re-seeding and constraint tests against a real PostgreSQL container (Testcontainers). |
 
 ## How the game works
@@ -88,6 +88,19 @@ The host picks where the cards come from when creating a room:
 
 AI settings live in the `Ai` configuration section (`Ai__Model`, `Ai__Effort`, `Ai__MaxGenerationsPerDay`,
 defaults: `claude-opus-5-5`, `low`, 100). The key comes from `ANTHROPIC_API_KEY` (or `Ai__ApiKey`).
+
+## Deck editor
+
+Anyone can make a deck (My decks → New deck) without an account. The server returns an edit key once;
+only its SHA-256 hash is stored, and the browser keeps the key (`DeviceDeckStore`), so only that device
+can change or delete the deck. A deck's id is its share link (`/d/<id>`): anyone with it can view the
+deck, add it to their list and play it, in pass-and-play or online rooms.
+
+- `GET /api/decks`: starter decks. `GET /api/decks/{id}`: any deck.
+- `POST /api/decks` (deck file JSON) returns `{ id, editKey }`; `PUT` and `DELETE /api/decks/{id}`
+  need the `X-Edit-Key` header. Writes are rate-limited per visitor.
+- Editing a starter card inside your deck saves your own copy (`forked_from_id`); the starter card stays.
+- Clearing the browser's data loses the edit key; accounts can claim decks later.
 
 ## Deploying
 

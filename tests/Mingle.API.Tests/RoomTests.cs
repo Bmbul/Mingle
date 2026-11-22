@@ -1,9 +1,9 @@
 using System.Collections.Immutable;
-using Mingle.Api.Rooms;
+using Mingle.API.Rooms;
 using Mingle.Contracts;
 using Mingle.Engine;
 
-namespace Mingle.Api.Tests;
+namespace Mingle.API.Tests;
 
 public class RoomTests
 {

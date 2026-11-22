@@ -1,7 +1,7 @@
 # Local testing and development.
 #   Everything (database + app), app on http://localhost:8080 and on your network at http://<this-computer's-ip>:8080:
 #     docker compose up --build
-#   Database only (then run the app with `dotnet run --project src/Mingle.Api`):
+#   Database only (then run the app with `dotnet run --project src/Mingle.API`):
 #     docker compose up -d db
 services:
   db:

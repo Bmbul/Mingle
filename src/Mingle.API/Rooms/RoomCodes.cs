@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace Mingle.Api.Rooms;
+namespace Mingle.API.Rooms;
 
 /// <summary>Short codes people can read out loud: no I, O, 0 or 1 to mix up.</summary>
 public static class RoomCodes

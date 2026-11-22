@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 using Mingle.DAL;
 using Mingle.Engine;
 
-namespace Mingle.Api.Tests;
+namespace Mingle.API.Tests;
 
 /// <summary>A small in-memory deck, so room and hub tests need no database.</summary>
 internal sealed class TestDecks : IDeckSource

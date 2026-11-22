@@ -42,6 +42,15 @@ public static class DeckJson
         return System.Text.Encoding.UTF8.GetString(stream.ToArray());
     }
 
+    /// <summary>Writes one deck in the same format <see cref="Parse"/> reads.</summary>
+    public static string Write(Deck deck)
+    {
+        using var stream = new MemoryStream();
+        using (var w = new Utf8JsonWriter(stream, new JsonWriterOptions { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }))
+            WriteDeck(w, deck);
+        return System.Text.Encoding.UTF8.GetString(stream.ToArray());
+    }
+
     private static void WriteDeck(Utf8JsonWriter w, Deck deck)
     {
         w.WriteStartObject();

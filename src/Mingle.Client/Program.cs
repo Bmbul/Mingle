@@ -13,6 +13,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddLocalization();
 builder.Services.AddScoped<Text>();
+builder.Services.AddScoped<DeviceDeckStore>();
 builder.Services.AddScoped<ContentService>();
 builder.Services.AddScoped<GameSession>();
 builder.Services.AddScoped<RoomClient>();

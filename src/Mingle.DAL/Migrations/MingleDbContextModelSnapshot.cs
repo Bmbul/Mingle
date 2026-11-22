@@ -240,6 +240,16 @@ namespace Mingle.DAL.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
+                    b.Property<string>("EditKeyHash")
+                        .HasMaxLength(64)
+                        .HasColumnType("character(64)")
+                        .HasColumnName("edit_key_hash")
+                        .IsFixedLength();
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
                     b.ComplexProperty(typeof(Dictionary<string, object>), "Name", "Mingle.DAL.Entities.Deck.Name#LocalizedText", b1 =>
                         {
                             b1.IsRequired();

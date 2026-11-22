@@ -106,5 +106,5 @@ public sealed record Deck(string Id, ImmutableDictionary<Lang, string> Names, Im
     public string NameFor(Lang lang) =>
         Names.TryGetValue(lang, out var name) ? name
         : Names.TryGetValue(Lang.En, out var en) ? en
-        : Id;
+        : Names.Values.FirstOrDefault() ?? Id;
 }
