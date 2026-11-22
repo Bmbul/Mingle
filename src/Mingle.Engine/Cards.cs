@@ -87,7 +87,7 @@ public sealed record Card(
     string Id,
     string KindId,
     int Depth,
-    ImmutableArray<string> Tags,
+    ImmutableArray<string> Topics,
     ImmutableDictionary<Lang, CardText> Texts)
 {
     public CardKind Kind => CardKinds.Get(KindId);

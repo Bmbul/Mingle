@@ -10,8 +10,7 @@ internal sealed class DeckConfiguration : IEntityTypeConfiguration<Deck>
     {
         deck.ToTable("decks");
         deck.HasKey(d => d.Id);
-        deck.Property(d => d.Id).HasMaxLength(64);
-        deck.HasMany(d => d.Names).WithOne().HasForeignKey(n => n.DeckId).OnDelete(DeleteBehavior.Cascade);
+        LocalizedColumns.Text(deck, d => d.Name, "name", maxLength: 100);
         deck.HasMany(d => d.Cards).WithOne().HasForeignKey(c => c.DeckId).OnDelete(DeleteBehavior.Cascade);
     }
 }

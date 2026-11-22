@@ -8,7 +8,7 @@ namespace Mingle.Engine;
 /// Reads a deck file:
 /// <code>
 /// { "id": "...", "name": { "en": "...", "hy": "...", "ru": "..." },
-///   "cards": [ { "id": "...", "kind": "wyr", "depth": 1, "tags": ["travel"],
+///   "cards": [ { "id": "...", "kind": "wyr", "depth": 1, "topics": ["travel"],
 ///                "text": { "en": "...", ... }, "options": { "en": ["A", "B"], ... } } ] }
 /// </code>
 /// Every problem is reported with the card id, so content mistakes are easy to find.
@@ -54,8 +54,8 @@ public static class DeckJson
             w.WriteString("id", card.Id);
             w.WriteString("kind", card.KindId);
             w.WriteNumber("depth", card.Depth);
-            w.WriteStartArray("tags");
-            foreach (var tag in card.Tags) w.WriteStringValue(tag);
+            w.WriteStartArray("topics");
+            foreach (var topic in card.Topics) w.WriteStringValue(topic);
             w.WriteEndArray();
             WriteStrings(w, "text", card.Texts.ToImmutableDictionary(t => t.Key, t => t.Value.Text));
             if (card.Texts.Values.Any(t => !t.Options.IsEmpty))
@@ -112,7 +112,7 @@ public static class DeckJson
             : throw new FormatException($"{where}: missing depth.");
         if (depth is < 1 or > 3) throw new FormatException($"{where}: depth must be 1, 2 or 3.");
 
-        var tags = element.TryGetProperty("tags", out var t)
+        var topics = element.TryGetProperty("topics", out var t)
             ? t.EnumerateArray().Select(x => x.GetString() ?? "").Where(x => x.Length > 0).ToImmutableArray()
             : [];
 
@@ -138,7 +138,7 @@ public static class DeckJson
         foreach (var lang in options.Keys.Where(l => !texts.ContainsKey(l)))
             throw new FormatException($"{where}: options for '{lang.Code()}' but no text.");
 
-        return new Card(id, kindId, depth, tags, result.ToImmutable());
+        return new Card(id, kindId, depth, topics, result.ToImmutable());
     }
 
     private static ImmutableDictionary<Lang, string> ReadStrings(JsonElement element, string where)

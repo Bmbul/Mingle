@@ -10,15 +10,15 @@ public interface IDeckSource
     Task<ImmutableArray<GameDeck>> GetDecksAsync(CancellationToken ct = default);
 }
 
-/// <summary>Reads every deck, with its cards and translations, from the database.</summary>
+/// <summary>Reads every deck, with its cards, options and topics, from the database.</summary>
 public sealed class DbDeckSource(MingleDbContext db) : IDeckSource
 {
     public async Task<ImmutableArray<GameDeck>> GetDecksAsync(CancellationToken ct = default)
     {
         var decks = await db.Decks
             .AsNoTracking()
-            .Include(d => d.Names)
-            .Include(d => d.Cards).ThenInclude(c => c.Card).ThenInclude(c => c.Translations)
+            .Include(d => d.Cards).ThenInclude(c => c.Card).ThenInclude(c => c.Options)
+            .Include(d => d.Cards).ThenInclude(c => c.Card).ThenInclude(c => c.Topics).ThenInclude(t => t.Topic)
             .OrderBy(d => d.CreatedAt).ThenBy(d => d.Id)
             .AsSplitQuery()
             .ToListAsync(ct);

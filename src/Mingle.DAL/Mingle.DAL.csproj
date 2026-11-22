@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <!-- Starter decks, imported into an empty database on first start. -->
-    <None Include="Seed\*.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Include="Seed\**\*.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

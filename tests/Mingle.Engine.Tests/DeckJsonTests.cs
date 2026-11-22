@@ -7,7 +7,7 @@ public class DeckJsonTests
           "id": "demo",
           "name": { "en": "Demo", "ru": "Демо" },
           "cards": [
-            { "id": "c1", "kind": "open", "depth": 1, "tags": ["travel"],
+            { "id": "c1", "kind": "open", "depth": 1, "topics": ["travel"],
               "text": { "en": "Where to next?", "ru": "Куда дальше?" } },
             { "id": "c2", "kind": "wyr", "depth": 2,
               "text": { "en": "Would you rather…" },
@@ -25,7 +25,7 @@ public class DeckJsonTests
         Assert.Equal("Демо", deck.NameFor(Lang.Ru));
         Assert.Equal("Demo", deck.NameFor(Lang.Hy)); // falls back to English
         Assert.Equal(2, deck.Cards.Length);
-        Assert.Equal(["travel"], deck.Cards[0].Tags.ToArray());
+        Assert.Equal(["travel"], deck.Cards[0].Topics.ToArray());
         Assert.Equal(["Sea", "Mountains"], deck.Cards[1].TextFor(Lang.En).Options.ToArray());
     }
 
@@ -56,7 +56,7 @@ public class DeckJsonTests
         {
             var (a, b) = (original.Cards[i], copy.Cards[i]);
             Assert.Equal((a.Id, a.KindId, a.Depth), (b.Id, b.KindId, b.Depth));
-            Assert.Equal(a.Tags.ToArray(), b.Tags.ToArray());
+            Assert.Equal(a.Topics.ToArray(), b.Topics.ToArray());
             foreach (var (lang, text) in a.Texts)
             {
                 Assert.Equal(text.Text, b.Texts[lang].Text);

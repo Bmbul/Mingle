@@ -5,10 +5,12 @@ namespace Mingle.DAL;
 
 public sealed class MingleDbContext(DbContextOptions<MingleDbContext> options) : DbContext(options)
 {
+    public DbSet<CardKind> CardKinds => Set<CardKind>();
+    public DbSet<Topic> Topics => Set<Topic>();
     public DbSet<Deck> Decks => Set<Deck>();
-    public DbSet<DeckName> DeckNames => Set<DeckName>();
     public DbSet<Card> Cards => Set<Card>();
-    public DbSet<CardTranslation> CardTranslations => Set<CardTranslation>();
+    public DbSet<CardOption> CardOptions => Set<CardOption>();
+    public DbSet<CardTopic> CardTopics => Set<CardTopic>();
     public DbSet<DeckCard> DeckCards => Set<DeckCard>();
 
     // Each table's mapping lives in Configurations/<Entity>Configuration.cs.

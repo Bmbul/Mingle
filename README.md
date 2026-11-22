@@ -26,7 +26,8 @@ dotnet run --project src/Mingle.Api --launch-profile http
 ```
 
 Open http://localhost:5243. On first start the API creates the tables and imports the
-starter decks from `src/Mingle.DAL/Seed/*.json`.
+starter content from `src/Mingle.DAL/Seed` (`topics.json` and `Decks/*.json`). It does that on
+every start: seeded rows have stable ids, so changed texts are updated and nothing is duplicated.
 
 Tests (the database tests start their own PostgreSQL container, so Docker must be running):
 
@@ -45,11 +46,11 @@ The SDK is pinned to .NET 10 in `global.json`. EF Core migrations:
 | `src/Mingle.Client` | Blazor WebAssembly PWA: Home, New game, Play screens; UI strings in `Resources/Strings*.resx`. Loads decks from `/api/decks` and keeps the last copy for offline play. |
 | `src/Mingle.Contracts` | Messages shared by the API and the client for online rooms (`IGameHub`, `IGameClient`, `RoomView`). |
 | `src/Mingle.Api` | ASP.NET Core host: serves the client, `GET /api/decks`, and the SignalR game hub (`/hubs/game`). `Rooms/` holds the in-memory rooms. |
-| `src/Mingle.DAL` | Data access: EF Core + PostgreSQL. `Entities/` and `Configurations/` hold one file per table; `Migrations/`; `Seeding/`. |
-| `src/Mingle.DAL/Seed` | Starter decks (`icebreakers.json`, `couples.json`), 20 cards each in hy/ru/en, imported into an empty database. |
+| `src/Mingle.DAL` | Data access: EF Core + PostgreSQL. `Entities/` and `Configurations/` hold one file per table (card_kinds, topics, decks, cards, card_options, card_topics, deck_cards); texts are stored as one column per language (`text_hy`, `text_ru`, `text_en`). `Migrations/`; `Seeding/`. |
+| `src/Mingle.DAL/Seed` | Starter content: `topics.json` (21 topics in hy/ru/en) and `Decks/` (`icebreakers.json`, `couples.json`, 20 cards each). |
 | `tests/Mingle.Engine.Tests` | xUnit tests for the engine and for the seed decks. |
 | `tests/Mingle.Api.Tests` | Room rules, plus end-to-end hub tests with two real SignalR clients (no database needed). |
-| `tests/Mingle.DAL.Tests` | Mapping tests, plus migration, seeding and constraint tests against a real PostgreSQL container (Testcontainers). |
+| `tests/Mingle.DAL.Tests` | Seed file checks, plus migration, seeding, re-seeding and constraint tests against a real PostgreSQL container (Testcontainers). |
 
 ## How the game works
 

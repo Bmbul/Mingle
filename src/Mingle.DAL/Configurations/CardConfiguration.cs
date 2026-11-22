@@ -10,11 +10,15 @@ internal sealed class CardConfiguration : IEntityTypeConfiguration<Card>
     {
         card.ToTable("cards", t => t.HasCheckConstraint("ck_cards_depth", "depth BETWEEN 1 AND 3"));
         card.HasKey(c => c.Id);
-        card.Property(c => c.Id).HasMaxLength(64);
-        card.Property(c => c.KindId).HasMaxLength(16);
+
+        card.HasOne(c => c.Kind).WithMany().HasForeignKey(c => c.KindId).OnDelete(DeleteBehavior.Restrict);
+        card.HasOne<Card>().WithMany().HasForeignKey(c => c.ForkedFromId).OnDelete(DeleteBehavior.SetNull);
+
+        LocalizedColumns.Text(card, c => c.Text, "text", maxLength: 1000);
+        LocalizedColumns.Flags(card, c => c.Machine, "machine");
         card.Property(c => c.Source).HasConversion<string>().HasMaxLength(16);
-        card.Property(c => c.ForkedFromId).HasMaxLength(64);
-        card.HasMany(c => c.Translations).WithOne().HasForeignKey(t => t.CardId).OnDelete(DeleteBehavior.Cascade);
-        card.HasIndex(c => c.KindId);
+
+        card.HasMany(c => c.Options).WithOne().HasForeignKey(o => o.CardId).OnDelete(DeleteBehavior.Cascade);
+        card.HasMany(c => c.Topics).WithOne().HasForeignKey(t => t.CardId).OnDelete(DeleteBehavior.Cascade);
     }
 }

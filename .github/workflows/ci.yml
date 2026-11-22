@@ -61,8 +61,8 @@ jobs:
       contents: read
       packages: write
     env:
-      # Pushes to main publish the image to GitHub Container Registry; pull requests only build it.
-      PUBLISH: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      # Main (pushes and manual runs) publishes the image to GitHub Container Registry; pull requests only build it.
+      PUBLISH: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -88,9 +88,9 @@ jobs:
 
   deploy:
     name: Deploy to Azure
-    # Only for main, after the build, the tests and the image all succeeded, and once Azure is set up
+    # Only for main (pushes and manual runs), after the build, the tests and the image all succeeded, once Azure is set up
     # (infra/azure-setup.sh stores the AZURE_* variables).
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.AZURE_CLIENT_ID != ''
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.AZURE_CLIENT_ID != ''
     needs: [build-and-test, docker]
     runs-on: ubuntu-latest
     timeout-minutes: 10

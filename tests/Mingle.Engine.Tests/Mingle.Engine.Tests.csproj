@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\src\Mingle.DAL\Seed\*.json" LinkBase="data" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\src\Mingle.DAL\Seed\Decks\*.json" LinkBase="data" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

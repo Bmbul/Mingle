@@ -6,55 +6,34 @@ using GameDeck = Mingle.Engine.Deck;
 
 namespace Mingle.DAL;
 
-/// <summary>Converts between database entities and the game engine's decks and cards.</summary>
+/// <summary>Converts database entities to the game engine's decks and cards.</summary>
 public static class DeckMapping
 {
+    /// <summary>Needs the deck's cards with their options and topics loaded.</summary>
     public static GameDeck ToGame(Entities.Deck deck) => new(
-        deck.Id,
-        deck.Names.ToImmutableDictionary(n => ParseLang(n.Lang), n => n.Name),
+        deck.Id.ToString(),
+        deck.Name.Present().ToImmutableDictionary(n => n.Lang, n => n.Value),
         [.. deck.Cards.OrderBy(c => c.Position).Select(c => ToGame(c.Card))]);
 
-    public static GameCard ToGame(Entities.Card card) => new(
-        card.Id,
-        card.KindId,
-        card.Depth,
-        [.. card.Tags],
-        card.Translations.ToImmutableDictionary(
-            t => ParseLang(t.Lang),
-            t => new CardText(t.Text, [.. t.Options])));
-
-    /// <summary>
-    /// Builds entities for a deck. Cards already built (by id) are reused, so a card shared by
-    /// several decks is stored once.
-    /// </summary>
-    public static Entities.Deck ToEntity(GameDeck deck, IDictionary<string, Entities.Card> knownCards) => new()
+    public static GameCard ToGame(Entities.Card card)
     {
-        Id = deck.Id,
-        Names = [.. deck.Names.Select(n => new DeckName { DeckId = deck.Id, Lang = n.Key.Code(), Name = n.Value })],
-        Cards = [.. deck.Cards.Select((card, index) => new DeckCard
-        {
-            DeckId = deck.Id,
-            CardId = card.Id,
-            Position = index,
-            Card = knownCards.TryGetValue(card.Id, out var known) ? known : knownCards[card.Id] = ToEntity(card),
-        })],
-    };
+        var options = card.Options.OrderBy(o => o.Position).ToList();
+        var texts = ImmutableDictionary.CreateBuilder<Lang, CardText>();
 
-    public static Entities.Card ToEntity(GameCard card) => new()
-    {
-        Id = card.Id,
-        KindId = card.KindId,
-        Depth = card.Depth,
-        Tags = [.. card.Tags],
-        Translations = [.. card.Texts.Select(t => new CardTranslation
+        // A language counts only when the question and every option exist in it.
+        foreach (var lang in Langs.All)
         {
-            CardId = card.Id,
-            Lang = t.Key.Code(),
-            Text = t.Value.Text,
-            Options = [.. t.Value.Options],
-        })],
-    };
+            if (card.Text.Get(lang) is not { } text) continue;
+            var optionTexts = options.Select(o => o.Text.Get(lang)).ToList();
+            if (optionTexts.Any(t => t is null)) continue;
+            texts[lang] = new CardText(text, [.. optionTexts!]);
+        }
 
-    private static Lang ParseLang(string code) =>
-        Langs.TryParse(code, out var lang) ? lang : throw new InvalidDataException($"Unknown language '{code}' in the database.");
+        return new GameCard(
+            card.Id.ToString(),
+            Entities.CardKind.CodeOf(card.KindId),
+            card.Depth,
+            [.. card.Topics.Select(t => t.Topic.Code).Order(StringComparer.Ordinal)],
+            texts.ToImmutable());
+    }
 }
