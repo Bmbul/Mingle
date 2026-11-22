@@ -181,15 +181,15 @@
   <data name="Editor_DeleteConfirm" xml:space="preserve"><value>Delete for everyone</value></data>
   <data name="Lobby_OwnDeck" xml:space="preserve"><value>their own deck</value></data>
   <data name="Editor_AiPlaceholder" xml:space="preserve"><value>In your own words, for example: our trip to Dilijan, moving in together</value></data>
-  <data name="Editor_AiWrite" xml:space="preserve"><value>Write {0} cards</value></data>
-  <data name="Editor_AiWriting" xml:space="preserve"><value>Writing…</value></data>
+  <data name="Editor_AiWrite" xml:space="preserve"><value>Generate {0} cards</value></data>
+  <data name="Editor_AiWriting" xml:space="preserve"><value>Generating…</value></data>
   <data name="Editor_AiHint" xml:space="preserve"><value>Pick topics or describe your own. Cards come in all three languages.</value></data>
-  <data name="Editor_AiFailed" xml:space="preserve"><value>The AI couldn't write cards right now. Try again, or write them by hand.</value></data>
+  <data name="Editor_AiFailed" xml:space="preserve"><value>The AI couldn't generate cards right now. Try again, or write them manually.</value></data>
   <data name="Editor_AiAdded_One" xml:space="preserve"><value>Added {0} card. Check it and save the deck.</value></data>
   <data name="Editor_AiAdded_Other" xml:space="preserve"><value>Added {0} cards. Check them and save the deck.</value></data>
-  <data name="Editor_Mode" xml:space="preserve"><value>How to add cards</value></data>
-  <data name="Editor_ModeAi" xml:space="preserve"><value>With AI</value></data>
-  <data name="Editor_ModeManual" xml:space="preserve"><value>By hand</value></data>
+  <data name="Editor_Mode" xml:space="preserve"><value>Create cards</value></data>
+  <data name="Editor_ModeAi" xml:space="preserve"><value>Generate with AI</value></data>
+  <data name="Editor_ModeManual" xml:space="preserve"><value>Write manually</value></data>
   <data name="Editor_AiTopics" xml:space="preserve"><value>Topics · up to {0}</value></data>
   <data name="Editor_AiOwn" xml:space="preserve"><value>Anything else? (optional)</value></data>
   <data name="Editor_AiDepth" xml:space="preserve"><value>How deep</value></data>
@@ -200,6 +200,6 @@
   <data name="Editor_Setting_family" xml:space="preserve"><value>Family</value></data>
   <data name="Editor_Setting_party" xml:space="preserve"><value>A party</value></data>
   <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Colleagues</value></data>
-  <data name="Editor_AiWriteMore" xml:space="preserve"><value>Write {0} more</value></data>
-  <data name="Editor_AiEditHint" xml:space="preserve"><value>To change a card's wording, switch to “By hand”.</value></data>
+  <data name="Editor_AiWriteMore" xml:space="preserve"><value>Generate {0} more</value></data>
+  <data name="Editor_AiEditHint" xml:space="preserve"><value>To change a card's wording, switch to “Write manually”.</value></data>
 </root>

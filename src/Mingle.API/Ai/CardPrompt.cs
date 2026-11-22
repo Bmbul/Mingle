@@ -18,8 +18,15 @@ public static class CardPrompt
         - open: an open question. Never a yes/no question.
         - finish: the start of a sentence the player completes, ending with "…".
         - wyr: "would you rather". Give exactly two short, balanced options; the card text is just the options.
+          The app shows them after "Would you rather…" / «Ո՞րն ես նախընտրում» / «Что ты выберешь?», so each
+          option starts with a verb in the infinitive and reads as a full choice on its own:
+          en: Live in a mountain village / Live in a seaside city
+          hy: Ապրել լեռնային գյուղում / Ապրել ծովափնյա քաղաքում
+          ru: Жить в горной деревне / Жить в приморском городе
         - likely: "who is most likely to…"; players vote for someone at the table.
-        - guess: a question about the person whose turn it is; the others guess their answer.
+        - guess: a question asked directly to the person whose turn it is, as "you"; the app tells the others to
+          guess the answer. Never write "Guess…", "this player" or "their": write "Which country would you pick
+          for a trip with no plan?", not "Guess which country this player would pick".
         - rate: a question answered on a scale from 1 to 10, starting with "From 1 to 10," or its translation.
 
         Depth:

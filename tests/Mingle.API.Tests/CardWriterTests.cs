@@ -135,4 +135,15 @@ public class CardWriterTests
 
         Assert.Contains("- dreams: Dreams (hopes and ambitions (not dreams while sleeping))", message);
     }
+
+    [Fact]
+    public void Guess_cards_written_as_instructions_are_dropped()
+    {
+        var instruction = new { kind = "guess", depth = 1, topic = "travel", text = new { en = "Guess which country this player would pick.", hy = "Գուշակեք՝ ո՞ր երկիրը։" }, options = new { } };
+        var question = new { kind = "guess", depth = 1, topic = "travel", text = new { en = "Which country would you pick?", hy = "Ո՞ր երկիրը կընտրեիր։" }, options = new { } };
+
+        var cards = CardParser.Parse(Json(instruction, question), Request);
+
+        Assert.Equal(["Which country would you pick?"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
+    }
 }

@@ -61,6 +61,9 @@ public static class CardParser
         element.TryGetProperty("options", out var options);
 
         var isChoice = kind == "wyr";
+        // A "guess" card must be the question itself; "Guess which…" means the model wrote the instruction instead.
+        if (kind == "guess" && Str(text, "en") is { } guessText && guessText.TrimStart().StartsWith("Guess", StringComparison.OrdinalIgnoreCase))
+            return null;
         var texts = ImmutableDictionary.CreateBuilder<Lang, CardText>();
         foreach (var lang in languages)
         {
