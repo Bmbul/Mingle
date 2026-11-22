@@ -90,4 +90,15 @@ public class CardWriterTests
         clock.Now = clock.Now.AddDays(1);
         Assert.True(limit.TryTake(2));
     }
+
+    [Fact]
+    public void Quotes_around_the_opening_words_are_removed()
+    {
+        var likely = new { kind = "likely", depth = 1, topic = "food",
+                           text = new { en = "Who is most likely to cook?", hy = "«Ո՞վ ավելի շուտ» ճաշ կպատրաստի։" }, options = new { } };
+
+        var card = Assert.Single(CardParser.Parse(Json(likely), Request));
+
+        Assert.Equal("Ո՞վ ավելի շուտ ճաշ կպատրաստի։", card.Texts[Lang.Hy].Text);
+    }
 }

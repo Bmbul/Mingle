@@ -34,7 +34,11 @@ public static class CardPrompt
         - Russian: never reveal the player's gender. Avoid past-tense verbs and adjectives that agree with
           the person addressed; rephrase instead (not "ты хотел(а)").
         - Armenian: Eastern Armenian, Armenian script, the question mark (՞) on the stressed vowel of the
-          question word, and "։" at the end of sentences. "likely" cards start with «Ո՞վ ավելի շուտ».
+          question word, and "։" at the end of sentences. Write natural Armenian, not a calque of English.
+        - "likely" cards, without quotation marks around the opening words:
+          en: Who is most likely to cook a huge dinner for no reason?
+          hy: Ո՞վ ավելի շուտ մեծ ընթրիք կպատրաստի առանց պատճառի։
+          ru: Кто скорее всего приготовит огромный ужин без повода?
         - No clichés ("If you were an animal…", "What is your favorite color?"), no trivia, nothing sexual,
           nothing about politics or religion.
         - Mix the kinds: about a third open questions, the rest spread over the other kinds.

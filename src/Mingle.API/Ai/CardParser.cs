@@ -73,7 +73,7 @@ public static class CardParser
             else
             {
                 if (Str(text, lang.Code()) is not { } value || !Clean(value, MaxTextLength)) return null;
-                texts[lang] = new CardText(value.Trim());
+                texts[lang] = new CardText(Tidy(value));
             }
         }
 
@@ -87,6 +87,17 @@ public static class CardParser
 
     private static string? Str(JsonElement element, string name) =>
         element.TryGetProperty(name, out var value) && value.ValueKind == JsonValueKind.String ? value.GetString() : null;
+
+    /// <summary>Removes quotation marks the model sometimes puts around a card's opening words.</summary>
+    private static string Tidy(string value)
+    {
+        var text = value.Trim();
+        foreach (var opening in new[] { "Ո՞վ ավելի շուտ", "Who is most likely", "Кто скорее всего" })
+            foreach (var (open, close) in new[] { ("«", "»"), ("\"", "\""), ("“", "”") })
+                if (text.StartsWith(open + opening + close, StringComparison.Ordinal))
+                    text = opening + text[(open.Length + opening.Length + close.Length)..];
+        return text;
+    }
 
     // Non-empty, not too long, and no template placeholders.
     private static bool Clean(string value, int maxLength) =>
