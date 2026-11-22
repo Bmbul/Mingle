@@ -130,7 +130,7 @@
   <data name="Lobby_NoDeck" xml:space="preserve"><value>հավաքածուն դեռ ընտրված չէ</value></data>
   <data name="Lobby_PickDecks" xml:space="preserve"><value>Ընտրեք հավաքածու՝ սկսելու համար։</value></data>
   <data name="Setup_SourceTopics" xml:space="preserve"><value>Մեր թեմաները</value></data>
-  <data name="Setup_SourceTopicsDesc" xml:space="preserve"><value>Յուրաքանչյուրն ընտրում է թեմաներ, իսկ AI-ն դրանց մասին քարտեր է գրում</value></data>
+  <data name="Setup_SourceTopicsDesc" xml:space="preserve"><value>Յուրաքանչյուրն ընտրում է թեմաներ, և Mingle-ը դրանց մասին քարտեր է գրում</value></data>
   <data name="Setup_SourceTopicsSummary" xml:space="preserve"><value>Յուրաքանչյուրը թեմաներ կընտրի սենյակում</value></data>
   <data name="Lobby_YourTopics" xml:space="preserve"><value>Քո թեմաները</value></data>
   <data name="Lobby_YourTopicsHint" xml:space="preserve"><value>Ընտրիր մինչև {0}։ Ոչ ոք չի տեսնի, թե ինչ ես ընտրել։</value></data>
@@ -140,7 +140,7 @@
   <data name="Lobby_TopicsPicking" xml:space="preserve"><value>ընտրում է թեմաներ…</value></data>
   <data name="Writing_Title" xml:space="preserve"><value>Գրում ենք ձեր քարտերը…</value></data>
   <data name="Writing_Hint" xml:space="preserve"><value>Սա կարող է տևել մինչև մեկ րոպե։</value></data>
-  <data name="Writing_Library" xml:space="preserve"><value>AI-ն հասանելի չէր, ուստի սրանք ձեր թեմաներով պատրաստի քարտեր են։</value></data>
+  <data name="Writing_Library" xml:space="preserve"><value>Այս անգամ նոր քարտեր գրել չհաջողվեց, ուստի սրանք ձեր թեմաներով պատրաստի քարտեր են։</value></data>
   <data name="Home_MyDecks" xml:space="preserve"><value>Իմ հավաքածուները</value></data>
   <data name="Decks_Title" xml:space="preserve"><value>Իմ հավաքածուները</value></data>
   <data name="Decks_New" xml:space="preserve"><value>Նոր հավաքածու</value></data>
@@ -184,11 +184,11 @@
   <data name="Editor_AiWrite" xml:space="preserve"><value>Ստեղծել {0} քարտ</value></data>
   <data name="Editor_AiWriting" xml:space="preserve"><value>Ստեղծում ենք…</value></data>
   <data name="Editor_AiHint" xml:space="preserve"><value>Ընտրիր թեմաներ կամ նկարագրիր քոնը։ Քարտերը կլինեն երեք լեզուներով։</value></data>
-  <data name="Editor_AiFailed" xml:space="preserve"><value>AI-ն հիմա չկարողացավ քարտեր ստեղծել։ Փորձիր կրկին կամ գրիր ինքնուրույն։</value></data>
+  <data name="Editor_AiFailed" xml:space="preserve"><value>Հիմա չհաջողվեց քարտեր ստեղծել։ Փորձիր կրկին կամ գրիր ինքնուրույն։</value></data>
   <data name="Editor_AiAdded_One" xml:space="preserve"><value>Ավելացվեց {0} քարտ։ Ստուգիր և պահպանիր։</value></data>
   <data name="Editor_AiAdded_Other" xml:space="preserve"><value>Ավելացվեց {0} քարտ։ Ստուգիր և պահպանիր։</value></data>
   <data name="Editor_Mode" xml:space="preserve"><value>Քարտերի ստեղծում</value></data>
-  <data name="Editor_ModeAi" xml:space="preserve"><value>Ստեղծել AI-ով</value></data>
+  <data name="Editor_ModeAi" xml:space="preserve"><value>Ստեղծել ավտոմատ</value></data>
   <data name="Editor_ModeManual" xml:space="preserve"><value>Գրել ինքնուրույն</value></data>
   <data name="Editor_AiTopics" xml:space="preserve"><value>Թեմաներ · մինչև {0}</value></data>
   <data name="Editor_AiOwn" xml:space="preserve"><value>Ուրիշ ի՞նչ (ըստ ցանկության)</value></data>

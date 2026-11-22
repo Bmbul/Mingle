@@ -134,7 +134,7 @@
   <data name="Lobby_NoDeck" xml:space="preserve"><value>колода не выбрана</value></data>
   <data name="Lobby_PickDecks" xml:space="preserve"><value>Выберите колоду, чтобы начать.</value></data>
   <data name="Setup_SourceTopics" xml:space="preserve"><value>Наши темы</value></data>
-  <data name="Setup_SourceTopicsDesc" xml:space="preserve"><value>Каждый выбирает темы, а AI пишет по ним карточки</value></data>
+  <data name="Setup_SourceTopicsDesc" xml:space="preserve"><value>Каждый выбирает темы, а Mingle пишет по ним карточки</value></data>
   <data name="Setup_SourceTopicsSummary" xml:space="preserve"><value>Каждый выберет темы в комнате</value></data>
   <data name="Lobby_YourTopics" xml:space="preserve"><value>Твои темы</value></data>
   <data name="Lobby_YourTopicsHint" xml:space="preserve"><value>Выбери до {0}. Никто не увидит твой выбор.</value></data>
@@ -144,7 +144,7 @@
   <data name="Lobby_TopicsPicking" xml:space="preserve"><value>выбирает темы…</value></data>
   <data name="Writing_Title" xml:space="preserve"><value>Пишем ваши карточки…</value></data>
   <data name="Writing_Hint" xml:space="preserve"><value>Это может занять до минуты.</value></data>
-  <data name="Writing_Library" xml:space="preserve"><value>AI был недоступен, поэтому здесь готовые карточки на ваши темы.</value></data>
+  <data name="Writing_Library" xml:space="preserve"><value>В этот раз новые карточки написать не удалось, поэтому здесь готовые карточки на ваши темы.</value></data>
   <data name="Home_MyDecks" xml:space="preserve"><value>Мои колоды</value></data>
   <data name="Decks_Title" xml:space="preserve"><value>Мои колоды</value></data>
   <data name="Decks_New" xml:space="preserve"><value>Новая колода</value></data>
@@ -188,12 +188,12 @@
   <data name="Editor_AiWrite" xml:space="preserve"><value>Сгенерировать {0} карточек</value></data>
   <data name="Editor_AiWriting" xml:space="preserve"><value>Генерируем…</value></data>
   <data name="Editor_AiHint" xml:space="preserve"><value>Выбери темы или опиши свою. Карточки будут на трёх языках.</value></data>
-  <data name="Editor_AiFailed" xml:space="preserve"><value>AI сейчас не смог сгенерировать карточки. Попробуй ещё раз или напиши вручную.</value></data>
+  <data name="Editor_AiFailed" xml:space="preserve"><value>Сейчас не удалось сгенерировать карточки. Попробуй ещё раз или напиши вручную.</value></data>
   <data name="Editor_AiAdded_One" xml:space="preserve"><value>Добавлена {0} карточка. Проверь и сохрани колоду.</value></data>
   <data name="Editor_AiAdded_Few" xml:space="preserve"><value>Добавлено {0} карточки. Проверь и сохрани колоду.</value></data>
   <data name="Editor_AiAdded_Many" xml:space="preserve"><value>Добавлено {0} карточек. Проверь и сохрани колоду.</value></data>
   <data name="Editor_Mode" xml:space="preserve"><value>Создание карточек</value></data>
-  <data name="Editor_ModeAi" xml:space="preserve"><value>Сгенерировать с AI</value></data>
+  <data name="Editor_ModeAi" xml:space="preserve"><value>Сгенерировать автоматически</value></data>
   <data name="Editor_ModeManual" xml:space="preserve"><value>Написать вручную</value></data>
   <data name="Editor_AiTopics" xml:space="preserve"><value>Темы · до {0}</value></data>
   <data name="Editor_AiOwn" xml:space="preserve"><value>Что-то ещё? (необязательно)</value></data>

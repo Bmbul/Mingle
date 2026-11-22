@@ -76,7 +76,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
 
         var known = (await topicSource.GetPickableTopicsAsync(ct)).Where(t => codes.Contains(t.Code)).ToList();
         if (known.Count != codes.Count) return BadRequest(new { error = "Unknown topic." });
-        if (!writer.IsAvailable) return StatusCode(StatusCodes.Status503ServiceUnavailable, new { error = "AI is not available." });
+        if (!writer.IsAvailable) return StatusCode(StatusCodes.Status503ServiceUnavailable, new { error = "Card generation is not available." });
 
         try
         {
