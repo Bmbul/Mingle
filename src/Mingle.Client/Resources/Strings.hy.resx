@@ -180,4 +180,12 @@
   <data name="Editor_Delete" xml:space="preserve"><value>Ջնջել հավաքածուն</value></data>
   <data name="Editor_DeleteConfirm" xml:space="preserve"><value>Ջնջել բոլորի համար</value></data>
   <data name="Lobby_OwnDeck" xml:space="preserve"><value>իր հավաքածուն</value></data>
+  <data name="Editor_AiTitle" xml:space="preserve"><value>Գրել քարտեր AI-ով</value></data>
+  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>Ինչի՞ մասին լինեն քարտերը։ Օրինակ՝ մեր ճամփորդությունը Դիլիջան, ծանոթացում նոր գործընկերների հետ</value></data>
+  <data name="Editor_AiWrite" xml:space="preserve"><value>Գրել 10 քարտ</value></data>
+  <data name="Editor_AiWriting" xml:space="preserve"><value>Գրում ենք…</value></data>
+  <data name="Editor_AiHint" xml:space="preserve"><value>Քարտերը կլինեն երեք լեզուներով։ Պահպանելուց առաջ կարող ես խմբագրել կամ հեռացնել։</value></data>
+  <data name="Editor_AiFailed" xml:space="preserve"><value>AI-ն հիմա չկարողացավ քարտեր գրել։ Փորձիր կրկին կամ գրիր ձեռքով։</value></data>
+  <data name="Editor_AiAdded_One" xml:space="preserve"><value>Ավելացվեց {0} քարտ։ Ստուգիր և պահպանիր։</value></data>
+  <data name="Editor_AiAdded_Other" xml:space="preserve"><value>Ավելացվեց {0} քարտ։ Ստուգիր և պահպանիր։</value></data>
 </root>

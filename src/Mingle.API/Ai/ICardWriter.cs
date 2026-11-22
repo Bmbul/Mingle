@@ -3,8 +3,22 @@ using Mingle.Engine;
 
 namespace Mingle.API.Ai;
 
-/// <summary>What the table picked, in the languages the table reads.</summary>
-public sealed record CardRequest(ImmutableArray<TopicInfo> Topics, ImmutableArray<Lang> Languages, int PlayerCount, int Count = TopicDeal.CardCount);
+/// <summary>What the table picked, in the languages the table reads. PlayerCount 0 means unknown (deck editor).</summary>
+public sealed record CardRequest(ImmutableArray<TopicInfo> Topics, ImmutableArray<Lang> Languages, int PlayerCount, int Count = TopicDeal.CardCount)
+{
+    public const string ThemeCode = "theme";
+    public const int MaxThemeLength = 200;
+
+    /// <summary>
+    /// Cards for the deck editor: about whatever the user wrote, in every language, for any group.
+    /// The user's words become the one topic, so the same prompt, schema and checks apply.
+    /// </summary>
+    public static CardRequest ForDeck(string theme, int count) => new(
+        [new TopicInfo(ThemeCode, ImmutableDictionary<Lang, string>.Empty.Add(Lang.En, theme.Trim()))],
+        [.. Langs.All],
+        PlayerCount: 0,
+        count);
+}
 
 /// <summary>Writes new cards about the picked topics.</summary>
 public interface ICardWriter

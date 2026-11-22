@@ -110,13 +110,22 @@ public sealed class ContentService(HttpClient http, IJSRuntime js, DeviceDeckSto
         return true;
     }
 
+    /// <summary>Asks the AI for new cards about a theme; nothing is saved until the deck is.</summary>
+    public async Task<(ImmutableArray<Card> Cards, string? Error)> WriteCardsAsync(string theme, int count = 10)
+    {
+        var body = JsonSerializer.Serialize(new Dictionary<string, object> { ["theme"] = theme, ["count"] = count });
+        using var response = await http.PostAsync("api/decks/write", new StringContent(body, Encoding.UTF8, new MediaTypeHeaderValue("application/json")));
+        if (!response.IsSuccessStatusCode) return ([], (await Failed(response)).Error);
+        return (DeckJson.Parse(await response.Content.ReadAsStringAsync()).Cards, null);
+    }
+
     private static StringContent Json(Deck deck) =>
         new(DeckJson.Write(deck), Encoding.UTF8, new MediaTypeHeaderValue("application/json"));
 
     private static async Task<DeckSaveResult> Failed(HttpResponseMessage response)
     {
         string? message = null;
-        if (response.StatusCode == HttpStatusCode.BadRequest)
+        if (response.StatusCode is HttpStatusCode.BadRequest or HttpStatusCode.ServiceUnavailable)
         {
             try
             {

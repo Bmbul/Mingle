@@ -30,6 +30,23 @@
                    @bind="name" @bind:event="oninput" />
         </section>
 
+        <section class="card stack">
+            <label class="label" for="ai-theme">@T["Editor_AiTitle"]</label>
+            <textarea id="ai-theme" class="field area" maxlength="200" placeholder="@T["Editor_AiPlaceholder"]"
+                      @bind="theme" @bind:event="oninput" disabled="@writing"></textarea>
+            <button class="btn2" disabled="@(writing || string.IsNullOrWhiteSpace(theme))" @onclick="WriteWithAi">
+                @if (writing)
+                {
+                    <span class="spinner small" aria-hidden="true"></span>@T["Editor_AiWriting"]
+                }
+                else
+                {
+                    @T["Editor_AiWrite"]
+                }
+            </button>
+            <p class="muted small" role="status">@(aiNote ?? T["Editor_AiHint"])</p>
+        </section>
+
         <section class="stack">
             <h2 class="label">@T.Plural("Cards", cards.Count)</h2>
             @foreach (var card in cards)
@@ -200,6 +217,9 @@
     private EditCard? open;
     private string? error;
     private string? note;
+    private string theme = "";
+    private bool writing;
+    private string? aiNote;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -230,6 +250,36 @@
             : cards.Count == 0 ? T["Editor_NeedCard"]
             : cards.Any(c => !c.IsComplete) ? T["Editor_Incomplete"]
             : "");
+
+    private async Task WriteWithAi()
+    {
+        if (string.IsNullOrWhiteSpace(theme)) return;
+        writing = true;
+        aiNote = null;
+        try
+        {
+            var (written, problem) = await Content.WriteCardsAsync(theme.Trim());
+            if (problem is not null)
+            {
+                aiNote = problem == "429" ? T["Editor_TooMany"] : T["Editor_AiFailed"];
+                return;
+            }
+            // Drop the empty card a new deck starts with, then add the written ones for review.
+            cards.RemoveAll(c => !c.IsComplete);
+            open = null;
+            cards.AddRange(written.Select(EditCard.From));
+            if (name.Trim().Length == 0) name = theme.Trim().Length <= 60 ? theme.Trim() : theme.Trim()[..60];
+            aiNote = T.Plural("Editor_AiAdded", written.Length);
+        }
+        catch (HttpRequestException)
+        {
+            aiNote = T["Online_ConnectFailed"];
+        }
+        finally
+        {
+            writing = false;
+        }
+    }
 
     private void AddCard()
     {

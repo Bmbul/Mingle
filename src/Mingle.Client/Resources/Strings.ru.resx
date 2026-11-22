@@ -184,4 +184,13 @@
   <data name="Editor_Delete" xml:space="preserve"><value>Удалить колоду</value></data>
   <data name="Editor_DeleteConfirm" xml:space="preserve"><value>Удалить для всех</value></data>
   <data name="Lobby_OwnDeck" xml:space="preserve"><value>своя колода</value></data>
+  <data name="Editor_AiTitle" xml:space="preserve"><value>Написать карточки с AI</value></data>
+  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>О чём должны быть карточки? Например: наша поездка в Дилижан, знакомство с новыми коллегами</value></data>
+  <data name="Editor_AiWrite" xml:space="preserve"><value>Написать 10 карточек</value></data>
+  <data name="Editor_AiWriting" xml:space="preserve"><value>Пишем…</value></data>
+  <data name="Editor_AiHint" xml:space="preserve"><value>Карточки будут на трёх языках. Перед сохранением их можно изменить или удалить.</value></data>
+  <data name="Editor_AiFailed" xml:space="preserve"><value>AI сейчас не смог написать карточки. Попробуй ещё раз или напиши вручную.</value></data>
+  <data name="Editor_AiAdded_One" xml:space="preserve"><value>Добавлена {0} карточка. Проверь и сохрани колоду.</value></data>
+  <data name="Editor_AiAdded_Few" xml:space="preserve"><value>Добавлено {0} карточки. Проверь и сохрани колоду.</value></data>
+  <data name="Editor_AiAdded_Many" xml:space="preserve"><value>Добавлено {0} карточек. Проверь и сохрани колоду.</value></data>
 </root>

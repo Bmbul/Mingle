@@ -296,3 +296,4 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 /* Deck editor */
 .check-row.incomplete { border-style: dashed; }
 .btn.danger { background: #C2412F; border-color: #C2412F; color: #fff; }
+.spinner.small { width: 16px; height: 16px; border-width: 2px; display: inline-block; vertical-align: -3px; margin-right: 8px; }

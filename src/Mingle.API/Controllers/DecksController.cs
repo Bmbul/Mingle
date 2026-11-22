@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
@@ -14,7 +15,7 @@ namespace Mingle.API.Controllers;
 /// </summary>
 [ApiController]
 [Route("api/decks")]
-public sealed class DecksController(IDeckSource starterDecks, UserDeckStore userDecks) : ControllerBase
+public sealed class DecksController(IDeckSource starterDecks, UserDeckStore userDecks, ICardWriter writer, ILogger<DecksController> log) : ControllerBase
 {
     public const string EditKeyHeader = "X-Edit-Key";
     public const string WritePolicy = "deck-writes";
@@ -49,6 +50,35 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
         if (deck is null) return BadRequest(new { error });
         var (id, key) = await userDecks.CreateAsync(deck, ct);
         return Created($"/api/decks/{id}", new { id, editKey = key });
+    }
+
+    public sealed record WriteRequest(string? Theme, int Count = 10);
+
+    /// <summary>
+    /// Writes new cards about a theme for the deck editor, in every language. Nothing is saved: the
+    /// cards come back as a deck file for the user to edit, keep or drop before saving the deck.
+    /// </summary>
+    [HttpPost("write")]
+    [EnableRateLimiting(WritePolicy)]
+    public async Task<IActionResult> Write(WriteRequest request, CancellationToken ct)
+    {
+        var theme = request.Theme?.Trim() ?? "";
+        if (theme.Length == 0) return BadRequest(new { error = "Say what the cards should be about." });
+        if (theme.Length > CardRequest.MaxThemeLength) return BadRequest(new { error = $"Keep it under {CardRequest.MaxThemeLength} characters." });
+        if (!writer.IsAvailable) return StatusCode(StatusCodes.Status503ServiceUnavailable, new { error = "AI is not available." });
+
+        try
+        {
+            var cards = await writer.WriteAsync(CardRequest.ForDeck(theme, Math.Clamp(request.Count, 1, 20)), ct);
+            // Topics are dropped: the theme is the user's own words, not a library topic.
+            var deck = new Deck("written", ImmutableDictionary<Lang, string>.Empty, [.. cards.Select(c => c with { Topics = [] })]);
+            return Content(DeckJson.Write(deck), Json);
+        }
+        catch (CardWriterException ex)
+        {
+            log.LogWarning("Writing deck cards failed: {Reason}", ex.Message);
+            return StatusCode(StatusCodes.Status503ServiceUnavailable, new { error = ex.Message });
+        }
     }
 
     [HttpPut("{id:guid}")]

@@ -180,4 +180,12 @@
   <data name="Editor_Delete" xml:space="preserve"><value>Delete deck</value></data>
   <data name="Editor_DeleteConfirm" xml:space="preserve"><value>Delete for everyone</value></data>
   <data name="Lobby_OwnDeck" xml:space="preserve"><value>their own deck</value></data>
+  <data name="Editor_AiTitle" xml:space="preserve"><value>Write cards with AI</value></data>
+  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>What should the cards be about? For example: our trip to Dilijan, getting to know new colleagues</value></data>
+  <data name="Editor_AiWrite" xml:space="preserve"><value>Write 10 cards</value></data>
+  <data name="Editor_AiWriting" xml:space="preserve"><value>Writing…</value></data>
+  <data name="Editor_AiHint" xml:space="preserve"><value>Cards come in all three languages. Edit or remove any before saving.</value></data>
+  <data name="Editor_AiFailed" xml:space="preserve"><value>The AI couldn't write cards right now. Try again, or write them by hand.</value></data>
+  <data name="Editor_AiAdded_One" xml:space="preserve"><value>Added {0} card. Check it and save the deck.</value></data>
+  <data name="Editor_AiAdded_Other" xml:space="preserve"><value>Added {0} cards. Check them and save the deck.</value></data>
 </root>
