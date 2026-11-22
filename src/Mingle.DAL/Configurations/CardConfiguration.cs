@@ -15,7 +15,6 @@ internal sealed class CardConfiguration : IEntityTypeConfiguration<Card>
         card.HasOne<Card>().WithMany().HasForeignKey(c => c.ForkedFromId).OnDelete(DeleteBehavior.SetNull);
 
         LocalizedColumns.Text(card, c => c.Text, "text", maxLength: 1000);
-        LocalizedColumns.Flags(card, c => c.Machine, "machine");
         card.Property(c => c.Source).HasConversion<string>().HasMaxLength(16);
 
         card.HasMany(c => c.Options).WithOne().HasForeignKey(o => o.CardId).OnDelete(DeleteBehavior.Cascade);

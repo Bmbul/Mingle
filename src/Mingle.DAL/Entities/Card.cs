@@ -15,9 +15,6 @@ public sealed class Card
     /// <summary>The question in each language; a null language means the card is not translated into it.</summary>
     public LocalizedText Text { get; set; } = new();
 
-    /// <summary>Which translations a machine made and nobody has reviewed yet.</summary>
-    public LocalizedFlags Machine { get; set; } = new();
-
     public CardSource Source { get; set; } = CardSource.Curated;
     public Guid? ForkedFromId { get; set; }
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;

@@ -52,23 +52,6 @@ namespace Mingle.DAL.Migrations
                         .HasColumnType("character varying(16)")
                         .HasColumnName("source");
 
-                    b.ComplexProperty(typeof(Dictionary<string, object>), "Machine", "Mingle.DAL.Entities.Card.Machine#LocalizedFlags", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<bool>("En")
-                                .HasColumnType("boolean")
-                                .HasColumnName("machine_en");
-
-                            b1.Property<bool>("Hy")
-                                .HasColumnType("boolean")
-                                .HasColumnName("machine_hy");
-
-                            b1.Property<bool>("Ru")
-                                .HasColumnType("boolean")
-                                .HasColumnName("machine_ru");
-                        });
-
                     b.ComplexProperty(typeof(Dictionary<string, object>), "Text", "Mingle.DAL.Entities.Card.Text#LocalizedText", b1 =>
                         {
                             b1.IsRequired();
