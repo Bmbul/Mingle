@@ -110,10 +110,37 @@ public sealed class ContentService(HttpClient http, IJSRuntime js, DeviceDeckSto
         return true;
     }
 
-    /// <summary>Asks the AI for new cards about a theme; nothing is saved until the deck is.</summary>
-    public async Task<(ImmutableArray<Card> Cards, string? Error)> WriteCardsAsync(string theme, int count = 10)
+    private ImmutableArray<TopicInfo>? topics;
+
+    /// <summary>The topics players can pick, with names in each language.</summary>
+    public async Task<ImmutableArray<TopicInfo>> GetTopicsAsync()
     {
-        var body = JsonSerializer.Serialize(new Dictionary<string, object> { ["theme"] = theme, ["count"] = count });
+        if (topics is { } cached) return cached;
+        using var doc = JsonDocument.Parse(await http.GetStringAsync("api/topics"));
+        topics = [.. doc.RootElement.EnumerateArray().Select(t => new TopicInfo(
+            t.GetProperty("code").GetString()!,
+            t.GetProperty("name").EnumerateObject()
+                .Where(n => Langs.TryParse(n.Name, out _))
+                .ToImmutableDictionary(n => { Langs.TryParse(n.Name, out var l); return l; }, n => n.Value.GetString() ?? "")))];
+        return topics.Value;
+    }
+
+    /// <summary>Asks the AI for new cards; nothing is saved until the deck is.</summary>
+    /// <param name="depth">1–3 for one depth only; null mixes light to deep.</param>
+    /// <param name="setting">Who plays: couple, friends, family, party or colleagues.</param>
+    public async Task<(ImmutableArray<Card> Cards, string? Error)> WriteCardsAsync(
+        IReadOnlyCollection<string> topicCodes, string theme, int? depth, string setting, int count)
+    {
+        // Built by hand: the trimmed browser app has no reflection-based JSON for anonymous types.
+        var request = new System.Text.Json.Nodes.JsonObject
+        {
+            ["topics"] = new System.Text.Json.Nodes.JsonArray([.. topicCodes.Select(c => (System.Text.Json.Nodes.JsonNode?)c)]),
+            ["theme"] = theme,
+            ["depth"] = depth,
+            ["setting"] = setting,
+            ["count"] = count,
+        };
+        var body = request.ToJsonString();
         using var response = await http.PostAsync("api/decks/write", new StringContent(body, Encoding.UTF8, new MediaTypeHeaderValue("application/json")));
         if (!response.IsSuccessStatusCode) return ([], (await Failed(response)).Error);
         return (DeckJson.Parse(await response.Content.ReadAsStringAsync()).Cards, null);

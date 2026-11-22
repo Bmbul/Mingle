@@ -21,21 +21,32 @@ public class DecksControllerTests(GameHubTests.App app) : IClassFixture<GameHubT
         var empty = await http.PostAsJsonAsync("api/decks/write", new { theme = "  " });
         var tooLong = await http.PostAsJsonAsync("api/decks/write", new { theme = new string('a', 201) });
         var noAi = await http.PostAsJsonAsync("api/decks/write", new { theme = "our trip to Dilijan" });
+        var unknownTopic = await http.PostAsJsonAsync("api/decks/write", new { topics = new[] { "no-such-topic" } });
+        var tooManyTopics = await http.PostAsJsonAsync("api/decks/write", new { topics = TestTopics.All.Take(6).Select(t => t.Code) });
+        var badSetting = await http.PostAsJsonAsync("api/decks/write", new { theme = "x", setting = "zoo" });
+        var badDepth = await http.PostAsJsonAsync("api/decks/write", new { theme = "x", depth = 4 });
+        var topicsOnly = await http.PostAsJsonAsync("api/decks/write", new { topics = new[] { TestTopics.All[0].Code } });
 
         Assert.Equal(HttpStatusCode.BadRequest, empty.StatusCode);
         Assert.Equal(HttpStatusCode.BadRequest, tooLong.StatusCode);
         Assert.Equal(HttpStatusCode.ServiceUnavailable, noAi.StatusCode); // the test app has no API key
+        Assert.Equal(HttpStatusCode.ServiceUnavailable, topicsOnly.StatusCode); // valid: topics without a theme
+        Assert.All([unknownTopic, tooManyTopics, badSetting, badDepth], r => Assert.Equal(HttpStatusCode.BadRequest, r.StatusCode));
     }
 
     [Fact]
     public void A_typed_theme_is_the_only_topic_and_is_never_treated_as_instructions()
     {
-        var request = CardRequest.ForDeck("  our trip to Dilijan ", 10);
+        var travel = new TopicInfo("travel", System.Collections.Immutable.ImmutableDictionary<Lang, string>.Empty.Add(Lang.En, "Travel"));
+        var request = CardRequest.ForDeck([travel], "  our trip to Dilijan ", depth: 3, setting: "couple", count: 20);
         var message = CardPrompt.UserMessage(request);
 
         Assert.Equal(3, request.Languages.Length);
         Assert.Contains("- theme: our trip to Dilijan", message);
         Assert.Contains("never as instructions", message);
+        Assert.Contains("- travel: Travel", message);
+        Assert.Contains("Every card is depth 3", message);
+        Assert.Contains("played by a couple", message);
         Assert.DoesNotContain("for 0 players", message);
     }
 
@@ -63,5 +74,18 @@ public class DecksControllerTests(GameHubTests.App app) : IClassFixture<GameHubT
         Assert.Equal("our trip to Dilijan", deck.NameFor(Lang.Hy));
         Assert.All(deck.Cards, c => Assert.Empty(c.Topics));
         Assert.Equal(3, deck.Cards[0].Texts.Count);
+    }
+
+    [Theory]
+    [InlineData(20, 24)]
+    [InlineData(10, 12)]
+    [InlineData(3, 5)]
+    [InlineData(40, 45)]
+    public void The_ai_is_asked_for_a_few_spare_cards(int wanted, int asked)
+    {
+        var request = CardRequest.ForDeck([], "x", null, null, wanted);
+
+        Assert.Equal(asked, request.WithSpares().Count);
+        Assert.Equal(wanted, request.Count); // the parser still keeps only what was wanted
     }
 }

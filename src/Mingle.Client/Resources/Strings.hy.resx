@@ -180,12 +180,26 @@
   <data name="Editor_Delete" xml:space="preserve"><value>Ջնջել հավաքածուն</value></data>
   <data name="Editor_DeleteConfirm" xml:space="preserve"><value>Ջնջել բոլորի համար</value></data>
   <data name="Lobby_OwnDeck" xml:space="preserve"><value>իր հավաքածուն</value></data>
-  <data name="Editor_AiTitle" xml:space="preserve"><value>Գրել քարտեր AI-ով</value></data>
-  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>Ինչի՞ մասին լինեն քարտերը։ Օրինակ՝ մեր ճամփորդությունը Դիլիջան, ծանոթացում նոր գործընկերների հետ</value></data>
-  <data name="Editor_AiWrite" xml:space="preserve"><value>Գրել 10 քարտ</value></data>
+  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>Քո բառերով, օրինակ՝ մեր ճամփորդությունը Դիլիջան, միասին ապրելը</value></data>
+  <data name="Editor_AiWrite" xml:space="preserve"><value>Գրել {0} քարտ</value></data>
   <data name="Editor_AiWriting" xml:space="preserve"><value>Գրում ենք…</value></data>
-  <data name="Editor_AiHint" xml:space="preserve"><value>Քարտերը կլինեն երեք լեզուներով։ Պահպանելուց առաջ կարող ես խմբագրել կամ հեռացնել։</value></data>
+  <data name="Editor_AiHint" xml:space="preserve"><value>Ընտրիր թեմաներ կամ նկարագրիր քոնը։ Քարտերը կլինեն երեք լեզուներով։</value></data>
   <data name="Editor_AiFailed" xml:space="preserve"><value>AI-ն հիմա չկարողացավ քարտեր գրել։ Փորձիր կրկին կամ գրիր ձեռքով։</value></data>
   <data name="Editor_AiAdded_One" xml:space="preserve"><value>Ավելացվեց {0} քարտ։ Ստուգիր և պահպանիր։</value></data>
   <data name="Editor_AiAdded_Other" xml:space="preserve"><value>Ավելացվեց {0} քարտ։ Ստուգիր և պահպանիր։</value></data>
+  <data name="Editor_Mode" xml:space="preserve"><value>Ինչպե՞ս ավելացնել քարտեր</value></data>
+  <data name="Editor_ModeAi" xml:space="preserve"><value>AI-ով</value></data>
+  <data name="Editor_ModeManual" xml:space="preserve"><value>Ձեռքով</value></data>
+  <data name="Editor_AiTopics" xml:space="preserve"><value>Թեմաներ · մինչև {0}</value></data>
+  <data name="Editor_AiOwn" xml:space="preserve"><value>Ուրիշ ի՞նչ (ըստ ցանկության)</value></data>
+  <data name="Editor_AiDepth" xml:space="preserve"><value>Որքան խորը</value></data>
+  <data name="Editor_AiDepthMixed" xml:space="preserve"><value>Թեթևից խորը</value></data>
+  <data name="Editor_AiSetting" xml:space="preserve"><value>Ովքեր են խաղալու</value></data>
+  <data name="Editor_Setting_couple" xml:space="preserve"><value>Զույգ</value></data>
+  <data name="Editor_Setting_friends" xml:space="preserve"><value>Ընկերներ</value></data>
+  <data name="Editor_Setting_family" xml:space="preserve"><value>Ընտանիք</value></data>
+  <data name="Editor_Setting_party" xml:space="preserve"><value>Խնջույք</value></data>
+  <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Գործընկերներ</value></data>
+  <data name="Editor_AiWriteMore" xml:space="preserve"><value>Գրել ևս {0}</value></data>
+  <data name="Editor_AiEditHint" xml:space="preserve"><value>Քարտի տեքստը փոխելու համար անցիր «Ձեռքով» ռեժիմին։</value></data>
 </root>

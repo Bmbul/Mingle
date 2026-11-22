@@ -184,13 +184,27 @@
   <data name="Editor_Delete" xml:space="preserve"><value>Удалить колоду</value></data>
   <data name="Editor_DeleteConfirm" xml:space="preserve"><value>Удалить для всех</value></data>
   <data name="Lobby_OwnDeck" xml:space="preserve"><value>своя колода</value></data>
-  <data name="Editor_AiTitle" xml:space="preserve"><value>Написать карточки с AI</value></data>
-  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>О чём должны быть карточки? Например: наша поездка в Дилижан, знакомство с новыми коллегами</value></data>
-  <data name="Editor_AiWrite" xml:space="preserve"><value>Написать 10 карточек</value></data>
+  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>Своими словами, например: наша поездка в Дилижан, жизнь вместе</value></data>
+  <data name="Editor_AiWrite" xml:space="preserve"><value>Написать {0} карточек</value></data>
   <data name="Editor_AiWriting" xml:space="preserve"><value>Пишем…</value></data>
-  <data name="Editor_AiHint" xml:space="preserve"><value>Карточки будут на трёх языках. Перед сохранением их можно изменить или удалить.</value></data>
+  <data name="Editor_AiHint" xml:space="preserve"><value>Выбери темы или опиши свою. Карточки будут на трёх языках.</value></data>
   <data name="Editor_AiFailed" xml:space="preserve"><value>AI сейчас не смог написать карточки. Попробуй ещё раз или напиши вручную.</value></data>
   <data name="Editor_AiAdded_One" xml:space="preserve"><value>Добавлена {0} карточка. Проверь и сохрани колоду.</value></data>
   <data name="Editor_AiAdded_Few" xml:space="preserve"><value>Добавлено {0} карточки. Проверь и сохрани колоду.</value></data>
   <data name="Editor_AiAdded_Many" xml:space="preserve"><value>Добавлено {0} карточек. Проверь и сохрани колоду.</value></data>
+  <data name="Editor_Mode" xml:space="preserve"><value>Как добавить карточки</value></data>
+  <data name="Editor_ModeAi" xml:space="preserve"><value>С AI</value></data>
+  <data name="Editor_ModeManual" xml:space="preserve"><value>Вручную</value></data>
+  <data name="Editor_AiTopics" xml:space="preserve"><value>Темы · до {0}</value></data>
+  <data name="Editor_AiOwn" xml:space="preserve"><value>Что-то ещё? (необязательно)</value></data>
+  <data name="Editor_AiDepth" xml:space="preserve"><value>Насколько глубоко</value></data>
+  <data name="Editor_AiDepthMixed" xml:space="preserve"><value>От лёгкого к глубокому</value></data>
+  <data name="Editor_AiSetting" xml:space="preserve"><value>Кто будет играть</value></data>
+  <data name="Editor_Setting_couple" xml:space="preserve"><value>Пара</value></data>
+  <data name="Editor_Setting_friends" xml:space="preserve"><value>Друзья</value></data>
+  <data name="Editor_Setting_family" xml:space="preserve"><value>Семья</value></data>
+  <data name="Editor_Setting_party" xml:space="preserve"><value>Вечеринка</value></data>
+  <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Коллеги</value></data>
+  <data name="Editor_AiWriteMore" xml:space="preserve"><value>Написать ещё {0}</value></data>
+  <data name="Editor_AiEditHint" xml:space="preserve"><value>Чтобы изменить текст карточки, переключись на «Вручную».</value></data>
 </root>

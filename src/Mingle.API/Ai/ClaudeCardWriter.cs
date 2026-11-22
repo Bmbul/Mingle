@@ -37,7 +37,8 @@ public sealed class ClaudeCardWriter(AnthropicClient client, IOptions<AiOptions>
                 },
                 Format = new JsonOutputFormat { Schema = CardPrompt.Schema(request) },
             },
-            Messages = [new UserMessageParam { Content = CardPrompt.UserMessage(request) }],
+            // Ask for a few spare cards: some may fail the checks, and the parser keeps only request.Count.
+            Messages = [new UserMessageParam { Content = CardPrompt.UserMessage(request.WithSpares()) }],
         };
 
         var json = new StringBuilder();
