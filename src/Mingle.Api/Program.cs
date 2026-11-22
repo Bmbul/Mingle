@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Mingle.Api.Hubs;
 using Mingle.Api.Rooms;
@@ -13,10 +14,19 @@ builder.Services.AddMingleDal(builder.Configuration.GetConnectionString("Mingle"
 builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<RoomRegistry>();
 builder.Services.AddHostedService<RoomCleanupService>();
+// Behind Azure Container Apps the app sees plain HTTP; the proxy's headers say the visitor used HTTPS.
+builder.Services.Configure<ForwardedHeadersOptions>(o =>
+{
+    o.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    o.KnownIPNetworks.Clear();
+    o.KnownProxies.Clear();
+});
 builder.Services.AddSignalR()
     .AddJsonProtocol(o => ContractsJsonContext.Register(o.PayloadSerializerOptions));
 
 var app = builder.Build();
+
+app.UseForwardedHeaders();
 
 if (app.Environment.IsDevelopment())
 {

@@ -74,3 +74,32 @@ Armenian and Russian change names by grammatical case.
 - A seat survives disconnects: the browser keeps a seat token and rejoins after a reload or a dropped
   connection. Rooms nobody is connected to are removed after two hours of inactivity.
 - Rooms live in one server's memory; running several instances would need a shared store such as Redis.
+
+## Deploying
+
+The live app runs on **Azure Container Apps** (Germany West Central, consumption plan, one copy at
+most because rooms live in memory, scales to zero when idle). Images go to **GitHub Container
+Registry** (`ghcr.io/bmbul/mingle`) and the database is **Neon** Postgres (Frankfurt).
+
+Every push to `main` that passes CI publishes the image and updates the app (the `deploy` job in
+`.github/workflows/ci.yml`). GitHub signs in to Azure with OIDC, so no Azure password is stored anywhere.
+
+One-time setup:
+
+1. Push to `main` once so CI publishes `ghcr.io/bmbul/mingle:latest`, then make the package public
+   (GitHub → your profile → Packages → `mingle` → Package settings → Change visibility → Public).
+2. Create a free Neon project in **AWS Europe Central 1 (Frankfurt)** and copy its *direct*
+   (not pooled) connection details.
+3. Sign in and run the setup script:
+   ```bash
+   az login
+   ./infra/azure-setup.sh
+   ```
+4. Store the database connection string as a secret in the app yourself (it never needs to be
+   shown to anyone else), then restart it:
+   ```bash
+   az containerapp secret set --name mingle-app --resource-group mingle-rg \
+     --secrets "db-connection=Host=<neon host>;Database=<db>;Username=<user>;Password=<password>;SSL Mode=Require"
+   az containerapp update --name mingle-app --resource-group mingle-rg --set-env-vars "SECRET_ROTATED=$(date +%s)"
+   ```
+   On first start the app creates the tables and imports the starter decks.
