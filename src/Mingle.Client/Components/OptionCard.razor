@@ -1,0 +1,11 @@
+<button class="option @(Selected ? "on" : "")" aria-pressed="@(Selected ? "true" : "false")" @onclick="OnSelect">
+    <span class="row-title">@Title</span>
+    <span class="muted small">@Description</span>
+</button>
+
+@code {
+    [Parameter] public bool Selected { get; set; }
+    [Parameter] public EventCallback OnSelect { get; set; }
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string Description { get; set; } = "";
+}

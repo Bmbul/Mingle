@@ -1,0 +1,54 @@
+@inject Text T
+
+@switch (View.Input)
+{
+    case InputMode.Text:
+        <div class="stack">
+            <label class="small" for="answer-@Id">@T["Play_YourAnswerHidden"]</label>
+            <textarea id="answer-@Id" class="field area" maxlength="@Game.MaxTextLength"
+                      placeholder="@T["Play_WriteHere"]" aria-label="@T["Play_WriteHere"]"
+                      @bind="text" @bind:event="oninput"></textarea>
+            <button class="btn" disabled="@string.IsNullOrWhiteSpace(text)"
+                    @onclick="() => OnAnswer.InvokeAsync(Answer.FromText(text))">@T["Play_Submit"]</button>
+        </div>
+        break;
+
+    case InputMode.Choice:
+        <div class="stack" role="group">
+            @for (var i = 0; i < View.Options.Length; i++)
+            {
+                var index = i;
+                <button class="choice" lang="@Lang.Code()" @onclick="() => OnAnswer.InvokeAsync(Answer.FromChoice(index))">@View.Options[index]</button>
+            }
+        </div>
+        break;
+
+    case InputMode.PlayerVote:
+        <div class="stack" role="group">
+            @foreach (var player in Players)
+            {
+                <button class="choice" @onclick="() => OnAnswer.InvokeAsync(Answer.ForPlayer(player.Id))">@player.Name</button>
+            }
+        </div>
+        break;
+
+    case InputMode.Scale:
+        <div class="scale" role="group" aria-label="@T["Kind_rate"]">
+            @for (var n = 1; n <= 10; n++)
+            {
+                var value = n;
+                <button class="scale-btn" @onclick="() => OnAnswer.InvokeAsync(Answer.FromScale(value))">@value</button>
+            }
+        </div>
+        break;
+}
+
+@code {
+    [Parameter, EditorRequired] public GameView View { get; set; } = default!;
+    [Parameter, EditorRequired] public ImmutableArray<Player> Players { get; set; }
+    [Parameter] public Lang Lang { get; set; } = Text.UiLang;
+    [Parameter] public EventCallback<Answer> OnAnswer { get; set; }
+
+    private readonly string Id = Guid.NewGuid().ToString("N")[..8];
+    private string text = "";
+}

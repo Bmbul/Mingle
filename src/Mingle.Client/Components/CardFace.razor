@@ -1,0 +1,23 @@
+@inject Text T
+
+<div class="card-face @(Compact ? "compact" : "")">
+    <p class="kind">@T.KindName(View.KindId!) · @T[$"Depth_{View.Depth}"]</p>
+    <p class="prompt" lang="@Lang.Code()">@View.Prompt</p>
+    @if (ShowOptions && !View.Options.IsEmpty)
+    {
+        <ul class="options" lang="@Lang.Code()">
+            @foreach (var option in View.Options)
+            {
+                <li>@option</li>
+            }
+        </ul>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public GameView View { get; set; } = default!;
+    [Parameter] public Lang Lang { get; set; } = Text.UiLang;
+    [Parameter] public bool Compact { get; set; }
+    /// <summary>Lists a choice card's options; off where the options are already shown as buttons or results.</summary>
+    [Parameter] public bool ShowOptions { get; set; }
+}

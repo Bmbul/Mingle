@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="AppTagline" xml:space="preserve"><value>Հարցեր, որոնք խոսեցնում են</value></data>
+  <data name="Home_NewGame" xml:space="preserve"><value>Նոր խաղ</value></data>
+  <data name="Home_PassAndPlay" xml:space="preserve"><value>Խաղացեք մեկ հեռախոսով</value></data>
+  <data name="Home_OnlineSoon" xml:space="preserve"><value>Առցանց սենյակները շուտով կլինեն։</value></data>
+  <data name="Home_Rejoin" xml:space="preserve"><value>Խաղը դեռ ընթանում է</value></data>
+  <data name="Home_RejoinAction" xml:space="preserve"><value>Շարունակել</value></data>
+  <data name="Home_Language" xml:space="preserve"><value>Լեզու</value></data>
+  <data name="Common_Back" xml:space="preserve"><value>Հետ</value></data>
+  <data name="Setup_Title" xml:space="preserve"><value>Նոր խաղ</value></data>
+  <data name="Setup_Players" xml:space="preserve"><value>Խաղացողներ</value></data>
+  <data name="Setup_PlayerName" xml:space="preserve"><value>Խաղացողի անունը</value></data>
+  <data name="Setup_PlayerLang" xml:space="preserve"><value>Քարտերի լեզուն</value></data>
+  <data name="Setup_AddPlayer" xml:space="preserve"><value>Ավելացնել խաղացող</value></data>
+  <data name="Setup_RemovePlayer" xml:space="preserve"><value>Հեռացնել խաղացողին</value></data>
+  <data name="Setup_Answers" xml:space="preserve"><value>Պատասխաններ</value></data>
+  <data name="Setup_Write" xml:space="preserve"><value>Գրել</value></data>
+  <data name="Setup_WriteDesc" xml:space="preserve"><value>Յուրաքանչյուրը պատասխանում է առանձին։ Պատասխանները բացվում են միասին։</value></data>
+  <data name="Setup_Talk" xml:space="preserve"><value>Պարզապես խոսել</value></data>
+  <data name="Setup_TalkDesc" xml:space="preserve"><value>Կարդացեք քարտը և պատասխանեք բարձրաձայն։ Քվեարկությունը՝ մեկ հպումով։</value></data>
+  <data name="Setup_Decks" xml:space="preserve"><value>Հավաքածուներ</value></data>
+  <data name="Setup_GameTypes" xml:space="preserve"><value>Խաղի տեսակներ</value></data>
+  <data name="Setup_Depth" xml:space="preserve"><value>Խորություն</value></data>
+  <data name="Setup_WhoAnswers" xml:space="preserve"><value>Ով է պատասխանում</value></data>
+  <data name="Setup_Everyone" xml:space="preserve"><value>Բոլորը</value></data>
+  <data name="Setup_TakeTurns" xml:space="preserve"><value>Հերթով</value></data>
+  <data name="Setup_CardCount" xml:space="preserve"><value>Քարտերի քանակը</value></data>
+  <data name="Setup_Start" xml:space="preserve"><value>Սկսել խաղը</value></data>
+  <data name="Setup_NeedPlayers" xml:space="preserve"><value>Ավելացրեք առնվազն 2 խաղացող՝ անուններով։</value></data>
+  <data name="Setup_NoCards" xml:space="preserve"><value>Այս կարգավորումներին համապատասխան քարտ չկա։ Ավելացրեք հավաքածուներ, խաղի տեսակներ կամ խորություններ։</value></data>
+  <data name="Setup_Matches_One" xml:space="preserve"><value>{0} քարտ է համապատասխանում</value></data>
+  <data name="Setup_Matches_Other" xml:space="preserve"><value>{0} քարտ է համապատասխանում</value></data>
+  <data name="Cards_One" xml:space="preserve"><value>{0} քարտ</value></data>
+  <data name="Cards_Other" xml:space="preserve"><value>{0} քարտ</value></data>
+  <data name="Depth_1" xml:space="preserve"><value>1 · թեթև</value></data>
+  <data name="Depth_2" xml:space="preserve"><value>2 · անձնական</value></data>
+  <data name="Depth_3" xml:space="preserve"><value>3 · խորը</value></data>
+  <data name="Kind_open" xml:space="preserve"><value>Բաց հարց</value></data>
+  <data name="Kind_finish" xml:space="preserve"><value>Ավարտիր նախադասությունը</value></data>
+  <data name="Kind_wyr" xml:space="preserve"><value>Ո՞րն ես նախընտրում</value></data>
+  <data name="Kind_likely" xml:space="preserve"><value>Ո՞վ ավելի շուտ</value></data>
+  <data name="Kind_guess" xml:space="preserve"><value>Գուշակիր պատասխանս</value></data>
+  <data name="Kind_rate" xml:space="preserve"><value>Գնահատիր 1–10</value></data>
+  <data name="KindEx_open" xml:space="preserve"><value>Պատասխանիր քո խոսքերով</value></data>
+  <data name="KindEx_finish" xml:space="preserve"><value>Ես ինձ ամենասիրվածն եմ զգում, երբ…</value></data>
+  <data name="KindEx_wyr" xml:space="preserve"><value>Ընտրիր երկուսից մեկը</value></data>
+  <data name="KindEx_likely" xml:space="preserve"><value>Քվեարկիր խաղացողի օգտին</value></data>
+  <data name="KindEx_guess" xml:space="preserve"><value>Մեկը պատասխանում է, մյուսները գուշակում են</value></data>
+  <data name="KindEx_rate" xml:space="preserve"><value>Գնահատիր քեզ և համեմատիր</value></data>
+  <data name="Play_CardOf" xml:space="preserve"><value>Քարտ {0}/{1}</value></data>
+  <data name="Play_EveryoneAnswers" xml:space="preserve"><value>Բոլորն են պատասխանում</value></data>
+  <data name="Play_Turn" xml:space="preserve"><value>Հերթը՝ {0}</value></data>
+  <data name="Play_Subject" xml:space="preserve"><value>Պատասխանում է՝ {0}։ Մյուսները գուշակում են</value></data>
+  <data name="Play_OutLoudOne" xml:space="preserve"><value>Բարձրաձայն պատասխանում է՝ {0}</value></data>
+  <data name="Play_OutLoudAll" xml:space="preserve"><value>Բոլորը պատասխանում են բարձրաձայն</value></data>
+  <data name="Play_HandTo" xml:space="preserve"><value>Փոխանցեք հեռախոսը՝ {0}</value></data>
+  <data name="Play_HandToHint" xml:space="preserve"><value>Հաջորդ էկրանը պետք է տեսնի միայն այս խաղացողը։</value></data>
+  <data name="Play_AnswerNow" xml:space="preserve"><value>Պատասխանել</value></data>
+  <data name="Play_AnsweringAs" xml:space="preserve"><value>Պատասխանում է՝ {0}</value></data>
+  <data name="Play_YourAnswerHidden" xml:space="preserve"><value>Քո պատասխանը · թաքնված է, մինչև բոլորը պատասխանեն</value></data>
+  <data name="Play_WriteHere" xml:space="preserve"><value>Գրիր պատասխանդ</value></data>
+  <data name="Play_Submit" xml:space="preserve"><value>Ուղարկել պատասխանը</value></data>
+  <data name="Play_Pass" xml:space="preserve"><value>Բաց թողնել</value></data>
+  <data name="Play_Next" xml:space="preserve"><value>Հաջորդ քարտը</value></data>
+  <data name="Play_TalkAboutIt" xml:space="preserve"><value>Քննարկեք</value></data>
+  <data name="Play_TakeYourTime" xml:space="preserve"><value>Մի շտապեք։ Ցանկացած ոք կարող է անցնել հաջորդ քարտին։</value></data>
+  <data name="Play_Like" xml:space="preserve"><value>Հավանել քարտը</value></data>
+  <data name="Play_Dislike" xml:space="preserve"><value>Չհավանել քարտը</value></data>
+  <data name="Play_End" xml:space="preserve"><value>Ավարտել խաղը</value></data>
+  <data name="Play_Answered" xml:space="preserve"><value>Պատասխանել է {0}/{1}</value></data>
+  <data name="Play_RealAnswer" xml:space="preserve"><value>Իրական պատասխանը</value></data>
+  <data name="Play_Votes_One" xml:space="preserve"><value>{0} ձայն</value></data>
+  <data name="Play_Votes_Other" xml:space="preserve"><value>{0} ձայն</value></data>
+  <data name="Play_Error" xml:space="preserve"><value>Ինչ-որ բան սխալ գնաց՝ {0}</value></data>
+  <data name="End_Title" xml:space="preserve"><value>Լավ խաղ էր</value></data>
+  <data name="End_Played_One" xml:space="preserve"><value>{0} քարտ խաղացվեց</value></data>
+  <data name="End_Played_Other" xml:space="preserve"><value>{0} քարտ խաղացվեց</value></data>
+  <data name="End_Passed" xml:space="preserve"><value>Բաց թողնված՝ {0}</value></data>
+  <data name="End_Liked" xml:space="preserve"><value>Ձեզ դուր եկավ</value></data>
+  <data name="End_NoLikes" xml:space="preserve"><value>Հավանեք քարտերը խաղի ընթացքում, և դրանք կհայտնվեն այստեղ։</value></data>
+  <data name="End_NewGame" xml:space="preserve"><value>Նոր խաղ</value></data>
+  <data name="End_Home" xml:space="preserve"><value>Գլխավոր</value></data>
+  <data name="Setup_OnePhone" xml:space="preserve"><value>Մեկ հեռախոսով</value></data>
+  <data name="Setup_PassPhone" xml:space="preserve"><value>Փոխանցել հեռախոսը</value></data>
+  <data name="Setup_PassPhoneDesc" xml:space="preserve"><value>Յուրաքանչյուրը պատասխանում է գաղտնի և փոխանցում հեռախոսը։</value></data>
+  <data name="Setup_OutLoud" xml:space="preserve"><value>Բարձրաձայն</value></data>
+  <data name="Setup_OutLoudDesc" xml:space="preserve"><value>Ոչինչ գրել կամ սեղմել պետք չէ։ Կարդացեք քարտը, պատասխանեք և քննարկեք։</value></data>
+</root>

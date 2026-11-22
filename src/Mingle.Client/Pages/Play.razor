@@ -1,0 +1,166 @@
+@page "/play"
+@implements IDisposable
+@inject Text T
+@inject GameSession Session
+@inject NavigationManager Nav
+
+<PageTitle>Mingle</PageTitle>
+
+@if (Session.State is { } state)
+{
+    var lang = Text.UiLang;
+    var table = GameViews.ForTable(state, lang);
+
+    if (state.Phase == GamePhase.Ended)
+    {
+        <main class="main">
+            <h1 class="h1 big">@T["End_Title"]</h1>
+            <p class="muted lead">
+                @T.Plural("End_Played", state.History.Count(h => !h.Passed))
+                @if (state.History.Any(h => h.Passed))
+                {
+                    <span> · @T["End_Passed", state.History.Count(h => h.Passed)]</span>
+                }
+            </p>
+
+            <h2 class="label">@T["End_Liked"]</h2>
+            @{ var liked = state.History.Where(h => h.Likes > 0).ToList(); }
+            @if (liked.Count == 0)
+            {
+                <p class="muted">@T["End_NoLikes"]</p>
+            }
+            @foreach (var result in liked)
+            {
+                <div class="card">
+                    <span class="row-title" lang="@lang.Code()">@result.Card.TextFor(lang).Text</span>
+                    <span class="muted small">@T.KindName(result.Card.KindId) · @T[$"Depth_{result.Card.Depth}"]</span>
+                </div>
+            }
+        </main>
+        <footer class="foot">
+            <a class="btn" href="setup">@T["End_NewGame"]</a>
+            <a class="btn2" href="" @onclick="Session.Clear">@T["End_Home"]</a>
+        </footer>
+    }
+    else
+    {
+        var round = state.Current!;
+        var answeringId = ActiveAnswerer(state);
+
+        <header class="top spread">
+            <span class="muted">@T["Play_CardOf", table.CardNumber, table.CardCount]</span>
+            <button class="text-btn" @onclick="() => Do(new EndGame(Me(state)))">@T["Play_End"]</button>
+        </header>
+
+        @if (state.Phase == GamePhase.Answering && answeringId is not null)
+        {
+            var player = state.Player(answeringId);
+            var mine = GameViews.ForPlayer(state, answeringId);
+            <main class="main">
+                <p class="who">@T["Play_AnsweringAs", player.Name]</p>
+                <CardFace View="mine" Lang="player.Lang" />
+                <AnswerInput @key="@($"{round.Number}-{answeringId}")" View="mine" Players="state.Players" Lang="player.Lang"
+                             OnAnswer="answer => Submit(answeringId, answer)" />
+            </main>
+        }
+        else if (state.Phase == GamePhase.Answering)
+        {
+            var next = round.Answerers.First(id => !round.Answers.ContainsKey(id));
+            <main class="main">
+                <p class="who">@WhoLine(state, table)</p>
+                <CardFace View="table" ShowOptions="true" />
+                <div class="card handoff">
+                    <span class="h2">@T["Play_HandTo", state.Player(next).Name]</span>
+                    <span class="muted small">@T["Play_HandToHint"]</span>
+                    <button class="btn" @onclick="() => handoff = (round.Number, next)">@T["Play_AnswerNow"]</button>
+                </div>
+                <p class="muted center" role="status">@T["Play_Answered", table.AnsweredCount, table.AnswererIds.Length]</p>
+            </main>
+            <footer class="foot row">
+                <button class="btn2 grow" @onclick="() => Do(new PassCard(Me(state)))">@T["Play_Pass"]</button>
+            </footer>
+        }
+        else
+        {
+            var reaction = round.Reactions.TryGetValue(Me(state), out var liked) ? liked : (bool?)null;
+            <main class="main">
+                <p class="who">@WhoLine(state, table)</p>
+                <CardFace View="table" Compact="@(!table.RevealedAnswers.IsEmpty)" ShowOptions="@table.RevealedAnswers.IsEmpty" />
+                <RevealList View="table" />
+                <div class="talk">
+                    <p class="h2">@T["Play_TalkAboutIt"]</p>
+                    <p class="muted small">@T["Play_TakeYourTime"]</p>
+                </div>
+            </main>
+            <footer class="foot row">
+                <button class="react @(reaction == true ? "on" : "")" aria-label="@T["Play_Like"]" aria-pressed="@(reaction == true ? "true" : "false")"
+                        @onclick="() => Do(new ReactToCard(Me(state), reaction == true ? null : true))"><Icon Name="like" Size="22" /></button>
+                <button class="react @(reaction == false ? "on" : "")" aria-label="@T["Play_Dislike"]" aria-pressed="@(reaction == false ? "true" : "false")"
+                        @onclick="() => Do(new ReactToCard(Me(state), reaction == false ? null : false))"><Icon Name="dislike" Size="22" /></button>
+                <button class="btn grow" @onclick="() => Do(new NextCard(Me(state)))">@T["Play_Next"]</button>
+            </footer>
+        }
+
+        @if (error is not null)
+        {
+            <p class="error" role="alert">@T["Play_Error", error]</p>
+        }
+    }
+}
+
+@code {
+    private (int Round, string PlayerId)? handoff;
+    private string? error;
+
+    protected override void OnInitialized()
+    {
+        if (Session.State is null) Nav.NavigateTo("setup", replace: true);
+        Session.Changed += OnChanged;
+    }
+
+    // In pass-and-play the device acts for the group; reactions and button presses are recorded as the first player.
+    private static string Me(GameState state) => state.Players[0].Id;
+
+    /// <summary>The player whose private answer screen is open, if any.</summary>
+    private string? ActiveAnswerer(GameState state)
+    {
+        var round = state.Current;
+        if (round is null || state.Phase != GamePhase.Answering) return null;
+        if (handoff is { } h && h.Round == round.Number && !round.Answers.ContainsKey(h.PlayerId)) return h.PlayerId;
+        // With a single answerer there is nothing to hide from anyone, so skip the hand-off screen.
+        return round.Answerers.Length == 1 ? round.Answerers[0] : null;
+    }
+
+    private string WhoLine(GameState state, GameView view)
+    {
+        var turn = view.TurnPlayerName ?? "";
+        var kind = CardKinds.Get(view.KindId!);
+        if (kind.Audience == Audience.AboutTurnPlayer) return T["Play_Subject", turn];
+        if (view.Input == InputMode.Spoken)
+            return state.Settings.TurnStyle == TurnStyle.TakeTurns ? T["Play_OutLoudOne", turn] : T["Play_OutLoudAll"];
+        return view.AnswererIds.Length == 1 ? T["Play_Turn", turn] : T["Play_EveryoneAnswers"];
+    }
+
+    private void Submit(string playerId, Answer answer)
+    {
+        Do(new SubmitAnswer(playerId, answer));
+        handoff = null;
+    }
+
+    private void Do(GameAction action)
+    {
+        try
+        {
+            error = null;
+            Session.Dispatch(action);
+        }
+        catch (GameRuleException ex)
+        {
+            error = ex.Message;
+        }
+    }
+
+    private void OnChanged() => InvokeAsync(StateHasChanged);
+
+    public void Dispose() => Session.Changed -= OnChanged;
+}

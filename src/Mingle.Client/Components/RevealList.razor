@@ -1,0 +1,63 @@
+@inject Text T
+
+@switch (View.Input)
+{
+    case InputMode.Choice:
+        @foreach (var option in View.Options)
+        {
+            var pickers = View.RevealedAnswers.Where(a => a.ChoiceText == option).ToList();
+            <div class="tally">
+                <div class="tally-head">
+                    <span class="row-title">@option</span>
+                    <span class="muted">@T.Plural("Play_Votes", pickers.Count)</span>
+                </div>
+                <div class="bar" aria-hidden="true"><div class="fill" style="width: @Percent(pickers.Count)%"></div></div>
+                <span class="muted small">@string.Join(", ", pickers.Select(p => p.PlayerName))</span>
+            </div>
+        }
+        break;
+
+    case InputMode.PlayerVote:
+        @foreach (var group in View.RevealedAnswers.GroupBy(a => a.VotedPlayerName).OrderByDescending(g => g.Count()))
+        {
+            <div class="tally">
+                <div class="tally-head">
+                    <span class="row-title">@group.Key</span>
+                    <span class="muted">@T.Plural("Play_Votes", group.Count())</span>
+                </div>
+                <div class="bar" aria-hidden="true"><div class="fill" style="width: @Percent(group.Count())%"></div></div>
+            </div>
+        }
+        break;
+
+    default:
+        @foreach (var answer in View.RevealedAnswers)
+        {
+            var real = answer.IsTurnPlayer && View.KindId == CardKinds.GuessMyAnswer.Id;
+            <div class="answer @(real ? "real" : "")">
+                <span class="avatar" aria-hidden="true">@Initial(answer.PlayerName)</span>
+                <span class="grow">
+                    <span class="muted small">@answer.PlayerName@(real ? $" · {T["Play_RealAnswer"]}" : "")</span>
+                    @if (answer.Scale is { } scale)
+                    {
+                        <span class="scale-value">@scale<span class="muted"> / 10</span></span>
+                    }
+                    else
+                    {
+                        <span class="answer-text">@answer.Text</span>
+                    }
+                </span>
+            </div>
+        }
+        break;
+}
+
+@code {
+    [Parameter, EditorRequired] public GameView View { get; set; } = default!;
+
+    private int Percent(int count) =>
+        View.RevealedAnswers.Length == 0 ? 0 : (int)Math.Round(100.0 * count / View.RevealedAnswers.Length);
+
+    private static string Initial(string name) =>
+        string.IsNullOrEmpty(name) ? "?" : char.ToUpperInvariant(name[0]).ToString();
+}

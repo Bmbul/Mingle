@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="AppTagline" xml:space="preserve"><value>Questions that get you talking</value></data>
+  <data name="Home_NewGame" xml:space="preserve"><value>New game</value></data>
+  <data name="Home_PassAndPlay" xml:space="preserve"><value>Play on one phone</value></data>
+  <data name="Home_OnlineSoon" xml:space="preserve"><value>Online rooms are coming soon.</value></data>
+  <data name="Home_Rejoin" xml:space="preserve"><value>Game in progress</value></data>
+  <data name="Home_RejoinAction" xml:space="preserve"><value>Continue</value></data>
+  <data name="Home_Language" xml:space="preserve"><value>Language</value></data>
+  <data name="Common_Back" xml:space="preserve"><value>Back</value></data>
+  <data name="Setup_Title" xml:space="preserve"><value>New game</value></data>
+  <data name="Setup_Players" xml:space="preserve"><value>Players</value></data>
+  <data name="Setup_PlayerName" xml:space="preserve"><value>Player name</value></data>
+  <data name="Setup_PlayerLang" xml:space="preserve"><value>Card language</value></data>
+  <data name="Setup_AddPlayer" xml:space="preserve"><value>Add player</value></data>
+  <data name="Setup_RemovePlayer" xml:space="preserve"><value>Remove player</value></data>
+  <data name="Setup_Answers" xml:space="preserve"><value>Answers</value></data>
+  <data name="Setup_Write" xml:space="preserve"><value>Write them down</value></data>
+  <data name="Setup_WriteDesc" xml:space="preserve"><value>Everyone answers privately. Answers are revealed together.</value></data>
+  <data name="Setup_Talk" xml:space="preserve"><value>Just talk</value></data>
+  <data name="Setup_TalkDesc" xml:space="preserve"><value>Read the card and answer out loud. Votes are one tap.</value></data>
+  <data name="Setup_Decks" xml:space="preserve"><value>Decks</value></data>
+  <data name="Setup_GameTypes" xml:space="preserve"><value>Game types</value></data>
+  <data name="Setup_Depth" xml:space="preserve"><value>Depth</value></data>
+  <data name="Setup_WhoAnswers" xml:space="preserve"><value>Who answers</value></data>
+  <data name="Setup_Everyone" xml:space="preserve"><value>Everyone</value></data>
+  <data name="Setup_TakeTurns" xml:space="preserve"><value>Take turns</value></data>
+  <data name="Setup_CardCount" xml:space="preserve"><value>Cards in the game</value></data>
+  <data name="Setup_Start" xml:space="preserve"><value>Start game</value></data>
+  <data name="Setup_NeedPlayers" xml:space="preserve"><value>Add at least 2 players with names.</value></data>
+  <data name="Setup_NoCards" xml:space="preserve"><value>No cards match these settings. Add decks, game types or depths.</value></data>
+  <data name="Setup_Matches_One" xml:space="preserve"><value>{0} card matches</value></data>
+  <data name="Setup_Matches_Other" xml:space="preserve"><value>{0} cards match</value></data>
+  <data name="Cards_One" xml:space="preserve"><value>{0} card</value></data>
+  <data name="Cards_Other" xml:space="preserve"><value>{0} cards</value></data>
+  <data name="Depth_1" xml:space="preserve"><value>1 · light</value></data>
+  <data name="Depth_2" xml:space="preserve"><value>2 · personal</value></data>
+  <data name="Depth_3" xml:space="preserve"><value>3 · deep</value></data>
+  <data name="Kind_open" xml:space="preserve"><value>Open question</value></data>
+  <data name="Kind_finish" xml:space="preserve"><value>Finish the sentence</value></data>
+  <data name="Kind_wyr" xml:space="preserve"><value>Would you rather</value></data>
+  <data name="Kind_likely" xml:space="preserve"><value>Most likely to</value></data>
+  <data name="Kind_guess" xml:space="preserve"><value>Guess my answer</value></data>
+  <data name="Kind_rate" xml:space="preserve"><value>Rate it 1–10</value></data>
+  <data name="KindEx_open" xml:space="preserve"><value>Answer in your own words</value></data>
+  <data name="KindEx_finish" xml:space="preserve"><value>I feel most loved when…</value></data>
+  <data name="KindEx_wyr" xml:space="preserve"><value>Pick one of two, see the split</value></data>
+  <data name="KindEx_likely" xml:space="preserve"><value>Vote for a player</value></data>
+  <data name="KindEx_guess" xml:space="preserve"><value>One answers, the others guess</value></data>
+  <data name="KindEx_rate" xml:space="preserve"><value>Rate yourself, then compare</value></data>
+  <data name="Play_CardOf" xml:space="preserve"><value>Card {0} of {1}</value></data>
+  <data name="Play_EveryoneAnswers" xml:space="preserve"><value>Everyone answers</value></data>
+  <data name="Play_Turn" xml:space="preserve"><value>{0}'s turn</value></data>
+  <data name="Play_Subject" xml:space="preserve"><value>{0} answers, everyone else guesses</value></data>
+  <data name="Play_OutLoudOne" xml:space="preserve"><value>{0} answers out loud</value></data>
+  <data name="Play_OutLoudAll" xml:space="preserve"><value>Everyone answers out loud</value></data>
+  <data name="Play_HandTo" xml:space="preserve"><value>Hand the phone to {0}</value></data>
+  <data name="Play_HandToHint" xml:space="preserve"><value>Only this player should look at the next screen.</value></data>
+  <data name="Play_AnswerNow" xml:space="preserve"><value>Answer now</value></data>
+  <data name="Play_AnsweringAs" xml:space="preserve"><value>Answering: {0}</value></data>
+  <data name="Play_YourAnswerHidden" xml:space="preserve"><value>Your answer · hidden until everyone is done</value></data>
+  <data name="Play_WriteHere" xml:space="preserve"><value>Write your answer</value></data>
+  <data name="Play_Submit" xml:space="preserve"><value>Submit answer</value></data>
+  <data name="Play_Pass" xml:space="preserve"><value>Pass</value></data>
+  <data name="Play_Next" xml:space="preserve"><value>Next card</value></data>
+  <data name="Play_TalkAboutIt" xml:space="preserve"><value>Talk about it</value></data>
+  <data name="Play_TakeYourTime" xml:space="preserve"><value>Take your time. Anyone can move to the next card.</value></data>
+  <data name="Play_Like" xml:space="preserve"><value>Like this card</value></data>
+  <data name="Play_Dislike" xml:space="preserve"><value>Dislike this card</value></data>
+  <data name="Play_End" xml:space="preserve"><value>End game</value></data>
+  <data name="Play_Answered" xml:space="preserve"><value>{0} of {1} answered</value></data>
+  <data name="Play_RealAnswer" xml:space="preserve"><value>The real answer</value></data>
+  <data name="Play_Votes_One" xml:space="preserve"><value>{0} vote</value></data>
+  <data name="Play_Votes_Other" xml:space="preserve"><value>{0} votes</value></data>
+  <data name="Play_Error" xml:space="preserve"><value>Something went wrong: {0}</value></data>
+  <data name="End_Title" xml:space="preserve"><value>Good game</value></data>
+  <data name="End_Played_One" xml:space="preserve"><value>{0} card played</value></data>
+  <data name="End_Played_Other" xml:space="preserve"><value>{0} cards played</value></data>
+  <data name="End_Passed" xml:space="preserve"><value>Passed: {0}</value></data>
+  <data name="End_Liked" xml:space="preserve"><value>You liked</value></data>
+  <data name="End_NoLikes" xml:space="preserve"><value>Like cards during the game to see them here.</value></data>
+  <data name="End_NewGame" xml:space="preserve"><value>New game</value></data>
+  <data name="End_Home" xml:space="preserve"><value>Home</value></data>
+  <data name="Setup_OnePhone" xml:space="preserve"><value>On one phone</value></data>
+  <data name="Setup_PassPhone" xml:space="preserve"><value>Pass the phone</value></data>
+  <data name="Setup_PassPhoneDesc" xml:space="preserve"><value>Each player answers privately, then hands the phone on.</value></data>
+  <data name="Setup_OutLoud" xml:space="preserve"><value>Out loud</value></data>
+  <data name="Setup_OutLoudDesc" xml:space="preserve"><value>Nothing to type or tap. Read the card, answer and talk.</value></data>
+</root>
