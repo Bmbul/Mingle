@@ -130,7 +130,7 @@
   <data name="Lobby_NoDeck" xml:space="preserve"><value>no deck yet</value></data>
   <data name="Lobby_PickDecks" xml:space="preserve"><value>Pick a deck to start.</value></data>
   <data name="Setup_SourceTopics" xml:space="preserve"><value>Our topics</value></data>
-  <data name="Setup_SourceTopicsDesc" xml:space="preserve"><value>Everyone picks topics; Mingle writes cards about them</value></data>
+  <data name="Setup_SourceTopicsDesc" xml:space="preserve"><value>Pick topics, get cards</value></data>
   <data name="Setup_SourceTopicsSummary" xml:space="preserve"><value>Everyone picks topics in the room</value></data>
   <data name="Lobby_YourTopics" xml:space="preserve"><value>Your topics</value></data>
   <data name="Lobby_YourTopicsHint" xml:space="preserve"><value>Pick up to {0}. Nobody sees what you picked.</value></data>
@@ -140,7 +140,7 @@
   <data name="Lobby_TopicsPicking" xml:space="preserve"><value>picking topics…</value></data>
   <data name="Writing_Title" xml:space="preserve"><value>Writing your cards…</value></data>
   <data name="Writing_Hint" xml:space="preserve"><value>This can take up to a minute.</value></data>
-  <data name="Writing_Library" xml:space="preserve"><value>New cards couldn't be written this time, so these are ready-made cards on your topics.</value></data>
+  <data name="Writing_Library" xml:space="preserve"><value>Ready-made cards on your topics.</value></data>
   <data name="Home_MyDecks" xml:space="preserve"><value>My decks</value></data>
   <data name="Decks_Title" xml:space="preserve"><value>My decks</value></data>
   <data name="Decks_New" xml:space="preserve"><value>New deck</value></data>
@@ -184,12 +184,12 @@
   <data name="Editor_AiWrite" xml:space="preserve"><value>Generate {0} cards</value></data>
   <data name="Editor_AiWriting" xml:space="preserve"><value>Generating…</value></data>
   <data name="Editor_AiHint" xml:space="preserve"><value>Pick topics or describe your own. Cards come in all three languages.</value></data>
-  <data name="Editor_AiFailed" xml:space="preserve"><value>Couldn't generate cards right now. Try again, or write them manually.</value></data>
+  <data name="Editor_AiFailed" xml:space="preserve"><value>Couldn't generate. Try again.</value></data>
   <data name="Editor_AiAdded_One" xml:space="preserve"><value>Added {0} card. Check it and save the deck.</value></data>
   <data name="Editor_AiAdded_Other" xml:space="preserve"><value>Added {0} cards. Check them and save the deck.</value></data>
   <data name="Editor_Mode" xml:space="preserve"><value>Create cards</value></data>
-  <data name="Editor_ModeAi" xml:space="preserve"><value>Generate automatically</value></data>
-  <data name="Editor_ModeManual" xml:space="preserve"><value>Write manually</value></data>
+  <data name="Editor_ModeAi" xml:space="preserve"><value>Automatic</value></data>
+  <data name="Editor_ModeManual" xml:space="preserve"><value>Manual</value></data>
   <data name="Editor_AiTopics" xml:space="preserve"><value>Topics · up to {0}</value></data>
   <data name="Editor_AiOwn" xml:space="preserve"><value>Anything else? (optional)</value></data>
   <data name="Editor_AiDepth" xml:space="preserve"><value>How deep</value></data>
@@ -201,5 +201,5 @@
   <data name="Editor_Setting_party" xml:space="preserve"><value>A party</value></data>
   <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Colleagues</value></data>
   <data name="Editor_AiWriteMore" xml:space="preserve"><value>Generate {0} more</value></data>
-  <data name="Editor_AiEditHint" xml:space="preserve"><value>To change a card's wording, switch to “Write manually”.</value></data>
+  <data name="Editor_AiEditHint" xml:space="preserve"><value>To edit a card's text, switch to “Manual”.</value></data>
 </root>
