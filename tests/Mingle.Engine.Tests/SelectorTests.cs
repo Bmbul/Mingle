@@ -15,14 +15,14 @@ public class SelectorTests
     public void Depth_ramps_from_light_to_deep_over_the_game(int cardNumber, int expectedDepth)
     {
         var settings = new GameSettings { MinDepth = 1, MaxDepth = 3, CardCount = 20 };
-        Assert.Equal(expectedDepth, RampCardSelector.TargetDepth(cardNumber, settings));
+        Assert.Equal(expectedDepth, CardSelector.TargetDepth(cardNumber, settings));
     }
 
     [Fact]
     public void A_single_depth_never_ramps()
     {
         var settings = new GameSettings { MinDepth = 2, MaxDepth = 2, CardCount = 20 };
-        Assert.Equal(2, RampCardSelector.TargetDepth(20, settings));
+        Assert.Equal(2, CardSelector.TargetDepth(20, settings));
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class SelectorTests
         var context = new SelectionContext(pool, new HashSet<string>(), CardNumber: 10,
             new GameSettings { MinDepth = 1, MaxDepth = 3, CardCount = 20 }, Seed: 1);
 
-        Assert.Equal("light", RampCardSelector.Instance.Pick(context)!.Id);
+        Assert.Equal("light", CardSelector.Instance.Pick(context)!.Id);
     }
 
     [Fact]
@@ -51,6 +51,26 @@ public class SelectorTests
         var pool = Deck(Card("a", CardKinds.OpenQuestion)).Cards;
         var context = new SelectionContext(pool, new HashSet<string> { "a" }, 2, new GameSettings(), 1);
 
-        Assert.Null(RampCardSelector.Instance.Pick(context));
+        Assert.Null(CardSelector.Instance.Pick(context));
+    }
+
+    [Fact]
+    public void Shuffled_order_can_open_with_any_depth()
+    {
+        var firstDepths = Enumerable.Range(0, 40)
+            .Select(seed => Start(new GameSettings { AnswerMode = AnswerMode.Talk, Order = CardOrder.Shuffled }, seed: seed).Current!.Card.Depth)
+            .ToHashSet();
+
+        Assert.Equal([1, 2, 3], firstDepths.Order());
+    }
+
+    [Fact]
+    public void Shuffled_order_still_deals_every_card_once()
+    {
+        var deck = FullDeck();
+        var state = Start(new GameSettings { AnswerMode = AnswerMode.Talk, Order = CardOrder.Shuffled, CardCount = deck.Cards.Length }, deck: deck);
+        while (state.Current is not null) state = Game.Apply(state, new PassCard("ani"));
+
+        Assert.Equal(deck.Cards.Length, state.History.Select(h => h.Card.Id).Distinct().Count());
     }
 }

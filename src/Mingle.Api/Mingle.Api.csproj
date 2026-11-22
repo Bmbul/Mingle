@@ -10,6 +10,7 @@
     <ProjectReference Include="..\Mingle.Engine\Mingle.Engine.csproj" />
     <ProjectReference Include="..\Mingle.DAL\Mingle.DAL.csproj" />
     <ProjectReference Include="..\Mingle.Client\Mingle.Client.csproj" />
+    <ProjectReference Include="..\Mingle.Contracts\Mingle.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

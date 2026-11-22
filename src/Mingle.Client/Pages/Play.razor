@@ -78,7 +78,7 @@
         {
             var next = round.Answerers.First(id => !round.Answers.ContainsKey(id));
             <main class="main">
-                <p class="who">@WhoLine(state, table)</p>
+                <p class="who">@WhoLine.For(T, table, state.Settings.TurnStyle)</p>
                 <CardFace View="table" ShowOptions="true" />
                 <div class="card handoff">
                     <span class="h2">@T["Play_HandTo", state.Player(next).Name]</span>
@@ -95,7 +95,7 @@
         {
             var reaction = round.Reactions.TryGetValue(Me(state), out var liked) ? liked : (bool?)null;
             <main class="main">
-                <p class="who">@WhoLine(state, table)</p>
+                <p class="who">@WhoLine.For(T, table, state.Settings.TurnStyle)</p>
                 <CardFace View="table" Compact="@(!table.RevealedAnswers.IsEmpty)" ShowOptions="@table.RevealedAnswers.IsEmpty" />
                 <RevealList View="table" />
                 <div class="talk">
@@ -147,16 +147,6 @@
         if (handoff is { } h && h.Round == round.Number && !round.Answers.ContainsKey(h.PlayerId)) return h.PlayerId;
         // With a single answerer there is nothing to hide from anyone, so skip the hand-off screen.
         return round.Answerers.Length == 1 ? round.Answerers[0] : null;
-    }
-
-    private string WhoLine(GameState state, GameView view)
-    {
-        var turn = view.TurnPlayerName ?? "";
-        var kind = CardKinds.Get(view.KindId!);
-        if (kind.Audience == Audience.AboutTurnPlayer) return T["Play_Subject", turn];
-        if (view.Input == InputMode.Spoken)
-            return state.Settings.TurnStyle == TurnStyle.TakeTurns ? T["Play_OutLoudOne", turn] : T["Play_OutLoudAll"];
-        return view.AnswererIds.Length == 1 ? T["Play_Turn", turn] : T["Play_EveryoneAnswers"];
     }
 
     private void Submit(string playerId, Answer answer)

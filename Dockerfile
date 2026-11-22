@@ -5,6 +5,7 @@ COPY global.json Mingle.slnx ./
 COPY src/Mingle.Engine/Mingle.Engine.csproj src/Mingle.Engine/
 COPY src/Mingle.Client/Mingle.Client.csproj src/Mingle.Client/
 COPY src/Mingle.DAL/Mingle.DAL.csproj src/Mingle.DAL/
+COPY src/Mingle.Contracts/Mingle.Contracts.csproj src/Mingle.Contracts/
 COPY src/Mingle.Api/Mingle.Api.csproj src/Mingle.Api/
 RUN dotnet restore src/Mingle.Api/Mingle.Api.csproj
 COPY src/ src/

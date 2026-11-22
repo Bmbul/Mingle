@@ -1,8 +1,8 @@
-# Local development.
+# Local testing and development.
+#   Everything (database + app), app on http://localhost:8080 and on your network at http://<this-computer's-ip>:8080:
+#     docker compose up --build
 #   Database only (then run the app with `dotnet run --project src/Mingle.Api`):
 #     docker compose up -d db
-#   Database and app together, app on http://localhost:8080:
-#     docker compose --profile app up --build
 services:
   db:
     image: postgres:17-alpine
@@ -22,7 +22,6 @@ services:
       retries: 10
 
   app:
-    profiles: ["app"]
     build: .
     environment:
       ConnectionStrings__Mingle: "Host=db;Port=5432;Database=mingle;Username=mingle;Password=${POSTGRES_PASSWORD:-mingle_dev}"
@@ -31,6 +30,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    restart: unless-stopped
 
 volumes:
   pgdata:

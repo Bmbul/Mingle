@@ -159,6 +159,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     background: var(--surface); border: 1px solid var(--accent);
 }
 
+/* Online rooms */
+.code-field { font-size: 28px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; text-align: center; }
+.room-code-card { align-items: stretch; gap: 10px; }
+.room-code { margin: 0; font-size: 44px; font-weight: 700; letter-spacing: .18em; text-align: center; }
+.player-line { display: flex; align-items: center; gap: 12px; min-height: 52px; }
+.player-line.away { opacity: 0.55; }
+.lang-tag { font-size: 12px; font-weight: 700; color: var(--muted); border: 1px solid var(--border-strong); border-radius: 8px; padding: 3px 7px; }
+.card.waiting { align-items: center; text-align: center; padding: 24px; gap: 6px; }
+.banner-warn { margin: 0; padding: 10px 20px; background: var(--accent-soft); color: var(--accent-soft-text); font-size: 14px; text-align: center; }
+.error-inline { color: var(--danger); margin: 0; font-size: 14px; }
+
 /* Cards and surfaces */
 .card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 16px;
@@ -184,7 +195,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .player-row { display: flex; gap: 8px; align-items: center; }
 .field {
     width: 100%; min-height: 52px; border-radius: 14px; background: var(--surface);
-    border: 1px solid var(--border-strong); color: var(--text); font-size: 16px; padding: 12px 14px;
+    border: 1px solid var(--border-strong); color: var(--text); font-family: inherit; font-size: 16px; padding: 12px 14px;
 }
 .field::placeholder { color: #8A8992; }
 .lang-select { width: 84px; flex: none; }

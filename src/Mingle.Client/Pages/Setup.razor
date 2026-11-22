@@ -3,42 +3,49 @@
 @inject GameSession Session
 @inject ContentService Content
 @inject NavigationManager Nav
+@inject RoomClient Rooms
+@inject IJSRuntime JS
 
-<PageTitle>@T["Setup_Title"] · Mingle</PageTitle>
+<PageTitle>@Title · Mingle</PageTitle>
 
 <header class="top">
     <a class="icon" href="" aria-label="@T["Common_Back"]"><Icon Name="back" /></a>
-    <h1 class="h1">@T["Setup_Title"]</h1>
+    <h1 class="h1">@Title</h1>
 </header>
 
 <main class="main">
     <section class="stack">
-        <h2 class="label">@T["Setup_Players"]</h2>
-        @foreach (var row in players)
+        <h2 class="label">@(Online ? T["Setup_YourName"] : T["Setup_Players"])</h2>
+        @foreach (var row in Online ? players.Take(1) : players)
         {
             <div class="player-row">
                 <label class="visually-hidden" for="name-@row.Id">@T["Setup_PlayerName"]</label>
                 <input id="name-@row.Id" class="field" placeholder="@T["Setup_PlayerName"]" maxlength="24"
                        autocomplete="off" @bind="row.Name" @bind:event="oninput" />
-                <label class="visually-hidden" for="lang-@row.Id">@T["Setup_PlayerLang"]</label>
-                <select id="lang-@row.Id" class="field lang-select" @bind="row.Lang">
-                    @foreach (var lang in Langs.All)
-                    {
-                        <option value="@lang" lang="@lang.Code()">@lang.Code().ToUpperInvariant()</option>
-                    }
-                </select>
-                @if (players.Count > Game.MinPlayers)
+                @if (!Online)
+                {
+                    <label class="visually-hidden" for="lang-@row.Id">@T["Setup_PlayerLang"]</label>
+                    <select id="lang-@row.Id" class="field lang-select" @bind="row.Lang">
+                        @foreach (var lang in Langs.All)
+                        {
+                            <option value="@lang" lang="@lang.Code()">@lang.Code().ToUpperInvariant()</option>
+                        }
+                    </select>
+                }
+                @if (!Online && players.Count > Game.MinPlayers)
                 {
                     <button class="icon" aria-label="@T["Setup_RemovePlayer"]" @onclick="() => players.Remove(row)"><Icon Name="close" /></button>
                 }
             </div>
         }
-        @if (players.Count < MaxPlayers)
+        @if (!Online && players.Count < MaxPlayers)
         {
             <button class="ghost" @onclick="AddPlayer"><Icon Name="plus" Size="18" />@T["Setup_AddPlayer"]</button>
         }
     </section>
 
+    @if (!Online)
+    {
     <section class="stack">
         <h2 class="label">@T["Setup_OnePhone"]</h2>
         <div class="two" role="group" aria-label="@T["Setup_OnePhone"]">
@@ -48,8 +55,9 @@
                         Title="@T["Setup_PassPhone"]" Description="@T["Setup_PassPhoneDesc"]" />
         </div>
     </section>
+    }
 
-    @if (passThePhone)
+    @if (Online || passThePhone)
     {
         <section class="stack">
             <h2 class="label">@T["Setup_Answers"]</h2>
@@ -78,28 +86,12 @@
     </section>
 
     <section class="stack">
-        <h2 class="label">@T["Setup_GameTypes"]</h2>
-        <div class="grid2">
-            @foreach (var kind in CardKinds.All)
-            {
-                var on = kindIds.Contains(kind.Id);
-                <button class="tile @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" @onclick="() => Toggle(kindIds, kind.Id)">
-                    <span class="row-title">@T.KindName(kind.Id)</span>
-                    <span class="muted small">@T[$"KindEx_{kind.Id}"]</span>
-                </button>
-            }
-        </div>
-    </section>
-
-    <section class="stack">
-        <h2 class="label">@T["Setup_Depth"]</h2>
-        <div class="chips">
-            @for (var depth = 1; depth <= 3; depth++)
-            {
-                var d = depth;
-                var on = d >= minDepth && d <= maxDepth;
-                <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" @onclick="() => ToggleDepth(d)">@T[$"Depth_{d}"]</button>
-            }
+        <h2 class="label">@T["Setup_Order"]</h2>
+        <div class="two" role="group" aria-label="@T["Setup_Order"]">
+            <OptionCard Selected="@(order == CardOrder.LightToDeep)" OnSelect="() => order = CardOrder.LightToDeep"
+                        Title="@T["Setup_OrderRamp"]" Description="@T["Setup_OrderRampDesc"]" />
+            <OptionCard Selected="@(order == CardOrder.Shuffled)" OnSelect="() => order = CardOrder.Shuffled"
+                        Title="@T["Setup_OrderShuffled"]" Description="@T["Setup_OrderShuffledDesc"]" />
         </div>
     </section>
 
@@ -127,11 +119,18 @@
 
 <footer class="foot">
     <p class="muted center" role="status">@Summary</p>
-    <button class="btn" disabled="@(!CanStart)" @onclick="Start">@T["Setup_Start"]</button>
+    <button class="btn" disabled="@(!CanStart || busy)" @onclick="Start">@(Online ? T["Setup_CreateRoom"] : T["Setup_Start"])</button>
 </footer>
 
 @code {
     private const int MaxPlayers = 8;
+
+    /// <summary>True when creating an online room: only your own name; everyone joins from their phone.</summary>
+    [SupplyParameterFromQuery] public bool Online { get; set; }
+
+    private string Title => Online ? T["Online_NewRoom"] : T["Setup_Title"];
+    private bool busy;
+    private string? createError;
 
     private sealed class PlayerRow
     {
@@ -143,12 +142,12 @@
     private List<PlayerRow> players = [];
     private ImmutableArray<Deck> decks = [];
     private HashSet<string> deckIds = [];
-    private HashSet<string> kindIds = CardKinds.All.Select(k => k.Id).ToHashSet();
     private AnswerMode mode = AnswerMode.Written;
     private TurnStyle turnStyle = TurnStyle.Everyone;
     private bool passThePhone;
     private bool loadFailed;
-    private int minDepth = 1, maxDepth = 3, cardCount = 20;
+    private int cardCount = 20;
+    private CardOrder order = CardOrder.LightToDeep;
 
     protected override async Task OnInitializedAsync()
     {
@@ -166,16 +165,19 @@
         {
             players = last.Players.Select(p => new PlayerRow { Name = p.Name, Lang = p.Lang }).ToList();
             deckIds = last.DeckIds.Where(id => decks.Any(d => d.Id == id)).ToHashSet();
-            kindIds = last.Settings.KindIds.ToHashSet();
             mode = last.Settings.AnswerMode == AnswerMode.OutLoud ? AnswerMode.Written : last.Settings.AnswerMode;
             turnStyle = last.Settings.TurnStyle;
             passThePhone = last.PassThePhone;
-            (minDepth, maxDepth, cardCount) = (last.Settings.MinDepth, last.Settings.MaxDepth, last.Settings.CardCount);
+            cardCount = last.Settings.CardCount;
+            order = last.Settings.Order;
         }
         else
         {
             players = [new PlayerRow(), new PlayerRow()];
         }
+
+        if (Online && await JS.InvokeAsync<string?>("mingle.get", "mingle.name") is { Length: > 0 } savedName && string.IsNullOrWhiteSpace(players[0].Name))
+            players[0].Name = savedName;
     }
 
     private ImmutableArray<Player> NamedPlayers =>
@@ -185,22 +187,25 @@
 
     private GameSettings Settings => new()
     {
-        KindIds = kindIds.ToImmutableHashSet(),
-        MinDepth = minDepth,
-        MaxDepth = maxDepth,
-        AnswerMode = passThePhone ? mode : AnswerMode.OutLoud,
+        // Playing chosen decks means playing their cards: every card type and depth is included.
+        // The game still starts light and goes deeper as it goes on.
+        AnswerMode = Online || passThePhone ? mode : AnswerMode.OutLoud,
         TurnStyle = turnStyle,
         CardCount = cardCount,
+        Order = order,
     };
 
     private int MatchingCards =>
         Game.BuildPool(decks.Where(d => deckIds.Contains(d.Id)), Settings, NamedPlayers.IsEmpty ? [new Player("x", "x", Text.UiLang)] : NamedPlayers).Length;
 
-    private bool CanStart => NamedPlayers.Length >= Game.MinPlayers && MatchingCards > 0;
+    private int NeededPlayers => Online ? 1 : Game.MinPlayers;
+
+    private bool CanStart => NamedPlayers.Length >= NeededPlayers && MatchingCards > 0;
 
     private string Summary =>
         loadFailed ? T["Setup_LoadFailed"]
-        : NamedPlayers.Length < Game.MinPlayers ? T["Setup_NeedPlayers"]
+        : createError is not null ? createError
+        : NamedPlayers.Length < NeededPlayers ? (Online ? T["Setup_NeedName"] : T["Setup_NeedPlayers"])
         : MatchingCards == 0 ? T["Setup_NoCards"]
         : T.Plural("Setup_Matches", MatchingCards);
 
@@ -211,21 +216,32 @@
         if (!set.Remove(id)) set.Add(id);
     }
 
-    // Depth is a range: tapping outside it extends it, tapping an end shrinks it, tapping the middle selects only that depth.
-    private void ToggleDepth(int depth)
-    {
-        if (depth < minDepth) minDepth = depth;
-        else if (depth > maxDepth) maxDepth = depth;
-        else if (minDepth == maxDepth) return;
-        else if (depth == minDepth) minDepth++;
-        else if (depth == maxDepth) maxDepth--;
-        else minDepth = maxDepth = depth;
-    }
-
-    private void Start()
+    private async Task Start()
     {
         if (!CanStart) return;
-        Session.Start(new SetupChoices(NamedPlayers, Settings, deckIds.ToImmutableHashSet(), passThePhone), decks);
-        Nav.NavigateTo("play");
+        if (!Online)
+        {
+            Session.Start(new SetupChoices(NamedPlayers, Settings, deckIds.ToImmutableHashSet(), passThePhone), decks);
+            Nav.NavigateTo("play");
+            return;
+        }
+
+        busy = true;
+        createError = null;
+        try
+        {
+            var me = NamedPlayers[0] with { Lang = Text.UiLang };
+            await JS.InvokeVoidAsync("mingle.set", "mingle.name", me.Name);
+            var room = await Rooms.CreateRoom(me.Name, me.Lang, new RoomSettings(Settings, [.. deckIds]));
+            Nav.NavigateTo($"room/{room.RoomCode}");
+        }
+        catch (Exception ex) when (ex is HttpRequestException or Microsoft.AspNetCore.SignalR.HubException or InvalidOperationException)
+        {
+            createError = T["Online_ConnectFailed"];
+        }
+        finally
+        {
+            busy = false;
+        }
     }
 }

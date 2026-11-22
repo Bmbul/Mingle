@@ -24,8 +24,6 @@
   <data name="Setup_Talk" xml:space="preserve"><value>Պարզապես խոսել</value></data>
   <data name="Setup_TalkDesc" xml:space="preserve"><value>Կարդացեք քարտը և պատասխանեք բարձրաձայն։ Քվեարկությունը՝ մեկ հպումով։</value></data>
   <data name="Setup_Decks" xml:space="preserve"><value>Հավաքածուներ</value></data>
-  <data name="Setup_GameTypes" xml:space="preserve"><value>Խաղի տեսակներ</value></data>
-  <data name="Setup_Depth" xml:space="preserve"><value>Խորություն</value></data>
   <data name="Setup_WhoAnswers" xml:space="preserve"><value>Ով է պատասխանում</value></data>
   <data name="Setup_Everyone" xml:space="preserve"><value>Բոլորը</value></data>
   <data name="Setup_TakeTurns" xml:space="preserve"><value>Հերթով</value></data>
@@ -46,12 +44,6 @@
   <data name="Kind_likely" xml:space="preserve"><value>Ո՞վ ավելի շուտ</value></data>
   <data name="Kind_guess" xml:space="preserve"><value>Գուշակիր պատասխանս</value></data>
   <data name="Kind_rate" xml:space="preserve"><value>Գնահատիր 1–10</value></data>
-  <data name="KindEx_open" xml:space="preserve"><value>Պատասխանիր քո խոսքերով</value></data>
-  <data name="KindEx_finish" xml:space="preserve"><value>Ես ինձ ամենասիրվածն եմ զգում, երբ…</value></data>
-  <data name="KindEx_wyr" xml:space="preserve"><value>Ընտրիր երկուսից մեկը</value></data>
-  <data name="KindEx_likely" xml:space="preserve"><value>Քվեարկիր խաղացողի օգտին</value></data>
-  <data name="KindEx_guess" xml:space="preserve"><value>Մեկը պատասխանում է, մյուսները գուշակում են</value></data>
-  <data name="KindEx_rate" xml:space="preserve"><value>Գնահատիր քեզ և համեմատիր</value></data>
   <data name="Play_CardOf" xml:space="preserve"><value>Քարտ {0}/{1}</value></data>
   <data name="Play_EveryoneAnswers" xml:space="preserve"><value>Բոլորն են պատասխանում</value></data>
   <data name="Play_Turn" xml:space="preserve"><value>Հերթը՝ {0}</value></data>
@@ -93,4 +85,38 @@
   <data name="Setup_LoadFailed" xml:space="preserve"><value>Չհաջողվեց բեռնել քարտերը։ Ստուգեք կապը և փորձեք կրկին։</value></data>
   <data name="Play_EndConfirm" xml:space="preserve"><value>Ավարտե՞լ խաղը</value></data>
   <data name="Play_KeepPlaying" xml:space="preserve"><value>Շարունակել խաղը</value></data>
+  <data name="Home_PlayOnline" xml:space="preserve"><value>Խաղալ առցանց</value></data>
+  <data name="Home_PlayOnlineDesc" xml:space="preserve"><value>Յուրաքանչյուրն իր հեռախոսով՝ նույն սենյակում կամ հեռու։</value></data>
+  <data name="Home_CreateRoom" xml:space="preserve"><value>Ստեղծել սենյակ</value></data>
+  <data name="Home_JoinRoom" xml:space="preserve"><value>Միանալ կոդով</value></data>
+  <data name="Online_NewRoom" xml:space="preserve"><value>Նոր առցանց սենյակ</value></data>
+  <data name="Online_Room" xml:space="preserve"><value>Առցանց սենյակ</value></data>
+  <data name="Online_Connecting" xml:space="preserve"><value>Միացում…</value></data>
+  <data name="Online_Reconnecting" xml:space="preserve"><value>Կապը կորավ։ Վերամիացում…</value></data>
+  <data name="Online_ConnectFailed" xml:space="preserve"><value>Չհաջողվեց կապվել սերվերի հետ։ Ստուգեք կապը և փորձեք կրկին։</value></data>
+  <data name="Online_RoomNotFound" xml:space="preserve"><value>Այս սենյակը գոյություն չունի կամ փակվել է։</value></data>
+  <data name="Online_WaitingOthers" xml:space="preserve"><value>Սպասում ենք մյուսներին</value></data>
+  <data name="Online_Leave" xml:space="preserve"><value>Լքել սենյակը</value></data>
+  <data name="Online_You" xml:space="preserve"><value>դուք</value></data>
+  <data name="Setup_YourName" xml:space="preserve"><value>Ձեր անունը</value></data>
+  <data name="Setup_NeedName" xml:space="preserve"><value>Գրեք ձեր անունը։</value></data>
+  <data name="Setup_CreateRoom" xml:space="preserve"><value>Ստեղծել սենյակ</value></data>
+  <data name="Join_Title" xml:space="preserve"><value>Միանալ սենյակին</value></data>
+  <data name="Join_Code" xml:space="preserve"><value>Սենյակի կոդը</value></data>
+  <data name="Join_Button" xml:space="preserve"><value>Միանալ</value></data>
+  <data name="Join_NoAccount" xml:space="preserve"><value>Հաշիվ պետք չէ։ Ձեր պատասխանները խաղից հետո չեն պահվում։</value></data>
+  <data name="Join_Started" xml:space="preserve"><value>Այս խաղն արդեն սկսվել է։</value></data>
+  <data name="Lobby_Share" xml:space="preserve"><value>Կիսվել հրավերի հղումով</value></data>
+  <data name="Lobby_Copied" xml:space="preserve"><value>Հղումը պատճենվեց</value></data>
+  <data name="Lobby_Host" xml:space="preserve"><value>Սենյակի տեր</value></data>
+  <data name="Lobby_Offline" xml:space="preserve"><value>անցանց</value></data>
+  <data name="Lobby_Waiting" xml:space="preserve"><value>Սպասում ենք խաղացողներին…</value></data>
+  <data name="Lobby_WaitingHost" xml:space="preserve"><value>Սպասում ենք, որ սենյակի տերը սկսի խաղը</value></data>
+  <data name="Lobby_NeedTwo" xml:space="preserve"><value>Անհրաժեշտ է առնվազն 2 խաղացող։</value></data>
+  <data name="Lobby_EveryoneIn" xml:space="preserve"><value>Սկսեք, երբ բոլորը միանան։</value></data>
+  <data name="Setup_Order" xml:space="preserve"><value>Քարտերի հերթականությունը</value></data>
+  <data name="Setup_OrderRamp" xml:space="preserve"><value>Թեթևից խորը</value></data>
+  <data name="Setup_OrderRampDesc" xml:space="preserve"><value>Սկսվում է թեթևից և աստիճանաբար խորանում։</value></data>
+  <data name="Setup_OrderShuffled" xml:space="preserve"><value>Խառը</value></data>
+  <data name="Setup_OrderShuffledDesc" xml:space="preserve"><value>Ցանկացած քարտ կարող է հայտնվել ցանկացած պահի։</value></data>
 </root>

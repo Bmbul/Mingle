@@ -1,0 +1,95 @@
+@page "/join"
+@page "/join/{Code}"
+@inject Text T
+@inject RoomClient Rooms
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+<PageTitle>@T["Join_Title"] · Mingle</PageTitle>
+
+<header class="top">
+    <a class="icon" href="" aria-label="@T["Common_Back"]"><Icon Name="back" /></a>
+    <h1 class="h1 grow">@T["Join_Title"]</h1>
+    <LangPicker BeforeChange="KeepInput" />
+</header>
+
+<main class="main">
+    <div class="stack">
+        <label class="label" for="room-code">@T["Join_Code"]</label>
+        <input id="room-code" class="field code-field" maxlength="4" autocomplete="off" autocapitalize="characters"
+               spellcheck="false" @bind="code" @bind:event="oninput" />
+    </div>
+    <div class="stack">
+        <label class="label" for="your-name">@T["Setup_YourName"]</label>
+        <input id="your-name" class="field" maxlength="24" autocomplete="nickname" @bind="name" @bind:event="oninput" />
+    </div>
+    <p class="muted">@T["Join_NoAccount"]</p>
+    @if (error is not null)
+    {
+        <p class="error-inline" role="alert">@error</p>
+    }
+</main>
+
+<footer class="foot">
+    <button class="btn" disabled="@(!CanJoin || busy)" @onclick="JoinRoom">@T["Join_Button"]</button>
+</footer>
+
+@code {
+    [Parameter] public string? Code { get; set; }
+
+    private string code = "";
+    private string name = "";
+    private bool busy;
+    private string? error;
+
+    private bool CanJoin => code.Trim().Length == 4 && !string.IsNullOrWhiteSpace(name);
+
+    protected override async Task OnInitializedAsync()
+    {
+        code = (Code ?? "").ToUpperInvariant();
+        name = await JS.InvokeAsync<string?>("mingle.get", "mingle.name") ?? "";
+
+        // Already sitting in this room on this device: go straight back in.
+        if (code.Length == 4 && await TryRejoin()) Nav.NavigateTo($"room/{code}", replace: true);
+    }
+
+    // Switching language reloads the page; keep the name and code so nothing has to be typed again.
+    private async Task KeepInput()
+    {
+        if (!string.IsNullOrWhiteSpace(name)) await JS.InvokeVoidAsync("mingle.set", "mingle.name", name.Trim());
+        if (code.Trim().Length == 4) Nav.NavigateTo($"join/{code.Trim().ToUpperInvariant()}", replace: true);
+    }
+
+    private async Task<bool> TryRejoin()
+    {
+        try { return await Rooms.RejoinSaved(code); }
+        catch (Exception) { return false; }
+    }
+
+    private async Task JoinRoom()
+    {
+        busy = true;
+        error = null;
+        try
+        {
+            var normalized = code.Trim().ToUpperInvariant();
+            await JS.InvokeVoidAsync("mingle.set", "mingle.name", name.Trim());
+            var result = await Rooms.JoinRoom(normalized, name.Trim(), Text.UiLang);
+            Nav.NavigateTo($"room/{result.RoomCode}");
+        }
+        catch (Microsoft.AspNetCore.SignalR.HubException ex)
+        {
+            error = ex.Message.Contains("Room not found", StringComparison.Ordinal) ? T["Online_RoomNotFound"]
+                : ex.Message.Contains("already started", StringComparison.Ordinal) ? T["Join_Started"]
+                : T["Online_ConnectFailed"];
+        }
+        catch (Exception)
+        {
+            error = T["Online_ConnectFailed"];
+        }
+        finally
+        {
+            busy = false;
+        }
+    }
+}

@@ -16,12 +16,13 @@ public interface ICardSelector
 }
 
 /// <summary>
-/// Starts light and ramps toward the deepest allowed depth over the game, choosing at random
-/// among unplayed cards at the target depth. Deterministic for a given seed and card number.
+/// Deals by the game's <see cref="CardOrder"/>. Light to deep: ramps toward the deepest allowed
+/// depth over the game, choosing at random among unplayed cards at the target depth. Shuffled:
+/// any unplayed card. Deterministic for a given seed and card number.
 /// </summary>
-public sealed class RampCardSelector : ICardSelector
+public sealed class CardSelector : ICardSelector
 {
-    public static RampCardSelector Instance { get; } = new();
+    public static CardSelector Instance { get; } = new();
 
     public Card? Pick(SelectionContext context)
     {
@@ -31,9 +32,13 @@ public sealed class RampCardSelector : ICardSelector
             .ToList();
         if (remaining.Count == 0) return null;
 
-        var target = TargetDepth(context.CardNumber, context.Settings);
-        var bestDistance = remaining.Min(c => Distance(c.Depth, target));
-        var candidates = remaining.Where(c => Distance(c.Depth, target) == bestDistance).ToList();
+        var candidates = remaining;
+        if (context.Settings.Order == CardOrder.LightToDeep)
+        {
+            var target = TargetDepth(context.CardNumber, context.Settings);
+            var bestDistance = remaining.Min(c => Distance(c.Depth, target));
+            candidates = [.. remaining.Where(c => Distance(c.Depth, target) == bestDistance)];
+        }
 
         var random = new Random(unchecked(context.Seed * 397 ^ context.CardNumber));
         return candidates[random.Next(candidates.Count)];

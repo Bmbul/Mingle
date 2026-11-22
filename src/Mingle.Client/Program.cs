@@ -15,6 +15,7 @@ builder.Services.AddLocalization();
 builder.Services.AddScoped<Text>();
 builder.Services.AddScoped<ContentService>();
 builder.Services.AddScoped<GameSession>();
+builder.Services.AddScoped<RoomClient>();
 
 var host = builder.Build();
 

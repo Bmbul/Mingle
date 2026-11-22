@@ -1,20 +1,13 @@
 ﻿@page "/"
 @inject Text T
 @inject GameSession Session
-@inject IJSRuntime JS
 
 <PageTitle>Mingle</PageTitle>
 
 <main class="main">
     <header class="home-top">
         <h1 class="brand">Mingle</h1>
-        <label class="visually-hidden" for="ui-lang">@T["Home_Language"]</label>
-        <select id="ui-lang" class="lang-pick" value="@Text.UiLang" @onchange="SetLang">
-            @foreach (var lang in Langs.All)
-            {
-                <option value="@lang" lang="@lang.Code()">@Text.LangName(lang)</option>
-            }
-        </select>
+        <LangPicker />
     </header>
     <p class="muted lead">@T["AppTagline"]</p>
 
@@ -31,13 +24,12 @@
         <p class="muted center">@T["Home_PassAndPlay"]</p>
     </div>
 
-    <div class="card soon">@T["Home_OnlineSoon"]</div>
+    <section class="stack">
+        <h2 class="label">@T["Home_PlayOnline"]</h2>
+        <p class="muted">@T["Home_PlayOnlineDesc"]</p>
+        <div class="row gap">
+            <a class="btn2 grow" href="setup?online=true">@T["Home_CreateRoom"]</a>
+            <a class="btn2 grow" href="join">@T["Home_JoinRoom"]</a>
+        </div>
+    </section>
 </main>
-
-@code {
-    private async Task SetLang(ChangeEventArgs e)
-    {
-        if (Enum.TryParse<Lang>(e.Value?.ToString(), out var lang) && lang != Text.UiLang)
-            await JS.InvokeVoidAsync("mingle.setLang", lang.Code());
-    }
-}
