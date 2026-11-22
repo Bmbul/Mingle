@@ -14,10 +14,20 @@ public sealed record JoinResult(string RoomCode, string PlayerId, string Token);
 
 public enum RoomStage { Lobby, Playing, Ended }
 
-public sealed record RoomPlayer(string Id, string Name, Lang Lang, bool IsHost, bool Connected);
+/// <param name="DeckId">The deck this player brings to an "Everyone's decks" game, if chosen yet.</param>
+public sealed record RoomPlayer(string Id, string Name, Lang Lang, bool IsHost, bool Connected, string? DeckId = null);
+
+/// <summary>Where a room's cards come from.</summary>
+public enum DeckSource
+{
+    /// <summary>The host picks the decks when creating the room.</summary>
+    Chosen,
+    /// <summary>Every player brings one deck; a few random cards from each are shuffled together.</summary>
+    Everyone,
+}
 
 /// <summary>The game settings chosen in the lobby, plus which decks to play.</summary>
-public sealed record RoomSettings(GameSettings Game, ImmutableArray<string> DeckIds);
+public sealed record RoomSettings(GameSettings Game, ImmutableArray<string> DeckIds, DeckSource Source = DeckSource.Chosen);
 
 public sealed record LikedCard(string KindId, int Depth, string Text);
 
@@ -47,6 +57,8 @@ public interface IGameHub
     Task<JoinResult> JoinRoom(string code, string name, Lang lang);
     Task<bool> Rejoin(string code, string playerId, string token);
     Task UpdateSettings(RoomSettings settings);
+    /// <summary>Picks the deck you bring to an "Everyone's decks" game; null takes it back.</summary>
+    Task BringDeck(string? deckId);
     Task StartGame();
     Task SubmitAnswer(Answer answer);
     Task Pass();

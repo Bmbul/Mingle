@@ -15,5 +15,8 @@ public sealed class RoomMember(string id, string name, Lang lang, string token)
 
     public bool Connected => Connections.Count > 0;
 
+    /// <summary>The deck this player brings when everyone brings a deck.</summary>
+    public string? DeckId { get; set; }
+
     public Player ToPlayer() => new(Id, Name, Lang);
 }

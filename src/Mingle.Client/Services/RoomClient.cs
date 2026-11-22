@@ -60,6 +60,7 @@ public sealed class RoomClient(NavigationManager nav, IJSRuntime js) : IAsyncDis
     }
 
     public Task UpdateSettings(RoomSettings settings) => Send(nameof(IGameHub.UpdateSettings), settings);
+    public Task BringDeck(string? deckId) => Send(nameof(IGameHub.BringDeck), deckId);
     public Task StartGame() => Send(nameof(IGameHub.StartGame));
     public Task SubmitAnswer(Answer answer) => Send(nameof(IGameHub.SubmitAnswer), answer);
     public Task Pass() => Send(nameof(IGameHub.Pass));

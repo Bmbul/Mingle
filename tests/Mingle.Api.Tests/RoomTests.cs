@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using Mingle.Api.Rooms;
 using Mingle.Contracts;
 using Mingle.Engine;
@@ -139,5 +140,47 @@ public class RoomTests
         Assert.Equal(1, removed);
         Assert.Null(registry.Find(empty.Code));
         Assert.NotNull(registry.Find(busy.Code.ToLowerInvariant())); // codes are case-insensitive
+    }
+
+    private static Deck Pack(string id, int cards) => new(
+        id, ImmutableDictionary<Lang, string>.Empty.Add(Lang.En, id),
+        [.. Enumerable.Range(1, cards).Select(i => new Card(
+            $"{id}-{i}", "open", 1 + i % 3, [],
+            Langs.All.ToImmutableDictionary(l => l, l => new CardText($"{id} {i} in {l.Code()}"))))]);
+
+    private static readonly RoomSettings EveryoneBrings = new(new GameSettings { KindIds = ["finish"], CardCount = 3 }, [], DeckSource.Everyone);
+
+    [Fact]
+    public void Everyone_brings_a_deck_and_ten_cards_come_from_each()
+    {
+        var (room, ani, arman) = Lobby();
+        room.UpdateSettings(ani.Id, EveryoneBrings);
+        room.BringDeck(ani.Id, "party");
+        room.BringDeck(arman.Id, "deep");
+
+        Assert.Equal("deep", room.ViewFor(ani.Id).Players.Single(p => p.Id == arman.Id).DeckId);
+
+        room.Start(ani.Id, [Pack("party", 30), Pack("deep", 30), Pack("unused", 30)], 5);
+        var game = room.ViewFor(ani.Id).Game!;
+
+        // Every card type and depth counts, whatever the settings said: 10 from each of the two decks.
+        Assert.Equal(20, game.CardCount);
+        Assert.Equal("open", game.KindId);
+        Assert.DoesNotContain("unused", game.Prompt);
+    }
+
+    [Fact]
+    public void Everyone_brings_needs_at_least_one_deck_and_only_in_the_lobby()
+    {
+        var (room, ani, arman) = Lobby();
+        room.UpdateSettings(ani.Id, EveryoneBrings);
+
+        Assert.Throws<RoomException>(() => room.Start(ani.Id, [Pack("party", 30)], 5));
+
+        room.BringDeck(arman.Id, "party");
+        room.Start(ani.Id, [Pack("party", 30)], 5);
+
+        Assert.Equal(10, room.ViewFor(ani.Id).Game!.CardCount);
+        Assert.Throws<RoomException>(() => room.BringDeck(ani.Id, "party"));
     }
 }

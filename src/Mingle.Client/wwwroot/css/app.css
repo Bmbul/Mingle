@@ -219,6 +219,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     display: flex; align-items: center; justify-content: center; color: var(--on-accent);
 }
 .box.on { background: var(--accent); border-color: var(--accent); }
+.box.round { border-radius: 50%; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {

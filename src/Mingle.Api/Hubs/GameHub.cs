@@ -45,6 +45,8 @@ public sealed class GameHub(RoomRegistry rooms, IDeckSource decks) : Hub<IGameCl
 
     public Task UpdateSettings(RoomSettings settings) => Change((room, me) => room.UpdateSettings(me, settings));
 
+    public Task BringDeck(string? deckId) => Change((room, me) => room.BringDeck(me, deckId));
+
     public async Task StartGame()
     {
         var (room, me) = Seat();

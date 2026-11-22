@@ -70,6 +70,21 @@
         </section>
     }
 
+    @if (Online)
+    {
+        <section class="stack">
+            <h2 class="label">@T["Setup_Source"]</h2>
+            <div class="two" role="group" aria-label="@T["Setup_Source"]">
+                <OptionCard Selected="@(source == DeckSource.Chosen)" OnSelect="() => source = DeckSource.Chosen"
+                            Title="@T["Setup_SourceChosen"]" Description="@T["Setup_SourceChosenDesc"]" />
+                <OptionCard Selected="@(source == DeckSource.Everyone)" OnSelect="() => source = DeckSource.Everyone"
+                            Title="@T["Setup_SourceEveryone"]" Description="@T["Setup_SourceEveryoneDesc"]" />
+            </div>
+        </section>
+    }
+
+    @if (!EveryoneBrings)
+    {
     <section class="stack">
         <h2 class="label">@T["Setup_Decks"]</h2>
         @foreach (var deck in decks)
@@ -94,6 +109,7 @@
                         Title="@T["Setup_OrderShuffled"]" Description="@T["Setup_OrderShuffledDesc"]" />
         </div>
     </section>
+    }
 
     <section class="stack">
         <h2 class="label">@T["Setup_WhoAnswers"]</h2>
@@ -105,6 +121,8 @@
         </div>
     </section>
 
+    @if (!EveryoneBrings)
+    {
     <section class="stack">
         <h2 class="label">@T["Setup_CardCount"]</h2>
         <div class="chips">
@@ -115,6 +133,7 @@
             }
         </div>
     </section>
+    }
 </main>
 
 <footer class="foot">
@@ -148,6 +167,10 @@
     private bool loadFailed;
     private int cardCount = 20;
     private CardOrder order = CardOrder.LightToDeep;
+    private DeckSource source = DeckSource.Chosen;
+
+    /// <summary>Each player brings a deck in the lobby, so no decks, order or card count are chosen here.</summary>
+    private bool EveryoneBrings => Online && source == DeckSource.Everyone;
 
     protected override async Task OnInitializedAsync()
     {
@@ -200,12 +223,13 @@
 
     private int NeededPlayers => Online ? 1 : Game.MinPlayers;
 
-    private bool CanStart => NamedPlayers.Length >= NeededPlayers && MatchingCards > 0;
+    private bool CanStart => NamedPlayers.Length >= NeededPlayers && (EveryoneBrings ? !decks.IsEmpty : MatchingCards > 0);
 
     private string Summary =>
         loadFailed ? T["Setup_LoadFailed"]
         : createError is not null ? createError
         : NamedPlayers.Length < NeededPlayers ? (Online ? T["Setup_NeedName"] : T["Setup_NeedPlayers"])
+        : EveryoneBrings ? T["Setup_SourceEveryoneSummary"]
         : MatchingCards == 0 ? T["Setup_NoCards"]
         : T.Plural("Setup_Matches", MatchingCards);
 
@@ -232,7 +256,7 @@
         {
             var me = NamedPlayers[0] with { Lang = Text.UiLang };
             await JS.InvokeVoidAsync("mingle.set", "mingle.name", me.Name);
-            var room = await Rooms.CreateRoom(me.Name, me.Lang, new RoomSettings(Settings, [.. deckIds]));
+            var room = await Rooms.CreateRoom(me.Name, me.Lang, new RoomSettings(Settings, [.. deckIds], source));
             Nav.NavigateTo($"room/{room.RoomCode}");
         }
         catch (Exception ex) when (ex is HttpRequestException or Microsoft.AspNetCore.SignalR.HubException or InvalidOperationException)

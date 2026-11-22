@@ -119,4 +119,14 @@
   <data name="Setup_OrderRampDesc" xml:space="preserve"><value>Starts easy and gets more personal as you play.</value></data>
   <data name="Setup_OrderShuffled" xml:space="preserve"><value>Shuffled</value></data>
   <data name="Setup_OrderShuffledDesc" xml:space="preserve"><value>Any card can come at any time.</value></data>
+  <data name="Setup_Source" xml:space="preserve"><value>Where the cards come from</value></data>
+  <data name="Setup_SourceChosen" xml:space="preserve"><value>Decks I pick</value></data>
+  <data name="Setup_SourceChosenDesc" xml:space="preserve"><value>You choose the decks for everyone</value></data>
+  <data name="Setup_SourceEveryone" xml:space="preserve"><value>Everyone's decks</value></data>
+  <data name="Setup_SourceEveryoneDesc" xml:space="preserve"><value>Each player brings a deck; 10 cards from each, shuffled</value></data>
+  <data name="Setup_SourceEveryoneSummary" xml:space="preserve"><value>Everyone picks a deck in the room</value></data>
+  <data name="Lobby_YourDeck" xml:space="preserve"><value>Your deck</value></data>
+  <data name="Lobby_YourDeckHint" xml:space="preserve"><value>10 random cards from it go into the game.</value></data>
+  <data name="Lobby_NoDeck" xml:space="preserve"><value>no deck yet</value></data>
+  <data name="Lobby_PickDecks" xml:space="preserve"><value>Pick a deck to start.</value></data>
 </root>

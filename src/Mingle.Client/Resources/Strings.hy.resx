@@ -119,4 +119,14 @@
   <data name="Setup_OrderRampDesc" xml:space="preserve"><value>Սկսվում է թեթևից և աստիճանաբար խորանում։</value></data>
   <data name="Setup_OrderShuffled" xml:space="preserve"><value>Խառը</value></data>
   <data name="Setup_OrderShuffledDesc" xml:space="preserve"><value>Ցանկացած քարտ կարող է հայտնվել ցանկացած պահի։</value></data>
+  <data name="Setup_Source" xml:space="preserve"><value>Որտեղի՞ց են գալիս քարտերը</value></data>
+  <data name="Setup_SourceChosen" xml:space="preserve"><value>Իմ ընտրած հավաքածուները</value></data>
+  <data name="Setup_SourceChosenDesc" xml:space="preserve"><value>Դու ես ընտրում հավաքածուները բոլորի համար</value></data>
+  <data name="Setup_SourceEveryone" xml:space="preserve"><value>Բոլորի հավաքածուները</value></data>
+  <data name="Setup_SourceEveryoneDesc" xml:space="preserve"><value>Յուրաքանչյուրը բերում է մեկ հավաքածու՝ 10 քարտ յուրաքանչյուրից, խառնված</value></data>
+  <data name="Setup_SourceEveryoneSummary" xml:space="preserve"><value>Յուրաքանչյուրը հավաքածու կընտրի սենյակում</value></data>
+  <data name="Lobby_YourDeck" xml:space="preserve"><value>Քո հավաքածուն</value></data>
+  <data name="Lobby_YourDeckHint" xml:space="preserve"><value>Դրանից 10 պատահական քարտ կմտնի խաղի մեջ։</value></data>
+  <data name="Lobby_NoDeck" xml:space="preserve"><value>հավաքածուն դեռ ընտրված չէ</value></data>
+  <data name="Lobby_PickDecks" xml:space="preserve"><value>Ընտրեք հավաքածու՝ սկսելու համար։</value></data>
 </root>

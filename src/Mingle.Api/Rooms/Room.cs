@@ -12,6 +12,7 @@ public sealed class Room(string code, TimeProvider clock)
 {
     public const int MaxPlayers = 12;
     public const int MaxNameLength = 24;
+    private const int MaxDeckIdLength = 64;
 
     private readonly Lock gate = new();
     private readonly List<RoomMember> members = [];
@@ -95,6 +96,17 @@ public sealed class Room(string code, TimeProvider clock)
         }
     }
 
+    public void BringDeck(string playerId, string? deckId)
+    {
+        lock (gate)
+        {
+            if (Stage != RoomStage.Lobby) throw new RoomException("Decks can only change before the game starts.");
+            if (deckId is { Length: > MaxDeckIdLength }) throw new RoomException("Unknown deck.");
+            Member(playerId).DeckId = string.IsNullOrWhiteSpace(deckId) ? null : deckId;
+            Touch();
+        }
+    }
+
     public void Start(string playerId, IEnumerable<Deck> decks, int seed)
     {
         lock (gate)
@@ -103,10 +115,30 @@ public sealed class Room(string code, TimeProvider clock)
             if (Stage != RoomStage.Lobby) throw new RoomException("The game has already started.");
             if (members.Count < Game.MinPlayers) throw new RoomException($"At least {Game.MinPlayers} players are needed.");
 
-            var chosen = settings.DeckIds.IsDefaultOrEmpty ? decks : decks.Where(d => settings.DeckIds.Contains(d.Id));
+            var available = decks.ToList();
+            var gameSettings = settings.Game;
+            IEnumerable<Deck> chosen;
+            if (settings.Source == DeckSource.Everyone)
+            {
+                // One entry per player who picked a deck that still exists, so a shared pick counts twice.
+                var picks = members
+                    .Select(m => available.FirstOrDefault(d => d.Id == m.DeckId))
+                    .OfType<Deck>()
+                    .ToList();
+                if (picks.Count == 0) throw new RoomException("Nobody has picked a deck yet.");
+                var mix = DeckMix.FromPicks(picks, [.. members.Select(m => m.Lang).Distinct()], seed);
+                if (mix.Cards.IsEmpty) throw new RoomException("The chosen decks have no cards everyone can read.");
+                gameSettings = DeckMix.SettingsFor(settings.Game, mix);
+                chosen = [mix];
+            }
+            else
+            {
+                chosen = settings.DeckIds.IsDefaultOrEmpty ? available : available.Where(d => settings.DeckIds.Contains(d.Id));
+            }
+
             try
             {
-                game = Game.Start(members.Select(m => m.ToPlayer()), settings.Game, chosen, seed);
+                game = Game.Start(members.Select(m => m.ToPlayer()), gameSettings, chosen, seed);
             }
             catch (GameRuleException ex)
             {
@@ -154,7 +186,7 @@ public sealed class Room(string code, TimeProvider clock)
     private RoomView BuildView(RoomMember viewer)
     {
         var players = members
-            .Select(m => new RoomPlayer(m.Id, m.Name, m.Lang, m.Id == hostId, m.Connected))
+            .Select(m => new RoomPlayer(m.Id, m.Name, m.Lang, m.Id == hostId, m.Connected, m.DeckId))
             .ToImmutableArray();
 
         GameView? gameView = Stage == RoomStage.Playing && game is not null ? GameViews.ForPlayer(game, viewer.Id) : null;

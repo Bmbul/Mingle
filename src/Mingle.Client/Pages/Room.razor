@@ -2,6 +2,7 @@
 @implements IDisposable
 @inject Text T
 @inject RoomClient Rooms
+@inject ContentService Content
 @inject NavigationManager Nav
 @inject IJSRuntime JS
 
@@ -41,7 +42,7 @@ else if (room.Stage == RoomStage.Lobby)
                 <span class="grow">
                     <span class="row-title">@player.Name@(player.Id == room.YouId ? $" ({T["Online_You"]})" : "")</span>
                     <span class="muted small">
-                        @(player.IsHost ? T["Lobby_Host"] : "")@(player.IsHost && !player.Connected ? " · " : "")@(!player.Connected ? T["Lobby_Offline"] : "")
+                        @string.Join(" · ", PlayerNotes(room, player))
                     </span>
                 </span>
                 <span class="lang-tag">@player.Lang.Code().ToUpperInvariant()</span>
@@ -51,12 +52,31 @@ else if (room.Stage == RoomStage.Lobby)
         {
             <p class="muted">@T["Lobby_Waiting"]</p>
         }
+
+        @if (EveryoneBrings(room))
+        {
+            <h2 class="label">@T["Lobby_YourDeck"]</h2>
+            <p class="muted small">@T["Lobby_YourDeckHint"]</p>
+            @foreach (var deck in decks)
+            {
+                var on = room.You?.DeckId == deck.Id;
+                <button class="check-row @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")"
+                        @onclick="() => Rooms.BringDeck(on ? null : deck.Id)">
+                    <span class="box round @(on ? "on" : "")" aria-hidden="true">@if (on) { <Icon Name="check" Size="14" Stroke="3" /> }</span>
+                    <span class="grow">
+                        <span class="row-title">@deck.NameFor(Text.UiLang)</span>
+                        <span class="muted small">@T.Plural("Cards", deck.Cards.Length)</span>
+                    </span>
+                </button>
+            }
+        }
     </main>
     <footer class="foot">
         @if (room.YouAreHost)
         {
-            <p class="muted center" role="status">@(room.Players.Length < Game.MinPlayers ? T["Lobby_NeedTwo"] : T["Lobby_EveryoneIn"])</p>
-            <button class="btn" disabled="@(room.Players.Length < Game.MinPlayers)" @onclick="Rooms.StartGame">@T["Setup_Start"]</button>
+            var noDecks = EveryoneBrings(room) && room.Players.All(p => p.DeckId is null);
+            <p class="muted center" role="status">@(room.Players.Length < Game.MinPlayers ? T["Lobby_NeedTwo"] : noDecks ? T["Lobby_PickDecks"] : T["Lobby_EveryoneIn"])</p>
+            <button class="btn" disabled="@(room.Players.Length < Game.MinPlayers || noDecks)" @onclick="Rooms.StartGame">@T["Setup_Start"]</button>
         }
         else
         {
@@ -163,6 +183,7 @@ else if (room.Summary is { } summary)
     [Parameter] public string Code { get; set; } = "";
 
     private bool confirmEnd;
+    private ImmutableArray<Deck> decks = [];
     private string? shareNote;
 
     protected override async Task OnInitializedAsync()
@@ -175,6 +196,19 @@ else if (room.Summary is { } summary)
         catch (Exception) { seated = false; }
 
         if (!seated) Nav.NavigateTo($"join/{Code}", replace: true);
+
+        try { decks = await Content.GetDecksAsync(); }
+        catch (ContentUnavailableException) { decks = []; }
+    }
+
+    private static bool EveryoneBrings(RoomView room) => room.Settings.Source == DeckSource.Everyone;
+
+    private IEnumerable<string> PlayerNotes(RoomView room, RoomPlayer player)
+    {
+        if (player.IsHost) yield return T["Lobby_Host"];
+        if (!player.Connected) yield return T["Lobby_Offline"];
+        if (EveryoneBrings(room))
+            yield return decks.FirstOrDefault(d => d.Id == player.DeckId)?.NameFor(Text.UiLang) ?? T["Lobby_NoDeck"];
     }
 
     private static ImmutableArray<Player> Players(RoomView room) =>

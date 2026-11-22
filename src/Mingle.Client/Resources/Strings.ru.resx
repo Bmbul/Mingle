@@ -123,4 +123,14 @@
   <data name="Setup_OrderRampDesc" xml:space="preserve"><value>Начинается легко и постепенно становится глубже.</value></data>
   <data name="Setup_OrderShuffled" xml:space="preserve"><value>Вперемешку</value></data>
   <data name="Setup_OrderShuffledDesc" xml:space="preserve"><value>Любая карточка может выпасть в любой момент.</value></data>
+  <data name="Setup_Source" xml:space="preserve"><value>Откуда берутся карточки</value></data>
+  <data name="Setup_SourceChosen" xml:space="preserve"><value>Колоды на мой выбор</value></data>
+  <data name="Setup_SourceChosenDesc" xml:space="preserve"><value>Колоды для всех выбираешь ты</value></data>
+  <data name="Setup_SourceEveryone" xml:space="preserve"><value>Колоды каждого</value></data>
+  <data name="Setup_SourceEveryoneDesc" xml:space="preserve"><value>Каждый приносит колоду: по 10 карточек из каждой, вперемешку</value></data>
+  <data name="Setup_SourceEveryoneSummary" xml:space="preserve"><value>Каждый выберет колоду в комнате</value></data>
+  <data name="Lobby_YourDeck" xml:space="preserve"><value>Твоя колода</value></data>
+  <data name="Lobby_YourDeckHint" xml:space="preserve"><value>Из неё в игру попадут 10 случайных карточек.</value></data>
+  <data name="Lobby_NoDeck" xml:space="preserve"><value>колода не выбрана</value></data>
+  <data name="Lobby_PickDecks" xml:space="preserve"><value>Выберите колоду, чтобы начать.</value></data>
 </root>
