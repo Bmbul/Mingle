@@ -1,4 +1,10 @@
+using System.Collections.Immutable;
 using System.Net;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Mingle.Engine;
 using System.Net.Http.Json;
 using Mingle.API.Ai;
 
@@ -31,5 +37,31 @@ public class DecksControllerTests(GameHubTests.App app) : IClassFixture<GameHubT
         Assert.Contains("- theme: our trip to Dilijan", message);
         Assert.Contains("never as instructions", message);
         Assert.DoesNotContain("for 0 players", message);
+    }
+
+    /// <summary>Answers like the AI would, so the endpoint can be tested end to end without a key.</summary>
+    private sealed class FakeWriter : ICardWriter
+    {
+        public bool IsAvailable => true;
+        public Task<ImmutableArray<Card>> WriteAsync(CardRequest request, CancellationToken ct) =>
+            Task.FromResult<ImmutableArray<Card>>([.. Enumerable.Range(1, request.Count).Select(i => new Card(
+                $"ai-{i}", "open", 1, [CardRequest.ThemeCode],
+                request.Languages.ToImmutableDictionary(l => l, l => new CardText($"Question {i} in {l.Code()}?"))))]);
+    }
+
+    [Fact]
+    public async Task Written_cards_come_back_as_a_deck_the_client_can_read()
+    {
+        using var withAi = app.WithWebHostBuilder(b => b.ConfigureServices(s => s.Replace(ServiceDescriptor.Singleton<ICardWriter, FakeWriter>())));
+        var http = withAi.CreateClient();
+
+        var response = await http.PostAsJsonAsync("api/decks/write", new { theme = "our trip to Dilijan", count = 4 });
+        response.EnsureSuccessStatusCode();
+        var deck = DeckJson.Parse(await response.Content.ReadAsStringAsync());
+
+        Assert.Equal(4, deck.Cards.Length);
+        Assert.Equal("our trip to Dilijan", deck.NameFor(Lang.Hy));
+        Assert.All(deck.Cards, c => Assert.Empty(c.Topics));
+        Assert.Equal(3, deck.Cards[0].Texts.Count);
     }
 }

@@ -275,6 +275,10 @@
         {
             aiNote = T["Online_ConnectFailed"];
         }
+        catch (Exception ex) when (ex is FormatException or System.Text.Json.JsonException)
+        {
+            aiNote = T["Editor_AiFailed"];
+        }
         finally
         {
             writing = false;

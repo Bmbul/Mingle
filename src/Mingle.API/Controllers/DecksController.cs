@@ -71,7 +71,8 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
         {
             var cards = await writer.WriteAsync(CardRequest.ForDeck(theme, Math.Clamp(request.Count, 1, 20)), ct);
             // Topics are dropped: the theme is the user's own words, not a library topic.
-            var deck = new Deck("written", ImmutableDictionary<Lang, string>.Empty, [.. cards.Select(c => c with { Topics = [] })]);
+            // Named after the theme: the deck file format needs a name, and the client reads it with the same parser.
+            var deck = new Deck("written", ImmutableDictionary<Lang, string>.Empty.Add(Lang.En, theme), [.. cards.Select(c => c with { Topics = [] })]);
             return Content(DeckJson.Write(deck), Json);
         }
         catch (CardWriterException ex)
