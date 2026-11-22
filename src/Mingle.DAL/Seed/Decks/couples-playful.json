@@ -1,0 +1,110 @@
+{
+  "id": "couples-playful",
+  "name": { "en": "Couples: playful", "hy": "Զույգերի համար՝ խաղային", "ru": "Для пар: игриво" },
+  "cards": [
+    { "id": "cpp-01", "kind": "likely", "depth": 1, "topics": ["us", "funny"],
+      "text": {
+        "en": "Who is most likely to steal the blanket at night?",
+        "hy": "Ո՞վ ավելի շուտ գիշերը կքաշի վերմակը։",
+        "ru": "Кто скорее всего утащит одеяло ночью?" } },
+    { "id": "cpp-02", "kind": "likely", "depth": 1, "topics": ["us", "travel"],
+      "text": {
+        "en": "Who is most likely to get us lost on a trip?",
+        "hy": "Ո՞վ ավելի շուտ մեզ կմոլորեցնի ճամփորդության ժամանակ։",
+        "ru": "Из-за кого мы скорее заблудимся в поездке?" } },
+    { "id": "cpp-03", "kind": "likely", "depth": 1, "topics": ["us", "habits"],
+      "text": {
+        "en": "Who is most likely to be late to our own date?",
+        "hy": "Ո՞վ ավելի շուտ կուշանա մեր իսկ ժամադրությանը։",
+        "ru": "Кто скорее опоздает на наше же свидание?" } },
+    { "id": "cpp-04", "kind": "likely", "depth": 1, "topics": ["us", "love"],
+      "text": {
+        "en": "Who is most likely to say \"I love you\" first in a day?",
+        "hy": "Ո՞վ ավելի շուտ օրվա ընթացքում առաջինը կասի «սիրում եմ քեզ»։",
+        "ru": "Кто скорее первым за день скажет «я тебя люблю»?" } },
+    { "id": "cpp-05", "kind": "wyr", "depth": 1, "topics": ["us", "dates"],
+      "text": { "en": "Would you rather…", "hy": "Ո՞րն ես նախընտրում", "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Breakfast in bed", "Dinner under the stars"],
+        "hy": ["Նախաճաշ անկողնում", "Ընթրիք աստղերի տակ"],
+        "ru": ["Завтрак в постель", "Ужин под звёздами"] } },
+    { "id": "cpp-06", "kind": "wyr", "depth": 1, "topics": ["us", "travel"],
+      "text": { "en": "Would you rather…", "hy": "Ո՞րն ես նախընտրում", "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["A beach holiday together", "A city trip together"],
+        "hy": ["Միասին հանգիստ ծովափին", "Միասին ճամփորդություն քաղաքով"],
+        "ru": ["Вместе на пляж", "Вместе в путешествие по городу"] } },
+    { "id": "cpp-07", "kind": "wyr", "depth": 2, "topics": ["us", "love", "long-distance"],
+      "text": { "en": "Would you rather…", "hy": "Ո՞րն ես նախընտրում", "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Get a handwritten letter", "Get a surprise visit"],
+        "hy": ["Ստանալ ձեռագիր նամակ", "Ստանալ անսպասելի այց"],
+        "ru": ["Получить письмо от руки", "Получить неожиданный визит"] } },
+    { "id": "cpp-08", "kind": "wyr", "depth": 1, "topics": ["us", "home"],
+      "text": { "en": "Would you rather…", "hy": "Ո՞րն ես նախընտրում", "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Cook together every night", "Order food every night"],
+        "hy": ["Ամեն երեկո միասին ճաշ պատրաստել", "Ամեն երեկո ուտելիք պատվիրել"],
+        "ru": ["Каждый вечер готовить вместе", "Каждый вечер заказывать еду"] } },
+    { "id": "cpp-09", "kind": "guess", "depth": 1, "topics": ["us", "music"],
+      "text": {
+        "en": "Which song would you choose for our first dance?",
+        "hy": "Ո՞ր երգը կընտրեիր մեր առաջին պարի համար։",
+        "ru": "Какую песню ты выберешь для нашего первого танца?" } },
+    { "id": "cpp-10", "kind": "guess", "depth": 1, "topics": ["us", "dates"],
+      "text": {
+        "en": "Where would you take me on a surprise date?",
+        "hy": "Ո՞ւր կտանեիր ինձ անակնկալ ժամադրության։",
+        "ru": "Куда ты поведёшь меня на свидание-сюрприз?" } },
+    { "id": "cpp-11", "kind": "guess", "depth": 2, "topics": ["us", "love"],
+      "text": {
+        "en": "What's your favorite thing about me that I don't know?",
+        "hy": "Ո՞րն է իմ մեջ քո ամենասիրած բանը, որի մասին ես չգիտեմ։",
+        "ru": "Что тебе больше всего нравится во мне, о чём я не знаю?" } },
+    { "id": "cpp-12", "kind": "guess", "depth": 1, "topics": ["us", "food"],
+      "text": {
+        "en": "What snack would you bring me when I'm sad?",
+        "hy": "Ի՞նչ համեղ բան կբերեիր ինձ, երբ տխուր եմ։",
+        "ru": "Какую вкусняшку ты принесёшь мне, когда мне грустно?" } },
+    { "id": "cpp-13", "kind": "rate", "depth": 1, "topics": ["us", "funny"],
+      "text": {
+        "en": "From 1 to 10, how good am I at telling jokes?",
+        "hy": "1-ից 10, որքա՞ն լավ եմ ես կատակներ պատմում։",
+        "ru": "От 1 до 10: насколько хорошо я рассказываю шутки?" } },
+    { "id": "cpp-14", "kind": "rate", "depth": 1, "topics": ["us", "home"],
+      "text": {
+        "en": "From 1 to 10, how good a cook am I?",
+        "hy": "1-ից 10, որքա՞ն լավ եմ ես ճաշ պատրաստում։",
+        "ru": "От 1 до 10: насколько хорошо я готовлю?" } },
+    { "id": "cpp-15", "kind": "finish", "depth": 1, "topics": ["us", "memories"],
+      "text": {
+        "en": "The moment I realized I liked you was when…",
+        "hy": "Այն պահը, երբ հասկացա, որ դու ինձ դուր ես գալիս…",
+        "ru": "Момент, когда стало ясно, что ты мне нравишься, — это…" } },
+    { "id": "cpp-16", "kind": "finish", "depth": 1, "topics": ["us", "funny"],
+      "text": {
+        "en": "Your funniest habit is…",
+        "hy": "Քո ամենազվարճալի սովորությունը…",
+        "ru": "Твоя самая смешная привычка — это…" } },
+    { "id": "cpp-17", "kind": "finish", "depth": 2, "topics": ["us", "memories"],
+      "text": {
+        "en": "My favorite memory from our first months is…",
+        "hy": "Մեր առաջին ամիսներից իմ ամենասիրած հիշողությունը…",
+        "ru": "Моё любимое воспоминание о наших первых месяцах — это…" } },
+    { "id": "cpp-18", "kind": "open", "depth": 1, "topics": ["us", "travel", "dreams"],
+      "text": {
+        "en": "Where should we go on our next trip together?",
+        "hy": "Ո՞ւր գնանք մեր հաջորդ ճամփորդությանը։",
+        "ru": "Куда нам поехать в следующую совместную поездку?" } },
+    { "id": "cpp-19", "kind": "open", "depth": 2, "topics": ["us", "long-distance"],
+      "text": {
+        "en": "What's the first thing you want to do when we see each other next?",
+        "hy": "Ի՞նչ ես ուզում անել առաջինը, երբ հաջորդ անգամ հանդիպենք։",
+        "ru": "Что ты хочешь сделать первым делом, когда мы снова увидимся?" } },
+    { "id": "cpp-20", "kind": "open", "depth": 2, "topics": ["us", "love"],
+      "text": {
+        "en": "What's a small gesture from me that you'd like more of?",
+        "hy": "Իմ ո՞ր փոքրիկ ժեստն ես ուզում ավելի հաճախ տեսնել։",
+        "ru": "Какого маленького жеста с моей стороны тебе хотелось бы больше?" } }
+  ]
+}

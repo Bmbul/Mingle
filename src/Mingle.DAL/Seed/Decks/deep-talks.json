@@ -1,0 +1,109 @@
+{
+  "id": "deep-talks",
+  "name": { "en": "Deep talks", "hy": "Խորը զրույցներ", "ru": "Глубокие разговоры" },
+  "cards": [
+    { "id": "dt-01", "kind": "open", "depth": 2, "topics": ["values"],
+      "text": {
+        "en": "What's a belief you held strongly five years ago that you no longer do?",
+        "hy": "Ո՞ր համոզմունքն ունեիր հինգ տարի առաջ, որն այլևս չունես։",
+        "ru": "Какое убеждение пять лет назад казалось тебе бесспорным, а теперь — нет?" } },
+    { "id": "dt-02", "kind": "open", "depth": 2, "topics": ["family"],
+      "text": {
+        "en": "What's something your family taught you without ever saying it out loud?",
+        "hy": "Ի՞նչ է քեզ սովորեցրել ընտանիքդ՝ առանց երբևէ բարձրաձայն ասելու։",
+        "ru": "Чему тебя научила семья, ни разу не сказав этого вслух?" } },
+    { "id": "dt-03", "kind": "open", "depth": 3, "topics": ["regrets"],
+      "text": {
+        "en": "If you could redo one decision from the last few years, which would it be?",
+        "hy": "Եթե կարողանայիր վերջին տարիների մեկ որոշում փոխել, ո՞րը կլիներ։",
+        "ru": "Если бы можно было переиграть одно решение последних лет, какое бы это было?" } },
+    { "id": "dt-04", "kind": "open", "depth": 2, "topics": ["work", "money"],
+      "text": {
+        "en": "What would you do for work if money didn't matter at all?",
+        "hy": "Ինչո՞վ կզբաղվեիր, եթե փողն ընդհանրապես նշանակություն չունենար։",
+        "ru": "Чем хочется заниматься, если бы деньги не имели никакого значения?" } },
+    { "id": "dt-05", "kind": "open", "depth": 3, "topics": ["fears"],
+      "text": {
+        "en": "What part of yourself is hardest to show to other people?",
+        "hy": "Քո ո՞ր կողմն է ամենադժվարը ցույց տալ ուրիշներին։",
+        "ru": "Какую часть себя тебе труднее всего показывать другим?" } },
+    { "id": "dt-06", "kind": "open", "depth": 2, "topics": ["growth"],
+      "text": {
+        "en": "What's a habit that changed your life more than you expected?",
+        "hy": "Ո՞ր սովորությունն է քո կյանքը փոխել ավելի շատ, քան սպասում էիր։",
+        "ru": "Какая привычка изменила твою жизнь сильнее, чем можно было ожидать?" } },
+    { "id": "dt-07", "kind": "finish", "depth": 2, "topics": ["gratitude"],
+      "text": {
+        "en": "Someone I never properly thanked is…",
+        "hy": "Մի մարդ, ում երբեք պատշաճ շնորհակալություն չեմ հայտնել…",
+        "ru": "Мне до сих пор не удалось как следует поблагодарить…" } },
+    { "id": "dt-08", "kind": "finish", "depth": 3, "topics": ["regrets"],
+      "text": {
+        "en": "I wish I had said yes to…",
+        "hy": "Ափսոսում եմ, որ «այո» չասացի…",
+        "ru": "Хотелось бы вернуться и сказать «да»…" } },
+    { "id": "dt-09", "kind": "finish", "depth": 2, "topics": ["growth"],
+      "text": {
+        "en": "The hardest lesson I learned recently is…",
+        "hy": "Վերջին շրջանում քաղածս ամենածանր դասը…",
+        "ru": "Самый трудный урок последнего времени — это…" } },
+    { "id": "dt-10", "kind": "finish", "depth": 2, "topics": ["family"],
+      "text": {
+        "en": "A family tradition I want to keep is…",
+        "hy": "Ընտանեկան ավանդույթ, որը ուզում եմ պահպանել…",
+        "ru": "Семейная традиция, которую я хочу сохранить, — это…" } },
+    { "id": "dt-11", "kind": "wyr", "depth": 2, "topics": ["values"],
+      "text": { "en": "Would you rather…", "hy": "Ո՞րն ես նախընտրում", "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Be loved by many", "Be deeply understood by one person"],
+        "hy": ["Լինել շատերի սիրելին", "Լինել մեկ մարդու կողմից խորապես հասկացված"],
+        "ru": ["Чтобы тебя любили многие", "Чтобы тебя глубоко понимал один человек"] } },
+    { "id": "dt-12", "kind": "wyr", "depth": 2, "topics": ["work", "money"],
+      "text": { "en": "Would you rather…", "hy": "Ո՞րն ես նախընտրում", "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["A job you love with an average salary", "A job you don't mind with a great salary"],
+        "hy": ["Սիրելի աշխատանք՝ միջին աշխատավարձով", "Ընդունելի աշխատանք՝ մեծ աշխատավարձով"],
+        "ru": ["Любимая работа со средней зарплатой", "Терпимая работа с отличной зарплатой"] } },
+    { "id": "dt-13", "kind": "wyr", "depth": 3, "topics": ["what-if"],
+      "text": { "en": "Would you rather…", "hy": "Ո՞րն ես նախընտրում", "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Relive your best day once more", "See one day of your future"],
+        "hy": ["Եվս մեկ անգամ ապրել կյանքիդ լավագույն օրը", "Տեսնել ապագայիդ մեկ օրը"],
+        "ru": ["Ещё раз прожить лучший день своей жизни", "Увидеть один день из своего будущего"] } },
+    { "id": "dt-14", "kind": "likely", "depth": 2, "topics": ["growth", "work"],
+      "text": {
+        "en": "Who is most likely to completely change careers?",
+        "hy": "Ո՞վ ավելի շուտ ամբողջովին կփոխի մասնագիտությունը։",
+        "ru": "Кто скорее всего полностью сменит профессию?" } },
+    { "id": "dt-15", "kind": "likely", "depth": 2, "topics": ["adventure"],
+      "text": {
+        "en": "Who is most likely to move to another country on a whim?",
+        "hy": "Ո՞վ ավելի շուտ հանկարծակի կտեղափոխվի այլ երկիր։",
+        "ru": "Кто скорее всего внезапно переедет в другую страну?" } },
+    { "id": "dt-16", "kind": "rate", "depth": 2, "topics": ["values"],
+      "text": {
+        "en": "From 1 to 10, how much do other people's opinions affect your decisions?",
+        "hy": "1-ից 10, որքա՞ն են ուրիշների կարծիքներն ազդում քո որոշումների վրա։",
+        "ru": "От 1 до 10: насколько мнение других влияет на твои решения?" } },
+    { "id": "dt-17", "kind": "rate", "depth": 3, "topics": ["growth"],
+      "text": {
+        "en": "From 1 to 10, how happy are you with where your life is right now?",
+        "hy": "1-ից 10, որքա՞ն ես գոհ, թե որտեղ է հիմա քո կյանքը։",
+        "ru": "От 1 до 10: насколько тебя устраивает твоя жизнь сейчас?" } },
+    { "id": "dt-18", "kind": "guess", "depth": 2, "topics": ["dreams"],
+      "text": {
+        "en": "What's one thing on your bucket list you'll definitely do?",
+        "hy": "Քո երազանքների ցուցակից ո՞ր բանն անպայման կանես։",
+        "ru": "Что из твоего списка желаний обязательно сбудется?" } },
+    { "id": "dt-19", "kind": "guess", "depth": 2, "topics": ["family", "childhood"],
+      "text": {
+        "en": "Which family member are you most like?",
+        "hy": "Ընտանիքի ո՞ր անդամին ես ամենաշատը նման։",
+        "ru": "Кто из родных больше всего на тебя похож?" } },
+    { "id": "dt-20", "kind": "open", "depth": 3, "topics": ["growth"],
+      "text": {
+        "en": "What part of yourself are you still learning to accept?",
+        "hy": "Քո ո՞ր կողմն ես դեռ սովորում ընդունել։",
+        "ru": "Какую часть себя ты всё ещё учишься принимать?" } }
+  ]
+}

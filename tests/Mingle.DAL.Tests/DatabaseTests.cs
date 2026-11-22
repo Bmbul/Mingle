@@ -44,7 +44,8 @@ public class DatabaseTests(PostgresFixture postgres)
         Assert.Equal(cards.Sum(c => c.Texts[Lang.En].Options.Length), await db.CardOptions.CountAsync());
         Assert.Equal(cards.Sum(c => c.Topics.Length), await db.CardTopics.CountAsync());
         Assert.Equal(cards.Count, await db.DeckCards.CountAsync());
-        Assert.Equal(21, await db.Topics.CountAsync());
+        var topicCount = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(DeckSeeder.DefaultFolder, "topics.json"))).RootElement.GetArrayLength();
+        Assert.Equal(topicCount, await db.Topics.CountAsync());
     }
 
     [Fact]
@@ -99,7 +100,7 @@ public class DatabaseTests(PostgresFixture postgres)
 
         var card = await db.Cards.SingleAsync(c => c.Id == StableId.For("card", "ice-01"));
         Assert.Equal("What small thing always makes your day better?", card.Text.En);
-        Assert.Equal(40, await db.Cards.CountAsync());
+        Assert.Equal(SeedDecks(DeckSeeder.DefaultFolder).Sum(d => d.Cards.Count()), await db.Cards.CountAsync());
         Assert.Equal(optionIds, await db.CardOptions.OrderBy(o => o.Id).Select(o => o.Id).ToListAsync());
     }
 

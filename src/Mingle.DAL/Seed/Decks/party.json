@@ -1,0 +1,111 @@
+{
+  "id": "party",
+  "name": { "en": "Party time", "hy": "Խնջույքի համար", "ru": "Для вечеринки" },
+  "cards": [
+    { "id": "pty-01", "kind": "likely", "depth": 1, "topics": ["funny"],
+      "text": {
+        "en": "Who is most likely to laugh at the worst possible moment?",
+        "hy": "Ո՞վ ավելի շուտ կծիծաղի ամենաանհարմար պահին։",
+        "ru": "Кто скорее всего рассмеётся в самый неподходящий момент?" } },
+    { "id": "pty-02", "kind": "likely", "depth": 1, "topics": ["funny"],
+      "text": {
+        "en": "Who is most likely to become famous by accident?",
+        "hy": "Ո՞վ ավելի շուտ պատահաբար հայտնի կդառնա։",
+        "ru": "Кто скорее всего случайно станет знаменитым?" } },
+    { "id": "pty-03", "kind": "likely", "depth": 1, "topics": ["food"],
+      "text": {
+        "en": "Who is most likely to eat the last slice without asking?",
+        "hy": "Ո՞վ ավելի շուտ առանց հարցնելու կուտի վերջին կտորը։",
+        "ru": "Кто скорее всего съест последний кусок, не спросив?" } },
+    { "id": "pty-04", "kind": "likely", "depth": 1, "topics": ["adventure"],
+      "text": {
+        "en": "Who is most likely to survive alone in the wild?",
+        "hy": "Ո՞վ ավելի շուտ կգոյատևի մենակ վայրի բնության մեջ։",
+        "ru": "Кто скорее всего выживет в одиночку в дикой природе?" } },
+    { "id": "pty-05", "kind": "likely", "depth": 1, "topics": ["habits"],
+      "text": {
+        "en": "Who is most likely to reply to a message three days later?",
+        "hy": "Ո՞վ ավելի շուտ նամակին կպատասխանի երեք օր անց։",
+        "ru": "Кто скорее всего ответит на сообщение через три дня?" } },
+    { "id": "pty-06", "kind": "wyr", "depth": 1, "topics": ["food"],
+      "text": { "en": "Would you rather…", "hy": "Ո՞րն ես նախընտրում", "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Never eat sweets again", "Never eat bread again"],
+        "hy": ["Այլևս երբեք քաղցր չուտել", "Այլևս երբեք հաց չուտել"],
+        "ru": ["Больше никогда не есть сладкое", "Больше никогда не есть хлеб"] } },
+    { "id": "pty-07", "kind": "wyr", "depth": 1, "topics": ["what-if"],
+      "text": { "en": "Would you rather…", "hy": "Ո՞րն ես նախընտրում", "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Be able to fly", "Be invisible"],
+        "hy": ["Կարողանալ թռչել", "Լինել անտեսանելի"],
+        "ru": ["Уметь летать", "Быть невидимкой"] } },
+    { "id": "pty-08", "kind": "wyr", "depth": 1, "topics": ["stories"],
+      "text": { "en": "Would you rather…", "hy": "Ո՞րն ես նախընտրում", "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Live inside your favorite movie", "Have your favorite character visit you for a day"],
+        "hy": ["Ապրել սիրելի ֆիլմիդ մեջ", "Որ սիրելի հերոսդ մեկ օրով այցելի քեզ"],
+        "ru": ["Жить внутри любимого фильма", "Чтобы любимый герой провёл с тобой один день"] } },
+    { "id": "pty-09", "kind": "wyr", "depth": 1, "topics": ["music"],
+      "text": { "en": "Would you rather…", "hy": "Ո՞րն ես նախընտրում", "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Only listen to one song forever", "Never listen to music again"],
+        "hy": ["Ամբողջ կյանքում լսել միայն մեկ երգ", "Այլևս երբեք երաժշտություն չլսել"],
+        "ru": ["Всю жизнь слушать одну песню", "Больше никогда не слушать музыку"] } },
+    { "id": "pty-10", "kind": "wyr", "depth": 1, "topics": ["habits"],
+      "text": { "en": "Would you rather…", "hy": "Ո՞րն ես նախընտրում", "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Always say what you think", "Never speak before noon"],
+        "hy": ["Միշտ ասել այն, ինչ մտածում ես", "Այլևս երբեք չխոսել մինչև կեսօր"],
+        "ru": ["Всегда говорить то, что думаешь", "Никогда не говорить до полудня"] } },
+    { "id": "pty-11", "kind": "open", "depth": 1, "topics": ["funny", "childhood"],
+      "text": {
+        "en": "What's the most embarrassing thing that happened to you at school?",
+        "hy": "Ո՞րն է ամենաամոթալի դեպքը, որ պատահել է քեզ դպրոցում։",
+        "ru": "Какой самый неловкий случай произошёл с тобой в школе?" } },
+    { "id": "pty-12", "kind": "open", "depth": 1, "topics": ["hobbies"],
+      "text": {
+        "en": "What's a hobby you tried once and gave up immediately?",
+        "hy": "Ո՞ր հոբբին փորձեցիր մեկ անգամ ու անմիջապես թողեցիր։",
+        "ru": "Какое хобби продержалось у тебя всего один день?" } },
+    { "id": "pty-13", "kind": "open", "depth": 1, "topics": ["stories"],
+      "text": {
+        "en": "Which movie can you watch again and again?",
+        "hy": "Ո՞ր ֆիլմը կարող ես նորից ու նորից դիտել։",
+        "ru": "Какой фильм ты можешь пересматривать снова и снова?" } },
+    { "id": "pty-14", "kind": "finish", "depth": 1, "topics": ["funny"],
+      "text": {
+        "en": "My most useless talent is…",
+        "hy": "Իմ ամենաանօգուտ տաղանդը…",
+        "ru": "Мой самый бесполезный талант — это…" } },
+    { "id": "pty-15", "kind": "finish", "depth": 1, "topics": ["food"],
+      "text": {
+        "en": "The weirdest food combination I secretly love is…",
+        "hy": "Ուտելիքի ամենատարօրինակ համադրությունը, որ գաղտնի սիրում եմ…",
+        "ru": "Самое странное сочетание еды, которое я втайне обожаю, — это…" } },
+    { "id": "pty-16", "kind": "finish", "depth": 1, "topics": ["firsts", "music"],
+      "text": {
+        "en": "The first concert I ever went to was…",
+        "hy": "Առաջին համերգը, որին երբևէ գնացել եմ…",
+        "ru": "Мой первый концерт — это…" } },
+    { "id": "pty-17", "kind": "rate", "depth": 1, "topics": ["habits"],
+      "text": {
+        "en": "From 1 to 10, how messy is your room right now?",
+        "hy": "1-ից 10, որքա՞ն անկարգ է հիմա քո սենյակը։",
+        "ru": "От 1 до 10: какой сейчас беспорядок в твоей комнате?" } },
+    { "id": "pty-18", "kind": "rate", "depth": 1, "topics": ["adventure", "food"],
+      "text": {
+        "en": "From 1 to 10, how adventurous are you with food?",
+        "hy": "1-ից 10, որքա՞ն համարձակ ես ուտելիքի հարցում։",
+        "ru": "От 1 до 10: насколько тебе нравится пробовать незнакомую еду?" } },
+    { "id": "pty-19", "kind": "guess", "depth": 1, "topics": ["food"],
+      "text": {
+        "en": "What would you order at a restaurant you've never been to?",
+        "hy": "Ի՞նչ կպատվիրեիր ռեստորանում, որտեղ երբեք չես եղել։",
+        "ru": "Что ты закажешь в незнакомом ресторане?" } },
+    { "id": "pty-20", "kind": "guess", "depth": 1, "topics": ["hobbies"],
+      "text": {
+        "en": "What would you do with a completely free Saturday?",
+        "hy": "Ի՞նչ կանեիր լրիվ ազատ շաբաթ օրը։",
+        "ru": "Чем ты займёшься в совершенно свободную субботу?" } }
+  ]
+}
