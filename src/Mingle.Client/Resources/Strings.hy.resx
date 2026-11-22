@@ -91,4 +91,6 @@
   <data name="Setup_OutLoud" xml:space="preserve"><value>Բարձրաձայն</value></data>
   <data name="Setup_OutLoudDesc" xml:space="preserve"><value>Ոչինչ գրել կամ սեղմել պետք չէ։ Կարդացեք քարտը, պատասխանեք և քննարկեք։</value></data>
   <data name="Setup_LoadFailed" xml:space="preserve"><value>Չհաջողվեց բեռնել քարտերը։ Ստուգեք կապը և փորձեք կրկին։</value></data>
+  <data name="Play_EndConfirm" xml:space="preserve"><value>Ավարտե՞լ խաղը</value></data>
+  <data name="Play_KeepPlaying" xml:space="preserve"><value>Շարունակել խաղը</value></data>
 </root>

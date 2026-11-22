@@ -153,6 +153,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 /* Uppercasing Armenian turns the ligature «և» into «ԵՒ», so Armenian labels keep their case. */
 :lang(hy) .label, :lang(hy) .kind { text-transform: none; letter-spacing: .02em; }
 
+.row.gap { display: flex; gap: 8px; }
+.confirm {
+    margin: 8px 20px 0; padding: 16px; border-radius: var(--radius); display: flex; flex-direction: column; gap: 12px;
+    background: var(--surface); border: 1px solid var(--accent);
+}
+
 /* Cards and surfaces */
 .card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 16px;

@@ -21,7 +21,7 @@ Or run everything in containers (app on http://localhost:8080):
 docker compose --profile app up --build
 ```
 
-Tests (no database needed):
+Tests (the database tests start their own PostgreSQL container, so Docker must be running):
 
 ```bash
 dotnet test
@@ -40,7 +40,7 @@ The SDK is pinned to .NET 10 in `global.json`. EF Core migrations:
 | `src/Mingle.DAL` | Data access: EF Core + PostgreSQL. `Entities/` and `Configurations/` hold one file per table; `Migrations/`; `Seeding/`. |
 | `src/Mingle.DAL/Seed` | Starter decks (`icebreakers.json`, `couples.json`), 20 cards each in hy/ru/en, imported into an empty database. |
 | `tests/Mingle.Engine.Tests` | xUnit tests for the engine and for the seed decks. |
-| `tests/Mingle.DAL.Tests` | Tests for mapping decks to and from database entities. |
+| `tests/Mingle.DAL.Tests` | Mapping tests, plus migration, seeding and constraint tests against a real PostgreSQL container (Testcontainers). |
 
 ## How the game works
 

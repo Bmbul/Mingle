@@ -49,8 +49,19 @@
 
         <header class="top spread">
             <span class="muted">@T["Play_CardOf", table.CardNumber, table.CardCount]</span>
-            <button class="text-btn" @onclick="() => Do(new EndGame(Me(state)))">@T["Play_End"]</button>
+            <button class="text-btn" aria-expanded="@(confirmEnd ? "true" : "false")" @onclick="() => confirmEnd = !confirmEnd">@T["Play_End"]</button>
         </header>
+
+        @if (confirmEnd)
+        {
+            <div class="confirm" role="alertdialog" aria-labelledby="confirm-end-title">
+                <span id="confirm-end-title" class="h2">@T["Play_EndConfirm"]</span>
+                <div class="row gap">
+                    <button class="btn2 grow" @onclick="() => confirmEnd = false">@T["Play_KeepPlaying"]</button>
+                    <button class="btn grow" @onclick="EndNow">@T["Play_End"]</button>
+                </div>
+            </div>
+        }
 
         @if (state.Phase == GamePhase.Answering && answeringId is not null)
         {
@@ -111,6 +122,13 @@
 @code {
     private (int Round, string PlayerId)? handoff;
     private string? error;
+    private bool confirmEnd;
+
+    private void EndNow()
+    {
+        confirmEnd = false;
+        if (Session.State is { } state) Do(new EndGame(Me(state)));
+    }
 
     protected override void OnInitialized()
     {
