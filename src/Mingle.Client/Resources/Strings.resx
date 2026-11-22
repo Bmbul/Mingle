@@ -24,8 +24,6 @@
   <data name="Setup_Talk" xml:space="preserve"><value>Just talk</value></data>
   <data name="Setup_TalkDesc" xml:space="preserve"><value>Read the card and answer out loud. Votes are one tap.</value></data>
   <data name="Setup_Decks" xml:space="preserve"><value>Decks</value></data>
-  <data name="Setup_GameTypes" xml:space="preserve"><value>Game types</value></data>
-  <data name="Setup_Depth" xml:space="preserve"><value>Depth</value></data>
   <data name="Setup_WhoAnswers" xml:space="preserve"><value>Who answers</value></data>
   <data name="Setup_Everyone" xml:space="preserve"><value>Everyone</value></data>
   <data name="Setup_TakeTurns" xml:space="preserve"><value>Take turns</value></data>
@@ -46,12 +44,6 @@
   <data name="Kind_likely" xml:space="preserve"><value>Most likely to</value></data>
   <data name="Kind_guess" xml:space="preserve"><value>Guess my answer</value></data>
   <data name="Kind_rate" xml:space="preserve"><value>Rate it 1–10</value></data>
-  <data name="KindEx_open" xml:space="preserve"><value>Answer in your own words</value></data>
-  <data name="KindEx_finish" xml:space="preserve"><value>I feel most loved when…</value></data>
-  <data name="KindEx_wyr" xml:space="preserve"><value>Pick one of two, see the split</value></data>
-  <data name="KindEx_likely" xml:space="preserve"><value>Vote for a player</value></data>
-  <data name="KindEx_guess" xml:space="preserve"><value>One answers, the others guess</value></data>
-  <data name="KindEx_rate" xml:space="preserve"><value>Rate yourself, then compare</value></data>
   <data name="Play_CardOf" xml:space="preserve"><value>Card {0} of {1}</value></data>
   <data name="Play_EveryoneAnswers" xml:space="preserve"><value>Everyone answers</value></data>
   <data name="Play_Turn" xml:space="preserve"><value>{0}'s turn</value></data>
@@ -93,4 +85,38 @@
   <data name="Setup_LoadFailed" xml:space="preserve"><value>Couldn't load the cards. Check your connection and try again.</value></data>
   <data name="Play_EndConfirm" xml:space="preserve"><value>End the game?</value></data>
   <data name="Play_KeepPlaying" xml:space="preserve"><value>Keep playing</value></data>
+  <data name="Home_PlayOnline" xml:space="preserve"><value>Play online</value></data>
+  <data name="Home_PlayOnlineDesc" xml:space="preserve"><value>Everyone on their own phone, in the same room or far apart.</value></data>
+  <data name="Home_CreateRoom" xml:space="preserve"><value>Create a room</value></data>
+  <data name="Home_JoinRoom" xml:space="preserve"><value>Join with a code</value></data>
+  <data name="Online_NewRoom" xml:space="preserve"><value>New online room</value></data>
+  <data name="Online_Room" xml:space="preserve"><value>Online room</value></data>
+  <data name="Online_Connecting" xml:space="preserve"><value>Connecting…</value></data>
+  <data name="Online_Reconnecting" xml:space="preserve"><value>Connection lost. Reconnecting…</value></data>
+  <data name="Online_ConnectFailed" xml:space="preserve"><value>Couldn't reach the server. Check your connection and try again.</value></data>
+  <data name="Online_RoomNotFound" xml:space="preserve"><value>This room doesn't exist or has closed.</value></data>
+  <data name="Online_WaitingOthers" xml:space="preserve"><value>Waiting for the others</value></data>
+  <data name="Online_Leave" xml:space="preserve"><value>Leave room</value></data>
+  <data name="Online_You" xml:space="preserve"><value>you</value></data>
+  <data name="Setup_YourName" xml:space="preserve"><value>Your name</value></data>
+  <data name="Setup_NeedName" xml:space="preserve"><value>Enter your name.</value></data>
+  <data name="Setup_CreateRoom" xml:space="preserve"><value>Create room</value></data>
+  <data name="Join_Title" xml:space="preserve"><value>Join a room</value></data>
+  <data name="Join_Code" xml:space="preserve"><value>Room code</value></data>
+  <data name="Join_Button" xml:space="preserve"><value>Join</value></data>
+  <data name="Join_NoAccount" xml:space="preserve"><value>No account needed. Your answers are not saved after the game.</value></data>
+  <data name="Join_Started" xml:space="preserve"><value>This game has already started.</value></data>
+  <data name="Lobby_Share" xml:space="preserve"><value>Share invite link</value></data>
+  <data name="Lobby_Copied" xml:space="preserve"><value>Link copied</value></data>
+  <data name="Lobby_Host" xml:space="preserve"><value>Host</value></data>
+  <data name="Lobby_Offline" xml:space="preserve"><value>offline</value></data>
+  <data name="Lobby_Waiting" xml:space="preserve"><value>Waiting for players…</value></data>
+  <data name="Lobby_WaitingHost" xml:space="preserve"><value>Waiting for the host to start the game</value></data>
+  <data name="Lobby_NeedTwo" xml:space="preserve"><value>At least 2 players are needed.</value></data>
+  <data name="Lobby_EveryoneIn" xml:space="preserve"><value>Start when everyone is in.</value></data>
+  <data name="Setup_Order" xml:space="preserve"><value>Card order</value></data>
+  <data name="Setup_OrderRamp" xml:space="preserve"><value>Light to deep</value></data>
+  <data name="Setup_OrderRampDesc" xml:space="preserve"><value>Starts easy and gets more personal as you play.</value></data>
+  <data name="Setup_OrderShuffled" xml:space="preserve"><value>Shuffled</value></data>
+  <data name="Setup_OrderShuffledDesc" xml:space="preserve"><value>Any card can come at any time.</value></data>
 </root>

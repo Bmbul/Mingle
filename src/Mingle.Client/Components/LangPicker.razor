@@ -1,0 +1,23 @@
+@inject Text T
+@inject IJSRuntime JS
+
+@* The app language, which is also the language your cards are shown in. Changing it reloads the app. *@
+<label class="visually-hidden" for="ui-lang">@T["Home_Language"]</label>
+<select id="ui-lang" class="lang-pick" value="@Text.UiLang" @onchange="Change">
+    @foreach (var lang in Langs.All)
+    {
+        <option value="@lang" lang="@lang.Code()">@Text.LangName(lang)</option>
+    }
+</select>
+
+@code {
+    /// <summary>Runs before the reload, so a page can keep what the user has typed.</summary>
+    [Parameter] public EventCallback BeforeChange { get; set; }
+
+    private async Task Change(ChangeEventArgs e)
+    {
+        if (!Enum.TryParse<Lang>(e.Value?.ToString(), out var lang) || lang == Text.UiLang) return;
+        await BeforeChange.InvokeAsync();
+        await JS.InvokeVoidAsync("mingle.setLang", lang.Code());
+    }
+}

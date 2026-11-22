@@ -1,11 +1,24 @@
 # Mingle
 
 A question-and-conversation game for friends and couples, in Armenian, Russian and English.
-Phase 1: pass-and-play on one phone, in the browser, offline-capable (PWA).
+Play on one phone (pass-and-play, works offline as a PWA) or online, where everyone joins a room from their own phone.
 
 ## Run it
 
-Start PostgreSQL in Docker, then the API (which also serves the app):
+### Everything in Docker (easiest way to test)
+
+```bash
+docker compose up --build
+```
+
+This starts PostgreSQL and the app. Open http://localhost:8080. To play online with your own phone,
+connect it to the same Wi-Fi and open `http://<this computer's IP>:8080` (on a Mac:
+`ipconfig getifaddr en0`). Create a room on one device and join it from another.
+Stop with `docker compose down` (add `-v` to also delete the database).
+
+### For development
+
+Start only PostgreSQL in Docker, then run the API (which also serves the app) with `dotnet run`:
 
 ```bash
 docker compose up -d db
@@ -14,12 +27,6 @@ dotnet run --project src/Mingle.Api --launch-profile http
 
 Open http://localhost:5243. On first start the API creates the tables and imports the
 starter decks from `src/Mingle.DAL/Seed/*.json`.
-
-Or run everything in containers (app on http://localhost:8080):
-
-```bash
-docker compose --profile app up --build
-```
 
 Tests (the database tests start their own PostgreSQL container, so Docker must be running):
 
@@ -36,10 +43,12 @@ The SDK is pinned to .NET 10 in `global.json`. EF Core migrations:
 | --- | --- |
 | `src/Mingle.Engine` | Pure game rules: cards and card kinds, `Game.Apply` reducer, per-player views, card selector, plural rules, deck JSON reader. No I/O. |
 | `src/Mingle.Client` | Blazor WebAssembly PWA: Home, New game, Play screens; UI strings in `Resources/Strings*.resx`. Loads decks from `/api/decks` and keeps the last copy for offline play. |
-| `src/Mingle.Api` | ASP.NET Core host: serves the client and the HTTP API (`GET /api/decks`). |
+| `src/Mingle.Contracts` | Messages shared by the API and the client for online rooms (`IGameHub`, `IGameClient`, `RoomView`). |
+| `src/Mingle.Api` | ASP.NET Core host: serves the client, `GET /api/decks`, and the SignalR game hub (`/hubs/game`). `Rooms/` holds the in-memory rooms. |
 | `src/Mingle.DAL` | Data access: EF Core + PostgreSQL. `Entities/` and `Configurations/` hold one file per table; `Migrations/`; `Seeding/`. |
 | `src/Mingle.DAL/Seed` | Starter decks (`icebreakers.json`, `couples.json`), 20 cards each in hy/ru/en, imported into an empty database. |
 | `tests/Mingle.Engine.Tests` | xUnit tests for the engine and for the seed decks. |
+| `tests/Mingle.Api.Tests` | Room rules, plus end-to-end hub tests with two real SignalR clients (no database needed). |
 | `tests/Mingle.DAL.Tests` | Mapping tests, plus migration, seeding and constraint tests against a real PostgreSQL container (Testcontainers). |
 
 ## How the game works
@@ -55,3 +64,13 @@ The SDK is pinned to .NET 10 in `global.json`. EF Core migrations:
 Deck files are validated by `DeckJson` and by `StarterContentTests`: every card needs all three languages,
 `wyr` cards need exactly two options per language, and starter cards avoid `{player}` placeholders because
 Armenian and Russian change names by grammatical case.
+
+## Online rooms
+
+- The host creates a room (New online room), gets a 4-letter code and an invite link (`/join/<code>`).
+- The server keeps each room and its game in memory and runs the same engine; after every change each
+  player receives only their own `RoomView`, so answers stay hidden until the reveal.
+- Every call is tied to the caller's seat on the server, so nobody can act for another player.
+- A seat survives disconnects: the browser keeps a seat token and rejoins after a reload or a dropped
+  connection. Rooms nobody is connected to are removed after two hours of inactivity.
+- Rooms live in one server's memory; running several instances would need a shared store such as Redis.

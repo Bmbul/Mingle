@@ -24,8 +24,6 @@
   <data name="Setup_Talk" xml:space="preserve"><value>Просто говорить</value></data>
   <data name="Setup_TalkDesc" xml:space="preserve"><value>Прочитайте карточку и отвечайте вслух. Голосование — одним касанием.</value></data>
   <data name="Setup_Decks" xml:space="preserve"><value>Колоды</value></data>
-  <data name="Setup_GameTypes" xml:space="preserve"><value>Типы игр</value></data>
-  <data name="Setup_Depth" xml:space="preserve"><value>Глубина</value></data>
   <data name="Setup_WhoAnswers" xml:space="preserve"><value>Кто отвечает</value></data>
   <data name="Setup_Everyone" xml:space="preserve"><value>Все</value></data>
   <data name="Setup_TakeTurns" xml:space="preserve"><value>По очереди</value></data>
@@ -48,12 +46,6 @@
   <data name="Kind_likely" xml:space="preserve"><value>Кто скорее всего</value></data>
   <data name="Kind_guess" xml:space="preserve"><value>Угадай мой ответ</value></data>
   <data name="Kind_rate" xml:space="preserve"><value>Оцени от 1 до 10</value></data>
-  <data name="KindEx_open" xml:space="preserve"><value>Ответь своими словами</value></data>
-  <data name="KindEx_finish" xml:space="preserve"><value>Сильнее всего я чувствую любовь, когда…</value></data>
-  <data name="KindEx_wyr" xml:space="preserve"><value>Выбери одно из двух</value></data>
-  <data name="KindEx_likely" xml:space="preserve"><value>Проголосуй за игрока</value></data>
-  <data name="KindEx_guess" xml:space="preserve"><value>Один отвечает, остальные угадывают</value></data>
-  <data name="KindEx_rate" xml:space="preserve"><value>Оцени себя и сравни</value></data>
   <data name="Play_CardOf" xml:space="preserve"><value>Карточка {0} из {1}</value></data>
   <data name="Play_EveryoneAnswers" xml:space="preserve"><value>Отвечают все</value></data>
   <data name="Play_Turn" xml:space="preserve"><value>Ход: {0}</value></data>
@@ -97,4 +89,38 @@
   <data name="Setup_LoadFailed" xml:space="preserve"><value>Не удалось загрузить карточки. Проверьте подключение и попробуйте снова.</value></data>
   <data name="Play_EndConfirm" xml:space="preserve"><value>Завершить игру?</value></data>
   <data name="Play_KeepPlaying" xml:space="preserve"><value>Продолжить игру</value></data>
+  <data name="Home_PlayOnline" xml:space="preserve"><value>Играть онлайн</value></data>
+  <data name="Home_PlayOnlineDesc" xml:space="preserve"><value>Каждый со своего телефона — рядом или далеко.</value></data>
+  <data name="Home_CreateRoom" xml:space="preserve"><value>Создать комнату</value></data>
+  <data name="Home_JoinRoom" xml:space="preserve"><value>Войти по коду</value></data>
+  <data name="Online_NewRoom" xml:space="preserve"><value>Новая онлайн-комната</value></data>
+  <data name="Online_Room" xml:space="preserve"><value>Онлайн-комната</value></data>
+  <data name="Online_Connecting" xml:space="preserve"><value>Подключение…</value></data>
+  <data name="Online_Reconnecting" xml:space="preserve"><value>Связь потеряна. Переподключение…</value></data>
+  <data name="Online_ConnectFailed" xml:space="preserve"><value>Не удалось связаться с сервером. Проверьте подключение и попробуйте снова.</value></data>
+  <data name="Online_RoomNotFound" xml:space="preserve"><value>Такой комнаты нет или она закрыта.</value></data>
+  <data name="Online_WaitingOthers" xml:space="preserve"><value>Ждём остальных</value></data>
+  <data name="Online_Leave" xml:space="preserve"><value>Выйти из комнаты</value></data>
+  <data name="Online_You" xml:space="preserve"><value>вы</value></data>
+  <data name="Setup_YourName" xml:space="preserve"><value>Ваше имя</value></data>
+  <data name="Setup_NeedName" xml:space="preserve"><value>Введите своё имя.</value></data>
+  <data name="Setup_CreateRoom" xml:space="preserve"><value>Создать комнату</value></data>
+  <data name="Join_Title" xml:space="preserve"><value>Войти в комнату</value></data>
+  <data name="Join_Code" xml:space="preserve"><value>Код комнаты</value></data>
+  <data name="Join_Button" xml:space="preserve"><value>Войти</value></data>
+  <data name="Join_NoAccount" xml:space="preserve"><value>Аккаунт не нужен. Ваши ответы не сохраняются после игры.</value></data>
+  <data name="Join_Started" xml:space="preserve"><value>Эта игра уже началась.</value></data>
+  <data name="Lobby_Share" xml:space="preserve"><value>Поделиться ссылкой</value></data>
+  <data name="Lobby_Copied" xml:space="preserve"><value>Ссылка скопирована</value></data>
+  <data name="Lobby_Host" xml:space="preserve"><value>Ведущий</value></data>
+  <data name="Lobby_Offline" xml:space="preserve"><value>не в сети</value></data>
+  <data name="Lobby_Waiting" xml:space="preserve"><value>Ждём игроков…</value></data>
+  <data name="Lobby_WaitingHost" xml:space="preserve"><value>Ждём, когда ведущий начнёт игру</value></data>
+  <data name="Lobby_NeedTwo" xml:space="preserve"><value>Нужно минимум два игрока.</value></data>
+  <data name="Lobby_EveryoneIn" xml:space="preserve"><value>Начинайте, когда все войдут.</value></data>
+  <data name="Setup_Order" xml:space="preserve"><value>Порядок карточек</value></data>
+  <data name="Setup_OrderRamp" xml:space="preserve"><value>От лёгких к глубоким</value></data>
+  <data name="Setup_OrderRampDesc" xml:space="preserve"><value>Начинается легко и постепенно становится глубже.</value></data>
+  <data name="Setup_OrderShuffled" xml:space="preserve"><value>Вперемешку</value></data>
+  <data name="Setup_OrderShuffledDesc" xml:space="preserve"><value>Любая карточка может выпасть в любой момент.</value></data>
 </root>

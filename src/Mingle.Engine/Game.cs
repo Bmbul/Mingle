@@ -35,7 +35,7 @@ public static class Game
         var state = new GameState(
             GamePhase.Answering, playerList, settings, pool, seed,
             TurnIndex: 0, Current: null, History: []);
-        return Deal(state, selector ?? RampCardSelector.Instance);
+        return Deal(state, selector ?? CardSelector.Instance);
     }
 
     /// <summary>The cards a game with these settings and players can use.</summary>
@@ -53,7 +53,7 @@ public static class Game
 
     public static GameState Apply(GameState state, GameAction action, ICardSelector? selector = null)
     {
-        selector ??= RampCardSelector.Instance;
+        selector ??= CardSelector.Instance;
         _ = state.Player(action.PlayerId); // unknown players are rejected
 
         if (state.Phase == GamePhase.Ended)

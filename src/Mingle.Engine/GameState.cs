@@ -22,6 +22,15 @@ public enum TurnStyle
     TakeTurns,
 }
 
+/// <summary>The order cards are dealt in.</summary>
+public enum CardOrder
+{
+    /// <summary>Starts with light cards and goes deeper as the game goes on.</summary>
+    LightToDeep,
+    /// <summary>Any card can come at any time.</summary>
+    Shuffled,
+}
+
 public sealed record GameSettings
 {
     public ImmutableHashSet<string> KindIds { get; init; } = CardKinds.All.Select(k => k.Id).ToImmutableHashSet();
@@ -30,6 +39,7 @@ public sealed record GameSettings
     public AnswerMode AnswerMode { get; init; } = AnswerMode.Written;
     public TurnStyle TurnStyle { get; init; } = TurnStyle.Everyone;
     public int CardCount { get; init; } = 20;
+    public CardOrder Order { get; init; } = CardOrder.LightToDeep;
 }
 
 public enum GamePhase

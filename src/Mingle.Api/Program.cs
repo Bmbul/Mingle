@@ -1,4 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Mingle.Api.Hubs;
+using Mingle.Api.Rooms;
+using Mingle.Contracts;
 using Mingle.DAL;
 using Mingle.DAL.Seeding;
 using Mingle.Engine;
@@ -7,6 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMingleDal(builder.Configuration.GetConnectionString("Mingle")
     ?? throw new InvalidOperationException("Missing connection string 'Mingle'."));
+builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddSingleton<RoomRegistry>();
+builder.Services.AddHostedService<RoomCleanupService>();
+builder.Services.AddSignalR()
+    .AddJsonProtocol(o => ContractsJsonContext.Register(o.PayloadSerializerOptions));
 
 var app = builder.Build();
 
@@ -26,21 +34,16 @@ if (app.Configuration.GetValue("Database:MigrateOnStartup", true))
 // Serves the Blazor WebAssembly client (framework files included) with fingerprinting and compression.
 app.MapStaticAssets();
 
-app.MapGet("/api/decks", async (MingleDbContext db, CancellationToken ct) =>
-{
-    var decks = await db.Decks
-        .AsNoTracking()
-        .Include(d => d.Names)
-        .Include(d => d.Cards).ThenInclude(c => c.Card).ThenInclude(c => c.Translations)
-        .OrderBy(d => d.CreatedAt).ThenBy(d => d.Id)
-        .AsSplitQuery()
-        .ToListAsync(ct);
+app.MapGet("/api/decks", async (IDeckSource decks, CancellationToken ct) =>
+    Results.Text(DeckJson.WriteMany(await decks.GetDecksAsync(ct)), "application/json; charset=utf-8"));
 
-    return Results.Text(DeckJson.WriteMany(decks.Select(DeckMapping.ToGame)), "application/json; charset=utf-8");
-});
+app.MapHub<GameHub>(HubRoutes.Game);
 
 app.MapGet("/health", () => Results.Ok("ok"));
 
 app.MapFallbackToFile("index.html");
 
 app.Run();
+
+// Lets the integration tests start the app with WebApplicationFactory<Program>.
+public partial class Program;
