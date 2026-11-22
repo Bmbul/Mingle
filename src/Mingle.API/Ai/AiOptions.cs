@@ -10,7 +10,7 @@ public sealed class AiOptions
     public const string Section = "Ai";
 
     public string? ApiKey { get; set; }
-    public string Model { get; set; } = "claude-opus-5-5";
+    public string Model { get; set; } = "claude-haiku-5-5"; // cheapest for now; Ai__Model switches it without a code change
 
     /// <summary>low, medium or high. Lower is faster, which matters while a room waits.</summary>
     public string Effort { get; set; } = "low";

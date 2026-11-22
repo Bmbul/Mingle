@@ -87,7 +87,7 @@ The host picks where the cards come from when creating a room:
 - **Decks I pick**: the host chooses the decks.
 
 AI settings live in the `Ai` configuration section (`Ai__Model`, `Ai__Effort`, `Ai__MaxGenerationsPerDay`,
-defaults: `claude-opus-5-5`, `low`, 100). The key comes from `ANTHROPIC_API_KEY` (or `Ai__ApiKey`).
+defaults: `claude-haiku-5-5`, `low`, 100). The key comes from `ANTHROPIC_API_KEY` (or `Ai__ApiKey`).
 
 ## Deck editor
 

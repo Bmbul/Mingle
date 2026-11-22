@@ -25,6 +25,8 @@ services:
     build: .
     environment:
       ConnectionStrings__Mingle: "Host=db;Port=5432;Database=mingle;Username=mingle;Password=${POSTGRES_PASSWORD:-mingle_dev}"
+      # Optional: AI-written cards locally. Export the key in your shell before `docker compose up`.
+      ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY:-}"
     ports:
       - "8080:8080"
     depends_on:
