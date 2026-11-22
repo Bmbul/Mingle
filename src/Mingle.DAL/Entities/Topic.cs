@@ -16,6 +16,9 @@ public sealed class Topic
     /// <summary>Whether players can be offered this topic (internal ones like "us" are not).</summary>
     public bool Pickable { get; set; } = true;
 
+    /// <summary>What the topic covers, in English, so the AI reads it as meant (e.g. "dreams" = hopes, not sleep).</summary>
+    public string? About { get; set; }
+
     public TopicAudience Audience { get; set; } = TopicAudience.Everyone;
 
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;

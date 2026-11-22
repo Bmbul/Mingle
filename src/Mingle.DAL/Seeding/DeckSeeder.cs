@@ -49,6 +49,7 @@ public sealed class DeckSeeder(MingleDbContext db, ILogger<DeckSeeder> log)
             topic.Name = LocalizedText.From(seed.Name);
             topic.Pickable = seed.Pickable;
             topic.Audience = seed.Audience;
+            topic.About = seed.About;
         }
         return existing;
     }

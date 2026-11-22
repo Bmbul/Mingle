@@ -101,4 +101,38 @@ public class CardWriterTests
 
         Assert.Equal("Ո՞վ ավելի շուտ ճաշ կպատրաստի։", card.Texts[Lang.Hy].Text);
     }
+
+    [Theory]
+    [InlineData("Որ քաղաքում կուզեիր մեկ կեսօր թափառել։", "Ո՞ր քաղաքում կուզեիր մեկ կեսօր թափառել։")]
+    [InlineData("Ինչու ես սիրում ծովը?", "Ինչո՞ւ ես սիրում ծովը։")]
+    [InlineData("1-ից 10, որքան ես սիրում ճամփորդել։", "1-ից 10, որքա՞ն ես սիրում ճամփորդել։")]
+    [InlineData("Ինչ է այն, որ քեզ ուրախացնում է։", "Ի՞նչ է այն, որ քեզ ուրախացնում է։")]
+    [InlineData("Ո՞վ ավելի շուտ կուշանա։", "Ո՞վ ավելի շուտ կուշանա։")]   // already marked: unchanged
+    [InlineData("Քո սիրելի երգը։", "Քո սիրելի երգը։")]               // no question word: unchanged
+    public void Armenian_questions_get_their_question_mark(string written, string expected)
+    {
+        Assert.Equal(expected, ArmenianQuestions.Fix(written));
+    }
+
+    [Fact]
+    public void Finish_the_sentence_cards_are_not_turned_into_questions()
+    {
+        var finish = new { kind = "finish", depth = 1, topic = "food", text = new { en = "What I cook best is…", hy = "Ինչ ամենալավն եմ պատրաստում…" }, options = new { } };
+        var open = Open("Which city?", "Որ քաղաքը։");
+
+        var cards = CardParser.Parse(Json(finish, open), Request);
+
+        Assert.Equal("Ինչ ամենալավն եմ պատրաստում…", cards[0].Texts[Lang.Hy].Text);
+        Assert.Equal("Ո՞ր քաղաքը։", cards[1].Texts[Lang.Hy].Text);
+    }
+
+    [Fact]
+    public void Topic_descriptions_reach_the_prompt()
+    {
+        var dreams = new TopicInfo("dreams", ImmutableDictionary<Lang, string>.Empty.Add(Lang.En, "Dreams"), "hopes and ambitions (not dreams while sleeping)");
+
+        var message = CardPrompt.UserMessage(Request with { Topics = [dreams] });
+
+        Assert.Contains("- dreams: Dreams (hopes and ambitions (not dreams while sleeping))", message);
+    }
 }

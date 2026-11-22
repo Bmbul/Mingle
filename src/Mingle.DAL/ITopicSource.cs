@@ -21,6 +21,6 @@ public sealed class DbTopicSource(MingleDbContext db) : ITopicSource
             .OrderBy(t => t.Code)
             .ToListAsync(ct);
 
-        return [.. topics.Select(t => new TopicInfo(t.Code, t.Name.Present().ToImmutableDictionary(n => n.Lang, n => n.Value)))];
+        return [.. topics.Select(t => new TopicInfo(t.Code, t.Name.Present().ToImmutableDictionary(n => n.Lang, n => n.Value), t.About))];
     }
 }

@@ -3,7 +3,8 @@ using System.Collections.Immutable;
 namespace Mingle.Engine;
 
 /// <summary>A topic players can pick in the "Our topics" game, with its name in each language.</summary>
-public sealed record TopicInfo(string Code, ImmutableDictionary<Lang, string> Names)
+/// <param name="About">What the topic covers, in English, for the AI prompt; optional.</param>
+public sealed record TopicInfo(string Code, ImmutableDictionary<Lang, string> Names, string? About = null)
 {
     public string NameFor(Lang lang) =>
         Names.TryGetValue(lang, out var name) ? name

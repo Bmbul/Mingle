@@ -42,6 +42,7 @@ public sealed class ClaudeCardWriter(AnthropicClient client, IOptions<AiOptions>
         };
 
         var json = new StringBuilder();
+        long inputTokens = 0, outputTokens = 0;
         var started = DateTimeOffset.UtcNow;
         try
         {
@@ -50,6 +51,10 @@ public sealed class ClaudeCardWriter(AnthropicClient client, IOptions<AiOptions>
             {
                 if (streamEvent.TryPickContentBlockDelta(out var delta) && delta.Delta.TryPickText(out var text))
                     json.Append(text.Text);
+                else if (streamEvent.TryPickStart(out var start))
+                    inputTokens = start.Message.Usage.InputTokens;
+                else if (streamEvent.TryPickDelta(out var end))
+                    outputTokens = end.Usage.OutputTokens;
             }
         }
         catch (Exception ex) when (ex is AnthropicApiException or HttpRequestException or OperationCanceledException or IOException)
@@ -59,8 +64,9 @@ public sealed class ClaudeCardWriter(AnthropicClient client, IOptions<AiOptions>
         }
 
         var cards = CardParser.Parse(json.ToString(), request);
-        log.LogInformation("Wrote {Count} of {Asked} cards on {Topics} in {Seconds:0}s",
-            cards.Length, request.Count, string.Join(",", request.Topics.Select(t => t.Code)), (DateTimeOffset.UtcNow - started).TotalSeconds);
+        log.LogInformation("Wrote {Count} of {Asked} cards on {Topics} in {Seconds:0}s with {Model}: {Input} input and {Output} output tokens",
+            cards.Length, request.Count, string.Join(",", request.Topics.Select(t => t.Code)), (DateTimeOffset.UtcNow - started).TotalSeconds,
+            settings.Model, inputTokens, outputTokens);
         if (cards.IsEmpty) throw new CardWriterException("The AI answer had no usable cards.");
         return cards;
     }

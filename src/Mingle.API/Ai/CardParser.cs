@@ -73,7 +73,10 @@ public static class CardParser
             else
             {
                 if (Str(text, lang.Code()) is not { } value || !Clean(value, MaxTextLength)) return null;
-                texts[lang] = new CardText(Tidy(value));
+                var tidy = Tidy(value);
+                // Every kind but "finish the sentence" is a question.
+                if (lang == Lang.Hy && kind != "finish") tidy = ArmenianQuestions.Fix(tidy);
+                texts[lang] = new CardText(tidy);
             }
         }
 

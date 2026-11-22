@@ -306,6 +306,11 @@ namespace Mingle.DAL.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<string>("About")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("about");
+
                     b.Property<string>("Audience")
                         .IsRequired()
                         .HasMaxLength(16)

@@ -5,7 +5,8 @@ using Mingle.Engine;
 namespace Mingle.DAL.Seeding;
 
 /// <summary>One entry of <c>Seed/topics.json</c>.</summary>
-public sealed record TopicSeed(string Code, TopicAudience Audience, bool Pickable, IReadOnlyDictionary<Lang, string> Name)
+/// <param name="About">What the topic covers, in English, for the AI prompt (e.g. "dreams" means hopes, not sleep).</param>
+public sealed record TopicSeed(string Code, TopicAudience Audience, bool Pickable, IReadOnlyDictionary<Lang, string> Name, string? About = null)
 {
     public static IReadOnlyList<TopicSeed> Parse(string json)
     {
@@ -21,7 +22,8 @@ public sealed record TopicSeed(string Code, TopicAudience Audience, bool Pickabl
                 p => p.Value.GetString() ?? "");
             if (Langs.All.Any(l => string.IsNullOrWhiteSpace(name.GetValueOrDefault(l))))
                 throw new FormatException($"Topic '{code}' needs a name in every language.");
-            result.Add(new TopicSeed(code, audience, pickable, name));
+            var about = item.TryGetProperty("about", out var a) ? a.GetString() : null;
+            result.Add(new TopicSeed(code, audience, pickable, name, about));
         }
 
         var duplicate = result.GroupBy(t => t.Code).FirstOrDefault(g => g.Count() > 1);
