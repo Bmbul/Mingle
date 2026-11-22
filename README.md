@@ -5,26 +5,42 @@ Phase 1: pass-and-play on one phone, in the browser, offline-capable (PWA).
 
 ## Run it
 
+Start PostgreSQL in Docker, then the API (which also serves the app):
+
 ```bash
-dotnet run --project src/Mingle.Client --launch-profile http
+docker compose up -d db
+dotnet run --project src/Mingle.Api --launch-profile http
 ```
 
-Then open http://localhost:5273. Tests:
+Open http://localhost:5243. On first start the API creates the tables and imports the
+starter decks from `src/Mingle.DAL/Seed/*.json`.
+
+Or run everything in containers (app on http://localhost:8080):
+
+```bash
+docker compose --profile app up --build
+```
+
+Tests (no database needed):
 
 ```bash
 dotnet test
 ```
 
-The SDK is pinned to .NET 10 in `global.json`.
+The SDK is pinned to .NET 10 in `global.json`. EF Core migrations:
+`dotnet ef migrations add <Name> --project src/Mingle.DAL --startup-project src/Mingle.Api --output-dir Migrations`.
 
 ## Layout
 
 | Path | What it is |
 | --- | --- |
 | `src/Mingle.Engine` | Pure game rules: cards and card kinds, `Game.Apply` reducer, per-player views, card selector, plural rules, deck JSON reader. No I/O. |
-| `src/Mingle.Client` | Blazor WebAssembly PWA: Home, New game, Play screens; UI strings in `Resources/Strings*.resx`. |
-| `src/Mingle.Client/wwwroot/data` | Starter decks (`icebreakers.json`, `couples.json`), 20 cards each in hy/ru/en. |
-| `tests/Mingle.Engine.Tests` | xUnit tests for the engine and for the shipped decks. |
+| `src/Mingle.Client` | Blazor WebAssembly PWA: Home, New game, Play screens; UI strings in `Resources/Strings*.resx`. Loads decks from `/api/decks` and keeps the last copy for offline play. |
+| `src/Mingle.Api` | ASP.NET Core host: serves the client and the HTTP API (`GET /api/decks`). |
+| `src/Mingle.DAL` | Data access: EF Core + PostgreSQL. `Entities/` and `Configurations/` hold one file per table; `Migrations/`; `Seeding/`. |
+| `src/Mingle.DAL/Seed` | Starter decks (`icebreakers.json`, `couples.json`), 20 cards each in hy/ru/en, imported into an empty database. |
+| `tests/Mingle.Engine.Tests` | xUnit tests for the engine and for the seed decks. |
+| `tests/Mingle.DAL.Tests` | Tests for mapping decks to and from database entities. |
 
 ## How the game works
 

@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "mingle-client",
+      "name": "mingle",
       "runtimeExecutable": "dotnet",
-      "runtimeArgs": ["run", "--project", "src/Mingle.Client", "--launch-profile", "http"],
-      "port": 5273
+      "runtimeArgs": ["run", "--project", "src/Mingle.Api", "--launch-profile", "http"],
+      "port": 5243
     }
   ]
 }

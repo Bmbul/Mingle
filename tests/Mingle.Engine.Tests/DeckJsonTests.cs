@@ -41,4 +41,34 @@ public class DeckJsonTests
         var ex = Assert.Throws<FormatException>(() => DeckJson.Parse(json));
         Assert.Contains(expected, ex.Message);
     }
+
+    [Fact]
+    public void Writing_then_reading_gives_back_the_same_decks()
+    {
+        var original = DeckJson.Parse(Valid);
+
+        var copy = Assert.Single(DeckJson.ParseMany(DeckJson.WriteMany([original])));
+
+        Assert.Equal(original.Id, copy.Id);
+        Assert.Equal(original.Names.OrderBy(n => n.Key), copy.Names.OrderBy(n => n.Key));
+        Assert.Equal(original.Cards.Length, copy.Cards.Length);
+        for (var i = 0; i < original.Cards.Length; i++)
+        {
+            var (a, b) = (original.Cards[i], copy.Cards[i]);
+            Assert.Equal((a.Id, a.KindId, a.Depth), (b.Id, b.KindId, b.Depth));
+            Assert.Equal(a.Tags.ToArray(), b.Tags.ToArray());
+            foreach (var (lang, text) in a.Texts)
+            {
+                Assert.Equal(text.Text, b.Texts[lang].Text);
+                Assert.Equal(text.Options.ToArray(), b.Texts[lang].Options.ToArray());
+            }
+        }
+    }
+
+    [Fact]
+    public void Written_json_keeps_armenian_and_russian_readable()
+    {
+        var json = DeckJson.WriteMany([DeckJson.Parse(Valid)]);
+        Assert.Contains("Куда дальше?", json);
+    }
 }

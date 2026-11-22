@@ -147,11 +147,19 @@
     private AnswerMode mode = AnswerMode.Written;
     private TurnStyle turnStyle = TurnStyle.Everyone;
     private bool passThePhone;
+    private bool loadFailed;
     private int minDepth = 1, maxDepth = 3, cardCount = 20;
 
     protected override async Task OnInitializedAsync()
     {
-        decks = await Content.GetDecksAsync();
+        try
+        {
+            decks = await Content.GetDecksAsync();
+        }
+        catch (ContentUnavailableException)
+        {
+            loadFailed = true;
+        }
         deckIds = decks.Select(d => d.Id).ToHashSet();
 
         if (Session.LastSetup is { } last)
@@ -191,7 +199,8 @@
     private bool CanStart => NamedPlayers.Length >= Game.MinPlayers && MatchingCards > 0;
 
     private string Summary =>
-        NamedPlayers.Length < Game.MinPlayers ? T["Setup_NeedPlayers"]
+        loadFailed ? T["Setup_LoadFailed"]
+        : NamedPlayers.Length < Game.MinPlayers ? T["Setup_NeedPlayers"]
         : MatchingCards == 0 ? T["Setup_NoCards"]
         : T.Plural("Setup_Matches", MatchingCards);
 

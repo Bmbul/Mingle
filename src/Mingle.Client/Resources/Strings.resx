@@ -90,4 +90,5 @@
   <data name="Setup_PassPhoneDesc" xml:space="preserve"><value>Each player answers privately, then hands the phone on.</value></data>
   <data name="Setup_OutLoud" xml:space="preserve"><value>Out loud</value></data>
   <data name="Setup_OutLoudDesc" xml:space="preserve"><value>Nothing to type or tap. Read the card, answer and talk.</value></data>
+  <data name="Setup_LoadFailed" xml:space="preserve"><value>Couldn't load the cards. Check your connection and try again.</value></data>
 </root>

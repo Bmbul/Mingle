@@ -1,9 +1,12 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/Mingle.Api/Mingle.Api.csproj" />
     <Project Path="src/Mingle.Client/Mingle.Client.csproj" />
+    <Project Path="src/Mingle.DAL/Mingle.DAL.csproj" />
     <Project Path="src/Mingle.Engine/Mingle.Engine.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/Mingle.DAL.Tests/Mingle.DAL.Tests.csproj" />
     <Project Path="tests/Mingle.Engine.Tests/Mingle.Engine.Tests.csproj" />
   </Folder>
 </Solution>

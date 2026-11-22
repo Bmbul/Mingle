@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 
 namespace Mingle.Engine;
@@ -17,7 +18,72 @@ public static class DeckJson
     public static Deck Parse(string json)
     {
         using var doc = JsonDocument.Parse(json);
-        var root = doc.RootElement;
+        return ReadDeck(doc.RootElement);
+    }
+
+    /// <summary>Reads a JSON array of decks, as returned by the server's <c>/api/decks</c>.</summary>
+    public static ImmutableArray<Deck> ParseMany(string json)
+    {
+        using var doc = JsonDocument.Parse(json);
+        if (doc.RootElement.ValueKind != JsonValueKind.Array) throw new FormatException("Expected a JSON array of decks.");
+        return [.. doc.RootElement.EnumerateArray().Select(ReadDeck)];
+    }
+
+    /// <summary>Writes decks in the same format <see cref="ParseMany"/> reads.</summary>
+    public static string WriteMany(IEnumerable<Deck> decks)
+    {
+        using var stream = new MemoryStream();
+        using (var w = new Utf8JsonWriter(stream, new JsonWriterOptions { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }))
+        {
+            w.WriteStartArray();
+            foreach (var deck in decks) WriteDeck(w, deck);
+            w.WriteEndArray();
+        }
+        return System.Text.Encoding.UTF8.GetString(stream.ToArray());
+    }
+
+    private static void WriteDeck(Utf8JsonWriter w, Deck deck)
+    {
+        w.WriteStartObject();
+        w.WriteString("id", deck.Id);
+        WriteStrings(w, "name", deck.Names);
+        w.WriteStartArray("cards");
+        foreach (var card in deck.Cards)
+        {
+            w.WriteStartObject();
+            w.WriteString("id", card.Id);
+            w.WriteString("kind", card.KindId);
+            w.WriteNumber("depth", card.Depth);
+            w.WriteStartArray("tags");
+            foreach (var tag in card.Tags) w.WriteStringValue(tag);
+            w.WriteEndArray();
+            WriteStrings(w, "text", card.Texts.ToImmutableDictionary(t => t.Key, t => t.Value.Text));
+            if (card.Texts.Values.Any(t => !t.Options.IsEmpty))
+            {
+                w.WriteStartObject("options");
+                foreach (var (lang, text) in card.Texts.OrderBy(t => t.Key))
+                {
+                    w.WriteStartArray(lang.Code());
+                    foreach (var option in text.Options) w.WriteStringValue(option);
+                    w.WriteEndArray();
+                }
+                w.WriteEndObject();
+            }
+            w.WriteEndObject();
+        }
+        w.WriteEndArray();
+        w.WriteEndObject();
+    }
+
+    private static void WriteStrings(Utf8JsonWriter w, string name, IReadOnlyDictionary<Lang, string> values)
+    {
+        w.WriteStartObject(name);
+        foreach (var (lang, value) in values.OrderBy(v => v.Key)) w.WriteString(lang.Code(), value);
+        w.WriteEndObject();
+    }
+
+    private static Deck ReadDeck(JsonElement root)
+    {
         var deckId = RequiredString(root, "id", "deck");
         var names = ReadStrings(root.GetProperty("name"), $"deck '{deckId}' name");
 
