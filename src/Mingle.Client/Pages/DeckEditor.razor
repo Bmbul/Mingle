@@ -143,11 +143,16 @@
             <h2 class="label">@T["Editor_AiTopics", CardLimits.MaxTopics]</h2>
             @* One page per group; swipe sideways or tap a dot (js/swipe.js keeps the dots in step). *@
             <div class="pager" role="group" aria-label="@T["Editor_AiTopics", CardLimits.MaxTopics]">
+                <div class="pager-tabs" role="tablist">
+                    @for (var i = 0; i < TopicPages.Count; i++)
+                    {
+                        <button class="pager-tab @(i == 0 ? "on" : "")" role="tab" data-page="@i">@T[$"TopicGroup_{TopicPages[i].Group}"]</button>
+                    }
+                </div>
                 <div class="pager-pages">
                     @foreach (var (group, members) in TopicPages)
                     {
-                        <div class="pager-page">
-                            <h3 class="pager-title">@T[$"TopicGroup_{group}"]</h3>
+                        <div class="pager-page" role="tabpanel" aria-label="@T[$"TopicGroup_{group}"]">
                             <div class="chips">
                                 @foreach (var topic in members)
                                 {
@@ -164,7 +169,7 @@
                 <div class="pager-dots">
                     @for (var i = 0; i < TopicPages.Count; i++)
                     {
-                        <button class="pager-dot @(i == 0 ? "on" : "")" data-page="@i" aria-label="@T[$"TopicGroup_{TopicPages[i].Group}"]"></button>
+                        <button class="pager-dot @(i == 0 ? "on" : "")" data-page="@i" aria-hidden="true" tabindex="-1"></button>
                     }
                 </div>
             </div>
@@ -390,9 +395,9 @@
     private static readonly (string Group, string[] Codes)[] Groups =
     [
         ("everyday", ["everyday", "habits", "home", "food", "hobbies", "money", "work"]),
-        ("personal", ["childhood", "memories", "firsts", "values", "fears", "regrets", "growth", "gratitude", "dreams", "future"]),
-        ("relationships", ["friendship", "family", "love", "long-distance", "dates", "needs", "conflict"]),
-        ("fun", ["funny", "what-if", "travel", "adventure", "music", "stories"]),
+        ("personal", ["childhood", "memories", "firsts", "values", "fears", "regrets", "growth", "future"]),
+        ("relationships", ["friendship", "family", "love", "long-distance", "dates", "needs", "conflict", "gratitude"]),
+        ("fun", ["funny", "what-if", "travel", "adventure", "music", "stories", "dreams"]),
     ];
 
     private List<(string Group, List<TopicInfo> Members)> TopicPages

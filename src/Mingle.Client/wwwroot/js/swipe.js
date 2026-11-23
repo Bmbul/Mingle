@@ -115,11 +115,17 @@
         const pages = e.target;
         if (!(pages instanceof Element) || !pages.classList.contains('pager-pages')) return;
         const index = Math.round(pages.scrollLeft / Math.max(1, pages.clientWidth));
-        pages.parentElement.querySelectorAll('.pager-dot').forEach((dot, i) => dot.classList.toggle('on', i === index));
+        const pager = pages.closest('.pager');
+        pager.querySelectorAll('.pager-dot').forEach((dot, i) => dot.classList.toggle('on', i === index));
+        pager.querySelectorAll('.pager-tab').forEach((tab, i) => {
+            tab.classList.toggle('on', i === index);
+            tab.setAttribute('aria-selected', i === index ? 'true' : 'false');
+            if (i === index) tab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        });
     }, true);
 
     document.addEventListener('click', e => {
-        const dot = e.target.closest?.('.pager-dot');
+        const dot = e.target.closest?.('.pager-dot, .pager-tab');
         if (!dot) return;
         const pages = dot.closest('.pager')?.querySelector('.pager-pages');
         pages?.scrollTo({ left: Number(dot.dataset.page) * pages.clientWidth, behavior: 'smooth' });

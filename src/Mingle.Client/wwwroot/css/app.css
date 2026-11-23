@@ -380,7 +380,16 @@ a.check-row { text-decoration: none; color: inherit; }
 }
 .pager-pages::-webkit-scrollbar { display: none; }
 .pager-page { flex: 0 0 100%; scroll-snap-align: start; display: flex; flex-direction: column; gap: 8px; padding-right: 2px; }
-.pager-title { margin: 0; font-size: 14px; font-weight: 700; color: var(--muted); }
 .pager-dots { display: flex; justify-content: center; gap: 8px; padding-top: 10px; }
 .pager-dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: var(--border-dashed); cursor: pointer; }
 .pager-dot.on { background: var(--accent); width: 20px; border-radius: 4px; }
+
+/* Theme tabs above the topic pages; every page keeps the height of the tallest */
+.pager-tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; margin-bottom: 10px; border-bottom: 1px solid var(--border); }
+.pager-tabs::-webkit-scrollbar { display: none; }
+.pager-tab {
+    flex: none; padding: 8px 10px; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    background: transparent; color: var(--muted); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
+}
+.pager-tab.on { color: var(--accent); border-bottom-color: var(--accent); }
+.pager-pages { align-items: stretch; }
