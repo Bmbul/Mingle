@@ -73,7 +73,8 @@ else if (room.Stage == RoomStage.Lobby)
         {
             <h2 class="label">@T["Lobby_YourDeck"]</h2>
             <p class="muted small">@T["Lobby_YourDeckHint"]</p>
-            @foreach (var deck in decks)
+            @* Only decks with cards everyone in the room can read. *@
+            @foreach (var deck in decks.Where(d => d.CountReadableBy(RoomLanguages(room)) > 0 || room.You?.DeckId == d.Id))
             {
                 var on = room.You?.DeckId == deck.Id;
                 <button class="check-row @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")"
@@ -81,7 +82,7 @@ else if (room.Stage == RoomStage.Lobby)
                     <span class="box round @(on ? "on" : "")" aria-hidden="true">@if (on) { <Icon Name="check" Size="14" Stroke="3" /> }</span>
                     <span class="grow">
                         <span class="row-title">@deck.NameFor(Text.UiLang)</span>
-                        <span class="muted small">@T.Plural("Cards", deck.Cards.Length)</span>
+                        <span class="muted small">@T.Plural("Cards", deck.CountReadableBy(RoomLanguages(room)))</span>
                     </span>
                 </button>
             }
@@ -273,6 +274,8 @@ else if (room.Summary is { } summary)
 
     private Task ToggleTopic(TopicChoice topics, string code) =>
         Rooms.PickTopics(topics.Picked.Contains(code) ? topics.Picked.Remove(code) : topics.Picked.Add(code));
+
+    private static Lang[] RoomLanguages(RoomView room) => [.. room.Players.Select(p => p.Lang).Distinct()];
 
     private static bool EveryoneBrings(RoomView room) => room.Settings.Source == DeckSource.Everyone;
 

@@ -76,4 +76,15 @@ public class DeckMixTests
 
         Assert.Equal(mix.Cards.Select(c => c.Id).Order(), played.Order());
     }
+
+    [Fact]
+    public void A_deck_counts_only_cards_everyone_can_read()
+    {
+        var deck = Deck(Card("all", CardKinds.OpenQuestion), Card("hy-en", CardKinds.OpenQuestion, 1, Lang.Hy, Lang.En), Card("hy", CardKinds.OpenQuestion, 1, Lang.Hy));
+
+        Assert.Equal(3, deck.CountReadableBy([Lang.Hy]));
+        Assert.Equal(2, deck.CountReadableBy([Lang.Hy, Lang.En]));
+        Assert.Equal(1, deck.CountReadableBy([Lang.Hy, Lang.Ru]));
+        Assert.Equal(0, Deck(Card("hy", CardKinds.OpenQuestion, 1, Lang.Hy)).CountReadableBy([Lang.Ru]));
+    }
 }

@@ -108,14 +108,15 @@
     {
     <section class="stack">
         <h2 class="label">@T["Setup_Decks"]</h2>
-        @foreach (var deck in decks)
+        @* Only decks with cards everyone at the table can read. *@
+        @foreach (var deck in decks.Where(d => d.CountReadableBy(TableLanguages) > 0))
         {
             var on = deckIds.Contains(deck.Id);
             <button class="check-row @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" @onclick="() => Toggle(deckIds, deck.Id)">
                 <span class="box @(on ? "on" : "")" aria-hidden="true">@if (on) { <Icon Name="check" Size="14" Stroke="3" /> }</span>
                 <span class="grow">
                     <span class="row-title">@deck.NameFor(Text.UiLang)</span>
-                    <span class="muted small">@T.Plural("Cards", deck.Cards.Length)</span>
+                    <span class="muted small">@T.Plural("Cards", deck.CountReadableBy(TableLanguages))</span>
                 </span>
             </button>
         }
@@ -245,6 +246,9 @@
             return string.Join(" · ", parts);
         }
     }
+
+    /// <summary>The languages at the table: every player's on one phone; online, the host's for now.</summary>
+    private Lang[] TableLanguages => Online ? [Text.UiLang] : [.. players.Select(p => p.Lang).Distinct()];
 
     private int MatchingCards =>
         Game.BuildPool(decks.Where(d => deckIds.Contains(d.Id)), Settings, NamedPlayers.IsEmpty ? [new Player("x", "x", Text.UiLang)] : NamedPlayers).Length;

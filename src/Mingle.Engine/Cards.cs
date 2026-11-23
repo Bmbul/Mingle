@@ -107,4 +107,7 @@ public sealed record Deck(string Id, ImmutableDictionary<Lang, string> Names, Im
         Names.TryGetValue(lang, out var name) ? name
         : Names.TryGetValue(Lang.En, out var en) ? en
         : Names.Values.FirstOrDefault() ?? Id;
+
+    /// <summary>How many cards everyone reading these languages can play (a card needs all of them).</summary>
+    public int CountReadableBy(IReadOnlyCollection<Lang> languages) => Cards.Count(c => languages.All(c.Supports));
 }
