@@ -31,227 +31,83 @@
         </section>
 
         <section class="stack">
-            <label class="label" for="add-mode">@T["Editor_Mode"]</label>
-            <select id="add-mode" class="field" @bind="Mode">
-                <option value="ai">@T["Editor_ModeAi"]</option>
-                <option value="manual">@T["Editor_ModeManual"]</option>
-                <option value="decks">@T["Editor_ModeDecks"]</option>
-            </select>
-        </section>
-
-        @if (Mode == "ai")
-        {
-            <section class="stack">
-                <h2 class="label">@T["Editor_AiTopics", CardLimits.MaxTopics]</h2>
-                <div class="chips" role="group" aria-label="@T["Editor_AiTopics", CardLimits.MaxTopics]">
-                    @foreach (var topic in ShownTopics)
-                    {
-                        var code = topic.Code;
-                        var on = pickedTopics.Contains(code);
-                        <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")"
-                                disabled="@(writing || (!on && pickedTopics.Count >= CardLimits.MaxTopics))"
-                                @onclick="() => ToggleTopic(code)">@topic.NameFor(Text.UiLang)</button>
-                    }
-                </div>
-                @if (topics.Length > TopicDeal.OfferSize)
+            <h2 class="label">@T.Plural("Cards", cards.Count)</h2>
+            @foreach (var card in cards)
+            {
+                var c = card;
+                if (ReferenceEquals(open, c))
                 {
-                    <button class="ghost" disabled="@writing" @onclick="OtherTopics"><Icon Name="refresh" Size="18" />@T["Lobby_NewTopics"]</button>
-                }
-            </section>
-
-            <section class="stack">
-                <label class="label" for="ai-theme">@T["Editor_AiOwn"]</label>
-                <textarea id="ai-theme" class="field area" maxlength="200" placeholder="@T["Editor_AiPlaceholder"]"
-                          @bind="theme" @bind:event="oninput" disabled="@writing"></textarea>
-            </section>
-
-            <section class="stack">
-                <h2 class="label">@T["Editor_AiDepth"]</h2>
-                <div class="chips" role="group" aria-label="@T["Editor_AiDepth"]">
-                    @for (var level = 1; level <= 3; level++)
-                    {
-                        var d = level;
-                        var on = depths.Contains(d);
-                        @* At least one depth stays on. *@
-                        <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@(writing || (on && depths.Count == 1))"
-                                @onclick="() => { if (!depths.Remove(d)) depths.Add(d); }">@T[$"Depth_{d}"]</button>
-                    }
-                </div>
-            </section>
-
-            <section class="stack">
-                <h2 class="label">@T["Editor_AiLanguages"]</h2>
-                <div class="chips" role="group" aria-label="@T["Editor_AiLanguages"]">
-                    @foreach (var language in Langs.All)
-                    {
-                        var l = language;
-                        var on = languages.Contains(l);
-                        <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" lang="@l.Code()"
-                                disabled="@(writing || (on && languages.Count == 1))"
-                                @onclick="() => { if (!languages.Remove(l)) languages.Add(l); }">@Text.LangName(l)</button>
-                    }
-                </div>
-                <p class="muted small">@T["Editor_AiLanguagesHint"]</p>
-            </section>
-
-            <section class="stack">
-                <h2 class="label">@T["Editor_AiSetting"]</h2>
-                <div class="chips" role="group" aria-label="@T["Editor_AiSetting"]">
-                    @foreach (var option in Settings)
-                    {
-                        var s = option;
-                        <button class="chip @(setting == s ? "on" : "")" aria-pressed="@(setting == s ? "true" : "false")" disabled="@writing"
-                                @onclick="() => setting = s">@T[$"Editor_Setting_{s}"]</button>
-                    }
-                </div>
-            </section>
-
-            <button class="btn2" disabled="@(writing || !CanWrite)" @onclick="WriteWithAi">
-                @if (writing)
-                {
-                    <span class="spinner small" aria-hidden="true"></span>@T["Editor_AiWriting"]
+                    <div class="card stack">
+                        <div class="row gap">
+                            <label class="visually-hidden" for="kind-@c.Key">@T["Editor_Kind"]</label>
+                            <select id="kind-@c.Key" class="field grow" @bind="c.KindId">
+                                @foreach (var kind in CardKinds.All)
+                                {
+                                    <option value="@kind.Id">@T.KindName(kind.Id)</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="chips" role="group" aria-label="@T["Editor_Depth"]">
+                            @for (var depth = 1; depth <= 3; depth++)
+                            {
+                                var d = depth;
+                                <button class="chip @(c.Depth == d ? "on" : "")" aria-pressed="@(c.Depth == d ? "true" : "false")"
+                                        @onclick="() => c.Depth = d">@T[$"Depth_{d}"]</button>
+                            }
+                        </div>
+                        @foreach (var lang in EditOrder)
+                        {
+                            var l = lang;
+                            <div class="stack">
+                                <span class="label" lang="@l.Code()">@Text.LangName(l)</span>
+                                @if (c.IsChoice)
+                                {
+                                    <input class="field" lang="@l.Code()" maxlength="120" placeholder="@T["Editor_OptionA"]"
+                                           value="@c.Option(l, 0)" @oninput="e => c.SetOption(l, 0, e.Value as string)" />
+                                    <input class="field" lang="@l.Code()" maxlength="120" placeholder="@T["Editor_OptionB"]"
+                                           value="@c.Option(l, 1)" @oninput="e => c.SetOption(l, 1, e.Value as string)" />
+                                }
+                                else
+                                {
+                                    <textarea class="field area" lang="@l.Code()" maxlength="300" placeholder="@T[$"Editor_Hint_{c.KindId}"]"
+                                              value="@c.Text(l)" @oninput="e => c.SetText(l, e.Value as string)"></textarea>
+                                }
+                            </div>
+                        }
+                        <p class="muted small">@T["Editor_LangHint"]</p>
+                        <div class="row gap">
+                            <button class="btn2 grow" @onclick="() => Remove(c)">@T["Editor_RemoveCard"]</button>
+                            <button class="btn grow" @onclick="() => open = null">@T["Editor_Done"]</button>
+                        </div>
+                    </div>
                 }
                 else
                 {
-                    @T[cards.Any(c => c.IsComplete) ? "Editor_AiWriteMore" : "Editor_AiWrite", CardLimits.PerWrite]
-                }
-            </button>
-            <p class="muted small" role="status">@(aiNote ?? T["Editor_AiHint"])</p>
-
-            @if (cards.Any(c => c.IsComplete))
-            {
-                <section class="stack">
-                    <h2 class="label">@T.Plural("Cards", cards.Count(c => c.IsComplete))</h2>
-                    @foreach (var card in cards.Where(c => c.IsComplete).ToList())
-                    {
-                        var c = card;
-                        <div class="check-row">
-                            <span class="grow">
-                                <span class="row-title">@c.Preview(Text.UiLang)</span>
-                                <span class="muted small">@T.KindName(c.KindId) · @T[$"Depth_{c.Depth}"]</span>
-                            </span>
-                            <button class="icon" aria-label="@T["Editor_RemoveCard"]" @onclick="() => Remove(c)"><Icon Name="close" /></button>
-                        </div>
-                    }
-                    <p class="muted small">@T["Editor_AiEditHint"]</p>
-                </section>
-            }
-        }
-        else if (Mode == "decks")
-        {
-            <p class="muted small">@T["Editor_DecksHint"]</p>
-            @if (sourceDecks.IsEmpty)
-            {
-                <p class="muted center">@T["Online_Connecting"]</p>
-            }
-            @foreach (var source in sourceDecks)
-            {
-                var deck = source;
-                var expanded = openDecks.Contains(deck.Id);
-                var addable = deck.Cards.Where(c => !InDeck(c)).ToList();
-                var allPicked = addable.Count > 0 && addable.All(c => picked.Contains(Key(deck, c)));
-                <div class="card stack">
                     <div class="row gap">
-                        <button class="text-row grow" aria-expanded="@(expanded ? "true" : "false")"
-                                @onclick="() => { if (!openDecks.Remove(deck.Id)) openDecks.Add(deck.Id); }">
-                            <span class="row-title">@deck.NameFor(Text.UiLang)</span>
-                            <span class="muted small">@T.Plural("Cards", deck.Cards.Length)</span>
-                        </button>
-                        <button class="chip @(allPicked ? "on" : "")" aria-pressed="@(allPicked ? "true" : "false")" disabled="@(addable.Count == 0)"
-                                @onclick="() => PickAll(deck, addable, !allPicked)">@T["Editor_SelectAll"]</button>
-                    </div>
-                    @if (expanded)
-                    {
-                        @foreach (var item in deck.Cards)
-                        {
-                            var card = item;
-                            var key = Key(deck, card);
-                            var already = InDeck(card);
-                            var on = already || picked.Contains(key);
-                            var text = card.TextFor(Text.UiLang);
-                            <button class="check-row @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@already"
-                                    @onclick="() => { if (!picked.Remove(key)) picked.Add(key); }">
-                                <span class="box @(on ? "on" : "")" aria-hidden="true">@if (on) { <Icon Name="check" Size="14" Stroke="3" /> }</span>
-                                <span class="grow">
-                                    <span class="row-title">@(text.Options.IsEmpty ? text.Text : string.Join(" / ", text.Options))</span>
-                                    <span class="muted small">@(already ? T["Editor_AlreadyIn"] : $"{T.KindName(card.KindId)} · {T[$"Depth_{card.Depth}"]}")</span>
-                                </span>
-                            </button>
-                        }
-                    }
-                </div>
-            }
-            <button class="btn2" disabled="@(picked.Count == 0)" @onclick="AddPicked"><Icon Name="layers" Size="18" />@T["Editor_AddPicked", picked.Count]</button>
-            @if (decksNote is not null)
-            {
-                <p class="muted small" role="status">@decksNote</p>
-            }
-        }
-        else
-        {
-            <section class="stack">
-                <h2 class="label">@T.Plural("Cards", cards.Count)</h2>
-                @foreach (var card in cards)
-                {
-                    var c = card;
-                    if (ReferenceEquals(open, c))
-                    {
-                        <div class="card stack">
-                            <div class="row gap">
-                                <label class="visually-hidden" for="kind-@c.Key">@T["Editor_Kind"]</label>
-                                <select id="kind-@c.Key" class="field grow" @bind="c.KindId">
-                                    @foreach (var kind in CardKinds.All)
-                                    {
-                                        <option value="@kind.Id">@T.KindName(kind.Id)</option>
-                                    }
-                                </select>
-                            </div>
-                            <div class="chips" role="group" aria-label="@T["Editor_Depth"]">
-                                @for (var depth = 1; depth <= 3; depth++)
-                                {
-                                    var d = depth;
-                                    <button class="chip @(c.Depth == d ? "on" : "")" aria-pressed="@(c.Depth == d ? "true" : "false")"
-                                            @onclick="() => c.Depth = d">@T[$"Depth_{d}"]</button>
-                                }
-                            </div>
-                            @foreach (var lang in EditOrder)
-                            {
-                                var l = lang;
-                                <div class="stack">
-                                    <span class="label" lang="@l.Code()">@Text.LangName(l)</span>
-                                    @if (c.IsChoice)
-                                    {
-                                        <input class="field" lang="@l.Code()" maxlength="120" placeholder="@T["Editor_OptionA"]"
-                                               value="@c.Option(l, 0)" @oninput="e => c.SetOption(l, 0, e.Value as string)" />
-                                        <input class="field" lang="@l.Code()" maxlength="120" placeholder="@T["Editor_OptionB"]"
-                                               value="@c.Option(l, 1)" @oninput="e => c.SetOption(l, 1, e.Value as string)" />
-                                    }
-                                    else
-                                    {
-                                        <textarea class="field area" lang="@l.Code()" maxlength="300" placeholder="@T[$"Editor_Hint_{c.KindId}"]"
-                                                  value="@c.Text(l)" @oninput="e => c.SetText(l, e.Value as string)"></textarea>
-                                    }
-                                </div>
-                            }
-                            <p class="muted small">@T["Editor_LangHint"]</p>
-                            <div class="row gap">
-                                <button class="btn2 grow" @onclick="() => Remove(c)">@T["Editor_RemoveCard"]</button>
-                                <button class="btn grow" @onclick="() => open = null">@T["Editor_Done"]</button>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <button class="check-row @(c.IsComplete ? "" : "incomplete")" @onclick="() => open = c">
+                        <button class="check-row grow @(c.IsComplete ? "" : "incomplete")" @onclick="() => open = c">
                             <span class="grow">
                                 <span class="row-title">@(c.Preview(Text.UiLang) is { Length: > 0 } p ? p : T["Editor_EmptyCard"])</span>
                                 <span class="muted small">@T.KindName(c.KindId) · @T[$"Depth_{c.Depth}"] · @string.Join(" ", c.Languages.Select(l => l.Code().ToUpperInvariant()))</span>
                             </span>
                         </button>
-                    }
+                        <button class="icon" aria-label="@T["Editor_RemoveCard"]" @onclick="() => Remove(c)"><Icon Name="close" /></button>
+                    </div>
                 }
-                <button class="ghost" @onclick="AddCard"><Icon Name="plus" Size="18" />@T["Editor_AddCard"]</button>
-            </section>
+            }
+            @if (cards.Count == 0)
+            {
+                <p class="muted">@T["Editor_NoCardsYet"]</p>
+            }
+        </section>
+
+        <section class="add-row" aria-label="@T["Editor_AddCards"]">
+            <button class="btn2" @onclick="AddCard"><Icon Name="plus" Size="18" />@T["Editor_WriteCard"]</button>
+            <button class="btn2" @onclick="@(() => OpenSheet("generate"))"><Icon Name="refresh" Size="18" />@T["Editor_Generate"]</button>
+            <button class="btn2" @onclick="@(() => OpenSheet("decks"))"><Icon Name="layers" Size="18" />@T["Editor_FromDecks"]</button>
+        </section>
+        @if (addedNote is not null)
+        {
+            <p class="muted small" role="status">@addedNote</p>
         }
 
         @if (Id is not null)
@@ -280,6 +136,142 @@
         <p class="muted center" role="status">@Status</p>
         <button class="btn" disabled="@(!CanSave || busy)" @onclick="Save">@T["Editor_Save"]</button>
     </footer>
+}
+
+@if (sheet is not null && !loading && !notAllowed)
+{
+    <div class="sheet-backdrop" @onclick="CloseSheet"></div>
+    <div class="sheet tall" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+        <div class="row gap">
+            <h2 id="sheet-title" class="h2 grow">@(sheet == "generate" ? T["Editor_Generate"] : T["Editor_FromDecks"])</h2>
+            <button class="icon" aria-label="@T["End_Close"]" @onclick="CloseSheet"><Icon Name="close" /></button>
+        </div>
+        @if (sheet == "generate")
+        {
+        <section class="stack">
+            <h2 class="label">@T["Editor_AiTopics", CardLimits.MaxTopics]</h2>
+            <div class="chips" role="group" aria-label="@T["Editor_AiTopics", CardLimits.MaxTopics]">
+                @foreach (var topic in ShownTopics)
+                {
+                    var code = topic.Code;
+                    var on = pickedTopics.Contains(code);
+                    <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")"
+                            disabled="@(writing || (!on && pickedTopics.Count >= CardLimits.MaxTopics))"
+                            @onclick="() => ToggleTopic(code)">@topic.NameFor(Text.UiLang)</button>
+                }
+            </div>
+            @if (topics.Length > TopicDeal.OfferSize)
+            {
+                <button class="ghost" disabled="@writing" @onclick="OtherTopics"><Icon Name="refresh" Size="18" />@T["Lobby_NewTopics"]</button>
+            }
+        </section>
+
+        <section class="stack">
+            <label class="label" for="ai-theme">@T["Editor_AiOwn"]</label>
+            <textarea id="ai-theme" class="field area" maxlength="200" placeholder="@T["Editor_AiPlaceholder"]"
+                      @bind="theme" @bind:event="oninput" disabled="@writing"></textarea>
+        </section>
+
+        <section class="stack">
+            <h2 class="label">@T["Editor_AiDepth"]</h2>
+            <div class="chips" role="group" aria-label="@T["Editor_AiDepth"]">
+                @for (var level = 1; level <= 3; level++)
+                {
+                    var d = level;
+                    var on = depths.Contains(d);
+                    @* At least one depth stays on. *@
+                    <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@(writing || (on && depths.Count == 1))"
+                            @onclick="() => { if (!depths.Remove(d)) depths.Add(d); }">@T[$"Depth_{d}"]</button>
+                }
+            </div>
+        </section>
+
+        <section class="stack">
+            <h2 class="label">@T["Editor_AiLanguages"]</h2>
+            <div class="chips" role="group" aria-label="@T["Editor_AiLanguages"]">
+                @foreach (var language in Langs.All)
+                {
+                    var l = language;
+                    var on = languages.Contains(l);
+                    <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" lang="@l.Code()"
+                            disabled="@(writing || (on && languages.Count == 1))"
+                            @onclick="() => { if (!languages.Remove(l)) languages.Add(l); }">@Text.LangName(l)</button>
+                }
+            </div>
+            <p class="muted small">@T["Editor_AiLanguagesHint"]</p>
+        </section>
+
+        <section class="stack">
+            <h2 class="label">@T["Editor_AiSetting"]</h2>
+            <div class="chips" role="group" aria-label="@T["Editor_AiSetting"]">
+                @foreach (var option in Settings)
+                {
+                    var s = option;
+                    <button class="chip @(setting == s ? "on" : "")" aria-pressed="@(setting == s ? "true" : "false")" disabled="@writing"
+                            @onclick="() => setting = s">@T[$"Editor_Setting_{s}"]</button>
+                }
+            </div>
+        </section>
+
+        <button class="btn2" disabled="@(writing || !CanWrite)" @onclick="WriteWithAi">
+            @if (writing)
+            {
+                <span class="spinner small" aria-hidden="true"></span>@T["Editor_AiWriting"]
+            }
+            else
+            {
+                @T[cards.Any(c => c.IsComplete) ? "Editor_AiWriteMore" : "Editor_AiWrite", CardLimits.PerWrite]
+            }
+        </button>
+        <p class="muted small" role="status">@(aiNote ?? T["Editor_AiHint"])</p>
+        }
+        else
+        {
+        <p class="muted small">@T["Editor_DecksHint"]</p>
+        @if (sourceDecks.IsEmpty)
+        {
+            <p class="muted center">@T["Online_Connecting"]</p>
+        }
+        @foreach (var source in sourceDecks)
+        {
+            var deck = source;
+            var expanded = openDecks.Contains(deck.Id);
+            var addable = deck.Cards.Where(c => !InDeck(c)).ToList();
+            var allPicked = addable.Count > 0 && addable.All(c => picked.Contains(Key(deck, c)));
+            <div class="card stack">
+                <div class="row gap">
+                    <button class="text-row grow" aria-expanded="@(expanded ? "true" : "false")"
+                            @onclick="() => { if (!openDecks.Remove(deck.Id)) openDecks.Add(deck.Id); }">
+                        <span class="row-title">@deck.NameFor(Text.UiLang)</span>
+                        <span class="muted small">@T.Plural("Cards", deck.Cards.Length)</span>
+                    </button>
+                    <button class="chip @(allPicked ? "on" : "")" aria-pressed="@(allPicked ? "true" : "false")" disabled="@(addable.Count == 0)"
+                            @onclick="() => PickAll(deck, addable, !allPicked)">@T["Editor_SelectAll"]</button>
+                </div>
+                @if (expanded)
+                {
+                    @foreach (var item in deck.Cards)
+                    {
+                        var card = item;
+                        var key = Key(deck, card);
+                        var already = InDeck(card);
+                        var on = already || picked.Contains(key);
+                        var text = card.TextFor(Text.UiLang);
+                        <button class="check-row @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@already"
+                                @onclick="() => { if (!picked.Remove(key)) picked.Add(key); }">
+                            <span class="box @(on ? "on" : "")" aria-hidden="true">@if (on) { <Icon Name="check" Size="14" Stroke="3" /> }</span>
+                            <span class="grow">
+                                <span class="row-title">@(text.Options.IsEmpty ? text.Text : string.Join(" / ", text.Options))</span>
+                                <span class="muted small">@(already ? T["Editor_AlreadyIn"] : $"{T.KindName(card.KindId)} · {T[$"Depth_{card.Depth}"]}")</span>
+                            </span>
+                        </button>
+                    }
+                }
+            </div>
+        }
+        <button class="btn2" disabled="@(picked.Count == 0)" @onclick="AddPicked"><Icon Name="layers" Size="18" />@T["Editor_AddPicked", picked.Count]</button>
+        }
+    </div>
 }
 
 @code {
@@ -368,7 +360,8 @@
     private readonly HashSet<int> depths = [1, 2, 3];
     private readonly HashSet<Lang> languages = [Text.UiLang];
     private string setting = "couple";
-    private string mode = "ai";
+    private string? sheet;
+    private string? addedNote;
 
     private static readonly string[] Settings = ["couple", "friends", "family", "party", "colleagues"];
 
@@ -378,19 +371,16 @@
         public const int PerWrite = 20;
     }
 
-    /// <summary>"ai" or "manual": two separate views of the same deck. By hand always has a card to type into.</summary>
-    private string Mode
+    /// <summary>The card list is always shown; generating and picking from decks open in a sheet over it.</summary>
+    private void OpenSheet(string which)
     {
-        get => mode;
-        set
-        {
-            mode = value;
-            open = null;
-            if (mode == "manual" && cards.Count == 0) AddCard();
-            if (mode != "manual") cards.RemoveAll(c => !c.IsComplete);
-            if (mode == "decks") _ = LoadSourceDecks();
-        }
+        open = null;
+        aiNote = null;
+        sheet = which;
+        if (which == "decks") _ = LoadSourceDecks();
     }
+
+    private void CloseSheet() => sheet = null;
 
     private ImmutableArray<string> offer = [];
 
@@ -405,7 +395,6 @@
     private ImmutableArray<Deck> sourceDecks = [];
     private readonly HashSet<string> openDecks = [];
     private readonly HashSet<string> picked = [];
-    private string? decksNote;
 
     private static string Key(Deck deck, Card card) => $"{deck.Id}|{card.Id}";
 
@@ -444,7 +433,8 @@
                 added++;
             }
         picked.Clear();
-        decksNote = T.Plural("Editor_DecksAdded", added);
+        addedNote = T.Plural("Editor_DecksAdded", added);
+        sheet = null;
     }
 
     private bool CanWrite => pickedTopics.Count > 0 || !string.IsNullOrWhiteSpace(theme);
@@ -468,9 +458,8 @@
                 cards = [.. deck.Cards.Select(EditCard.From)];
             }
         }
-        // A new deck starts with AI; an existing one opens by hand, ready to edit its cards.
-        mode = Id is null ? "ai" : "manual";
-        if (mode == "manual" && cards.Count == 0) AddCard();
+        // A new deck opens straight on "Generate", the quickest start; an existing one shows its cards.
+        sheet = Id is null ? "generate" : null;
         try { topics = await Content.GetTopicsAsync(); }
         catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException) { topics = []; }
         offer = TopicDeal.Offer(topics, Random.Shared.Next());
@@ -510,7 +499,8 @@
                     : string.Join(", ", topics.Where(t => pickedTopics.Contains(t.Code)).Select(t => t.NameFor(Text.UiLang)));
                 name = suggested.Length <= 60 ? suggested : suggested[..60];
             }
-            aiNote = T.Plural("Editor_AiAdded", written.Length);
+            addedNote = T.Plural("Editor_AiAdded", written.Length);
+            sheet = null;
         }
         catch (HttpRequestException)
         {

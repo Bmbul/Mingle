@@ -187,9 +187,6 @@
   <data name="Editor_AiFailed" xml:space="preserve"><value>Չստացվեց։ Փորձիր կրկին։</value></data>
   <data name="Editor_AiAdded_One" xml:space="preserve"><value>Ավելացվեց {0} քարտ։ Ստուգիր և պահպանիր։</value></data>
   <data name="Editor_AiAdded_Other" xml:space="preserve"><value>Ավելացվեց {0} քարտ։ Ստուգիր և պահպանիր։</value></data>
-  <data name="Editor_Mode" xml:space="preserve"><value>Քարտերի ստեղծում</value></data>
-  <data name="Editor_ModeAi" xml:space="preserve"><value>Ավտոմատ</value></data>
-  <data name="Editor_ModeManual" xml:space="preserve"><value>Ձեռքով</value></data>
   <data name="Editor_AiTopics" xml:space="preserve"><value>Թեմաներ · մինչև {0}</value></data>
   <data name="Editor_AiOwn" xml:space="preserve"><value>Ուրիշ ի՞նչ (ըստ ցանկության)</value></data>
   <data name="Editor_AiDepth" xml:space="preserve"><value>Որքան խորը</value></data>
@@ -200,7 +197,6 @@
   <data name="Editor_Setting_party" xml:space="preserve"><value>Խնջույք</value></data>
   <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Գործընկերներ</value></data>
   <data name="Editor_AiWriteMore" xml:space="preserve"><value>Ստեղծել ևս {0}</value></data>
-  <data name="Editor_AiEditHint" xml:space="preserve"><value>Քարտի տեքստը փոխելու համար ընտրիր «Ձեռքով»։</value></data>
   <data name="Setup_HowToPlay" xml:space="preserve"><value>Ինչպես եք խաղում</value></data>
   <data name="Setup_WriteShort" xml:space="preserve"><value>Գրել</value></data>
   <data name="Setup_TalkShort" xml:space="preserve"><value>Խոսել</value></data>
@@ -217,7 +213,6 @@
   <data name="End_OpenDeck" xml:space="preserve"><value>Բացել</value></data>
   <data name="End_Close" xml:space="preserve"><value>Փակել</value></data>
   <data name="End_Cancel" xml:space="preserve"><value>Չեղարկել</value></data>
-  <data name="Editor_ModeDecks" xml:space="preserve"><value>Այլ հավաքածուներից</value></data>
   <data name="Editor_DecksHint" xml:space="preserve"><value>Նշիր քարտեր այլ հավաքածուներից կամ ընտրիր բոլորը՝ միավորելու համար։</value></data>
   <data name="Editor_SelectAll" xml:space="preserve"><value>Բոլորը</value></data>
   <data name="Editor_AlreadyIn" xml:space="preserve"><value>Արդեն այս հավաքածուում է</value></data>
@@ -231,4 +226,9 @@
   <data name="Setup_TalkLine" xml:space="preserve"><value>Պատասխանեք բարձրաձայն</value></data>
   <data name="Setup_AllLine" xml:space="preserve"><value>Պատասխանում են բոլորը</value></data>
   <data name="Setup_TurnsLine" xml:space="preserve"><value>Ամեն քարտ՝ մեկ հոգի</value></data>
+  <data name="Editor_AddCards" xml:space="preserve"><value>Ավելացնել քարտեր</value></data>
+  <data name="Editor_WriteCard" xml:space="preserve"><value>Գրել քարտ</value></data>
+  <data name="Editor_Generate" xml:space="preserve"><value>Ստեղծել</value></data>
+  <data name="Editor_FromDecks" xml:space="preserve"><value>Հավաքածուներից</value></data>
+  <data name="Editor_NoCardsYet" xml:space="preserve"><value>Դեռ քարտեր չկան։ Գրիր, ստեղծիր կամ վերցրու այլ հավաքածուներից։</value></data>
 </root>

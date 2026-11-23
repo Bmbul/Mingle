@@ -192,9 +192,6 @@
   <data name="Editor_AiAdded_One" xml:space="preserve"><value>Добавлена {0} карточка. Проверь и сохрани колоду.</value></data>
   <data name="Editor_AiAdded_Few" xml:space="preserve"><value>Добавлено {0} карточки. Проверь и сохрани колоду.</value></data>
   <data name="Editor_AiAdded_Many" xml:space="preserve"><value>Добавлено {0} карточек. Проверь и сохрани колоду.</value></data>
-  <data name="Editor_Mode" xml:space="preserve"><value>Создание карточек</value></data>
-  <data name="Editor_ModeAi" xml:space="preserve"><value>Автоматически</value></data>
-  <data name="Editor_ModeManual" xml:space="preserve"><value>Вручную</value></data>
   <data name="Editor_AiTopics" xml:space="preserve"><value>Темы · до {0}</value></data>
   <data name="Editor_AiOwn" xml:space="preserve"><value>Что-то ещё? (необязательно)</value></data>
   <data name="Editor_AiDepth" xml:space="preserve"><value>Насколько глубоко</value></data>
@@ -205,7 +202,6 @@
   <data name="Editor_Setting_party" xml:space="preserve"><value>Вечеринка</value></data>
   <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Коллеги</value></data>
   <data name="Editor_AiWriteMore" xml:space="preserve"><value>Сгенерировать ещё {0}</value></data>
-  <data name="Editor_AiEditHint" xml:space="preserve"><value>Чтобы изменить текст карточки, выбери «Вручную».</value></data>
   <data name="Setup_HowToPlay" xml:space="preserve"><value>Как играете</value></data>
   <data name="Setup_WriteShort" xml:space="preserve"><value>Писать</value></data>
   <data name="Setup_TalkShort" xml:space="preserve"><value>Говорить</value></data>
@@ -222,7 +218,6 @@
   <data name="End_OpenDeck" xml:space="preserve"><value>Открыть</value></data>
   <data name="End_Close" xml:space="preserve"><value>Закрыть</value></data>
   <data name="End_Cancel" xml:space="preserve"><value>Отмена</value></data>
-  <data name="Editor_ModeDecks" xml:space="preserve"><value>Из колод</value></data>
   <data name="Editor_DecksHint" xml:space="preserve"><value>Отметь карточки из других колод или выбери все, чтобы объединить.</value></data>
   <data name="Editor_SelectAll" xml:space="preserve"><value>Все</value></data>
   <data name="Editor_AlreadyIn" xml:space="preserve"><value>Уже в этой колоде</value></data>
@@ -237,4 +232,9 @@
   <data name="Setup_TalkLine" xml:space="preserve"><value>Отвечайте вслух</value></data>
   <data name="Setup_AllLine" xml:space="preserve"><value>Отвечают все</value></data>
   <data name="Setup_TurnsLine" xml:space="preserve"><value>Одна карточка — один человек</value></data>
+  <data name="Editor_AddCards" xml:space="preserve"><value>Добавить карточки</value></data>
+  <data name="Editor_WriteCard" xml:space="preserve"><value>Написать</value></data>
+  <data name="Editor_Generate" xml:space="preserve"><value>Сгенерировать</value></data>
+  <data name="Editor_FromDecks" xml:space="preserve"><value>Из колод</value></data>
+  <data name="Editor_NoCardsYet" xml:space="preserve"><value>Карточек пока нет. Напиши, сгенерируй или возьми из других колод.</value></data>
 </root>

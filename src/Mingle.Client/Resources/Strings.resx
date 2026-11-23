@@ -187,9 +187,6 @@
   <data name="Editor_AiFailed" xml:space="preserve"><value>Couldn't generate. Try again.</value></data>
   <data name="Editor_AiAdded_One" xml:space="preserve"><value>Added {0} card. Check it and save the deck.</value></data>
   <data name="Editor_AiAdded_Other" xml:space="preserve"><value>Added {0} cards. Check them and save the deck.</value></data>
-  <data name="Editor_Mode" xml:space="preserve"><value>Create cards</value></data>
-  <data name="Editor_ModeAi" xml:space="preserve"><value>Automatic</value></data>
-  <data name="Editor_ModeManual" xml:space="preserve"><value>Manual</value></data>
   <data name="Editor_AiTopics" xml:space="preserve"><value>Topics · up to {0}</value></data>
   <data name="Editor_AiOwn" xml:space="preserve"><value>Anything else? (optional)</value></data>
   <data name="Editor_AiDepth" xml:space="preserve"><value>How deep</value></data>
@@ -200,7 +197,6 @@
   <data name="Editor_Setting_party" xml:space="preserve"><value>A party</value></data>
   <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Colleagues</value></data>
   <data name="Editor_AiWriteMore" xml:space="preserve"><value>Generate {0} more</value></data>
-  <data name="Editor_AiEditHint" xml:space="preserve"><value>To edit a card's text, switch to “Manual”.</value></data>
   <data name="Setup_HowToPlay" xml:space="preserve"><value>How you play</value></data>
   <data name="Setup_WriteShort" xml:space="preserve"><value>Write</value></data>
   <data name="Setup_TalkShort" xml:space="preserve"><value>Talk</value></data>
@@ -217,7 +213,6 @@
   <data name="End_OpenDeck" xml:space="preserve"><value>Open</value></data>
   <data name="End_Close" xml:space="preserve"><value>Close</value></data>
   <data name="End_Cancel" xml:space="preserve"><value>Cancel</value></data>
-  <data name="Editor_ModeDecks" xml:space="preserve"><value>From decks</value></data>
   <data name="Editor_DecksHint" xml:space="preserve"><value>Tick cards from other decks, or select all to merge.</value></data>
   <data name="Editor_SelectAll" xml:space="preserve"><value>All</value></data>
   <data name="Editor_AlreadyIn" xml:space="preserve"><value>Already in this deck</value></data>
@@ -231,4 +226,9 @@
   <data name="Setup_TalkLine" xml:space="preserve"><value>Answer out loud</value></data>
   <data name="Setup_AllLine" xml:space="preserve"><value>Everyone answers</value></data>
   <data name="Setup_TurnsLine" xml:space="preserve"><value>One person per card</value></data>
+  <data name="Editor_AddCards" xml:space="preserve"><value>Add cards</value></data>
+  <data name="Editor_WriteCard" xml:space="preserve"><value>Write a card</value></data>
+  <data name="Editor_Generate" xml:space="preserve"><value>Generate</value></data>
+  <data name="Editor_FromDecks" xml:space="preserve"><value>From decks</value></data>
+  <data name="Editor_NoCardsYet" xml:space="preserve"><value>No cards yet. Write one, generate some, or take them from other decks.</value></data>
 </root>
