@@ -372,3 +372,15 @@ a.check-row { text-decoration: none; color: inherit; }
 .swipe-row.swiping .swipe-content, .swipe-row.open .swipe-content {
     border-top-right-radius: 0; border-bottom-right-radius: 0; border-right-color: transparent;
 }
+
+/* Swipeable pages with dots (topic groups in the deck editor) */
+.pager-pages {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
+}
+.pager-pages::-webkit-scrollbar { display: none; }
+.pager-page { flex: 0 0 100%; scroll-snap-align: start; display: flex; flex-direction: column; gap: 8px; padding-right: 2px; }
+.pager-title { margin: 0; font-size: 14px; font-weight: 700; color: var(--muted); }
+.pager-dots { display: flex; justify-content: center; gap: 8px; padding-top: 10px; }
+.pager-dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: var(--border-dashed); cursor: pointer; }
+.pager-dot.on { background: var(--accent); width: 20px; border-radius: 4px; }

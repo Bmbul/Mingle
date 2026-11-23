@@ -125,21 +125,10 @@ public sealed class Room(string code, TimeProvider clock)
             var member = Member(playerId);
             var picks = (codes ?? []).Distinct(StringComparer.Ordinal).ToImmutableArray();
             if (picks.Length > TopicDeal.MaxPicks) throw new RoomException($"Pick up to {TopicDeal.MaxPicks} topics.");
-            // A pick must be in the current offer, or kept from an earlier one.
-            if (picks.Any(c => !member.TopicOffer.Contains(c) && !member.TopicPicks.Contains(c)))
+            // A pick must be one of the topics this player was offered.
+            if (picks.Any(c => !member.TopicOffer.Contains(c)))
                 throw new RoomException("Pick from the topics you were offered.");
             member.TopicPicks = picks;
-            Touch();
-        }
-    }
-
-    public void NewTopics(string playerId)
-    {
-        lock (gate)
-        {
-            if (Stage != RoomStage.Lobby) throw new RoomException("Topics can only change before the game starts.");
-            var member = Member(playerId);
-            member.TopicOffer = TopicDeal.Offer(topicPool, topicRandom.Next(), avoid: [.. member.TopicOffer, .. member.TopicPicks]);
             Touch();
         }
     }
@@ -314,7 +303,7 @@ public sealed class Room(string code, TimeProvider clock)
         if (settings.Source == DeckSource.Topics && Stage == RoomStage.Lobby)
         {
             var byCode = topicPool.ToDictionary(t => t.Code);
-            var shown = viewer.TopicOffer.Concat(viewer.TopicPicks.Where(p => !viewer.TopicOffer.Contains(p)));
+            var shown = viewer.TopicOffer;
             topics = new TopicChoice(
                 [.. shown.Where(byCode.ContainsKey).Select(c => new TopicOption(c, byCode[c].NameFor(viewer.Lang)))],
                 viewer.TopicPicks,

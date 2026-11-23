@@ -108,3 +108,20 @@
         if (e.target.closest('.swipe-actions')) setTimeout(() => { if (openRow && !openRow.isConnected) openRow = null; }, 0);
     });
 })();
+
+// Pages with dots (".pager"): the dots follow the scroll position, and tapping a dot scrolls there.
+(function () {
+    document.addEventListener('scroll', e => {
+        const pages = e.target;
+        if (!(pages instanceof Element) || !pages.classList.contains('pager-pages')) return;
+        const index = Math.round(pages.scrollLeft / Math.max(1, pages.clientWidth));
+        pages.parentElement.querySelectorAll('.pager-dot').forEach((dot, i) => dot.classList.toggle('on', i === index));
+    }, true);
+
+    document.addEventListener('click', e => {
+        const dot = e.target.closest?.('.pager-dot');
+        if (!dot) return;
+        const pages = dot.closest('.pager')?.querySelector('.pager-pages');
+        pages?.scrollTo({ left: Number(dot.dataset.page) * pages.clientWidth, behavior: 'smooth' });
+    });
+})();

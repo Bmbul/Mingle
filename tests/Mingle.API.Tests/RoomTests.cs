@@ -215,21 +215,6 @@ public class RoomTests
     }
 
     [Fact]
-    public void A_new_offer_keeps_your_picks()
-    {
-        var (room, ani, _) = TopicsLobby();
-        var first = room.ViewFor(ani.Id).Topics!.Offer;
-        room.PickTopics(ani.Id, [first[0].Code]);
-
-        room.NewTopics(ani.Id);
-        var view = room.ViewFor(ani.Id).Topics!;
-
-        Assert.Contains(first[0].Code, view.Picked);
-        Assert.Contains(view.Offer, o => o.Code == first[0].Code); // still shown, so it can be unpicked
-        room.PickTopics(ani.Id, [first[0].Code, view.Offer[0].Code]);
-    }
-
-    [Fact]
     public void Writing_waits_between_the_lobby_and_play()
     {
         var (room, ani, arman) = TopicsLobby();

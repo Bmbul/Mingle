@@ -85,8 +85,6 @@ public interface IGameHub
     Task BringDeck(string? deckId);
     /// <summary>Sets your topic picks (up to three, from your offer) in an "Our topics" lobby.</summary>
     Task PickTopics(ImmutableArray<string> codes);
-    /// <summary>Deals you a new topic offer; your picks stay.</summary>
-    Task NewTopics();
     Task StartGame();
     Task SubmitAnswer(Answer answer);
     Task Pass();

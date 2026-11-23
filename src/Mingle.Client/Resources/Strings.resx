@@ -134,7 +134,6 @@
   <data name="Setup_SourceTopicsSummary" xml:space="preserve"><value>Everyone picks topics in the room</value></data>
   <data name="Lobby_YourTopics" xml:space="preserve"><value>Your topics</value></data>
   <data name="Lobby_YourTopicsHint" xml:space="preserve"><value>Pick up to {0}. Nobody sees what you picked.</value></data>
-  <data name="Lobby_NewTopics" xml:space="preserve"><value>Show other topics</value></data>
   <data name="Lobby_PickTopics" xml:space="preserve"><value>Pick a topic to start.</value></data>
   <data name="Lobby_TopicsPicked" xml:space="preserve"><value>topics picked</value></data>
   <data name="Lobby_TopicsPicking" xml:space="preserve"><value>picking topics…</value></data>
@@ -239,4 +238,8 @@
   <data name="Decks_Removed" xml:space="preserve"><value>Removed from your list.</value></data>
   <data name="Decks_DeleteTitle" xml:space="preserve"><value>Delete «{0}»?</value></data>
   <data name="Decks_DeleteWarning" xml:space="preserve"><value>It will be gone for everyone with the link. This can't be undone.</value></data>
+  <data name="TopicGroup_everyday" xml:space="preserve"><value>Everyday</value></data>
+  <data name="TopicGroup_personal" xml:space="preserve"><value>Personal</value></data>
+  <data name="TopicGroup_relationships" xml:space="preserve"><value>Relationships</value></data>
+  <data name="TopicGroup_fun" xml:space="preserve"><value>Fun</value></data>
 </root>

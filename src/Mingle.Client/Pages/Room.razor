@@ -66,7 +66,6 @@ else if (room.Stage == RoomStage.Lobby)
                             @onclick="() => ToggleTopic(topics, topic.Code)">@topic.Name</button>
                 }
             </div>
-            <button class="ghost" @onclick="Rooms.NewTopics"><Icon Name="refresh" Size="18" />@T["Lobby_NewTopics"]</button>
         }
 
         @if (EveryoneBrings(room))

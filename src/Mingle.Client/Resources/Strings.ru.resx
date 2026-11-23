@@ -138,7 +138,6 @@
   <data name="Setup_SourceTopicsSummary" xml:space="preserve"><value>Каждый выберет темы в комнате</value></data>
   <data name="Lobby_YourTopics" xml:space="preserve"><value>Твои темы</value></data>
   <data name="Lobby_YourTopicsHint" xml:space="preserve"><value>Выбери до {0}. Никто не увидит твой выбор.</value></data>
-  <data name="Lobby_NewTopics" xml:space="preserve"><value>Показать другие темы</value></data>
   <data name="Lobby_PickTopics" xml:space="preserve"><value>Выберите тему, чтобы начать.</value></data>
   <data name="Lobby_TopicsPicked" xml:space="preserve"><value>темы выбраны</value></data>
   <data name="Lobby_TopicsPicking" xml:space="preserve"><value>выбирает темы…</value></data>
@@ -245,4 +244,8 @@
   <data name="Decks_Removed" xml:space="preserve"><value>Убрано из списка.</value></data>
   <data name="Decks_DeleteTitle" xml:space="preserve"><value>Удалить «{0}»?</value></data>
   <data name="Decks_DeleteWarning" xml:space="preserve"><value>Колода пропадёт у всех, у кого есть ссылка. Отменить это нельзя.</value></data>
+  <data name="TopicGroup_everyday" xml:space="preserve"><value>Повседневное</value></data>
+  <data name="TopicGroup_personal" xml:space="preserve"><value>Личное</value></data>
+  <data name="TopicGroup_relationships" xml:space="preserve"><value>Отношения</value></data>
+  <data name="TopicGroup_fun" xml:space="preserve"><value>Весёлое</value></data>
 </root>

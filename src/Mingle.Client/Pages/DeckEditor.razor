@@ -141,20 +141,33 @@
         {
         <section class="stack">
             <h2 class="label">@T["Editor_AiTopics", CardLimits.MaxTopics]</h2>
-            <div class="chips" role="group" aria-label="@T["Editor_AiTopics", CardLimits.MaxTopics]">
-                @foreach (var topic in ShownTopics)
-                {
-                    var code = topic.Code;
-                    var on = pickedTopics.Contains(code);
-                    <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")"
-                            disabled="@(writing || (!on && pickedTopics.Count >= CardLimits.MaxTopics))"
-                            @onclick="() => ToggleTopic(code)">@topic.NameFor(Text.UiLang)</button>
-                }
+            @* One page per group; swipe sideways or tap a dot (js/swipe.js keeps the dots in step). *@
+            <div class="pager" role="group" aria-label="@T["Editor_AiTopics", CardLimits.MaxTopics]">
+                <div class="pager-pages">
+                    @foreach (var (group, members) in TopicPages)
+                    {
+                        <div class="pager-page">
+                            <h3 class="pager-title">@T[$"TopicGroup_{group}"]</h3>
+                            <div class="chips">
+                                @foreach (var topic in members)
+                                {
+                                    var code = topic.Code;
+                                    var on = pickedTopics.Contains(code);
+                                    <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")"
+                                            disabled="@(writing || (!on && pickedTopics.Count >= CardLimits.MaxTopics))"
+                                            @onclick="() => ToggleTopic(code)">@topic.NameFor(Text.UiLang)</button>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="pager-dots">
+                    @for (var i = 0; i < TopicPages.Count; i++)
+                    {
+                        <button class="pager-dot @(i == 0 ? "on" : "")" data-page="@i" aria-label="@T[$"TopicGroup_{TopicPages[i].Group}"]"></button>
+                    }
+                </div>
             </div>
-            @if (topics.Length > TopicDeal.OfferSize)
-            {
-                <button class="ghost" disabled="@writing" @onclick="OtherTopics"><Icon Name="refresh" Size="18" />@T["Lobby_NewTopics"]</button>
-            }
         </section>
 
         <section class="stack">
@@ -372,14 +385,26 @@
 
     private void CloseSheet() => sheet = null;
 
-    private ImmutableArray<string> offer = [];
 
-    /// <summary>Ten random topics (as in the room lobby), plus any picked ones from earlier offers.</summary>
-    private IEnumerable<TopicInfo> ShownTopics =>
-        topics.Where(t => offer.Contains(t.Code) || pickedTopics.Contains(t.Code))
-              .OrderBy(t => offer.IndexOf(t.Code) is var i && i < 0 ? -1 : i);
+    /// <summary>Topics grouped into pages; a topic outside these groups lands on the last page.</summary>
+    private static readonly (string Group, string[] Codes)[] Groups =
+    [
+        ("everyday", ["everyday", "habits", "home", "food", "hobbies", "money", "work"]),
+        ("personal", ["childhood", "memories", "firsts", "values", "fears", "regrets", "growth", "gratitude", "dreams", "future"]),
+        ("relationships", ["friendship", "family", "love", "long-distance", "dates", "needs", "conflict"]),
+        ("fun", ["funny", "what-if", "travel", "adventure", "music", "stories"]),
+    ];
 
-    private void OtherTopics() => offer = TopicDeal.Offer(topics, Random.Shared.Next(), avoid: [.. offer, .. pickedTopics]);
+    private List<(string Group, List<TopicInfo> Members)> TopicPages
+    {
+        get
+        {
+            var pages = Groups.Select(g => (g.Group, Members: topics.Where(t => g.Codes.Contains(t.Code)).ToList())).ToList();
+            var placed = Groups.SelectMany(g => g.Codes).ToHashSet();
+            pages[^1].Members.AddRange(topics.Where(t => !placed.Contains(t.Code)));
+            return [.. pages.Where(p => p.Members.Count > 0)];
+        }
+    }
 
     // "From decks": tick cards in other decks (or "Select all" to merge whole decks) and add them here.
     private ImmutableArray<Deck> sourceDecks = [];
@@ -452,7 +477,6 @@
         sheet = Id is null ? "generate" : null;
         try { topics = await Content.GetTopicsAsync(); }
         catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException) { topics = []; }
-        offer = TopicDeal.Offer(topics, Random.Shared.Next());
         loading = false;
     }
 

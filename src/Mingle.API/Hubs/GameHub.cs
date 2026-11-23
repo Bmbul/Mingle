@@ -51,7 +51,6 @@ public sealed class GameHub(RoomRegistry rooms, IDeckSource decks, UserDeckStore
     public Task BringDeck(string? deckId) => Change((room, me) => room.BringDeck(me, deckId));
 
     public Task PickTopics(ImmutableArray<string> codes) => Change((room, me) => room.PickTopics(me, codes.IsDefault ? [] : codes));
-    public Task NewTopics() => Change((room, me) => room.NewTopics(me));
 
     public async Task StartGame()
     {
