@@ -225,4 +225,10 @@
   <data name="Editor_DecksAdded_One" xml:space="preserve"><value>Ավելացվեց {0} քարտ։</value></data>
   <data name="Editor_DecksAdded_Other" xml:space="preserve"><value>Ավելացվեց {0} քարտ։</value></data>
   <data name="Setup_PassPhoneShort" xml:space="preserve"><value>Փոխանցել</value></data>
+  <data name="Setup_OutLoudLine" xml:space="preserve"><value>Կարդացեք քարտը և խոսեք</value></data>
+  <data name="Setup_PassLine" xml:space="preserve"><value>Պատասխանեք գաղտնի, փոխանցեք հեռախոսը</value></data>
+  <data name="Setup_WriteLine" xml:space="preserve"><value>Պատասխանները բացվում են միասին</value></data>
+  <data name="Setup_TalkLine" xml:space="preserve"><value>Պատասխանեք բարձրաձայն</value></data>
+  <data name="Setup_AllLine" xml:space="preserve"><value>Պատասխանում են բոլորը</value></data>
+  <data name="Setup_TurnsLine" xml:space="preserve"><value>Ամեն քարտ՝ մեկ հոգի</value></data>
 </root>

@@ -72,24 +72,21 @@
                         <Icon Name="chat" Size="20" /><span>@T["Setup_TalkShort"]</span>
                     </button>
                 </div>
+                @* Who answers only matters when the app collects answers; out loud, the card just names whose turn it is. *@
+                <div class="seg" role="group" aria-label="@T["Setup_WhoAnswers"]">
+                    <button class="@(turnStyle == TurnStyle.Everyone ? "on" : "")" aria-pressed="@(turnStyle == TurnStyle.Everyone ? "true" : "false")"
+                            @onclick="() => turnStyle = TurnStyle.Everyone">
+                        <Icon Name="people" Size="20" /><span>@T["Setup_EveryoneShort"]</span>
+                    </button>
+                    <button class="@(turnStyle == TurnStyle.TakeTurns ? "on" : "")" aria-pressed="@(turnStyle == TurnStyle.TakeTurns ? "true" : "false")"
+                            @onclick="() => turnStyle = TurnStyle.TakeTurns">
+                        <Icon Name="refresh" Size="20" /><span>@T["Setup_TakeTurnsShort"]</span>
+                    </button>
+                </div>
             }
-            <div class="seg" role="group" aria-label="@T["Setup_WhoAnswers"]">
-                <button class="@(turnStyle == TurnStyle.Everyone ? "on" : "")" aria-pressed="@(turnStyle == TurnStyle.Everyone ? "true" : "false")"
-                        title="@T["Setup_EveryoneDesc"]" @onclick="() => turnStyle = TurnStyle.Everyone">
-                    <Icon Name="people" Size="20" /><span>@T["Setup_EveryoneShort"]</span>
-                </button>
-                <button class="@(turnStyle == TurnStyle.TakeTurns ? "on" : "")" aria-pressed="@(turnStyle == TurnStyle.TakeTurns ? "true" : "false")"
-                        title="@T["Setup_TakeTurnsDesc"]" @onclick="() => turnStyle = TurnStyle.TakeTurns">
-                    <Icon Name="refresh" Size="20" /><span>@T["Setup_TakeTurnsShort"]</span>
-                </button>
-            </div>
         </div>
-        @* Phones have no hover, so the meaning of the current choice is spelled out underneath. *@
-        <p class="muted small">
-            @if (!Online) { @(passThePhone ? T["Setup_PassPhoneDesc"] : T["Setup_OutLoudDesc"]) @(" ") }
-            @if (Online || passThePhone) { @(mode == AnswerMode.Written ? T["Setup_WriteDesc"] : T["Setup_TalkDesc"]) @(" ") }
-            @(turnStyle == TurnStyle.Everyone ? T["Setup_EveryoneDesc"] : T["Setup_TakeTurnsDesc"])
-        </p>
+        @* Phones have no hover, so one short phrase per switch says what the current choice means. *@
+        <p class="muted small">@HowToPlayLine</p>
     </section>
 
     @if (Online)
@@ -228,10 +225,26 @@
         // Playing chosen decks means playing their cards: every card type and depth is included.
         // The game still starts light and goes deeper as it goes on.
         AnswerMode = Online || passThePhone ? mode : AnswerMode.OutLoud,
-        TurnStyle = turnStyle,
+        // Out loud nothing is collected, so the card simply names whose turn it is.
+        TurnStyle = Online || passThePhone ? turnStyle : TurnStyle.TakeTurns,
         CardCount = cardCount,
         Order = order,
     };
+
+    private string HowToPlayLine
+    {
+        get
+        {
+            var parts = new List<string>();
+            if (!Online) parts.Add(passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
+            if (Online || passThePhone)
+            {
+                parts.Add(mode == AnswerMode.Written ? T["Setup_WriteLine"] : T["Setup_TalkLine"]);
+                parts.Add(turnStyle == TurnStyle.Everyone ? T["Setup_AllLine"] : T["Setup_TurnsLine"]);
+            }
+            return string.Join(" · ", parts);
+        }
+    }
 
     private int MatchingCards =>
         Game.BuildPool(decks.Where(d => deckIds.Contains(d.Id)), Settings, NamedPlayers.IsEmpty ? [new Player("x", "x", Text.UiLang)] : NamedPlayers).Length;

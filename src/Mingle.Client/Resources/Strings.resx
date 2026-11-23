@@ -225,4 +225,10 @@
   <data name="Editor_DecksAdded_One" xml:space="preserve"><value>Added {0} card.</value></data>
   <data name="Editor_DecksAdded_Other" xml:space="preserve"><value>Added {0} cards.</value></data>
   <data name="Setup_PassPhoneShort" xml:space="preserve"><value>Pass it</value></data>
+  <data name="Setup_OutLoudLine" xml:space="preserve"><value>Read the card and talk</value></data>
+  <data name="Setup_PassLine" xml:space="preserve"><value>Answer privately, pass the phone</value></data>
+  <data name="Setup_WriteLine" xml:space="preserve"><value>Answers revealed together</value></data>
+  <data name="Setup_TalkLine" xml:space="preserve"><value>Answer out loud</value></data>
+  <data name="Setup_AllLine" xml:space="preserve"><value>Everyone answers</value></data>
+  <data name="Setup_TurnsLine" xml:space="preserve"><value>One person per card</value></data>
 </root>

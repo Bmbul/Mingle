@@ -231,4 +231,10 @@
   <data name="Editor_DecksAdded_Few" xml:space="preserve"><value>Добавлено {0} карточки.</value></data>
   <data name="Editor_DecksAdded_Many" xml:space="preserve"><value>Добавлено {0} карточек.</value></data>
   <data name="Setup_PassPhoneShort" xml:space="preserve"><value>Передавать</value></data>
+  <data name="Setup_OutLoudLine" xml:space="preserve"><value>Читайте карточку и говорите</value></data>
+  <data name="Setup_PassLine" xml:space="preserve"><value>Отвечайте тайно, передавайте телефон</value></data>
+  <data name="Setup_WriteLine" xml:space="preserve"><value>Ответы открываются вместе</value></data>
+  <data name="Setup_TalkLine" xml:space="preserve"><value>Отвечайте вслух</value></data>
+  <data name="Setup_AllLine" xml:space="preserve"><value>Отвечают все</value></data>
+  <data name="Setup_TurnsLine" xml:space="preserve"><value>Одна карточка — один человек</value></data>
 </root>
