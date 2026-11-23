@@ -326,3 +326,27 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 /* Deck editor: the remove button sits in the middle of its card row */
 .card-line { align-items: center; }
 .card-line > .icon { flex: none; }
+
+/* Swipe left to remove (deck editor) */
+/* isolation keeps the card's z-index inside its row, so cards never cover the sticky "Save" footer. */
+.swipe-row { position: relative; isolation: isolate; touch-action: pan-y; border-radius: var(--radius); overflow: hidden; }
+.swipe-row .swipe-content { position: relative; z-index: 1; width: 100%; will-change: transform; }
+.swipe-row .swipe-bg {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end; gap: 6px;
+    padding-right: 18px; background: #C2412F; color: #fff; font-weight: 700; font-size: 14px;
+    opacity: 0; /* only while swiping, so it never peeks out at the rounded corners */
+}
+.swipe-row.swiping .swipe-bg { opacity: 1; }
+.swipe-row.swiping .swipe-content { cursor: grabbing; }
+.undo-bar {
+    display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+    border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border);
+}
+
+/* Dropdowns: our own chevron, inset like the text instead of the browser's arrow against the edge */
+select.field {
+    appearance: none; -webkit-appearance: none; padding-right: 42px; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23A8A7B0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center; background-size: 16px;
+}
+select.field.lang-select { padding-right: 32px; background-position: right 10px center; }

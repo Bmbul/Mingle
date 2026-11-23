@@ -83,20 +83,29 @@
                 }
                 else
                 {
-                    <div class="row gap card-line">
-                        <button class="check-row grow @(c.IsComplete ? "" : "incomplete")" @onclick="() => open = c">
+                    @* Swipe left to remove (js/swipe.js); the hidden button keeps it reachable by keyboard and screen readers. *@
+                    <div class="swipe-row" @key="c.Key">
+                        <span class="swipe-bg" aria-hidden="true"><Icon Name="close" Size="18" />@T["Editor_RemoveCard"]</span>
+                        <button class="check-row swipe-content @(c.IsComplete ? "" : "incomplete")" @onclick="() => open = c">
                             <span class="grow">
                                 <span class="row-title">@(c.Preview(Text.UiLang) is { Length: > 0 } p ? p : T["Editor_EmptyCard"])</span>
                                 <span class="muted small">@T.KindName(c.KindId) · @T[$"Depth_{c.Depth}"] · @string.Join(" ", c.Languages.Select(l => l.Code().ToUpperInvariant()))</span>
                             </span>
                         </button>
-                        <button class="icon" aria-label="@T["Editor_RemoveCard"]" @onclick="() => Remove(c)"><Icon Name="close" /></button>
+                        <button class="visually-hidden" data-swipe-remove @onclick="() => Remove(c)">@T["Editor_RemoveCard"]</button>
                     </div>
                 }
             }
             @if (cards.Count == 0)
             {
                 <p class="muted">@T["Editor_NoCardsYet"]</p>
+            }
+            @if (removed is { } last)
+            {
+                <div class="undo-bar" role="status">
+                    <span class="grow">@T["Editor_Removed"]</span>
+                    <button class="text-btn" @onclick="Undo">@T["Editor_Undo"]</button>
+                </div>
             }
         </section>
 
@@ -523,10 +532,23 @@
         open = card;
     }
 
+    /// <summary>The last removed card and where it was, so a swipe by accident can be undone.</summary>
+    private (EditCard Card, int Index)? removed;
+
     private void Remove(EditCard card)
     {
-        cards.Remove(card);
+        var index = cards.IndexOf(card);
+        if (index < 0) return;
+        cards.RemoveAt(index);
         if (ReferenceEquals(open, card)) open = null;
+        removed = card.IsComplete ? (card, index) : null; // an empty card is not worth an undo
+    }
+
+    private void Undo()
+    {
+        if (removed is not { } last) return;
+        cards.Insert(Math.Min(last.Index, cards.Count), last.Card);
+        removed = null;
     }
 
     private Deck Build() => new(
