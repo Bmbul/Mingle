@@ -393,3 +393,7 @@ a.check-row { text-decoration: none; color: inherit; }
 }
 .pager-tab.on { color: var(--accent); border-bottom-color: var(--accent); }
 .pager-pages { align-items: stretch; }
+
+/* Topic chips sit centered on each page */
+.pager-page .chips { justify-content: center; }
+.chips.centered { justify-content: center; }

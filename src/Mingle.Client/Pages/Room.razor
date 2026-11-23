@@ -57,7 +57,7 @@ else if (room.Stage == RoomStage.Lobby)
         {
             <h2 class="label">@T["Lobby_YourTopics"]</h2>
             <p class="muted small">@T["Lobby_YourTopicsHint", topics.MaxPicks]</p>
-            <div class="chips" role="group" aria-label="@T["Lobby_YourTopics"]">
+            <div class="chips centered" role="group" aria-label="@T["Lobby_YourTopics"]">
                 @foreach (var topic in topics.Offer)
                 {
                     var on = topics.Picked.Contains(topic.Code);
