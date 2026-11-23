@@ -350,3 +350,25 @@ select.field {
     background-repeat: no-repeat; background-position: right 14px center; background-size: 16px;
 }
 select.field.lang-select { padding-right: 32px; background-position: right 10px center; }
+
+/* Swipe to reveal actions (My decks) */
+.swipe-row .swipe-actions {
+    position: absolute; top: 0; right: 0; bottom: 0; display: flex; opacity: 0;
+}
+.swipe-row.swiping .swipe-actions, .swipe-row.open .swipe-actions { opacity: 1; }
+.swipe-action {
+    width: 84px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    border: 0; color: #fff; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+}
+.swipe-action.edit { background: #4A4A55; }
+.swipe-action.delete { background: #C2412F; }
+
+a.check-row { text-decoration: none; color: inherit; }
+
+/* No text selection or link dragging while swiping a row */
+.swipe-row .swipe-content { user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
+
+/* While a row is swiped or open, the card's right side meets the actions flush, without a notch. */
+.swipe-row.swiping .swipe-content, .swipe-row.open .swipe-content {
+    border-top-right-radius: 0; border-bottom-right-radius: 0; border-right-color: transparent;
+}

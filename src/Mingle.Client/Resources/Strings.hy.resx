@@ -234,4 +234,9 @@
   <data name="Setup_PickDeck" xml:space="preserve"><value>Ընտրեք հավաքածու։</value></data>
   <data name="Editor_Removed" xml:space="preserve"><value>Քարտը հեռացվեց։</value></data>
   <data name="Editor_Undo" xml:space="preserve"><value>Հետ բերել</value></data>
+  <data name="Decks_Delete" xml:space="preserve"><value>Ջնջել</value></data>
+  <data name="Decks_Remove" xml:space="preserve"><value>Հեռացնել</value></data>
+  <data name="Decks_Removed" xml:space="preserve"><value>Հեռացվեց ցանկից։</value></data>
+  <data name="Decks_DeleteTitle" xml:space="preserve"><value>Ջնջե՞լ «{0}»-ը</value></data>
+  <data name="Decks_DeleteWarning" xml:space="preserve"><value>Այն կջնջվի բոլորի համար, ովքեր ունեն հղումը։ Հետ բերել հնարավոր չի լինի։</value></data>
 </root>

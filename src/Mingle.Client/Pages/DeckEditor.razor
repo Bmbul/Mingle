@@ -4,7 +4,6 @@
 @inject ContentService Content
 @inject DeviceDeckStore DeviceDecks
 @inject NavigationManager Nav
-@inject IJSRuntime JS
 
 <PageTitle>@Title · Mingle</PageTitle>
 
@@ -119,23 +118,6 @@
             <p class="muted small" role="status">@addedNote</p>
         }
 
-        @if (Id is not null)
-        {
-            <section class="stack">
-                <button class="btn2" @onclick="Share">@T["Decks_Share"]</button>
-                @if (confirmDelete)
-                {
-                    <div class="row gap">
-                        <button class="btn2 grow" @onclick="() => confirmDelete = false">@T["Play_KeepPlaying"]</button>
-                        <button class="btn grow danger" @onclick="Delete">@T["Editor_DeleteConfirm"]</button>
-                    </div>
-                }
-                else
-                {
-                    <button class="text-btn" @onclick="() => confirmDelete = true">@T["Editor_Delete"]</button>
-                }
-            </section>
-        }
     }
 </main>
 
@@ -354,7 +336,6 @@
     private bool loading = true;
     private bool notAllowed;
     private bool busy;
-    private bool confirmDelete;
     private string name = "";
     private string? editKey;
     private List<EditCard> cards = [];
@@ -596,17 +577,4 @@
         }
     }
 
-    private async Task Delete()
-    {
-        if (Id is null || editKey is null) return;
-        if (await Content.DeleteAsync(Id, editKey)) Nav.NavigateTo("decks");
-        else error = T["Editor_SaveFailed"];
-    }
-
-    private async Task Share()
-    {
-        var url = Nav.ToAbsoluteUri($"d/{Id}").ToString();
-        var result = await JS.InvokeAsync<string>("mingle.share", url, name);
-        note = result switch { "copied" => T["Lobby_Copied"], "failed" => url, _ => null };
-    }
 }
