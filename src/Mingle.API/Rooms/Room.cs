@@ -22,6 +22,7 @@ public sealed class Room(string code, TimeProvider clock)
     private ImmutableArray<TopicInfo> topicPool = [];
     private Random topicRandom = new(0);
     private bool libraryCards;
+    private ImmutableArray<TopicInfo> writtenTopics = [];
 
     public string Code { get; } = code;
     public RoomStage Stage { get; private set; } = RoomStage.Lobby;
@@ -161,7 +162,8 @@ public sealed class Room(string code, TimeProvider clock)
 
             Stage = RoomStage.Writing;
             Touch();
-            return ([.. topicPool.Where(t => picked.Contains(t.Code))],
+            writtenTopics = [.. topicPool.Where(t => picked.Contains(t.Code))];
+            return (writtenTopics,
                     [.. members.Select(m => m.Lang).Distinct().Order()],
                     members.Count);
         }
@@ -298,7 +300,7 @@ public sealed class Room(string code, TimeProvider clock)
             .ToImmutableArray();
 
         GameView? gameView = Stage == RoomStage.Playing && game is not null ? GameViews.ForPlayer(game, viewer.Id) : null;
-        GameSummary? summary = Stage == RoomStage.Ended && game is not null ? Summarize(game, viewer.Lang) : null;
+        GameSummary? summary = Stage == RoomStage.Ended && game is not null ? Summarize(game, viewer.Lang, writtenTopics) : null;
 
         TopicChoice? topics = null;
         if (settings.Source == DeckSource.Topics && Stage == RoomStage.Lobby)
@@ -314,11 +316,23 @@ public sealed class Room(string code, TimeProvider clock)
         return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary, topics, libraryCards);
     }
 
-    private static GameSummary Summarize(GameState state, Lang lang) => new(
-        state.History.Count(h => !h.Passed),
-        state.History.Count(h => h.Passed),
-        [.. state.History.Where(h => h.Likes > 0)
-            .Select(h => new LikedCard(h.Card.KindId, h.Card.Depth, h.Card.TextFor(lang).Text))]);
+    private static GameSummary Summarize(GameState state, Lang lang, ImmutableArray<TopicInfo> topics)
+    {
+        var liked = state.History.Where(h => h.Likes > 0).ToList();
+        // Only "Our topics" games offer their cards to keep; other games already play saved decks.
+        string? cards = null;
+        if (!topics.IsEmpty)
+        {
+            var name = string.Join(", ", topics.Select(t => t.NameFor(lang)));
+            cards = DeckJson.Write(new Deck("topics", ImmutableDictionary<Lang, string>.Empty.Add(lang, name), state.Pool));
+        }
+        return new GameSummary(
+            state.History.Count(h => !h.Passed),
+            state.History.Count(h => h.Passed),
+            [.. liked.Select(h => new LikedCard(h.Card.KindId, h.Card.Depth, h.Card.TextFor(lang).Text))],
+            cards,
+            [.. liked.Select(h => h.Card.Id)]);
+    }
 
     private RoomMember Member(string playerId) =>
         members.FirstOrDefault(m => m.Id == playerId) ?? throw new RoomException("You are not in this room.");

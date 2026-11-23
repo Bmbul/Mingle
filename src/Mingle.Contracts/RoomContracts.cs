@@ -40,7 +40,11 @@ public sealed record RoomSettings(GameSettings Game, ImmutableArray<string> Deck
 
 public sealed record LikedCard(string KindId, int Depth, string Text);
 
-public sealed record GameSummary(int Played, int Passed, ImmutableArray<LikedCard> Liked);
+/// <param name="Cards">In an "Our topics" game, every written card as a deck file (named after the topics,
+/// in the viewer's language), so each player can save them as their own deck.</param>
+/// <param name="LikedIds">Ids of the cards anyone liked, to save only those.</param>
+public sealed record GameSummary(int Played, int Passed, ImmutableArray<LikedCard> Liked,
+    string? Cards = null, ImmutableArray<string> LikedIds = default);
 
 /// <summary>
 /// Everything one player's screen needs. Built per player on the server, so it never contains

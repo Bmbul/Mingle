@@ -5,14 +5,14 @@ namespace Mingle.API.Ai;
 
 /// <summary>
 /// What to write about, in which languages. PlayerCount 0 means unknown (deck editor).
-/// Depth null mixes light to deep; Setting null means any group (see <see cref="Settings"/>).
+/// Depths empty (or all three) mixes light to deep; Setting null means any group (see <see cref="Settings"/>).
 /// </summary>
 public sealed record CardRequest(
     ImmutableArray<TopicInfo> Topics,
     ImmutableArray<Lang> Languages,
     int PlayerCount,
     int Count = TopicDeal.CardCount,
-    int? Depth = null,
+    ImmutableArray<int> Depths = default,
     string? Setting = null)
 {
     public const string ThemeCode = "theme";
@@ -39,15 +39,21 @@ public sealed record CardRequest(
     /// Cards for the deck editor, in every language: about the chosen topics and, if given, the
     /// user's own words, which become one more topic so the same prompt, schema and checks apply.
     /// </summary>
-    public static CardRequest ForDeck(IEnumerable<TopicInfo> topics, string? theme, int? depth, string? setting, int count)
+    public static CardRequest ForDeck(
+        IEnumerable<TopicInfo> topics, string? theme, IEnumerable<int>? depths, string? setting, IEnumerable<Lang>? languages, int count)
     {
         var all = topics.ToList();
         if (!string.IsNullOrWhiteSpace(theme))
             all.Add(new TopicInfo(ThemeCode, ImmutableDictionary<Lang, string>.Empty.Add(Lang.En, theme.Trim())));
-        return new([.. all], [.. Langs.All], PlayerCount: 0, count,
-            depth is >= 1 and <= 3 ? depth : null,
+        var langs = (languages ?? []).Distinct().Order().ToImmutableArray();
+        var chosen = (depths ?? []).Where(d => d is >= 1 and <= 3).Distinct().Order().ToImmutableArray();
+        return new([.. all], langs.IsEmpty ? [.. Langs.All] : langs, PlayerCount: 0, count,
+            chosen.Length is 0 or 3 ? [] : chosen,
             setting is not null && Settings.ContainsKey(setting) ? setting : null);
     }
+
+    /// <summary>Whether a card of this depth fits the request (any depth when no depths were chosen).</summary>
+    public bool Allows(int depth) => Depths.IsDefaultOrEmpty || Depths.Contains(depth);
 }
 
 /// <summary>Writes new cards about the picked topics.</summary>

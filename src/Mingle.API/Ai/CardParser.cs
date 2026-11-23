@@ -41,7 +41,7 @@ public static class CardParser
             foreach (var element in cards.EnumerateArray())
             {
                 if (result.Count >= request.Count) break;
-                if (TryRead(element, request.Languages, topics) is not { } card) continue;
+                if (TryRead(element, request, topics) is not { } card) continue;
                 var key = string.Join("|", card.Texts[request.Languages[0]].Options.Prepend(card.Texts[request.Languages[0]].Text));
                 if (seen.Add(key)) result.Add(card);
             }
@@ -50,16 +50,17 @@ public static class CardParser
         }
     }
 
-    private static Card? TryRead(JsonElement element, ImmutableArray<Lang> languages, HashSet<string> topics)
+    private static Card? TryRead(JsonElement element, CardRequest request, HashSet<string> topics)
     {
         if (element.ValueKind != JsonValueKind.Object) return null;
         if (Str(element, "kind") is not { } kind || !CardPrompt.Kinds.Contains(kind)) return null;
-        if (!element.TryGetProperty("depth", out var d) || !d.TryGetInt32(out var depth) || depth is < 1 or > 3) return null;
+        if (!element.TryGetProperty("depth", out var d) || !d.TryGetInt32(out var depth) || depth is < 1 or > 3 || !request.Allows(depth)) return null;
         var topic = Str(element, "topic");
         if (topic is null || !topics.Contains(topic)) return null;
         if (!element.TryGetProperty("text", out var text) || text.ValueKind != JsonValueKind.Object) return null;
         element.TryGetProperty("options", out var options);
 
+        var languages = request.Languages;
         var isChoice = kind == "wyr";
         // A "guess" card must be the question itself; "Guess which…" means the model wrote the instruction instead.
         if (kind == "guess" && Str(text, "en") is { } guessText && guessText.TrimStart().StartsWith("Guess", StringComparison.OrdinalIgnoreCase))

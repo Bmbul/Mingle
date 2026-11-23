@@ -54,9 +54,10 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
 
     /// <param name="Topics">Topic codes from <c>GET /api/topics</c>, up to five.</param>
     /// <param name="Theme">The user's own words, optional when topics are given.</param>
-    /// <param name="Depth">1–3 for one depth only; null mixes light to deep.</param>
+    /// <param name="Depths">Any of 1, 2, 3; none or all three mixes light to deep.</param>
     /// <param name="Setting">Who plays: couple, friends, family, party or colleagues.</param>
-    public sealed record WriteRequest(string[]? Topics, string? Theme, int? Depth, string? Setting, int Count = 20);
+    /// <param name="Languages">Language codes (hy, ru, en) to write the cards in; none means all three.</param>
+    public sealed record WriteRequest(string[]? Topics, string? Theme, int[]? Depths, string? Setting, string[]? Languages, int Count = 20);
 
     /// <summary>
     /// Writes new cards about a theme for the deck editor, in every language. Nothing is saved: the
@@ -72,7 +73,13 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
         if (theme.Length > CardRequest.MaxThemeLength) return BadRequest(new { error = $"Keep it under {CardRequest.MaxThemeLength} characters." });
         if (codes.Count > CardRequest.MaxTopics) return BadRequest(new { error = $"Pick up to {CardRequest.MaxTopics} topics." });
         if (request.Setting is { } setting && !CardRequest.Settings.ContainsKey(setting)) return BadRequest(new { error = "Unknown setting." });
-        if (request.Depth is < 1 or > 3) return BadRequest(new { error = "Depth is 1, 2 or 3." });
+        if ((request.Depths ?? []).Any(d => d is < 1 or > 3)) return BadRequest(new { error = "Depth is 1, 2 or 3." });
+        var languages = new List<Lang>();
+        foreach (var code in request.Languages ?? [])
+        {
+            if (!Langs.TryParse(code, out var lang)) return BadRequest(new { error = $"Unknown language '{code}'." });
+            languages.Add(lang);
+        }
 
         var known = (await topicSource.GetPickableTopicsAsync(ct)).Where(t => codes.Contains(t.Code)).ToList();
         if (known.Count != codes.Count) return BadRequest(new { error = "Unknown topic." });
@@ -81,7 +88,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
         try
         {
             var cards = await writer.WriteAsync(
-                CardRequest.ForDeck(known, theme, request.Depth, request.Setting, Math.Clamp(request.Count, 1, 20)), ct);
+                CardRequest.ForDeck(known, theme, request.Depths, request.Setting, languages, Math.Clamp(request.Count, 1, 20)), ct);
             // Topics are dropped: the theme is the user's own words, not a library topic.
             // Named after the theme: the deck file format needs a name, and the client reads it with the same parser.
             var name = theme.Length > 0 ? theme : string.Join(", ", known.Select(t => t.NameFor(Lang.En)));

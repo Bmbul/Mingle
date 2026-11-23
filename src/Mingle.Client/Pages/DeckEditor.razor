@@ -35,6 +35,7 @@
             <select id="add-mode" class="field" @bind="Mode">
                 <option value="ai">@T["Editor_ModeAi"]</option>
                 <option value="manual">@T["Editor_ModeManual"]</option>
+                <option value="decks">@T["Editor_ModeDecks"]</option>
             </select>
         </section>
 
@@ -67,13 +68,30 @@
             <section class="stack">
                 <h2 class="label">@T["Editor_AiDepth"]</h2>
                 <div class="chips" role="group" aria-label="@T["Editor_AiDepth"]">
-                    @foreach (var option in new int?[] { null, 1, 2, 3 })
+                    @for (var level = 1; level <= 3; level++)
                     {
-                        var d = option;
-                        <button class="chip @(depth == d ? "on" : "")" aria-pressed="@(depth == d ? "true" : "false")" disabled="@writing"
-                                @onclick="() => depth = d">@(d is null ? T["Editor_AiDepthMixed"] : T[$"Depth_{d}"])</button>
+                        var d = level;
+                        var on = depths.Contains(d);
+                        @* At least one depth stays on. *@
+                        <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@(writing || (on && depths.Count == 1))"
+                                @onclick="() => { if (!depths.Remove(d)) depths.Add(d); }">@T[$"Depth_{d}"]</button>
                     }
                 </div>
+            </section>
+
+            <section class="stack">
+                <h2 class="label">@T["Editor_AiLanguages"]</h2>
+                <div class="chips" role="group" aria-label="@T["Editor_AiLanguages"]">
+                    @foreach (var language in Langs.All)
+                    {
+                        var l = language;
+                        var on = languages.Contains(l);
+                        <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" lang="@l.Code()"
+                                disabled="@(writing || (on && languages.Count == 1))"
+                                @onclick="() => { if (!languages.Remove(l)) languages.Add(l); }">@Text.LangName(l)</button>
+                    }
+                </div>
+                <p class="muted small">@T["Editor_AiLanguagesHint"]</p>
             </section>
 
             <section class="stack">
@@ -117,6 +135,56 @@
                     }
                     <p class="muted small">@T["Editor_AiEditHint"]</p>
                 </section>
+            }
+        }
+        else if (Mode == "decks")
+        {
+            <p class="muted small">@T["Editor_DecksHint"]</p>
+            @if (sourceDecks.IsEmpty)
+            {
+                <p class="muted center">@T["Online_Connecting"]</p>
+            }
+            @foreach (var source in sourceDecks)
+            {
+                var deck = source;
+                var expanded = openDecks.Contains(deck.Id);
+                var addable = deck.Cards.Where(c => !InDeck(c)).ToList();
+                var allPicked = addable.Count > 0 && addable.All(c => picked.Contains(Key(deck, c)));
+                <div class="card stack">
+                    <div class="row gap">
+                        <button class="text-row grow" aria-expanded="@(expanded ? "true" : "false")"
+                                @onclick="() => { if (!openDecks.Remove(deck.Id)) openDecks.Add(deck.Id); }">
+                            <span class="row-title">@deck.NameFor(Text.UiLang)</span>
+                            <span class="muted small">@T.Plural("Cards", deck.Cards.Length)</span>
+                        </button>
+                        <button class="chip @(allPicked ? "on" : "")" aria-pressed="@(allPicked ? "true" : "false")" disabled="@(addable.Count == 0)"
+                                @onclick="() => PickAll(deck, addable, !allPicked)">@T["Editor_SelectAll"]</button>
+                    </div>
+                    @if (expanded)
+                    {
+                        @foreach (var item in deck.Cards)
+                        {
+                            var card = item;
+                            var key = Key(deck, card);
+                            var already = InDeck(card);
+                            var on = already || picked.Contains(key);
+                            var text = card.TextFor(Text.UiLang);
+                            <button class="check-row @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@already"
+                                    @onclick="() => { if (!picked.Remove(key)) picked.Add(key); }">
+                                <span class="box @(on ? "on" : "")" aria-hidden="true">@if (on) { <Icon Name="check" Size="14" Stroke="3" /> }</span>
+                                <span class="grow">
+                                    <span class="row-title">@(text.Options.IsEmpty ? text.Text : string.Join(" / ", text.Options))</span>
+                                    <span class="muted small">@(already ? T["Editor_AlreadyIn"] : $"{T.KindName(card.KindId)} · {T[$"Depth_{card.Depth}"]}")</span>
+                                </span>
+                            </button>
+                        }
+                    }
+                </div>
+            }
+            <button class="btn2" disabled="@(picked.Count == 0)" @onclick="AddPicked"><Icon Name="layers" Size="18" />@T["Editor_AddPicked", picked.Count]</button>
+            @if (decksNote is not null)
+            {
+                <p class="muted small" role="status">@decksNote</p>
             }
         }
         else
@@ -297,7 +365,8 @@
     private string? aiNote;
     private ImmutableArray<TopicInfo> topics = [];
     private readonly HashSet<string> pickedTopics = [];
-    private int? depth;
+    private readonly HashSet<int> depths = [1, 2, 3];
+    private readonly HashSet<Lang> languages = [Text.UiLang];
     private string setting = "couple";
     private string mode = "ai";
 
@@ -318,7 +387,8 @@
             mode = value;
             open = null;
             if (mode == "manual" && cards.Count == 0) AddCard();
-            if (mode == "ai") cards.RemoveAll(c => !c.IsComplete);
+            if (mode != "manual") cards.RemoveAll(c => !c.IsComplete);
+            if (mode == "decks") _ = LoadSourceDecks();
         }
     }
 
@@ -330,6 +400,52 @@
               .OrderBy(t => offer.IndexOf(t.Code) is var i && i < 0 ? -1 : i);
 
     private void OtherTopics() => offer = TopicDeal.Offer(topics, Random.Shared.Next(), avoid: [.. offer, .. pickedTopics]);
+
+    // "From decks": tick cards in other decks (or "Select all" to merge whole decks) and add them here.
+    private ImmutableArray<Deck> sourceDecks = [];
+    private readonly HashSet<string> openDecks = [];
+    private readonly HashSet<string> picked = [];
+    private string? decksNote;
+
+    private static string Key(Deck deck, Card card) => $"{deck.Id}|{card.Id}";
+
+    /// <summary>Already in this deck: the same card, or a card with the same text (a saved copy).</summary>
+    private bool InDeck(Card card) =>
+        cards.Any(c => c.Id == card.Id || (c.IsComplete && c.Preview(Text.UiLang) == PreviewOf(card)));
+
+    private static string PreviewOf(Card card)
+    {
+        var text = card.TextFor(Text.UiLang);
+        return text.Options.IsEmpty ? text.Text : string.Join(" / ", text.Options);
+    }
+
+    private async Task LoadSourceDecks()
+    {
+        if (!sourceDecks.IsEmpty) return;
+        try { sourceDecks = [.. (await Content.GetDecksAsync()).Where(d => d.Id != Id)]; }
+        catch (ContentUnavailableException) { sourceDecks = []; }
+        StateHasChanged();
+    }
+
+    private void PickAll(Deck deck, IEnumerable<Card> addable, bool on)
+    {
+        foreach (var card in addable)
+            if (on) picked.Add(Key(deck, card)); else picked.Remove(Key(deck, card));
+    }
+
+    private void AddPicked()
+    {
+        var added = 0;
+        foreach (var deck in sourceDecks)
+            foreach (var card in deck.Cards.Where(c => picked.Contains(Key(deck, c))))
+            {
+                if (InDeck(card)) continue; // the same card picked from two decks
+                cards.Add(EditCard.From(card));
+                added++;
+            }
+        picked.Clear();
+        decksNote = T.Plural("Editor_DecksAdded", added);
+    }
 
     private bool CanWrite => pickedTopics.Count > 0 || !string.IsNullOrWhiteSpace(theme);
 
@@ -377,7 +493,7 @@
         aiNote = null;
         try
         {
-            var (written, problem) = await Content.WriteCardsAsync([.. pickedTopics], theme.Trim(), depth, setting, CardLimits.PerWrite);
+            var (written, problem) = await Content.WriteCardsAsync([.. pickedTopics], theme.Trim(), [.. depths], setting, [.. languages], CardLimits.PerWrite);
             if (problem is not null)
             {
                 aiNote = problem == "429" ? T["Editor_TooMany"] : T["Editor_AiFailed"];

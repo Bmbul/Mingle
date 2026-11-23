@@ -126,17 +126,20 @@ public sealed class ContentService(HttpClient http, IJSRuntime js, DeviceDeckSto
     }
 
     /// <summary>Asks the AI for new cards; nothing is saved until the deck is.</summary>
-    /// <param name="depth">1–3 for one depth only; null mixes light to deep.</param>
+    /// <param name="depths">Any of 1–3; all three mixes light to deep.</param>
+    /// <param name="languages">The languages to write every card in.</param>
     /// <param name="setting">Who plays: couple, friends, family, party or colleagues.</param>
     public async Task<(ImmutableArray<Card> Cards, string? Error)> WriteCardsAsync(
-        IReadOnlyCollection<string> topicCodes, string theme, int? depth, string setting, int count)
+        IReadOnlyCollection<string> topicCodes, string theme, IReadOnlyCollection<int> depths, string setting,
+        IReadOnlyCollection<Lang> languages, int count)
     {
         // Built by hand: the trimmed browser app has no reflection-based JSON for anonymous types.
         var request = new System.Text.Json.Nodes.JsonObject
         {
             ["topics"] = new System.Text.Json.Nodes.JsonArray([.. topicCodes.Select(c => (System.Text.Json.Nodes.JsonNode?)c)]),
             ["theme"] = theme,
-            ["depth"] = depth,
+            ["depths"] = new System.Text.Json.Nodes.JsonArray([.. depths.Select(d => (System.Text.Json.Nodes.JsonNode?)d)]),
+            ["languages"] = new System.Text.Json.Nodes.JsonArray([.. languages.Select(l => (System.Text.Json.Nodes.JsonNode?)l.Code())]),
             ["setting"] = setting,
             ["count"] = count,
         };

@@ -183,7 +183,7 @@
   <data name="Editor_AiPlaceholder" xml:space="preserve"><value>In your own words, for example: our trip to Dilijan, moving in together</value></data>
   <data name="Editor_AiWrite" xml:space="preserve"><value>Generate {0} cards</value></data>
   <data name="Editor_AiWriting" xml:space="preserve"><value>Generating…</value></data>
-  <data name="Editor_AiHint" xml:space="preserve"><value>Pick topics or describe your own. Cards come in all three languages.</value></data>
+  <data name="Editor_AiHint" xml:space="preserve"><value>Pick topics or describe your own.</value></data>
   <data name="Editor_AiFailed" xml:space="preserve"><value>Couldn't generate. Try again.</value></data>
   <data name="Editor_AiAdded_One" xml:space="preserve"><value>Added {0} card. Check it and save the deck.</value></data>
   <data name="Editor_AiAdded_Other" xml:space="preserve"><value>Added {0} cards. Check them and save the deck.</value></data>
@@ -193,7 +193,6 @@
   <data name="Editor_AiTopics" xml:space="preserve"><value>Topics · up to {0}</value></data>
   <data name="Editor_AiOwn" xml:space="preserve"><value>Anything else? (optional)</value></data>
   <data name="Editor_AiDepth" xml:space="preserve"><value>How deep</value></data>
-  <data name="Editor_AiDepthMixed" xml:space="preserve"><value>Light to deep</value></data>
   <data name="Editor_AiSetting" xml:space="preserve"><value>Who will play</value></data>
   <data name="Editor_Setting_couple" xml:space="preserve"><value>A couple</value></data>
   <data name="Editor_Setting_friends" xml:space="preserve"><value>Friends</value></data>
@@ -202,4 +201,27 @@
   <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Colleagues</value></data>
   <data name="Editor_AiWriteMore" xml:space="preserve"><value>Generate {0} more</value></data>
   <data name="Editor_AiEditHint" xml:space="preserve"><value>To edit a card's text, switch to “Manual”.</value></data>
+  <data name="Setup_HowToPlay" xml:space="preserve"><value>How you play</value></data>
+  <data name="Setup_WriteShort" xml:space="preserve"><value>Write</value></data>
+  <data name="Setup_TalkShort" xml:space="preserve"><value>Talk</value></data>
+  <data name="Setup_EveryoneShort" xml:space="preserve"><value>All</value></data>
+  <data name="Setup_TakeTurnsShort" xml:space="preserve"><value>In turns</value></data>
+  <data name="Setup_EveryoneDesc" xml:space="preserve"><value>Everyone answers every card.</value></data>
+  <data name="Setup_TakeTurnsDesc" xml:space="preserve"><value>One person answers each card, in turns.</value></data>
+  <data name="Editor_AiLanguages" xml:space="preserve"><value>Languages</value></data>
+  <data name="Editor_AiLanguagesHint" xml:space="preserve"><value>Players only get cards in languages they read.</value></data>
+  <data name="End_SaveDeck" xml:space="preserve"><value>Save as deck</value></data>
+  <data name="End_SaveAll" xml:space="preserve"><value>All cards ({0})</value></data>
+  <data name="End_SaveLiked" xml:space="preserve"><value>Liked only ({0})</value></data>
+  <data name="End_Saved" xml:space="preserve"><value>Saved to My decks.</value></data>
+  <data name="End_OpenDeck" xml:space="preserve"><value>Open</value></data>
+  <data name="End_Close" xml:space="preserve"><value>Close</value></data>
+  <data name="End_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Editor_ModeDecks" xml:space="preserve"><value>From decks</value></data>
+  <data name="Editor_DecksHint" xml:space="preserve"><value>Tick cards from other decks, or select all to merge.</value></data>
+  <data name="Editor_SelectAll" xml:space="preserve"><value>All</value></data>
+  <data name="Editor_AlreadyIn" xml:space="preserve"><value>Already in this deck</value></data>
+  <data name="Editor_AddPicked" xml:space="preserve"><value>Add ({0})</value></data>
+  <data name="Editor_DecksAdded_One" xml:space="preserve"><value>Added {0} card.</value></data>
+  <data name="Editor_DecksAdded_Other" xml:space="preserve"><value>Added {0} cards.</value></data>
 </root>

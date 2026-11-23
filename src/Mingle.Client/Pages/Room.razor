@@ -199,8 +199,49 @@ else if (room.Summary is { } summary)
         }
     </main>
     <footer class="foot">
+        @if (summary.Cards is not null)
+        {
+            <button class="btn2" @onclick="() => OpenSave(summary)"><Icon Name="save" Size="18" />@T["End_SaveDeck"]</button>
+        }
         <button class="btn" @onclick="LeaveRoom">@T["End_Home"]</button>
     </footer>
+
+    @if (saveDeck is { } toSave)
+    {
+        <div class="sheet-backdrop" @onclick="() => saveDeck = null"></div>
+        <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="save-title">
+            <h2 id="save-title" class="h2">@T["End_SaveDeck"]</h2>
+            @if (savedId is not null)
+            {
+                <p role="status">@T["End_Saved"]</p>
+                <div class="row gap">
+                    <button class="btn2 grow" @onclick="() => saveDeck = null">@T["End_Close"]</button>
+                    <a class="btn grow" href="decks/@savedId/edit">@T["End_OpenDeck"]</a>
+                </div>
+            }
+            else
+            {
+                var likedCount = toSave.Cards.Count(c => likedIds.Contains(c.Id));
+                <div class="stack" role="radiogroup">
+                    <OptionCard Selected="@(!likedOnly)" OnSelect="() => likedOnly = false" Title="@T["End_SaveAll", toSave.Cards.Length]" />
+                    @if (likedCount > 0)
+                    {
+                        <OptionCard Selected="@likedOnly" OnSelect="() => likedOnly = true" Title="@T["End_SaveLiked", likedCount]" />
+                    }
+                </div>
+                <label class="label" for="save-name">@T["Editor_Name"]</label>
+                <input id="save-name" class="field" maxlength="60" @bind="saveName" @bind:event="oninput" />
+                @if (saveError is not null)
+                {
+                    <p class="error" role="alert">@saveError</p>
+                }
+                <div class="row gap">
+                    <button class="btn2 grow" @onclick="() => saveDeck = null">@T["End_Cancel"]</button>
+                    <button class="btn grow" disabled="@(saving || saveName.Trim().Length == 0)" @onclick="SaveDeck">@T["Editor_Save"]</button>
+                </div>
+            }
+        </div>
+    }
 }
 
 @if (Rooms.Error is { } error)
@@ -264,6 +305,50 @@ else if (room.Summary is { } summary)
     {
         confirmEnd = false;
         await Rooms.EndGame();
+    }
+
+    // "Save as deck" after an "Our topics" game: each player saves their own copy.
+    private Deck? saveDeck;
+    private HashSet<string> likedIds = [];
+    private bool likedOnly;
+    private string saveName = "";
+    private bool saving;
+    private string? saveError;
+    private string? savedId;
+
+    private void OpenSave(GameSummary summary)
+    {
+        if (summary.Cards is null) return;
+        saveDeck = DeckJson.Parse(summary.Cards);
+        likedIds = summary.LikedIds.IsDefault ? [] : [.. summary.LikedIds];
+        likedOnly = false;
+        saveName = saveDeck.NameFor(Text.UiLang);
+        if (saveName.Length > 60) saveName = saveName[..60];
+        saveError = null;
+        savedId = null;
+    }
+
+    private async Task SaveDeck()
+    {
+        if (saveDeck is null) return;
+        saving = true;
+        saveError = null;
+        try
+        {
+            var cards = likedOnly ? saveDeck.Cards.Where(c => likedIds.Contains(c.Id)).ToImmutableArray() : saveDeck.Cards;
+            var deck = new Deck("new", ImmutableDictionary<Lang, string>.Empty.Add(Text.UiLang, saveName.Trim()), cards);
+            var result = await Content.CreateAsync(deck);
+            if (result.Error is null) savedId = result.Id;
+            else saveError = T["Editor_SaveFailed"];
+        }
+        catch (HttpRequestException)
+        {
+            saveError = T["Online_ConnectFailed"];
+        }
+        finally
+        {
+            saving = false;
+        }
     }
 
     private async Task LeaveRoom()

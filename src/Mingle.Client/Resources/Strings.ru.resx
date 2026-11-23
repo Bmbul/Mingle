@@ -187,7 +187,7 @@
   <data name="Editor_AiPlaceholder" xml:space="preserve"><value>Своими словами, например: наша поездка в Дилижан, жизнь вместе</value></data>
   <data name="Editor_AiWrite" xml:space="preserve"><value>Сгенерировать {0} карточек</value></data>
   <data name="Editor_AiWriting" xml:space="preserve"><value>Генерируем…</value></data>
-  <data name="Editor_AiHint" xml:space="preserve"><value>Выбери темы или опиши свою. Карточки будут на трёх языках.</value></data>
+  <data name="Editor_AiHint" xml:space="preserve"><value>Выбери темы или опиши свою.</value></data>
   <data name="Editor_AiFailed" xml:space="preserve"><value>Не получилось. Попробуй ещё раз.</value></data>
   <data name="Editor_AiAdded_One" xml:space="preserve"><value>Добавлена {0} карточка. Проверь и сохрани колоду.</value></data>
   <data name="Editor_AiAdded_Few" xml:space="preserve"><value>Добавлено {0} карточки. Проверь и сохрани колоду.</value></data>
@@ -198,7 +198,6 @@
   <data name="Editor_AiTopics" xml:space="preserve"><value>Темы · до {0}</value></data>
   <data name="Editor_AiOwn" xml:space="preserve"><value>Что-то ещё? (необязательно)</value></data>
   <data name="Editor_AiDepth" xml:space="preserve"><value>Насколько глубоко</value></data>
-  <data name="Editor_AiDepthMixed" xml:space="preserve"><value>От лёгкого к глубокому</value></data>
   <data name="Editor_AiSetting" xml:space="preserve"><value>Кто будет играть</value></data>
   <data name="Editor_Setting_couple" xml:space="preserve"><value>Пара</value></data>
   <data name="Editor_Setting_friends" xml:space="preserve"><value>Друзья</value></data>
@@ -207,4 +206,28 @@
   <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Коллеги</value></data>
   <data name="Editor_AiWriteMore" xml:space="preserve"><value>Сгенерировать ещё {0}</value></data>
   <data name="Editor_AiEditHint" xml:space="preserve"><value>Чтобы изменить текст карточки, выбери «Вручную».</value></data>
+  <data name="Setup_HowToPlay" xml:space="preserve"><value>Как играете</value></data>
+  <data name="Setup_WriteShort" xml:space="preserve"><value>Писать</value></data>
+  <data name="Setup_TalkShort" xml:space="preserve"><value>Говорить</value></data>
+  <data name="Setup_EveryoneShort" xml:space="preserve"><value>Все</value></data>
+  <data name="Setup_TakeTurnsShort" xml:space="preserve"><value>По очереди</value></data>
+  <data name="Setup_EveryoneDesc" xml:space="preserve"><value>Каждую карточку отвечают все.</value></data>
+  <data name="Setup_TakeTurnsDesc" xml:space="preserve"><value>Каждую карточку отвечает один, по очереди.</value></data>
+  <data name="Editor_AiLanguages" xml:space="preserve"><value>Языки</value></data>
+  <data name="Editor_AiLanguagesHint" xml:space="preserve"><value>Игроки получают карточки только на языках, которые они читают.</value></data>
+  <data name="End_SaveDeck" xml:space="preserve"><value>Сохранить как колоду</value></data>
+  <data name="End_SaveAll" xml:space="preserve"><value>Все карточки ({0})</value></data>
+  <data name="End_SaveLiked" xml:space="preserve"><value>Только понравившиеся ({0})</value></data>
+  <data name="End_Saved" xml:space="preserve"><value>Сохранено в «Мои колоды».</value></data>
+  <data name="End_OpenDeck" xml:space="preserve"><value>Открыть</value></data>
+  <data name="End_Close" xml:space="preserve"><value>Закрыть</value></data>
+  <data name="End_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Editor_ModeDecks" xml:space="preserve"><value>Из колод</value></data>
+  <data name="Editor_DecksHint" xml:space="preserve"><value>Отметь карточки из других колод или выбери все, чтобы объединить.</value></data>
+  <data name="Editor_SelectAll" xml:space="preserve"><value>Все</value></data>
+  <data name="Editor_AlreadyIn" xml:space="preserve"><value>Уже в этой колоде</value></data>
+  <data name="Editor_AddPicked" xml:space="preserve"><value>Добавить ({0})</value></data>
+  <data name="Editor_DecksAdded_One" xml:space="preserve"><value>Добавлена {0} карточка.</value></data>
+  <data name="Editor_DecksAdded_Few" xml:space="preserve"><value>Добавлено {0} карточки.</value></data>
+  <data name="Editor_DecksAdded_Many" xml:space="preserve"><value>Добавлено {0} карточек.</value></data>
 </root>

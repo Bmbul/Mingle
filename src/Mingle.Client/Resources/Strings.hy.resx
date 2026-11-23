@@ -183,7 +183,7 @@
   <data name="Editor_AiPlaceholder" xml:space="preserve"><value>Քո բառերով, օրինակ՝ մեր ճամփորդությունը Դիլիջան, միասին ապրելը</value></data>
   <data name="Editor_AiWrite" xml:space="preserve"><value>Ստեղծել {0} քարտ</value></data>
   <data name="Editor_AiWriting" xml:space="preserve"><value>Ստեղծում ենք…</value></data>
-  <data name="Editor_AiHint" xml:space="preserve"><value>Ընտրիր թեմաներ կամ նկարագրիր քոնը։ Քարտերը կլինեն երեք լեզուներով։</value></data>
+  <data name="Editor_AiHint" xml:space="preserve"><value>Ընտրիր թեմաներ կամ նկարագրիր քոնը։</value></data>
   <data name="Editor_AiFailed" xml:space="preserve"><value>Չստացվեց։ Փորձիր կրկին։</value></data>
   <data name="Editor_AiAdded_One" xml:space="preserve"><value>Ավելացվեց {0} քարտ։ Ստուգիր և պահպանիր։</value></data>
   <data name="Editor_AiAdded_Other" xml:space="preserve"><value>Ավելացվեց {0} քարտ։ Ստուգիր և պահպանիր։</value></data>
@@ -193,7 +193,6 @@
   <data name="Editor_AiTopics" xml:space="preserve"><value>Թեմաներ · մինչև {0}</value></data>
   <data name="Editor_AiOwn" xml:space="preserve"><value>Ուրիշ ի՞նչ (ըստ ցանկության)</value></data>
   <data name="Editor_AiDepth" xml:space="preserve"><value>Որքան խորը</value></data>
-  <data name="Editor_AiDepthMixed" xml:space="preserve"><value>Թեթևից խորը</value></data>
   <data name="Editor_AiSetting" xml:space="preserve"><value>Ովքեր են խաղալու</value></data>
   <data name="Editor_Setting_couple" xml:space="preserve"><value>Զույգ</value></data>
   <data name="Editor_Setting_friends" xml:space="preserve"><value>Ընկերներ</value></data>
@@ -202,4 +201,27 @@
   <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Գործընկերներ</value></data>
   <data name="Editor_AiWriteMore" xml:space="preserve"><value>Ստեղծել ևս {0}</value></data>
   <data name="Editor_AiEditHint" xml:space="preserve"><value>Քարտի տեքստը փոխելու համար ընտրիր «Ձեռքով»։</value></data>
+  <data name="Setup_HowToPlay" xml:space="preserve"><value>Ինչպես եք խաղում</value></data>
+  <data name="Setup_WriteShort" xml:space="preserve"><value>Գրել</value></data>
+  <data name="Setup_TalkShort" xml:space="preserve"><value>Խոսել</value></data>
+  <data name="Setup_EveryoneShort" xml:space="preserve"><value>Բոլորը</value></data>
+  <data name="Setup_TakeTurnsShort" xml:space="preserve"><value>Հերթով</value></data>
+  <data name="Setup_EveryoneDesc" xml:space="preserve"><value>Ամեն քարտի պատասխանում եք բոլորդ։</value></data>
+  <data name="Setup_TakeTurnsDesc" xml:space="preserve"><value>Ամեն քարտի պատասխանում է մեկը՝ հերթով։</value></data>
+  <data name="Editor_AiLanguages" xml:space="preserve"><value>Լեզուներ</value></data>
+  <data name="Editor_AiLanguagesHint" xml:space="preserve"><value>Խաղացողները ստանում են միայն իրենց կարդացած լեզուներով քարտեր։</value></data>
+  <data name="End_SaveDeck" xml:space="preserve"><value>Պահպանել որպես հավաքածու</value></data>
+  <data name="End_SaveAll" xml:space="preserve"><value>Բոլոր քարտերը ({0})</value></data>
+  <data name="End_SaveLiked" xml:space="preserve"><value>Միայն հավանածները ({0})</value></data>
+  <data name="End_Saved" xml:space="preserve"><value>Պահպանվեց «Իմ հավաքածուներում»։</value></data>
+  <data name="End_OpenDeck" xml:space="preserve"><value>Բացել</value></data>
+  <data name="End_Close" xml:space="preserve"><value>Փակել</value></data>
+  <data name="End_Cancel" xml:space="preserve"><value>Չեղարկել</value></data>
+  <data name="Editor_ModeDecks" xml:space="preserve"><value>Այլ հավաքածուներից</value></data>
+  <data name="Editor_DecksHint" xml:space="preserve"><value>Նշիր քարտեր այլ հավաքածուներից կամ ընտրիր բոլորը՝ միավորելու համար։</value></data>
+  <data name="Editor_SelectAll" xml:space="preserve"><value>Բոլորը</value></data>
+  <data name="Editor_AlreadyIn" xml:space="preserve"><value>Արդեն այս հավաքածուում է</value></data>
+  <data name="Editor_AddPicked" xml:space="preserve"><value>Ավելացնել ({0})</value></data>
+  <data name="Editor_DecksAdded_One" xml:space="preserve"><value>Ավելացվեց {0} քարտ։</value></data>
+  <data name="Editor_DecksAdded_Other" xml:space="preserve"><value>Ավելացվեց {0} քարտ։</value></data>
 </root>

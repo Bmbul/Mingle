@@ -64,8 +64,8 @@ public static class CardPrompt
             : request.Setting is { } setting
                 ? $"Write {request.Count} cards for a deck played by {CardRequest.Settings[setting]}."
                 : $"Write {request.Count} cards for a deck any group of friends or a couple can play.");
-        if (request.Depth is { } depth)
-            text.AppendLine($"Every card is depth {depth} (instead of the usual mix of depths).");
+        if (!request.Depths.IsDefaultOrEmpty)
+            text.AppendLine($"Use only depth {string.Join(" and ", request.Depths)} (instead of the usual mix of depths).");
         text.AppendLine($"Languages: {string.Join(", ", request.Languages.Select(l => l.Code()))}.");
         text.AppendLine("Topics (use the code in the \"topic\" field):");
         foreach (var topic in request.Topics)

@@ -57,18 +57,39 @@
     </section>
     }
 
-    @if (Online || passThePhone)
-    {
-        <section class="stack">
-            <h2 class="label">@T["Setup_Answers"]</h2>
-            <div class="two" role="group" aria-label="@T["Setup_Answers"]">
-                <OptionCard Selected="@(mode == AnswerMode.Written)" OnSelect="() => mode = AnswerMode.Written"
-                            Title="@T["Setup_Write"]" Description="@T["Setup_WriteDesc"]" />
-                <OptionCard Selected="@(mode == AnswerMode.Talk)" OnSelect="() => mode = AnswerMode.Talk"
-                            Title="@T["Setup_Talk"]" Description="@T["Setup_TalkDesc"]" />
+    <section class="stack">
+        <h2 class="label">@T["Setup_HowToPlay"]</h2>
+        <div class="seg-row">
+            @if (Online || passThePhone)
+            {
+                <div class="seg" role="group" aria-label="@T["Setup_Answers"]">
+                    <button class="@(mode == AnswerMode.Written ? "on" : "")" aria-pressed="@(mode == AnswerMode.Written ? "true" : "false")"
+                            title="@T["Setup_WriteDesc"]" @onclick="() => mode = AnswerMode.Written">
+                        <Icon Name="pen" Size="20" /><span>@T["Setup_WriteShort"]</span>
+                    </button>
+                    <button class="@(mode == AnswerMode.Talk ? "on" : "")" aria-pressed="@(mode == AnswerMode.Talk ? "true" : "false")"
+                            title="@T["Setup_TalkDesc"]" @onclick="() => mode = AnswerMode.Talk">
+                        <Icon Name="chat" Size="20" /><span>@T["Setup_TalkShort"]</span>
+                    </button>
+                </div>
+            }
+            <div class="seg" role="group" aria-label="@T["Setup_WhoAnswers"]">
+                <button class="@(turnStyle == TurnStyle.Everyone ? "on" : "")" aria-pressed="@(turnStyle == TurnStyle.Everyone ? "true" : "false")"
+                        title="@T["Setup_EveryoneDesc"]" @onclick="() => turnStyle = TurnStyle.Everyone">
+                    <Icon Name="people" Size="20" /><span>@T["Setup_EveryoneShort"]</span>
+                </button>
+                <button class="@(turnStyle == TurnStyle.TakeTurns ? "on" : "")" aria-pressed="@(turnStyle == TurnStyle.TakeTurns ? "true" : "false")"
+                        title="@T["Setup_TakeTurnsDesc"]" @onclick="() => turnStyle = TurnStyle.TakeTurns">
+                    <Icon Name="refresh" Size="20" /><span>@T["Setup_TakeTurnsShort"]</span>
+                </button>
             </div>
-        </section>
-    }
+        </div>
+        @* Phones have no hover, so the meaning of the current choice is spelled out underneath. *@
+        <p class="muted small">
+            @if (Online || passThePhone) { @(mode == AnswerMode.Written ? T["Setup_WriteDesc"] : T["Setup_TalkDesc"]) @(" ") }
+            @(turnStyle == TurnStyle.Everyone ? T["Setup_EveryoneDesc"] : T["Setup_TakeTurnsDesc"])
+        </p>
+    </section>
 
     @if (Online)
     {
@@ -113,15 +134,6 @@
     </section>
     }
 
-    <section class="stack">
-        <h2 class="label">@T["Setup_WhoAnswers"]</h2>
-        <div class="chips">
-            <button class="chip @(turnStyle == TurnStyle.Everyone ? "on" : "")" aria-pressed="@(turnStyle == TurnStyle.Everyone ? "true" : "false")"
-                    @onclick="() => turnStyle = TurnStyle.Everyone">@T["Setup_Everyone"]</button>
-            <button class="chip @(turnStyle == TurnStyle.TakeTurns ? "on" : "")" aria-pressed="@(turnStyle == TurnStyle.TakeTurns ? "true" : "false")"
-                    @onclick="() => turnStyle = TurnStyle.TakeTurns">@T["Setup_TakeTurns"]</button>
-        </div>
-    </section>
 
     @if (!PicksInLobby)
     {
