@@ -224,4 +224,5 @@
   <data name="Editor_AddPicked" xml:space="preserve"><value>Add ({0})</value></data>
   <data name="Editor_DecksAdded_One" xml:space="preserve"><value>Added {0} card.</value></data>
   <data name="Editor_DecksAdded_Other" xml:space="preserve"><value>Added {0} cards.</value></data>
+  <data name="Setup_PassPhoneShort" xml:space="preserve"><value>Pass it</value></data>
 </root>

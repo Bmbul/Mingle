@@ -44,22 +44,22 @@
         }
     </section>
 
-    @if (!Online)
-    {
-    <section class="stack">
-        <h2 class="label">@T["Setup_OnePhone"]</h2>
-        <div class="two" role="group" aria-label="@T["Setup_OnePhone"]">
-            <OptionCard Selected="@(!passThePhone)" OnSelect="() => passThePhone = false"
-                        Title="@T["Setup_OutLoud"]" Description="@T["Setup_OutLoudDesc"]" />
-            <OptionCard Selected="@passThePhone" OnSelect="() => passThePhone = true"
-                        Title="@T["Setup_PassPhone"]" Description="@T["Setup_PassPhoneDesc"]" />
-        </div>
-    </section>
-    }
-
     <section class="stack">
         <h2 class="label">@T["Setup_HowToPlay"]</h2>
         <div class="seg-row">
+            @if (!Online)
+            {
+                <div class="seg" role="group" aria-label="@T["Setup_OnePhone"]">
+                    <button class="@(!passThePhone ? "on" : "")" aria-pressed="@(!passThePhone ? "true" : "false")"
+                            title="@T["Setup_OutLoudDesc"]" @onclick="() => passThePhone = false">
+                        <Icon Name="speaker" Size="20" /><span>@T["Setup_OutLoud"]</span>
+                    </button>
+                    <button class="@(passThePhone ? "on" : "")" aria-pressed="@(passThePhone ? "true" : "false")"
+                            title="@T["Setup_PassPhoneDesc"]" @onclick="() => passThePhone = true">
+                        <Icon Name="pass" Size="20" /><span>@T["Setup_PassPhoneShort"]</span>
+                    </button>
+                </div>
+            }
             @if (Online || passThePhone)
             {
                 <div class="seg" role="group" aria-label="@T["Setup_Answers"]">
@@ -86,6 +86,7 @@
         </div>
         @* Phones have no hover, so the meaning of the current choice is spelled out underneath. *@
         <p class="muted small">
+            @if (!Online) { @(passThePhone ? T["Setup_PassPhoneDesc"] : T["Setup_OutLoudDesc"]) @(" ") }
             @if (Online || passThePhone) { @(mode == AnswerMode.Written ? T["Setup_WriteDesc"] : T["Setup_TalkDesc"]) @(" ") }
             @(turnStyle == TurnStyle.Everyone ? T["Setup_EveryoneDesc"] : T["Setup_TakeTurnsDesc"])
         </p>
