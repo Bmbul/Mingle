@@ -25,7 +25,7 @@ public static class DeckMix
         foreach (var group in picks.GroupBy(d => d.Id, StringComparer.Ordinal).OrderBy(g => g.Key, StringComparer.Ordinal))
         {
             var readable = group.First().Cards
-                .Where(c => languages.All(c.Supports) && !seen.Contains(c.Id))
+                .Where(c => !c.Kind.BlitzOnly && languages.All(c.Supports) && !seen.Contains(c.Id))
                 .DistinctBy(c => c.Id)
                 .OrderBy(c => c.Id, StringComparer.Ordinal)
                 .ToArray();
@@ -46,7 +46,7 @@ public static class DeckMix
     /// </summary>
     public static GameSettings SettingsFor(GameSettings chosen, Deck mix) => chosen with
     {
-        KindIds = CardKinds.All.Select(k => k.Id).ToImmutableHashSet(),
+        KindIds = CardKinds.Regular.Select(k => k.Id).ToImmutableHashSet(),
         MinDepth = 1,
         MaxDepth = 3,
         CardCount = Math.Max(1, mix.Cards.Length),

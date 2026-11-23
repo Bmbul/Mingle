@@ -33,7 +33,7 @@ public enum CardOrder
 
 public sealed record GameSettings
 {
-    public ImmutableHashSet<string> KindIds { get; init; } = CardKinds.All.Select(k => k.Id).ToImmutableHashSet();
+    public ImmutableHashSet<string> KindIds { get; init; } = CardKinds.Regular.Select(k => k.Id).ToImmutableHashSet();
     public int MinDepth { get; init; } = 1;
     public int MaxDepth { get; init; } = 3;
     public AnswerMode AnswerMode { get; init; } = AnswerMode.Written;

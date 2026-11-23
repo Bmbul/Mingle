@@ -42,6 +42,19 @@
             remove: function (key) {
                 try { localStorage.removeItem(key); } catch (e) { }
             },
+            // Screen size in CSS pixels (the blitz timer bar runs around the edge).
+            viewport: function () { return [window.innerWidth, window.innerHeight]; },
+            // End of a blitz turn: a short vibration and a beep, where the phone allows them.
+            buzz: function () {
+                try { if (navigator.vibrate) navigator.vibrate([120, 60, 120]); } catch (e) { }
+                try {
+                    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    var osc = ctx.createOscillator(), gain = ctx.createGain();
+                    osc.frequency.value = 660; gain.gain.value = 0.15;
+                    osc.connect(gain); gain.connect(ctx.destination);
+                    osc.start(); osc.stop(ctx.currentTime + 0.25);
+                } catch (e) { }
+            },
             // Opens the phone's share sheet, or copies the link where there is none.
             share: async function (url, title) {
                 try {

@@ -20,6 +20,7 @@ public sealed class CardKind
         ["likely"] = 4,
         ["guess"] = 5,
         ["rate"] = 6,
+        ["word"] = 7,
     };
 
     public static IEnumerable<CardKind> All() =>

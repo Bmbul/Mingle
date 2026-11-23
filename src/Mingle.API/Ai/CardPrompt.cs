@@ -66,6 +66,13 @@ public static class CardPrompt
                 : $"Write {request.Count} cards for a deck any group of friends or a couple can play.");
         if (!request.Depths.IsDefaultOrEmpty)
             text.AppendLine($"Use only depth {string.Join(" and ", request.Depths)} (instead of the usual mix of depths).");
+        if (request.Associations)
+            text.AppendLine("""
+                These are association cards for a blitz game (kind "word"): the player sees the card and says the first
+                word that comes to mind, within five seconds. Each card is ONE word or a short phrase of at most three words,
+                a noun or a moment ("Sea", "First date", "Sunday morning"), never a question, with no punctuation at the end.
+                Mix everyday words with a few personal or evocative ones. Translate naturally into each language. No options.
+                """);
         text.AppendLine($"Languages: {string.Join(", ", request.Languages.Select(l => l.Code()))}.");
         text.AppendLine("Topics (use the code in the \"topic\" field):");
         foreach (var topic in request.Topics)
@@ -97,7 +104,7 @@ public static class CardPrompt
             type = "object",
             properties = new Dictionary<string, object>
             {
-                ["kind"] = new { type = "string", @enum = Kinds },
+                ["kind"] = new { type = "string", @enum = request.AllowedKinds },
                 ["depth"] = new { type = "integer", @enum = new[] { 1, 2, 3 } },
                 ["topic"] = new { type = "string", @enum = request.Topics.Select(t => t.Code).ToArray() },
                 ["text"] = PerLanguage(new { type = "string" }),

@@ -242,4 +242,21 @@
   <data name="TopicGroup_personal" xml:space="preserve"><value>Անձնական</value></data>
   <data name="TopicGroup_relationships" xml:space="preserve"><value>Հարաբերություններ</value></data>
   <data name="TopicGroup_fun" xml:space="preserve"><value>Զվարճալի</value></data>
+  <data name="Setup_Blitz" xml:space="preserve"><value>Բլից</value></data>
+  <data name="Setup_BlitzLine" xml:space="preserve"><value>{0} վայրկյան ամեն մեկին՝ առաջին բառը, որ գալիս է մտքիդ</value></data>
+  <data name="Blitz_NotStarted" xml:space="preserve"><value>Սկսեք բլիցը «Նոր խաղ»-ից։</value></data>
+  <data name="Blitz_Results" xml:space="preserve"><value>Արդյունքներ</value></data>
+  <data name="Blitz_Again" xml:space="preserve"><value>Նորից խաղալ</value></data>
+  <data name="Blitz_TurnOf" xml:space="preserve"><value>Հիմա խաղում է</value></data>
+  <data name="Blitz_Rules" xml:space="preserve"><value>{0} վայրկյան։ Ասա առաջին բառը, որ գալիս է մտքիդ։ Մեկ ուրիշը սեղմում է ✓։</value></data>
+  <data name="Blitz_LastTurn" xml:space="preserve"><value>{0}՝ {1} պատասխան</value></data>
+  <data name="Blitz_Go" xml:space="preserve"><value>Սկսե՛լ</value></data>
+  <data name="Blitz_Answered" xml:space="preserve"><value>Պատասխաններ՝ {0}</value></data>
+  <data name="Blitz_Skip" xml:space="preserve"><value>Բաց թողնել</value></data>
+  <data name="Blitz_Got" xml:space="preserve"><value>Ասաց</value></data>
+  <data name="Kind_word" xml:space="preserve"><value>Ասոցիացիա</value></data>
+  <data name="Editor_Hint_word" xml:space="preserve"><value>Մեկ բառ կամ կարճ արտահայտություն…</value></data>
+  <data name="Editor_Style" xml:space="preserve"><value>Քարտերի տեսակը</value></data>
+  <data name="Editor_StyleQuestions" xml:space="preserve"><value>Հարցեր</value></data>
+  <data name="Editor_StyleWords" xml:space="preserve"><value>Ասոցիացիաներ (բլիցի համար)</value></data>
 </root>

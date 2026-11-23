@@ -162,6 +162,13 @@ namespace Mingle.DAL.Migrations
                             Audience = "FollowTurnStyle",
                             Code = "rate",
                             ResponseType = "Scale"
+                        },
+                        new
+                        {
+                            Id = (short)7,
+                            Audience = "FollowTurnStyle",
+                            Code = "word",
+                            ResponseType = "Free"
                         });
                 });
 

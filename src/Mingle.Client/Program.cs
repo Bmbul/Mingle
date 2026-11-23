@@ -16,6 +16,7 @@ builder.Services.AddScoped<Text>();
 builder.Services.AddScoped<DeviceDeckStore>();
 builder.Services.AddScoped<ContentService>();
 builder.Services.AddScoped<GameSession>();
+builder.Services.AddScoped<BlitzSession>();
 builder.Services.AddScoped<RoomClient>();
 
 var host = builder.Build();

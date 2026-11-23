@@ -13,7 +13,8 @@ public sealed record CardRequest(
     int PlayerCount,
     int Count = TopicDeal.CardCount,
     ImmutableArray<int> Depths = default,
-    string? Setting = null)
+    string? Setting = null,
+    bool Associations = false)
 {
     public const string ThemeCode = "theme";
     public const int MaxThemeLength = 200;
@@ -40,7 +41,8 @@ public sealed record CardRequest(
     /// user's own words, which become one more topic so the same prompt, schema and checks apply.
     /// </summary>
     public static CardRequest ForDeck(
-        IEnumerable<TopicInfo> topics, string? theme, IEnumerable<int>? depths, string? setting, IEnumerable<Lang>? languages, int count)
+        IEnumerable<TopicInfo> topics, string? theme, IEnumerable<int>? depths, string? setting, IEnumerable<Lang>? languages, int count,
+        bool associations = false)
     {
         var all = topics.ToList();
         if (!string.IsNullOrWhiteSpace(theme))
@@ -49,8 +51,12 @@ public sealed record CardRequest(
         var chosen = (depths ?? []).Where(d => d is >= 1 and <= 3).Distinct().Order().ToImmutableArray();
         return new([.. all], langs.IsEmpty ? [.. Langs.All] : langs, PlayerCount: 0, count,
             chosen.Length is 0 or 3 ? [] : chosen,
-            setting is not null && Settings.ContainsKey(setting) ? setting : null);
+            setting is not null && Settings.ContainsKey(setting) ? setting : null,
+            associations);
     }
+
+    /// <summary>The card kinds this request may produce: associations only, or the normal kinds.</summary>
+    public string[] AllowedKinds => Associations ? [CardKinds.Association.Id] : CardPrompt.Kinds;
 
     /// <summary>Whether a card of this depth fits the request (any depth when no depths were chosen).</summary>
     public bool Allows(int depth) => Depths.IsDefaultOrEmpty || Depths.Contains(depth);

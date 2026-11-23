@@ -56,7 +56,8 @@ public enum Audience
 /// <summary>The input a player actually uses for the current card, after the answer mode is applied.</summary>
 public enum InputMode { Spoken, Text, Choice, PlayerVote, Scale }
 
-public sealed record CardKind(string Id, ResponseType Response, Audience Audience);
+/// <param name="BlitzOnly">Played only in blitz (associations): normal games, mixes and fallbacks leave it out.</param>
+public sealed record CardKind(string Id, ResponseType Response, Audience Audience, bool BlitzOnly = false);
 
 public static class CardKinds
 {
@@ -66,9 +67,17 @@ public static class CardKinds
     public static readonly CardKind MostLikelyTo = new("likely", ResponseType.PlayerVote, Audience.Everyone);
     public static readonly CardKind GuessMyAnswer = new("guess", ResponseType.Free, Audience.AboutTurnPlayer);
     public static readonly CardKind RateIt = new("rate", ResponseType.Scale, Audience.FollowTurnStyle);
+    /// <summary>A single word or short phrase; the player says the first word it brings to mind.</summary>
+    public static readonly CardKind Association = new("word", ResponseType.Free, Audience.FollowTurnStyle, BlitzOnly: true);
 
     public static ImmutableArray<CardKind> All { get; } =
-        [OpenQuestion, FinishSentence, WouldYouRather, MostLikelyTo, GuessMyAnswer, RateIt];
+        [OpenQuestion, FinishSentence, WouldYouRather, MostLikelyTo, GuessMyAnswer, RateIt, Association];
+
+    /// <summary>The kinds normal games play.</summary>
+    public static ImmutableArray<CardKind> Regular { get; } = [.. All.Where(k => !k.BlitzOnly)];
+
+    /// <summary>The kinds blitz plays: quick, one-word answers.</summary>
+    public static ImmutableArray<CardKind> Blitz { get; } = [Association, WouldYouRather];
 
     private static readonly ImmutableDictionary<string, CardKind> ById = All.ToImmutableDictionary(k => k.Id);
 
@@ -109,5 +118,12 @@ public sealed record Deck(string Id, ImmutableDictionary<Lang, string> Names, Im
         : Names.Values.FirstOrDefault() ?? Id;
 
     /// <summary>How many cards everyone reading these languages can play (a card needs all of them).</summary>
-    public int CountReadableBy(IReadOnlyCollection<Lang> languages) => Cards.Count(c => languages.All(c.Supports));
+    public int CountReadableBy(IReadOnlyCollection<Lang> languages) => CountReadableBy(languages, CardKinds.Regular);
+
+    /// <summary>The same, counting only cards of the given kinds (for example the blitz kinds).</summary>
+    public int CountReadableBy(IReadOnlyCollection<Lang> languages, IEnumerable<CardKind> kinds)
+    {
+        var ids = kinds.Select(k => k.Id).ToHashSet();
+        return Cards.Count(c => ids.Contains(c.KindId) && languages.All(c.Supports));
+    }
 }

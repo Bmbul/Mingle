@@ -53,7 +53,7 @@ public static class CardParser
     private static Card? TryRead(JsonElement element, CardRequest request, HashSet<string> topics)
     {
         if (element.ValueKind != JsonValueKind.Object) return null;
-        if (Str(element, "kind") is not { } kind || !CardPrompt.Kinds.Contains(kind)) return null;
+        if (Str(element, "kind") is not { } kind || !request.AllowedKinds.Contains(kind)) return null;
         if (!element.TryGetProperty("depth", out var d) || !d.TryGetInt32(out var depth) || depth is < 1 or > 3 || !request.Allows(depth)) return null;
         var topic = Str(element, "topic");
         if (topic is null || !topics.Contains(topic)) return null;
@@ -78,8 +78,14 @@ public static class CardParser
             {
                 if (Str(text, lang.Code()) is not { } value || !Clean(value, MaxTextLength)) return null;
                 var tidy = Tidy(value);
-                // Every kind but "finish the sentence" is a question.
-                if (lang == Lang.Hy && kind != "finish") tidy = ArmenianQuestions.Fix(tidy);
+                if (kind == CardKinds.Association.Id)
+                {
+                    // One word or a short phrase: no question, no full stop, nothing long.
+                    tidy = tidy.TrimEnd('.', '։', '!', '…');
+                    if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 40 || tidy.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length > 4) return null;
+                }
+                // Every kind but "finish the sentence" and associations is a question.
+                if (lang == Lang.Hy && kind is not ("finish" or "word")) tidy = ArmenianQuestions.Fix(tidy);
                 texts[lang] = new CardText(tidy);
             }
         }

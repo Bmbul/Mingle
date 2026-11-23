@@ -1,6 +1,7 @@
 @page "/setup"
 @inject Text T
 @inject GameSession Session
+@inject BlitzSession Blitzes
 @inject ContentService Content
 @inject NavigationManager Nav
 @inject RoomClient Rooms
@@ -50,13 +51,17 @@
             @if (!Online)
             {
                 <div class="seg" role="group" aria-label="@T["Setup_OnePhone"]">
-                    <button class="@(!passThePhone ? "on" : "")" aria-pressed="@(!passThePhone ? "true" : "false")"
-                            title="@T["Setup_OutLoudDesc"]" @onclick="() => passThePhone = false">
+                    <button class="@(!passThePhone && !blitz ? "on" : "")" aria-pressed="@(!passThePhone && !blitz ? "true" : "false")"
+                            title="@T["Setup_OutLoudDesc"]" @onclick="() => { passThePhone = false; blitz = false; }">
                         <Icon Name="speaker" Size="20" /><span>@T["Setup_OutLoud"]</span>
                     </button>
                     <button class="@(passThePhone ? "on" : "")" aria-pressed="@(passThePhone ? "true" : "false")"
-                            title="@T["Setup_PassPhoneDesc"]" @onclick="() => passThePhone = true">
+                            title="@T["Setup_PassPhoneDesc"]" @onclick="() => { passThePhone = true; blitz = false; }">
                         <Icon Name="pass" Size="20" /><span>@T["Setup_PassPhoneShort"]</span>
+                    </button>
+                    <button class="@(blitz ? "on" : "")" aria-pressed="@(blitz ? "true" : "false")"
+                            @onclick="() => { blitz = true; passThePhone = false; }">
+                        <Icon Name="bolt" Size="20" /><span>@T["Setup_Blitz"]</span>
                     </button>
                 </div>
             }
@@ -126,19 +131,21 @@
     <section class="stack">
         <h2 class="label">@T["Setup_Decks"]</h2>
         @* Only decks with cards everyone at the table can read. *@
-        @foreach (var deck in decks.Where(d => d.CountReadableBy(TableLanguages) > 0))
+        @foreach (var deck in decks.Where(d => Readable(d) > 0))
         {
             var on = deckIds.Contains(deck.Id);
             <button class="check-row @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" @onclick="() => Toggle(deckIds, deck.Id)">
                 <span class="box @(on ? "on" : "")" aria-hidden="true">@if (on) { <Icon Name="check" Size="14" Stroke="3" /> }</span>
                 <span class="grow">
                     <span class="row-title">@deck.NameFor(Text.UiLang)</span>
-                    <span class="muted small">@T.Plural("Cards", deck.CountReadableBy(TableLanguages))</span>
+                    <span class="muted small">@T.Plural("Cards", Readable(deck))</span>
                 </span>
             </button>
         }
     </section>
 
+    @if (!blitz)
+    {
     <section class="stack">
         <h2 class="label">@T["Setup_Order"]</h2>
         <div class="two" role="group" aria-label="@T["Setup_Order"]">
@@ -148,6 +155,7 @@
                         Title="@T["Setup_OrderShuffled"]" Description="@T["Setup_OrderShuffledDesc"]" />
         </div>
     </section>
+    }
     }
 
 
@@ -194,6 +202,8 @@
     private AnswerMode mode = AnswerMode.Written;
     private TurnStyle turnStyle = TurnStyle.Everyone;
     private bool passThePhone;
+    /// <summary>Blitz: 60-second hot-seat turns of quick association cards (see Pages/Blitz.razor).</summary>
+    private bool blitz;
     private bool loadFailed;
     private int cardCount = 20;
     private CardOrder order = CardOrder.LightToDeep;
@@ -255,7 +265,7 @@
         get
         {
             var parts = new List<string>();
-            if (!Online) parts.Add(passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
+            if (!Online) parts.Add(blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
             if (Online || passThePhone)
             {
                 parts.Add(mode == AnswerMode.Written ? T["Setup_WriteLine"] : T["Setup_TalkLine"]);
@@ -268,7 +278,12 @@
     /// <summary>The languages at the table: every player's on one phone; online, the host's for now.</summary>
     private Lang[] TableLanguages => Online ? [Text.UiLang] : [.. players.Select(p => p.Lang).Distinct()];
 
-    private int MatchingCards =>
+    /// <summary>Cards in a deck everyone can read: blitz counts only quick cards, other games only normal ones.</summary>
+    private int Readable(Deck deck) => blitz ? deck.CountReadableBy(TableLanguages, CardKinds.Blitz) : deck.CountReadableBy(TableLanguages);
+
+    private int MatchingCards => blitz
+        ? decks.Where(d => deckIds.Contains(d.Id)).Sum(Readable)
+        :
         Game.BuildPool(decks.Where(d => deckIds.Contains(d.Id)), Settings, NamedPlayers.IsEmpty ? [new Player("x", "x", Text.UiLang)] : NamedPlayers).Length;
 
     private int NeededPlayers => Online ? 1 : Game.MinPlayers;
@@ -296,6 +311,12 @@
         if (!CanStart) return;
         if (!Online)
         {
+            if (blitz)
+            {
+                Blitzes.Start(NamedPlayers, [.. decks.Where(d => deckIds.Contains(d.Id))]);
+                Nav.NavigateTo("blitz");
+                return;
+            }
             Session.Start(new SetupChoices(NamedPlayers, Settings, deckIds.ToImmutableHashSet(), passThePhone), decks);
             Nav.NavigateTo("play");
             return;

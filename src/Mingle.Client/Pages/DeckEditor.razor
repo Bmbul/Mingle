@@ -140,6 +140,16 @@
         @if (sheet == "generate")
         {
         <section class="stack">
+            <h2 class="label">@T["Editor_Style"]</h2>
+            <div class="chips" role="group" aria-label="@T["Editor_Style"]">
+                <button class="chip @(!associations ? "on" : "")" aria-pressed="@(!associations ? "true" : "false")" disabled="@writing"
+                        @onclick="() => associations = false">@T["Editor_StyleQuestions"]</button>
+                <button class="chip @(associations ? "on" : "")" aria-pressed="@(associations ? "true" : "false")" disabled="@writing"
+                        @onclick="() => associations = true"><Icon Name="bolt" Size="16" />@T["Editor_StyleWords"]</button>
+            </div>
+        </section>
+
+        <section class="stack">
             <h2 class="label">@T["Editor_AiTopics", CardLimits.MaxTopics]</h2>
             @* One page per group; swipe sideways or tap a dot (js/swipe.js keeps the dots in step). *@
             <div class="pager" role="group" aria-label="@T["Editor_AiTopics", CardLimits.MaxTopics]">
@@ -368,6 +378,7 @@
     private readonly HashSet<int> depths = [1, 2, 3];
     private readonly HashSet<Lang> languages = [Text.UiLang];
     private string setting = "couple";
+    private bool associations;
     private string? sheet;
     private string? addedNote;
 
@@ -501,7 +512,7 @@
         aiNote = null;
         try
         {
-            var (written, problem) = await Content.WriteCardsAsync([.. pickedTopics], theme.Trim(), [.. depths], setting, [.. languages], CardLimits.PerWrite);
+            var (written, problem) = await Content.WriteCardsAsync([.. pickedTopics], theme.Trim(), [.. depths], setting, [.. languages], CardLimits.PerWrite, associations);
             if (problem is not null)
             {
                 aiNote = problem == "429" ? T["Editor_TooMany"] : T["Editor_AiFailed"];

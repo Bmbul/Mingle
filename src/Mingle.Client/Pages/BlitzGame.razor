@@ -1,0 +1,209 @@
+@page "/blitz"
+@implements IAsyncDisposable
+@inject Text T
+@inject BlitzSession Game
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+<PageTitle>@T["Setup_Blitz"] · Mingle</PageTitle>
+
+@if (!Game.Ready)
+{
+    <main class="main center-screen">
+        <p class="muted">@T["Blitz_NotStarted"]</p>
+        <a class="btn" href="setup">@T["Home_NewGame"]</a>
+    </main>
+}
+else if (Game.Finished)
+{
+    <main class="main">
+        <h1 class="h1 big">@T["Blitz_Results"]</h1>
+        <section class="stack">
+            @foreach (var (player, answered) in Game.Ranking())
+            {
+                <div class="card blitz-score">
+                    <span class="row-title grow">@player.Name</span>
+                    <span class="blitz-count">@answered</span>
+                </div>
+            }
+        </section>
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="PlayAgain">@T["Blitz_Again"]</button>
+        <a class="btn2" href="">@T["End_Home"]</a>
+    </footer>
+}
+else if (stage == Stage.Ready)
+{
+    <main class="main center-screen">
+        <p class="muted">@T["Blitz_TurnOf"]</p>
+        <p class="blitz-name">@Game.Current!.Name</p>
+        <p class="muted center">@T["Blitz_Rules", Blitz.TurnSeconds]</p>
+        @if (lastTurn is { } last)
+        {
+            <p class="muted small">@T["Blitz_LastTurn", last.Name, last.Answered]</p>
+        }
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="BeginTurn">@T["Blitz_Go"]</button>
+    </footer>
+}
+else if (stage == Stage.Countdown)
+{
+    <main class="main center-screen" aria-live="assertive">
+        <p class="blitz-countdown">@countdown</p>
+    </main>
+}
+else if (stage == Stage.Running && card is { } current)
+{
+    @* The card's own timer: a bar around the screen that starts full at the top and shrinks back to the top. *@
+    <svg class="edge-timer" viewBox="0 0 @W @H" preserveAspectRatio="none" aria-hidden="true">
+        <path @key="cardNumber" d="@EdgePath" pathLength="100" style="animation-duration: @(Blitz.CardSeconds)s" />
+    </svg>
+    <header class="top spread">
+        <span class="muted">@Game.Current!.Name</span>
+        <span class="blitz-clock">@TurnLeft</span>
+    </header>
+    <main class="main center-screen">
+        <p class="blitz-card" lang="@Game.Current!.Lang.Code()">@CardText(current)</p>
+        <p class="muted small">@T["Blitz_Answered", answered]</p>
+    </main>
+    <footer class="foot">
+        <div class="row gap">
+            <button class="btn2 grow" @onclick="Skip">@T["Blitz_Skip"]</button>
+            <button class="btn grow blitz-yes" @onclick="Answered"><Icon Name="check" Size="22" Stroke="3" />@T["Blitz_Got"]</button>
+        </div>
+    </footer>
+}
+
+@code {
+    private enum Stage { Ready, Countdown, Running }
+
+    private Stage stage = Stage.Ready;
+    private int countdown;
+    private Card? card;
+    private int cardNumber;
+    private int answered;
+    private int missed;
+    private DateTime turnEnds;
+    private DateTime cardEnds;
+    private (string Name, int Answered)? lastTurn;
+    private CancellationTokenSource? ticking;
+
+    // Screen size in CSS pixels, so the edge bar runs at the same speed along every side.
+    private double W = 375, H = 812;
+    private const double Inset = 3;
+
+    private string EdgePath
+    {
+        get
+        {
+            // Starts at the top center, goes clockwise around the screen and ends back at the top center.
+            static string N(double v) => v.ToString("0.#", System.Globalization.CultureInfo.InvariantCulture);
+            var (l, t, r, b, mid) = (Inset, Inset, W - Inset, H - Inset, W / 2);
+            return $"M {N(mid)} {N(t)} L {N(r)} {N(t)} L {N(r)} {N(b)} L {N(l)} {N(b)} L {N(l)} {N(t)} L {N(mid)} {N(t)}";
+        }
+    }
+
+    private string TurnLeft => Math.Max(0, (int)Math.Ceiling((turnEnds - DateTime.UtcNow).TotalSeconds)).ToString();
+
+    private string CardText(Card c)
+    {
+        var text = c.TextFor(Game.Current!.Lang);
+        return text.Options.IsEmpty ? text.Text : string.Join(" / ", text.Options);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+        var size = await JS.InvokeAsync<double[]>("mingle.viewport");
+        (W, H) = (size[0], size[1]);
+    }
+
+    private async Task BeginTurn()
+    {
+        stage = Stage.Countdown;
+        for (countdown = 3; countdown > 0; countdown--)
+        {
+            StateHasChanged();
+            await Task.Delay(700);
+        }
+        answered = 0;
+        missed = 0;
+        turnEnds = DateTime.UtcNow.AddSeconds(Blitz.TurnSeconds);
+        stage = Stage.Running;
+        NextCard();
+        ticking = new CancellationTokenSource();
+        _ = Tick(ticking.Token);
+    }
+
+    private void NextCard()
+    {
+        card = Game.NextCard();
+        cardNumber++;
+        cardEnds = DateTime.UtcNow.AddSeconds(Blitz.CardSeconds);
+    }
+
+    private void Answered()
+    {
+        if (stage != Stage.Running) return;
+        answered++;
+        NextCard();
+    }
+
+    private void Skip()
+    {
+        if (stage != Stage.Running) return;
+        missed++;
+        NextCard();
+    }
+
+    /// <summary>Ten times a second: a card that runs out counts as missed; the end of the turn ends it.</summary>
+    private async Task Tick(CancellationToken ct)
+    {
+        using var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(100));
+        try
+        {
+            while (await timer.WaitForNextTickAsync(ct))
+            {
+                var now = DateTime.UtcNow;
+                if (now >= turnEnds)
+                {
+                    await EndTurn();
+                    return;
+                }
+                if (now >= cardEnds)
+                {
+                    missed++;
+                    NextCard();
+                }
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+        catch (OperationCanceledException) { }
+    }
+
+    private async Task EndTurn()
+    {
+        ticking?.Cancel();
+        lastTurn = (Game.Current!.Name, answered);
+        Game.EndTurn(answered, missed);
+        stage = Stage.Ready;
+        card = null;
+        await JS.InvokeVoidAsync("mingle.buzz");
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void PlayAgain()
+    {
+        Game.Restart();
+        lastTurn = null;
+        stage = Stage.Ready;
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        ticking?.Cancel();
+        return ValueTask.CompletedTask;
+    }
+}

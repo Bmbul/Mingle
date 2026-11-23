@@ -397,3 +397,19 @@ a.check-row { text-decoration: none; color: inherit; }
 /* Topic chips sit centered on each page */
 .pager-page .chips { justify-content: center; }
 .chips.centered { justify-content: center; }
+
+/* Blitz */
+.edge-timer { position: fixed; inset: 0; width: 100vw; height: 100dvh; pointer-events: none; z-index: 30; }
+.edge-timer path {
+    fill: none; stroke: var(--accent); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 100 100; stroke-dashoffset: 0; animation-name: edge-shrink; animation-timing-function: linear; animation-fill-mode: forwards;
+}
+@keyframes edge-shrink { to { stroke-dashoffset: 100; } }
+@media (prefers-reduced-motion: reduce) { .edge-timer path { animation-timing-function: steps(5); } }
+.blitz-name { font-size: 40px; font-weight: 800; margin: 0; }
+.blitz-countdown { font-size: 96px; font-weight: 800; margin: 0; color: var(--accent); }
+.blitz-card { font-size: 44px; font-weight: 800; text-align: center; margin: 0; line-height: 1.15; overflow-wrap: anywhere; }
+.blitz-clock { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.blitz-score { flex-direction: row; align-items: center; }
+.blitz-count { font-size: 28px; font-weight: 800; color: var(--accent); }
+.btn.blitz-yes { min-height: 64px; font-size: 20px; }

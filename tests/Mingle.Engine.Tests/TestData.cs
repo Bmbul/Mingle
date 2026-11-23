@@ -22,11 +22,11 @@ internal static class TestData
     public static Deck Deck(params Card[] cards) =>
         new("test", ImmutableDictionary<Lang, string>.Empty.Add(Lang.En, "Test"), [.. cards]);
 
-    /// <summary>A deck with several cards of every kind at every depth.</summary>
+    /// <summary>A deck with several cards of every normal kind at every depth.</summary>
     public static Deck FullDeck()
     {
         var cards = new List<Card>();
-        foreach (var kind in CardKinds.All)
+        foreach (var kind in CardKinds.Regular)
             for (var depth = 1; depth <= 3; depth++)
                 for (var i = 0; i < 4; i++)
                     cards.Add(Card($"{kind.Id}-{depth}-{i}", kind, depth));

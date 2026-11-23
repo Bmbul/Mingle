@@ -146,4 +146,22 @@ public class CardWriterTests
 
         Assert.Equal(["Which country would you pick?"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
     }
+
+    [Fact]
+    public void Association_requests_accept_only_short_words()
+    {
+        var words = Request with { Associations = true };
+        object Word(string en, string hy) => new { kind = "word", depth = 1, topic = "travel", text = new { en, hy }, options = new { } };
+
+        var cards = CardParser.Parse(Json(
+            Word("Sea.", "Ծով։"),                                   // trailing stops are trimmed
+            Word("What is the sea?", "Ի՞նչ է ծովը"),               // a question
+            Word("A very long phrase about the sea", "Շատ երկար"), // too long
+            Open("Where to?", "Ո՞ւր")), words);                     // not an association
+
+        Assert.Equal(["Sea"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
+        Assert.Equal("Ծով", cards[0].Texts[Lang.Hy].Text);
+        Assert.Contains("\"word\"", JsonSerializer.Serialize(CardPrompt.Schema(words)));
+        Assert.DoesNotContain("\"word\"", JsonSerializer.Serialize(CardPrompt.Schema(Request)));
+    }
 }

@@ -49,7 +49,7 @@ public static class TopicDeal
         var readable = decks
             .SelectMany(d => d.Cards)
             .DistinctBy(c => c.Id)
-            .Where(c => languages.All(c.Supports))
+            .Where(c => !c.Kind.BlitzOnly && languages.All(c.Supports))
             .OrderBy(c => c.Id, StringComparer.Ordinal)
             .ToArray();
         random.Shuffle(readable);
@@ -68,7 +68,7 @@ public static class TopicDeal
     /// </summary>
     public static GameSettings SettingsFor(GameSettings chosen, Deck cards) => chosen with
     {
-        KindIds = CardKinds.All.Select(k => k.Id).ToImmutableHashSet(),
+        KindIds = CardKinds.Regular.Select(k => k.Id).ToImmutableHashSet(),
         MinDepth = 1,
         MaxDepth = 3,
         CardCount = Math.Max(1, cards.Cards.Length),
