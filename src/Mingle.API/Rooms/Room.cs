@@ -148,7 +148,7 @@ public sealed class Room(string code, TimeProvider clock)
     /// Host starts an "Our topics" game: the room waits while cards are written. Returns what to write.
     /// Finish with <see cref="FinishWriting"/>, or <see cref="CancelWriting"/> if no cards could be found.
     /// </summary>
-    public (ImmutableArray<TopicInfo> Topics, ImmutableArray<Lang> Languages, int PlayerCount) BeginWriting(string playerId)
+    public (ImmutableArray<TopicInfo> Topics, ImmutableArray<Lang> Languages, int PlayerCount, ImmutableArray<int> Depths) BeginWriting(string playerId)
     {
         lock (gate)
         {
@@ -165,8 +165,16 @@ public sealed class Room(string code, TimeProvider clock)
             writtenTopics = [.. topicPool.Where(t => picked.Contains(t.Code))];
             return (writtenTopics,
                     [.. members.Select(m => m.Lang).Distinct().Order()],
-                    members.Count);
+                    members.Count,
+                    ChosenDepths(settings.Depths));
         }
+    }
+
+    /// <summary>Valid depths only; all three (or none) means the usual light-to-deep mix.</summary>
+    private static ImmutableArray<int> ChosenDepths(ImmutableArray<int> depths)
+    {
+        var valid = (depths.IsDefault ? [] : depths).Where(d => d is >= 1 and <= 3).Distinct().Order().ToImmutableArray();
+        return valid.Length == 3 ? [] : valid;
     }
 
     public void FinishWriting(Deck cards, bool fromLibrary, int seed)

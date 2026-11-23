@@ -231,4 +231,5 @@
   <data name="Editor_Generate" xml:space="preserve"><value>Generate</value></data>
   <data name="Editor_FromDecks" xml:space="preserve"><value>From decks</value></data>
   <data name="Editor_NoCardsYet" xml:space="preserve"><value>No cards yet. Write one, generate some, or take them from other decks.</value></data>
+  <data name="Setup_PickDeck" xml:space="preserve"><value>Pick a deck.</value></data>
 </root>

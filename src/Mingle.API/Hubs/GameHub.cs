@@ -79,7 +79,7 @@ public sealed class GameHub(RoomRegistry rooms, IDeckSource decks, UserDeckStore
     /// </summary>
     private async Task StartTopicsGame(Room room, string me)
     {
-        var (picked, languages, playerCount) = Guard(() => room.BeginWriting(me));
+        var (picked, languages, playerCount, depths) = Guard(() => room.BeginWriting(me));
         await Broadcast(room);
 
         var seed = Random.Shared.Next();
@@ -90,13 +90,13 @@ public sealed class GameHub(RoomRegistry rooms, IDeckSource decks, UserDeckStore
             try
             {
                 // Not tied to the host's connection: if the host drops, the room still gets its cards.
-                var written = await writer.WriteAsync(new CardRequest(picked, languages, playerCount), CancellationToken.None);
+                var written = await writer.WriteAsync(new CardRequest(picked, languages, playerCount, Depths: depths), CancellationToken.None);
                 cards = new Deck("topics", ImmutableDictionary<Lang, string>.Empty, written);
             }
             catch (CardWriterException ex)
             {
                 if (writer.IsAvailable) log.LogWarning("Using library cards: {Reason}", ex.Message);
-                cards = TopicDeal.FromLibrary(await decks.GetDecksAsync(CancellationToken.None), [.. picked.Select(t => t.Code)], languages, seed);
+                cards = TopicDeal.FromLibrary(await decks.GetDecksAsync(CancellationToken.None), [.. picked.Select(t => t.Code)], languages, seed, depths: depths);
                 fromLibrary = true;
             }
             Guard(() => room.FinishWriting(cards, fromLibrary, seed));

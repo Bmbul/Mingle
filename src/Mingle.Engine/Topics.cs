@@ -41,7 +41,9 @@ public static class TopicDeal
     /// daily limit). Cards on more of the picked topics come first; if too few match, other
     /// readable cards fill up the game. Deterministic for a given seed.
     /// </summary>
-    public static Deck FromLibrary(IEnumerable<Deck> decks, IReadOnlyCollection<string> topics, IReadOnlyCollection<Lang> languages, int seed, int count = CardCount)
+    /// <param name="depths">Chosen depths come first; empty means any.</param>
+    public static Deck FromLibrary(IEnumerable<Deck> decks, IReadOnlyCollection<string> topics, IReadOnlyCollection<Lang> languages, int seed,
+        int count = CardCount, IReadOnlyCollection<int>? depths = null)
     {
         var random = new Random(seed);
         var readable = decks
@@ -53,7 +55,8 @@ public static class TopicDeal
         random.Shuffle(readable);
 
         var picked = readable
-            .OrderByDescending(c => c.Topics.Count(topics.Contains))
+            .OrderByDescending(c => depths is not { Count: > 0 } || depths.Contains(c.Depth))
+            .ThenByDescending(c => c.Topics.Count(topics.Contains))
             .Take(count)
             .ToImmutableArray();
         return new Deck("topics", ImmutableDictionary<Lang, string>.Empty, picked);

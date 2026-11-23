@@ -231,4 +231,5 @@
   <data name="Editor_Generate" xml:space="preserve"><value>Ստեղծել</value></data>
   <data name="Editor_FromDecks" xml:space="preserve"><value>Հավաքածուներից</value></data>
   <data name="Editor_NoCardsYet" xml:space="preserve"><value>Դեռ քարտեր չկան։ Գրիր, ստեղծիր կամ վերցրու այլ հավաքածուներից։</value></data>
+  <data name="Setup_PickDeck" xml:space="preserve"><value>Ընտրեք հավաքածու։</value></data>
 </root>

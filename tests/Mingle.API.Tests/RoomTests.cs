@@ -239,7 +239,8 @@ public class RoomTests
         room.PickTopics(arman.Id, [code]);
         Assert.Throws<RoomException>(() => room.BeginWriting(arman.Id)); // only the host
 
-        var (topics, languages, players) = room.BeginWriting(ani.Id);
+        var (topics, languages, players, depths) = room.BeginWriting(ani.Id);
+        Assert.Empty(depths); // nothing chosen: the usual mix
         Assert.Equal([code], topics.Select(t => t.Code).ToArray());
         Assert.Equal([Lang.En, Lang.Hy], languages.Order().ToArray());
         Assert.Equal(2, players);
@@ -262,5 +263,19 @@ public class RoomTests
         room.CancelWriting();
 
         Assert.Equal(RoomStage.Lobby, room.Stage);
+    }
+
+    [Fact]
+    public void Chosen_depths_reach_the_writer_and_all_three_means_the_mix()
+    {
+        var (room, ani, arman) = TopicsLobby();
+        room.PickTopics(arman.Id, [room.ViewFor(arman.Id).Topics!.Offer[0].Code]);
+
+        room.UpdateSettings(ani.Id, new RoomSettings(new GameSettings(), [], DeckSource.Topics, [3, 1, 7]));
+        Assert.Equal([1, 3], room.BeginWriting(ani.Id).Depths.ToArray()); // 7 is ignored
+        room.CancelWriting();
+
+        room.UpdateSettings(ani.Id, new RoomSettings(new GameSettings(), [], DeckSource.Topics, [1, 2, 3]));
+        Assert.Empty(room.BeginWriting(ani.Id).Depths);
     }
 }

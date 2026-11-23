@@ -102,6 +102,23 @@
                             Title="@T["Setup_SourceChosen"]" Description="@T["Setup_SourceChosenDesc"]" />
             </div>
         </section>
+
+        @if (source == DeckSource.Topics)
+        {
+            <section class="stack">
+                <h2 class="label">@T["Editor_AiDepth"]</h2>
+                <div class="chips" role="group" aria-label="@T["Editor_AiDepth"]">
+                    @for (var level = 1; level <= 3; level++)
+                    {
+                        var d = level;
+                        var on = depths.Contains(d);
+                        @* At least one depth stays on; all three is the usual light-to-deep mix. *@
+                        <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@(on && depths.Count == 1)"
+                                @onclick="() => { if (!depths.Remove(d)) depths.Add(d); }">@T[$"Depth_{d}"]</button>
+                    }
+                </div>
+            </section>
+        }
     }
 
     @if (!PicksInLobby)
@@ -181,6 +198,7 @@
     private int cardCount = 20;
     private CardOrder order = CardOrder.LightToDeep;
     private DeckSource source = DeckSource.Topics;
+    private readonly HashSet<int> depths = [1, 2, 3];
 
     /// <summary>Players pick topics or bring decks in the lobby, so no decks, order or card count are chosen here.</summary>
     private bool PicksInLobby => Online && source != DeckSource.Chosen;
@@ -195,7 +213,7 @@
         {
             loadFailed = true;
         }
-        deckIds = decks.Select(d => d.Id).ToHashSet();
+        deckIds = []; // nothing is selected until you pick (a previous game's choice is restored below)
 
         if (Session.LastSetup is { } last)
         {
@@ -262,6 +280,7 @@
         : createError is not null ? createError
         : NamedPlayers.Length < NeededPlayers ? (Online ? T["Setup_NeedName"] : T["Setup_NeedPlayers"])
         : PicksInLobby ? T[source == DeckSource.Topics ? "Setup_SourceTopicsSummary" : "Setup_SourceEveryoneSummary"]
+        : deckIds.Count == 0 ? T["Setup_PickDeck"]
         : MatchingCards == 0 ? T["Setup_NoCards"]
         : T.Plural("Setup_Matches", MatchingCards);
 
@@ -288,7 +307,7 @@
         {
             var me = NamedPlayers[0] with { Lang = Text.UiLang };
             await JS.InvokeVoidAsync("mingle.set", "mingle.name", me.Name);
-            var room = await Rooms.CreateRoom(me.Name, me.Lang, new RoomSettings(Settings, [.. deckIds], source));
+            var room = await Rooms.CreateRoom(me.Name, me.Lang, new RoomSettings(Settings, [.. deckIds], source, [.. depths.Order()]));
             Nav.NavigateTo($"room/{room.RoomCode}");
         }
         catch (Exception ex) when (ex is HttpRequestException or Microsoft.AspNetCore.SignalR.HubException or InvalidOperationException)

@@ -55,4 +55,16 @@ public class TopicDealTests
 
         Assert.Equal(["all"], cards.Select(c => c.Id));
     }
+
+    [Fact]
+    public void Library_fallback_prefers_the_chosen_depths()
+    {
+        var deck = Deck([.. Enumerable.Range(1, 10).Select(i => Card($"light-{i}", CardKinds.OpenQuestion, 1)),
+                         .. Enumerable.Range(1, 3).Select(i => Card($"deep-{i}", CardKinds.OpenQuestion, 3))]);
+
+        var cards = TopicDeal.FromLibrary([deck], [], Everyone, seed: 1, count: 5, depths: [3]).Cards;
+
+        Assert.Equal(3, cards.Count(c => c.Depth == 3)); // all deep cards first, then light ones fill up
+        Assert.Equal(5, cards.Length);
+    }
 }

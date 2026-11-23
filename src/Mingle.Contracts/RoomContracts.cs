@@ -36,7 +36,13 @@ public sealed record TopicOption(string Code, string Name);
 public sealed record TopicChoice(ImmutableArray<TopicOption> Offer, ImmutableArray<string> Picked, int MaxPicks);
 
 /// <summary>The game settings chosen in the lobby, plus which decks to play.</summary>
-public sealed record RoomSettings(GameSettings Game, ImmutableArray<string> DeckIds, DeckSource Source = DeckSource.Chosen);
+/// <param name="Depths">"Our topics" only: the depths to write (1 light, 2 personal, 3 deep); none or all three mixes them.</param>
+public sealed record RoomSettings(GameSettings Game, ImmutableArray<string> DeckIds, DeckSource Source = DeckSource.Chosen,
+    ImmutableArray<int> Depths = default)
+{
+    // Missing from older clients: an empty list, since a default ImmutableArray cannot be serialized.
+    public ImmutableArray<int> Depths { get; init; } = Depths.IsDefault ? [] : Depths;
+}
 
 public sealed record LikedCard(string KindId, int Depth, string Text);
 
@@ -44,7 +50,10 @@ public sealed record LikedCard(string KindId, int Depth, string Text);
 /// in the viewer's language), so each player can save them as their own deck.</param>
 /// <param name="LikedIds">Ids of the cards anyone liked, to save only those.</param>
 public sealed record GameSummary(int Played, int Passed, ImmutableArray<LikedCard> Liked,
-    string? Cards = null, ImmutableArray<string> LikedIds = default);
+    string? Cards = null, ImmutableArray<string> LikedIds = default)
+{
+    public ImmutableArray<string> LikedIds { get; init; } = LikedIds.IsDefault ? [] : LikedIds;
+}
 
 /// <summary>
 /// Everything one player's screen needs. Built per player on the server, so it never contains
