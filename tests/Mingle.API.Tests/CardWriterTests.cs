@@ -157,9 +157,10 @@ public class CardWriterTests
             Word("Sea.", "Ծով։"),                                   // trailing stops are trimmed
             Word("What is the sea?", "Ի՞նչ է ծովը"),               // a question
             Word("A very long phrase about the sea", "Շատ երկար"), // too long
+            Word("I miss…", "Կարոտում եմ…"),                       // a starter keeps its "…"
             Open("Where to?", "Ո՞ւր")), words);                     // not an association
 
-        Assert.Equal(["Sea"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
+        Assert.Equal(["Sea", "I miss…"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
         Assert.Equal("Ծով", cards[0].Texts[Lang.Hy].Text);
         Assert.Contains("\"word\"", JsonSerializer.Serialize(CardPrompt.Schema(words)));
         Assert.DoesNotContain("\"word\"", JsonSerializer.Serialize(CardPrompt.Schema(Request)));

@@ -23,7 +23,18 @@ public class StarterContentTests
     {
         var deck = Load(file);
         Assert.All(Langs.All, lang => Assert.False(string.IsNullOrWhiteSpace(deck.NameFor(lang))));
-        Assert.All(deck.Cards, card => Assert.All(Langs.All, lang => Assert.True(card.Supports(lang), $"{card.Id} is missing {lang.Code()}")));
+        foreach (var card in deck.Cards)
+        {
+            // Blitz word beginnings ("Արևա…") only work in their own language: "blz-hy-…" has Armenian only, and so on.
+            var only = System.Text.RegularExpressions.Regex.Match(card.Id, "^blz-(hy|ru|en)-");
+            if (only.Success)
+            {
+                Langs.TryParse(only.Groups[1].Value, out var lang);
+                Assert.True(card.Texts.Count == 1 && card.Supports(lang), $"{card.Id} should be in {lang.Code()} only");
+                continue;
+            }
+            Assert.All(Langs.All, lang => Assert.True(card.Supports(lang), $"{card.Id} is missing {lang.Code()}"));
+        }
     }
 
     [Theory]

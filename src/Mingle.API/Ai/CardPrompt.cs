@@ -68,10 +68,14 @@ public static class CardPrompt
             text.AppendLine($"Use only depth {string.Join(" and ", request.Depths)} (instead of the usual mix of depths).");
         if (request.Associations)
             text.AppendLine("""
-                These are association cards for a blitz game (kind "word"): the player sees the card and says the first
-                word that comes to mind, within five seconds. Each card is ONE word or a short phrase of at most three words,
-                a noun or a moment ("Sea", "First date", "Sunday morning"), never a question, with no punctuation at the end.
-                Mix everyday words with a few personal or evocative ones. Translate naturally into each language. No options.
+                These are cards for a blitz game (kind "word"): the player sees the card and answers with one word within
+                five seconds. Write two styles, about half each, never questions:
+                - Associations: a vivid word or short phrase of at most three words that sparks a personal reaction
+                  ("Smell of rain", "Grandma's kitchen", "3 a.m."), with no punctuation at the end. Avoid flat dictionary
+                  words like "Table" or "Color".
+                - Sentence starters the player finishes with one word, ending with "…" ("I miss…", "My superpower is…").
+                  In Russian keep them gender-neutral (not "я был…").
+                Translate naturally into each language. No options.
                 """);
         text.AppendLine($"Languages: {string.Join(", ", request.Languages.Select(l => l.Code()))}.");
         text.AppendLine("Topics (use the code in the \"topic\" field):");

@@ -279,7 +279,10 @@
     private Lang[] TableLanguages => Online ? [Text.UiLang] : [.. players.Select(p => p.Lang).Distinct()];
 
     /// <summary>Cards in a deck everyone can read: blitz counts only quick cards, other games only normal ones.</summary>
-    private int Readable(Deck deck) => blitz ? deck.CountReadableBy(TableLanguages, CardKinds.Blitz) : deck.CountReadableBy(TableLanguages);
+    /// <remarks>Blitz shows each player cards in their own language, so a card counts if any player reads it.</remarks>
+    private int Readable(Deck deck) => blitz
+        ? deck.Cards.Count(c => CardKinds.Blitz.Any(k => k.Id == c.KindId) && TableLanguages.Any(c.Supports))
+        : deck.CountReadableBy(TableLanguages);
 
     private int MatchingCards => blitz
         ? decks.Where(d => deckIds.Contains(d.Id)).Sum(Readable)

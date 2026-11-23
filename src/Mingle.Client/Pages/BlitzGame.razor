@@ -58,7 +58,8 @@ else if (stage == Stage.Running && card is { } current)
 {
     @* The card's own timer: a bar around the screen that starts full at the top and shrinks back to the top. *@
     <svg class="edge-timer" viewBox="0 0 @W @H" preserveAspectRatio="none" aria-hidden="true">
-        <path @key="cardNumber" d="@EdgePath" pathLength="100" style="animation-duration: @(Blitz.CardSeconds)s" />
+        <path class="track" d="@EdgePath" />
+        <path class="bar" @key="cardNumber" d="@EdgePath" pathLength="100" style="animation-duration: @(Blitz.CardSeconds)s" />
     </svg>
     <header class="top spread">
         <span class="muted">@Game.Current!.Name</span>
@@ -66,6 +67,7 @@ else if (stage == Stage.Running && card is { } current)
     </header>
     <main class="main center-screen">
         <p class="blitz-card" lang="@Game.Current!.Lang.Code()">@CardText(current)</p>
+        <p class="blitz-hint">@(IsToFinish(current) ? T["Blitz_HintFinish"] : T["Blitz_HintWord"])</p>
         <p class="muted small">@T["Blitz_Answered", answered]</p>
     </main>
     <footer class="foot">
@@ -92,20 +94,28 @@ else if (stage == Stage.Running && card is { } current)
 
     // Screen size in CSS pixels, so the edge bar runs at the same speed along every side.
     private double W = 375, H = 812;
-    private const double Inset = 3;
+    private const double Inset = 4;
+    private const double Radius = 32; // close to a phone's rounded screen corners
 
     private string EdgePath
     {
         get
         {
-            // Starts at the top center, goes clockwise around the screen and ends back at the top center.
+            // Starts at the top center, goes clockwise around the screen with rounded corners and ends back at the top center.
             static string N(double v) => v.ToString("0.#", System.Globalization.CultureInfo.InvariantCulture);
             var (l, t, r, b, mid) = (Inset, Inset, W - Inset, H - Inset, W / 2);
-            return $"M {N(mid)} {N(t)} L {N(r)} {N(t)} L {N(r)} {N(b)} L {N(l)} {N(b)} L {N(l)} {N(t)} L {N(mid)} {N(t)}";
+            var c = Math.Min(Radius, Math.Min(W, H) / 4);
+            return $"M {N(mid)} {N(t)} L {N(r - c)} {N(t)} A {N(c)} {N(c)} 0 0 1 {N(r)} {N(t + c)} " +
+                   $"L {N(r)} {N(b - c)} A {N(c)} {N(c)} 0 0 1 {N(r - c)} {N(b)} " +
+                   $"L {N(l + c)} {N(b)} A {N(c)} {N(c)} 0 0 1 {N(l)} {N(b - c)} " +
+                   $"L {N(l)} {N(t + c)} A {N(c)} {N(c)} 0 0 1 {N(l + c)} {N(t)} L {N(mid)} {N(t)}";
         }
     }
 
     private string TurnLeft => Math.Max(0, (int)Math.Ceiling((turnEnds - DateTime.UtcNow).TotalSeconds)).ToString();
+
+    /// <summary>"Սիրում եմ…" or "Արևա…": the player finishes it instead of saying an association.</summary>
+    private bool IsToFinish(Card c) => CardText(c).TrimEnd() is var t && (t.EndsWith('…') || t.EndsWith("..."));
 
     private string CardText(Card c)
     {

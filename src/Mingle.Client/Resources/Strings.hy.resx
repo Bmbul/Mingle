@@ -259,4 +259,6 @@
   <data name="Editor_Style" xml:space="preserve"><value>Քարտերի տեսակը</value></data>
   <data name="Editor_StyleQuestions" xml:space="preserve"><value>Հարցեր</value></data>
   <data name="Editor_StyleWords" xml:space="preserve"><value>Ասոցիացիաներ (բլիցի համար)</value></data>
+  <data name="Blitz_HintWord" xml:space="preserve"><value>Առաջին բառը, որ գալիս է մտքիդ</value></data>
+  <data name="Blitz_HintFinish" xml:space="preserve"><value>Շարունակի՛ր</value></data>
 </root>

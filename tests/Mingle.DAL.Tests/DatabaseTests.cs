@@ -41,7 +41,7 @@ public class DatabaseTests(PostgresFixture postgres)
 
         Assert.Equal(decks.Count, await db.Decks.CountAsync());
         Assert.Equal(cards.Count, await db.Cards.CountAsync());
-        Assert.Equal(cards.Sum(c => c.Texts[Lang.En].Options.Length), await db.CardOptions.CountAsync());
+        Assert.Equal(cards.Sum(c => c.Texts.Values.Max(t => t.Options.Length)), await db.CardOptions.CountAsync());
         Assert.Equal(cards.Sum(c => c.Topics.Length), await db.CardTopics.CountAsync());
         Assert.Equal(cards.Count, await db.DeckCards.CountAsync());
         var topicCount = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(DeckSeeder.DefaultFolder, "topics.json"))).RootElement.GetArrayLength();
@@ -68,7 +68,8 @@ public class DatabaseTests(PostgresFixture postgres)
                 Assert.Equal(StableId.For("card", e.Id).ToString(), a.Id);
                 Assert.Equal((e.KindId, e.Depth), (a.KindId, a.Depth));
                 Assert.Equal(e.Topics.Order(StringComparer.Ordinal), a.Topics);
-                foreach (var lang in Langs.All)
+                Assert.Equal(e.Texts.Keys.Order(), a.Texts.Keys.Order()); // some blitz cards exist in one language only
+                foreach (var lang in e.Texts.Keys)
                 {
                     Assert.Equal(e.Texts[lang].Text, a.Texts[lang].Text);
                     Assert.Equal(e.Texts[lang].Options.ToArray(), a.Texts[lang].Options.ToArray());

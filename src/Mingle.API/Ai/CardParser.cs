@@ -80,8 +80,8 @@ public static class CardParser
                 var tidy = Tidy(value);
                 if (kind == CardKinds.Association.Id)
                 {
-                    // One word or a short phrase: no question, no full stop, nothing long.
-                    tidy = tidy.TrimEnd('.', '։', '!', '…');
+                    // One word, a short phrase, or a starter ending in "…": no question, no full stop, nothing long.
+                    tidy = tidy.TrimEnd('.', '։', '!');
                     if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 40 || tidy.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length > 4) return null;
                 }
                 // Every kind but "finish the sentence" and associations is a question.
