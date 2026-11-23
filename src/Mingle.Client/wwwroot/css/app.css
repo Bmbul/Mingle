@@ -322,3 +322,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 /* Deck editor: ways to add cards under the list */
 .add-row { display: flex; flex-direction: column; gap: 8px; }
 .sheet.tall { max-height: 88vh; overflow-y: auto; }
+
+/* Deck editor: the remove button sits in the middle of its card row */
+.card-line { align-items: center; }
+.card-line > .icon { flex: none; }

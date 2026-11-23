@@ -83,7 +83,7 @@
                 }
                 else
                 {
-                    <div class="row gap">
+                    <div class="row gap card-line">
                         <button class="check-row grow @(c.IsComplete ? "" : "incomplete")" @onclick="() => open = c">
                             <span class="grow">
                                 <span class="row-title">@(c.Preview(Text.UiLang) is { Length: > 0 } p ? p : T["Editor_EmptyCard"])</span>
