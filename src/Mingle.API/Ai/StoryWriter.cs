@@ -63,7 +63,8 @@ public static class StoryPrompt
         Returning words (this is what makes the words matter):
         - Mark 1 or 2 important gaps with #1, #2 ({animal#1}) and bring their word back once or twice later with
           {#1}. The players say the word once; it returns on its own. The punchline should use a returning word.
-        - A returning word follows the same grammar rules as a gap: no ending after it, a safe spot only.
+        - A returning word follows the same grammar rules as a gap (in Armenian, with its ending after a hyphen).
+        - The same thing mentioned twice is one gap and its returning word ({ուտելիք#1} … {#1}-ին), never two gaps.
 
         Gaps:
         - Write each gap as {hint}. The gap REPLACES the word completely: never write the hint word, or another word
@@ -79,14 +80,22 @@ public static class StoryPrompt
           Russian: where the draft has "в Сочи" or "про пирог", cut the whole phrase as {куда? например: на Луну}
           or {о чём? например: о пицце}, never "в {место}".
 
+        Keep track of who does what: the player whose goal it is acts on it; another player may help or get in the
+        way. Always name players with a name slot, never "the second player" or "the other player".
+
         Players (you do not know their genders, never use he/she/they for them, repeat the name or rephrase):
         - English and Russian: write {@} for a name. Russian: never a past-tense verb or a gendered adjective with
           a name; tell the story in the present tense ("{@} говорит", "{@} решает").
         - Armenian: names need the right ending, which the app adds for the real name. Write {@ը} for the subject
           (becomes «Սմբատը», «Անին»), {@ի} for "of" («Սմբատի»), {@ին} for "to" («Սմբատին»), {@ից} for "from",
-          {@ով} for "with". A gap or a returning word may take the same endings after a hyphen: {ուտելիք}-ը,
-          {#2}-ին, {կենդանի}-ի, {առարկա}-ով. The app turns them into the right form for the word the players say
-          («դոլման», «կատվին»), so write natural Armenian. Use only -ը, -ի, -ին, -ից, -ով, never other endings.
+          {@ով} for "with".
+        - Armenian gaps and returning words: write the ending the sentence needs after a hyphen, exactly as you
+          would on a real word, and the app adapts it to the word the players say («դոլման», «կատվին», «այգում»):
+          -ը "the", -ի "of", -ին "to/at", -ից "from/of (afraid of)", -ով "with", -ում "in".
+          Wrong: «գալիս է {վայր}», «վախենում են {կենդանի}», «{ուտելիք} չի նայում».
+          Right: «գալիս է {վայր}-ի մոտ» or «հարցազրույցը {վայր}-ում է», «վախենում են {կենդանի}-ից»,
+          «{ուտելիք}-ին չի նայում». No ending only where the bare word is correct: after «՝», inside quotes, or
+          «մի {առարկա}». Use only -ը, -ի, -ին, -ից, -ով, -ում, never other endings.
 
         Examples. Never reuse them: write a new story for your premise.
 
@@ -158,6 +167,8 @@ public static class StoryPrompt
     /// Spots where a filled word or a name would need an ending the players cannot know: a Russian preposition or
     /// agreeing adjective before a gap, a Russian past-tense verb after a name, an Armenian suffix on a name or gap.
     /// </summary>
+    private static readonly string[] ArmenianPostpositions = ["հետ", "առաջ", "մասին", "համար", "մոտ", "վրա", "տակ", "դեմ", "կողքին", "փոխարեն", "պես", "նման"];
+
     public static bool GrammarTrap(string text, Lang lang)
     {
         if (lang == Lang.Hy)
@@ -165,7 +176,14 @@ public static class StoryPrompt
             // An ending the app can adapt ("{ուտելիք}-ը", "{#2}-ին") is fine; anything else after a gap is not.
             foreach (global::System.Text.RegularExpressions.Match m in global::System.Text.RegularExpressions.Regex.Matches(text, @"\}\s*-\s*(\p{L}+)"))
                 if (!Story.ArmenianEndings.Contains(m.Groups[1].Value)) return true;
-            return false;
+            // A bare gap before a postposition needs -ի: «{առարկա} հետ» should be «{առարկա}-ի հետ».
+            if (global::System.Text.RegularExpressions.Regex.IsMatch(text, @"\{[^{}@]+\}\s+(" + string.Join("|", ArmenianPostpositions) + @")(?!\p{L})"))
+                return true;
+            // A place almost always needs an ending («{վայր}-ում»); bare only after «՝» or inside quotes.
+            if (global::System.Text.RegularExpressions.Regex.IsMatch(text, @"(?<![՝«:]\s*)\{\s*վայր[^{}]*\}(?!\s*-)"))
+                return true;
+            // An action is said as «պարել», so «{գործողություն} է» cannot be right.
+            return global::System.Text.RegularExpressions.Regex.IsMatch(text, @"\{\s*գործողություն[^{}]*\}\s+(է|են|եմ|ես|ենք|եք)(?!\p{L})");
         }
         if (lang != Lang.Ru) return false;
 
@@ -231,7 +249,7 @@ public static class StoryPrompt
             if (HintEchoed(text)) return (null, "a hint word was also written next to its gap, like \"{food} food\"");
             if (GrammarTrap(text, request.Lang))
                 return (null, request.Lang == Lang.Hy
-                    ? "a gap had an ending other than -ը, -ի, -ին, -ից, -ով"
+                    ? "an Armenian gap is missing the ending the sentence needs (write «{վայր}-ում», «{առարկա}-ի հետ», «{կենդանի}-ից»), has an ending other than -ը, -ի, -ին, -ից, -ով, -ում, or an action gap is followed by «է»"
                     : "a gap came right after a preposition or an agreeing adjective, or a name had a past-tense verb");
             if (!DenseEnough(story, request.Lang)) return (null, "too much text for the gaps: every sentence needs a gap or a returning word");
             // Hints must be in the story's language: Latin letters in an Armenian or Russian hint mean it slipped into English.

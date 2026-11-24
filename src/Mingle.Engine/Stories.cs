@@ -9,7 +9,9 @@ namespace Mingle.Engine;
 /// </summary>
 /// <param name="Ending">Armenian only: an ending written after the gap ("-ը", "-ին"…), applied to the real word.</param>
 /// <param name="Following">The text right after the gap, which decides «-ը» or «-ն».</param>
-public sealed record StoryPart(string? Text, string? Hint, int? Word = null, bool Repeat = false, string? Ending = null, string Following = "")
+/// <param name="Capital">The gap starts a sentence, so its word gets a capital letter.</param>
+public sealed record StoryPart(string? Text, string? Hint, int? Word = null, bool Repeat = false, string? Ending = null, string Following = "",
+    bool Capital = false)
 {
     public bool IsGap => Hint is not null;
 }
@@ -42,6 +44,7 @@ public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
             if (c == '}') throw new FormatException("A '}' without a '{'.");
             if (c != '{') { text.Append(c); continue; }
 
+            var start = i;
             var end = template.IndexOf('}', i + 1);
             if (end < 0) throw new FormatException("A '{' without a '}'.");
             var inside = template[(i + 1)..end].Trim();
@@ -65,12 +68,13 @@ public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
             // Armenian: an ending right after the gap ("{ուտելիք}-ը") is applied to the word the players give.
             var ending = ReadEnding(template, ref i);
             var following = template[(i + 1)..].TrimStart();
+            var capital = StartsSentence(template[..start]);
 
             // {#1}: the word given for {hint#1} comes back here.
             if (inside.StartsWith('#'))
             {
                 if (!marked.TryGetValue(inside[1..].Trim(), out var earlier)) throw new FormatException($"'{{{inside}}}' comes before its gap.");
-                parts.Add(new StoryPart(null, earlier.Hint, earlier.Word, Repeat: true, ending, following));
+                parts.Add(new StoryPart(null, earlier.Hint, earlier.Word, Repeat: true, ending, following, capital));
                 continue;
             }
 
@@ -84,12 +88,12 @@ public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
                 // The same hint and mark again ("{animal#1}" twice) is the returning word written in full.
                 if (marked.TryGetValue(key, out var same) && same.Hint == hint)
                 {
-                    parts.Add(new StoryPart(null, hint, same.Word, Repeat: true, ending, following));
+                    parts.Add(new StoryPart(null, hint, same.Word, Repeat: true, ending, following, capital));
                     continue;
                 }
                 if (key.Length == 0 || !marked.TryAdd(key, (words, hint))) throw new FormatException($"Gap mark '#{key}' is empty or used twice.");
             }
-            parts.Add(new StoryPart(null, hint, words++, Ending: ending, Following: following));
+            parts.Add(new StoryPart(null, hint, words++, Ending: ending, Following: following, Capital: capital));
         }
         if (text.Length > 0) parts.Add(new StoryPart(text.ToString(), null));
 
@@ -102,8 +106,15 @@ public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
         return story;
     }
 
+    /// <summary>True at the start of the story or right after a sentence ends («։», ".", "!", "?").</summary>
+    private static bool StartsSentence(string before)
+    {
+        var text = before.TrimEnd();
+        return text.Length == 0 || text[^1] is '.' or '!' or '?' or '։' or '…';
+    }
+
     /// <summary>The Armenian endings a gap may carry after a hyphen; the app adapts them to the real word.</summary>
-    public static readonly string[] ArmenianEndings = ["ին", "ից", "ով", "ը", "ն", "ի"];
+    public static readonly string[] ArmenianEndings = ["ում", "ին", "ից", "ով", "ը", "ն", "ի"];
 
     private static string? ReadEnding(string template, ref int closingBrace)
     {
@@ -139,10 +150,12 @@ public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
     }
 
     /// <summary>The word for a gap (the same word everywhere it returns), or its hint in brackets while unknown.</summary>
-    public static string WordFor(StoryPart part, IReadOnlyList<string> words) =>
-        part.Word is { } i && i < words.Count && !string.IsNullOrWhiteSpace(words[i])
-            ? ArmenianNames.WithEnding(words[i].Trim(), part.Ending ?? "", part.Following)
-            : $"[{part.Hint}]";
+    public static string WordFor(StoryPart part, IReadOnlyList<string> words)
+    {
+        if (part.Word is not { } i || i >= words.Count || string.IsNullOrWhiteSpace(words[i])) return $"[{part.Hint}]";
+        var word = ArmenianNames.WithEnding(words[i].Trim(), part.Ending ?? "", part.Following);
+        return part.Capital ? char.ToUpperInvariant(word[0]) + word[1..] : word;
+    }
 }
 
 /// <summary>
@@ -168,6 +181,9 @@ public static class ArmenianNames
         // A word ending in «ու» turns it into «վ» before -ի, -ին, -ից, -ով: կատու → կատվի, մեղու → մեղվին.
         if (join.Length == 0 && name.Length > 2 && name.EndsWith("ու", StringComparison.Ordinal) && ending is "ի" or "ին" or "ից" or "ով")
             return name[..^2] + "վ" + ending;
+        // "In": a final «ի» gives way (այգի → այգում), other vowels take a glide (Մոսկվա → Մոսկվայում).
+        if (join.Length == 0 && ending == "ում" && name.Length > 1 && last == 'ի')
+            return name[..^1] + "ում";
         return name + join + Ending(ending, endsInVowel, glide, followingText);
     }
 
@@ -180,6 +196,7 @@ public static class ArmenianNames
             "ին" => glide ? "յին" : "ին",
             "ից" => glide ? "յից" : "ից",
             "ով" => glide ? "յով" : "ով",
+            "ում" => glide ? "յում" : "ում",
             _ => ending,
         };
 

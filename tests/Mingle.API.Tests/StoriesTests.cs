@@ -89,6 +89,13 @@ public class StoriesTests(GameHubTests.App app) : IClassFixture<GameHubTests.App
     [InlineData(Lang.Hy, "{@}-ը եկավ։", false)]                         // an ending the app adapts
     [InlineData(Lang.Hy, "Եկավ {կենդանի}-ներով։", true)]                // an ending the app cannot adapt
     [InlineData(Lang.Hy, "Հանկարծ հայտնվեց մի {կենդանի}։ — Բարև,— ասաց {@}։", false)]
+    [InlineData(Lang.Hy, "Նա պարում է {առարկա} հետ։", true)]               // a postposition needs -ի
+    [InlineData(Lang.Hy, "Նա պարում է {առարկա}-ի հետ։", false)]
+    [InlineData(Lang.Hy, "Սագը {վայր} աշխատանք է փնտրում։", true)]          // a bare place
+    [InlineData(Lang.Hy, "Սագը {վայր}-ում աշխատանք է փնտրում։", false)]
+    [InlineData(Lang.Hy, "Նոր հասցեն՝ {վայր}։", false)]
+    [InlineData(Lang.Hy, "Նա {գործողություն, օրինակ՝ պարել} է։", true)]     // an action is not «պարել է»
+    [InlineData(Lang.Hy, "Նա որոշում է {գործողություն, օրինակ՝ պարել}։", false)]
     [InlineData(Lang.En, "They met at the {place}.", false)]
     public void Russian_and_armenian_grammar_traps_are_caught(Lang lang, string text, bool trap)
     {

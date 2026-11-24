@@ -53,6 +53,9 @@ public class StoryTests
     [InlineData("Սմբատ", "ին", "", "Սմբատին")]
     [InlineData("Սմբատ", "ից", "", "Սմբատից")]
     [InlineData("Ani", "ը", "", "Ani-ն")]
+    [InlineData("դպրոց", "ում", "", "դպրոցում")]
+    [InlineData("Մոսկվա", "ում", "", "Մոսկվայում")]
+    [InlineData("այգի", "ում", "", "այգում")]
     [InlineData("Սմբատ", "", "", "Սմբատ")]
     public void Armenian_names_get_the_right_ending(string name, string ending, string next, string expected)
     {
@@ -105,5 +108,13 @@ public class StoryTests
 
         Assert.Equal(2, story.Gaps.Length);
         Assert.Equal("Ani met Bob. Later Bob left with a pie.", story.Fill(["Bob", "pie"]));
+    }
+
+    [Fact]
+    public void A_word_that_starts_a_sentence_gets_a_capital_letter()
+    {
+        var story = Story.Parse("t", "Եկավ {կենդանի#1}։ {#1}-ը նստեց։ Ահա {#1}-ը։", ["Անի"]);
+
+        Assert.Equal("Եկավ կատու։ Կատուն նստեց։ Ահա կատուն։", story.Fill(["կատու"]));
     }
 }
