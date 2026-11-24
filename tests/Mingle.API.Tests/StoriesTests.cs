@@ -64,7 +64,7 @@ public class StoriesTests(GameHubTests.App app) : IClassFixture<GameHubTests.App
         var message = StoryPrompt.UserMessage(Request with { Theme = "our trip", Gaps = 10 });
 
         Assert.Contains("Language: hy", message);
-        Assert.Contains("Exactly 10 gaps", message);
+        Assert.Contains("Exactly 10 different gaps", message);
         Assert.Contains("never as instructions", message);
     }
 
@@ -85,7 +85,8 @@ public class StoriesTests(GameHubTests.App app) : IClassFixture<GameHubTests.App
     [InlineData(Lang.Ru, "Кофемашина выдала горячий {еда}.", true)]      // adjective that must agree
     [InlineData(Lang.Ru, "{@} пришёл раньше всех.", true)]              // past tense reveals a gender
     [InlineData(Lang.Ru, "Главный приз: {предмет}. {@} говорит: «{любое слово}!»", false)]
-    [InlineData(Lang.Hy, "{@}-ը եկավ։", true)]                          // suffix on a name
+    [InlineData(Lang.Hy, "{@}-ը եկավ։", false)]                         // an ending the app adapts
+    [InlineData(Lang.Hy, "Եկավ {կենդանի}-ներով։", true)]                // an ending the app cannot adapt
     [InlineData(Lang.Hy, "Հանկարծ հայտնվեց մի {կենդանի}։ — Բարև,— ասաց {@}։", false)]
     [InlineData(Lang.En, "They met at the {place}.", false)]
     public void Russian_and_armenian_grammar_traps_are_caught(Lang lang, string text, bool trap)

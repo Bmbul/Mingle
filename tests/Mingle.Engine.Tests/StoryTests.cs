@@ -82,9 +82,28 @@ public class StoryTests
 
     [Theory]
     [InlineData("The {#1} came first. Then a {animal#1}.")]   // a repeat before its gap
-    [InlineData("A {animal#1} and a {food#1}.")]               // the same mark twice
+    [InlineData("A {animal#1} and a {food#1}.")]               // the same mark on a different hint
     public void Bad_word_marks_are_rejected(string template)
     {
         Assert.Throws<FormatException>(() => Story.Parse("t", template, ["Ani"]));
+    }
+
+    [Fact]
+    public void Armenian_endings_after_a_gap_are_applied_to_the_real_word()
+    {
+        var story = Story.Parse("t", "Սեղանին էր {ուտելիք#1}։ {#1}-ը սառել էր, իսկ {կենդանի}-ին դուր եկավ {#1}-ի հոտը։", ["Անի"]);
+
+        Assert.Equal("Սեղանին էր դոլմա։ Դոլման սառել էր, իսկ կատվին դուր եկավ դոլմայի հոտը։".ToLowerInvariant(),
+            story.Fill(["դոլմա", "կատու"]).ToLowerInvariant());
+        Assert.Equal(2, story.Gaps.Length);
+    }
+
+    [Fact]
+    public void A_returning_word_written_in_full_is_still_the_same_word()
+    {
+        var story = Story.Parse("t", "{@} met {any word#2}. Later {any word#2} left with a {food}.", ["Ani"]);
+
+        Assert.Equal(2, story.Gaps.Length);
+        Assert.Equal("Ani met Bob. Later Bob left with a pie.", story.Fill(["Bob", "pie"]));
     }
 }
