@@ -153,10 +153,9 @@
                 {
                     var t = option;
                     <button class="chip @(storyTheme == t ? "on" : "")" aria-pressed="@(storyTheme == t ? "true" : "false")"
-                            @onclick="() => { storyTheme = t; ownTheme = string.Empty; }">@T[$"StoryTheme_{t}"]</button>
+                            @onclick="() => storyTheme = t">@T[$"StoryTheme_{t}"]</button>
                 }
             </div>
-            <input class="field" maxlength="200" placeholder="@T["Story_OwnTheme"]" @bind="ownTheme" @bind:event="oninput" />
         </section>
 
         <section class="stack">
@@ -251,7 +250,6 @@
     private bool storyBlind = true;
     private bool storyLong;
     private string storyTheme = "random";
-    private string ownTheme = "";
 
     /// <summary>Theme chips; the server picks a different premise from the chip's group for every story.</summary>
     private static readonly string[] StoryThemes = ["random", "travel", "love", "work", "family", "fairy"];
@@ -368,7 +366,7 @@
         {
             if (stories)
             {
-                StorySessions.Start(NamedPlayers.Select(p => p.Name), ownTheme, storyTheme, storyLong, storyBlind);
+                StorySessions.Start(NamedPlayers.Select(p => p.Name), storyTheme, storyLong, storyBlind);
                 Nav.NavigateTo("story");
                 return;
             }

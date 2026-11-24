@@ -179,7 +179,7 @@
   <data name="Editor_Delete" xml:space="preserve"><value>Delete deck</value></data>
   <data name="Editor_DeleteConfirm" xml:space="preserve"><value>Delete for everyone</value></data>
   <data name="Lobby_OwnDeck" xml:space="preserve"><value>their own deck</value></data>
-  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>In your own words, for example: our trip to Dilijan, moving in together</value></data>
+  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>In your own words, for example: our first year together, the new job</value></data>
   <data name="Editor_AiWrite" xml:space="preserve"><value>Generate {0} cards</value></data>
   <data name="Editor_AiWriting" xml:space="preserve"><value>Generating…</value></data>
   <data name="Editor_AiHint" xml:space="preserve"><value>Pick topics or describe your own.</value></data>
@@ -269,7 +269,6 @@
   <data name="Story_BlindLine" xml:space="preserve"><value>Words first, without the story; then read it aloud</value></data>
   <data name="Story_LiveLine" xml:space="preserve"><value>Read aloud and shout a word at each gap</value></data>
   <data name="Story_Theme" xml:space="preserve"><value>About</value></data>
-  <data name="Story_OwnTheme" xml:space="preserve"><value>Or your own, e.g. our trip to Dilijan</value></data>
   <data name="Story_Length" xml:space="preserve"><value>Length</value></data>
   <data name="Story_Short" xml:space="preserve"><value>Short</value></data>
   <data name="Story_Long" xml:space="preserve"><value>Long</value></data>

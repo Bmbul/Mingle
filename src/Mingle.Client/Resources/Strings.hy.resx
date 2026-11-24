@@ -179,7 +179,7 @@
   <data name="Editor_Delete" xml:space="preserve"><value>Ջնջել հավաքածուն</value></data>
   <data name="Editor_DeleteConfirm" xml:space="preserve"><value>Ջնջել բոլորի համար</value></data>
   <data name="Lobby_OwnDeck" xml:space="preserve"><value>իր հավաքածուն</value></data>
-  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>Քո բառերով, օրինակ՝ մեր ճամփորդությունը Դիլիջան, միասին ապրելը</value></data>
+  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>Քո բառերով, օրինակ՝ մեր առաջին տարին միասին, նոր աշխատանքը</value></data>
   <data name="Editor_AiWrite" xml:space="preserve"><value>Ստեղծել {0} քարտ</value></data>
   <data name="Editor_AiWriting" xml:space="preserve"><value>Ստեղծում ենք…</value></data>
   <data name="Editor_AiHint" xml:space="preserve"><value>Ընտրիր թեմաներ կամ նկարագրիր քոնը։</value></data>
@@ -269,7 +269,6 @@
   <data name="Story_BlindLine" xml:space="preserve"><value>Նախ բառերը՝ առանց պատմության, հետո կարդացեք այն բարձրաձայն</value></data>
   <data name="Story_LiveLine" xml:space="preserve"><value>Կարդացեք բարձրաձայն, ամեն բացին ասեք մի բառ</value></data>
   <data name="Story_Theme" xml:space="preserve"><value>Ինչի մասին</value></data>
-  <data name="Story_OwnTheme" xml:space="preserve"><value>Կամ ձերը, օրինակ՝ մեր ճամփորդությունը Դիլիջան</value></data>
   <data name="Story_Length" xml:space="preserve"><value>Երկարություն</value></data>
   <data name="Story_Short" xml:space="preserve"><value>Կարճ</value></data>
   <data name="Story_Long" xml:space="preserve"><value>Երկար</value></data>

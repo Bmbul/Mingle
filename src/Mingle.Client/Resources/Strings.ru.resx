@@ -183,7 +183,7 @@
   <data name="Editor_Delete" xml:space="preserve"><value>Удалить колоду</value></data>
   <data name="Editor_DeleteConfirm" xml:space="preserve"><value>Удалить для всех</value></data>
   <data name="Lobby_OwnDeck" xml:space="preserve"><value>своя колода</value></data>
-  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>Своими словами, например: наша поездка в Дилижан, жизнь вместе</value></data>
+  <data name="Editor_AiPlaceholder" xml:space="preserve"><value>Своими словами, например: наш первый год вместе, новая работа</value></data>
   <data name="Editor_AiWrite" xml:space="preserve"><value>Сгенерировать {0} карточек</value></data>
   <data name="Editor_AiWriting" xml:space="preserve"><value>Генерируем…</value></data>
   <data name="Editor_AiHint" xml:space="preserve"><value>Выбери темы или опиши свою.</value></data>
@@ -275,7 +275,6 @@
   <data name="Story_BlindLine" xml:space="preserve"><value>Сначала слова, без истории; потом читаете её вслух</value></data>
   <data name="Story_LiveLine" xml:space="preserve"><value>Читайте вслух, на каждом пропуске кричите слово</value></data>
   <data name="Story_Theme" xml:space="preserve"><value>О чём</value></data>
-  <data name="Story_OwnTheme" xml:space="preserve"><value>Или своя тема, например: наша поездка в Дилижан</value></data>
   <data name="Story_Length" xml:space="preserve"><value>Длина</value></data>
   <data name="Story_Short" xml:space="preserve"><value>Короткая</value></data>
   <data name="Story_Long" xml:space="preserve"><value>Длинная</value></data>

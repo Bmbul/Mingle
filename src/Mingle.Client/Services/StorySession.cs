@@ -19,20 +19,17 @@ public sealed class StorySession(HttpClient http, IJSRuntime js)
     private const int MaxSeen = 500;
 
     public ImmutableArray<string> Names { get; private set; } = [];
-    public string? Theme { get; private set; }
     public string Topic { get; private set; } = "random";
     public bool Long { get; private set; }
     public bool Blind { get; private set; } = true;
     public bool Ready => !Names.IsEmpty;
     private int stories;
 
-    /// <param name="theme">The players' own words, if any.</param>
-    /// <param name="topic">The theme chip; the server picks a fresh premise from its group every story.</param>
-    public void Start(IEnumerable<string> names, string? theme, string topic, bool longStory, bool blind)
+    /// <param name="topic">The theme chip; the server picks a library story on that theme.</param>
+    public void Start(IEnumerable<string> names, string topic, bool longStory, bool blind)
     {
         Names = [.. names];
         stories = 0;
-        Theme = string.IsNullOrWhiteSpace(theme) ? null : theme.Trim();
         Topic = topic;
         Long = longStory;
         Blind = blind;
@@ -45,7 +42,6 @@ public sealed class StorySession(HttpClient http, IJSRuntime js)
         var body = new JsonObject
         {
             ["lang"] = Text.UiLang.Code(),
-            ["theme"] = Theme,
             ["topic"] = Topic,
             ["length"] = Long ? "long" : "short",
             ["names"] = new JsonArray([.. Names.Select(n => (JsonNode?)n)]),
