@@ -287,10 +287,14 @@ public sealed class ClaudeStoryWriter(AnthropicClient client, IOptions<AiOptions
         };
 
         var json = new StringBuilder();
+        var stop = ""; // why the model stopped, for the log (a refusal comes back empty)
         try
         {
             await foreach (var e in client.Messages.CreateStreaming(parameters, timeout.Token))
+            {
                 if (e.TryPickContentBlockDelta(out var delta) && delta.Delta.TryPickText(out var text)) json.Append(text.Text);
+                else if (e.TryPickDelta(out var end)) stop = $"{end.Delta.StopReason}, {end.Usage.OutputTokens} output tokens";
+            }
         }
         catch (Exception ex) when (ex is AnthropicApiException or HttpRequestException or OperationCanceledException or IOException)
         {
@@ -299,7 +303,7 @@ public sealed class ClaudeStoryWriter(AnthropicClient client, IOptions<AiOptions
         }
 
         var (story, rejected) = StoryPrompt.CheckWithReason(json.ToString(), request);
-        if (story is null) log.LogInformation("Story rejected ({Reason}): {Text}", rejected, json.ToString());
+        if (story is null) log.LogInformation("Story rejected ({Reason}; stopped: {Stop}): {Text}", rejected, stop, json.ToString());
         return (story, rejected);
     }
 }
