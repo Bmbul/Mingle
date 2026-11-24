@@ -291,6 +291,7 @@
   <data name="Story_SayA" xml:space="preserve"><value>Все вместе, назовите…</value></data>
   <data name="Story_Next" xml:space="preserve"><value>Дальше</value></data>
   <data name="Story_LiveHint" xml:space="preserve"><value>Читай вслух; на каждом пропуске остальные кричат слово.</value></data>
+  <data name="Story_SameWord" xml:space="preserve"><value>то же слово</value></data>
   <data name="Story_Share" xml:space="preserve"><value>Поделиться</value></data>
   <data name="Story_New" xml:space="preserve"><value>Новая история</value></data>
   <data name="Story_Copied" xml:space="preserve"><value>История скопирована.</value></data>

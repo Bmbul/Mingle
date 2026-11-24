@@ -285,6 +285,7 @@
   <data name="Story_SayA" xml:space="preserve"><value>Բոլորը, ասեք մի…</value></data>
   <data name="Story_Next" xml:space="preserve"><value>Հաջորդը</value></data>
   <data name="Story_LiveHint" xml:space="preserve"><value>Կարդա բարձրաձայն․ ամեն բացին մյուսները մի բառ են ասում։</value></data>
+  <data name="Story_SameWord" xml:space="preserve"><value>նույն բառը</value></data>
   <data name="Story_Share" xml:space="preserve"><value>Կիսվել</value></data>
   <data name="Story_New" xml:space="preserve"><value>Նոր պատմություն</value></data>
   <data name="Story_Copied" xml:space="preserve"><value>Պատմությունը պատճենվեց։</value></data>

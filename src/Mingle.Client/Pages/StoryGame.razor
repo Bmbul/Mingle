@@ -68,8 +68,10 @@ else
                 }
                 else
                 {
-                    @* Live: a returning word is shown as "↺" so the reader repeats what was said before. *@
-                    <span class="story-gap @(part.Repeat ? "repeat" : "")">@(part.Repeat ? $"↺ {part.Hint}" : part.Hint)</span>
+                    @* Live: a returning word asks for the word said before, not a new one; an Armenian ending
+                       ("-ի") is shown so the reader adds it to the word that was shouted. *@
+                    <span class="story-gap @(part.Repeat ? "repeat" : "")" title="@part.Hint">@(part.Repeat ? $"↺ {T["Story_SameWord"]}" : part.Hint)@if (part.Ending is { } ending)
+                    {<span class="gap-ending">-@ending</span>}</span>
                 }
             }
         </p>
