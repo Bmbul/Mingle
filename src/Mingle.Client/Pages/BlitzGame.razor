@@ -123,15 +123,16 @@ else if (stage == Stage.Running && card is { } current)
         return text.Options.IsEmpty ? text.Text : string.Join(" / ", text.Options);
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    private async Task MeasureScreen()
     {
-        if (!firstRender) return;
         var size = await JS.InvokeAsync<double[]>("mingle.viewport");
         (W, H) = (size[0], size[1]);
     }
 
     private async Task BeginTurn()
     {
+        // Measured per turn: mobile browsers change the visible height as their toolbars show and hide.
+        await MeasureScreen();
         stage = Stage.Countdown;
         for (countdown = 3; countdown > 0; countdown--)
         {

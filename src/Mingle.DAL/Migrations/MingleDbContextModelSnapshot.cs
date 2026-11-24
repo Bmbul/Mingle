@@ -306,6 +306,60 @@ namespace Mingle.DAL.Migrations
                     b.ToTable("deck_cards", (string)null);
                 });
 
+            modelBuilder.Entity("Mingle.DAL.Entities.LibraryStory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<int>("Gaps")
+                        .HasColumnType("integer")
+                        .HasColumnName("gaps");
+
+                    b.Property<string>("Lang")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("character varying(8)")
+                        .HasColumnName("lang");
+
+                    b.Property<string>("Source")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("source");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
+                        .HasColumnName("text");
+
+                    b.Property<string>("Theme")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("theme");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("pk_stories");
+
+                    b.HasIndex("Lang")
+                        .HasDatabaseName("ix_stories_lang");
+
+                    b.ToTable("stories", (string)null);
+                });
+
             modelBuilder.Entity("Mingle.DAL.Entities.Topic", b =>
                 {
                     b.Property<Guid>("Id")

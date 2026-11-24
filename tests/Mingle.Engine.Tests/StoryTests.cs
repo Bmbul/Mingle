@@ -117,4 +117,26 @@ public class StoryTests
 
         Assert.Equal("Եկավ կատու։ Կատուն նստեց։ Ահա կատուն։", story.Fill(["կատու"]));
     }
+
+    [Fact]
+    public void Numbered_name_slots_keep_the_same_player()
+    {
+        var story = Story.Parse("{@1ի} օրը", "{@1ը} եկավ։ {@2ը} ժպտաց {@1ին}։ {@1ը} գնաց {վայր}-ից։", ["Սմբատ", "Անի"]);
+
+        Assert.Equal("Սմբատի օրը", story.Title);
+        Assert.Equal("Սմբատն եկավ։ Անին ժպտաց Սմբատին։ Սմբատը գնաց [վայր]։", story.Fill([]));
+        Assert.StartsWith("Ani met Ani.", Story.Parse("t", "{@1} met {@2}. {x}", ["Ani"]).Fill([]));
+    }
+
+    [Theory]
+    [InlineData("ի", "այգու")]
+    [InlineData("ին", "այգուն")]
+    [InlineData("ից", "այգուց")]
+    [InlineData("ով", "այգով")]
+    [InlineData("ում", "այգում")]
+    public void A_word_ending_in_i_changes_but_a_name_does_not(string ending, string expected)
+    {
+        Assert.Equal(expected, ArmenianNames.WithEnding("այգի", ending, "", isName: false));
+        Assert.Equal("Անիի", ArmenianNames.WithEnding("Անի", "ի", ""));
+    }
 }

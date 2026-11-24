@@ -399,8 +399,9 @@ a.check-row { text-decoration: none; color: inherit; }
 .chips.centered { justify-content: center; }
 
 /* Blitz */
-.edge-timer { position: fixed; inset: 0; width: 100vw; height: 100dvh; pointer-events: none; z-index: 30; }
-.edge-timer path { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.edge-timer { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
+/* Non-scaling stroke: the bar stays 4px on every side even if the viewBox and the screen differ a little. */
+.edge-timer path { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
 .edge-timer .track { stroke: rgba(255, 255, 255, 0.07); }
 .edge-timer .bar {
     stroke: var(--accent); filter: drop-shadow(0 0 6px rgba(255, 138, 101, 0.55));
@@ -418,6 +419,8 @@ a.check-row { text-decoration: none; color: inherit; }
 .blitz-score { flex-direction: row; align-items: center; }
 .blitz-count { font-size: 28px; font-weight: 800; color: var(--accent); }
 .btn.blitz-yes { min-height: 64px; font-size: 20px; }
+/* .grow stacks its children; a growing button keeps its icon beside the label. */
+.btn.grow, .btn2.grow { flex-direction: row; gap: 8px; }
 
 /* One-phone choice with four options: two by two */
 .seg.grid2 { display: grid; grid-template-columns: 1fr 1fr; }

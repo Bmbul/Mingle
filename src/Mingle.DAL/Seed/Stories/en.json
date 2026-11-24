@@ -1,0 +1,209 @@
+{
+  "lang": "en",
+  "stories": [
+    {
+      "id": "en-travel-01",
+      "theme": "travel",
+      "title": "The Magician's Suitcase",
+      "text": "{@1} opens the suitcase from the airport and finds no clothes, only a top hat, a {object#1} and a note that says \"{any word}\". With nothing else to wear, {@1} goes to the hotel dinner in the hat. When {@1} lifts the hat to say hello, a {animal} jumps out and lands in the {food}. The manager calls it the most {adjective} act of the season and offers {@1} a contract for every night. Meanwhile, at the {place}, a famous magician is performing in {@1}'s pajamas to a full house. They meet at the airport to swap suitcases, but neither of them will give back the {#1}."
+    },
+    {
+      "id": "en-travel-02",
+      "theme": "travel",
+      "title": "The Honest Guide",
+      "text": "{@1} pays for a tour of the old fortress, but the guide is clearly making everything up. The tower, says the guide, was built in 1704 to store {food#1} for the king. {@1} asks for proof, so the guide points at a {object#2} and calls it \"the original lid\". Twenty tourists photograph the {#2}, including a man with a {animal} on his shoulder. {@1} complains at the ticket office, but the cashier only shrugs: \"{any word}.\" A year later {@1} comes back and finds a new sign at the gate: \"Museum of {#1}\". The guide is now the director, and the {#2} has its own {adjective} room with a guard."
+    },
+    {
+      "id": "en-travel-03",
+      "theme": "travel",
+      "title": "The Roommate",
+      "text": "{@1} arrives at the hotel after a twelve-hour trip and finds a {animal#1} asleep in the only bed. The receptionist checks the computer: the {#1} booked the room first, in 2019, and paid in {food}. {@1} offers to share, but the {#1} has already hung a sign on the bed: \"{any word}\". So {@1} sleeps in the bathtub, with a {object} for a pillow. In the morning the {#1} gets breakfast in bed, and {@1} gets a bill for the bathtub. The {#1} leaves a review: five stars, a {adjective} room, but a very noisy guest in the bathroom."
+    },
+    {
+      "id": "en-travel-04",
+      "theme": "travel",
+      "title": "The Riddle Navigator",
+      "text": "{@1} rents a car with a navigator that only speaks in riddles. \"Turn where the {animal} has no shadow,\" it says, so {@1} turns at every farm for an hour. \"Stop where the {object} sleeps,\" it says next, and {@1} stops at a furniture shop. {@2} finally solves one: the answer is \"{any word#1}\", and it leads to {place}. There are balloons there, a cake made of {food}, and a banner that says \"{#1}\". It is the navigator's birthday party, and it has been planning this route for {number} years. {@1} stays for cake, and the navigator finally speaks plainly: \"Turn left. And bring a {adjective} present next time.\""
+    },
+    {
+      "id": "en-travel-05",
+      "theme": "travel",
+      "title": "The Tent Has Opinions",
+      "text": "{@1} wants one quiet night by the lake, but the new tent has strong opinions. It refuses the flat meadow because the grass smells of {food}. It refuses the forest because a {animal} once looked at it badly. {@1} carries it up the hill, and the tent finally agrees, on one condition: a pillow shaped like a {object#1}. At midnight the tent lets in three other tents to admire the {adjective} view of {place}. By morning {@1} is sleeping outside, and the tents are taking turns with the {#1}."
+    },
+    {
+      "id": "en-travel-06",
+      "theme": "travel",
+      "title": "The Small Cruise",
+      "text": "{@1} books a luxury cruise with one hundred activities, but the ship turns out to be a rowing boat. The captain hands {@1} the oars and the list: activity one, row; activity two, {action, e.g. dance}. All day a giant cruise liner follows them, and its passengers wave {adjective} flags. At sunset the liner's captain shouts across the water: they have run out of {food#1}, and the rowing boat has the last box. {@1} trades the box for the whole liner, keys included. Now {@1} sails to {place} on the liner, and the old captain rows behind with a {object} and every last {#1}."
+    },
+    {
+      "id": "en-love-01",
+      "theme": "love",
+      "title": "Table for Four",
+      "text": "{@1} wants one perfect first date, so a table for two is booked at a restaurant called \"{any word#1}\". But the date's mother is already hiding behind a menu at the next table, eating {food}. {@1}'s own mother is under the table, holding a {object} for emergencies. The two mothers spot each other and start rating the date out loud, like judges at a {animal} show. By dessert the mothers have swapped numbers and planned a {adjective} trip to {place} together. Now the mothers meet every Friday at \"{#1}\", and {@1} and the date are not invited."
+    },
+    {
+      "id": "en-love-02",
+      "theme": "love",
+      "title": "The Pigeon Test",
+      "text": "{@1} kneels at the {place} to propose, but a pigeon steals the ring and flies off. {@1} tries again with a second ring hidden in a {food#1}, and the pigeon eats the whole {#1}. The third time {@1} holds up a {object} as a shield, but the pigeon returns with a {adjective} friend. Then a grandmother on a bench whistles, and both pigeons land on her hat. She trains pigeons to test every proposal made here, and {@1} has just passed: \"{any word}!\" At the wedding the pigeon carries the rings inside a fresh {#1} and arrives exactly on time."
+    },
+    {
+      "id": "en-love-03",
+      "theme": "love",
+      "title": "It's a Match",
+      "text": "A dating app matches {@1} with a vending machine at the {place}. Its profile says: likes {food#1}, hates small change, looking for something {adjective}. On the first date {@1} brings flowers, and the machine gives back a {#1} and a small plastic {animal}. Encouraged, {@1} leans in close, and the machine calls security. The guard arrives, sees the machine and sighs: \"{any word}, not again.\" The guard is the machine's ex, and now {@1} buys a {#1} every morning just to make the guard jealous."
+    },
+    {
+      "id": "en-love-04",
+      "theme": "love",
+      "title": "Apartment 14",
+      "text": "{@1} writes a love letter to the neighbor in apartment 41, but it goes to apartment 14 by mistake. The answer comes the next day, from a grandmother, with a recipe for {food#1}. {@1} writes back to explain, and the grandmother replies with four pages about her {animal}. For three months they write every Tuesday, about the {#1}, the weather and {place}. Then the neighbor from 41 knocks, holding a {object}: the grandmother is family, and she has told them everything. {@1} and the neighbor are a couple now, but every Tuesday {@1} still writes to apartment 14 and signs it \"{any word}\"."
+    },
+    {
+      "id": "en-love-05",
+      "theme": "love",
+      "title": "The Argument Cactus",
+      "text": "For their anniversary {@1} gives {@2} a cactus that grows every time they argue. They argue about {food} on the first evening, and by morning the cactus is taller than the {object}. {@1} suggests they stop arguing completely, and they argue about that for six hours. By Sunday the cactus is taller than the house, and a {animal} has moved in at the top. The city declares it a monument and puts up a {adjective} sign: \"{any word}\". Now tourists come from {place} for photos, and the couple argues on purpose, every evening at seven, for the business."
+    },
+    {
+      "id": "en-love-06",
+      "theme": "love",
+      "title": "The Waiter's Heart",
+      "text": "{@1} plans a romantic dinner for {@2} and orders the famous {food#1} for dessert. The waiter brings everything except the {#1}, because he has fallen in love with it. The manager apologizes and reads out a poem the waiter wrote for it: \"{any word}\". {@1} offers a {object} in exchange, but the waiter only holds the plate tighter. At midnight the waiter proposes to the {#1} on one knee, in front of a {adjective} chef. {@1} and {@2} are invited to the wedding and seated next to the spoons, under a picture of a {animal}."
+    },
+    {
+      "id": "en-work-01",
+      "theme": "work",
+      "title": "The Printer's Salary",
+      "text": "{@1} needs one urgent report, but the office printer prints a letter instead: it wants a salary. It demands {food#1} every day and a {object} of its own. The director refuses, so the printer prints \"{any word#2}\" on every page of the report. {@1} brings the {#1} from home, and the printer prints the report at once, in {adjective} ink. At the meeting the director reads \"{#2}\" forty times and calls it a brilliant strategy. The printer is promoted to a corner office with a view of {place}, and {@1} now brings it {#1} every morning."
+    },
+    {
+      "id": "en-work-02",
+      "theme": "work",
+      "title": "The Confident Interviewer",
+      "text": "{@1} arrives early for the job interview, but the interviewer is a very confident {animal#1}. The {#1} demands that {@1} look into its eyes for five minutes and say \"{any word#2}\". {@2}, waiting outside, whispers that the {#1} loves bribes, so {@1} offers a box of {food}. The {#1} is offended because the box is {adjective}, and fires {@1} before {@1} is even hired. Then the director walks in, and the director is the same kind of {#1}. {@2} gets the job, and {@1} gets a {object} and the title \"Chief of {#2}\"."
+    },
+    {
+      "id": "en-work-03",
+      "theme": "work",
+      "title": "Meetings Underwater",
+      "text": "The boss announces that from Monday all meetings are held underwater, at the {place}. {@1} arrives with a {object#1} as a snorkel and a presentation printed on {food}. The slides dissolve in a minute, so {@1} explains the plan with hand signs and a {animal}. Nobody understands a thing, so nobody can disagree, and the plan is approved in record time. {@2} asks why the meetings moved underwater, and the boss writes on a {adjective} board: \"{any word}\". The boss simply wanted meetings where nobody can talk for an hour. Now the whole company swims to work, and {@1} is promoted to Head of {#1}."
+    },
+    {
+      "id": "en-work-04",
+      "theme": "work",
+      "title": "The Intern",
+      "text": "The new intern is obviously a cat in a tie, but HR insists the papers are in order. On day one the intern sleeps on the keyboard and emails every client: \"{any word#1}\". The biggest client replies within a minute, calls it {adjective}, and signs a three-year contract. {@1} tries to teach the intern spreadsheets, but the intern knocks a {object} off the desk and stares at {@1}. By Friday the intern is the director, with a corner office overlooking {place}. {@1} is now the director's assistant and brings {food} at exactly six, along with every email that says \"{#1}\"."
+    },
+    {
+      "id": "en-work-05",
+      "theme": "work",
+      "title": "The Coffee Strike",
+      "text": "On Monday the office coffee machine goes on strike and tapes a list of demands to the wall. It wants a {adjective} name, a weekly {food#2} and a photo of a {animal} on its side. {@1} has drunk only tea for {number} years, so {@1} is sent to negotiate. {@1} offers a {object} as a peace gift, and the machine answers with one word: \"{any word#1}\". By lunch the whole office is chanting \"{#1}\" outside the director's door. It turns out the director wrote the demands, after three years without a raise. The director gets the raise, the machine gets its {#2}, and {@1} drinks tea alone in {place}."
+    },
+    {
+      "id": "en-work-06",
+      "theme": "work",
+      "title": "The Wrong Camera",
+      "text": "Five minutes before the big video call, {@1}'s camera starts showing a {animal#1} instead. The boss joins, looks at the {#1}, and says: \"Finally, someone {adjective} on this team.\" {@1} restarts the laptop twice, and now the camera shows {@2} eating {food} at the {place}. The boss loves that too and asks {@2} to present the quarterly numbers. Then the boss's own camera blinks, and everyone sees the boss is a {object} and has been for two years. The {#1} gets the promotion, and {@1} now reports to it every Monday at nine."
+    },
+    {
+      "id": "en-family-01",
+      "theme": "family",
+      "title": "Grandma on Air",
+      "text": "{@1} cannot sleep, because every night at midnight a voice behind the wall reads a recipe for {food#1}. {@1} tapes a note to the wall that says \"{any word#2}\" and goes back to bed. The next night the voice reads the note on air and thanks the listener for the {adjective} idea. Behind the wall {@1} finds grandma, a microphone, and a pirate radio station with eleven thousand listeners. Grandma makes {@1} co-host, and the first guest is a {animal} with strong views on {#1}. Now the show is called \"{#2}\", and {@1} sleeps through the day like a {object}."
+    },
+    {
+      "id": "en-family-02",
+      "theme": "family",
+      "title": "The Cat's Complaint",
+      "text": "{@1} wants a quiet Sunday, but the cat files an official complaint against the family. The complaint is twelve pages long and titled \"{any word#1}\". The cat demands {food} for breakfast and a {object} to sleep on, signed by a lawyer. {@1} goes to the pet shop to settle it and finds the neighbors' {animal#2} in line with the same complaint. It turns out the {#2} wrote both complaints, and the cat only signed. Now the family reads \"{#1}\" aloud every morning, and the {#2} calls it {adjective}."
+    },
+    {
+      "id": "en-family-03",
+      "theme": "family",
+      "title": "The Lucky Dog",
+      "text": "The family dog wins the lottery and refuses to share a single coin. The first thing it buys is a golden {object#1} and a lifetime supply of {food}. {@1} tries to win it over with a {adjective} new collar, but the dog hires a lawyer. The lawyer is a {animal}, and it bills by the minute. By the weekend the dog has bought the house and moved the family into the garage, next to the {#1}. Now {@1} pays rent every Friday, and the dog accepts it only with a bow and the words \"{any word}\"."
+    },
+    {
+      "id": "en-family-04",
+      "theme": "family",
+      "title": "Grandpa's Startup",
+      "text": "Grandpa opens a startup in the garage, and the product is a {object} that finds lost keys. {@1} invites investors, who arrive in a {adjective} car and sit on boxes of {food}. The demo starts, and the device finds grandpa's keys in eleven seconds, under a {animal}. The investors ask it to find their keys too, but it only works for grandpa. The investors buy the company anyway, and grandpa too, since the device only works with him. Now grandpa flies to {place} in first class, finding keys, and sends {@1} postcards that say \"{any word}\"."
+    },
+    {
+      "id": "en-family-05",
+      "theme": "family",
+      "title": "The Fridge Knows",
+      "text": "The fridge starts leaving notes about everyone's habits. The first note says: \"{@1} ate the {food#1} at 3:10 in the morning.\" {@1} hides the next {#1} behind a {object} in the garage, next to a sleeping {animal}. The second note says where it is and adds that it is getting {adjective}. So {@1} decides to unplug the fridge, and a third note appears: \"{any word}\". That night {@1} catches {@2} writing the notes in the kitchen, in the fridge's handwriting. {@2} confesses: it was the only way to keep the {#1} safe from {@1}."
+    },
+    {
+      "id": "en-family-06",
+      "theme": "family",
+      "title": "Backs to the Camera",
+      "text": "For grandma's birthday {@1} books a family photo at a studio called \"{any word#1}\". The photographer turns out to be afraid of faces, so the whole family poses with their backs to the camera. {@1} tries to fix it by holding a {object} in front of every face. The photographer relaxes and adds a {animal#2} to the front row for balance. Grandma hangs the photo above the sofa and says the family has never looked so {adjective}. Every guest recognizes only the {#2}, and \"{#1}\" sends the family a coupon for free {food}."
+    },
+    {
+      "id": "en-fairy-01",
+      "theme": "fairy",
+      "title": "The Dragon's Bakery",
+      "text": "A dragon opens a bakery, but it is terribly afraid of mice. {@1} works at the counter, and the first customer orders a cake shaped like a {animal}. Every morning the dragon checks every corner and shouts \"{any word#1}\". One day {@1} finds a mouse in the flour, eating {food}. The dragon sneezes fire, and every loaf turns into a {adjective} {object}. It turns out the mouse has baked all the bread for {number} years, because dragon paws are too big for dough. Now the mouse runs the bakery, and the sign above the door says \"{#1}\"."
+    },
+    {
+      "id": "en-fairy-02",
+      "theme": "fairy",
+      "title": "The Lazy Knight",
+      "text": "{@1} rules a small kingdom and hires a knight to fight the dragon, but the knight is extremely lazy. The knight agrees, but only after a nap on a {object#1}. The dragon arrives at noon, finds the knight asleep, and waits politely with a {food}. By evening the dragon is bored and lies down next to the knight on the {#1}. {@1} finds them both snoring and declares a {adjective} peace. Now every Tuesday is National Nap Day, called \"{any word}\", and the dragon guards the {#1} from a {animal}."
+    },
+    {
+      "id": "en-fairy-03",
+      "theme": "fairy",
+      "title": "Very Polite Furniture",
+      "text": "A wizard's spell turns the whole village into very polite furniture. {@1} wakes up as a chair, and {@2} as a {object}. Every chair says \"{any word#1}\" when someone sits down, so nobody gets any rest. {@1} hops to the wizard to complain, but the wizard is eating {food} at a table that refuses to be a table. The wizard tips over into a {adjective} puddle and confesses: the spell was revenge for {number} years of feet on the sofa. The spell ends, but every chair in the village still says \"{#1}\", especially the one shaped like a {animal}."
+    },
+    {
+      "id": "en-fairy-04",
+      "theme": "fairy",
+      "title": "Vote Frog",
+      "text": "A talking frog runs for mayor, and {@1} becomes its campaign manager. The frog promises free {food#1} for everyone and a pond in every {place}. At the big debate the frog only croaks, so {@1} translates: \"{any word}\". The other candidate, a {animal}, demands proof that the frog can read. {@1} hands the frog a {object} to read from, and the frog reads it upside down. The frog wins anyway, and its first law makes every Tuesday {#1} Day, with {adjective} music."
+    },
+    {
+      "id": "en-fairy-05",
+      "theme": "fairy",
+      "title": "Three Exact Wishes",
+      "text": "{@1} finds a lamp, and the genie offers three wishes but takes everything literally. First {@1} asks to be rich, and the genie brings a {animal#1} named Rich. Then {@1} wishes for a house by the sea, and the genie moves the sea into the {place}. For the last wish {@1} writes a {adjective} letter, twelve pages long, so nothing can go wrong. The genie reads it, says \"{any word}\", and turns {@1} into a {object}. Now {@1} stands on the genie's shelf, and the {#1} dusts it every morning with {food}."
+    },
+    {
+      "id": "en-misc-01",
+      "theme": "misc",
+      "title": "Dolma from Space",
+      "text": "A spaceship lands in the yard, and the aliens want only one thing: to learn to make dolma. {@1} starts the lesson, but they have brought a {object#1} instead of grape leaves. They wrap the meat in the {#1}, and the kitchen fills with {adjective} smoke. {@2} runs for the neighbor, who arrives with a {animal} and {number} years of experience. The neighbor turns out to be an alien too, who came for the same lesson and stayed. The aliens add a secret ingredient, {food}, and fly home happy. Now their planet holds a dolma festival in a crater called \"{any word}\", with {@1} as guest of honor."
+    },
+    {
+      "id": "en-misc-02",
+      "theme": "misc",
+      "title": "The Sock Hero",
+      "text": "{@1} is a superhero whose only power is finding lost socks. The city pays nothing except {food} every Tuesday. One day the mayor calls: a left sock has vanished, {number} minutes before the mayor's speech. {@1} finds it in eleven seconds, inside a {object} at the {place}. The mayor refuses to wear it because it smells like a {animal}, so {@1} sprays it with {adjective} perfume. The perfume is so strong that every lost sock in the city runs to {@1}. Now {@1} has nine thousand socks and not one pair, and the newspapers call it \"{any word}\"."
+    },
+    {
+      "id": "en-misc-03",
+      "theme": "misc",
+      "title": "Yesterday's Elevator",
+      "text": "The elevator in {@1}'s building gets stuck between two time zones. Through the left door it is Monday morning, and through the right it is last Saturday's party, with {food}. {@1} steps into the party and has a {adjective} time, until the boss calls about a missing report. The repairman arrives from next Tuesday, carrying a {animal#1} and a {object}. He presses one button, and now the elevator opens only onto {place}, one day early. {@1} keeps using it and is never late again, arriving every day yesterday, with the {#1}."
+    },
+    {
+      "id": "en-misc-04",
+      "theme": "misc",
+      "title": "The Statue Complains",
+      "text": "At night a museum statue comes to life and writes a complaint about the visitors. They point, they touch, and one of them called its nose {adjective}. {@1}, the night guard, tries to calm it with tea and a {food}. The statue demands to be moved to {place}, where nobody will look at it. So {@1} moves it, and by morning {number} people are queuing to see it there. Now the statue sells tickets and a {object} with its face on it. It earns more than the museum, and {@1} guards it with a sign: \"{any word}\"."
+    },
+    {
+      "id": "en-misc-05",
+      "theme": "misc",
+      "title": "The Ball Retires",
+      "text": "In the middle of the final, the ball announces that it is retiring. It rolls to the bench, puts on a {object#1}, and asks for a cup of {food}. {@1}, the captain, tries to play with a {animal} instead, but the referee says that breaks rule \"{any word}\". So {@1} offers the ball a {adjective} contract and a holiday in {place}. The ball agrees to play one last minute and scores an own goal on purpose. Now the ball coaches the other team and wears the {#1} at every match."
+    }
+  ]
+}

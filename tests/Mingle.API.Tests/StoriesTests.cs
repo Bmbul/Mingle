@@ -27,34 +27,38 @@ public class StoriesTests(GameHubTests.App app) : IClassFixture<GameHubTests.App
     }
 
     [Fact]
-    public void Every_ready_made_story_parses_in_every_language()
+    public void Every_library_story_passes_the_same_checks_as_a_written_one()
     {
-        var library = new StoryLibrary();
+        var stories = TestStories.Seeds;
 
         foreach (var lang in Langs.All)
         {
-            Assert.NotEmpty(library.For(lang));
-            Assert.All(library.For(lang), s =>
-            {
-                var story = Story.Parse(s.Title, s.Text, ["Ani", "Arman"]);
-                Assert.InRange(story.Gaps.Length, 5, 9);
-                Assert.DoesNotContain("{", story.Fill([]));
-            });
+            var own = stories.Where(s => s.Lang == lang).ToList();
+            Assert.True(own.Count >= 30, $"Only {own.Count} stories in {lang.Code()}.");
+            foreach (var theme in Enum.GetValues<StoryTheme>())
+                Assert.True(own.Count(s => s.Theme == theme) >= 3, $"Too few {theme} stories in {lang.Code()}.");
         }
+        Assert.All(stories, s =>
+        {
+            var (story, rejected) = StoryPrompt.CheckWithReason(Json(s.Title, s.Text), new StoryRequest(s.Lang, null, s.Gaps, ["Ani", "Arman"]));
+            Assert.True(story is not null, $"{s.Key}: {rejected}");
+            Assert.InRange(s.Gaps, 5, 10);
+        });
     }
 
     [Fact]
-    public async Task Without_ai_a_ready_made_story_in_the_right_language_comes_back()
+    public async Task A_library_story_comes_back_and_played_ones_wait()
     {
-        var response = await app.CreateClient().PostAsJsonAsync("api/stories", new { lang = "ru", names = new[] { "Ani", "Arman" } });
+        var client = app.CreateClient();
+        var russian = TestStories.Seeds.Where(s => s.Lang == Lang.Ru).Select(s => s.Id).ToList();
 
+        var response = await client.PostAsJsonAsync("api/stories", new { lang = "ru", names = new[] { "Ani", "Arman" }, seen = russian.Skip(1) });
         response.EnsureSuccessStatusCode();
         using var body = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
         Assert.True(body.RootElement.GetProperty("fromLibrary").GetBoolean());
-        var text = body.RootElement.GetProperty("text").GetString()!;
-        Assert.Contains(new StoryLibrary().For(Lang.Ru), s => s.Text == text);
+        Assert.Equal(russian[0], body.RootElement.GetProperty("id").GetGuid());
 
-        var bad = await app.CreateClient().PostAsJsonAsync("api/stories", new { lang = "de" });
+        var bad = await client.PostAsJsonAsync("api/stories", new { lang = "de" });
         Assert.Equal(HttpStatusCode.BadRequest, bad.StatusCode);
     }
 

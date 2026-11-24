@@ -23,7 +23,7 @@ public class DatabaseTests(PostgresFixture postgres)
             .ToListAsync();
 
         Assert.Superset(
-            new HashSet<string> { "card_kinds", "topics", "decks", "cards", "card_options", "card_topics", "deck_cards" },
+            new HashSet<string> { "card_kinds", "topics", "decks", "cards", "card_options", "card_topics", "deck_cards", "stories" },
             tables.ToHashSet());
         Assert.Empty(await db.Database.GetPendingMigrationsAsync());
         Assert.Equal(CardKinds.All.Select(k => k.Id).Order(), (await db.CardKinds.Select(k => k.Code).ToListAsync()).Order());
@@ -46,6 +46,25 @@ public class DatabaseTests(PostgresFixture postgres)
         Assert.Equal(cards.Count, await db.DeckCards.CountAsync());
         var topicCount = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(DeckSeeder.DefaultFolder, "topics.json"))).RootElement.GetArrayLength();
         Assert.Equal(topicCount, await db.Topics.CountAsync());
+        Assert.Equal(StorySeed.ReadFolder(Path.Combine(DeckSeeder.DefaultFolder, "Stories")).Count, await db.Stories.CountAsync());
+    }
+
+    [Fact]
+    public async Task A_story_is_picked_in_the_asked_language_and_theme()
+    {
+        await using var db = await postgres.NewDatabaseAsync();
+        await Seeder(db).SeedAsync();
+        var source = new DbStorySource(db);
+
+        var story = await source.PickAsync(Lang.Hy, StoryTheme.Work, longStory: false, new HashSet<Guid>());
+
+        Assert.NotNull(story);
+        var row = await db.Stories.SingleAsync(s => s.Id == story.Id);
+        Assert.Equal(Lang.Hy, row.Lang);
+        Assert.Equal(StoryTheme.Work, row.Theme);
+        // Stored as the enum's name, like the other enum columns.
+        var langs = await db.Database.SqlQueryRaw<string>("SELECT DISTINCT lang AS \"Value\" FROM stories").ToListAsync();
+        Assert.Equal(["En", "Hy", "Ru"], langs.Order());
     }
 
     [Fact]

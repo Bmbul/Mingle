@@ -22,7 +22,6 @@ builder.Services.AddRateLimiter(DecksController.AddWriteLimit);
 // AI card writing for the "Our topics" game. Without a key, games use library cards instead.
 builder.Services.Configure<AiOptions>(builder.Configuration.GetSection(AiOptions.Section));
 builder.Services.AddSingleton<DailyLimit>();
-builder.Services.AddSingleton<StoryLibrary>();
 var aiKey = builder.Configuration[$"{AiOptions.Section}:ApiKey"] ?? builder.Configuration["ANTHROPIC_API_KEY"];
 if (!string.IsNullOrWhiteSpace(aiKey))
 {

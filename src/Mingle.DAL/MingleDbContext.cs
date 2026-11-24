@@ -12,6 +12,7 @@ public sealed class MingleDbContext(DbContextOptions<MingleDbContext> options) :
     public DbSet<CardOption> CardOptions => Set<CardOption>();
     public DbSet<CardTopic> CardTopics => Set<CardTopic>();
     public DbSet<DeckCard> DeckCards => Set<DeckCard>();
+    public DbSet<LibraryStory> Stories => Set<LibraryStory>();
 
     // Each table's mapping lives in Configurations/<Entity>Configuration.cs.
     protected override void OnModelCreating(ModelBuilder model) =>

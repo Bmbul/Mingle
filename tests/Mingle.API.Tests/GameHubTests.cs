@@ -24,6 +24,7 @@ public class GameHubTests(GameHubTests.App app) : IClassFixture<GameHubTests.App
             {
                 services.Replace(ServiceDescriptor.Singleton<IDeckSource, TestDecks>());
                 services.Replace(ServiceDescriptor.Singleton<ITopicSource, TestTopics>());
+                services.Replace(ServiceDescriptor.Singleton<IStorySource, TestStories>());
             });
         }
     }

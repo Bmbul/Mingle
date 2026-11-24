@@ -19,7 +19,8 @@ public sealed record StoryPart(string? Text, string? Hint, int? Word = null, boo
 /// <summary>
 /// A short funny story with gaps, for the "Fill-in stories" game. Written as a template:
 /// <c>{food}</c> is a gap whose hint is "food"; <c>{animal#1}</c> is a gap whose word comes back later wherever
-/// <c>{#1}</c> appears; <c>{@}</c> is a player's name (the players take turns, in order). Anything else is text.
+/// <c>{#1}</c> appears; <c>{@}</c> is a player's name (the players take turns, in order); <c>{@1}</c>, <c>{@2}</c>…
+/// are fixed roles, the same player every time (the first, second… in the list). Anything else is text.
 /// </summary>
 public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
 {
@@ -58,7 +59,8 @@ public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
                 if (playerNames.Count > 0)
                 {
                     var next = template[(end + 1)..].TrimStart();
-                    text.Append(ArmenianNames.WithEnding(playerNames[nameIndex++ % playerNames.Count], inside[1..].Trim(), next));
+                    var (name, nameEnding) = NameFor(inside, playerNames, ref nameIndex);
+                    text.Append(ArmenianNames.WithEnding(name, nameEnding, next));
                     continue;
                 }
                 inside = "name";
@@ -98,12 +100,29 @@ public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
         if (text.Length > 0) parts.Add(new StoryPart(text.ToString(), null));
 
         // A name slot in the title gets the first player's name (with its ending); any other braces there are dropped.
-        var cleanTitle = global::System.Text.RegularExpressions.Regex.Replace(title, @"\{@([^{}]*)\}",
-            m => playerNames.Count > 0 ? ArmenianNames.WithEnding(playerNames[0], m.Groups[1].Value.Trim(), "") : "");
+        var titleIndex = 0;
+        var cleanTitle = global::System.Text.RegularExpressions.Regex.Replace(title, @"\{@[^{}]*\}", m =>
+        {
+            if (playerNames.Count == 0) return "";
+            var (name, ending) = NameFor(m.Value[1..^1].Trim(), playerNames, ref titleIndex);
+            return ArmenianNames.WithEnding(name, ending, "");
+        });
         cleanTitle = cleanTitle.Replace("{", "").Replace("}", "").Trim();
         var story = new Story(cleanTitle, parts.ToImmutable());
         if (story.Gaps.IsEmpty) throw new FormatException("The story has no gaps.");
         return story;
+    }
+
+    /// <summary>The name for a slot: "@2ին" is the second player with «-ին»; a plain "@" (or "@ը") takes the next turn.</summary>
+    private static (string Name, string Ending) NameFor(string slot, IReadOnlyList<string> playerNames, ref int turn)
+    {
+        var rest = slot[1..].Trim();
+        if (rest.Length > 0 && char.IsAsciiDigit(rest[0]))
+        {
+            var role = Math.Max(1, rest[0] - '0');
+            return (playerNames[(role - 1) % playerNames.Count], rest[1..].Trim());
+        }
+        return (playerNames[turn++ % playerNames.Count], rest);
     }
 
     /// <summary>True at the start of the story or right after a sentence ends («։», ".", "!", "?").</summary>
@@ -153,7 +172,7 @@ public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
     public static string WordFor(StoryPart part, IReadOnlyList<string> words)
     {
         if (part.Word is not { } i || i >= words.Count || string.IsNullOrWhiteSpace(words[i])) return $"[{part.Hint}]";
-        var word = ArmenianNames.WithEnding(words[i].Trim(), part.Ending ?? "", part.Following);
+        var word = ArmenianNames.WithEnding(words[i].Trim(), part.Ending ?? "", part.Following, isName: false);
         return part.Capital ? char.ToUpperInvariant(word[0]) + word[1..] : word;
     }
 }
@@ -167,7 +186,8 @@ public static class ArmenianNames
 {
     private const string Vowels = "աեէըիոօAEIOUaeiouyY";
 
-    public static string WithEnding(string name, string ending, string followingText)
+    /// <param name="isName">A name keeps its final «ի» (Անիի); an ordinary word gives it up (այգի → այգու, այգով).</param>
+    public static string WithEnding(string name, string ending, string followingText, bool isName = true)
     {
         if (ending.Length == 0 || name.Length == 0) return name;
         var last = name[^1];
@@ -181,6 +201,9 @@ public static class ArmenianNames
         // A word ending in «ու» turns it into «վ» before -ի, -ին, -ից, -ով: կատու → կատվի, մեղու → մեղվին.
         if (join.Length == 0 && name.Length > 2 && name.EndsWith("ու", StringComparison.Ordinal) && ending is "ի" or "ին" or "ից" or "ով")
             return name[..^2] + "վ" + ending;
+        // A word (not a name) ending in «ի»: այգի → այգու, այգուն, այգուց, այգով.
+        if (!isName && join.Length == 0 && name.Length > 1 && last == 'ի' && ending is "ի" or "ին" or "ից" or "ով")
+            return name[..^1] + ending switch { "ի" => "ու", "ին" => "ուն", "ից" => "ուց", _ => "ով" };
         // "In": a final «ի» gives way (այգի → այգում), other vowels take a glide (Մոսկվա → Մոսկվայում).
         if (join.Length == 0 && ending == "ում" && name.Length > 1 && last == 'ի')
             return name[..^1] + "ում";

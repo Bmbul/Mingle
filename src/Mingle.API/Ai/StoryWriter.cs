@@ -188,7 +188,7 @@ public static class StoryPrompt
         if (lang != Lang.Ru) return false;
 
         var lower = text.ToLowerInvariant();
-        foreach (global::System.Text.RegularExpressions.Match m in global::System.Text.RegularExpressions.Regex.Matches(lower, @"(\p{L}+)\s+\{(?!@\})"))
+        foreach (global::System.Text.RegularExpressions.Match m in global::System.Text.RegularExpressions.Regex.Matches(lower, @"(\p{L}+)\s+\{(?!@\d?\})"))
         {
             var before = m.Groups[1].Value;
             if (RussianPrepositions.Contains(before)) return true;
@@ -196,7 +196,7 @@ public static class StoryPrompt
             if (before.Length > 3 && new[] { "ый", "ий", "ой", "ая", "яя", "ое", "ым", "им", "ую" }.Any(before.EndsWith)) return true;
         }
         // A past-tense verb right after a name reveals a gender: "{@} пришёл", "{@} хотела".
-        return global::System.Text.RegularExpressions.Regex.IsMatch(lower, @"\{@\}\s+\p{L}+(л|ла|ло|ли|ёл)\b");
+        return global::System.Text.RegularExpressions.Regex.IsMatch(lower, @"\{@\d?\}\s+\p{L}+(л|ла|ло|ли|ёл)\b");
     }
 
     /// <summary>
@@ -324,25 +324,4 @@ public sealed class ClaudeStoryWriter(AnthropicClient client, IOptions<AiOptions
         if (story is null) log.LogInformation("Story rejected ({Reason}; stopped: {Stop}): {Text}", rejected, stop, json.ToString());
         return (story, rejected);
     }
-}
-
-/// <summary>Ready-made stories (Seed/Stories/stories.json), used when the AI is off or fails.</summary>
-public sealed class StoryLibrary
-{
-    private readonly List<(Lang Lang, StoryTemplate Story)> stories = [];
-
-    public StoryLibrary() : this(Path.Combine(AppContext.BaseDirectory, "Seed", "Stories", "stories.json")) { }
-
-    public StoryLibrary(string file)
-    {
-        if (!File.Exists(file)) return;
-        using var doc = JsonDocument.Parse(File.ReadAllText(file));
-        foreach (var item in doc.RootElement.EnumerateArray())
-            if (Langs.TryParse(item.GetProperty("lang").GetString(), out var lang))
-                stories.Add((lang, new StoryTemplate(item.GetProperty("title").GetString()!, item.GetProperty("text").GetString()!)));
-    }
-
-    public IReadOnlyList<StoryTemplate> For(Lang lang) => [.. stories.Where(s => s.Lang == lang).Select(s => s.Story)];
-
-    public StoryTemplate? Random(Lang lang) => For(lang) is { Count: > 0 } list ? list[System.Random.Shared.Next(list.Count)] : null;
 }

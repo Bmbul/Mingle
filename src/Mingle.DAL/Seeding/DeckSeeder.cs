@@ -8,7 +8,7 @@ using GameDeck = Mingle.Engine.Deck;
 namespace Mingle.DAL.Seeding;
 
 /// <summary>
-/// Imports the starter content: <c>Seed/topics.json</c> and <c>Seed/Decks/*.json</c>. Safe to run on
+/// Imports the starter content: <c>Seed/topics.json</c>, <c>Seed/Decks/*.json</c> and <c>Seed/Stories/*.json</c>. Safe to run on
 /// every start: seeded rows have stable ids, so existing ones are updated (texts, options, topics,
 /// deck contents) and only new ones are added. Rows made by players or the AI are never touched.
 /// </summary>
@@ -28,9 +28,12 @@ public sealed class DeckSeeder(MingleDbContext db, ILogger<DeckSeeder> log)
 
         var cards = await SeedCardsAsync(decks.SelectMany(d => d.Cards).DistinctBy(c => c.Id).ToList(), topics, ct);
         foreach (var deck in decks) await SeedDeckAsync(deck, cards, ct);
+        var stories = StorySeed.ReadFolder(Path.Combine(folder, "Stories"));
+        await SeedStoriesAsync(stories, ct);
 
         await db.SaveChangesAsync(ct);
-        log.LogInformation("Seed content is up to date: {Topics} topics, {Cards} cards, {Decks} decks.", topics.Count, cards.Count, decks.Count);
+        log.LogInformation("Seed content is up to date: {Topics} topics, {Cards} cards, {Decks} decks, {Stories} stories.",
+            topics.Count, cards.Count, decks.Count, stories.Count);
     }
 
     private async Task<Dictionary<string, Topic>> SeedTopicsAsync(IReadOnlyList<TopicSeed> seeds, CancellationToken ct)
@@ -126,6 +129,26 @@ public sealed class DeckSeeder(MingleDbContext db, ILogger<DeckSeeder> log)
         }
         foreach (var topicId in wanted.Where(id => card.Topics.All(l => l.TopicId != id)))
             card.Topics.Add(new CardTopic { CardId = card.Id, TopicId = topicId });
+    }
+
+    private async Task SeedStoriesAsync(IReadOnlyList<StorySeed> seeds, CancellationToken ct)
+    {
+        var ids = seeds.Select(s => s.Id).ToList();
+        var existing = await db.Stories.Where(s => ids.Contains(s.Id)).ToDictionaryAsync(s => s.Id, ct);
+        foreach (var seed in seeds)
+        {
+            if (!existing.TryGetValue(seed.Id, out var story))
+            {
+                story = new LibraryStory { Id = seed.Id, Title = seed.Title, Text = seed.Text };
+                db.Stories.Add(story);
+            }
+            story.Lang = seed.Lang;
+            story.Theme = seed.Theme;
+            story.Title = seed.Title;
+            story.Text = seed.Text;
+            story.Gaps = seed.Gaps;
+            story.Source = CardSource.Curated;
+        }
     }
 
     private async Task SeedDeckAsync(GameDeck seed, IReadOnlyDictionary<string, Entities.Card> cards, CancellationToken ct)
