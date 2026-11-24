@@ -261,4 +261,32 @@
   <data name="Editor_StyleWords" xml:space="preserve"><value>Associations (for blitz)</value></data>
   <data name="Blitz_HintWord" xml:space="preserve"><value>First word that comes to mind</value></data>
   <data name="Blitz_HintFinish" xml:space="preserve"><value>Finish it!</value></data>
+  <data name="Setup_Stories" xml:space="preserve"><value>Stories</value></data>
+  <data name="Setup_StoriesLine" xml:space="preserve"><value>A funny story with missing words</value></data>
+  <data name="Story_Style" xml:space="preserve"><value>How to play</value></data>
+  <data name="Story_Blind" xml:space="preserve"><value>Blind</value></data>
+  <data name="Story_Live" xml:space="preserve"><value>Live</value></data>
+  <data name="Story_BlindLine" xml:space="preserve"><value>Words first, without the story; then read it aloud</value></data>
+  <data name="Story_LiveLine" xml:space="preserve"><value>Read aloud and shout a word at each gap</value></data>
+  <data name="Story_Theme" xml:space="preserve"><value>About</value></data>
+  <data name="Story_OwnTheme" xml:space="preserve"><value>Or your own, e.g. our trip to Dilijan</value></data>
+  <data name="Story_Length" xml:space="preserve"><value>Length</value></data>
+  <data name="Story_Short" xml:space="preserve"><value>Short</value></data>
+  <data name="Story_Long" xml:space="preserve"><value>Long</value></data>
+  <data name="StoryTheme_random" xml:space="preserve"><value>Surprise me</value></data>
+  <data name="StoryTheme_travel" xml:space="preserve"><value>Trip</value></data>
+  <data name="StoryTheme_love" xml:space="preserve"><value>Date</value></data>
+  <data name="StoryTheme_work" xml:space="preserve"><value>Office</value></data>
+  <data name="StoryTheme_family" xml:space="preserve"><value>Family dinner</value></data>
+  <data name="StoryTheme_fairy" xml:space="preserve"><value>Fairy tale</value></data>
+  <data name="Story_Writing" xml:space="preserve"><value>Writing your story…</value></data>
+  <data name="Story_Failed" xml:space="preserve"><value>Couldn't get a story right now.</value></data>
+  <data name="Story_TryAgain" xml:space="preserve"><value>Try again</value></data>
+  <data name="Story_WordOf" xml:space="preserve"><value>Word {0} of {1}</value></data>
+  <data name="Story_SayA" xml:space="preserve"><value>Everyone, say a…</value></data>
+  <data name="Story_Next" xml:space="preserve"><value>Next</value></data>
+  <data name="Story_LiveHint" xml:space="preserve"><value>Read aloud; at each gap, the others shout a word.</value></data>
+  <data name="Story_Share" xml:space="preserve"><value>Share</value></data>
+  <data name="Story_New" xml:space="preserve"><value>New story</value></data>
+  <data name="Story_Copied" xml:space="preserve"><value>Story copied.</value></data>
 </root>

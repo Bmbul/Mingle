@@ -418,3 +418,17 @@ a.check-row { text-decoration: none; color: inherit; }
 .blitz-score { flex-direction: row; align-items: center; }
 .blitz-count { font-size: 28px; font-weight: 800; color: var(--accent); }
 .btn.blitz-yes { min-height: 64px; font-size: 20px; }
+
+/* One-phone choice with four options: two by two */
+.seg.grid2 { display: grid; grid-template-columns: 1fr 1fr; }
+
+/* Fill-in stories */
+.story-hint { font-size: 36px; font-weight: 800; margin: 0; color: var(--accent); text-align: center; }
+.story-entry { width: 100%; max-width: 420px; }
+.story-entry .field { font-size: 20px; text-align: center; }
+.story-text { font-size: 21px; line-height: 1.6; margin: 0; }
+.story-word { background: var(--accent-soft); color: var(--accent-soft-text); padding: 1px 6px; border-radius: 6px; font-weight: 700; }
+.story-gap {
+    display: inline-block; padding: 0 8px; border-radius: 999px; border: 1px dashed var(--accent);
+    color: var(--accent); font-size: 0.8em; font-weight: 700; line-height: 1.7;
+}

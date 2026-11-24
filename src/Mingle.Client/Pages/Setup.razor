@@ -2,6 +2,7 @@
 @inject Text T
 @inject GameSession Session
 @inject BlitzSession Blitzes
+@inject StorySession StorySessions
 @inject ContentService Content
 @inject NavigationManager Nav
 @inject RoomClient Rooms
@@ -50,18 +51,22 @@
         <div class="seg-row">
             @if (!Online)
             {
-                <div class="seg" role="group" aria-label="@T["Setup_OnePhone"]">
-                    <button class="@(!passThePhone && !blitz ? "on" : "")" aria-pressed="@(!passThePhone && !blitz ? "true" : "false")"
-                            title="@T["Setup_OutLoudDesc"]" @onclick="() => { passThePhone = false; blitz = false; }">
+                <div class="seg grid2" role="group" aria-label="@T["Setup_OnePhone"]">
+                    <button class="@(!passThePhone && !blitz && !stories ? "on" : "")" aria-pressed="@(!passThePhone && !blitz && !stories ? "true" : "false")"
+                            title="@T["Setup_OutLoudDesc"]" @onclick="() => { passThePhone = false; blitz = false; stories = false; }">
                         <Icon Name="speaker" Size="20" /><span>@T["Setup_OutLoud"]</span>
                     </button>
                     <button class="@(passThePhone ? "on" : "")" aria-pressed="@(passThePhone ? "true" : "false")"
-                            title="@T["Setup_PassPhoneDesc"]" @onclick="() => { passThePhone = true; blitz = false; }">
+                            title="@T["Setup_PassPhoneDesc"]" @onclick="() => { passThePhone = true; blitz = false; stories = false; }">
                         <Icon Name="pass" Size="20" /><span>@T["Setup_PassPhoneShort"]</span>
                     </button>
                     <button class="@(blitz ? "on" : "")" aria-pressed="@(blitz ? "true" : "false")"
-                            @onclick="() => { blitz = true; passThePhone = false; }">
+                            @onclick="() => { blitz = true; passThePhone = false; stories = false; }">
                         <Icon Name="bolt" Size="20" /><span>@T["Setup_Blitz"]</span>
+                    </button>
+                    <button class="@(stories ? "on" : "")" aria-pressed="@(stories ? "true" : "false")"
+                            @onclick="() => { stories = true; passThePhone = false; blitz = false; }">
+                        <Icon Name="book" Size="20" /><span>@T["Setup_Stories"]</span>
                     </button>
                 </div>
             }
@@ -126,7 +131,44 @@
         }
     }
 
-    @if (!PicksInLobby)
+    @if (stories)
+    {
+        <section class="stack">
+            <h2 class="label">@T["Story_Style"]</h2>
+            <div class="seg" role="group" aria-label="@T["Story_Style"]">
+                <button class="@(storyBlind ? "on" : "")" aria-pressed="@(storyBlind ? "true" : "false")" @onclick="() => storyBlind = true">
+                    <span>🙈</span><span>@T["Story_Blind"]</span>
+                </button>
+                <button class="@(!storyBlind ? "on" : "")" aria-pressed="@(!storyBlind ? "true" : "false")" @onclick="() => storyBlind = false">
+                    <span>📖</span><span>@T["Story_Live"]</span>
+                </button>
+            </div>
+            <p class="muted small">@(storyBlind ? T["Story_BlindLine"] : T["Story_LiveLine"])</p>
+        </section>
+
+        <section class="stack">
+            <h2 class="label">@T["Story_Theme"]</h2>
+            <div class="chips">
+                @foreach (var option in StoryThemes)
+                {
+                    var t = option;
+                    <button class="chip @(storyTheme == t ? "on" : "")" aria-pressed="@(storyTheme == t ? "true" : "false")"
+                            @onclick="() => { storyTheme = t; ownTheme = string.Empty; }">@T[$"StoryTheme_{t}"]</button>
+                }
+            </div>
+            <input class="field" maxlength="200" placeholder="@T["Story_OwnTheme"]" @bind="ownTheme" @bind:event="oninput" />
+        </section>
+
+        <section class="stack">
+            <h2 class="label">@T["Story_Length"]</h2>
+            <div class="chips">
+                <button class="chip @(!storyLong ? "on" : "")" aria-pressed="@(!storyLong ? "true" : "false")" @onclick="() => storyLong = false">@T["Story_Short"]</button>
+                <button class="chip @(storyLong ? "on" : "")" aria-pressed="@(storyLong ? "true" : "false")" @onclick="() => storyLong = true">@T["Story_Long"]</button>
+            </div>
+        </section>
+    }
+
+    @if (!PicksInLobby && !stories)
     {
     <section class="stack">
         <h2 class="label">@T["Setup_Decks"]</h2>
@@ -204,6 +246,20 @@
     private bool passThePhone;
     /// <summary>Blitz: 60-second hot-seat turns of quick association cards (see Pages/Blitz.razor).</summary>
     private bool blitz;
+    /// <summary>Fill-in stories: Blind (words first) or Live (read along); see Pages/StoryGame.razor.</summary>
+    private bool stories;
+    private bool storyBlind = true;
+    private bool storyLong;
+    private string storyTheme = "random";
+    private string ownTheme = "";
+
+    /// <summary>Theme chips and what the writer is told for each ("random" lets it choose).</summary>
+    private static readonly string[] StoryThemes = ["random", "travel", "love", "work", "family", "fairy"];
+    private static readonly Dictionary<string, string> StoryThemePrompts = new()
+    {
+        ["travel"] = "a trip that goes wrong", ["love"] = "a first date", ["work"] = "a strange day at the office",
+        ["family"] = "a big family dinner", ["fairy"] = "a fairy tale",
+    };
     private bool loadFailed;
     private int cardCount = 20;
     private CardOrder order = CardOrder.LightToDeep;
@@ -265,7 +321,7 @@
         get
         {
             var parts = new List<string>();
-            if (!Online) parts.Add(blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
+            if (!Online) parts.Add(stories ? T["Setup_StoriesLine"] : blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
             if (Online || passThePhone)
             {
                 parts.Add(mode == AnswerMode.Written ? T["Setup_WriteLine"] : T["Setup_TalkLine"]);
@@ -291,12 +347,13 @@
 
     private int NeededPlayers => Online ? 1 : Game.MinPlayers;
 
-    private bool CanStart => NamedPlayers.Length >= NeededPlayers && (PicksInLobby ? !decks.IsEmpty : MatchingCards > 0);
+    private bool CanStart => NamedPlayers.Length >= NeededPlayers && (stories || (PicksInLobby ? !decks.IsEmpty : MatchingCards > 0));
 
     private string Summary =>
         loadFailed ? T["Setup_LoadFailed"]
         : createError is not null ? createError
         : NamedPlayers.Length < NeededPlayers ? (Online ? T["Setup_NeedName"] : T["Setup_NeedPlayers"])
+        : stories ? ""
         : PicksInLobby ? T[source == DeckSource.Topics ? "Setup_SourceTopicsSummary" : "Setup_SourceEveryoneSummary"]
         : deckIds.Count == 0 ? T["Setup_PickDeck"]
         : MatchingCards == 0 ? T["Setup_NoCards"]
@@ -314,6 +371,13 @@
         if (!CanStart) return;
         if (!Online)
         {
+            if (stories)
+            {
+                var theme = ownTheme.Trim().Length > 0 ? ownTheme : StoryThemePrompts.GetValueOrDefault(storyTheme);
+                StorySessions.Start(NamedPlayers.Select(p => p.Name), theme, storyLong, storyBlind);
+                Nav.NavigateTo("story");
+                return;
+            }
             if (blitz)
             {
                 Blitzes.Start(NamedPlayers, [.. decks.Where(d => deckIds.Contains(d.Id))]);

@@ -22,15 +22,18 @@ builder.Services.AddRateLimiter(DecksController.AddWriteLimit);
 // AI card writing for the "Our topics" game. Without a key, games use library cards instead.
 builder.Services.Configure<AiOptions>(builder.Configuration.GetSection(AiOptions.Section));
 builder.Services.AddSingleton<DailyLimit>();
+builder.Services.AddSingleton<StoryLibrary>();
 var aiKey = builder.Configuration[$"{AiOptions.Section}:ApiKey"] ?? builder.Configuration["ANTHROPIC_API_KEY"];
 if (!string.IsNullOrWhiteSpace(aiKey))
 {
     builder.Services.AddSingleton(new AnthropicClient { ApiKey = aiKey });
     builder.Services.AddSingleton<ICardWriter, ClaudeCardWriter>();
+    builder.Services.AddSingleton<IStoryWriter, ClaudeStoryWriter>();
 }
 else
 {
     builder.Services.AddSingleton<ICardWriter, NoCardWriter>();
+    builder.Services.AddSingleton<IStoryWriter, NoStoryWriter>();
 }
 builder.Services.AddHostedService<RoomCleanupService>();
 // Behind Azure Container Apps the app sees plain HTTP; the proxy's headers say the visitor used HTTPS.

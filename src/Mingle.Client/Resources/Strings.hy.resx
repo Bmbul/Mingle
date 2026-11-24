@@ -261,4 +261,32 @@
   <data name="Editor_StyleWords" xml:space="preserve"><value>Ասոցիացիաներ (բլիցի համար)</value></data>
   <data name="Blitz_HintWord" xml:space="preserve"><value>Առաջին բառը, որ գալիս է մտքիդ</value></data>
   <data name="Blitz_HintFinish" xml:space="preserve"><value>Շարունակի՛ր</value></data>
+  <data name="Setup_Stories" xml:space="preserve"><value>Պատմություն</value></data>
+  <data name="Setup_StoriesLine" xml:space="preserve"><value>Զվարճալի պատմություն՝ բաց թողած բառերով</value></data>
+  <data name="Story_Style" xml:space="preserve"><value>Ինչպես խաղալ</value></data>
+  <data name="Story_Blind" xml:space="preserve"><value>Կույր</value></data>
+  <data name="Story_Live" xml:space="preserve"><value>Կենդանի</value></data>
+  <data name="Story_BlindLine" xml:space="preserve"><value>Նախ բառերը՝ առանց պատմության, հետո կարդացեք այն բարձրաձայն</value></data>
+  <data name="Story_LiveLine" xml:space="preserve"><value>Կարդացեք բարձրաձայն, ամեն բացին ասեք մի բառ</value></data>
+  <data name="Story_Theme" xml:space="preserve"><value>Ինչի մասին</value></data>
+  <data name="Story_OwnTheme" xml:space="preserve"><value>Կամ ձերը, օրինակ՝ մեր ճամփորդությունը Դիլիջան</value></data>
+  <data name="Story_Length" xml:space="preserve"><value>Երկարություն</value></data>
+  <data name="Story_Short" xml:space="preserve"><value>Կարճ</value></data>
+  <data name="Story_Long" xml:space="preserve"><value>Երկար</value></data>
+  <data name="StoryTheme_random" xml:space="preserve"><value>Անակնկալ</value></data>
+  <data name="StoryTheme_travel" xml:space="preserve"><value>Ճամփորդություն</value></data>
+  <data name="StoryTheme_love" xml:space="preserve"><value>Ժամադրություն</value></data>
+  <data name="StoryTheme_work" xml:space="preserve"><value>Գրասենյակ</value></data>
+  <data name="StoryTheme_family" xml:space="preserve"><value>Ընտանեկան ճաշ</value></data>
+  <data name="StoryTheme_fairy" xml:space="preserve"><value>Հեքիաթ</value></data>
+  <data name="Story_Writing" xml:space="preserve"><value>Գրում ենք ձեր պատմությունը…</value></data>
+  <data name="Story_Failed" xml:space="preserve"><value>Հիմա պատմություն ստանալ չհաջողվեց։</value></data>
+  <data name="Story_TryAgain" xml:space="preserve"><value>Կրկին փորձել</value></data>
+  <data name="Story_WordOf" xml:space="preserve"><value>Բառ {0}՝ {1}-ից</value></data>
+  <data name="Story_SayA" xml:space="preserve"><value>Բոլորը, ասեք մի…</value></data>
+  <data name="Story_Next" xml:space="preserve"><value>Հաջորդը</value></data>
+  <data name="Story_LiveHint" xml:space="preserve"><value>Կարդա բարձրաձայն․ ամեն բացին մյուսները մի բառ են ասում։</value></data>
+  <data name="Story_Share" xml:space="preserve"><value>Կիսվել</value></data>
+  <data name="Story_New" xml:space="preserve"><value>Նոր պատմություն</value></data>
+  <data name="Story_Copied" xml:space="preserve"><value>Պատմությունը պատճենվեց։</value></data>
 </root>
