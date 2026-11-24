@@ -41,4 +41,31 @@ public class StoryTests
     {
         Assert.Equal("Chef Ani", Story.Parse("Chef {@}", "{@} cooked {food}.", ["Ani", "Arman"]).Title);
     }
+
+    [Theory]
+    [InlineData("Սմբատ", "ը", "որոշեց", "Սմբատը")]
+    [InlineData("Անի", "ը", "որոշեց", "Անին")]
+    [InlineData("Սմբատ", "ը", "էլ եկավ", "Սմբատն")]   // before a vowel
+    [InlineData("Սմբատ", "ի", "", "Սմբատի")]
+    [InlineData("Անի", "ի", "", "Անիի")]
+    [InlineData("Աննա", "ի", "", "Աննայի")]
+    [InlineData("Աննա", "ին", "", "Աննային")]
+    [InlineData("Սմբատ", "ին", "", "Սմբատին")]
+    [InlineData("Սմբատ", "ից", "", "Սմբատից")]
+    [InlineData("Ani", "ը", "", "Ani-ն")]
+    [InlineData("Սմբատ", "", "", "Սմբատ")]
+    public void Armenian_names_get_the_right_ending(string name, string ending, string next, string expected)
+    {
+        Assert.Equal(expected, ArmenianNames.WithEnding(name, ending, next));
+    }
+
+    [Fact]
+    public void Name_slots_with_endings_are_filled_in_the_story()
+    {
+        var story = Story.Parse("{@ի} ճաշը", "{@ը} և {@ը} որոշեցին ճաշ եփել։ Տատիկը {@ին} տվեց {ուտելիք}։", ["Սմբատ", "Անի"]);
+
+        Assert.Equal("Սմբատի ճաշը", story.Title);
+        Assert.Equal("Սմբատը և Անին որոշեցին ճաշ եփել։ Տատիկը Սմբատին տվեց [ուտելիք]։", story.Fill([]));
+        Assert.Equal(1, Story.CountGaps("{@ը} և {@ին} տվեց {ուտելիք}"));
+    }
 }

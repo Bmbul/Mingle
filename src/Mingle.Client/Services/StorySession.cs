@@ -15,14 +15,18 @@ public sealed class StorySession(HttpClient http)
 {
     public ImmutableArray<string> Names { get; private set; } = [];
     public string? Theme { get; private set; }
+    public string Topic { get; private set; } = "random";
     public bool Long { get; private set; }
     public bool Blind { get; private set; } = true;
     public bool Ready => !Names.IsEmpty;
 
-    public void Start(IEnumerable<string> names, string? theme, bool longStory, bool blind)
+    /// <param name="theme">The players' own words, if any.</param>
+    /// <param name="topic">The theme chip; the server picks a fresh premise from its group every story.</param>
+    public void Start(IEnumerable<string> names, string? theme, string topic, bool longStory, bool blind)
     {
         Names = [.. names];
         Theme = string.IsNullOrWhiteSpace(theme) ? null : theme.Trim();
+        Topic = topic;
         Long = longStory;
         Blind = blind;
     }
@@ -35,6 +39,7 @@ public sealed class StorySession(HttpClient http)
         {
             ["lang"] = Text.UiLang.Code(),
             ["theme"] = Theme,
+            ["topic"] = Topic,
             ["length"] = Long ? "long" : "short",
             ["names"] = new JsonArray([.. Names.Select(n => (JsonNode?)n)]),
         };

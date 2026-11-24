@@ -253,13 +253,8 @@
     private string storyTheme = "random";
     private string ownTheme = "";
 
-    /// <summary>Theme chips and what the writer is told for each ("random" lets it choose).</summary>
+    /// <summary>Theme chips; the server picks a different premise from the chip's group for every story.</summary>
     private static readonly string[] StoryThemes = ["random", "travel", "love", "work", "family", "fairy"];
-    private static readonly Dictionary<string, string> StoryThemePrompts = new()
-    {
-        ["travel"] = "a trip that goes wrong", ["love"] = "a first date", ["work"] = "a strange day at the office",
-        ["family"] = "a big family dinner", ["fairy"] = "a fairy tale",
-    };
     private bool loadFailed;
     private int cardCount = 20;
     private CardOrder order = CardOrder.LightToDeep;
@@ -373,8 +368,7 @@
         {
             if (stories)
             {
-                var theme = ownTheme.Trim().Length > 0 ? ownTheme : StoryThemePrompts.GetValueOrDefault(storyTheme);
-                StorySessions.Start(NamedPlayers.Select(p => p.Name), theme, storyLong, storyBlind);
+                StorySessions.Start(NamedPlayers.Select(p => p.Name), ownTheme, storyTheme, storyLong, storyBlind);
                 Nav.NavigateTo("story");
                 return;
             }

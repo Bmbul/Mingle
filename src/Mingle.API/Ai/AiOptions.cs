@@ -12,6 +12,13 @@ public sealed class AiOptions
     public string? ApiKey { get; set; }
     public string Model { get; set; } = "claude-haiku-5-5"; // cheapest for now; Ai__Model switches it without a code change
 
+    /// <summary>
+    /// Model for fill-in stories: they need humor, a story arc and careful Armenian and Russian grammar, where
+    /// Opus was clearly best in side-by-side tests (about $0.04 a story). Empty uses <see cref="Model"/>.
+    /// Setting: Ai__StoryModel.
+    /// </summary>
+    public string? StoryModel { get; set; } = "claude-opus-5-5";
+
     /// <summary>low, medium or high. Lower is faster, which matters while a room waits.</summary>
     public string Effort { get; set; } = "low";
 

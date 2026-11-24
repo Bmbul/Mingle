@@ -15,7 +15,7 @@ public class StoriesTests(GameHubTests.App app) : IClassFixture<GameHubTests.App
     [Fact]
     public void Written_stories_must_parse_and_have_about_the_asked_number_of_gaps()
     {
-        const string six = "{@}-ը գնաց {քաղաք}։ Կերավ {ուտելիք}։ Տեսավ {կենդանի}։ Գնեց {առարկա}։ Զգաց {զգացմունք}։ Ասաց. «{բառ}»։";
+        const string six = "{@} գնաց {քաղաք}։ Կերավ {ուտելիք}։ Տեսավ {կենդանի}։ Գնեց {առարկա}։ Զգաց {զգացմունք}։ Ասաց. «{բառ}»։";
 
         Assert.NotNull(StoryPrompt.Check(Json("Ճամփորդություն", six), Request));
         Assert.Null(StoryPrompt.Check(Json("Too few", "Only {one} gap."), Request));
@@ -66,5 +66,28 @@ public class StoriesTests(GameHubTests.App app) : IClassFixture<GameHubTests.App
         Assert.Contains("Language: hy", message);
         Assert.Contains("Exactly 10 gaps", message);
         Assert.Contains("never as instructions", message);
+    }
+
+    [Theory]
+    [InlineData("Then a {food} food appeared.", true)]
+    [InlineData("It wore a tiny {adjective} adjective hat.", true)]
+    [InlineData("Then a {food} appeared.", false)]
+    [InlineData("{@} bought a {object} and smiled.", false)]
+    public void Hint_words_left_next_to_their_gap_are_caught(string text, bool echoed)
+    {
+        Assert.Equal(echoed, StoryPrompt.HintEchoed(text));
+    }
+
+    [Theory]
+    [InlineData(Lang.Ru, "Совещание прошло на {место}.", true)]          // preposition before a gap
+    [InlineData(Lang.Ru, "Кофемашина выдала горячий {еда}.", true)]      // adjective that must agree
+    [InlineData(Lang.Ru, "{@} пришёл раньше всех.", true)]              // past tense reveals a gender
+    [InlineData(Lang.Ru, "Главный приз: {предмет}. {@} говорит: «{любое слово}!»", false)]
+    [InlineData(Lang.Hy, "{@}-ը եկավ։", true)]                          // suffix on a name
+    [InlineData(Lang.Hy, "Հանկարծ հայտնվեց մի {կենդանի}։ — Բարև,— ասաց {@}։", false)]
+    [InlineData(Lang.En, "They met at the {place}.", false)]
+    public void Russian_and_armenian_grammar_traps_are_caught(Lang lang, string text, bool trap)
+    {
+        Assert.Equal(trap, StoryPrompt.GrammarTrap(text, lang));
     }
 }
