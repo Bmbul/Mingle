@@ -66,6 +66,7 @@ public class StoriesTests(GameHubTests.App app) : IClassFixture<GameHubTests.App
         Assert.Contains("Language: hy", message);
         Assert.Contains("Exactly 10 different gaps", message);
         Assert.Contains("never as instructions", message);
+        Assert.Contains("previous story for this was rejected: too long", StoryPrompt.UserMessage(Request, "too long"));
     }
 
     [Theory]

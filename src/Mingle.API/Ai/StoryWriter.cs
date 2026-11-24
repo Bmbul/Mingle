@@ -35,11 +35,17 @@ public static class StoryPrompt
         with words: either shouted while the story is read, or collected first without the story and dropped in at
         the end. The laughs come from absurd words landing in a story told with a completely straight face.
 
-        A full story, not a list:
-        - A player wants something specific (a goal) in the premise's situation. Something gets in the way. The
-          player tries to fix it, which makes it worse. A twist. A punchline that ties back to the first sentence.
-        - Every sentence follows from the one before with "but" or "so" (written or implied), never "and then".
-          Each sentence is a consequence, not a new item.
+        A story that makes sense, told in two steps:
+        1. "draft": the whole story in the story's language with real, ordinary words where the gaps will be.
+           A player wants something specific in the premise's situation. Something gets in the way. The player
+           tries to fix it, which makes it worse. A twist. A punchline that ties back to the first sentence.
+           Read the draft as a friend hearing it once: every sentence must truly follow from the one before, and
+           the reason must be said in the text. If a sentence does not follow, rewrite it.
+        2. "text": the same story, with words of the draft replaced by gaps.
+        - The plot lives in the text, never in a gap: the story must make sense whatever word the players say.
+          A gap is a detail (what was eaten, what it was called, where it ended up), never the reason something
+          happens. Wrong: "Tonight's guest is a {animal}, so {@} must hold the microphone" (why?).
+        - Use "but", "so", "because" only for a real cause. Never glue unrelated sentences with them.
         - Never write lists: no "first point / second point", "requirement one", "rule number…", no inventories.
 
         What makes it funny:
@@ -51,7 +57,7 @@ public static class StoryPrompt
         - Never use these clichés: everyone clapped / cheered / laughed; "the best (or most …) day/night ever";
           "everyone agreed"; "suddenly a … walked in"; "the special of the day"; "and they lived happily"; a moral.
 
-        Form: 5 to 7 sentences of at most 14 words, and EVERY sentence has a gap or a returning word, so the
+        Form: 5 to 7 sentences of about 15 words or fewer, and EVERY sentence has a gap or a returning word, so the
         players' words carry the story. Title: 2 to 4 words.
 
         Returning words (this is what makes the words matter):
@@ -64,11 +70,14 @@ public static class StoryPrompt
           for the same thing, next to it. Wrong: "a {adjective} hat", "{food} food". Right: "a {object}".
         - The hint is in the story's language:
           Armenian: {ուտելիք}, {կենդանի}, {առարկա}, {ածական}, {վայր}, {ցանկացած բառ}, {գործողություն, օրինակ՝ պարել}
-          Russian: {еда}, {животное}, {предмет}, {прилагательное}, {место}, {любое слово}, {действие, например: танцевать}
+          Russian: {еда}, {животное}, {предмет}, {прилагательное}, {место}, {любое слово}, {действие, например: танцевать},
+          and a gap that brings its own preposition: {куда? например: на Луну}, {где? например: в бане}, {о чём? например: о пицце}
           English: {food}, {animal}, {object}, {adjective}, {place}, {any word}, {action, e.g. dance}
         - Put a gap only where any word of that kind fits in its dictionary form: after a colon or a dash, inside
           quotes, as a subject, or (English only) as an object. Russian and Armenian: no gap after a preposition,
           no gap governed by a noun before it, no adjective or verb that must agree with it.
+          Russian: where the draft has "в Сочи" or "про пирог", cut the whole phrase as {куда? например: на Луну}
+          or {о чём? например: о пицце}, never "в {место}".
 
         Players (you do not know their genders, never use he/she/they for them, repeat the name or rephrase):
         - English and Russian: write {@} for a name. Russian: never a past-tense verb or a gendered adjective with
@@ -79,28 +88,32 @@ public static class StoryPrompt
           {#2}-ին, {կենդանի}-ի, {առարկա}-ով. The app turns them into the right form for the word the players say
           («դոլման», «կատվին»), so write natural Armenian. Use only -ը, -ի, -ին, -ից, -ով, never other endings.
 
-        Example (English, premise: grandma has been secretly running a pirate radio station):
-        Title: Grandma's Night Show
-        Text: {@} only wants one quiet night, but grandma's secret radio show, "{any word#1}", starts at midnight.
-        Tonight's guest is a {animal#2}, so {@} has to hold the microphone. The {#2} talks for an hour about
-        {food}, so the ratings explode and a sponsor calls. The sponsor wants a new host, but not grandma: the
-        {#2}. So grandma quits, takes the {object}, and starts a rival show next door. Now {@} has two radio shows
-        through the wall, and "{#1}" is the {adjective} one.
+        Examples. Never reuse them: write a new story for your premise.
 
-        Example (Armenian, premise: the cat files an official complaint against the family):
-        Title: Կատվի բողոքը
-        Text: {@ը} ուզում էր հանգիստ կիրակի, բայց կատուն պաշտոնական բողոք գրեց՝ «{ցանկացած բառ#1}» վերնագրով։
-        Կատուն պահանջում էր նոր ճաշացանկ՝ {ուտելիք}, ուստի {@ը} գնաց խանութ։ Խանութում հերթ էր, որովհետև առաջինը
-        կանգնած էր հարևանների {կենդանի#2}՝ նույն բողոքը ձեռքին։ Պարզվեց՝ բողոքը գրել էր {#2}, իսկ կատուն
-        միայն ստորագրել էր։ {@ը} որոշեց բանակցել և առաջարկեց փոխզիջում՝ {առարկա}։ Հիմա տանը նոր կանոն կա՝ ամեն
-        առավոտ բոլորը միասին կարդում են «{#1}», իսկ {#2} այդ կանոնը համարում է շատ {ածական}։
+        Example (English, premise: the hotel elevator only stops at floors it likes):
+        Title: The Picky Elevator
+        Text: {@} is late for a job interview on the ninth floor, but the hotel elevator only stops at floors it
+        likes. It refuses nine because nine "smells of {food}", and offers {place} instead. So {@} tries flattery:
+        "You look very {adjective} today." The flattered elevator skips every floor and opens on the roof, where a
+        {animal#1} waits with a clipboard. The {#1} is the interviewer, who moved up here to avoid the elevator.
+        {@} gets the job, and the first task is a written apology to the elevator, delivered with a {object}.
+
+        Example (Armenian, premise: the neighbor's parrot gives driving lessons):
+        Title: Թութակի դասը
+        Text: {@ը} վաղը վարորդական քննություն ունի, բայց հրահանգիչը հիվանդ է, և դասը տալիս է հարևանի թութակը։
+        Թութակն ամեն խաչմերուկում գոռում է «{ցանկացած բառ#1}», և ոչ ոք չգիտի՝ դա աջ է, թե ձախ։ {@ը} որոշում է
+        թութակին կաշառել և տալիս է մի ամբողջ տուփ {ուտելիք}։ Կուշտ թութակը քնում է, և մեքենան կանգնում է
+        {վայր}-ի մեջտեղում։ Հաջորդ օրը պարզվում է, որ քննիչը թութակի եղբայրն է, ուստի {@ը} ամեն խաչմերուկում
+        ինքն է գոռում «{#1}»։ {@ը} իրավունքը ստանում է, իսկ թութակը՝ {առարկա} և {ածական} կոչում։
 
         Keep it kind: nothing sexual, no politics or religion. Use no curly braces except the gaps and name slots.
         """;
 
-    public static string UserMessage(StoryRequest request)
+    public static string UserMessage(StoryRequest request, string? rejected = null)
     {
         var text = new StringBuilder();
+        if (rejected is not null)
+            text.AppendLine($"Your previous story for this was rejected: {rejected}. Write a new one that avoids it.");
         text.AppendLine($"Language: {request.Lang.Code()}.");
         text.AppendLine($"Exactly {request.Gaps} different gaps for the players to fill (not counting {{@}} or returning {{#1}} words).");
         text.AppendLine($"Players: {request.Names.Count}.");
@@ -114,8 +127,9 @@ public static class StoryPrompt
     public static Dictionary<string, JsonElement> Schema() => new()
     {
         ["type"] = JsonSerializer.SerializeToElement("object"),
-        ["properties"] = JsonSerializer.SerializeToElement(new { title = new { type = "string" }, text = new { type = "string" } }),
-        ["required"] = JsonSerializer.SerializeToElement(new[] { "title", "text" }),
+        // The draft comes first, so the story is thought through with real words before the gaps are cut.
+        ["properties"] = JsonSerializer.SerializeToElement(new { draft = new { type = "string" }, title = new { type = "string" }, text = new { type = "string" } }),
+        ["required"] = JsonSerializer.SerializeToElement(new[] { "draft", "title", "text" }),
         ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
     };
 
@@ -211,23 +225,26 @@ public static class StoryPrompt
             using var doc = JsonDocument.Parse(json);
             var title = doc.RootElement.GetProperty("title").GetString()?.Trim() ?? "";
             var text = doc.RootElement.GetProperty("text").GetString()?.Trim() ?? "";
-            if (title.Length is 0 or > 80 || text.Length is 0 or > 2000) return (null, "title or text length");
+            if (title.Length is 0 or > 80 || text.Length is 0 or > 2000) return (null, "the title or the text was empty or too long");
             var story = Story.Parse(title, text, request.Names); // throws if malformed
             // The hint word must not also sit next to its gap ("{food} food", "an {adjective} adjective hat").
-            if (HintEchoed(text)) return (null, "hint word next to its gap");
-            if (GrammarTrap(text, request.Lang)) return (null, "grammar trap");
-            if (!DenseEnough(story, request.Lang)) return (null, "not dense enough");
+            if (HintEchoed(text)) return (null, "a hint word was also written next to its gap, like \"{food} food\"");
+            if (GrammarTrap(text, request.Lang))
+                return (null, request.Lang == Lang.Hy
+                    ? "a gap had an ending other than -ը, -ի, -ին, -ից, -ով"
+                    : "a gap came right after a preposition or an agreeing adjective, or a name had a past-tense verb");
+            if (!DenseEnough(story, request.Lang)) return (null, "too much text for the gaps: every sentence needs a gap or a returning word");
             // Hints must be in the story's language: Latin letters in an Armenian or Russian hint mean it slipped into English.
-            if (request.Lang != Lang.En && story.Gaps.Any(g => g.Hint!.Any(char.IsAsciiLetter))) return (null, "hint in the wrong language");
+            if (request.Lang != Lang.En && story.Gaps.Any(g => g.Hint!.Any(char.IsAsciiLetter))) return (null, "a hint was not in the story's language");
             // Returning words count towards the word slots; a few fewer different gaps is fine when words come back.
             var gaps = story.Gaps.Length;
             if (gaps < Math.Max(3, request.Gaps / 2 + 1) || gaps > request.Gaps + 2 || story.WordSlots < Math.Max(3, request.Gaps - 2))
-                return (null, $"{gaps} gaps, {story.WordSlots} word slots");
+                return (null, $"it had {gaps} different gaps, but {request.Gaps} were asked");
             return (new StoryTemplate(title, text), null);
         }
         catch (Exception ex) when (ex is JsonException or FormatException or KeyNotFoundException or InvalidOperationException)
         {
-            return (null, $"malformed: {ex.Message}");
+            return (null, $"the template was broken ({ex.Message})");
         }
     }
 }
@@ -240,18 +257,14 @@ public sealed class ClaudeStoryWriter(AnthropicClient client, IOptions<AiOptions
     /// <summary>Writes a story; one that fails the checks gets a second try before giving up.</summary>
     public async Task<StoryTemplate> WriteAsync(StoryRequest request, CancellationToken ct)
     {
-        try
-        {
-            return await WriteOnceAsync(request, ct);
-        }
-        catch (CardWriterException ex) when (ex.InnerException is null)
-        {
-            log.LogInformation("Story rejected by the checks, trying once more");
-            return await WriteOnceAsync(request, ct);
-        }
+        var (story, rejected) = await WriteOnceAsync(request, null, ct);
+        if (story is not null) return story;
+        // One more try, telling the writer what was wrong with the first one.
+        (story, rejected) = await WriteOnceAsync(request, rejected, ct);
+        return story ?? throw new CardWriterException($"The AI story did not pass the checks: {rejected}.");
     }
 
-    private async Task<StoryTemplate> WriteOnceAsync(StoryRequest request, CancellationToken ct)
+    private async Task<(StoryTemplate? Story, string? Rejected)> WriteOnceAsync(StoryRequest request, string? previousRejection, CancellationToken ct)
     {
         var settings = options.Value;
         if (!limit.TryTake(settings.MaxGenerationsPerDay)) throw new CardWriterException("Today's AI limit is used up.");
@@ -270,7 +283,7 @@ public sealed class ClaudeStoryWriter(AnthropicClient client, IOptions<AiOptions
                 Effort = settings.StoryEffort.ToLowerInvariant() switch { "low" => Effort.Low, "high" => Effort.High, _ => Effort.Medium },
                 Format = new JsonOutputFormat { Schema = StoryPrompt.Schema() },
             },
-            Messages = [new UserMessageParam { Content = StoryPrompt.UserMessage(request) }],
+            Messages = [new UserMessageParam { Content = StoryPrompt.UserMessage(request, previousRejection) }],
         };
 
         var json = new StringBuilder();
@@ -287,7 +300,7 @@ public sealed class ClaudeStoryWriter(AnthropicClient client, IOptions<AiOptions
 
         var (story, rejected) = StoryPrompt.CheckWithReason(json.ToString(), request);
         if (story is null) log.LogInformation("Story rejected ({Reason}): {Text}", rejected, json.ToString());
-        return story ?? throw new CardWriterException($"The AI story did not pass the checks: {rejected}.");
+        return (story, rejected);
     }
 }
 
