@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hy">
 
 <head>
     <meta charset="utf-8" />
@@ -13,14 +13,14 @@
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
     <script>
-        // UI language: saved choice, else the browser's language. Changing it reloads the app.
+        // UI language: the saved choice, else Armenian. Changing it reloads the app.
         window.mingle = {
             getLang: function () {
                 try {
                     var saved = localStorage.getItem('mingle.lang');
                     if (saved) return saved;
                 } catch (e) { }
-                return (navigator.language || 'en').slice(0, 2);
+                return 'hy';
             },
             setLang: function (code) {
                 try { localStorage.setItem('mingle.lang', code); } catch (e) { }

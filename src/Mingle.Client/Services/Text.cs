@@ -9,7 +9,7 @@ namespace Mingle.Client.Services;
 public sealed class Text(IStringLocalizer<Strings> localizer)
 {
     public static Lang UiLang =>
-        Langs.TryParse(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out var lang) ? lang : Lang.En;
+        Langs.TryParse(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out var lang) ? lang : Lang.Hy;
 
     public string this[string key] => localizer[key];
 

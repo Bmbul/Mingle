@@ -25,7 +25,7 @@ var host = builder.Build();
 // The UI language is chosen before the app renders; switching language reloads the page.
 var js = host.Services.GetRequiredService<IJSRuntime>();
 var code = await js.InvokeAsync<string?>("mingle.getLang");
-var lang = Langs.TryParse(code, out var parsed) ? parsed : Lang.En;
+var lang = Langs.TryParse(code, out var parsed) ? parsed : Lang.Hy;
 var culture = CultureInfo.GetCultureInfo(lang.Code());
 CultureInfo.DefaultThreadCurrentCulture = culture;
 CultureInfo.DefaultThreadCurrentUICulture = culture;
