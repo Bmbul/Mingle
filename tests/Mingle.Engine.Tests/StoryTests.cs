@@ -68,4 +68,23 @@ public class StoryTests
         Assert.Equal("Սմբատը և Անին որոշեցին ճաշ եփել։ Տատիկը Սմբատին տվեց [ուտելիք]։", story.Fill([]));
         Assert.Equal(1, Story.CountGaps("{@ը} և {@ին} տվեց {ուտելիք}"));
     }
+
+    [Fact]
+    public void A_marked_word_comes_back_later_without_being_asked_again()
+    {
+        var story = Story.Parse("Zoo", "{@} bought a {animal#1}. The {#1} ate {food}. Now the {#1} is the boss.", ["Ani"]);
+
+        Assert.Equal(["animal", "food"], story.Gaps.Select(g => g.Hint!).ToArray());
+        Assert.Equal(4, story.WordSlots);
+        Assert.Equal("Ani bought a goat. The goat ate pizza. Now the goat is the boss.", story.Fill(["goat", "pizza"]));
+        Assert.Equal(2, Story.CountGaps("{@} bought a {animal#1}. The {#1} ate {food}."));
+    }
+
+    [Theory]
+    [InlineData("The {#1} came first. Then a {animal#1}.")]   // a repeat before its gap
+    [InlineData("A {animal#1} and a {food#1}.")]               // the same mark twice
+    public void Bad_word_marks_are_rejected(string template)
+    {
+        Assert.Throws<FormatException>(() => Story.Parse("t", template, ["Ani"]));
+    }
 }

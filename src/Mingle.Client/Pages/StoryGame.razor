@@ -56,7 +56,6 @@ else
             <p class="muted small">@T["Story_LiveHint"]</p>
         }
         <p class="story-text" lang="@Text.UiLang.Code()">
-            @{ var index = 0; }
             @foreach (var part in story.Parts)
             {
                 if (!part.IsGap)
@@ -65,11 +64,12 @@ else
                 }
                 else if (Game.Blind)
                 {
-                    <mark class="story-word">@words[index++]</mark>
+                    <mark class="story-word">@Story.WordFor(part, words)</mark>
                 }
                 else
                 {
-                    <span class="story-gap">@part.Hint</span>
+                    @* Live: a returning word is shown as "↺" so the reader repeats what was said before. *@
+                    <span class="story-gap @(part.Repeat ? "repeat" : "")">@(part.Repeat ? $"↺ {part.Hint}" : part.Hint)</span>
                 }
             }
         </p>

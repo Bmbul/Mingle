@@ -3,22 +3,26 @@ using System.Text;
 
 namespace Mingle.Engine;
 
-/// <summary>A piece of a story: plain text, or a gap with a hint such as "a food".</summary>
-public sealed record StoryPart(string? Text, string? Hint)
+/// <summary>
+/// A piece of a story: plain text, or a gap with a hint such as "a food". <paramref name="Word"/> is which of the
+/// players' words goes there; a gap can come back later in the story with the same word (<paramref name="Repeat"/>).
+/// </summary>
+public sealed record StoryPart(string? Text, string? Hint, int? Word = null, bool Repeat = false)
 {
     public bool IsGap => Hint is not null;
 }
 
 /// <summary>
 /// A short funny story with gaps, for the "Fill-in stories" game. Written as a template:
-/// <c>{food}</c> is a gap whose hint is "food", and <c>{@}</c> is a player's name (the players take turns
-/// filling these, in order). Anything else is plain text.
+/// <c>{food}</c> is a gap whose hint is "food"; <c>{animal#1}</c> is a gap whose word comes back later wherever
+/// <c>{#1}</c> appears; <c>{@}</c> is a player's name (the players take turns, in order). Anything else is text.
 /// </summary>
 public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
 {
     public const int MaxHintLength = 40;
 
-    public ImmutableArray<StoryPart> Gaps => [.. Parts.Where(p => p.IsGap)];
+    /// <summary>The gaps the players fill, each once (a returning word is not asked for again).</summary>
+    public ImmutableArray<StoryPart> Gaps => [.. Parts.Where(p => p.IsGap && !p.Repeat)];
 
     /// <summary>Reads a template; throws <see cref="FormatException"/> when it is malformed.</summary>
     public static Story Parse(string title, string template, IReadOnlyList<string> playerNames)
@@ -27,6 +31,8 @@ public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
         var parts = ImmutableArray.CreateBuilder<StoryPart>();
         var text = new StringBuilder();
         var nameIndex = 0;
+        var words = 0;
+        var marked = new Dictionary<string, (int Word, string Hint)>(StringComparer.Ordinal);
 
         for (var i = 0; i < template.Length; i++)
         {
@@ -52,10 +58,26 @@ public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
                 }
                 inside = "name";
             }
-            if (inside.Length == 0 || inside.Length > MaxHintLength) throw new FormatException("A gap needs a short hint.");
-
             if (text.Length > 0) { parts.Add(new StoryPart(text.ToString(), null)); text.Clear(); }
-            parts.Add(new StoryPart(null, inside));
+
+            // {#1}: the word given for {hint#1} comes back here.
+            if (inside.StartsWith('#'))
+            {
+                if (!marked.TryGetValue(inside[1..].Trim(), out var earlier)) throw new FormatException($"'{{{inside}}}' comes before its gap.");
+                parts.Add(new StoryPart(null, earlier.Hint, earlier.Word, Repeat: true));
+                continue;
+            }
+
+            // {hint#1}: a gap whose word comes back later.
+            var mark = inside.IndexOf('#');
+            var hint = (mark < 0 ? inside : inside[..mark]).Trim();
+            if (hint.Length == 0 || hint.Length > MaxHintLength) throw new FormatException("A gap needs a short hint.");
+            if (mark >= 0)
+            {
+                var key = inside[(mark + 1)..].Trim();
+                if (key.Length == 0 || !marked.TryAdd(key, (words, hint))) throw new FormatException($"Gap mark '#{key}' is empty or used twice.");
+            }
+            parts.Add(new StoryPart(null, hint, words++));
         }
         if (text.Length > 0) parts.Add(new StoryPart(text.ToString(), null));
 
@@ -70,21 +92,23 @@ public sealed record Story(string Title, ImmutableArray<StoryPart> Parts)
 
     /// <summary>Number of gaps in a template, without reading it fully (for checks before parsing).</summary>
     public static int CountGaps(string template) =>
-        System.Text.RegularExpressions.Regex.Matches(template, @"\{(?!\s*@)[^{}]+\}").Count;
+        System.Text.RegularExpressions.Regex.Matches(template, @"\{(?!\s*[@#])[^{}]+\}").Count;
+
+    /// <summary>How many times gap words appear in the story text, returning words included.</summary>
+    public int WordSlots => Parts.Count(p => p.IsGap);
 
     /// <summary>The story with each gap replaced by the word given for it, in order; missing words keep their hint.</summary>
     public string Fill(IReadOnlyList<string> words)
     {
         var text = new StringBuilder();
-        var gap = 0;
         foreach (var part in Parts)
-        {
-            if (!part.IsGap) { text.Append(part.Text); continue; }
-            text.Append(gap < words.Count && !string.IsNullOrWhiteSpace(words[gap]) ? words[gap].Trim() : $"[{part.Hint}]");
-            gap++;
-        }
+            text.Append(part.IsGap ? WordFor(part, words) : part.Text);
         return text.ToString();
     }
+
+    /// <summary>The word for a gap (the same word everywhere it returns), or its hint in brackets while unknown.</summary>
+    public static string WordFor(StoryPart part, IReadOnlyList<string> words) =>
+        part.Word is { } i && i < words.Count && !string.IsNullOrWhiteSpace(words[i]) ? words[i].Trim() : $"[{part.Hint}]";
 }
 
 /// <summary>

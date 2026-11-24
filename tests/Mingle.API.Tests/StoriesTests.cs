@@ -73,6 +73,8 @@ public class StoriesTests(GameHubTests.App app) : IClassFixture<GameHubTests.App
     [InlineData("It wore a tiny {adjective} adjective hat.", true)]
     [InlineData("Then a {food} appeared.", false)]
     [InlineData("{@} bought a {object} and smiled.", false)]
+    [InlineData("Մի {կենդանի#2} եկավ։ Հիմա {#2} կենդանին է պետը։", true)]   // the hint word comes back with an article
+    [InlineData("Մի {կենդանի#2} եկավ։ Հիմա պետը {#2} է։", false)]
     public void Hint_words_left_next_to_their_gap_are_caught(string text, bool echoed)
     {
         Assert.Equal(echoed, StoryPrompt.HintEchoed(text));
@@ -89,5 +91,25 @@ public class StoriesTests(GameHubTests.App app) : IClassFixture<GameHubTests.App
     public void Russian_and_armenian_grammar_traps_are_caught(Lang lang, string text, bool trap)
     {
         Assert.Equal(trap, StoryPrompt.GrammarTrap(text, lang));
+    }
+
+    [Fact]
+    public void Stories_must_be_dense_so_the_words_carry_them()
+    {
+        var dense = Story.Parse("t", "{@} bought a {animal#1}. The {#1} ate {food}. Now the {#1} is the {adjective} boss.", ["Ani"]);
+        var padded = Story.Parse("t", "{@} woke up early on a quiet and sunny Monday morning in the small town. " +
+            "The coffee machine was making its usual noise in the kitchen next to the window. " +
+            "Nothing at all was unusual about this ordinary and peaceful day in the town. Then a {animal} arrived.", ["Ani"]);
+
+        Assert.True(StoryPrompt.DenseEnough(dense));
+        Assert.False(StoryPrompt.DenseEnough(padded));
+    }
+
+    [Fact]
+    public void An_armenian_dot_inside_a_sentence_is_not_a_sentence_end()
+    {
+        var story = Story.Parse("t", "{@ը} եկավ։ Դատավորը որոշեց. այսուհետ բոլորը ուտում են {ուտելիք}։ Կատուն ստացավ կոչում՝ {ածական}։", ["Սմբատ"]);
+
+        Assert.True(StoryPrompt.DenseEnough(story, Lang.Hy));
     }
 }

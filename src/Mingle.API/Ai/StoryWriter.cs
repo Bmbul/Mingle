@@ -45,7 +45,13 @@ public static class StoryPrompt
         - Never use these clichés: everyone clapped / cheered / laughed; "the best (or most …) day/night ever";
           "everyone agreed"; "suddenly a … walked in"; "the special of the day"; "and they lived happily"; a moral.
 
-        Form: 5 to 7 short sentences, simple words, easy to read aloud. Title: 2 to 4 words.
+        Form: dense and short. 4 to 6 sentences of at most 12 words, about 10 words of story per gap, and EVERY
+        sentence has a gap or a returning word, so the players' words carry the story. Title: 2 to 4 words.
+
+        Returning words (this is what makes the words matter):
+        - Mark 1 or 2 important gaps with #1, #2 ({animal#1}) and bring their word back once or twice later with
+          {#1}. The players say the word once; it returns on its own. The punchline should use a returning word.
+        - A returning word follows the same grammar rules as a gap: no ending after it, a safe spot only.
 
         Gaps:
         - Write each gap as {hint}. The gap REPLACES the word completely: never write the hint word, or another word
@@ -67,19 +73,17 @@ public static class StoryPrompt
 
         Example (English, premise: grandma has been secretly running a pirate radio station):
         Title: Grandma's Night Show
-        Text: Every night at midnight, {@} hears a voice from grandma's room: "Good evening, listeners, tonight's
-        topic is {food}." It turns out grandma has been running a secret radio show for eleven years. Her most loyal
-        listener, a {animal} from the third floor, calls in every Tuesday to complain about the {object}. Tonight
-        there is a special guest, and {@} has to talk live for three minutes about "{any word}". The ratings explode.
-        Now grandma has a sponsor and her own slogan: "Stay {adjective}, stay up late."
+        Text: Every midnight, grandma hosts a secret radio show called "{any word#1}". Tonight's guest is a
+        {animal#2} who wants to talk about {food}. The {#2} cries live on air, and the ratings explode. {@} has to
+        read the ad: "{#1}: now with a free {object}!" By morning the {#2} has its own show, and grandma is its
+        {adjective} assistant.
 
         Example (Armenian, premise: the cat files an official complaint against the family):
         Title: Կատվի բողոքը
-        Text: Առավոտյան {@ը} փոստարկղում գտավ պաշտոնական նամակ. կատուն բողոք էր ներկայացրել։ Առաջին կետ՝ ճաշը
-        վերջին ժամանակներս շատ {ածական} է։ Երկրորդ կետ՝ ինչ-որ մեկը գիշերները երգում է «{ցանկացած բառ}»։ Երրորդ
-        կետ՝ կատուն պահանջում է նոր անկողին՝ {առարկա}։ Ընտանիքը փաստաբան վարձեց՝ շատ լուրջ մի {կենդանի}։ Երեք ժամ
-        բանակցություններից հետո պայմանագիրը ստորագրվեց. բազմոցը մնում է կատվին, իսկ {@ը} կարող է տանն ապրել
-        միայն հանգստյան օրերին։
+        Text: {@ը} փոստարկղում գտավ պաշտոնական նամակ՝ կատվից։ Առաջին կետ՝ ճաշը շատ {ածական} է։ Երկրորդ կետ՝
+        ինչ-որ մեկը գիշերները երգում է «{ցանկացած բառ#1}»։ Կատուն փաստաբան վարձեց՝ մի {կենդանի#2}։ Փաստաբանը՝
+        {#2}, պահանջեց փոխհատուցում՝ {առարկա}։ Պայմանագիրը ստորագրվեց. բազմոցը մնում է կատվին, իսկ {@ը} ամեն
+        առավոտ պետք է երգի «{#1}»։
 
         Keep it kind: nothing sexual, no politics or religion. Use no curly braces except the gaps and name slots.
         """;
@@ -104,6 +108,24 @@ public static class StoryPrompt
         ["required"] = JsonSerializer.SerializeToElement(new[] { "title", "text" }),
         ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
     };
+
+    /// <summary>
+    /// The players' words must carry the story: at most about 13 words of text per word slot (returning words
+    /// count), and at most two sentences without any gap.
+    /// </summary>
+    public static bool DenseEnough(Story story, Lang lang = Lang.En)
+    {
+        var plain = string.Concat(story.Parts.Where(p => !p.IsGap).Select(p => p.Text));
+        var words = plain.Split((char[])[' ', '\n', '\t'], StringSplitOptions.RemoveEmptyEntries).Count(w => w.Any(char.IsLetter));
+        if (words > 13 * story.WordSlots) return false;
+
+        // Sentences: split the story with each gap shown as a marker, and count the ones without a marker.
+        var marked = string.Concat(story.Parts.Select(p => p.IsGap ? "\u0001" : p.Text));
+        // Armenian ends a sentence with «։»; its «.» works like a colon inside the sentence.
+        var ends = lang == Lang.Hy ? @"(?<=[։!…])\s+" : @"(?<=[.!?…])\s+";
+        var sentences = global::System.Text.RegularExpressions.Regex.Split(marked, ends).Where(x => x.Any(char.IsLetter));
+        return sentences.Count(x => !x.Contains('\u0001')) <= 2;
+    }
 
     private static readonly string[] RussianPrepositions =
         ["в", "во", "на", "о", "об", "с", "со", "к", "ко", "по", "у", "от", "до", "из", "за", "для", "под", "про", "при", "без", "над", "через"];
@@ -130,19 +152,38 @@ public static class StoryPrompt
         return global::System.Text.RegularExpressions.Regex.IsMatch(lower, @"\{@\}\s+\p{L}+(л|ла|ло|ли|ёл)\b");
     }
 
-    /// <summary>True when the text right before or after a gap repeats the gap's hint word.</summary>
+    /// <summary>
+    /// True when the word right before or after a gap (or a returning word) repeats the gap's hint word, with or
+    /// without an ending: "{food} food", "{#2} կենդանին" where #2 is an animal.
+    /// </summary>
     public static bool HintEchoed(string text)
     {
+        var hints = new Dictionary<string, string>(StringComparer.Ordinal);
         foreach (global::System.Text.RegularExpressions.Match m in global::System.Text.RegularExpressions.Regex.Matches(
-                     text, @"(\p{L}+)?\s*\{([^{}@]+)\}\s*(\p{L}+)?"))
+                     text, @"(\p{L}+)?[\s\p{P}-[{]]*\{([^{}@]+)\}[\s\p{P}-[}]]*(\p{L}+)?"))
         {
-            var hint = m.Groups[2].Value.Split([',', ' '], StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? "";
+            var inside = m.Groups[2].Value.Trim();
+            string hint;
+            if (inside.StartsWith('#'))
+            {
+                if (!hints.TryGetValue(inside[1..].Trim(), out hint!)) continue;
+            }
+            else
+            {
+                var mark = inside.IndexOf('#');
+                hint = (mark < 0 ? inside : inside[..mark]).Split([',', ' '], StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? "";
+                if (mark >= 0) hints[inside[(mark + 1)..].Trim()] = hint;
+            }
             if (hint.Length < 3) continue;
-            if (string.Equals(m.Groups[1].Value, hint, StringComparison.OrdinalIgnoreCase)
-                || string.Equals(m.Groups[3].Value, hint, StringComparison.OrdinalIgnoreCase)) return true;
+            if (Echoes(m.Groups[1].Value, hint) || Echoes(m.Groups[3].Value, hint)) return true;
         }
         return false;
     }
+
+    // The same word, or the hint word with an ending ("կենդանին", "animals").
+    private static bool Echoes(string word, string hint) =>
+        word.Length > 0 && (string.Equals(word, hint, StringComparison.OrdinalIgnoreCase)
+            || (hint.Length >= 4 && word.StartsWith(hint, StringComparison.OrdinalIgnoreCase) && word.Length - hint.Length <= 3));
 
     /// <summary>The story if it is usable: parses, and has about the asked number of gaps; null otherwise.</summary>
     public static StoryTemplate? Check(string json, StoryRequest request)
@@ -157,6 +198,7 @@ public static class StoryPrompt
             // The hint word must not also sit next to its gap ("{food} food", "an {adjective} adjective hat").
             if (HintEchoed(text)) return null;
             if (GrammarTrap(text, request.Lang)) return null;
+            if (!DenseEnough(Story.Parse(title, text, request.Names), request.Lang)) return null;
             // Hints must be in the story's language: Latin letters in an Armenian or Russian hint mean it slipped into English.
             if (request.Lang != Lang.En && Story.Parse(title, text, request.Names).Gaps.Any(g => g.Hint!.Any(char.IsAsciiLetter))) return null;
             var gaps = Story.CountGaps(text);
@@ -174,7 +216,21 @@ public sealed class ClaudeStoryWriter(AnthropicClient client, IOptions<AiOptions
 {
     public bool IsAvailable => true;
 
+    /// <summary>Writes a story; one that fails the checks gets a second try before giving up.</summary>
     public async Task<StoryTemplate> WriteAsync(StoryRequest request, CancellationToken ct)
+    {
+        try
+        {
+            return await WriteOnceAsync(request, ct);
+        }
+        catch (CardWriterException ex) when (ex.InnerException is null)
+        {
+            log.LogInformation("Story rejected by the checks, trying once more");
+            return await WriteOnceAsync(request, ct);
+        }
+    }
+
+    private async Task<StoryTemplate> WriteOnceAsync(StoryRequest request, CancellationToken ct)
     {
         var settings = options.Value;
         if (!limit.TryTake(settings.MaxGenerationsPerDay)) throw new CardWriterException("Today's AI limit is used up.");
