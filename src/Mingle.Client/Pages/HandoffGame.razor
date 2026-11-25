@@ -1,0 +1,231 @@
+@page "/handoff"
+@inject Text T
+@inject HandoffSession Game
+@inject NavigationManager Nav
+
+<PageTitle>@T["Setup_Handoff"] · Mingle</PageTitle>
+
+@if (!Game.Ready)
+{
+    <main class="main center-screen">
+        <p class="muted">@T["Handoff_NotStarted"]</p>
+        <a class="btn" href="setup">@T["Home_NewGame"]</a>
+    </main>
+}
+else if (stage == Stage.Trail)
+{
+    <main class="main">
+        <h1 class="h1 big">@T["Handoff_Trail"]</h1>
+        <section class="stack">
+            @foreach (var (player, received, right) in Game.Trail())
+            {
+                <div class="card stack handoff-trail">
+                    <div class="row gap">
+                        <span class="row-title grow">@player.Name</span>
+                        <span class="blitz-count">×@received.Length</span>
+                    </div>
+                    @foreach (var pass in received)
+                    {
+                        <p class="handoff-reason" lang="@player.Lang.Code()">
+                            <span class="muted">@Game.PlayerById(pass.From).Name →</span>
+                            @Game.CardById(pass.CardId).TextFor(player.Lang).Text
+                            @if (!pass.Revealed)
+                            {
+                                <span class="muted small"> · <Icon Name="secret" Size="14" /> @T["Handoff_WasSecret"]</span>
+                            }
+                        </p>
+                    }
+                    @if (received.IsEmpty)
+                    {
+                        <p class="muted small">@T["Handoff_Nobody"]</p>
+                    }
+                    @if (Game.Guess && !received.IsEmpty)
+                    {
+                        <p class="muted small">@T["Handoff_RightGuesses", right, received.Length]</p>
+                    }
+                </div>
+            }
+        </section>
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="PlayAgain">@T["Handoff_Again"]</button>
+        <a class="btn2" href="">@T["End_Home"]</a>
+    </footer>
+}
+else if (stage == Stage.Secret)
+{
+    <main class="main center-screen">
+        <p class="muted">@T["Handoff_SecretFor"]</p>
+        <p class="blitz-name">@Game.Holder!.Name</p>
+        <p class="muted center"><Icon Name="secret" Size="18" /> @T["Handoff_LookAway"]</p>
+        <p class="muted small">@T["Handoff_Progress", Game.Passes.Count + 1, Game.Rounds]</p>
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="ShowCard">@T["Handoff_Show"]</button>
+    </footer>
+}
+else if (stage == Stage.Prompt && card is { } prompt)
+{
+    <main class="main center-screen">
+        <p class="muted">@T["Handoff_GiveTo"]</p>
+        <p class="blitz-card" lang="@Game.Holder!.Lang.Code()">@prompt.TextFor(Game.Holder!.Lang).Text</p>
+        <p class="muted center small">@T["Handoff_Pick"]</p>
+        <div class="handoff-players">
+            @foreach (var player in Game.Players.Where(p => p.Id != Game.Holder!.Id))
+            {
+                var p = player;
+                <button class="btn2" @onclick="() => Choose(p)">@p.Name</button>
+            }
+        </div>
+    </main>
+}
+else if (stage == Stage.Hand && receiver is { } to)
+{
+    <main class="main center-screen">
+        <p class="muted">@T["Handoff_HandTo"]</p>
+        <p class="blitz-name">@to.Name</p>
+        <p class="muted center">@T["Handoff_NoWord"]</p>
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="Received">@T["Handoff_GotIt", to.Name]</button>
+    </footer>
+}
+else if (stage == Stage.Guess && receiver is { } guesser)
+{
+    <main class="main center-screen">
+        <p class="muted">@guesser.Name</p>
+        <h1 class="h1 center">@T["Handoff_WhyYou"]</h1>
+        <p class="muted center small">@T["Handoff_GuessHint"]</p>
+        <div class="handoff-choices">
+            @foreach (var option in choices)
+            {
+                var o = option;
+                <button class="btn2" lang="@guesser.Lang.Code()" @onclick="() => Guessed(o)">@o.TextFor(guesser.Lang).Text</button>
+            }
+        </div>
+    </main>
+}
+else if (stage == Stage.Coin)
+{
+    <main class="main center-screen">
+        @* The guess is not judged yet: if the coin keeps the reason secret, the verdict stays secret too. *@
+        @if (guessedRight is not null)
+        {
+            <p class="muted">@T["Handoff_GuessLocked"]</p>
+        }
+        <div class="coin @(flipping ? "flipping" : "")" aria-hidden="true">?</div>
+        <p class="muted center">@T["Handoff_CoinRule"]</p>
+    </main>
+    <footer class="foot">
+        <button class="btn" disabled="@flipping" @onclick="Flip">@T["Handoff_Flip"]</button>
+    </footer>
+}
+else if (stage == Stage.Reveal && receiver is { } holder && card is { } said)
+{
+    <main class="main center-screen" aria-live="polite">
+        @if (revealed)
+        {
+            @GuessLine()
+            <p class="muted">@T["Handoff_CardSaid"]</p>
+            <p class="blitz-card" lang="@holder.Lang.Code()">@T["Handoff_GiveTo"] @said.TextFor(holder.Lang).Text</p>
+        }
+        else
+        {
+            <div class="coin" aria-hidden="true"><Icon Name="secret" Size="44" /></div>
+            <p class="blitz-hint center">@T["Handoff_Secret"]</p>
+        }
+    </main>
+    <footer class="foot">
+        @if (Game.Finished)
+        {
+            <button class="btn" @onclick="() => stage = Stage.Trail">@T["Handoff_SeeTrail"]</button>
+        }
+        else
+        {
+            <button class="btn" @onclick="() => stage = Stage.Secret">@T["Handoff_Next", holder.Name]</button>
+        }
+    </footer>
+}
+
+@code {
+    private enum Stage { Secret, Prompt, Hand, Guess, Coin, Reveal, Trail }
+
+    private Stage stage = Stage.Secret;
+    private Card? card;
+    private Player? receiver;
+    private ImmutableArray<Card> choices = [];
+    private bool? guessedRight;
+    private bool revealed;
+    private bool flipping;
+
+    protected override void OnInitialized()
+    {
+        if (Game.Finished) stage = Stage.Trail;
+    }
+
+    private void ShowCard()
+    {
+        card = Game.NextCard();
+        receiver = null;
+        guessedRight = null;
+        stage = Stage.Prompt;
+    }
+
+    private void Choose(Player to)
+    {
+        receiver = to;
+        stage = Stage.Hand;
+    }
+
+    private void Received()
+    {
+        if (Game.Guess)
+        {
+            choices = Game.Choices(card!);
+            stage = Stage.Guess;
+        }
+        else AfterGuess();
+    }
+
+    private void Guessed(Card choice)
+    {
+        guessedRight = choice.Id == card!.Id;
+        AfterGuess();
+    }
+
+    private void AfterGuess()
+    {
+        if (Game.Coin) stage = Stage.Coin;
+        else Reveal(true);
+    }
+
+    private async Task Flip()
+    {
+        flipping = true;
+        StateHasChanged();
+        await Task.Delay(1200); // the coin spins before it lands
+        flipping = false;
+        Reveal(Game.FlipCoin());
+    }
+
+    private void Reveal(bool show)
+    {
+        revealed = show;
+        Game.Record(receiver!, card!, guessedRight, show);
+        stage = Stage.Reveal;
+    }
+
+    private RenderFragment GuessLine() => __builder =>
+    {
+        if (guessedRight is { } right)
+        {
+            <p class="handoff-verdict @(right ? "right" : "wrong")">@(right ? T["Handoff_Right"] : T["Handoff_Wrong"])</p>
+        }
+    };
+
+    private void PlayAgain()
+    {
+        Game.Restart();
+        stage = Stage.Secret;
+    }
+}

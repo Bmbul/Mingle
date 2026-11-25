@@ -73,7 +73,7 @@ else if (room.Stage == RoomStage.Lobby)
             <h2 class="label">@T["Lobby_YourDeck"]</h2>
             <p class="muted small">@T["Lobby_YourDeckHint"]</p>
             @* Only decks with cards everyone in the room can read. *@
-            @foreach (var deck in decks.Where(d => !d.IsBlitz && (d.CountReadableBy(RoomLanguages(room)) > 0 || room.You?.DeckId == d.Id)))
+            @foreach (var deck in decks.Where(d => d.Style == DeckStyle.Questions && (d.CountReadableBy(RoomLanguages(room)) > 0 || room.You?.DeckId == d.Id)))
             {
                 var on = room.You?.DeckId == deck.Id;
                 <button class="check-row @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")"

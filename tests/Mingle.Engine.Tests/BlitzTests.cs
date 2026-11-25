@@ -57,7 +57,7 @@ public class BlitzTests
     {
         Assert.True(Deck(Word("a"), Word("b")).IsBlitz);
         Assert.False(Deck(Card("q", CardKinds.OpenQuestion)).IsBlitz);
-        Assert.True(Deck(Word("a"), Card("q", CardKinds.OpenQuestion)).MixesBlitzAndQuestions);
-        Assert.False(Deck(Word("a")).MixesBlitzAndQuestions);
+        Assert.True(Deck(Word("a"), Card("q", CardKinds.OpenQuestion)).MixesStyles);
+        Assert.False(Deck(Word("a")).MixesStyles);
     }
 }

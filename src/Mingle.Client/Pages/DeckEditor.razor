@@ -110,7 +110,11 @@
 
         <section class="add-row" aria-label="@T["Editor_AddCards"]">
             <button class="btn2" @onclick="AddCard"><Icon Name="plus" Size="18" />@T["Editor_WriteCard"]</button>
-            <button class="btn2" @onclick="@(() => OpenSheet("generate"))"><Icon Name="refresh" Size="18" />@T["Editor_Generate"]</button>
+            @* The AI writes questions and blitz words; "Give it to…" cards are written by hand. *@
+            @if (Style != DeckStyle.Handoff)
+            {
+                <button class="btn2" @onclick="@(() => OpenSheet("generate"))"><Icon Name="refresh" Size="18" />@T["Editor_Generate"]</button>
+            }
             <button class="btn2" @onclick="@(() => OpenSheet("decks"))"><Icon Name="layers" Size="18" />@T["Editor_FromDecks"]</button>
         </section>
         @if (addedNote is not null)
@@ -139,7 +143,7 @@
         </div>
         @if (sheet == "generate")
         {
-        @if (BlitzDeck is null)
+        @if (Style is null)
         {
         <section class="stack">
             <h2 class="label">@T["Editor_Style"]</h2>
@@ -254,7 +258,7 @@
         {
             <p class="muted center">@T["Online_Connecting"]</p>
         }
-        @foreach (var source in sourceDecks.Where(d => BlitzDeck is not { } blitzDeck || d.IsBlitz == blitzDeck))
+        @foreach (var source in sourceDecks.Where(d => Style is not { } style || d.Style == style))
         {
             var deck = source;
             var expanded = openDecks.Contains(deck.Id);
@@ -400,7 +404,7 @@
         aiNote = null;
         sheet = which;
         // A deck keeps one style: once it has cards, the AI writes more of the same kind.
-        if (BlitzDeck is { } blitzDeck) associations = blitzDeck;
+        if (Style is { } style) associations = style == DeckStyle.Blitz;
         if (which == "decks") _ = LoadSourceDecks();
     }
 
@@ -461,14 +465,14 @@
     private void AddPicked()
     {
         var added = 0;
-        var blitzDeck = BlitzDeck;
+        var style = Style;
         foreach (var deck in sourceDecks)
             foreach (var card in deck.Cards.Where(c => picked.Contains(Key(deck, c))))
             {
                 if (InDeck(card)) continue; // the same card picked from two decks
                 // An empty deck takes the style of the first card added; cards of the other style are left out.
-                blitzDeck ??= card.Kind.BlitzOnly;
-                if (card.Kind.BlitzOnly != blitzDeck) continue;
+                style ??= card.Kind.Style;
+                if (card.Kind.Style != style) continue;
                 cards.Add(EditCard.From(card));
                 added++;
             }
@@ -555,22 +559,29 @@
         }
     }
 
-    /// <summary>Whether this is a blitz deck (true), a question deck (false), or still empty (null).</summary>
-    private bool? BlitzDeck => cards.Count == 0 ? null : cards.Any(c => CardKinds.Get(c.KindId).BlitzOnly);
+    /// <summary>The game this deck is for (questions, blitz, "Give it to…"), or null while it is empty.</summary>
+    private DeckStyle? Style => cards.Count == 0 ? null : CardKinds.Get(cards[0].KindId).Style;
 
     /// <summary>The kinds a card may have: those of the deck's style, decided by the other cards.</summary>
     private static IEnumerable<CardKind> KindsFor(EditCard card, List<EditCard> all)
     {
         var others = all.Where(c => !ReferenceEquals(c, card)).ToList();
-        return others.Count == 0 ? CardKinds.All
-            : others.Any(c => CardKinds.Get(c.KindId).BlitzOnly) ? CardKinds.Blitz : CardKinds.Regular;
+        return others.Count == 0 ? CardKinds.All : CardKinds.OfStyle(CardKinds.Get(others[0].KindId).Style);
     }
 
     private IEnumerable<CardKind> KindsFor(EditCard card) => KindsFor(card, cards);
 
     private void AddCard()
     {
-        var card = new EditCard { KindId = BlitzDeck == true ? CardKinds.Association.Id : CardKinds.OpenQuestion.Id };
+        var card = new EditCard
+        {
+            KindId = Style switch
+            {
+                DeckStyle.Blitz => CardKinds.Association.Id,
+                DeckStyle.Handoff => CardKinds.Handoff.Id,
+                _ => CardKinds.OpenQuestion.Id,
+            },
+        };
         cards.Add(card);
         open = card;
     }

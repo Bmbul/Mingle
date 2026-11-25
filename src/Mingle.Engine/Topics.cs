@@ -49,7 +49,7 @@ public static class TopicDeal
         var readable = decks
             .SelectMany(d => d.Cards)
             .DistinctBy(c => c.Id)
-            .Where(c => !c.Kind.BlitzOnly && languages.All(c.Supports))
+            .Where(c => c.Kind.IsQuestion && languages.All(c.Supports))
             .OrderBy(c => c.Id, StringComparer.Ordinal)
             .ToArray();
         random.Shuffle(readable);

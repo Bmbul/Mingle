@@ -169,6 +169,13 @@ namespace Mingle.DAL.Migrations
                             Audience = "FollowTurnStyle",
                             Code = "word",
                             ResponseType = "Free"
+                        },
+                        new
+                        {
+                            Id = (short)8,
+                            Audience = "Everyone",
+                            Code = "handoff",
+                            ResponseType = "PlayerVote"
                         });
                 });
 

@@ -289,4 +289,40 @@
   <data name="Story_Share" xml:space="preserve"><value>Share</value></data>
   <data name="Story_New" xml:space="preserve"><value>New story</value></data>
   <data name="Story_Copied" xml:space="preserve"><value>Story copied.</value></data>
+  <data name="Setup_Handoff" xml:space="preserve"><value>Give it to</value></data>
+  <data name="Setup_HandoffLine" xml:space="preserve"><value>Secretly give the phone to someone; they guess why</value></data>
+  <data name="Setup_HandoffExtras" xml:space="preserve"><value>Extras</value></data>
+  <data name="Setup_HandoffGuess" xml:space="preserve"><value>Guess why</value></data>
+  <data name="Setup_HandoffCoin" xml:space="preserve"><value>Coin flip</value></data>
+  <data name="Setup_HandoffExtrasHint" xml:space="preserve"><value>Guess why: the receiver picks the real reason out of three. Coin flip: the coin decides whether the reason is revealed or stays secret until the end.</value></data>
+  <data name="Setup_HandoffRounds" xml:space="preserve"><value>Passes</value></data>
+  <data name="Setup_NeedThree" xml:space="preserve"><value>Add at least 3 players with names.</value></data>
+  <data name="Handoff_NotStarted" xml:space="preserve"><value>Start “Give it to” from New game.</value></data>
+  <data name="Handoff_SecretFor" xml:space="preserve"><value>Secret card for</value></data>
+  <data name="Handoff_LookAway" xml:space="preserve"><value>Everyone else, look away!</value></data>
+  <data name="Handoff_Progress" xml:space="preserve"><value>Pass {0} of {1}</value></data>
+  <data name="Handoff_Show" xml:space="preserve"><value>Show my card</value></data>
+  <data name="Handoff_GiveTo" xml:space="preserve"><value>Give the phone to</value></data>
+  <data name="Handoff_Pick" xml:space="preserve"><value>Tap the name, then hand the phone over without a word.</value></data>
+  <data name="Handoff_HandTo" xml:space="preserve"><value>Hand the phone to</value></data>
+  <data name="Handoff_NoWord" xml:space="preserve"><value>Not a word about why!</value></data>
+  <data name="Handoff_GotIt" xml:space="preserve"><value>{0}: I've got the phone</value></data>
+  <data name="Handoff_WhyYou" xml:space="preserve"><value>Why did you get the phone?</value></data>
+  <data name="Handoff_GuessHint" xml:space="preserve"><value>Guess out loud, then tap your answer.</value></data>
+  <data name="Handoff_Right" xml:space="preserve"><value>Right!</value></data>
+  <data name="Handoff_Wrong" xml:space="preserve"><value>Not quite…</value></data>
+  <data name="Handoff_CoinRule" xml:space="preserve"><value>Heads: the reason comes out. Tails: it stays a secret.</value></data>
+  <data name="Handoff_Flip" xml:space="preserve"><value>Flip the coin</value></data>
+  <data name="Handoff_CardSaid" xml:space="preserve"><value>The card said</value></data>
+  <data name="Handoff_Secret" xml:space="preserve"><value>It stays a secret… until the end of the game.</value></data>
+  <data name="Handoff_Next" xml:space="preserve"><value>{0}, your secret card</value></data>
+  <data name="Handoff_SeeTrail" xml:space="preserve"><value>See who got the phone</value></data>
+  <data name="Handoff_Trail" xml:space="preserve"><value>Who got the phone</value></data>
+  <data name="Handoff_WasSecret" xml:space="preserve"><value>was a secret</value></data>
+  <data name="Handoff_Nobody" xml:space="preserve"><value>Never got the phone</value></data>
+  <data name="Handoff_RightGuesses" xml:space="preserve"><value>Guessed {0} of {1}</value></data>
+  <data name="Handoff_Again" xml:space="preserve"><value>Play again</value></data>
+  <data name="Kind_handoff" xml:space="preserve"><value>Give it to…</value></data>
+  <data name="Editor_Hint_handoff" xml:space="preserve"><value>the person who… (follows “Give the phone to”)</value></data>
+  <data name="Handoff_GuessLocked" xml:space="preserve"><value>Your guess is locked in.</value></data>
 </root>

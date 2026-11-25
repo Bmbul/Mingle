@@ -2,6 +2,7 @@
 @inject Text T
 @inject GameSession Session
 @inject BlitzSession Blitzes
+@inject HandoffSession HandoffGames
 @inject StorySession StorySessions
 @inject ContentService Content
 @inject NavigationManager Nav
@@ -52,21 +53,25 @@
             @if (!Online)
             {
                 <div class="seg grid2" role="group" aria-label="@T["Setup_OnePhone"]">
-                    <button class="@(!passThePhone && !blitz && !stories ? "on" : "")" aria-pressed="@(!passThePhone && !blitz && !stories ? "true" : "false")"
-                            title="@T["Setup_OutLoudDesc"]" @onclick="() => { passThePhone = false; blitz = false; stories = false; }">
+                    <button class="@(OutLoud ? "on" : "")" aria-pressed="@(OutLoud ? "true" : "false")"
+                            title="@T["Setup_OutLoudDesc"]" @onclick="@(() => PickMode(""))">
                         <Icon Name="speaker" Size="20" /><span>@T["Setup_OutLoud"]</span>
                     </button>
                     <button class="@(passThePhone ? "on" : "")" aria-pressed="@(passThePhone ? "true" : "false")"
-                            title="@T["Setup_PassPhoneDesc"]" @onclick="() => { passThePhone = true; blitz = false; stories = false; }">
+                            title="@T["Setup_PassPhoneDesc"]" @onclick="@(() => PickMode("pass"))">
                         <Icon Name="pass" Size="20" /><span>@T["Setup_PassPhoneShort"]</span>
                     </button>
                     <button class="@(blitz ? "on" : "")" aria-pressed="@(blitz ? "true" : "false")"
-                            @onclick="() => { blitz = true; passThePhone = false; stories = false; }">
+                            @onclick="@(() => PickMode("blitz"))">
                         <Icon Name="bolt" Size="20" /><span>@T["Setup_Blitz"]</span>
                     </button>
                     <button class="@(stories ? "on" : "")" aria-pressed="@(stories ? "true" : "false")"
-                            @onclick="() => { stories = true; passThePhone = false; blitz = false; }">
+                            @onclick="@(() => PickMode("stories"))">
                         <Icon Name="book" Size="20" /><span>@T["Setup_Stories"]</span>
+                    </button>
+                    <button class="wide @(handoff ? "on" : "")" aria-pressed="@(handoff ? "true" : "false")"
+                            @onclick="@(() => PickMode("handoff"))">
+                        <Icon Name="secret" Size="20" /><span>@T["Setup_Handoff"]</span>
                     </button>
                 </div>
             }
@@ -167,6 +172,18 @@
         </section>
     }
 
+    @if (handoff)
+    {
+        <section class="stack">
+            <h2 class="label">@T["Setup_HandoffExtras"]</h2>
+            <div class="chips">
+                <button class="chip @(handoffGuess ? "on" : "")" aria-pressed="@(handoffGuess ? "true" : "false")" @onclick="() => handoffGuess = !handoffGuess">@T["Setup_HandoffGuess"]</button>
+                <button class="chip @(handoffCoin ? "on" : "")" aria-pressed="@(handoffCoin ? "true" : "false")" @onclick="() => handoffCoin = !handoffCoin">@T["Setup_HandoffCoin"]</button>
+            </div>
+            <p class="muted small">@T["Setup_HandoffExtrasHint"]</p>
+        </section>
+    }
+
     @if (!PicksInLobby && !stories)
     {
     <section class="stack">
@@ -185,7 +202,7 @@
         }
     </section>
 
-    @if (!blitz)
+    @if (!blitz && !handoff)
     {
     <section class="stack">
         <h2 class="label">@T["Setup_Order"]</h2>
@@ -247,6 +264,23 @@
     private bool blitz;
     /// <summary>Fill-in stories: Blind (words first) or Live (read along); see Pages/StoryGame.razor.</summary>
     private bool stories;
+    /// <summary>"Give it to…": secretly hand the phone to someone, who guesses why; see Pages/HandoffGame.razor.</summary>
+    private bool handoff;
+    private bool handoffGuess = true;
+    private bool handoffCoin;
+
+    private bool OutLoud => !passThePhone && !blitz && !stories && !handoff;
+
+    private void PickMode(string which)
+    {
+        passThePhone = which == "pass";
+        blitz = which == "blitz";
+        stories = which == "stories";
+        handoff = which == "handoff";
+    }
+
+    /// <summary>The kind of deck the chosen game plays.</summary>
+    private DeckStyle ModeStyle => blitz ? DeckStyle.Blitz : handoff ? DeckStyle.Handoff : DeckStyle.Questions;
     private bool storyBlind = true;
     private bool storyLong;
     private string storyTheme = "random";
@@ -314,7 +348,7 @@
         get
         {
             var parts = new List<string>();
-            if (!Online) parts.Add(stories ? T["Setup_StoriesLine"] : blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
+            if (!Online) parts.Add(stories ? T["Setup_StoriesLine"] : handoff ? T["Setup_HandoffLine"] : blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
             if (Online || passThePhone)
             {
                 parts.Add(mode == AnswerMode.Written ? T["Setup_WriteLine"] : T["Setup_TalkLine"]);
@@ -329,23 +363,24 @@
 
     /// <summary>Cards in a deck everyone can read: blitz lists only blitz decks, other games only question decks.</summary>
     /// <remarks>Blitz shows each player cards in their own language, so a card counts if any player reads it.</remarks>
-    private int Readable(Deck deck) => deck.IsBlitz != blitz ? 0
+    private int Readable(Deck deck) => deck.Cards.IsEmpty || deck.Style != ModeStyle ? 0
         : blitz ? deck.Cards.Count(c => TableLanguages.Any(c.Supports))
+        : handoff ? deck.CountReadableBy(TableLanguages, CardKinds.OfStyle(DeckStyle.Handoff))
         : deck.CountReadableBy(TableLanguages);
 
-    private int MatchingCards => blitz
+    private int MatchingCards => blitz || handoff
         ? decks.Where(d => deckIds.Contains(d.Id)).Sum(Readable)
         :
         Game.BuildPool(decks.Where(d => deckIds.Contains(d.Id)), Settings, NamedPlayers.IsEmpty ? [new Player("x", "x", Text.UiLang)] : NamedPlayers).Length;
 
-    private int NeededPlayers => Online ? 1 : Game.MinPlayers;
+    private int NeededPlayers => Online ? 1 : handoff ? Handoffs.MinPlayers : Game.MinPlayers;
 
     private bool CanStart => NamedPlayers.Length >= NeededPlayers && (stories || (PicksInLobby ? !decks.IsEmpty : MatchingCards > 0));
 
     private string Summary =>
         loadFailed ? T["Setup_LoadFailed"]
         : createError is not null ? createError
-        : NamedPlayers.Length < NeededPlayers ? (Online ? T["Setup_NeedName"] : T["Setup_NeedPlayers"])
+        : NamedPlayers.Length < NeededPlayers ? (Online ? T["Setup_NeedName"] : handoff ? T["Setup_NeedThree"] : T["Setup_NeedPlayers"])
         : stories ? ""
         : PicksInLobby ? T[source == DeckSource.Topics ? "Setup_SourceTopicsSummary" : "Setup_SourceEveryoneSummary"]
         : deckIds.Count == 0 ? T["Setup_PickDeck"]
@@ -368,6 +403,12 @@
             {
                 StorySessions.Start(NamedPlayers.Select(p => p.Name), storyTheme, storyLong, storyBlind);
                 Nav.NavigateTo("story");
+                return;
+            }
+            if (handoff)
+            {
+                HandoffGames.Start(NamedPlayers, decks.Where(d => deckIds.Contains(d.Id)), handoffGuess, handoffCoin, cardCount);
+                Nav.NavigateTo("handoff");
                 return;
             }
             if (blitz)

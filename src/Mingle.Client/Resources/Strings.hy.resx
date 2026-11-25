@@ -289,4 +289,40 @@
   <data name="Story_Share" xml:space="preserve"><value>Կիսվել</value></data>
   <data name="Story_New" xml:space="preserve"><value>Նոր պատմություն</value></data>
   <data name="Story_Copied" xml:space="preserve"><value>Պատմությունը պատճենվեց։</value></data>
+  <data name="Setup_Handoff" xml:space="preserve"><value>Տուր նրան</value></data>
+  <data name="Setup_HandoffLine" xml:space="preserve"><value>Գաղտնի տուր հեռախոսը, ստացողը գուշակում է՝ ինչու</value></data>
+  <data name="Setup_HandoffExtras" xml:space="preserve"><value>Լրացուցիչ</value></data>
+  <data name="Setup_HandoffGuess" xml:space="preserve"><value>Գուշակիր՝ ինչու</value></data>
+  <data name="Setup_HandoffCoin" xml:space="preserve"><value>Մետաղադրամ</value></data>
+  <data name="Setup_HandoffExtrasHint" xml:space="preserve"><value>Գուշակիր՝ ինչու. ստացողը երեքից ընտրում է իսկական պատճառը։ Մետաղադրամ. մետաղադրամը որոշում է՝ պատճառը բացահայտել, թե պահել գաղտնի մինչև վերջ։</value></data>
+  <data name="Setup_HandoffRounds" xml:space="preserve"><value>Փոխանցումներ</value></data>
+  <data name="Setup_NeedThree" xml:space="preserve"><value>Ավելացրեք առնվազն 3 խաղացող՝ անուններով։</value></data>
+  <data name="Handoff_NotStarted" xml:space="preserve"><value>Սկսեք «Տուր նրան» խաղը «Նոր խաղ»-ից։</value></data>
+  <data name="Handoff_SecretFor" xml:space="preserve"><value>Գաղտնի քարտ՝</value></data>
+  <data name="Handoff_LookAway" xml:space="preserve"><value>Մյուսները, մի՛ նայեք</value></data>
+  <data name="Handoff_Progress" xml:space="preserve"><value>Փոխանցում {0}՝ {1}-ից</value></data>
+  <data name="Handoff_Show" xml:space="preserve"><value>Ցույց տալ իմ քարտը</value></data>
+  <data name="Handoff_GiveTo" xml:space="preserve"><value>Հեռախոսը տուր</value></data>
+  <data name="Handoff_Pick" xml:space="preserve"><value>Սեղմիր անունը և լուռ տուր հեռախոսը։</value></data>
+  <data name="Handoff_HandTo" xml:space="preserve"><value>Հեռախոսը տուր</value></data>
+  <data name="Handoff_NoWord" xml:space="preserve"><value>Ոչ մի բառ՝ ինչու</value></data>
+  <data name="Handoff_GotIt" xml:space="preserve"><value>{0}՝ հեռախոսն ինձ մոտ է</value></data>
+  <data name="Handoff_WhyYou" xml:space="preserve"><value>Ինչո՞ւ է հեռախոսը քեզ մոտ</value></data>
+  <data name="Handoff_GuessHint" xml:space="preserve"><value>Գուշակիր բարձրաձայն, հետո սեղմիր պատասխանը։</value></data>
+  <data name="Handoff_Right" xml:space="preserve"><value>Ճիշտ է</value></data>
+  <data name="Handoff_Wrong" xml:space="preserve"><value>Չգուշակեցիր…</value></data>
+  <data name="Handoff_CoinRule" xml:space="preserve"><value>Գիր՝ պատճառը բացվում է։ Զինանշան՝ մնում է գաղտնի։</value></data>
+  <data name="Handoff_Flip" xml:space="preserve"><value>Նետել մետաղադրամը</value></data>
+  <data name="Handoff_CardSaid" xml:space="preserve"><value>Քարտում գրված էր</value></data>
+  <data name="Handoff_Secret" xml:space="preserve"><value>Սա գաղտնի կմնա… մինչև խաղի ավարտը։</value></data>
+  <data name="Handoff_Next" xml:space="preserve"><value>{0}, քո գաղտնի քարտը</value></data>
+  <data name="Handoff_SeeTrail" xml:space="preserve"><value>Տեսնել՝ ում մոտ էր հեռախոսը</value></data>
+  <data name="Handoff_Trail" xml:space="preserve"><value>Ում մոտ էր հեռախոսը</value></data>
+  <data name="Handoff_WasSecret" xml:space="preserve"><value>գաղտնի էր</value></data>
+  <data name="Handoff_Nobody" xml:space="preserve"><value>Հեռախոսը չստացավ</value></data>
+  <data name="Handoff_RightGuesses" xml:space="preserve"><value>Գուշակել է {0}՝ {1}-ից</value></data>
+  <data name="Handoff_Again" xml:space="preserve"><value>Նորից խաղալ</value></data>
+  <data name="Kind_handoff" xml:space="preserve"><value>Տուր նրան, ով…</value></data>
+  <data name="Editor_Hint_handoff" xml:space="preserve"><value>նրան, ով… (շարունակում է «Հեռախոսը տուր»)</value></data>
+  <data name="Handoff_GuessLocked" xml:space="preserve"><value>Պատասխանդ ընդունված է։</value></data>
 </root>

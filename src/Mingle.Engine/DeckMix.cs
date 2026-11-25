@@ -25,7 +25,7 @@ public static class DeckMix
         foreach (var group in picks.GroupBy(d => d.Id, StringComparer.Ordinal).OrderBy(g => g.Key, StringComparer.Ordinal))
         {
             var readable = group.First().Cards
-                .Where(c => !c.Kind.BlitzOnly && languages.All(c.Supports) && !seen.Contains(c.Id))
+                .Where(c => c.Kind.IsQuestion && languages.All(c.Supports) && !seen.Contains(c.Id))
                 .DistinctBy(c => c.Id)
                 .OrderBy(c => c.Id, StringComparer.Ordinal)
                 .ToArray();

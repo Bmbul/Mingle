@@ -295,4 +295,40 @@
   <data name="Story_Share" xml:space="preserve"><value>Поделиться</value></data>
   <data name="Story_New" xml:space="preserve"><value>Новая история</value></data>
   <data name="Story_Copied" xml:space="preserve"><value>История скопирована.</value></data>
+  <data name="Setup_Handoff" xml:space="preserve"><value>Отдай тому</value></data>
+  <data name="Setup_HandoffLine" xml:space="preserve"><value>Тайно отдай телефон; получатель угадывает почему</value></data>
+  <data name="Setup_HandoffExtras" xml:space="preserve"><value>Дополнительно</value></data>
+  <data name="Setup_HandoffGuess" xml:space="preserve"><value>Угадай почему</value></data>
+  <data name="Setup_HandoffCoin" xml:space="preserve"><value>Монетка</value></data>
+  <data name="Setup_HandoffExtrasHint" xml:space="preserve"><value>Угадай почему: получатель выбирает настоящую причину из трёх. Монетка: монетка решает, раскрыть причину или держать в секрете до конца.</value></data>
+  <data name="Setup_HandoffRounds" xml:space="preserve"><value>Передач</value></data>
+  <data name="Setup_NeedThree" xml:space="preserve"><value>Добавьте хотя бы 3 игроков с именами.</value></data>
+  <data name="Handoff_NotStarted" xml:space="preserve"><value>Начните «Отдай тому» из «Новой игры».</value></data>
+  <data name="Handoff_SecretFor" xml:space="preserve"><value>Секретная карточка для</value></data>
+  <data name="Handoff_LookAway" xml:space="preserve"><value>Остальные, не подглядывайте!</value></data>
+  <data name="Handoff_Progress" xml:space="preserve"><value>Передача {0} из {1}</value></data>
+  <data name="Handoff_Show" xml:space="preserve"><value>Показать мою карточку</value></data>
+  <data name="Handoff_GiveTo" xml:space="preserve"><value>Отдай телефон</value></data>
+  <data name="Handoff_Pick" xml:space="preserve"><value>Нажми на имя и молча передай телефон.</value></data>
+  <data name="Handoff_HandTo" xml:space="preserve"><value>Передай телефон</value></data>
+  <data name="Handoff_NoWord" xml:space="preserve"><value>Ни слова о причине!</value></data>
+  <data name="Handoff_GotIt" xml:space="preserve"><value>{0}: телефон у меня</value></data>
+  <data name="Handoff_WhyYou" xml:space="preserve"><value>Почему телефон у тебя?</value></data>
+  <data name="Handoff_GuessHint" xml:space="preserve"><value>Угадай вслух, потом нажми ответ.</value></data>
+  <data name="Handoff_Right" xml:space="preserve"><value>В точку!</value></data>
+  <data name="Handoff_Wrong" xml:space="preserve"><value>Мимо…</value></data>
+  <data name="Handoff_CoinRule" xml:space="preserve"><value>Орёл — причина раскрывается. Решка — остаётся секретом.</value></data>
+  <data name="Handoff_Flip" xml:space="preserve"><value>Подбросить монетку</value></data>
+  <data name="Handoff_CardSaid" xml:space="preserve"><value>На карточке было</value></data>
+  <data name="Handoff_Secret" xml:space="preserve"><value>Это останется секретом… до конца игры.</value></data>
+  <data name="Handoff_Next" xml:space="preserve"><value>{0}, твоя секретная карточка</value></data>
+  <data name="Handoff_SeeTrail" xml:space="preserve"><value>Посмотреть, у кого был телефон</value></data>
+  <data name="Handoff_Trail" xml:space="preserve"><value>У кого был телефон</value></data>
+  <data name="Handoff_WasSecret" xml:space="preserve"><value>было секретом</value></data>
+  <data name="Handoff_Nobody" xml:space="preserve"><value>Телефон так и не попал</value></data>
+  <data name="Handoff_RightGuesses" xml:space="preserve"><value>Угадано {0} из {1}</value></data>
+  <data name="Handoff_Again" xml:space="preserve"><value>Ещё раз</value></data>
+  <data name="Kind_handoff" xml:space="preserve"><value>Отдай тому, кто…</value></data>
+  <data name="Editor_Hint_handoff" xml:space="preserve"><value>тому, кто… (продолжение «Отдай телефон»)</value></data>
+  <data name="Handoff_GuessLocked" xml:space="preserve"><value>Ответ принят.</value></data>
 </root>

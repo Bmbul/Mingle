@@ -56,8 +56,17 @@ public enum Audience
 /// <summary>The input a player actually uses for the current card, after the answer mode is applied.</summary>
 public enum InputMode { Spoken, Text, Choice, PlayerVote, Scale }
 
-/// <param name="BlitzOnly">Played only in blitz (associations): normal games, mixes and fallbacks leave it out.</param>
-public sealed record CardKind(string Id, ResponseType Response, Audience Audience, bool BlitzOnly = false);
+/// <summary>
+/// Which game a card belongs to. Question games play only question cards; blitz and "Give it to…" have their own
+/// cards and their own decks, and a deck never mixes styles.
+/// </summary>
+public enum DeckStyle { Questions, Blitz, Handoff }
+
+/// <param name="Style">The game the kind belongs to: normal games, mixes and fallbacks use only question kinds.</param>
+public sealed record CardKind(string Id, ResponseType Response, Audience Audience, DeckStyle Style = DeckStyle.Questions)
+{
+    public bool IsQuestion => Style == DeckStyle.Questions;
+}
 
 public static class CardKinds
 {
@@ -68,16 +77,21 @@ public static class CardKinds
     public static readonly CardKind GuessMyAnswer = new("guess", ResponseType.Free, Audience.AboutTurnPlayer);
     public static readonly CardKind RateIt = new("rate", ResponseType.Scale, Audience.FollowTurnStyle);
     /// <summary>A single word or short phrase; the player says the first word it brings to mind.</summary>
-    public static readonly CardKind Association = new("word", ResponseType.Free, Audience.FollowTurnStyle, BlitzOnly: true);
+    public static readonly CardKind Association = new("word", ResponseType.Free, Audience.FollowTurnStyle, DeckStyle.Blitz);
+    /// <summary>"Give the phone to…": who it describes, written to follow those words ("the best cook here").</summary>
+    public static readonly CardKind Handoff = new("handoff", ResponseType.PlayerVote, Audience.Everyone, DeckStyle.Handoff);
 
     public static ImmutableArray<CardKind> All { get; } =
-        [OpenQuestion, FinishSentence, WouldYouRather, MostLikelyTo, GuessMyAnswer, RateIt, Association];
+        [OpenQuestion, FinishSentence, WouldYouRather, MostLikelyTo, GuessMyAnswer, RateIt, Association, Handoff];
 
     /// <summary>The kinds normal games play.</summary>
-    public static ImmutableArray<CardKind> Regular { get; } = [.. All.Where(k => !k.BlitzOnly)];
+    public static ImmutableArray<CardKind> Regular { get; } = [.. All.Where(k => k.IsQuestion)];
 
     /// <summary>The kinds blitz plays: quick, one-word answers. Blitz decks hold only these; question decks never do.</summary>
-    public static ImmutableArray<CardKind> Blitz { get; } = [.. All.Where(k => k.BlitzOnly)];
+    public static ImmutableArray<CardKind> Blitz { get; } = [.. All.Where(k => k.Style == DeckStyle.Blitz)];
+
+    /// <summary>The kinds of one style, e.g. what a card in a blitz deck may be.</summary>
+    public static ImmutableArray<CardKind> OfStyle(DeckStyle style) => [.. All.Where(k => k.Style == style)];
 
     private static readonly ImmutableDictionary<string, CardKind> ById = All.ToImmutableDictionary(k => k.Id);
 
@@ -117,11 +131,14 @@ public sealed record Deck(string Id, ImmutableDictionary<Lang, string> Names, Im
         : Names.TryGetValue(Lang.En, out var en) ? en
         : Names.Values.FirstOrDefault() ?? Id;
 
-    /// <summary>A blitz deck: its cards are all blitz cards. A deck is either blitz or questions, never both.</summary>
-    public bool IsBlitz => !Cards.IsEmpty && Cards.All(c => c.Kind.BlitzOnly);
+    /// <summary>The game this deck is for, from its cards (an empty deck counts as questions).</summary>
+    public DeckStyle Style => Cards.IsEmpty ? DeckStyle.Questions : Cards[0].Kind.Style;
 
-    /// <summary>True when blitz cards and question cards are mixed in one deck, which is not allowed.</summary>
-    public bool MixesBlitzAndQuestions => Cards.Any(c => c.Kind.BlitzOnly) && Cards.Any(c => !c.Kind.BlitzOnly);
+    /// <summary>A blitz deck: its cards are all blitz cards.</summary>
+    public bool IsBlitz => !Cards.IsEmpty && Style == DeckStyle.Blitz;
+
+    /// <summary>True when one deck mixes cards of different games (blitz, questions, "Give it to…"), which is not allowed.</summary>
+    public bool MixesStyles => Cards.Select(c => c.Kind.Style).Distinct().Skip(1).Any();
 
     /// <summary>How many cards everyone reading these languages can play (a card needs all of them).</summary>
     public int CountReadableBy(IReadOnlyCollection<Lang> languages) => CountReadableBy(languages, CardKinds.Regular);
