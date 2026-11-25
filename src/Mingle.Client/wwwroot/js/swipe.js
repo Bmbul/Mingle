@@ -49,7 +49,8 @@
             row.classList.add('swiping');
             try { row.setPointerCapture(pointerId); } catch { }
         }
-        const limit = -(actionsWidth(row) + 40);
+        // The card stops where the buttons end, so no gap ever opens between them.
+        const limit = -actionsWidth(row);
         dx = Math.max(limit, Math.min(0, startOffset + mx));
         content.style.transform = `translateX(${dx}px)`;
     });
