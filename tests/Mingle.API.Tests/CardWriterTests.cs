@@ -164,7 +164,7 @@ public class CardWriterTests
         Assert.Equal(["I miss…", "My secret talent is…"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
         Assert.Contains("\"word\"", JsonSerializer.Serialize(CardPrompt.Schema(words)));
         Assert.DoesNotContain("\"word\"", JsonSerializer.Serialize(CardPrompt.Schema(Request)));
-        Assert.Contains("sentence starters", CardPrompt.UserMessage(words));
+        Assert.Contains("sentence starter", CardPrompt.UserMessage(words));
     }
 
     [Fact]
@@ -182,5 +182,25 @@ public class CardWriterTests
         Assert.Equal("նրան, ով ամենալավն է ճաշ եփում", cards[0].Texts[Lang.Hy].Text);
         Assert.Contains("\"handoff\"", JsonSerializer.Serialize(CardPrompt.Schema(handoff)));
         Assert.Contains("Give the phone to", CardPrompt.UserMessage(handoff));
+    }
+
+    [Fact]
+    public void Blitz_formats_follow_the_chosen_kinds()
+    {
+        var both = CardRequest.ForDeck([TestTopics.All[0]], null, null, null, [Lang.En, Lang.Hy], 10, DeckStyle.Blitz, ["name3", "letter", "open"]);
+        object Card(string kind, string en, string hy) => new { kind, depth = 1, topic = "topic-01", text = new { en, hy }, options = new { } };
+
+        var cards = CardParser.Parse(Json(
+            Card("name3", "Name 3 Armenian dishes", "Անվանիր 3 հայկական ուտեստ"),
+            Card("name3", "Name some dishes", "Անվանիր ուտեստներ"),          // no "3"
+            Card("letter", "Fruit:", "Միրգ"),                                  // the colon is trimmed
+            Card("letter", "Which fruit starts with K?", "Ո՞ր միրգը"),         // a question
+            Card("word", "I miss…", "Կարոտում եմ…")), both);                    // not a chosen format
+
+        Assert.Equal(["name3", "letter"], both.AllowedKinds);
+        Assert.Equal(["Name 3 Armenian dishes", "Fruit"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
+        Assert.Contains("name3", CardPrompt.UserMessage(both));
+        Assert.DoesNotContain("- word:", CardPrompt.UserMessage(both));
+        Assert.Equal(CardPrompt.BlitzKinds, CardRequest.ForDeck([TestTopics.All[0]], null, null, null, [Lang.En], 10, DeckStyle.Blitz).AllowedKinds);
     }
 }

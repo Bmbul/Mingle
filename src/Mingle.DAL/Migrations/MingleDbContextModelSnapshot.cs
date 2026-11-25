@@ -179,6 +179,20 @@ namespace Mingle.DAL.Migrations
                         },
                         new
                         {
+                            Id = (short)10,
+                            Audience = "FollowTurnStyle",
+                            Code = "name3",
+                            ResponseType = "Free"
+                        },
+                        new
+                        {
+                            Id = (short)11,
+                            Audience = "FollowTurnStyle",
+                            Code = "letter",
+                            ResponseType = "Free"
+                        },
+                        new
+                        {
                             Id = (short)8,
                             Audience = "Everyone",
                             Code = "handoff",

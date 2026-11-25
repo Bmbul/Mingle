@@ -91,11 +91,16 @@ public static class CardKinds
         }.ToImmutableDictionary());
     /// <summary>A single word or short phrase; the player says the first word it brings to mind.</summary>
     public static readonly CardKind Association = new("word", ResponseType.Free, Audience.FollowTurnStyle, DeckStyle.Blitz);
+    /// <summary>Blitz: "Name 3 Armenian dishes", the card holding the whole challenge.</summary>
+    public static readonly CardKind NameThree = new("name3", ResponseType.Free, Audience.FollowTurnStyle, DeckStyle.Blitz);
+    /// <summary>Blitz: a category ("Fruit"); the app draws a letter each time ("Fruit: K").</summary>
+    public static readonly CardKind LetterCategory = new("letter", ResponseType.Free, Audience.FollowTurnStyle, DeckStyle.Blitz);
     /// <summary>"Give the phone to…": who it describes, written to follow those words ("the best cook here").</summary>
     public static readonly CardKind Handoff = new("handoff", ResponseType.PlayerVote, Audience.Everyone, DeckStyle.Handoff);
 
     public static ImmutableArray<CardKind> All { get; } =
-        [OpenQuestion, FinishSentence, WouldYouRather, MostLikelyTo, GuessMyAnswer, RateIt, CringeOrFine, Association, Handoff];
+        [OpenQuestion, FinishSentence, WouldYouRather, MostLikelyTo, GuessMyAnswer, RateIt, CringeOrFine,
+         Association, NameThree, LetterCategory, Handoff];
 
     /// <summary>The kinds normal games play.</summary>
     public static ImmutableArray<CardKind> Regular { get; } = [.. All.Where(k => k.IsQuestion)];

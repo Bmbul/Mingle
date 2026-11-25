@@ -81,13 +81,18 @@ public sealed record CardRequest(
             chosen.Length is 0 or 3 ? [] : chosen,
             setting is not null && Settings.ContainsKey(setting) ? setting : null,
             style,
-            Kinds: style == DeckStyle.Questions ? [.. (kinds ?? []).Where(CardPrompt.Kinds.Contains).Distinct()] : []);
+            Kinds: style switch
+            {
+                DeckStyle.Questions => [.. (kinds ?? []).Where(CardPrompt.Kinds.Contains).Distinct()],
+                DeckStyle.Blitz => [.. (kinds ?? []).Where(CardPrompt.BlitzKinds.Contains).Distinct()],
+                _ => [],
+            });
     }
 
     /// <summary>The card kinds this request may produce: the normal kinds, or the one kind of a blitz or "Give it to…" deck.</summary>
     public string[] AllowedKinds => Style switch
     {
-        DeckStyle.Blitz => [CardKinds.Association.Id],
+        DeckStyle.Blitz => Kinds.IsDefaultOrEmpty ? CardPrompt.BlitzKinds : [.. Kinds],
         DeckStyle.Handoff => [CardKinds.Handoff.Id],
         _ => Kinds.IsDefaultOrEmpty ? CardPrompt.Kinds : [.. Kinds],
     };

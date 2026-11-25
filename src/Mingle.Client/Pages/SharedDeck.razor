@@ -9,6 +9,10 @@
 
 <header class="top">
     <a class="icon" href="decks" aria-label="@T["Common_Back"]"><Icon Name="back" /></a>
+    @if (deck is not null)
+    {
+        <DeckBadge Style="deck.Style" />
+    }
     <h1 class="h1">@(deck?.NameFor(Text.UiLang) ?? "")</h1>
 </header>
 
@@ -46,8 +50,8 @@
         }
         @if (saved)
         {
-            <button class="btn2" @onclick="Share">@T["Decks_Share"]</button>
-            <a class="btn" href="decks">@T["Decks_Title"]</a>
+            @* The back arrow already leads to My decks. *@
+            <button class="btn" @onclick="Share">@T["Decks_Share"]</button>
         }
         else
         {

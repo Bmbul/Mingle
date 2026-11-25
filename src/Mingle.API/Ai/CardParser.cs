@@ -78,6 +78,18 @@ public static class CardParser
             {
                 if (Str(text, lang.Code()) is not { } value || !Clean(value, MaxTextLength)) return null;
                 var tidy = Tidy(value);
+                if (kind == CardKinds.NameThree.Id)
+                {
+                    // "Name 3 …": the number must be there, and it is a task, not a question.
+                    tidy = tidy.TrimEnd('.', '։', '!');
+                    if (!tidy.Contains('3') || tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 90) return null;
+                }
+                if (kind == CardKinds.LetterCategory.Id)
+                {
+                    // Just a category; the game adds the letter.
+                    tidy = tidy.TrimEnd('.', '։', '!', ':');
+                    if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length > 5) return null;
+                }
                 if (kind == CardKinds.Association.Id)
                 {
                     // A sentence starter ending in "…": no question, nothing long.
@@ -92,7 +104,7 @@ public static class CardParser
                     if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 100) return null;
                 }
                 // Every kind but "finish the sentence", associations, "Give it to…" and "cringe or fine" is a question.
-                if (lang == Lang.Hy && kind is not ("finish" or "word" or "handoff" or "cringe")) tidy = ArmenianQuestions.Fix(tidy);
+                if (lang == Lang.Hy && kind is not ("finish" or "word" or "name3" or "letter" or "handoff" or "cringe")) tidy = ArmenianQuestions.Fix(tidy);
                 texts[lang] = new CardText(tidy);
             }
         }

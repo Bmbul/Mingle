@@ -85,7 +85,8 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
         if (codes.Count > CardRequest.MaxTopics) return BadRequest(new { error = $"Pick up to {CardRequest.MaxTopics} topics." });
         if (request.Setting is { } setting && !CardRequest.Settings.ContainsKey(setting)) return BadRequest(new { error = "Unknown setting." });
         if ((request.Depths ?? []).Any(d => d is < 1 or > 3)) return BadRequest(new { error = "Depth is 1, 2 or 3." });
-        if ((request.Kinds ?? []).Any(k => !CardPrompt.Kinds.Contains(k))) return BadRequest(new { error = "Unknown card kind." });
+        var validKinds = style == DeckStyle.Blitz ? CardPrompt.BlitzKinds : CardPrompt.Kinds;
+        if ((request.Kinds ?? []).Any(k => !validKinds.Contains(k))) return BadRequest(new { error = "Unknown card kind." });
         var languages = new List<Lang>();
         foreach (var code in request.Languages ?? [])
         {

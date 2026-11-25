@@ -206,6 +206,7 @@
             var on = deckIds.Contains(deck.Id);
             <button class="check-row @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" @onclick="() => Toggle(deckIds, deck.Id)">
                 <span class="box @(on ? "on" : "")" aria-hidden="true">@if (on) { <Icon Name="check" Size="14" Stroke="3" /> }</span>
+                <DeckBadge Style="deck.Style" />
                 <span class="grow">
                     <span class="row-title">@deck.NameFor(Text.UiLang)</span>
                     <span class="muted small">@T.Plural("Cards", Readable(deck))</span>

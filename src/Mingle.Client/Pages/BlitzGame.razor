@@ -59,7 +59,7 @@ else if (stage == Stage.Running && card is { } current)
     @* The card's own timer: a bar around the screen that starts full at the top and shrinks back to the top. *@
     <svg class="edge-timer" viewBox="0 0 @W @H" preserveAspectRatio="none" aria-hidden="true">
         <path class="track" d="@EdgePath" />
-        <path class="bar" @key="cardNumber" d="@EdgePath" pathLength="100" style="animation-duration: @(Blitz.CardSeconds)s" />
+        <path class="bar" @key="cardNumber" d="@EdgePath" pathLength="100" style="animation-duration: @(Blitz.SecondsFor(current.Kind))s" />
     </svg>
     <header class="top spread">
         <span class="muted">@Game.Current!.Name</span>
@@ -67,7 +67,11 @@ else if (stage == Stage.Running && card is { } current)
     </header>
     <main class="main center-screen">
         <p class="blitz-card" lang="@Game.Current!.Lang.Code()">@CardText(current)</p>
-        <p class="blitz-hint">@T["Blitz_HintFinish"]</p>
+        @if (letter is not null)
+        {
+            <p class="blitz-letter" lang="@Game.Current!.Lang.Code()">@letter</p>
+        }
+        <p class="blitz-hint">@T[$"Blitz_Hint_{current.KindId}"]</p>
         <p class="muted small">@T["Blitz_Answered", answered]</p>
     </main>
     <footer class="foot">
@@ -85,6 +89,7 @@ else if (stage == Stage.Running && card is { } current)
     private int countdown;
     private Card? card;
     private int cardNumber;
+    private string? letter;
     private int answered;
     private int missed;
     private DateTime turnEnds;
@@ -113,8 +118,6 @@ else if (stage == Stage.Running && card is { } current)
     }
 
     private string TurnLeft => Math.Max(0, (int)Math.Ceiling((turnEnds - DateTime.UtcNow).TotalSeconds)).ToString();
-
-    /// <summary>"Սիրում եմ…" or "Արևա…": the player finishes it instead of saying an association.</summary>
 
     private string CardText(Card c)
     {
@@ -151,7 +154,8 @@ else if (stage == Stage.Running && card is { } current)
     {
         card = Game.NextCard();
         cardNumber++;
-        cardEnds = DateTime.UtcNow.AddSeconds(Blitz.CardSeconds);
+        letter = card?.Kind == CardKinds.LetterCategory ? Game.LetterFor(Game.Current!.Lang) : null;
+        cardEnds = DateTime.UtcNow.AddSeconds(card is null ? Blitz.CardSeconds : Blitz.SecondsFor(card.Kind));
     }
 
     private void Answered()

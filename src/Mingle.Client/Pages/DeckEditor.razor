@@ -161,7 +161,19 @@
         {
         @if (Style == DeckStyle.Blitz)
         {
-            <p class="muted small">@T["Editor_BlitzAiHint"]</p>
+            <section class="stack">
+                <h2 class="label">@T["Editor_AiFormats"]</h2>
+                <div class="chips" role="group" aria-label="@T["Editor_AiFormats"]">
+                    @foreach (var kind in CardKinds.Blitz)
+                    {
+                        var k = kind.Id;
+                        var on = blitzKinds.Contains(k);
+                        <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@(writing || (on && blitzKinds.Count == 1))"
+                                @onclick="() => { if (!blitzKinds.Remove(k)) blitzKinds.Add(k); }">@T.KindName(k)</button>
+                    }
+                </div>
+                <p class="muted small">@T["Editor_BlitzAiHint"]</p>
+            </section>
         }
         @if (Style == DeckStyle.Handoff)
         {
@@ -437,6 +449,7 @@
     private readonly HashSet<string> pickedTopics = [];
     private readonly HashSet<int> depths = [1, 2, 3];
     private readonly HashSet<string> kinds = [.. CardKinds.Regular.Select(k => k.Id)];
+    private readonly HashSet<string> blitzKinds = [.. CardKinds.Blitz.Select(k => k.Id)];
     private readonly HashSet<Lang> languages = [Text.UiLang];
     private string setting = "couple";
     /// <summary>The game picked for a new, still empty deck.</summary>
@@ -589,7 +602,7 @@
         aiNote = null;
         try
         {
-            var (written, problem) = await Content.WriteCardsAsync([.. pickedTopics], theme.Trim(), [.. depths], setting, [.. languages], CardLimits.PerWrite, Style, [.. moods], [.. kinds]);
+            var (written, problem) = await Content.WriteCardsAsync([.. pickedTopics], theme.Trim(), [.. depths], setting, [.. languages], CardLimits.PerWrite, Style, [.. moods], Style == DeckStyle.Blitz ? [.. blitzKinds] : [.. kinds]);
             if (problem is not null)
             {
                 aiNote = problem == "429" ? T["Editor_TooMany"] : T["Editor_AiFailed"];

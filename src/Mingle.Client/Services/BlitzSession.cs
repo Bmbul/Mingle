@@ -41,6 +41,13 @@ public sealed class BlitzSession
     /// <summary>The next card for the player in the hot seat, in their language.</summary>
     public Card? NextCard() => Current is { } player ? Blitz.Next(pools[player.Lang], seen, random) : null;
 
+    /// <summary>A random letter for a "category with a letter" card, in the player's alphabet.</summary>
+    public string LetterFor(Lang lang)
+    {
+        var letters = Blitz.Letters(lang);
+        return letters[random.Next(letters.Length)];
+    }
+
     public void EndTurn(int answered, int missed)
     {
         if (Current is { } player) Scores[player.Id] = (answered, missed);

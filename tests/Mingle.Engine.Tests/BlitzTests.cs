@@ -60,4 +60,13 @@ public class BlitzTests
         Assert.True(Deck(Word("a"), Card("q", CardKinds.OpenQuestion)).MixesStyles);
         Assert.False(Deck(Word("a")).MixesStyles);
     }
+
+    [Fact]
+    public void Name_three_gets_more_time_and_every_language_has_letters()
+    {
+        Assert.Equal(8, Blitz.SecondsFor(CardKinds.NameThree));
+        Assert.Equal(Blitz.CardSeconds, Blitz.SecondsFor(CardKinds.Association));
+        Assert.All(Langs.All, l => Assert.True(Blitz.Letters(l).Length >= 20));
+        Assert.Contains(CardKinds.LetterCategory, CardKinds.Blitz);
+    }
 }

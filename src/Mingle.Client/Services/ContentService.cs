@@ -145,7 +145,7 @@ public sealed class ContentService(HttpClient http, IJSRuntime js, DeviceDeckSto
             ["count"] = count,
             ["style"] = style switch { DeckStyle.Blitz => "associations", DeckStyle.Handoff => "handoff", _ => "questions" },
             ["moods"] = new System.Text.Json.Nodes.JsonArray([.. (moods ?? []).Select(m => (System.Text.Json.Nodes.JsonNode?)m)]),
-            ["kinds"] = new System.Text.Json.Nodes.JsonArray([.. (style == DeckStyle.Questions ? kinds ?? [] : []).Select(k => (System.Text.Json.Nodes.JsonNode?)k)]),
+            ["kinds"] = new System.Text.Json.Nodes.JsonArray([.. (style is DeckStyle.Questions or DeckStyle.Blitz ? kinds ?? [] : []).Select(k => (System.Text.Json.Nodes.JsonNode?)k)]),
         };
         var body = request.ToJsonString();
         using var response = await http.PostAsync("api/decks/write", new StringContent(body, Encoding.UTF8, new MediaTypeHeaderValue("application/json")));

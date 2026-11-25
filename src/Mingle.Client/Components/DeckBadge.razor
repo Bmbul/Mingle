@@ -1,0 +1,18 @@
+@inject Text T
+
+@* Which game a deck is for, at a glance: questions, blitz or "Give it to…". *@
+<span class="deck-badge @Style.ToString().ToLowerInvariant()" role="img" aria-label="@T[$"Editor_Game_{Style}"]" title="@T[$"Editor_Game_{Style}"]">
+    <Icon Name="@IconName" Size="@Size" />
+</span>
+
+@code {
+    [Parameter] public DeckStyle Style { get; set; }
+    [Parameter] public int Size { get; set; } = 18;
+
+    private string IconName => Style switch
+    {
+        DeckStyle.Blitz => "bolt",
+        DeckStyle.Handoff => "secret",
+        _ => "chat",
+    };
+}

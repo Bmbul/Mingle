@@ -417,6 +417,7 @@ a.check-row { text-decoration: none; color: inherit; }
 .blitz-card { font-size: 44px; font-weight: 800; text-align: center; margin: 0; line-height: 1.15; overflow-wrap: anywhere; }
 .blitz-clock { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; }
 .blitz-score { flex-direction: row; align-items: center; }
+.blitz-letter { font-size: 72px; font-weight: 800; line-height: 1; color: var(--accent); margin: 4px 0 0; }
 .blitz-count { font-size: 28px; font-weight: 800; color: var(--accent); }
 .btn.blitz-yes { min-height: 64px; font-size: 20px; }
 /* .grow stacks its children; a growing button keeps its icon beside the label. */
@@ -494,3 +495,9 @@ a.check-row { text-decoration: none; color: inherit; }
     .coin3d, .coin-shadow { animation: none !important; }
     .coin3d.toss-tails { transform: rotateX(180deg); }
 }
+
+/* Deck badges: which game a deck is for. */
+.deck-badge { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center;
+    background: var(--accent-soft); color: var(--accent-soft-text); }
+.deck-badge.blitz { background: rgba(255, 196, 77, 0.16); color: #ffc44d; }
+.deck-badge.handoff { background: rgba(160, 140, 255, 0.16); color: #b9adff; }

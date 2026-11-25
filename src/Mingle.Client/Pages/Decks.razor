@@ -49,6 +49,10 @@
                         }
                     </div>
                     <a class="check-row swipe-content" href="d/@e.Id" draggable="false">
+                        @if (deck is not null)
+                        {
+                            <DeckBadge Style="deck.Style" />
+                        }
                         <span class="grow">
                             <span class="row-title">@name</span>
                             <span class="muted small">

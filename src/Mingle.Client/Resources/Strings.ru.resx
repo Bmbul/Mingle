@@ -249,12 +249,12 @@
   <data name="TopicGroup_relationships" xml:space="preserve"><value>Отношения</value></data>
   <data name="TopicGroup_fun" xml:space="preserve"><value>Весёлое</value></data>
   <data name="Setup_Blitz" xml:space="preserve"><value>Блиц</value></data>
-  <data name="Setup_BlitzLine" xml:space="preserve"><value>по {0} секунд каждому — закончить как можно больше фраз</value></data>
+  <data name="Setup_BlitzLine" xml:space="preserve"><value>по {0} секунд каждому: закончить фразу, назвать три, найти слово</value></data>
   <data name="Blitz_NotStarted" xml:space="preserve"><value>Начните блиц через «Новая игра».</value></data>
   <data name="Blitz_Results" xml:space="preserve"><value>Результаты</value></data>
   <data name="Blitz_Again" xml:space="preserve"><value>Сыграть ещё</value></data>
   <data name="Blitz_TurnOf" xml:space="preserve"><value>Сейчас играет</value></data>
-  <data name="Blitz_Rules" xml:space="preserve"><value>{0} секунд. Заканчивай каждую фразу — быстро и честно. Кто-то другой нажимает ✓.</value></data>
+  <data name="Blitz_Rules" xml:space="preserve"><value>{0} секунд. Отвечай на каждую карточку как можно быстрее. Кто-то другой нажимает ✓.</value></data>
   <data name="Blitz_LastTurn" xml:space="preserve"><value>{0}: {1} ответов</value></data>
   <data name="Blitz_Go" xml:space="preserve"><value>Поехали!</value></data>
   <data name="Blitz_Answered" xml:space="preserve"><value>Ответов: {0}</value></data>
@@ -262,7 +262,6 @@
   <data name="Blitz_Got" xml:space="preserve"><value>Есть</value></data>
   <data name="Kind_word" xml:space="preserve"><value>Закончи быстро</value></data>
   <data name="Editor_Hint_word" xml:space="preserve"><value>Фраза, которую надо закончить за 5 секунд: «Я боюсь…»</value></data>
-  <data name="Blitz_HintFinish" xml:space="preserve"><value>Продолжи!</value></data>
   <data name="Setup_Stories" xml:space="preserve"><value>Истории</value></data>
   <data name="Setup_StoriesLine" xml:space="preserve"><value>Смешная история с пропущенными словами</value></data>
   <data name="Story_Style" xml:space="preserve"><value>Как играть</value></data>
@@ -353,5 +352,13 @@
   <data name="Editor_AiKinds" xml:space="preserve"><value>Типы карточек</value></data>
   <data name="Kind_cringe" xml:space="preserve"><value>Стрём или норм</value></data>
   <data name="Editor_Hint_cringe" xml:space="preserve"><value>Ситуация, которую все оценивают: стрём или норм…</value></data>
-  <data name="Editor_BlitzAiHint" xml:space="preserve"><value>Карточки будут фразами, которые надо закончить за пять секунд, например «Я боюсь…» или «Родители не знают, что…».</value></data>
+  <data name="Editor_BlitzAiHint" xml:space="preserve"><value>Закончить фразу за пять секунд, назвать три вещи или найти слово на выпавшую букву.</value></data>
+  <data name="Blitz_Hint_word" xml:space="preserve"><value>Продолжи!</value></data>
+  <data name="Blitz_Hint_name3" xml:space="preserve"><value>Все три, быстро!</value></data>
+  <data name="Blitz_Hint_letter" xml:space="preserve"><value>Одно слово на эту букву</value></data>
+  <data name="Kind_name3" xml:space="preserve"><value>Назови 3</value></data>
+  <data name="Kind_letter" xml:space="preserve"><value>Категория + буква</value></data>
+  <data name="Editor_Hint_name3" xml:space="preserve"><value>Назови 3 армянских блюда</value></data>
+  <data name="Editor_Hint_letter" xml:space="preserve"><value>Категория, например «Фрукт»; игра добавит букву</value></data>
+  <data name="Editor_AiFormats" xml:space="preserve"><value>Форматы</value></data>
 </root>
