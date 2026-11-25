@@ -344,4 +344,5 @@
   <data name="Setup_HandoffAloudLine" xml:space="preserve"><value>Կարդա բարձրաձայն և տուր հեռախոսը նրան, ով համապատասխանում է</value></data>
   <data name="Handoff_Heads" xml:space="preserve"><value>Բացել</value></data>
   <data name="Handoff_Tails" xml:space="preserve"><value>Գաղտնի</value></data>
+  <data name="Setup_PlayerN" xml:space="preserve"><value>Խաղացող {0}</value></data>
 </root>

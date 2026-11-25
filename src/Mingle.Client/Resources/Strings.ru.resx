@@ -350,4 +350,5 @@
   <data name="Setup_HandoffAloudLine" xml:space="preserve"><value>Прочитай вслух и отдай телефон тому, кто подходит</value></data>
   <data name="Handoff_Heads" xml:space="preserve"><value>Открыть</value></data>
   <data name="Handoff_Tails" xml:space="preserve"><value>Секрет</value></data>
+  <data name="Setup_PlayerN" xml:space="preserve"><value>Игрок {0}</value></data>
 </root>

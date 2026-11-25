@@ -196,8 +196,8 @@ public static class ArmenianNames
         if (name.EndsWith("ու", StringComparison.Ordinal)) endsInVowel = true;
         var glide = last is 'ա' or 'ո' or 'օ' or 'a' or 'o' || (endsInVowel && last is not ('ի' or 'i' or 'ւ' or 'ե' or 'e' or 'է'));
 
-        // A name in Latin letters takes its Armenian ending after a hyphen: «Ani-ն».
-        var join = name.Any(ch => ch is >= 'Ա' and <= 'ֆ') ? "" : "-";
+        // A name in Latin letters, or one ending in a number, takes its Armenian ending after a hyphen: «Ani-ն», «Խաղացող 2-ը».
+        var join = name.Any(ch => ch is >= 'Ա' and <= 'ֆ') && !char.IsDigit(last) ? "" : "-";
         // A word ending in «ու» turns it into «վ» before -ի, -ին, -ից, -ով: կատու → կատվի, մեղու → մեղվին.
         if (join.Length == 0 && name.Length > 2 && name.EndsWith("ու", StringComparison.Ordinal) && ending is "ի" or "ին" or "ից" or "ով")
             return name[..^2] + "վ" + ending;

@@ -23,7 +23,8 @@
         {
             <div class="player-row">
                 <label class="visually-hidden" for="name-@row.Id">@T["Setup_PlayerName"]</label>
-                <input id="name-@row.Id" class="field" placeholder="@T["Setup_PlayerName"]" maxlength="24"
+                @* On one phone an empty name is fine: the placeholder ("Player 2") is used instead. *@
+                <input id="name-@row.Id" class="field" placeholder="@(Online ? T["Setup_PlayerName"] : DefaultName(row))" maxlength="24"
                        autocomplete="off" @bind="row.Name" @bind:event="oninput" />
                 @if (!Online)
                 {
@@ -290,6 +291,8 @@
         blitz = which == "blitz";
         stories = which == "stories";
         handoff = which == "handoff";
+        // "Give it to…" needs three players; add the rows so the placeholders can play.
+        while (handoff && players.Count < Handoffs.MinPlayers) players.Add(new PlayerRow());
     }
 
     /// <summary>The kind of deck the chosen game plays.</summary>
@@ -323,7 +326,8 @@
 
         if (Session.LastSetup is { } last)
         {
-            players = last.Players.Select(p => new PlayerRow { Name = p.Name, Lang = p.Lang }).ToList();
+            // A placeholder name from last time ("Player 2") stays a placeholder, not a typed name.
+            players = last.Players.Select((p, i) => new PlayerRow { Name = p.Name == T["Setup_PlayerN", i + 1] ? "" : p.Name, Lang = p.Lang }).ToList();
             deckIds = last.DeckIds.Where(id => decks.Any(d => d.Id == id)).ToHashSet();
             mode = last.Settings.AnswerMode == AnswerMode.OutLoud ? AnswerMode.Written : last.Settings.AnswerMode;
             turnStyle = last.Settings.TurnStyle;
@@ -340,10 +344,15 @@
             players[0].Name = savedName;
     }
 
-    private ImmutableArray<Player> NamedPlayers =>
-        players.Where(p => !string.IsNullOrWhiteSpace(p.Name))
-               .Select(p => new Player(p.Id, p.Name.Trim(), p.Lang))
-               .ToImmutableArray();
+    /// <summary>
+    /// The players: online, only a typed name counts (others see it); on one phone an empty row plays under its
+    /// placeholder name, so nobody has to type names to start.
+    /// </summary>
+    private ImmutableArray<Player> NamedPlayers => Online
+        ? [.. players.Where(p => !string.IsNullOrWhiteSpace(p.Name)).Select(p => new Player(p.Id, p.Name.Trim(), p.Lang))]
+        : [.. players.Select(p => new Player(p.Id, string.IsNullOrWhiteSpace(p.Name) ? DefaultName(p) : p.Name.Trim(), p.Lang))];
+
+    private string DefaultName(PlayerRow row) => T["Setup_PlayerN", players.IndexOf(row) + 1];
 
     private GameSettings Settings => new()
     {

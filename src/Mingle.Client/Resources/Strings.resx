@@ -344,4 +344,5 @@
   <data name="Setup_HandoffAloudLine" xml:space="preserve"><value>Read the card out loud and give the phone to whoever fits it</value></data>
   <data name="Handoff_Heads" xml:space="preserve"><value>Reveal</value></data>
   <data name="Handoff_Tails" xml:space="preserve"><value>Secret</value></data>
+  <data name="Setup_PlayerN" xml:space="preserve"><value>Player {0}</value></data>
 </root>
