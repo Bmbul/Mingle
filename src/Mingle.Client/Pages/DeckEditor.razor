@@ -565,8 +565,9 @@
                 cards = [.. deck.Cards.Select(EditCard.From)];
             }
         }
-        // A new deck opens straight on "Generate", the quickest start; an existing one shows its cards.
+        // Every deck opens on its card list, with nothing open over it.
         sheet = null;
+        open = null;
         try { topics = await Content.GetTopicsAsync(); }
         catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException) { topics = []; }
         loading = false;
@@ -670,6 +671,9 @@
     private async Task Save()
     {
         if (!CanSave) return;
+        // Saving closes whatever is open over the card list (the generator, a card being edited).
+        sheet = null;
+        open = null;
         busy = true;
         error = note = null;
         try
