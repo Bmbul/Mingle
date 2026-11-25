@@ -150,7 +150,7 @@ public class CardWriterTests
     [Fact]
     public void Association_requests_accept_only_short_words()
     {
-        var words = Request with { Associations = true };
+        var words = Request with { Style = DeckStyle.Blitz };
         object Word(string en, string hy) => new { kind = "word", depth = 1, topic = "travel", text = new { en, hy }, options = new { } };
 
         var cards = CardParser.Parse(Json(
@@ -164,5 +164,22 @@ public class CardWriterTests
         Assert.Equal("Ծով", cards[0].Texts[Lang.Hy].Text);
         Assert.Contains("\"word\"", JsonSerializer.Serialize(CardPrompt.Schema(words)));
         Assert.DoesNotContain("\"word\"", JsonSerializer.Serialize(CardPrompt.Schema(Request)));
+    }
+
+    [Fact]
+    public void Give_it_to_requests_accept_only_short_descriptions()
+    {
+        var handoff = Request with { Style = DeckStyle.Handoff };
+        object Pass(string en, string hy) => new { kind = "handoff", depth = 1, topic = "travel", text = new { en, hy }, options = new { } };
+
+        var cards = CardParser.Parse(Json(
+            Pass("the best cook here.", "նրան, ով ամենալավն է ճաշ եփում։"), // the stop is trimmed, no question fix
+            Pass("who is the best cook?", "ո՞վ է"),                         // a question
+            Open("Where to?", "Ո՞ւր")), handoff);                           // not this game's kind
+
+        Assert.Equal(["the best cook here"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
+        Assert.Equal("նրան, ով ամենալավն է ճաշ եփում", cards[0].Texts[Lang.Hy].Text);
+        Assert.Contains("\"handoff\"", JsonSerializer.Serialize(CardPrompt.Schema(handoff)));
+        Assert.Contains("Give the phone to", CardPrompt.UserMessage(handoff));
     }
 }

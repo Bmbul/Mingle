@@ -14,7 +14,7 @@ public sealed record CardRequest(
     int Count = TopicDeal.CardCount,
     ImmutableArray<int> Depths = default,
     string? Setting = null,
-    bool Associations = false)
+    DeckStyle Style = DeckStyle.Questions)
 {
     public const string ThemeCode = "theme";
     public const int MaxThemeLength = 200;
@@ -42,7 +42,7 @@ public sealed record CardRequest(
     /// </summary>
     public static CardRequest ForDeck(
         IEnumerable<TopicInfo> topics, string? theme, IEnumerable<int>? depths, string? setting, IEnumerable<Lang>? languages, int count,
-        bool associations = false)
+        DeckStyle style = DeckStyle.Questions)
     {
         var all = topics.ToList();
         if (!string.IsNullOrWhiteSpace(theme))
@@ -52,11 +52,16 @@ public sealed record CardRequest(
         return new([.. all], langs.IsEmpty ? [.. Langs.All] : langs, PlayerCount: 0, count,
             chosen.Length is 0 or 3 ? [] : chosen,
             setting is not null && Settings.ContainsKey(setting) ? setting : null,
-            associations);
+            style);
     }
 
-    /// <summary>The card kinds this request may produce: associations only, or the normal kinds.</summary>
-    public string[] AllowedKinds => Associations ? [CardKinds.Association.Id] : CardPrompt.Kinds;
+    /// <summary>The card kinds this request may produce: the normal kinds, or the one kind of a blitz or "Give it to…" deck.</summary>
+    public string[] AllowedKinds => Style switch
+    {
+        DeckStyle.Blitz => [CardKinds.Association.Id],
+        DeckStyle.Handoff => [CardKinds.Handoff.Id],
+        _ => CardPrompt.Kinds,
+    };
 
     /// <summary>Whether a card of this depth fits the request (any depth when no depths were chosen).</summary>
     public bool Allows(int depth) => Depths.IsDefaultOrEmpty || Depths.Contains(depth);

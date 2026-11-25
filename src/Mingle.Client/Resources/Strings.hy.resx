@@ -256,9 +256,6 @@
   <data name="Blitz_Got" xml:space="preserve"><value>Ասաց</value></data>
   <data name="Kind_word" xml:space="preserve"><value>Ասոցիացիա</value></data>
   <data name="Editor_Hint_word" xml:space="preserve"><value>Մեկ բառ կամ կարճ արտահայտություն…</value></data>
-  <data name="Editor_Style" xml:space="preserve"><value>Քարտերի տեսակը</value></data>
-  <data name="Editor_StyleQuestions" xml:space="preserve"><value>Հարցեր</value></data>
-  <data name="Editor_StyleWords" xml:space="preserve"><value>Ասոցիացիաներ (բլիցի համար)</value></data>
   <data name="Blitz_HintWord" xml:space="preserve"><value>Առաջին բառը, որ գալիս է մտքիդ</value></data>
   <data name="Blitz_HintFinish" xml:space="preserve"><value>Շարունակի՛ր</value></data>
   <data name="Setup_Stories" xml:space="preserve"><value>Պատմություն</value></data>
@@ -325,4 +322,9 @@
   <data name="Kind_handoff" xml:space="preserve"><value>Տուր նրան, ով…</value></data>
   <data name="Editor_Hint_handoff" xml:space="preserve"><value>նրան, ով… (շարունակում է «Հեռախոսը տուր»)</value></data>
   <data name="Handoff_GuessLocked" xml:space="preserve"><value>Պատասխանդ ընդունված է։</value></data>
+  <data name="Editor_Game" xml:space="preserve"><value>Խաղ</value></data>
+  <data name="Editor_Game_Questions" xml:space="preserve"><value>Հարցեր</value></data>
+  <data name="Editor_Game_Blitz" xml:space="preserve"><value>Բլից</value></data>
+  <data name="Editor_Game_Handoff" xml:space="preserve"><value>Տուր նրան, ով…</value></data>
+  <data name="Editor_GameFixed" xml:space="preserve"><value>որոշվում է հավաքածուի քարտերով</value></data>
 </root>

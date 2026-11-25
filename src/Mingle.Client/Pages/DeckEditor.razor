@@ -29,6 +29,26 @@
                    @bind="name" @bind:event="oninput" />
         </section>
 
+        @* Which game the deck is for; fixed once it has cards, since a deck holds one game's cards only. *@
+        <section class="stack">
+            <h2 class="label">@T["Editor_Game"]</h2>
+            @if (cards.Count == 0)
+            {
+                <div class="chips" role="group" aria-label="@T["Editor_Game"]">
+                    @foreach (var option in Enum.GetValues<DeckStyle>())
+                    {
+                        var o = option;
+                        <button class="chip @(chosenStyle == o ? "on" : "")" aria-pressed="@(chosenStyle == o ? "true" : "false")"
+                                @onclick="() => chosenStyle = o">@T[$"Editor_Game_{o}"]</button>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="muted small">@T[$"Editor_Game_{Style}"] · @T["Editor_GameFixed"]</p>
+            }
+        </section>
+
         <section class="stack">
             <h2 class="label">@T.Plural("Cards", cards.Count)</h2>
             @foreach (var card in cards)
@@ -110,11 +130,7 @@
 
         <section class="add-row" aria-label="@T["Editor_AddCards"]">
             <button class="btn2" @onclick="AddCard"><Icon Name="plus" Size="18" />@T["Editor_WriteCard"]</button>
-            @* The AI writes questions and blitz words; "Give it to…" cards are written by hand. *@
-            @if (Style != DeckStyle.Handoff)
-            {
-                <button class="btn2" @onclick="@(() => OpenSheet("generate"))"><Icon Name="refresh" Size="18" />@T["Editor_Generate"]</button>
-            }
+            <button class="btn2" @onclick="@(() => OpenSheet("generate"))"><Icon Name="refresh" Size="18" />@T["Editor_Generate"]</button>
             <button class="btn2" @onclick="@(() => OpenSheet("decks"))"><Icon Name="layers" Size="18" />@T["Editor_FromDecks"]</button>
         </section>
         @if (addedNote is not null)
@@ -143,18 +159,6 @@
         </div>
         @if (sheet == "generate")
         {
-        @if (Style is null)
-        {
-        <section class="stack">
-            <h2 class="label">@T["Editor_Style"]</h2>
-            <div class="chips" role="group" aria-label="@T["Editor_Style"]">
-                <button class="chip @(!associations ? "on" : "")" aria-pressed="@(!associations ? "true" : "false")" disabled="@writing"
-                        @onclick="() => associations = false">@T["Editor_StyleQuestions"]</button>
-                <button class="chip @(associations ? "on" : "")" aria-pressed="@(associations ? "true" : "false")" disabled="@writing"
-                        @onclick="() => associations = true"><Icon Name="bolt" Size="16" />@T["Editor_StyleWords"]</button>
-            </div>
-        </section>
-        }
 
         <section class="stack">
             <h2 class="label">@T["Editor_AiTopics", CardLimits.MaxTopics]</h2>
@@ -258,7 +262,7 @@
         {
             <p class="muted center">@T["Online_Connecting"]</p>
         }
-        @foreach (var source in sourceDecks.Where(d => Style is not { } style || d.Style == style))
+        @foreach (var source in sourceDecks.Where(d => d.Style == Style))
         {
             var deck = source;
             var expanded = openDecks.Contains(deck.Id);
@@ -385,7 +389,8 @@
     private readonly HashSet<int> depths = [1, 2, 3];
     private readonly HashSet<Lang> languages = [Text.UiLang];
     private string setting = "couple";
-    private bool associations;
+    /// <summary>The game picked for a new, still empty deck.</summary>
+    private DeckStyle chosenStyle = DeckStyle.Questions;
     private string? sheet;
     private string? addedNote;
 
@@ -403,8 +408,6 @@
         open = null;
         aiNote = null;
         sheet = which;
-        // A deck keeps one style: once it has cards, the AI writes more of the same kind.
-        if (Style is { } style) associations = style == DeckStyle.Blitz;
         if (which == "decks") _ = LoadSourceDecks();
     }
 
@@ -465,14 +468,12 @@
     private void AddPicked()
     {
         var added = 0;
-        var style = Style;
+
         foreach (var deck in sourceDecks)
             foreach (var card in deck.Cards.Where(c => picked.Contains(Key(deck, c))))
             {
                 if (InDeck(card)) continue; // the same card picked from two decks
-                // An empty deck takes the style of the first card added; cards of the other style are left out.
-                style ??= card.Kind.Style;
-                if (card.Kind.Style != style) continue;
+                if (card.Kind.Style != Style) continue; // only cards for this deck's game
                 cards.Add(EditCard.From(card));
                 added++;
             }
@@ -503,7 +504,7 @@
             }
         }
         // A new deck opens straight on "Generate", the quickest start; an existing one shows its cards.
-        sheet = Id is null ? "generate" : null;
+        sheet = null;
         try { topics = await Content.GetTopicsAsync(); }
         catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException) { topics = []; }
         loading = false;
@@ -525,7 +526,7 @@
         aiNote = null;
         try
         {
-            var (written, problem) = await Content.WriteCardsAsync([.. pickedTopics], theme.Trim(), [.. depths], setting, [.. languages], CardLimits.PerWrite, associations);
+            var (written, problem) = await Content.WriteCardsAsync([.. pickedTopics], theme.Trim(), [.. depths], setting, [.. languages], CardLimits.PerWrite, Style);
             if (problem is not null)
             {
                 aiNote = problem == "429" ? T["Editor_TooMany"] : T["Editor_AiFailed"];
@@ -559,17 +560,11 @@
         }
     }
 
-    /// <summary>The game this deck is for (questions, blitz, "Give it to…"), or null while it is empty.</summary>
-    private DeckStyle? Style => cards.Count == 0 ? null : CardKinds.Get(cards[0].KindId).Style;
+    /// <summary>The game this deck is for: its cards' game, or the one picked while it is still empty.</summary>
+    private DeckStyle Style => cards.Count == 0 ? chosenStyle : CardKinds.Get(cards[0].KindId).Style;
 
-    /// <summary>The kinds a card may have: those of the deck's style, decided by the other cards.</summary>
-    private static IEnumerable<CardKind> KindsFor(EditCard card, List<EditCard> all)
-    {
-        var others = all.Where(c => !ReferenceEquals(c, card)).ToList();
-        return others.Count == 0 ? CardKinds.All : CardKinds.OfStyle(CardKinds.Get(others[0].KindId).Style);
-    }
-
-    private IEnumerable<CardKind> KindsFor(EditCard card) => KindsFor(card, cards);
+    /// <summary>The kinds a card may have: those of the deck's game.</summary>
+    private IEnumerable<CardKind> KindsFor(EditCard card) => CardKinds.OfStyle(Style);
 
     private void AddCard()
     {

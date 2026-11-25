@@ -66,7 +66,18 @@ public static class CardPrompt
                 : $"Write {request.Count} cards for a deck any group of friends or a couple can play.");
         if (!request.Depths.IsDefaultOrEmpty)
             text.AppendLine($"Use only depth {string.Join(" and ", request.Depths)} (instead of the usual mix of depths).");
-        if (request.Associations)
+        if (request.Style == DeckStyle.Handoff)
+            text.AppendLine("""
+                These are cards for "Give it to…" (kind "handoff"): the player holding the phone secretly reads
+                "Give the phone to …" followed by the card, and hands the phone to the person in the group who fits it best.
+                Write only the part that follows "Give the phone to": "the person who…", "the person you'd…".
+                In Russian start with «тому, кто…», «тому, кому…» or «тому, с кем…» and keep it gender-neutral (no past tense).
+                In Armenian start with «նրան, ով…», «նրան, ում…» or «նրան, ում հետ…».
+                Mostly flattering or playfully embarrassing, specific and quick to judge ("the person who'd survive a zombie
+                apocalypse the longest", "the person who laughs at their own jokes"). Never about looks, weight or anything
+                that would hurt the one chosen. No question marks, no options, at most 12 words.
+                """);
+        if (request.Style == DeckStyle.Blitz)
             text.AppendLine("""
                 These are cards for a blitz game (kind "word"): the player sees the card and answers with one word within
                 five seconds. Write two styles, about half each, never questions:

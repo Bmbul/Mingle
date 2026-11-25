@@ -262,9 +262,6 @@
   <data name="Blitz_Got" xml:space="preserve"><value>Есть</value></data>
   <data name="Kind_word" xml:space="preserve"><value>Ассоциация</value></data>
   <data name="Editor_Hint_word" xml:space="preserve"><value>Одно слово или короткая фраза…</value></data>
-  <data name="Editor_Style" xml:space="preserve"><value>Тип карточек</value></data>
-  <data name="Editor_StyleQuestions" xml:space="preserve"><value>Вопросы</value></data>
-  <data name="Editor_StyleWords" xml:space="preserve"><value>Ассоциации (для блица)</value></data>
   <data name="Blitz_HintWord" xml:space="preserve"><value>Первое слово, что пришло в голову</value></data>
   <data name="Blitz_HintFinish" xml:space="preserve"><value>Продолжи!</value></data>
   <data name="Setup_Stories" xml:space="preserve"><value>Истории</value></data>
@@ -331,4 +328,9 @@
   <data name="Kind_handoff" xml:space="preserve"><value>Отдай тому, кто…</value></data>
   <data name="Editor_Hint_handoff" xml:space="preserve"><value>тому, кто… (продолжение «Отдай телефон»)</value></data>
   <data name="Handoff_GuessLocked" xml:space="preserve"><value>Ответ принят.</value></data>
+  <data name="Editor_Game" xml:space="preserve"><value>Игра</value></data>
+  <data name="Editor_Game_Questions" xml:space="preserve"><value>Вопросы</value></data>
+  <data name="Editor_Game_Blitz" xml:space="preserve"><value>Блиц</value></data>
+  <data name="Editor_Game_Handoff" xml:space="preserve"><value>Отдай тому, кто…</value></data>
+  <data name="Editor_GameFixed" xml:space="preserve"><value>определяется карточками колоды</value></data>
 </root>

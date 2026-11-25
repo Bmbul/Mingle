@@ -57,7 +57,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
     /// <param name="Depths">Any of 1, 2, 3; none or all three mixes light to deep.</param>
     /// <param name="Setting">Who plays: couple, friends, family, party or colleagues.</param>
     /// <param name="Languages">Language codes (hy, ru, en) to write the cards in; none means all three.</param>
-    /// <param name="Style">"associations" for one-word blitz cards; anything else writes normal cards.</param>
+    /// <param name="Style">"associations" for one-word blitz cards, "handoff" for "Give it to…"; anything else writes normal cards.</param>
     public sealed record WriteRequest(string[]? Topics, string? Theme, int[]? Depths, string? Setting, string[]? Languages, int Count = 20, string? Style = null);
 
     /// <summary>
@@ -90,7 +90,12 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
         {
             var cards = await writer.WriteAsync(
                 CardRequest.ForDeck(known, theme, request.Depths, request.Setting, languages, Math.Clamp(request.Count, 1, 20),
-                    associations: string.Equals(request.Style, "associations", StringComparison.OrdinalIgnoreCase)), ct);
+                    request.Style?.ToLowerInvariant() switch
+                    {
+                        "associations" => DeckStyle.Blitz,
+                        "handoff" => DeckStyle.Handoff,
+                        _ => DeckStyle.Questions,
+                    }), ct);
             // Topics are dropped: the theme is the user's own words, not a library topic.
             // Named after the theme: the deck file format needs a name, and the client reads it with the same parser.
             var name = theme.Length > 0 ? theme : string.Join(", ", known.Select(t => t.NameFor(Lang.En)));

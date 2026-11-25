@@ -256,9 +256,6 @@
   <data name="Blitz_Got" xml:space="preserve"><value>Got it</value></data>
   <data name="Kind_word" xml:space="preserve"><value>Association</value></data>
   <data name="Editor_Hint_word" xml:space="preserve"><value>One word or a short phrase…</value></data>
-  <data name="Editor_Style" xml:space="preserve"><value>Kind of cards</value></data>
-  <data name="Editor_StyleQuestions" xml:space="preserve"><value>Questions</value></data>
-  <data name="Editor_StyleWords" xml:space="preserve"><value>Associations (for blitz)</value></data>
   <data name="Blitz_HintWord" xml:space="preserve"><value>First word that comes to mind</value></data>
   <data name="Blitz_HintFinish" xml:space="preserve"><value>Finish it!</value></data>
   <data name="Setup_Stories" xml:space="preserve"><value>Stories</value></data>
@@ -325,4 +322,9 @@
   <data name="Kind_handoff" xml:space="preserve"><value>Give it to…</value></data>
   <data name="Editor_Hint_handoff" xml:space="preserve"><value>the person who… (follows “Give the phone to”)</value></data>
   <data name="Handoff_GuessLocked" xml:space="preserve"><value>Your guess is locked in.</value></data>
+  <data name="Editor_Game" xml:space="preserve"><value>Game</value></data>
+  <data name="Editor_Game_Questions" xml:space="preserve"><value>Questions</value></data>
+  <data name="Editor_Game_Blitz" xml:space="preserve"><value>Blitz</value></data>
+  <data name="Editor_Game_Handoff" xml:space="preserve"><value>Give it to…</value></data>
+  <data name="Editor_GameFixed" xml:space="preserve"><value>set by the cards in the deck</value></data>
 </root>
