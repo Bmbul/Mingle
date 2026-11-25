@@ -341,5 +341,12 @@
   <data name="Editor_MoodHint" xml:space="preserve"><value>Карточки будут о людях в комнате, а не о теме.</value></data>
   <data name="Editor_MoodBoldHint" xml:space="preserve"><value>Карточки будут о людях в комнате. Смелые — для друзей, вечеринок и пар.</value></data>
   <data name="Editor_AiGroup" xml:space="preserve"><value>О вашей компании (необязательно)</value></data>
-  <data name="Editor_AiGroupPlaceholder" xml:space="preserve"><value>Например: мы познакомились в походе, кот Ани знаменит, Смбат всегда готовит</value></data>
+  <data name="Setup_HandoffHow" xml:space="preserve"><value>Как играем</value></data>
+  <data name="Setup_HandoffSecret" xml:space="preserve"><value>Тайно</value></data>
+  <data name="Setup_HandoffAloud" xml:space="preserve"><value>Вслух</value></data>
+  <data name="Setup_HandoffSecretHint" xml:space="preserve"><value>Карточку видит только тот, у кого телефон; получатель гадает почему.</value></data>
+  <data name="Setup_HandoffAloudHint" xml:space="preserve"><value>Прочитай карточку всем и отдай телефон тому, кто подходит лучше всех.</value></data>
+  <data name="Handoff_ReadAloud" xml:space="preserve"><value>{0}, прочитай вслух</value></data>
+  <data name="Handoff_PickAloud" xml:space="preserve"><value>Можно обсудить, потом нажми на имя и передай телефон.</value></data>
+  <data name="Setup_HandoffAloudLine" xml:space="preserve"><value>Прочитай вслух и отдай телефон тому, кто подходит</value></data>
 </root>

@@ -335,5 +335,12 @@
   <data name="Editor_MoodHint" xml:space="preserve"><value>Քարտերը կլինեն սենյակում գտնվող մարդկանց մասին, ոչ թե որևէ թեմայի։</value></data>
   <data name="Editor_MoodBoldHint" xml:space="preserve"><value>Քարտերը կլինեն սենյակում գտնվող մարդկանց մասին։ Համարձակները ընկերների, խնջույքների և զույգերի համար են։</value></data>
   <data name="Editor_AiGroup" xml:space="preserve"><value>Ձեր խմբի մասին (ըստ ցանկության)</value></data>
-  <data name="Editor_AiGroupPlaceholder" xml:space="preserve"><value>Օրինակ՝ ծանոթացել ենք արշավի ժամանակ, Անիի կատուն հայտնի է, Սմբատը միշտ ճաշ է եփում</value></data>
+  <data name="Setup_HandoffHow" xml:space="preserve"><value>Ինչպես</value></data>
+  <data name="Setup_HandoffSecret" xml:space="preserve"><value>Գաղտնի</value></data>
+  <data name="Setup_HandoffAloud" xml:space="preserve"><value>Բարձրաձայն</value></data>
+  <data name="Setup_HandoffSecretHint" xml:space="preserve"><value>Քարտը տեսնում է միայն հեռախոսը պահողը, ստացողը մտածում է՝ ինչու։</value></data>
+  <data name="Setup_HandoffAloudHint" xml:space="preserve"><value>Կարդա քարտը բոլորի համար և տուր հեռախոսը նրան, ով ամենաշատն է համապատասխանում։</value></data>
+  <data name="Handoff_ReadAloud" xml:space="preserve"><value>{0}, կարդա բարձրաձայն</value></data>
+  <data name="Handoff_PickAloud" xml:space="preserve"><value>Կարող եք քննարկել, հետո սեղմիր անունը և տուր հեռախոսը։</value></data>
+  <data name="Setup_HandoffAloudLine" xml:space="preserve"><value>Կարդա բարձրաձայն և տուր հեռախոսը նրան, ով համապատասխանում է</value></data>
 </root>

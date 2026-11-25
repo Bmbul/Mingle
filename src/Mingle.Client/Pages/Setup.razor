@@ -175,6 +175,16 @@
     @if (handoff)
     {
         <section class="stack">
+            <h2 class="label">@T["Setup_HandoffHow"]</h2>
+            <div class="chips">
+                <button class="chip @(handoffSecret ? "on" : "")" aria-pressed="@(handoffSecret ? "true" : "false")" @onclick="() => handoffSecret = true">@T["Setup_HandoffSecret"]</button>
+                <button class="chip @(!handoffSecret ? "on" : "")" aria-pressed="@(!handoffSecret ? "true" : "false")" @onclick="() => handoffSecret = false">@T["Setup_HandoffAloud"]</button>
+            </div>
+            <p class="muted small">@T[handoffSecret ? "Setup_HandoffSecretHint" : "Setup_HandoffAloudHint"]</p>
+        </section>
+        @if (handoffSecret)
+        {
+        <section class="stack">
             <h2 class="label">@T["Setup_HandoffExtras"]</h2>
             <div class="chips">
                 <button class="chip @(handoffGuess ? "on" : "")" aria-pressed="@(handoffGuess ? "true" : "false")" @onclick="() => handoffGuess = !handoffGuess">@T["Setup_HandoffGuess"]</button>
@@ -182,6 +192,7 @@
             </div>
             <p class="muted small">@T["Setup_HandoffExtrasHint"]</p>
         </section>
+        }
     }
 
     @if (!PicksInLobby && !stories)
@@ -266,6 +277,7 @@
     private bool stories;
     /// <summary>"Give it to…": secretly hand the phone to someone, who guesses why; see Pages/HandoffGame.razor.</summary>
     private bool handoff;
+    private bool handoffSecret = true;
     private bool handoffGuess = true;
     private bool handoffCoin;
 
@@ -348,7 +360,7 @@
         get
         {
             var parts = new List<string>();
-            if (!Online) parts.Add(stories ? T["Setup_StoriesLine"] : handoff ? T["Setup_HandoffLine"] : blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
+            if (!Online) parts.Add(stories ? T["Setup_StoriesLine"] : handoff ? T[handoffSecret ? "Setup_HandoffLine" : "Setup_HandoffAloudLine"] : blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
             if (Online || passThePhone)
             {
                 parts.Add(mode == AnswerMode.Written ? T["Setup_WriteLine"] : T["Setup_TalkLine"]);
@@ -407,7 +419,7 @@
             }
             if (handoff)
             {
-                HandoffGames.Start(NamedPlayers, decks.Where(d => deckIds.Contains(d.Id)), handoffGuess, handoffCoin, cardCount);
+                HandoffGames.Start(NamedPlayers, decks.Where(d => deckIds.Contains(d.Id)), handoffSecret, handoffGuess, handoffCoin, cardCount);
                 Nav.NavigateTo("handoff");
                 return;
             }

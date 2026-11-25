@@ -335,5 +335,12 @@
   <data name="Editor_MoodHint" xml:space="preserve"><value>The cards will be about the people in the room, not a topic.</value></data>
   <data name="Editor_MoodBoldHint" xml:space="preserve"><value>The cards will be about the people in the room. Bold cards are for friends, parties and couples.</value></data>
   <data name="Editor_AiGroup" xml:space="preserve"><value>About your group (optional)</value></data>
-  <data name="Editor_AiGroupPlaceholder" xml:space="preserve"><value>For example: we met hiking, Ani's cat is famous, Smbat always cooks</value></data>
+  <data name="Setup_HandoffHow" xml:space="preserve"><value>How</value></data>
+  <data name="Setup_HandoffSecret" xml:space="preserve"><value>Secret</value></data>
+  <data name="Setup_HandoffAloud" xml:space="preserve"><value>Out loud</value></data>
+  <data name="Setup_HandoffSecretHint" xml:space="preserve"><value>Only the holder sees the card; the one who gets the phone wonders why.</value></data>
+  <data name="Setup_HandoffAloudHint" xml:space="preserve"><value>Read the card to everyone, then give the phone to whoever fits it best.</value></data>
+  <data name="Handoff_ReadAloud" xml:space="preserve"><value>{0}, read it out loud</value></data>
+  <data name="Handoff_PickAloud" xml:space="preserve"><value>Discuss if you like, then tap the name and hand the phone over.</value></data>
+  <data name="Setup_HandoffAloudLine" xml:space="preserve"><value>Read the card out loud and give the phone to whoever fits it</value></data>
 </root>

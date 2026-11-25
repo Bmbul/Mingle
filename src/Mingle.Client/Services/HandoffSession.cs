@@ -4,8 +4,8 @@ using Mingle.Engine;
 namespace Mingle.Client.Services;
 
 /// <summary>
-/// A "Give it to…" game on one phone: who plays, the cards, the options (guess why, coin flip), who holds the phone
-/// and every pass so far. Cards do not repeat until every card has been played.
+/// A "Give it to…" game on one phone: who plays, the cards, how it is played (secretly, with the options guess why
+/// and coin flip, or out loud), who holds the phone and every pass so far. Cards do not repeat until all are played.
 /// </summary>
 public sealed class HandoffSession
 {
@@ -14,6 +14,8 @@ public sealed class HandoffSession
 
     public ImmutableArray<Player> Players { get; private set; } = [];
     public ImmutableArray<Card> Pool { get; private set; } = [];
+    /// <summary>Secret: only the holder reads the card. Out loud: the holder reads it to everyone.</summary>
+    public bool Secret { get; private set; } = true;
     public bool Guess { get; private set; }
     public bool Coin { get; private set; }
     public int Rounds { get; private set; }
@@ -23,12 +25,14 @@ public sealed class HandoffSession
     public bool Ready => !Players.IsEmpty && !Pool.IsEmpty;
     public bool Finished => Ready && Passes.Count >= Rounds;
 
-    public void Start(ImmutableArray<Player> players, IEnumerable<Deck> decks, bool guess, bool coin, int rounds)
+    public void Start(ImmutableArray<Player> players, IEnumerable<Deck> decks, bool secret, bool guess, bool coin, int rounds)
     {
         Players = players;
         Pool = Handoffs.Pool(decks, [.. players.Select(p => p.Lang).Distinct()]);
-        Guess = guess;
-        Coin = coin;
+        Secret = secret;
+        // Guessing and the coin only make sense when the card was secret.
+        Guess = secret && guess;
+        Coin = secret && coin;
         Rounds = rounds;
         Restart();
     }

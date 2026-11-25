@@ -67,9 +67,13 @@ else if (stage == Stage.Secret)
 else if (stage == Stage.Prompt && card is { } prompt)
 {
     <main class="main center-screen">
+        @if (!Game.Secret)
+        {
+            <p class="muted">@T["Handoff_ReadAloud", Game.Holder!.Name] · @T["Handoff_Progress", Game.Passes.Count + 1, Game.Rounds]</p>
+        }
         <p class="muted">@T["Handoff_GiveTo"]</p>
         <p class="blitz-card" lang="@Game.Holder!.Lang.Code()">@prompt.TextFor(Game.Holder!.Lang).Text</p>
-        <p class="muted center small">@T["Handoff_Pick"]</p>
+        <p class="muted center small">@T[Game.Secret ? "Handoff_Pick" : "Handoff_PickAloud"]</p>
         <div class="handoff-players">
             @foreach (var player in Game.Players.Where(p => p.Id != Game.Holder!.Id))
             {
@@ -84,7 +88,10 @@ else if (stage == Stage.Hand && receiver is { } to)
     <main class="main center-screen">
         <p class="muted">@T["Handoff_HandTo"]</p>
         <p class="blitz-name">@to.Name</p>
-        <p class="muted center">@T["Handoff_NoWord"]</p>
+        @if (Game.Secret)
+        {
+            <p class="muted center">@T["Handoff_NoWord"]</p>
+        }
     </main>
     <footer class="foot">
         <button class="btn" @onclick="Received">@T["Handoff_GotIt", to.Name]</button>
@@ -161,6 +168,7 @@ else if (stage == Stage.Reveal && receiver is { } holder && card is { } said)
     protected override void OnInitialized()
     {
         if (Game.Finished) stage = Stage.Trail;
+        else if (Game.Ready && !Game.Secret) ShowCard(); // out loud: no secret screen, the first card is read right away
     }
 
     private void ShowCard()
@@ -179,6 +187,14 @@ else if (stage == Stage.Reveal && receiver is { } holder && card is { } said)
 
     private void Received()
     {
+        if (!Game.Secret)
+        {
+            // Out loud everyone heard the card: the receiver simply reads the next one.
+            Game.Record(receiver!, card!, null, true);
+            if (Game.Finished) stage = Stage.Trail;
+            else ShowCard();
+            return;
+        }
         if (Game.Guess)
         {
             choices = Game.Choices(card!);
@@ -226,6 +242,7 @@ else if (stage == Stage.Reveal && receiver is { } holder && card is { } said)
     private void PlayAgain()
     {
         Game.Restart();
-        stage = Stage.Secret;
+        if (Game.Secret) stage = Stage.Secret;
+        else ShowCard();
     }
 }
