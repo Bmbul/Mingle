@@ -13,8 +13,8 @@ public class BlitzTests
 
         var armenian = Blitz.Pool([deck, deck], Lang.Hy).Select(c => c.Id).ToArray();
 
-        Assert.Equal(["w1", "wyr"], armenian);
-        Assert.Equal(3, Blitz.Pool([deck], Lang.En).Length);
+        Assert.Equal(["w1"], armenian);
+        Assert.Equal(2, Blitz.Pool([deck], Lang.En).Length);
     }
 
     [Fact]
@@ -50,5 +50,14 @@ public class BlitzTests
         Assert.Equal(5, deck.CountReadableBy([Lang.En], [CardKinds.Association]));
         Assert.DoesNotContain(DeckMix.FromPicks([deck with { Id = "d" }], [Lang.En], 1).Cards, c => c.KindId == "word");
         Assert.DoesNotContain(TopicDeal.FromLibrary([deck], [], [Lang.En], 1).Cards, c => c.KindId == "word");
+    }
+
+    [Fact]
+    public void A_deck_is_either_blitz_or_questions()
+    {
+        Assert.True(Deck(Word("a"), Word("b")).IsBlitz);
+        Assert.False(Deck(Card("q", CardKinds.OpenQuestion)).IsBlitz);
+        Assert.True(Deck(Word("a"), Card("q", CardKinds.OpenQuestion)).MixesBlitzAndQuestions);
+        Assert.False(Deck(Word("a")).MixesBlitzAndQuestions);
     }
 }

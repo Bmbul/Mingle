@@ -76,8 +76,8 @@ public static class CardKinds
     /// <summary>The kinds normal games play.</summary>
     public static ImmutableArray<CardKind> Regular { get; } = [.. All.Where(k => !k.BlitzOnly)];
 
-    /// <summary>The kinds blitz plays: quick, one-word answers.</summary>
-    public static ImmutableArray<CardKind> Blitz { get; } = [Association, WouldYouRather];
+    /// <summary>The kinds blitz plays: quick, one-word answers. Blitz decks hold only these; question decks never do.</summary>
+    public static ImmutableArray<CardKind> Blitz { get; } = [.. All.Where(k => k.BlitzOnly)];
 
     private static readonly ImmutableDictionary<string, CardKind> ById = All.ToImmutableDictionary(k => k.Id);
 
@@ -116,6 +116,12 @@ public sealed record Deck(string Id, ImmutableDictionary<Lang, string> Names, Im
         Names.TryGetValue(lang, out var name) ? name
         : Names.TryGetValue(Lang.En, out var en) ? en
         : Names.Values.FirstOrDefault() ?? Id;
+
+    /// <summary>A blitz deck: its cards are all blitz cards. A deck is either blitz or questions, never both.</summary>
+    public bool IsBlitz => !Cards.IsEmpty && Cards.All(c => c.Kind.BlitzOnly);
+
+    /// <summary>True when blitz cards and question cards are mixed in one deck, which is not allowed.</summary>
+    public bool MixesBlitzAndQuestions => Cards.Any(c => c.Kind.BlitzOnly) && Cards.Any(c => !c.Kind.BlitzOnly);
 
     /// <summary>How many cards everyone reading these languages can play (a card needs all of them).</summary>
     public int CountReadableBy(IReadOnlyCollection<Lang> languages) => CountReadableBy(languages, CardKinds.Regular);

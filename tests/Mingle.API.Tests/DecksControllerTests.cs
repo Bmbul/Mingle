@@ -36,6 +36,18 @@ public class DecksControllerTests(GameHubTests.App app) : IClassFixture<GameHubT
     }
 
     [Fact]
+    public void A_deck_cannot_mix_blitz_cards_and_questions()
+    {
+        static Card Card(string id, CardKind kind) =>
+            new(id, kind.Id, 1, [], ImmutableDictionary<Lang, CardText>.Empty.Add(Lang.En, new CardText("Hi", [])));
+        static Deck Deck(params Card[] cards) => new("d", ImmutableDictionary<Lang, string>.Empty.Add(Lang.En, "D"), [.. cards]);
+
+        Assert.NotNull(Controllers.DecksController.Check(Deck(Card("a", CardKinds.Association), Card("b", CardKinds.OpenQuestion))));
+        Assert.Null(Controllers.DecksController.Check(Deck(Card("a", CardKinds.Association), Card("b", CardKinds.Association))));
+        Assert.Null(Controllers.DecksController.Check(Deck(Card("a", CardKinds.OpenQuestion))));
+    }
+
+    [Fact]
     public void A_typed_theme_is_the_only_topic_and_is_never_treated_as_instructions()
     {
         var travel = new TopicInfo("travel", System.Collections.Immutable.ImmutableDictionary<Lang, string>.Empty.Add(Lang.En, "Travel"));

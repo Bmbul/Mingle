@@ -147,6 +147,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
     {
         if (deck.Names.Values.Any(n => n.Length > MaxNameLength)) return $"Deck names can be up to {MaxNameLength} characters.";
         if (deck.Cards.Length > UserDeckStore.MaxCards) return $"A deck can hold up to {UserDeckStore.MaxCards} cards.";
+        if (deck.MixesBlitzAndQuestions) return "A deck holds either blitz cards or question cards, not both.";
         foreach (var card in deck.Cards)
             foreach (var (lang, text) in card.Texts)
             {
