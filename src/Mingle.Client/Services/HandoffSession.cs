@@ -30,9 +30,9 @@ public sealed class HandoffSession
         Players = players;
         Pool = Handoffs.Pool(decks, [.. players.Select(p => p.Lang).Distinct()]);
         Secret = secret;
-        // Guessing and the coin only make sense when the card was secret.
+        // Guessing and the coin only make sense when the card was secret, and only one of them at a time.
         Guess = secret && guess;
-        Coin = secret && coin;
+        Coin = secret && coin && !guess;
         Rounds = rounds;
         Restart();
     }

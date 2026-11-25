@@ -291,7 +291,7 @@
   <data name="Setup_HandoffExtras" xml:space="preserve"><value>Լրացուցիչ</value></data>
   <data name="Setup_HandoffGuess" xml:space="preserve"><value>Գուշակիր՝ ինչու</value></data>
   <data name="Setup_HandoffCoin" xml:space="preserve"><value>Մետաղադրամ</value></data>
-  <data name="Setup_HandoffExtrasHint" xml:space="preserve"><value>Գուշակիր՝ ինչու. ստացողը երեքից ընտրում է իսկական պատճառը։ Մետաղադրամ. մետաղադրամը որոշում է՝ պատճառը բացահայտել, թե պահել գաղտնի մինչև վերջ։</value></data>
+  <data name="Setup_HandoffExtrasHint" xml:space="preserve"><value>Ընտրեք մեկը կամ ոչ մեկը։ Գուշակիր՝ ինչու. ստացողը երեքից ընտրում է իսկական պատճառը։ Մետաղադրամ. մետաղադրամը որոշում է՝ պատճառը բացահայտել, թե պահել գաղտնի մինչև վերջ։</value></data>
   <data name="Setup_HandoffRounds" xml:space="preserve"><value>Փոխանցումներ</value></data>
   <data name="Setup_NeedThree" xml:space="preserve"><value>Ավելացրեք առնվազն 3 խաղացող՝ անուններով։</value></data>
   <data name="Handoff_NotStarted" xml:space="preserve"><value>Սկսեք «Տուր նրան» խաղը «Նոր խաղ»-ից։</value></data>
@@ -321,7 +321,6 @@
   <data name="Handoff_Again" xml:space="preserve"><value>Նորից խաղալ</value></data>
   <data name="Kind_handoff" xml:space="preserve"><value>Տուր նրան, ով…</value></data>
   <data name="Editor_Hint_handoff" xml:space="preserve"><value>նրան, ով… (շարունակում է «Հեռախոսը տուր»)</value></data>
-  <data name="Handoff_GuessLocked" xml:space="preserve"><value>Պատասխանդ ընդունված է։</value></data>
   <data name="Editor_Game" xml:space="preserve"><value>Խաղ</value></data>
   <data name="Editor_Game_Questions" xml:space="preserve"><value>Հարցեր</value></data>
   <data name="Editor_Game_Blitz" xml:space="preserve"><value>Բլից</value></data>

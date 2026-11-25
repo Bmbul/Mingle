@@ -291,7 +291,7 @@
   <data name="Setup_HandoffExtras" xml:space="preserve"><value>Extras</value></data>
   <data name="Setup_HandoffGuess" xml:space="preserve"><value>Guess why</value></data>
   <data name="Setup_HandoffCoin" xml:space="preserve"><value>Coin flip</value></data>
-  <data name="Setup_HandoffExtrasHint" xml:space="preserve"><value>Guess why: the receiver picks the real reason out of three. Coin flip: the coin decides whether the reason is revealed or stays secret until the end.</value></data>
+  <data name="Setup_HandoffExtrasHint" xml:space="preserve"><value>Pick one or none. Guess why: the receiver picks the real reason out of three. Coin flip: the coin decides whether the reason is revealed or stays secret until the end.</value></data>
   <data name="Setup_HandoffRounds" xml:space="preserve"><value>Passes</value></data>
   <data name="Setup_NeedThree" xml:space="preserve"><value>Add at least 3 players with names.</value></data>
   <data name="Handoff_NotStarted" xml:space="preserve"><value>Start “Give it to” from New game.</value></data>
@@ -321,7 +321,6 @@
   <data name="Handoff_Again" xml:space="preserve"><value>Play again</value></data>
   <data name="Kind_handoff" xml:space="preserve"><value>Give it to…</value></data>
   <data name="Editor_Hint_handoff" xml:space="preserve"><value>the person who… (follows “Give the phone to”)</value></data>
-  <data name="Handoff_GuessLocked" xml:space="preserve"><value>Your guess is locked in.</value></data>
   <data name="Editor_Game" xml:space="preserve"><value>Game</value></data>
   <data name="Editor_Game_Questions" xml:space="preserve"><value>Questions</value></data>
   <data name="Editor_Game_Blitz" xml:space="preserve"><value>Blitz</value></data>

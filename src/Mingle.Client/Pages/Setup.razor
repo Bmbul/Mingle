@@ -187,8 +187,8 @@
         <section class="stack">
             <h2 class="label">@T["Setup_HandoffExtras"]</h2>
             <div class="chips">
-                <button class="chip @(handoffGuess ? "on" : "")" aria-pressed="@(handoffGuess ? "true" : "false")" @onclick="() => handoffGuess = !handoffGuess">@T["Setup_HandoffGuess"]</button>
-                <button class="chip @(handoffCoin ? "on" : "")" aria-pressed="@(handoffCoin ? "true" : "false")" @onclick="() => handoffCoin = !handoffCoin">@T["Setup_HandoffCoin"]</button>
+                <button class="chip @(handoffGuess ? "on" : "")" aria-pressed="@(handoffGuess ? "true" : "false")" @onclick="() => { handoffGuess = !handoffGuess; if (handoffGuess) handoffCoin = false; }">@T["Setup_HandoffGuess"]</button>
+                <button class="chip @(handoffCoin ? "on" : "")" aria-pressed="@(handoffCoin ? "true" : "false")" @onclick="() => { handoffCoin = !handoffCoin; if (handoffCoin) handoffGuess = false; }">@T["Setup_HandoffCoin"]</button>
             </div>
             <p class="muted small">@T["Setup_HandoffExtrasHint"]</p>
         </section>
@@ -278,6 +278,7 @@
     /// <summary>"Give it to…": secretly hand the phone to someone, who guesses why; see Pages/HandoffGame.razor.</summary>
     private bool handoff;
     private bool handoffSecret = true;
+    // One extra at most: a coin that hides the reason right after a guess would waste the guess.
     private bool handoffGuess = true;
     private bool handoffCoin;
 

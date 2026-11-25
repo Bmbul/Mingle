@@ -115,11 +115,6 @@ else if (stage == Stage.Guess && receiver is { } guesser)
 else if (stage == Stage.Coin)
 {
     <main class="main center-screen">
-        @* The guess is not judged yet: if the coin keeps the reason secret, the verdict stays secret too. *@
-        @if (guessedRight is not null)
-        {
-            <p class="muted">@T["Handoff_GuessLocked"]</p>
-        }
         @* A two-faced coin: tossed up, spinning, and landing on the side that was drawn. *@
         <div class="coin-stage" aria-hidden="true">
             <div class="coin3d @toss">

@@ -297,7 +297,7 @@
   <data name="Setup_HandoffExtras" xml:space="preserve"><value>Дополнительно</value></data>
   <data name="Setup_HandoffGuess" xml:space="preserve"><value>Угадай почему</value></data>
   <data name="Setup_HandoffCoin" xml:space="preserve"><value>Монетка</value></data>
-  <data name="Setup_HandoffExtrasHint" xml:space="preserve"><value>Угадай почему: получатель выбирает настоящую причину из трёх. Монетка: монетка решает, раскрыть причину или держать в секрете до конца.</value></data>
+  <data name="Setup_HandoffExtrasHint" xml:space="preserve"><value>Выберите одно или ничего. Угадай почему: получатель выбирает настоящую причину из трёх. Монетка: монетка решает, раскрыть причину или держать в секрете до конца.</value></data>
   <data name="Setup_HandoffRounds" xml:space="preserve"><value>Передач</value></data>
   <data name="Setup_NeedThree" xml:space="preserve"><value>Добавьте хотя бы 3 игроков с именами.</value></data>
   <data name="Handoff_NotStarted" xml:space="preserve"><value>Начните «Отдай тому» из «Новой игры».</value></data>
@@ -327,7 +327,6 @@
   <data name="Handoff_Again" xml:space="preserve"><value>Ещё раз</value></data>
   <data name="Kind_handoff" xml:space="preserve"><value>Отдай тому, кто…</value></data>
   <data name="Editor_Hint_handoff" xml:space="preserve"><value>тому, кто… (продолжение «Отдай телефон»)</value></data>
-  <data name="Handoff_GuessLocked" xml:space="preserve"><value>Ответ принят.</value></data>
   <data name="Editor_Game" xml:space="preserve"><value>Игра</value></data>
   <data name="Editor_Game_Questions" xml:space="preserve"><value>Вопросы</value></data>
   <data name="Editor_Game_Blitz" xml:space="preserve"><value>Блиц</value></data>
