@@ -14,7 +14,8 @@ public sealed record CardRequest(
     int Count = TopicDeal.CardCount,
     ImmutableArray<int> Depths = default,
     string? Setting = null,
-    DeckStyle Style = DeckStyle.Questions)
+    DeckStyle Style = DeckStyle.Questions,
+    string? Group = null)
 {
     public const string ThemeCode = "theme";
     public const int MaxThemeLength = 200;
@@ -25,6 +26,32 @@ public sealed record CardRequest(
     /// checks drop a broken card there are still enough to keep exactly <see cref="Count"/>.
     /// </summary>
     public CardRequest WithSpares() => this with { Count = Count + Math.Clamp(Count / 5, 2, 5) };
+
+    /// <summary>
+    /// Moods for "Give it to…" cards, which are about the people in the room rather than a topic. "bold" is only for
+    /// groups where it fits (see <see cref="BoldSettings"/>).
+    /// </summary>
+    public static readonly IReadOnlyDictionary<string, string> Moods = new Dictionary<string, string>
+    {
+        ["flattering"] = "kind and flattering: who is best at something, whom you'd trust, admire or want around",
+        ["funny"] = "playfully embarrassing habits and quirks, never mean",
+        ["situations"] = "who you'd pick for an imagined situation: a desert island, a road trip, a heist, a reality show",
+        ["bold"] = "bolder, cheeky or flirty (exes, crushes, secrets, wild nights), still never about looks or anything hurtful",
+    };
+
+    public static readonly string[] BoldSettings = ["friends", "party", "couple"];
+
+    /// <summary>"Give it to…" cards for the deck editor: about the chosen moods, with an optional note about the group.</summary>
+    public static CardRequest ForHandoffDeck(IEnumerable<string> moods, string? group, string? setting, IEnumerable<Lang>? languages, int count)
+    {
+        var langs = (languages ?? []).Distinct().Order().ToImmutableArray();
+        return new(
+            [.. moods.Select(m => new TopicInfo(m, ImmutableDictionary<Lang, string>.Empty.Add(Lang.En, m), Moods[m]))],
+            langs.IsEmpty ? [.. Langs.All] : langs, PlayerCount: 0, count, [],
+            setting is not null && Settings.ContainsKey(setting) ? setting : null,
+            DeckStyle.Handoff,
+            string.IsNullOrWhiteSpace(group) ? null : group.Trim());
+    }
 
     /// <summary>Who will play the deck, and what that means for the cards.</summary>
     public static readonly IReadOnlyDictionary<string, string> Settings = new Dictionary<string, string>

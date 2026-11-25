@@ -58,7 +58,9 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
     /// <param name="Setting">Who plays: couple, friends, family, party or colleagues.</param>
     /// <param name="Languages">Language codes (hy, ru, en) to write the cards in; none means all three.</param>
     /// <param name="Style">"associations" for one-word blitz cards, "handoff" for "Give it to…"; anything else writes normal cards.</param>
-    public sealed record WriteRequest(string[]? Topics, string? Theme, int[]? Depths, string? Setting, string[]? Languages, int Count = 20, string? Style = null);
+    /// <param name="Moods">"Give it to…" only, instead of topics: flattering, funny, situations, bold.</param>
+    public sealed record WriteRequest(string[]? Topics, string? Theme, int[]? Depths, string? Setting, string[]? Languages, int Count = 20,
+        string? Style = null, string[]? Moods = null);
 
     /// <summary>
     /// Writes new cards about a theme for the deck editor, in every language. Nothing is saved: the
@@ -70,6 +72,13 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
     {
         var theme = request.Theme?.Trim() ?? "";
         var codes = (request.Topics ?? []).Distinct(StringComparer.Ordinal).ToList();
+        var style = request.Style?.ToLowerInvariant() switch
+        {
+            "associations" => DeckStyle.Blitz,
+            "handoff" => DeckStyle.Handoff,
+            _ => DeckStyle.Questions,
+        };
+        if (style == DeckStyle.Handoff) return await WriteHandoff(request, theme, ct);
         if (theme.Length == 0 && codes.Count == 0) return BadRequest(new { error = "Pick a topic or say what the cards should be about." });
         if (theme.Length > CardRequest.MaxThemeLength) return BadRequest(new { error = $"Keep it under {CardRequest.MaxThemeLength} characters." });
         if (codes.Count > CardRequest.MaxTopics) return BadRequest(new { error = $"Pick up to {CardRequest.MaxTopics} topics." });
@@ -89,13 +98,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
         try
         {
             var cards = await writer.WriteAsync(
-                CardRequest.ForDeck(known, theme, request.Depths, request.Setting, languages, Math.Clamp(request.Count, 1, 20),
-                    request.Style?.ToLowerInvariant() switch
-                    {
-                        "associations" => DeckStyle.Blitz,
-                        "handoff" => DeckStyle.Handoff,
-                        _ => DeckStyle.Questions,
-                    }), ct);
+                CardRequest.ForDeck(known, theme, request.Depths, request.Setting, languages, Math.Clamp(request.Count, 1, 20), style), ct);
             // Topics are dropped: the theme is the user's own words, not a library topic.
             // Named after the theme: the deck file format needs a name, and the client reads it with the same parser.
             var name = theme.Length > 0 ? theme : string.Join(", ", known.Select(t => t.NameFor(Lang.En)));
@@ -131,6 +134,38 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
     };
 
     /// <summary>Reads and checks the body as a deck file; the message says what is wrong.</summary>
+    /// <summary>"Give it to…" cards: moods instead of topics, and the user's words are a note about the group.</summary>
+    private async Task<IActionResult> WriteHandoff(WriteRequest request, string group, CancellationToken ct)
+    {
+        var moods = (request.Moods ?? []).Distinct(StringComparer.Ordinal).ToList();
+        if (moods.Count == 0) return BadRequest(new { error = "Pick a mood." });
+        if (moods.Any(m => !CardRequest.Moods.ContainsKey(m))) return BadRequest(new { error = "Unknown mood." });
+        if (moods.Contains("bold") && !CardRequest.BoldSettings.Contains(request.Setting))
+            return BadRequest(new { error = "Bold cards are for friends, parties and couples." });
+        if (group.Length > CardRequest.MaxThemeLength) return BadRequest(new { error = $"Keep it under {CardRequest.MaxThemeLength} characters." });
+        if (request.Setting is { } setting && !CardRequest.Settings.ContainsKey(setting)) return BadRequest(new { error = "Unknown setting." });
+        var languages = new List<Lang>();
+        foreach (var code in request.Languages ?? [])
+        {
+            if (!Langs.TryParse(code, out var lang)) return BadRequest(new { error = $"Unknown language '{code}'." });
+            languages.Add(lang);
+        }
+        if (!writer.IsAvailable) return StatusCode(StatusCodes.Status503ServiceUnavailable, new { error = "Card generation is not available." });
+
+        try
+        {
+            var cards = await writer.WriteAsync(
+                CardRequest.ForHandoffDeck(moods, group, request.Setting, languages, Math.Clamp(request.Count, 1, 20)), ct);
+            var deck = new Deck("written", ImmutableDictionary<Lang, string>.Empty.Add(Lang.En, "Give it to…"), [.. cards.Select(c => c with { Topics = [] })]);
+            return Content(DeckJson.Write(deck), Json);
+        }
+        catch (CardWriterException ex)
+        {
+            log.LogWarning("Writing Give it to… cards failed: {Reason}", ex.Message);
+            return StatusCode(StatusCodes.Status503ServiceUnavailable, new { error = ex.Message });
+        }
+    }
+
     private async Task<(Deck? Deck, string? Error)> ReadDeck(CancellationToken ct)
     {
         if (Request.ContentLength > MaxBodyBytes) return (null, "The deck is too large.");

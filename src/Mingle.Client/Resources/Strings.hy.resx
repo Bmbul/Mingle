@@ -327,4 +327,13 @@
   <data name="Editor_Game_Blitz" xml:space="preserve"><value>Բլից</value></data>
   <data name="Editor_Game_Handoff" xml:space="preserve"><value>Տուր նրան, ով…</value></data>
   <data name="Editor_GameFixed" xml:space="preserve"><value>որոշվում է հավաքածուի քարտերով</value></data>
+  <data name="Editor_AiMood" xml:space="preserve"><value>Տրամադրություն</value></data>
+  <data name="Editor_Mood_flattering" xml:space="preserve"><value>Հաճոյախոսություն</value></data>
+  <data name="Editor_Mood_funny" xml:space="preserve"><value>Զվարճալի</value></data>
+  <data name="Editor_Mood_situations" xml:space="preserve"><value>Իրավիճակներ</value></data>
+  <data name="Editor_Mood_bold" xml:space="preserve"><value>Համարձակ</value></data>
+  <data name="Editor_MoodHint" xml:space="preserve"><value>Քարտերը կլինեն սենյակում գտնվող մարդկանց մասին, ոչ թե որևէ թեմայի։</value></data>
+  <data name="Editor_MoodBoldHint" xml:space="preserve"><value>Քարտերը կլինեն սենյակում գտնվող մարդկանց մասին։ Համարձակները ընկերների, խնջույքների և զույգերի համար են։</value></data>
+  <data name="Editor_AiGroup" xml:space="preserve"><value>Ձեր խմբի մասին (ըստ ցանկության)</value></data>
+  <data name="Editor_AiGroupPlaceholder" xml:space="preserve"><value>Օրինակ՝ ծանոթացել ենք արշավի ժամանակ, Անիի կատուն հայտնի է, Սմբատը միշտ ճաշ է եփում</value></data>
 </root>

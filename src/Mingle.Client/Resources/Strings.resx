@@ -327,4 +327,13 @@
   <data name="Editor_Game_Blitz" xml:space="preserve"><value>Blitz</value></data>
   <data name="Editor_Game_Handoff" xml:space="preserve"><value>Give it to…</value></data>
   <data name="Editor_GameFixed" xml:space="preserve"><value>set by the cards in the deck</value></data>
+  <data name="Editor_AiMood" xml:space="preserve"><value>Mood</value></data>
+  <data name="Editor_Mood_flattering" xml:space="preserve"><value>Flattering</value></data>
+  <data name="Editor_Mood_funny" xml:space="preserve"><value>Funny</value></data>
+  <data name="Editor_Mood_situations" xml:space="preserve"><value>Situations</value></data>
+  <data name="Editor_Mood_bold" xml:space="preserve"><value>Bold</value></data>
+  <data name="Editor_MoodHint" xml:space="preserve"><value>The cards will be about the people in the room, not a topic.</value></data>
+  <data name="Editor_MoodBoldHint" xml:space="preserve"><value>The cards will be about the people in the room. Bold cards are for friends, parties and couples.</value></data>
+  <data name="Editor_AiGroup" xml:space="preserve"><value>About your group (optional)</value></data>
+  <data name="Editor_AiGroupPlaceholder" xml:space="preserve"><value>For example: we met hiking, Ani's cat is famous, Smbat always cooks</value></data>
 </root>

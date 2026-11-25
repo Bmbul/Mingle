@@ -159,6 +159,31 @@
         </div>
         @if (sheet == "generate")
         {
+        @if (Style == DeckStyle.Handoff)
+        {
+        @* "Give it to…" cards are about the people in the room: moods instead of topics and depth. *@
+        <section class="stack">
+            <h2 class="label">@T["Editor_AiMood"]</h2>
+            <div class="chips" role="group" aria-label="@T["Editor_AiMood"]">
+                @foreach (var option in Moods)
+                {
+                    var m = option;
+                    var on = moods.Contains(m);
+                    <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@(writing || (on && moods.Count == 1))"
+                            @onclick="() => { if (!moods.Remove(m)) moods.Add(m); }">@T[$"Editor_Mood_{m}"]</button>
+                }
+            </div>
+            <p class="muted small">@T[BoldAllowed ? "Editor_MoodHint" : "Editor_MoodBoldHint"]</p>
+        </section>
+
+        <section class="stack">
+            <label class="label" for="ai-group">@T["Editor_AiGroup"]</label>
+            <textarea id="ai-group" class="field area" maxlength="200" placeholder="@T["Editor_AiGroupPlaceholder"]"
+                      @bind="theme" @bind:event="oninput" disabled="@writing"></textarea>
+        </section>
+        }
+        else
+        {
 
         <section class="stack">
             <h2 class="label">@T["Editor_AiTopics", CardLimits.MaxTopics]</h2>
@@ -216,6 +241,8 @@
             </div>
         </section>
 
+        }
+
         <section class="stack">
             <h2 class="label">@T["Editor_AiLanguages"]</h2>
             <div class="chips" role="group" aria-label="@T["Editor_AiLanguages"]">
@@ -238,7 +265,7 @@
                 {
                     var s = option;
                     <button class="chip @(setting == s ? "on" : "")" aria-pressed="@(setting == s ? "true" : "false")" disabled="@writing"
-                            @onclick="() => setting = s">@T[$"Editor_Setting_{s}"]</button>
+                            @onclick="() => PickSetting(s)">@T[$"Editor_Setting_{s}"]</button>
                 }
             </div>
         </section>
@@ -396,6 +423,18 @@
 
     private static readonly string[] Settings = ["couple", "friends", "family", "party", "colleagues"];
 
+    // "Give it to…": moods instead of topics; "bold" only for groups where it fits (the server checks the same).
+    private static readonly string[] BoldSettings = ["friends", "party", "couple"];
+    private readonly HashSet<string> moods = ["flattering", "funny", "situations"];
+    private bool BoldAllowed => BoldSettings.Contains(setting);
+    private IEnumerable<string> Moods => BoldAllowed ? ["flattering", "funny", "situations", "bold"] : ["flattering", "funny", "situations"];
+
+    private void PickSetting(string s)
+    {
+        setting = s;
+        if (!BoldAllowed && moods.Remove("bold") && moods.Count == 0) moods.Add("flattering");
+    }
+
     private static class CardLimits
     {
         public const int MaxTopics = 5;
@@ -482,7 +521,7 @@
         sheet = null;
     }
 
-    private bool CanWrite => pickedTopics.Count > 0 || !string.IsNullOrWhiteSpace(theme);
+    private bool CanWrite => Style == DeckStyle.Handoff ? moods.Count > 0 : pickedTopics.Count > 0 || !string.IsNullOrWhiteSpace(theme);
 
     private void ToggleTopic(string code)
     {
@@ -526,7 +565,7 @@
         aiNote = null;
         try
         {
-            var (written, problem) = await Content.WriteCardsAsync([.. pickedTopics], theme.Trim(), [.. depths], setting, [.. languages], CardLimits.PerWrite, Style);
+            var (written, problem) = await Content.WriteCardsAsync([.. pickedTopics], theme.Trim(), [.. depths], setting, [.. languages], CardLimits.PerWrite, Style, [.. moods]);
             if (problem is not null)
             {
                 aiNote = problem == "429" ? T["Editor_TooMany"] : T["Editor_AiFailed"];

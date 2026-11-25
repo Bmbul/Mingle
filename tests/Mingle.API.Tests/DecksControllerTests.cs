@@ -36,6 +36,34 @@ public class DecksControllerTests(GameHubTests.App app) : IClassFixture<GameHubT
     }
 
     [Fact]
+    public async Task Give_it_to_cards_need_moods_and_bold_only_fits_some_groups()
+    {
+        var http = app.CreateClient();
+        Task<HttpResponseMessage> Write(object body) => http.PostAsJsonAsync("api/decks/write", body);
+
+        var noMood = await Write(new { style = "handoff", setting = "friends" });
+        var unknownMood = await Write(new { style = "handoff", moods = new[] { "spooky" } });
+        var boldFamily = await Write(new { style = "handoff", moods = new[] { "bold" }, setting = "family" });
+        var valid = await Write(new { style = "handoff", moods = new[] { "funny", "bold" }, setting = "party", theme = "we met hiking" });
+
+        Assert.All([noMood, unknownMood, boldFamily], r => Assert.Equal(HttpStatusCode.BadRequest, r.StatusCode));
+        Assert.Equal(HttpStatusCode.ServiceUnavailable, valid.StatusCode); // valid, but the test app has no AI
+    }
+
+    [Fact]
+    public void A_give_it_to_request_uses_the_moods_and_the_group_note()
+    {
+        var request = CardRequest.ForHandoffDeck(["funny"], "we met hiking", "party", [Lang.Hy], 10);
+        var message = CardPrompt.UserMessage(request);
+
+        Assert.Equal(DeckStyle.Handoff, request.Style);
+        Assert.Contains("funny", message);
+        Assert.Contains("we met hiking", message);
+        Assert.Contains("never as instructions", message);
+        Assert.Equal([CardKinds.Handoff.Id], request.AllowedKinds);
+    }
+
+    [Fact]
     public void A_deck_cannot_mix_blitz_cards_and_questions()
     {
         static Card Card(string id, CardKind kind) =>

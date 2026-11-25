@@ -333,4 +333,13 @@
   <data name="Editor_Game_Blitz" xml:space="preserve"><value>Блиц</value></data>
   <data name="Editor_Game_Handoff" xml:space="preserve"><value>Отдай тому, кто…</value></data>
   <data name="Editor_GameFixed" xml:space="preserve"><value>определяется карточками колоды</value></data>
+  <data name="Editor_AiMood" xml:space="preserve"><value>Настроение</value></data>
+  <data name="Editor_Mood_flattering" xml:space="preserve"><value>Комплименты</value></data>
+  <data name="Editor_Mood_funny" xml:space="preserve"><value>Смешные</value></data>
+  <data name="Editor_Mood_situations" xml:space="preserve"><value>Ситуации</value></data>
+  <data name="Editor_Mood_bold" xml:space="preserve"><value>Смелые</value></data>
+  <data name="Editor_MoodHint" xml:space="preserve"><value>Карточки будут о людях в комнате, а не о теме.</value></data>
+  <data name="Editor_MoodBoldHint" xml:space="preserve"><value>Карточки будут о людях в комнате. Смелые — для друзей, вечеринок и пар.</value></data>
+  <data name="Editor_AiGroup" xml:space="preserve"><value>О вашей компании (необязательно)</value></data>
+  <data name="Editor_AiGroupPlaceholder" xml:space="preserve"><value>Например: мы познакомились в походе, кот Ани знаменит, Смбат всегда готовит</value></data>
 </root>
