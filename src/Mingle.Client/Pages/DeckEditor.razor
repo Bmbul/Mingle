@@ -102,16 +102,19 @@
                 }
                 else
                 {
-                    @* Swipe left to remove (js/swipe.js); the hidden button keeps it reachable by keyboard and screen readers. *@
-                    <div class="swipe-row" @key="c.Key">
-                        <span class="swipe-bg" aria-hidden="true"><Icon Name="close" Size="18" />@T["Editor_RemoveCard"]</span>
+                    @* Swipe left to uncover Delete, like My decks (js/swipe.js); nothing is removed until it is tapped. *@
+                    <div class="swipe-row reveal" @key="c.Key">
+                        <div class="swipe-actions">
+                            <button class="swipe-action delete" @onclick="() => Remove(c)">
+                                <Icon Name="close" Size="18" /><span>@T["Decks_Delete"]</span>
+                            </button>
+                        </div>
                         <button class="check-row swipe-content @(c.IsComplete ? "" : "incomplete")" @onclick="() => open = c">
                             <span class="grow">
                                 <span class="row-title">@(c.Preview(Text.UiLang) is { Length: > 0 } p ? p : T["Editor_EmptyCard"])</span>
                                 <span class="muted small">@T.KindName(c.KindId) · @T[$"Depth_{c.Depth}"] · @string.Join(" ", c.Languages.Select(l => l.Code().ToUpperInvariant()))</span>
                             </span>
                         </button>
-                        <button class="visually-hidden" data-swipe-remove @onclick="() => Remove(c)">@T["Editor_RemoveCard"]</button>
                     </div>
                 }
             }

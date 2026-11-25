@@ -1,8 +1,5 @@
-// Swipe left on any ".swipe-row" (touch or mouse). Its ".swipe-content" follows the finger.
-// - Plain rows: past a third of the width (at most 120px) the row's hidden [data-swipe-remove]
-//   button is clicked, so Blazor removes it like any other click.
-// - ".reveal" rows: the content slides open to uncover the row's ".swipe-actions" buttons and stays
-//   open until you tap elsewhere.
+// Swipe left on any ".swipe-row" (touch or mouse): its ".swipe-content" slides open to uncover the
+// row's ".swipe-actions" buttons (Edit, Delete) and stays open until you tap elsewhere.
 // Vertical drags scroll the page as usual, and the click that ends a drag never opens the row.
 (function () {
     let row = null, content = null, pointerId = null, startX = 0, startY = 0, startOffset = 0, dx = 0, dragging = false;
@@ -52,7 +49,7 @@
             row.classList.add('swiping');
             try { row.setPointerCapture(pointerId); } catch { }
         }
-        const limit = row.classList.contains('reveal') ? -(actionsWidth(row) + 40) : -Infinity;
+        const limit = -(actionsWidth(row) + 40);
         dx = Math.max(limit, Math.min(0, startOffset + mx));
         content.style.transform = `translateX(${dx}px)`;
     });
@@ -64,26 +61,13 @@
         if (!wasDragging) return;
         suppressUntil = Date.now() + 400; suppressIn = r;
 
-        if (r.classList.contains('reveal')) {
-            if (-moved > Math.min(60, actionsWidth(r) / 2)) {
-                if (openRow && openRow !== r) close(openRow);
-                openRow = r;
-                r.classList.add('open');
-                slide(r, -actionsWidth(r), true);
-            } else {
-                close(r);
-            }
-            return;
-        }
-
-        if (-moved > Math.min(120, r.offsetWidth / 3)) {
-            slide(r, -r.offsetWidth, true, () => {
-                r.classList.remove('swiping');
-                slide(r, 0, false);
-                r.querySelector('[data-swipe-remove]')?.click();
-            });
+        if (-moved > Math.min(60, actionsWidth(r) / 2)) {
+            if (openRow && openRow !== r) close(openRow);
+            openRow = r;
+            r.classList.add('open');
+            slide(r, -actionsWidth(r), true);
         } else {
-            slide(r, 0, true, () => r.classList.remove('swiping'));
+            close(r);
         }
     }
     document.addEventListener('pointerup', end);
@@ -97,7 +81,7 @@
     // The click that ends a drag, or closes an open row, must not also open the row.
     window.addEventListener('click', e => {
         if (Date.now() < suppressUntil && suppressIn?.contains(e.target)
-            && !e.target.closest('[data-swipe-remove]') && !e.target.closest('.swipe-actions')) {
+            && !e.target.closest('.swipe-actions')) {
             e.stopPropagation();
             e.preventDefault();
         }

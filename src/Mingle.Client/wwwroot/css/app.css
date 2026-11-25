@@ -327,16 +327,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .card-line { align-items: center; }
 .card-line > .icon { flex: none; }
 
-/* Swipe left to remove (deck editor) */
+/* Swipe left to uncover Edit / Delete (My decks, the deck editor's cards) */
 /* isolation keeps the card's z-index inside its row, so cards never cover the sticky "Save" footer. */
 .swipe-row { position: relative; isolation: isolate; touch-action: pan-y; border-radius: var(--radius); overflow: hidden; }
 .swipe-row .swipe-content { position: relative; z-index: 1; width: 100%; will-change: transform; }
-.swipe-row .swipe-bg {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end; gap: 6px;
-    padding-right: 18px; background: #C2412F; color: #fff; font-weight: 700; font-size: 14px;
-    opacity: 0; /* only while swiping, so it never peeks out at the rounded corners */
-}
-.swipe-row.swiping .swipe-bg { opacity: 1; }
 .swipe-row.swiping .swipe-content { cursor: grabbing; }
 .undo-bar {
     display: flex; align-items: center; gap: 12px; padding: 10px 14px;
@@ -351,7 +345,7 @@ select.field {
 }
 select.field.lang-select { padding-right: 32px; background-position: right 10px center; }
 
-/* Swipe to reveal actions (My decks) */
+/* The actions a swipe uncovers */
 .swipe-row .swipe-actions {
     position: absolute; top: 0; right: 0; bottom: 0; display: flex; opacity: 0;
 }
