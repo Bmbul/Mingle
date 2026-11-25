@@ -49,8 +49,8 @@ public sealed class HandoffSession
 
     public ImmutableArray<Card> Choices(Card answer) => Handoffs.GuessChoices(answer, Pool, random);
 
-    /// <summary>Heads: the reason comes out; tails: it stays secret until the end.</summary>
-    public bool FlipCoin() => random.Next(2) == 0;
+    /// <summary>Heads: the reason comes out; tails: it stays secret until the end. Leans against streaks.</summary>
+    public bool FlipCoin() => Handoffs.CoinShows([.. Passes.Select(p => p.Revealed)], random);
 
     /// <summary>The phone went from the holder to <paramref name="to"/>, who now holds it.</summary>
     public void Record(Player to, Card card, bool? guessedRight, bool revealed)

@@ -308,7 +308,7 @@
   <data name="Handoff_GuessHint" xml:space="preserve"><value>Գուշակիր բարձրաձայն, հետո սեղմիր պատասխանը։</value></data>
   <data name="Handoff_Right" xml:space="preserve"><value>Ճիշտ է</value></data>
   <data name="Handoff_Wrong" xml:space="preserve"><value>Չգուշակեցիր…</value></data>
-  <data name="Handoff_CoinRule" xml:space="preserve"><value>Գիր՝ պատճառը բացվում է։ Զինանշան՝ մնում է գաղտնի։</value></data>
+  <data name="Handoff_CoinRule" xml:space="preserve"><value>«Բացել»՝ պատճառը բացվում է։ «Գաղտնի»՝ մնում է գաղտնի։</value></data>
   <data name="Handoff_Flip" xml:space="preserve"><value>Նետել մետաղադրամը</value></data>
   <data name="Handoff_CardSaid" xml:space="preserve"><value>Քարտում գրված էր</value></data>
   <data name="Handoff_Secret" xml:space="preserve"><value>Սա գաղտնի կմնա… մինչև խաղի ավարտը։</value></data>
@@ -343,4 +343,6 @@
   <data name="Handoff_ReadAloud" xml:space="preserve"><value>{0}, կարդա բարձրաձայն</value></data>
   <data name="Handoff_PickAloud" xml:space="preserve"><value>Կարող եք քննարկել, հետո սեղմիր անունը և տուր հեռախոսը։</value></data>
   <data name="Setup_HandoffAloudLine" xml:space="preserve"><value>Կարդա բարձրաձայն և տուր հեռախոսը նրան, ով համապատասխանում է</value></data>
+  <data name="Handoff_Heads" xml:space="preserve"><value>Բացել</value></data>
+  <data name="Handoff_Tails" xml:space="preserve"><value>Գաղտնի</value></data>
 </root>

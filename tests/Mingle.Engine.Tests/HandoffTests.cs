@@ -57,4 +57,25 @@ public class HandoffTests
         Assert.True(mixed.MixesStyles);
         Assert.Equal(DeckStyle.Handoff, Deck(Pass("p")).Style);
     }
+
+    [Fact]
+    public void The_coin_is_even_and_avoids_long_streaks()
+    {
+        var random = new Random(7);
+        var tosses = new List<bool>();
+        var (shown, longest, streak) = (0, 0, 0);
+        bool? last = null;
+        for (var i = 0; i < 10_000; i++)
+        {
+            var show = Handoffs.CoinShows(tosses, random);
+            tosses.Add(show);
+            if (show) shown++;
+            streak = show == last ? streak + 1 : 1;
+            longest = Math.Max(longest, streak);
+            last = show;
+        }
+
+        Assert.InRange(shown, 4_900, 5_100);
+        Assert.True(longest <= 4, $"A streak of {longest}.");
+    }
 }

@@ -308,7 +308,7 @@
   <data name="Handoff_GuessHint" xml:space="preserve"><value>Guess out loud, then tap your answer.</value></data>
   <data name="Handoff_Right" xml:space="preserve"><value>Right!</value></data>
   <data name="Handoff_Wrong" xml:space="preserve"><value>Not quite…</value></data>
-  <data name="Handoff_CoinRule" xml:space="preserve"><value>Heads: the reason comes out. Tails: it stays a secret.</value></data>
+  <data name="Handoff_CoinRule" xml:space="preserve"><value>Reveal: the reason comes out. Secret: it stays a secret.</value></data>
   <data name="Handoff_Flip" xml:space="preserve"><value>Flip the coin</value></data>
   <data name="Handoff_CardSaid" xml:space="preserve"><value>The card said</value></data>
   <data name="Handoff_Secret" xml:space="preserve"><value>It stays a secret… until the end of the game.</value></data>
@@ -343,4 +343,6 @@
   <data name="Handoff_ReadAloud" xml:space="preserve"><value>{0}, read it out loud</value></data>
   <data name="Handoff_PickAloud" xml:space="preserve"><value>Discuss if you like, then tap the name and hand the phone over.</value></data>
   <data name="Setup_HandoffAloudLine" xml:space="preserve"><value>Read the card out loud and give the phone to whoever fits it</value></data>
+  <data name="Handoff_Heads" xml:space="preserve"><value>Reveal</value></data>
+  <data name="Handoff_Tails" xml:space="preserve"><value>Secret</value></data>
 </root>

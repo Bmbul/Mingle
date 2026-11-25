@@ -120,8 +120,22 @@ else if (stage == Stage.Coin)
         {
             <p class="muted">@T["Handoff_GuessLocked"]</p>
         }
-        <div class="coin @(flipping ? "flipping" : "")" aria-hidden="true">?</div>
-        <p class="muted center">@T["Handoff_CoinRule"]</p>
+        @* A two-faced coin: tossed up, spinning, and landing on the side that was drawn. *@
+        <div class="coin-stage" aria-hidden="true">
+            <div class="coin3d @toss">
+                <div class="face heads"><Icon Name="eye" Size="40" /><span>@T["Handoff_Heads"]</span></div>
+                <div class="face tails"><Icon Name="secret" Size="40" /><span>@T["Handoff_Tails"]</span></div>
+            </div>
+            <div class="coin-shadow @toss"></div>
+        </div>
+        @if (landed is { } shows)
+        {
+            <p class="coin-landed" aria-live="polite">@T[shows ? "Handoff_Heads" : "Handoff_Tails"]</p>
+        }
+        else
+        {
+            <p class="muted center">@T["Handoff_CoinRule"]</p>
+        }
     </main>
     <footer class="foot">
         <button class="btn" disabled="@flipping" @onclick="Flip">@T["Handoff_Flip"]</button>
@@ -164,6 +178,8 @@ else if (stage == Stage.Reveal && receiver is { } holder && card is { } said)
     private bool? guessedRight;
     private bool revealed;
     private bool flipping;
+    private string toss = "";
+    private bool? landed;
 
     protected override void OnInitialized()
     {
@@ -217,11 +233,18 @@ else if (stage == Stage.Reveal && receiver is { } holder && card is { } said)
 
     private async Task Flip()
     {
+        var shows = Game.FlipCoin();
         flipping = true;
+        toss = shows ? "toss-heads" : "toss-tails";
         StateHasChanged();
-        await Task.Delay(1200); // the coin spins before it lands
+        await Task.Delay(1700); // up, spinning, down with a little bounce
+        landed = shows;
+        StateHasChanged();
+        await Task.Delay(900);  // a moment to see which side it landed on
         flipping = false;
-        Reveal(Game.FlipCoin());
+        toss = "";
+        landed = null;
+        Reveal(shows);
     }
 
     private void Reveal(bool show)

@@ -314,7 +314,7 @@
   <data name="Handoff_GuessHint" xml:space="preserve"><value>Угадай вслух, потом нажми ответ.</value></data>
   <data name="Handoff_Right" xml:space="preserve"><value>В точку!</value></data>
   <data name="Handoff_Wrong" xml:space="preserve"><value>Мимо…</value></data>
-  <data name="Handoff_CoinRule" xml:space="preserve"><value>Орёл — причина раскрывается. Решка — остаётся секретом.</value></data>
+  <data name="Handoff_CoinRule" xml:space="preserve"><value>«Открыть» — причина раскрывается. «Секрет» — остаётся секретом.</value></data>
   <data name="Handoff_Flip" xml:space="preserve"><value>Подбросить монетку</value></data>
   <data name="Handoff_CardSaid" xml:space="preserve"><value>На карточке было</value></data>
   <data name="Handoff_Secret" xml:space="preserve"><value>Это останется секретом… до конца игры.</value></data>
@@ -349,4 +349,6 @@
   <data name="Handoff_ReadAloud" xml:space="preserve"><value>{0}, прочитай вслух</value></data>
   <data name="Handoff_PickAloud" xml:space="preserve"><value>Можно обсудить, потом нажми на имя и передай телефон.</value></data>
   <data name="Setup_HandoffAloudLine" xml:space="preserve"><value>Прочитай вслух и отдай телефон тому, кто подходит</value></data>
+  <data name="Handoff_Heads" xml:space="preserve"><value>Открыть</value></data>
+  <data name="Handoff_Tails" xml:space="preserve"><value>Секрет</value></data>
 </root>

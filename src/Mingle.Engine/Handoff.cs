@@ -33,6 +33,21 @@ public static class Handoffs
     }
 
     /// <summary>
+    /// The coin: true shows the reason, false keeps it secret. A plain 50/50 coin can easily show the reason five times
+    /// in a row, which feels broken in a game, so a streak gets less likely the longer it runs (50%, 35%, 20%) and never
+    /// goes past four. Both sides are treated alike, so over a game it stays even.
+    /// </summary>
+    /// <param name="earlier">The earlier tosses of this game, oldest first.</param>
+    public static bool CoinShows(IReadOnlyList<bool> earlier, Random random)
+    {
+        if (earlier.Count == 0) return random.Next(2) == 0;
+        var last = earlier[^1];
+        var streak = earlier.Reverse().TakeWhile(t => t == last).Count();
+        var keepGoing = streak switch { 1 => 0.5, 2 => 0.35, 3 => 0.2, _ => 0.0 };
+        return random.NextDouble() < keepGoing ? last : !last;
+    }
+
+    /// <summary>
     /// Who got the phone and why, most passes first (ties keep the playing order), with each player's right guesses.
     /// </summary>
     public static ImmutableArray<(Player Player, ImmutableArray<Handoff> Received, int RightGuesses)> Trail(
