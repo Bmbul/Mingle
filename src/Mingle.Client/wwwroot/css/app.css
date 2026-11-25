@@ -346,8 +346,11 @@ select.field {
 select.field.lang-select { padding-right: 32px; background-position: right 10px center; }
 
 /* The actions a swipe uncovers */
+/* Inset by the card's border and rounded like its right side, so the buttons stay hidden under a closed
+   card even at its rounded corners. */
 .swipe-row .swipe-actions {
-    position: absolute; top: 0; right: 0; bottom: 0; display: flex; opacity: 0;
+    position: absolute; top: 1px; right: 1px; bottom: 1px; display: flex; opacity: 0; overflow: hidden;
+    border-radius: 0 calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0;
 }
 .swipe-row.swiping .swipe-actions, .swipe-row.open .swipe-actions { opacity: 1; }
 .swipe-action {

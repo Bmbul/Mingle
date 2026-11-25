@@ -72,6 +72,12 @@
     }
     document.addEventListener('pointerup', end);
     document.addEventListener('pointercancel', end);
+    // The browser can drop the pointer without a pointerup (released outside the window, a system gesture):
+    // end the swipe there too, so a row never stays half open.
+    document.addEventListener('lostpointercapture', end);
+    window.addEventListener('blur', () => {
+        if (row && dragging) { const r = row; reset(); close(r); }
+    });
 
     // Dragging a link or text with a mouse would start the browser's own drag and cancel the swipe.
     document.addEventListener('dragstart', e => {
