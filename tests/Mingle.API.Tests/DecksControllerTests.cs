@@ -64,6 +64,19 @@ public class DecksControllerTests(GameHubTests.App app) : IClassFixture<GameHubT
     }
 
     [Fact]
+    public async Task Question_cards_can_be_limited_to_chosen_kinds()
+    {
+        var request = CardRequest.ForDeck([TestTopics.All[0]], null, null, null, [Lang.En], 10, kinds: ["wyr", "likely", "word"]);
+
+        Assert.Equal(["wyr", "likely"], request.AllowedKinds);
+        Assert.Contains("Use only these kinds", CardPrompt.UserMessage(request));
+        Assert.Equal(CardPrompt.Kinds, CardRequest.ForDeck([TestTopics.All[0]], null, null, null, [Lang.En], 10).AllowedKinds);
+
+        var bad = await app.CreateClient().PostAsJsonAsync("api/decks/write", new { theme = "x", kinds = new[] { "word" } });
+        Assert.Equal(HttpStatusCode.BadRequest, bad.StatusCode);
+    }
+
+    [Fact]
     public void A_deck_cannot_mix_blitz_cards_and_questions()
     {
         static Card Card(string id, CardKind kind) =>

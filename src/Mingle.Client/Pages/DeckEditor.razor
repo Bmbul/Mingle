@@ -241,6 +241,20 @@
             </div>
         </section>
 
+        <section class="stack">
+            <h2 class="label">@T["Editor_AiKinds"]</h2>
+            <div class="chips" role="group" aria-label="@T["Editor_AiKinds"]">
+                @foreach (var kind in CardKinds.Regular)
+                {
+                    var k = kind.Id;
+                    var on = kinds.Contains(k);
+                    @* At least one card type stays on. *@
+                    <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@(writing || (on && kinds.Count == 1))"
+                            @onclick="() => { if (!kinds.Remove(k)) kinds.Add(k); }">@T.KindName(k)</button>
+                }
+            </div>
+        </section>
+
         }
 
         <section class="stack">
@@ -414,6 +428,7 @@
     private ImmutableArray<TopicInfo> topics = [];
     private readonly HashSet<string> pickedTopics = [];
     private readonly HashSet<int> depths = [1, 2, 3];
+    private readonly HashSet<string> kinds = [.. CardKinds.Regular.Select(k => k.Id)];
     private readonly HashSet<Lang> languages = [Text.UiLang];
     private string setting = "couple";
     /// <summary>The game picked for a new, still empty deck.</summary>
@@ -565,7 +580,7 @@
         aiNote = null;
         try
         {
-            var (written, problem) = await Content.WriteCardsAsync([.. pickedTopics], theme.Trim(), [.. depths], setting, [.. languages], CardLimits.PerWrite, Style, [.. moods]);
+            var (written, problem) = await Content.WriteCardsAsync([.. pickedTopics], theme.Trim(), [.. depths], setting, [.. languages], CardLimits.PerWrite, Style, [.. moods], [.. kinds]);
             if (problem is not null)
             {
                 aiNote = problem == "429" ? T["Editor_TooMany"] : T["Editor_AiFailed"];

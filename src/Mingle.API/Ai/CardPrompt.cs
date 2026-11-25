@@ -64,6 +64,8 @@ public static class CardPrompt
             : request.Setting is { } setting
                 ? $"Write {request.Count} cards for a deck played by {CardRequest.Settings[setting]}."
                 : $"Write {request.Count} cards for a deck any group of friends or a couple can play.");
+        if (request.ChosenKinds)
+            text.AppendLine($"Use only these kinds, spread evenly (instead of the usual mix): {string.Join(", ", request.Kinds)}.");
         if (!request.Depths.IsDefaultOrEmpty)
             text.AppendLine($"Use only depth {string.Join(" and ", request.Depths)} (instead of the usual mix of depths).");
         if (request.Style == DeckStyle.Handoff)

@@ -131,7 +131,8 @@ public sealed class ContentService(HttpClient http, IJSRuntime js, DeviceDeckSto
     /// <param name="setting">Who plays: couple, friends, family, party or colleagues.</param>
     public async Task<(ImmutableArray<Card> Cards, string? Error)> WriteCardsAsync(
         IReadOnlyCollection<string> topicCodes, string theme, IReadOnlyCollection<int> depths, string setting,
-        IReadOnlyCollection<Lang> languages, int count, DeckStyle style = DeckStyle.Questions, IReadOnlyCollection<string>? moods = null)
+        IReadOnlyCollection<Lang> languages, int count, DeckStyle style = DeckStyle.Questions, IReadOnlyCollection<string>? moods = null,
+        IReadOnlyCollection<string>? kinds = null)
     {
         // Built by hand: the trimmed browser app has no reflection-based JSON for anonymous types.
         var request = new System.Text.Json.Nodes.JsonObject
@@ -144,6 +145,7 @@ public sealed class ContentService(HttpClient http, IJSRuntime js, DeviceDeckSto
             ["count"] = count,
             ["style"] = style switch { DeckStyle.Blitz => "associations", DeckStyle.Handoff => "handoff", _ => "questions" },
             ["moods"] = new System.Text.Json.Nodes.JsonArray([.. (moods ?? []).Select(m => (System.Text.Json.Nodes.JsonNode?)m)]),
+            ["kinds"] = new System.Text.Json.Nodes.JsonArray([.. (style == DeckStyle.Questions ? kinds ?? [] : []).Select(k => (System.Text.Json.Nodes.JsonNode?)k)]),
         };
         var body = request.ToJsonString();
         using var response = await http.PostAsync("api/decks/write", new StringContent(body, Encoding.UTF8, new MediaTypeHeaderValue("application/json")));

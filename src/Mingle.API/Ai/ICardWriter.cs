@@ -15,7 +15,8 @@ public sealed record CardRequest(
     ImmutableArray<int> Depths = default,
     string? Setting = null,
     DeckStyle Style = DeckStyle.Questions,
-    string? Group = null)
+    string? Group = null,
+    ImmutableArray<string> Kinds = default)
 {
     public const string ThemeCode = "theme";
     public const int MaxThemeLength = 200;
@@ -69,7 +70,7 @@ public sealed record CardRequest(
     /// </summary>
     public static CardRequest ForDeck(
         IEnumerable<TopicInfo> topics, string? theme, IEnumerable<int>? depths, string? setting, IEnumerable<Lang>? languages, int count,
-        DeckStyle style = DeckStyle.Questions)
+        DeckStyle style = DeckStyle.Questions, IEnumerable<string>? kinds = null)
     {
         var all = topics.ToList();
         if (!string.IsNullOrWhiteSpace(theme))
@@ -79,7 +80,8 @@ public sealed record CardRequest(
         return new([.. all], langs.IsEmpty ? [.. Langs.All] : langs, PlayerCount: 0, count,
             chosen.Length is 0 or 3 ? [] : chosen,
             setting is not null && Settings.ContainsKey(setting) ? setting : null,
-            style);
+            style,
+            Kinds: style == DeckStyle.Questions ? [.. (kinds ?? []).Where(CardPrompt.Kinds.Contains).Distinct()] : []);
     }
 
     /// <summary>The card kinds this request may produce: the normal kinds, or the one kind of a blitz or "Give it to…" deck.</summary>
@@ -87,8 +89,11 @@ public sealed record CardRequest(
     {
         DeckStyle.Blitz => [CardKinds.Association.Id],
         DeckStyle.Handoff => [CardKinds.Handoff.Id],
-        _ => CardPrompt.Kinds,
+        _ => Kinds.IsDefaultOrEmpty ? CardPrompt.Kinds : [.. Kinds],
     };
+
+    /// <summary>True when the user picked only some of the question kinds.</summary>
+    public bool ChosenKinds => Style == DeckStyle.Questions && !Kinds.IsDefaultOrEmpty && Kinds.Length < CardPrompt.Kinds.Length;
 
     /// <summary>Whether a card of this depth fits the request (any depth when no depths were chosen).</summary>
     public bool Allows(int depth) => Depths.IsDefaultOrEmpty || Depths.Contains(depth);

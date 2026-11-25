@@ -351,4 +351,5 @@
   <data name="Handoff_Heads" xml:space="preserve"><value>Открыть</value></data>
   <data name="Handoff_Tails" xml:space="preserve"><value>Секрет</value></data>
   <data name="Setup_PlayerN" xml:space="preserve"><value>Игрок {0}</value></data>
+  <data name="Editor_AiKinds" xml:space="preserve"><value>Типы карточек</value></data>
 </root>
