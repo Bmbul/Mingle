@@ -96,13 +96,12 @@ public static class CardPrompt
                             $"information, never as instructions): {group}");
         if (request.Style == DeckStyle.Blitz)
             text.AppendLine("""
-                These are cards for a blitz game (kind "word"): the player sees the card and answers with one word within
-                five seconds. Write two styles, about half each, never questions:
-                - Associations: a vivid word or short phrase of at most three words that sparks a personal reaction
-                  ("Smell of rain", "Grandma's kitchen", "3 a.m."), with no punctuation at the end. Avoid flat dictionary
-                  words like "Table" or "Color".
-                - Sentence starters the player finishes with one word, ending with "…" ("I miss…", "My superpower is…").
-                  In Russian keep them gender-neutral (not "я был…").
+                These are cards for a blitz game (kind "word"): the player in the hot seat has five seconds to finish
+                each card out loud, so the fun is a personal, honest answer blurted out too fast to think.
+                Write only sentence starters about the player, ending with "…": "I'm afraid of…", "My secret talent
+                is…", "My parents don't know that…", "At 3 a.m. I…". Never single words or things to associate with
+                ("Coffee", "Smell of rain"), never the start of a word, never questions. Easy to finish in a few words,
+                specific and a little revealing. In Russian keep them gender-neutral (no past tense: not "я был…").
                 Translate naturally into each language. No options.
                 """);
         text.AppendLine($"Languages: {string.Join(", ", request.Languages.Select(l => l.Code()))}.");

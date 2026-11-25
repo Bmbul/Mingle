@@ -148,22 +148,23 @@ public class CardWriterTests
     }
 
     [Fact]
-    public void Association_requests_accept_only_short_words()
+    public void Blitz_requests_accept_only_sentence_starters()
     {
         var words = Request with { Style = DeckStyle.Blitz };
         object Word(string en, string hy) => new { kind = "word", depth = 1, topic = "travel", text = new { en, hy }, options = new { } };
 
         var cards = CardParser.Parse(Json(
-            Word("Sea.", "Ծով։"),                                   // trailing stops are trimmed
-            Word("What is the sea?", "Ի՞նչ է ծովը"),               // a question
-            Word("A very long phrase about the sea", "Շատ երկար"), // too long
-            Word("I miss…", "Կարոտում եմ…"),                       // a starter keeps its "…"
-            Open("Where to?", "Ո՞ւր")), words);                     // not an association
+            Word("Sea", "Ծով"),                                                    // a flat word, not a starter
+            Word("What is the sea?…", "Ի՞նչ է ծովը…"),                            // a question
+            Word("The thing I would most like to do this summer is…", "Շատ…"),     // too long
+            Word("I miss...", "Կարոտում եմ…"),                                    // "..." becomes "…"
+            Word("My secret talent is…", "Իմ գաղտնի տաղանդը…"),
+            Open("Where to?", "Ո՞ւր")), words);                                   // not a blitz card
 
-        Assert.Equal(["Sea", "I miss…"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
-        Assert.Equal("Ծով", cards[0].Texts[Lang.Hy].Text);
+        Assert.Equal(["I miss…", "My secret talent is…"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
         Assert.Contains("\"word\"", JsonSerializer.Serialize(CardPrompt.Schema(words)));
         Assert.DoesNotContain("\"word\"", JsonSerializer.Serialize(CardPrompt.Schema(Request)));
+        Assert.Contains("sentence starters", CardPrompt.UserMessage(words));
     }
 
     [Fact]

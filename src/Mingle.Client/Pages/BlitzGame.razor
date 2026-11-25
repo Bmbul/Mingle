@@ -67,7 +67,7 @@ else if (stage == Stage.Running && card is { } current)
     </header>
     <main class="main center-screen">
         <p class="blitz-card" lang="@Game.Current!.Lang.Code()">@CardText(current)</p>
-        <p class="blitz-hint">@(IsToFinish(current) ? T["Blitz_HintFinish"] : T["Blitz_HintWord"])</p>
+        <p class="blitz-hint">@T["Blitz_HintFinish"]</p>
         <p class="muted small">@T["Blitz_Answered", answered]</p>
     </main>
     <footer class="foot">
@@ -115,7 +115,6 @@ else if (stage == Stage.Running && card is { } current)
     private string TurnLeft => Math.Max(0, (int)Math.Ceiling((turnEnds - DateTime.UtcNow).TotalSeconds)).ToString();
 
     /// <summary>"Սիրում եմ…" or "Արևա…": the player finishes it instead of saying an association.</summary>
-    private bool IsToFinish(Card c) => CardText(c).TrimEnd() is var t && (t.EndsWith('…') || t.EndsWith("..."));
 
     private string CardText(Card c)
     {

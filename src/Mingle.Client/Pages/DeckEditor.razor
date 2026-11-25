@@ -159,6 +159,10 @@
         </div>
         @if (sheet == "generate")
         {
+        @if (Style == DeckStyle.Blitz)
+        {
+            <p class="muted small">@T["Editor_BlitzAiHint"]</p>
+        }
         @if (Style == DeckStyle.Handoff)
         {
         @* "Give it to…" cards are about the people in the room: moods instead of topics and depth. *@
@@ -227,6 +231,9 @@
                       @bind="theme" @bind:event="oninput" disabled="@writing"></textarea>
         </section>
 
+        @* Depth and card types are for question decks; blitz cards are all sentences to finish fast. *@
+        @if (Style == DeckStyle.Questions)
+        {
         <section class="stack">
             <h2 class="label">@T["Editor_AiDepth"]</h2>
             <div class="chips" role="group" aria-label="@T["Editor_AiDepth"]">
@@ -254,6 +261,7 @@
                 }
             </div>
         </section>
+        }
 
         }
 
