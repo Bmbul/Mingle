@@ -165,6 +165,13 @@ namespace Mingle.DAL.Migrations
                         },
                         new
                         {
+                            Id = (short)9,
+                            Audience = "Everyone",
+                            Code = "cringe",
+                            ResponseType = "Choice"
+                        },
+                        new
+                        {
                             Id = (short)7,
                             Audience = "FollowTurnStyle",
                             Code = "word",

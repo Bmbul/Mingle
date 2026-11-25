@@ -7,7 +7,7 @@ namespace Mingle.API.Ai;
 /// <summary>The instructions and output schema for writing cards. Pure, so it can be tested.</summary>
 public static class CardPrompt
 {
-    public static readonly string[] Kinds = ["open", "finish", "wyr", "likely", "guess", "rate"];
+    public static readonly string[] Kinds = ["open", "finish", "wyr", "likely", "guess", "rate", "cringe"];
 
     public const string System = """
         You write question cards for Mingle, a conversation game that friends and couples play together,
@@ -17,17 +17,27 @@ public static class CardPrompt
         Card kinds:
         - open: an open question. Never a yes/no question.
         - finish: the start of a sentence the player completes, ending with "…".
-        - wyr: "would you rather". Give exactly two short, balanced options; the card text is just the options.
-          The app shows them after "Would you rather…" / «Ո՞րն ես նախընտրում» / «Что ты выберешь?», so each
-          option starts with a verb in the infinitive and reads as a full choice on its own:
-          en: Live in a mountain village / Live in a seaside city
-          hy: Ապրել լեռնային գյուղում / Ապրել ծովափնյա քաղաքում
-          ru: Жить в горной деревне / Жить в приморском городе
+        - wyr: "would you rather", a real dilemma. Give exactly two short options; the card text is just the options.
+          Make the choice hard: two extremes, two prices or two temptations, equally attractive or equally painful,
+          so people argue about it ("cheat ten times or be cheated on once"). Never an easy pick like beach or
+          mountains. The app shows them after "Would you rather…" / «Ո՞րն ես նախընտրում» / «Что ты выберешь?», so
+          each option starts with a verb in the infinitive and reads as a full choice on its own:
+          en: Always know when someone lies to you / Never be lied to, but never know the truth about yourself
+          hy: Միշտ իմանալ, երբ քեզ ստում են / Երբեք չլսել սուտ, բայց չիմանալ ճշմարտությունը քո մասին
+          ru: Всегда знать, когда тебе врут / Никогда не слышать лжи, но не знать правды о себе
+          en: Lose all your photos / Lose all your messages
+          hy: Կորցնել բոլոր լուսանկարներդ / Կորցնել բոլոր նամակագրություններդ
+          ru: Потерять все фотографии / Потерять всю переписку
         - likely: "who is most likely to…"; players vote for someone at the table.
         - guess: a question asked directly to the person whose turn it is, as "you"; the app tells the others to
           guess the answer. Never write "Guess…", "this player" or "their": write "Which country would you pick
           for a trip with no plan?", not "Guess which country this player would pick".
         - rate: a question answered on a scale from 1 to 10, starting with "From 1 to 10," or its translation.
+        - cringe: "cringe or fine?" A short everyday situation or habit, as a statement, not a question; everyone
+          votes «Cringe» or «Fine» (the app adds the two answers). Pick things people really disagree about:
+          en: Replying to a long message with just "ok"
+          hy: Երկար նամակին պատասխանել միայն «լավ» բառով
+          ru: Ответить на длинное сообщение одним «ок»
 
         Depth:
         1 = light and playful, fine with new friends.

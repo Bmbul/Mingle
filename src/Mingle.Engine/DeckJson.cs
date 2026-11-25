@@ -132,7 +132,7 @@ public static class DeckJson
                 p => p.Value.EnumerateArray().Select(x => x.GetString() ?? "").ToImmutableArray())
             : ImmutableDictionary<Lang, ImmutableArray<string>>.Empty;
 
-        var needsOptions = kind.Response == ResponseType.Choice;
+        var needsOptions = kind.CardsHaveOptions;
         var result = ImmutableDictionary.CreateBuilder<Lang, CardText>();
         foreach (var (lang, text) in texts)
         {

@@ -332,7 +332,7 @@
                                 @onclick="() => { if (!picked.Remove(key)) picked.Add(key); }">
                             <span class="box @(on ? "on" : "")" aria-hidden="true">@if (on) { <Icon Name="check" Size="14" Stroke="3" /> }</span>
                             <span class="grow">
-                                <span class="row-title">@(text.Options.IsEmpty ? text.Text : string.Join(" / ", text.Options))</span>
+                                <span class="row-title">@(card.Kind.CardsHaveOptions ? string.Join(" / ", text.Options) : text.Text)</span>
                                 <span class="muted small">@(already ? T["Editor_AlreadyIn"] : $"{T.KindName(card.KindId)} · {T[$"Depth_{card.Depth}"]}")</span>
                             </span>
                         </button>
@@ -502,7 +502,7 @@
     private static string PreviewOf(Card card)
     {
         var text = card.TextFor(Text.UiLang);
-        return text.Options.IsEmpty ? text.Text : string.Join(" / ", text.Options);
+        return card.Kind.CardsHaveOptions ? string.Join(" / ", text.Options) : text.Text;
     }
 
     private async Task LoadSourceDecks()

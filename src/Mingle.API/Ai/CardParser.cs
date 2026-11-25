@@ -84,14 +84,14 @@ public static class CardParser
                     tidy = tidy.TrimEnd('.', '։', '!');
                     if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 40 || tidy.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length > 4) return null;
                 }
-                if (kind == CardKinds.Handoff.Id)
+                if (kind is "handoff" or "cringe")
                 {
-                    // It follows "Give the phone to": a description, never a question, nothing long.
+                    // "Give it to…" follows "Give the phone to"; "cringe or fine" is a situation: never a question, nothing long.
                     tidy = tidy.TrimEnd('.', '։', '!');
                     if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 100) return null;
                 }
-                // Every kind but "finish the sentence", associations and "Give it to…" is a question.
-                if (lang == Lang.Hy && kind is not ("finish" or "word" or "handoff")) tidy = ArmenianQuestions.Fix(tidy);
+                // Every kind but "finish the sentence", associations, "Give it to…" and "cringe or fine" is a question.
+                if (lang == Lang.Hy && kind is not ("finish" or "word" or "handoff" or "cringe")) tidy = ArmenianQuestions.Fix(tidy);
                 texts[lang] = new CardText(tidy);
             }
         }

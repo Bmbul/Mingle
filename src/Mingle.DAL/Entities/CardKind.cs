@@ -22,6 +22,7 @@ public sealed class CardKind
         ["rate"] = 6,
         ["word"] = 7,
         ["handoff"] = 8,
+        ["cringe"] = 9,
     };
 
     public static IEnumerable<CardKind> All() =>

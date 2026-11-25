@@ -105,6 +105,44 @@
       "text": {
         "en": "What's a small gesture from me that you'd like more of?",
         "hy": "Իմ ո՞ր փոքրիկ ժեստն ես ուզում ավելի հաճախ տեսնել։",
-        "ru": "Какого маленького жеста с моей стороны тебе хотелось бы больше?" } }
+        "ru": "Какого маленького жеста с моей стороны тебе хотелось бы больше?" } },
+    { "id": "cpp-21", "kind": "cringe", "depth": 1, "topics": ["us"],
+      "text": {
+        "en": "Posting a photo of your partner every day",
+        "hy": "Ամեն օր զուգընկերոջդ լուսանկարը հրապարակել",
+        "ru": "Каждый день выкладывать фото своей половинки" } },
+    { "id": "cpp-22", "kind": "cringe", "depth": 1, "topics": ["us"],
+      "text": {
+        "en": "Calling each other \"baby\" in front of everyone",
+        "hy": "Բոլորի ներկայությամբ իրար «բալիկ» ասել",
+        "ru": "Называть друг друга «зая» при всех" } },
+    { "id": "cpp-23", "kind": "cringe", "depth": 2, "topics": ["conflict"],
+      "text": {
+        "en": "Checking your partner's phone",
+        "hy": "Ստուգել զուգընկերոջդ հեռախոսը",
+        "ru": "Проверять телефон партнёра" } },
+    { "id": "cpp-24", "kind": "cringe", "depth": 2, "topics": ["love"],
+      "text": {
+        "en": "Staying friends with an ex",
+        "hy": "Նախկինի հետ ընկեր մնալ",
+        "ru": "Оставаться друзьями с бывшими" } },
+    { "id": "cpp-25", "kind": "wyr", "depth": 2, "topics": ["love"],
+      "text": {
+        "en": "Would you rather…",
+        "hy": "Ո՞րն ես նախընտրում",
+        "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Cheat ten times", "Be cheated on once"],
+        "hy": ["Տասն անգամ դավաճանել", "Մեկ անգամ դավաճանության զոհ դառնալ"],
+        "ru": ["Изменить десять раз", "Один раз стать жертвой измены"] } },
+    { "id": "cpp-26", "kind": "wyr", "depth": 2, "topics": ["us"],
+      "text": {
+        "en": "Would you rather…",
+        "hy": "Ո՞րն ես նախընտրում",
+        "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Read your partner's mind for a day", "Let your partner read yours for a day"],
+        "hy": ["Մեկ օր կարդալ զուգընկերոջդ մտքերը", "Մեկ օր թույլ տալ, որ զուգընկերդ կարդա քո մտքերը"],
+        "ru": ["Один день читать мысли партнёра", "Один день дать партнёру читать твои мысли"] } }
   ]
 }

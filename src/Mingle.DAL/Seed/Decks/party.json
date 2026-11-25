@@ -106,6 +106,82 @@
       "text": {
         "en": "What would you do with a completely free Saturday?",
         "hy": "Ի՞նչ կանեիր լրիվ ազատ շաբաթ օրը։",
-        "ru": "Чем ты займёшься в совершенно свободную субботу?" } }
+        "ru": "Чем ты займёшься в совершенно свободную субботу?" } },
+    { "id": "pty-21", "kind": "cringe", "depth": 1, "topics": ["habits"],
+      "text": {
+        "en": "Replying to a long message with just \"ok\"",
+        "hy": "Երկար նամակին պատասխանել միայն «լավ» բառով",
+        "ru": "Ответить на длинное сообщение одним «ок»" } },
+    { "id": "pty-22", "kind": "cringe", "depth": 1, "topics": ["travel"],
+      "text": {
+        "en": "Clapping when the plane lands",
+        "hy": "Ծափահարել, երբ ինքնաթիռը վայրէջք է կատարում",
+        "ru": "Хлопать, когда самолёт приземлился" } },
+    { "id": "pty-23", "kind": "cringe", "depth": 1, "topics": ["habits"],
+      "text": {
+        "en": "Sending voice messages longer than two minutes",
+        "hy": "Երկու րոպեից երկար ձայնային հաղորդագրություններ ուղարկել",
+        "ru": "Отправлять голосовые длиннее двух минут" } },
+    { "id": "pty-24", "kind": "cringe", "depth": 1, "topics": ["funny"],
+      "text": {
+        "en": "Dancing alone in the middle of a wedding",
+        "hy": "Հարսանիքի մեջտեղում մենակ պարել",
+        "ru": "Танцевать в одиночку посреди свадьбы" } },
+    { "id": "pty-25", "kind": "cringe", "depth": 1, "topics": ["food"],
+      "text": {
+        "en": "Taking the leftovers home from a restaurant",
+        "hy": "Ռեստորանից մնացած ուտելիքը տուն տանել",
+        "ru": "Забрать остатки еды из ресторана домой" } },
+    { "id": "pty-26", "kind": "cringe", "depth": 1, "topics": ["habits"],
+      "text": {
+        "en": "Liking your own photo",
+        "hy": "Սեփական լուսանկարին լայք տալ",
+        "ru": "Лайкнуть собственное фото" } },
+    { "id": "pty-27", "kind": "cringe", "depth": 1, "topics": ["everyday"],
+      "text": {
+        "en": "Wearing socks with sandals",
+        "hy": "Սանդալներով գուլպա հագնել",
+        "ru": "Носить носки с сандалиями" } },
+    { "id": "pty-28", "kind": "cringe", "depth": 1, "topics": ["habits"],
+      "text": {
+        "en": "Calling someone without texting first",
+        "hy": "Զանգել առանց նախապես գրելու",
+        "ru": "Позвонить, не написав сначала" } },
+    { "id": "pty-29", "kind": "wyr", "depth": 2, "topics": ["values"],
+      "text": {
+        "en": "Would you rather…",
+        "hy": "Ո՞րն ես նախընտրում",
+        "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Always say exactly what you think", "Never be able to say what you think"],
+        "hy": ["Միշտ ասել ճիշտ այն, ինչ մտածում ես", "Երբեք չկարողանալ ասել այն, ինչ մտածում ես"],
+        "ru": ["Всегда говорить ровно то, что думаешь", "Никогда не иметь возможности сказать, что думаешь"] } },
+    { "id": "pty-30", "kind": "wyr", "depth": 2, "topics": ["dreams"],
+      "text": {
+        "en": "Would you rather…",
+        "hy": "Ո՞րն ես նախընտրում",
+        "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Be famous but lonely", "Be unknown but deeply loved"],
+        "hy": ["Լինել հայտնի, բայց միայնակ", "Լինել անհայտ, բայց շատ սիրված"],
+        "ru": ["Иметь славу, но жить в одиночестве", "Жить без славы, но в большой любви"] } },
+    { "id": "pty-31", "kind": "wyr", "depth": 1, "topics": ["funny"],
+      "text": {
+        "en": "Would you rather…",
+        "hy": "Ո՞րն ես նախընտրում",
+        "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Show your parents your search history", "Read your chats aloud to your friends"],
+        "hy": ["Ծնողներիդ ցույց տալ քո որոնումների պատմությունը", "Ընկերներիդ համար բարձրաձայն կարդալ քո նամակագրությունը"],
+        "ru": ["Показать родителям свою историю поиска", "Прочитать друзьям вслух свою переписку"] } },
+    { "id": "pty-32", "kind": "wyr", "depth": 1, "topics": ["habits"],
+      "text": {
+        "en": "Would you rather…",
+        "hy": "Ո՞րն ես նախընտրում",
+        "ru": "Что ты выберешь?" },
+      "options": {
+        "en": ["Spend a month without your phone", "Spend a month without your voice"],
+        "hy": ["Մեկ ամիս անցկացնել առանց հեռախոսի", "Մեկ ամիս անցկացնել առանց ձայնի"],
+        "ru": ["Провести месяц без телефона", "Провести месяц без голоса"] } }
   ]
 }

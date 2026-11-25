@@ -79,3 +79,28 @@ public class HandoffTests
         Assert.True(longest <= 4, $"A streak of {longest}.");
     }
 }
+
+public class CringeOrFineTests
+{
+    [Fact]
+    public void A_cringe_card_holds_only_a_text_and_the_kind_adds_both_answers()
+    {
+        var deck = DeckJson.Parse("""
+            { "id": "d", "name": { "en": "D" }, "cards": [
+              { "id": "c1", "kind": "cringe", "depth": 1, "topics": [],
+                "text": { "en": "Clapping when the plane lands", "hy": "Ծափահարել վայրէջքին" } } ] }
+            """);
+        var card = deck.Cards[0];
+
+        Assert.Equal(["Ամոթ է", "Նորմալ է"], card.TextFor(Lang.Hy).Options.ToArray());
+        Assert.Equal(["Cringe", "Fine"], card.TextFor(Lang.En).Options.ToArray());
+        Assert.Equal("Clapping when the plane lands", card.TextFor(Lang.En).Text);
+        Assert.False(card.Kind.CardsHaveOptions);
+        Assert.True(CardKinds.WouldYouRather.CardsHaveOptions);
+        Assert.Throws<FormatException>(() => DeckJson.Parse("""
+            { "id": "d", "name": { "en": "D" }, "cards": [
+              { "id": "c1", "kind": "cringe", "depth": 1, "topics": [],
+                "text": { "en": "x" }, "options": { "en": ["a", "b"] } } ] }
+            """));
+    }
+}

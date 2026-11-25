@@ -29,7 +29,7 @@
             {
                 var text = card.TextFor(Text.UiLang);
                 <div class="card">
-                    <span class="row-title">@(text.Options.IsEmpty ? text.Text : string.Join(" / ", text.Options))</span>
+                    <span class="row-title">@(card.Kind.CardsHaveOptions ? string.Join(" / ", text.Options) : text.Text)</span>
                     <span class="muted small">@T.KindName(card.KindId) · @T[$"Depth_{card.Depth}"]</span>
                 </div>
             }

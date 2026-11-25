@@ -63,9 +63,14 @@ public enum InputMode { Spoken, Text, Choice, PlayerVote, Scale }
 public enum DeckStyle { Questions, Blitz, Handoff }
 
 /// <param name="Style">The game the kind belongs to: normal games, mixes and fallbacks use only question kinds.</param>
-public sealed record CardKind(string Id, ResponseType Response, Audience Audience, DeckStyle Style = DeckStyle.Questions)
+/// <param name="FixedOptions">Two answers the kind always offers ("Cringe" / "Fine"), so its cards hold only a text.</param>
+public sealed record CardKind(string Id, ResponseType Response, Audience Audience, DeckStyle Style = DeckStyle.Questions,
+    ImmutableDictionary<Lang, ImmutableArray<string>>? FixedOptions = null)
 {
     public bool IsQuestion => Style == DeckStyle.Questions;
+
+    /// <summary>Cards of this kind carry their own two options (would you rather).</summary>
+    public bool CardsHaveOptions => Response == ResponseType.Choice && FixedOptions is null;
 }
 
 public static class CardKinds
@@ -76,13 +81,21 @@ public static class CardKinds
     public static readonly CardKind MostLikelyTo = new("likely", ResponseType.PlayerVote, Audience.Everyone);
     public static readonly CardKind GuessMyAnswer = new("guess", ResponseType.Free, Audience.AboutTurnPlayer);
     public static readonly CardKind RateIt = new("rate", ResponseType.Scale, Audience.FollowTurnStyle);
+    /// <summary>A situation everyone judges: cringe, or totally fine? The two answers come with the kind.</summary>
+    public static readonly CardKind CringeOrFine = new("cringe", ResponseType.Choice, Audience.Everyone, DeckStyle.Questions,
+        new Dictionary<Lang, ImmutableArray<string>>
+        {
+            [Lang.En] = ["Cringe", "Fine"],
+            [Lang.Hy] = ["Ամոթ է", "Նորմալ է"],
+            [Lang.Ru] = ["Стрём", "Норм"],
+        }.ToImmutableDictionary());
     /// <summary>A single word or short phrase; the player says the first word it brings to mind.</summary>
     public static readonly CardKind Association = new("word", ResponseType.Free, Audience.FollowTurnStyle, DeckStyle.Blitz);
     /// <summary>"Give the phone to…": who it describes, written to follow those words ("the best cook here").</summary>
     public static readonly CardKind Handoff = new("handoff", ResponseType.PlayerVote, Audience.Everyone, DeckStyle.Handoff);
 
     public static ImmutableArray<CardKind> All { get; } =
-        [OpenQuestion, FinishSentence, WouldYouRather, MostLikelyTo, GuessMyAnswer, RateIt, Association, Handoff];
+        [OpenQuestion, FinishSentence, WouldYouRather, MostLikelyTo, GuessMyAnswer, RateIt, CringeOrFine, Association, Handoff];
 
     /// <summary>The kinds normal games play.</summary>
     public static ImmutableArray<CardKind> Regular { get; } = [.. All.Where(k => k.IsQuestion)];
@@ -118,10 +131,16 @@ public sealed record Card(
     public bool Supports(Lang lang) => Texts.ContainsKey(lang);
 
     /// <summary>The card in the requested language, falling back to English, then to any language it has.</summary>
-    public CardText TextFor(Lang lang) =>
-        Texts.TryGetValue(lang, out var text) ? text
-        : Texts.TryGetValue(Lang.En, out var en) ? en
-        : Texts.Values.First();
+    public CardText TextFor(Lang lang)
+    {
+        var text = Texts.TryGetValue(lang, out var own) ? own
+            : Texts.TryGetValue(Lang.En, out var en) ? en
+            : Texts.Values.First();
+        // A kind with fixed answers ("Cringe" / "Fine") supplies them in the reader's language.
+        return Kind.FixedOptions is { } fixedOptions && text.Options.IsEmpty
+            ? text with { Options = fixedOptions.GetValueOrDefault(lang, fixedOptions[Lang.En]) }
+            : text;
+    }
 }
 
 public sealed record Deck(string Id, ImmutableDictionary<Lang, string> Names, ImmutableArray<Card> Cards)
