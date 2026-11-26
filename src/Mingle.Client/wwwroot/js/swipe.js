@@ -1,8 +1,12 @@
 // Swipe left on any ".swipe-row" (touch or mouse): its ".swipe-content" slides open to uncover the
 // row's ".swipe-actions" buttons (Edit, Delete) and stays open until you tap elsewhere.
 // Vertical drags scroll the page as usual, and the click that ends a drag never opens the row.
+// Touch uses touch events: once a finger clearly moves sideways, the page is told not to scroll, which is the
+// only reliable way on iPhone (WebKit cancels pointer-based swipes as soon as it starts scrolling).
+// A mouse uses pointer events.
 (function () {
-    let row = null, content = null, pointerId = null, startX = 0, startY = 0, startOffset = 0, dx = 0, dragging = false;
+    let row = null, content = null, startX = 0, startY = 0, startOffset = 0, dx = 0, dragging = false;
+    let pointerId = null;   // the mouse pointer being tracked, if any
     let openRow = null;
     let suppressUntil = 0, suppressIn = null;
 
@@ -25,38 +29,40 @@
 
     function reset() { row = null; content = null; pointerId = null; dx = 0; dragging = false; }
 
-    document.addEventListener('pointerdown', e => {
+    // A finger or the mouse goes down. Returns false when the gesture is not ours.
+    function start(target, x, y) {
         // A tap anywhere but on an open row's buttons closes it (and the tap does nothing else).
-        if (openRow && !e.target.closest('.swipe-actions')) {
+        if (openRow && !target.closest('.swipe-actions')) {
             const wasOpen = openRow;
             close(openRow);
-            if (wasOpen.contains(e.target)) { suppressUntil = Date.now() + 600; suppressIn = wasOpen; reset(); return; }
+            if (wasOpen.contains(target)) { suppressUntil = Date.now() + 600; suppressIn = wasOpen; reset(); return false; }
         }
-        const r = e.target.closest('.swipe-row');
-        if (!r || e.button > 0 || e.target.closest('.swipe-actions')) return;
-        row = r; content = r.querySelector('.swipe-content'); pointerId = e.pointerId;
-        startX = e.clientX; startY = e.clientY; dx = 0; dragging = false;
+        const r = target.closest('.swipe-row');
+        if (!r || target.closest('.swipe-actions')) return false;
+        row = r; content = r.querySelector('.swipe-content');
+        startX = x; startY = y; dx = 0; dragging = false;
         startOffset = r.classList.contains('open') ? -actionsWidth(r) : 0;
-    });
+        return true;
+    }
 
-    document.addEventListener('pointermove', e => {
-        if (!row || e.pointerId !== pointerId || !content) return;
-        const mx = e.clientX - startX, my = e.clientY - startY;
+    // The finger or mouse moves. Returns true while the row is being dragged sideways.
+    function move(x, y) {
+        if (!row || !content) return false;
+        const mx = x - startX, my = y - startY;
         if (!dragging) {
-            if (Math.abs(my) > 12 && Math.abs(my) > Math.abs(mx) * 1.2) { reset(); return; } // a scroll, not a swipe
-            if (mx > -8 || Math.abs(mx) < Math.abs(my) * 1.2) return; // mostly sideways, a little slant is fine
+            if (Math.abs(my) > 12 && Math.abs(my) > Math.abs(mx) * 1.2) { reset(); return false; } // a scroll, not a swipe
+            if (mx > -8 || Math.abs(mx) < Math.abs(my) * 1.2) return false; // mostly sideways, a little slant is fine
             dragging = true;
             row.classList.add('swiping');
-            try { row.setPointerCapture(pointerId); } catch { }
         }
         // The card stops where the buttons end, so no gap ever opens between them.
-        const limit = -actionsWidth(row);
-        dx = Math.max(limit, Math.min(0, startOffset + mx));
+        dx = Math.max(-actionsWidth(row), Math.min(0, startOffset + mx));
         content.style.transform = `translateX(${dx}px)`;
-    });
+        return true;
+    }
 
-    function end(e) {
-        if (!row || e.pointerId !== pointerId) return;
+    function end() {
+        if (!row) return;
         const r = row, moved = dx, wasDragging = dragging;
         reset();
         if (!wasDragging) return;
@@ -71,11 +77,37 @@
             close(r);
         }
     }
-    document.addEventListener('pointerup', end);
-    document.addEventListener('pointercancel', end);
-    // The browser can drop the pointer without a pointerup (released outside the window, a system gesture):
-    // end the swipe there too, so a row never stays half open.
-    document.addEventListener('lostpointercapture', end);
+
+    // Touch (phones).
+    document.addEventListener('touchstart', e => {
+        if (e.touches.length !== 1) { if (row) end(); return; }
+        start(e.target, e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+    document.addEventListener('touchmove', e => {
+        if (!row || e.touches.length !== 1) return;
+        // Once the drag is sideways, keep the browser from scrolling or taking the gesture over.
+        if (move(e.touches[0].clientX, e.touches[0].clientY) && e.cancelable) e.preventDefault();
+    }, { passive: false });
+    document.addEventListener('touchend', end);
+    document.addEventListener('touchcancel', end);
+
+    // Mouse (and pen). Touch is left to the handlers above.
+    document.addEventListener('pointerdown', e => {
+        if (e.pointerType === 'touch' || e.button > 0) return;
+        if (start(e.target, e.clientX, e.clientY)) pointerId = e.pointerId;
+    });
+    document.addEventListener('pointermove', e => {
+        if (e.pointerType === 'touch' || e.pointerId !== pointerId) return;
+        const wasDragging = dragging;
+        if (move(e.clientX, e.clientY) && !wasDragging) {
+            try { row.setPointerCapture(pointerId); } catch { }
+        }
+    });
+    const pointerEnd = e => { if (e.pointerType !== 'touch' && e.pointerId === pointerId) end(); };
+    document.addEventListener('pointerup', pointerEnd);
+    document.addEventListener('pointercancel', pointerEnd);
+    // The browser can drop the pointer without a pointerup (released outside the window): end the swipe there too.
+    document.addEventListener('lostpointercapture', pointerEnd);
     window.addEventListener('blur', () => {
         if (row && dragging) { const r = row; reset(); close(r); }
     });
