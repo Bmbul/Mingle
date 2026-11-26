@@ -147,6 +147,7 @@ else if (stage == Stage.Reveal && receiver is { } holder && card is { } said)
         }
         else
         {
+            @GuessLine()
             <div class="coin" aria-hidden="true"><Icon Name="secret" Size="44" /></div>
             <p class="blitz-hint center">@T["Handoff_Secret"]</p>
         }
@@ -217,7 +218,9 @@ else if (stage == Stage.Reveal && receiver is { } holder && card is { } said)
     private void Guessed(Card choice)
     {
         guessedRight = choice.Id == card!.Id;
-        AfterGuess();
+        // A wrong guess keeps the reason secret until the end, like the coin's secrets.
+        if (guessedRight == false) Reveal(false);
+        else AfterGuess();
     }
 
     private void AfterGuess()
