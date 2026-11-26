@@ -172,7 +172,6 @@
   <data name="Editor_EmptyCard" xml:space="preserve"><value>Пустая карточка</value></data>
   <data name="Editor_AddCard" xml:space="preserve"><value>Добавить карточку</value></data>
   <data name="Editor_Save" xml:space="preserve"><value>Сохранить колоду</value></data>
-  <data name="Editor_Saved" xml:space="preserve"><value>Сохранено.</value></data>
   <data name="Editor_NeedName" xml:space="preserve"><value>Дай колоде название.</value></data>
   <data name="Editor_NeedCard" xml:space="preserve"><value>Добавь хотя бы одну карточку.</value></data>
   <data name="Editor_Incomplete" xml:space="preserve"><value>У некоторых карточек ещё нет текста.</value></data>

@@ -444,7 +444,6 @@
     private List<EditCard> cards = [];
     private EditCard? open;
     private string? error;
-    private string? note;
     private string theme = "";
     private bool writing;
     private string? aiNote;
@@ -592,7 +591,7 @@
     private bool CanSave => name.Trim().Length > 0 && cards.Count > 0 && cards.All(c => c.IsComplete);
 
     private string Status =>
-        error ?? note
+        error
         ?? (name.Trim().Length == 0 ? T["Editor_NeedName"]
             : cards.Count == 0 ? T["Editor_NeedCard"]
             : cards.Any(c => !c.IsComplete) ? T["Editor_Incomplete"]
@@ -691,7 +690,7 @@
         sheet = null;
         open = null;
         busy = true;
-        error = note = null;
+        error = null;
         try
         {
             var result = Id is null
@@ -707,15 +706,8 @@
                 };
                 return;
             }
-            if (Id is null)
-            {
-                Nav.NavigateTo($"decks/{result.Id}/edit", replace: true);
-                return;
-            }
-            // Reload so new cards get their saved ids and later saves update them in place.
-            if (await Content.GetDeckAsync(Id) is { } deck) cards = [.. deck.Cards.Select(EditCard.From)];
-            open = null;
-            note = T["Editor_Saved"];
+            // Saving closes the editor: back to My decks, where the deck now is.
+            Nav.NavigateTo("decks");
         }
         catch (HttpRequestException)
         {

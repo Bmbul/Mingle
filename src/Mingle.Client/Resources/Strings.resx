@@ -168,7 +168,6 @@
   <data name="Editor_EmptyCard" xml:space="preserve"><value>Empty card</value></data>
   <data name="Editor_AddCard" xml:space="preserve"><value>Add card</value></data>
   <data name="Editor_Save" xml:space="preserve"><value>Save deck</value></data>
-  <data name="Editor_Saved" xml:space="preserve"><value>Saved.</value></data>
   <data name="Editor_NeedName" xml:space="preserve"><value>Give the deck a name.</value></data>
   <data name="Editor_NeedCard" xml:space="preserve"><value>Add at least one card.</value></data>
   <data name="Editor_Incomplete" xml:space="preserve"><value>Some cards have no text yet.</value></data>

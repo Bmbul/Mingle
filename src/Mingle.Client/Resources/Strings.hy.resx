@@ -168,7 +168,6 @@
   <data name="Editor_EmptyCard" xml:space="preserve"><value>Դատարկ քարտ</value></data>
   <data name="Editor_AddCard" xml:space="preserve"><value>Ավելացնել քարտ</value></data>
   <data name="Editor_Save" xml:space="preserve"><value>Պահպանել</value></data>
-  <data name="Editor_Saved" xml:space="preserve"><value>Պահպանված է։</value></data>
   <data name="Editor_NeedName" xml:space="preserve"><value>Անուն տուր հավաքածուին։</value></data>
   <data name="Editor_NeedCard" xml:space="preserve"><value>Ավելացրու առնվազն մեկ քարտ։</value></data>
   <data name="Editor_Incomplete" xml:space="preserve"><value>Որոշ քարտեր դեռ տեքստ չունեն։</value></data>
