@@ -81,7 +81,6 @@
   <data name="End_NoLikes" xml:space="preserve"><value>Отмечайте понравившиеся карточки — они появятся здесь.</value></data>
   <data name="End_NewGame" xml:space="preserve"><value>Новая игра</value></data>
   <data name="End_Home" xml:space="preserve"><value>Главная</value></data>
-  <data name="Setup_OnePhone" xml:space="preserve"><value>На одном телефоне</value></data>
   <data name="Setup_PassPhone" xml:space="preserve"><value>Передавать телефон</value></data>
   <data name="Setup_PassPhoneDesc" xml:space="preserve"><value>Каждый отвечает втайне и передаёт телефон дальше.</value></data>
   <data name="Setup_OutLoud" xml:space="preserve"><value>Вслух</value></data>
@@ -201,7 +200,6 @@
   <data name="Editor_Setting_party" xml:space="preserve"><value>Вечеринка</value></data>
   <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Коллеги</value></data>
   <data name="Editor_AiWriteMore" xml:space="preserve"><value>Сгенерировать ещё {0}</value></data>
-  <data name="Setup_HowToPlay" xml:space="preserve"><value>Как играете</value></data>
   <data name="Setup_WriteShort" xml:space="preserve"><value>Писать</value></data>
   <data name="Setup_TalkShort" xml:space="preserve"><value>Говорить</value></data>
   <data name="Setup_EveryoneShort" xml:space="preserve"><value>Все</value></data>
@@ -224,7 +222,6 @@
   <data name="Editor_DecksAdded_One" xml:space="preserve"><value>Добавлена {0} карточка.</value></data>
   <data name="Editor_DecksAdded_Few" xml:space="preserve"><value>Добавлено {0} карточки.</value></data>
   <data name="Editor_DecksAdded_Many" xml:space="preserve"><value>Добавлено {0} карточек.</value></data>
-  <data name="Setup_PassPhoneShort" xml:space="preserve"><value>Передавать</value></data>
   <data name="Setup_OutLoudLine" xml:space="preserve"><value>Читайте карточку и говорите</value></data>
   <data name="Setup_PassLine" xml:space="preserve"><value>Отвечайте тайно, передавайте телефон</value></data>
   <data name="Setup_WriteLine" xml:space="preserve"><value>Ответы открываются вместе</value></data>
@@ -361,4 +358,8 @@
   <data name="Editor_Hint_name3" xml:space="preserve"><value>Назови 3 армянских блюда</value></data>
   <data name="Editor_Hint_letter" xml:space="preserve"><value>Категория, например «Фрукт»; игра добавит букву</value></data>
   <data name="Editor_AiFormats" xml:space="preserve"><value>Форматы</value></data>
+  <data name="Setup_Game" xml:space="preserve"><value>Игра</value></data>
+  <data name="Setup_Questions" xml:space="preserve"><value>Вопросы</value></data>
+  <data name="Setup_HowToAnswer" xml:space="preserve"><value>Как отвечать</value></data>
+  <data name="Setup_SecretAnswers" xml:space="preserve"><value>Тайные ответы</value></data>
 </root>

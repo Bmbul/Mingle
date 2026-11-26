@@ -77,7 +77,6 @@
   <data name="End_NoLikes" xml:space="preserve"><value>Հավանեք քարտերը խաղի ընթացքում, և դրանք կհայտնվեն այստեղ։</value></data>
   <data name="End_NewGame" xml:space="preserve"><value>Նոր խաղ</value></data>
   <data name="End_Home" xml:space="preserve"><value>Գլխավոր</value></data>
-  <data name="Setup_OnePhone" xml:space="preserve"><value>Մեկ հեռախոսով</value></data>
   <data name="Setup_PassPhone" xml:space="preserve"><value>Փոխանցել հեռախոսը</value></data>
   <data name="Setup_PassPhoneDesc" xml:space="preserve"><value>Յուրաքանչյուրը պատասխանում է գաղտնի և փոխանցում հեռախոսը։</value></data>
   <data name="Setup_OutLoud" xml:space="preserve"><value>Բարձրաձայն</value></data>
@@ -196,7 +195,6 @@
   <data name="Editor_Setting_party" xml:space="preserve"><value>Խնջույք</value></data>
   <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Գործընկերներ</value></data>
   <data name="Editor_AiWriteMore" xml:space="preserve"><value>Ստեղծել ևս {0}</value></data>
-  <data name="Setup_HowToPlay" xml:space="preserve"><value>Ինչպես եք խաղում</value></data>
   <data name="Setup_WriteShort" xml:space="preserve"><value>Գրել</value></data>
   <data name="Setup_TalkShort" xml:space="preserve"><value>Խոսել</value></data>
   <data name="Setup_EveryoneShort" xml:space="preserve"><value>Բոլորը</value></data>
@@ -218,7 +216,6 @@
   <data name="Editor_AddPicked" xml:space="preserve"><value>Ավելացնել ({0})</value></data>
   <data name="Editor_DecksAdded_One" xml:space="preserve"><value>Ավելացվեց {0} քարտ։</value></data>
   <data name="Editor_DecksAdded_Other" xml:space="preserve"><value>Ավելացվեց {0} քարտ։</value></data>
-  <data name="Setup_PassPhoneShort" xml:space="preserve"><value>Փոխանցել</value></data>
   <data name="Setup_OutLoudLine" xml:space="preserve"><value>Կարդացեք քարտը և խոսեք</value></data>
   <data name="Setup_PassLine" xml:space="preserve"><value>Պատասխանեք գաղտնի, փոխանցեք հեռախոսը</value></data>
   <data name="Setup_WriteLine" xml:space="preserve"><value>Պատասխանները բացվում են միասին</value></data>
@@ -355,4 +352,8 @@
   <data name="Editor_Hint_name3" xml:space="preserve"><value>Անվանիր 3 հայկական ուտեստ</value></data>
   <data name="Editor_Hint_letter" xml:space="preserve"><value>Կատեգորիա, օրինակ՝ «Միրգ», խաղը կավելացնի տառը</value></data>
   <data name="Editor_AiFormats" xml:space="preserve"><value>Ձևաչափեր</value></data>
+  <data name="Setup_Game" xml:space="preserve"><value>Խաղ</value></data>
+  <data name="Setup_Questions" xml:space="preserve"><value>Հարցեր</value></data>
+  <data name="Setup_HowToAnswer" xml:space="preserve"><value>Ինչպես պատասխանել</value></data>
+  <data name="Setup_SecretAnswers" xml:space="preserve"><value>Գաղտնի պատասխաններ</value></data>
 </root>

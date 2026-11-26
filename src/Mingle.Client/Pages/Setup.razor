@@ -48,31 +48,46 @@
         }
     </section>
 
+    @* One phone: choose the game first; each game then shows its own options below. *@
+    @if (!Online)
+    {
     <section class="stack">
-        <h2 class="label">@T["Setup_HowToPlay"]</h2>
+        <h2 class="label">@T["Setup_Game"]</h2>
+        <div class="seg grid2" role="group" aria-label="@T["Setup_Game"]">
+            <button class="@(Questions ? "on" : "")" aria-pressed="@(Questions ? "true" : "false")" @onclick="@(() => PickMode("questions"))">
+                <Icon Name="chat" Size="20" /><span>@T["Setup_Questions"]</span>
+            </button>
+            <button class="@(blitz ? "on" : "")" aria-pressed="@(blitz ? "true" : "false")" @onclick="@(() => PickMode("blitz"))">
+                <Icon Name="bolt" Size="20" /><span>@T["Setup_Blitz"]</span>
+            </button>
+            <button class="@(stories ? "on" : "")" aria-pressed="@(stories ? "true" : "false")" @onclick="@(() => PickMode("stories"))">
+                <Icon Name="book" Size="20" /><span>@T["Setup_Stories"]</span>
+            </button>
+            <button class="@(handoff ? "on" : "")" aria-pressed="@(handoff ? "true" : "false")" @onclick="@(() => PickMode("handoff"))">
+                <Icon Name="secret" Size="20" /><span>@T["Setup_Handoff"]</span>
+            </button>
+        </div>
+        @* Phones have no hover, so one short phrase says what the current choice means. *@
+        <p class="muted small">@HowToPlayLine</p>
+    </section>
+    }
+
+    @* Questions: out loud, or answers collected secretly (one phone passed around, or everyone's own phone online). *@
+    @if (Questions)
+    {
+    <section class="stack">
+        <h2 class="label">@T["Setup_HowToAnswer"]</h2>
         <div class="seg-row">
             @if (!Online)
             {
-                <div class="seg grid2" role="group" aria-label="@T["Setup_OnePhone"]">
-                    <button class="@(OutLoud ? "on" : "")" aria-pressed="@(OutLoud ? "true" : "false")"
-                            title="@T["Setup_OutLoudDesc"]" @onclick="@(() => PickMode(""))">
+                <div class="seg" role="group" aria-label="@T["Setup_HowToAnswer"]">
+                    <button class="@(!passThePhone ? "on" : "")" aria-pressed="@(!passThePhone ? "true" : "false")"
+                            title="@T["Setup_OutLoudDesc"]" @onclick="() => passThePhone = false">
                         <Icon Name="speaker" Size="20" /><span>@T["Setup_OutLoud"]</span>
                     </button>
                     <button class="@(passThePhone ? "on" : "")" aria-pressed="@(passThePhone ? "true" : "false")"
-                            title="@T["Setup_PassPhoneDesc"]" @onclick="@(() => PickMode("pass"))">
-                        <Icon Name="pass" Size="20" /><span>@T["Setup_PassPhoneShort"]</span>
-                    </button>
-                    <button class="@(blitz ? "on" : "")" aria-pressed="@(blitz ? "true" : "false")"
-                            @onclick="@(() => PickMode("blitz"))">
-                        <Icon Name="bolt" Size="20" /><span>@T["Setup_Blitz"]</span>
-                    </button>
-                    <button class="@(stories ? "on" : "")" aria-pressed="@(stories ? "true" : "false")"
-                            @onclick="@(() => PickMode("stories"))">
-                        <Icon Name="book" Size="20" /><span>@T["Setup_Stories"]</span>
-                    </button>
-                    <button class="wide @(handoff ? "on" : "")" aria-pressed="@(handoff ? "true" : "false")"
-                            @onclick="@(() => PickMode("handoff"))">
-                        <Icon Name="secret" Size="20" /><span>@T["Setup_Handoff"]</span>
+                            title="@T["Setup_PassPhoneDesc"]" @onclick="() => passThePhone = true">
+                        <Icon Name="pass" Size="20" /><span>@T["Setup_SecretAnswers"]</span>
                     </button>
                 </div>
             }
@@ -101,9 +116,12 @@
                 </div>
             }
         </div>
-        @* Phones have no hover, so one short phrase per switch says what the current choice means. *@
-        <p class="muted small">@HowToPlayLine</p>
+        @if (Online)
+        {
+            <p class="muted small">@HowToPlayLine</p>
+        }
     </section>
+    }
 
     @if (Online)
     {
@@ -284,11 +302,11 @@
     private bool handoffGuess = true;
     private bool handoffCoin;
 
-    private bool OutLoud => !passThePhone && !blitz && !stories && !handoff;
+    /// <summary>The questions game: out loud or with secret answers (passThePhone), and always online.</summary>
+    private bool Questions => !blitz && !stories && !handoff;
 
     private void PickMode(string which)
     {
-        passThePhone = which == "pass";
         blitz = which == "blitz";
         stories = which == "stories";
         handoff = which == "handoff";
@@ -372,7 +390,7 @@
         {
             var parts = new List<string>();
             if (!Online) parts.Add(stories ? T["Setup_StoriesLine"] : handoff ? T[handoffSecret ? "Setup_HandoffLine" : "Setup_HandoffAloudLine"] : blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
-            if (Online || passThePhone)
+            if (Questions && (Online || passThePhone))
             {
                 parts.Add(mode == AnswerMode.Written ? T["Setup_WriteLine"] : T["Setup_TalkLine"]);
                 parts.Add(turnStyle == TurnStyle.Everyone ? T["Setup_AllLine"] : T["Setup_TurnsLine"]);

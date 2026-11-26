@@ -77,7 +77,6 @@
   <data name="End_NoLikes" xml:space="preserve"><value>Like cards during the game to see them here.</value></data>
   <data name="End_NewGame" xml:space="preserve"><value>New game</value></data>
   <data name="End_Home" xml:space="preserve"><value>Home</value></data>
-  <data name="Setup_OnePhone" xml:space="preserve"><value>On one phone</value></data>
   <data name="Setup_PassPhone" xml:space="preserve"><value>Pass the phone</value></data>
   <data name="Setup_PassPhoneDesc" xml:space="preserve"><value>Each player answers privately, then hands the phone on.</value></data>
   <data name="Setup_OutLoud" xml:space="preserve"><value>Out loud</value></data>
@@ -196,7 +195,6 @@
   <data name="Editor_Setting_party" xml:space="preserve"><value>A party</value></data>
   <data name="Editor_Setting_colleagues" xml:space="preserve"><value>Colleagues</value></data>
   <data name="Editor_AiWriteMore" xml:space="preserve"><value>Generate {0} more</value></data>
-  <data name="Setup_HowToPlay" xml:space="preserve"><value>How you play</value></data>
   <data name="Setup_WriteShort" xml:space="preserve"><value>Write</value></data>
   <data name="Setup_TalkShort" xml:space="preserve"><value>Talk</value></data>
   <data name="Setup_EveryoneShort" xml:space="preserve"><value>All</value></data>
@@ -218,7 +216,6 @@
   <data name="Editor_AddPicked" xml:space="preserve"><value>Add ({0})</value></data>
   <data name="Editor_DecksAdded_One" xml:space="preserve"><value>Added {0} card.</value></data>
   <data name="Editor_DecksAdded_Other" xml:space="preserve"><value>Added {0} cards.</value></data>
-  <data name="Setup_PassPhoneShort" xml:space="preserve"><value>Pass it</value></data>
   <data name="Setup_OutLoudLine" xml:space="preserve"><value>Read the card and talk</value></data>
   <data name="Setup_PassLine" xml:space="preserve"><value>Answer privately, pass the phone</value></data>
   <data name="Setup_WriteLine" xml:space="preserve"><value>Answers revealed together</value></data>
@@ -355,4 +352,8 @@
   <data name="Editor_Hint_name3" xml:space="preserve"><value>Name 3 Armenian dishes</value></data>
   <data name="Editor_Hint_letter" xml:space="preserve"><value>A category, like “Fruit”; the game adds a letter</value></data>
   <data name="Editor_AiFormats" xml:space="preserve"><value>Formats</value></data>
+  <data name="Setup_Game" xml:space="preserve"><value>Game</value></data>
+  <data name="Setup_Questions" xml:space="preserve"><value>Questions</value></data>
+  <data name="Setup_HowToAnswer" xml:space="preserve"><value>How to answer</value></data>
+  <data name="Setup_SecretAnswers" xml:space="preserve"><value>Secret answers</value></data>
 </root>
