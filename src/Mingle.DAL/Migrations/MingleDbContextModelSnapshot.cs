@@ -197,6 +197,13 @@ namespace Mingle.DAL.Migrations
                             Audience = "Everyone",
                             Code = "handoff",
                             ResponseType = "PlayerVote"
+                        },
+                        new
+                        {
+                            Id = (short)12,
+                            Audience = "Everyone",
+                            Code = "fact",
+                            ResponseType = "Free"
                         });
                 });
 

@@ -37,8 +37,10 @@ public sealed record TopicChoice(ImmutableArray<TopicOption> Offer, ImmutableArr
 
 /// <summary>The game settings chosen in the lobby, plus which decks to play.</summary>
 /// <param name="Depths">"Our topics" only: the depths to write (1 light, 2 personal, 3 deep); none or all three mixes them.</param>
+/// <param name="Facts">Set when the room plays a fact game ("One truth", "Whose fact?") instead of questions; its prompts
+/// come from the chosen decks.</param>
 public sealed record RoomSettings(GameSettings Game, ImmutableArray<string> DeckIds, DeckSource Source = DeckSource.Chosen,
-    ImmutableArray<int> Depths = default)
+    ImmutableArray<int> Depths = default, FactSettings? Facts = null)
 {
     // Missing from older clients: an empty list, since a default ImmutableArray cannot be serialized.
     public ImmutableArray<int> Depths { get; init; } = Depths.IsDefault ? [] : Depths;
@@ -68,7 +70,8 @@ public sealed record RoomView(
     GameView? Game,
     GameSummary? Summary,
     TopicChoice? Topics = null,
-    bool LibraryCards = false)
+    bool LibraryCards = false,
+    FactView? Facts = null)
 {
     [JsonIgnore] public RoomPlayer? You => Players.FirstOrDefault(p => p.Id == YouId);
     [JsonIgnore] public bool YouAreHost => You?.IsHost == true;
@@ -92,6 +95,19 @@ public interface IGameHub
     Task React(bool? liked);
     Task EndGame();
     Task Leave();
+
+    // Fact games.
+    /// <summary>Your facts; in "One truth" three, with <paramref name="marked"/> the true one (or the lie).</summary>
+    Task WriteFacts(ImmutableArray<string> facts, int marked);
+    /// <summary>"One truth": another prompt, before you have written.</summary>
+    Task SwapPrompt();
+    /// <summary>Host: start with whoever has written, without waiting for the rest.</summary>
+    Task BeginFacts();
+    /// <summary>A position (One truth) or a player id (Whose fact).</summary>
+    Task VoteFact(string choice);
+    /// <summary>Host: show the answer before everyone has voted.</summary>
+    Task RevealFact();
+    Task NextFact();
 }
 
 /// <summary>Messages the server sends to a player.</summary>

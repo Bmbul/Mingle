@@ -4,6 +4,7 @@
 @inject BlitzSession Blitzes
 @inject HandoffSession HandoffGames
 @inject StorySession StorySessions
+@inject FactSession FactGames
 @inject ContentService Content
 @inject NavigationManager Nav
 @inject RoomClient Rooms
@@ -48,28 +49,57 @@
         }
     </section>
 
-    @* One phone: choose the game first; each game then shows its own options below. *@
-    @if (!Online)
-    {
+    @* Choose the game first; each game then shows its own options below. Online has the games played on everyone's phone. *@
     <section class="stack">
         <h2 class="label">@T["Setup_Game"]</h2>
         <div class="seg grid2" role="group" aria-label="@T["Setup_Game"]">
-            <button class="@(Questions ? "on" : "")" aria-pressed="@(Questions ? "true" : "false")" @onclick="@(() => PickMode("questions"))">
-                <Icon Name="chat" Size="20" /><span>@T["Setup_Questions"]</span>
-            </button>
-            <button class="@(blitz ? "on" : "")" aria-pressed="@(blitz ? "true" : "false")" @onclick="@(() => PickMode("blitz"))">
-                <Icon Name="bolt" Size="20" /><span>@T["Setup_Blitz"]</span>
-            </button>
-            <button class="@(stories ? "on" : "")" aria-pressed="@(stories ? "true" : "false")" @onclick="@(() => PickMode("stories"))">
-                <Icon Name="book" Size="20" /><span>@T["Setup_Stories"]</span>
-            </button>
-            <button class="@(handoff ? "on" : "")" aria-pressed="@(handoff ? "true" : "false")" @onclick="@(() => PickMode("handoff"))">
-                <Icon Name="secret" Size="20" /><span>@T["Setup_Handoff"]</span>
-            </button>
+            @foreach (var (id, icon, label) in GameChoices)
+            {
+                var on = id == GameId;
+                <button class="@(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" @onclick="@(() => PickMode(id))">
+                    <Icon Name="@icon" Size="20" /><span>@T[label]</span>
+                </button>
+            }
         </div>
         @* Phones have no hover, so one short phrase says what the current choice means. *@
-        <p class="muted small">@HowToPlayLine</p>
+        @if (!Online || !Questions)
+        {
+            <p class="muted small">@HowToPlayLine</p>
+        }
     </section>
+
+    @if (oneTruth)
+    {
+        <section class="stack">
+            <h2 class="label">@T["Facts_Find"]</h2>
+            <div class="chips" role="group" aria-label="@T["Facts_Find"]">
+                <button class="chip @(!findTheLie ? "on" : "")" aria-pressed="@(!findTheLie ? "true" : "false")" @onclick="() => findTheLie = false">@T["Facts_FindTruth"]</button>
+                <button class="chip @(findTheLie ? "on" : "")" aria-pressed="@(findTheLie ? "true" : "false")" @onclick="() => findTheLie = true">@T["Facts_FindLie"]</button>
+            </div>
+            <p class="muted small">@T[findTheLie ? "Facts_FindLieHint" : "Facts_FindTruthHint"]</p>
+        </section>
+    }
+
+    @if (whoseFact)
+    {
+        <section class="stack">
+            <h2 class="label">@T["Facts_Each"]</h2>
+            <div class="chips" role="group" aria-label="@T["Facts_Each"]">
+                @for (var n = 1; n <= FactGame.MaxFactsEach; n++)
+                {
+                    var count = n;
+                    <button class="chip @(factsEach == count ? "on" : "")" aria-pressed="@(factsEach == count ? "true" : "false")" @onclick="() => factsEach = count">@count</button>
+                }
+            </div>
+        </section>
+        <section class="stack">
+            <h2 class="label">@T["Facts_ShowAuthor"]</h2>
+            <div class="chips" role="group" aria-label="@T["Facts_ShowAuthor"]">
+                <button class="chip @(revealEach ? "on" : "")" aria-pressed="@(revealEach ? "true" : "false")" @onclick="() => revealEach = true">@T["Facts_AfterEach"]</button>
+                <button class="chip @(!revealEach ? "on" : "")" aria-pressed="@(!revealEach ? "true" : "false")" @onclick="() => revealEach = false">@T["Facts_AtTheEnd"]</button>
+            </div>
+            <p class="muted small">@T[revealEach ? "Facts_AfterEachHint" : "Facts_AtTheEndHint"]</p>
+        </section>
     }
 
     @* Questions: out loud, or answers collected secretly (one phone passed around, or everyone's own phone online). *@
@@ -123,7 +153,7 @@
     </section>
     }
 
-    @if (Online)
+    @if (Online && Questions)
     {
         <section class="stack">
             <h2 class="label">@T["Setup_Source"]</h2>
@@ -233,7 +263,7 @@
         }
     </section>
 
-    @if (!blitz && !handoff)
+    @if (Questions)
     {
     <section class="stack">
         <h2 class="label">@T["Setup_Order"]</h2>
@@ -248,7 +278,7 @@
     }
 
 
-    @if (!PicksInLobby)
+    @if (!PicksInLobby && !Facts)
     {
     <section class="stack">
         <h2 class="label">@T["Setup_CardCount"]</h2>
@@ -302,20 +332,40 @@
     private bool handoffGuess = true;
     private bool handoffCoin;
 
+    /// <summary>The fact games: "One truth" (one phone or online) and "Whose fact?" (online only).</summary>
+    private bool oneTruth;
+    private bool whoseFact;
+    private bool findTheLie;
+    private int factsEach = 1;
+    private bool revealEach = true;
+    private bool Facts => oneTruth || whoseFact;
+
     /// <summary>The questions game: out loud or with secret answers (passThePhone), and always online.</summary>
-    private bool Questions => !blitz && !stories && !handoff;
+    private bool Questions => !blitz && !stories && !handoff && !Facts;
+
+    private string GameId => blitz ? "blitz" : stories ? "stories" : handoff ? "handoff" : oneTruth ? "onetruth" : whoseFact ? "whosefact" : "questions";
+
+    /// <summary>One phone has every game but "Whose fact?"; online has the games where everyone uses their own phone.</summary>
+    private IEnumerable<(string Id, string Icon, string Label)> GameChoices => Online
+        ? [("questions", "chat", "Setup_Questions"), ("onetruth", "idea", "Facts_OneTruth"), ("whosefact", "people", "Facts_WhoseFact")]
+        : [("questions", "chat", "Setup_Questions"), ("blitz", "bolt", "Setup_Blitz"), ("stories", "book", "Setup_Stories"),
+           ("handoff", "secret", "Setup_Handoff"), ("onetruth", "idea", "Facts_OneTruth")];
 
     private void PickMode(string which)
     {
         blitz = which == "blitz";
         stories = which == "stories";
         handoff = which == "handoff";
+        oneTruth = which == "onetruth";
+        whoseFact = which == "whosefact";
+        // A deck picked for one game is no use in another.
+        deckIds.RemoveWhere(id => decks.FirstOrDefault(d => d.Id == id)?.Style != ModeStyle);
         // "Give it to…" needs three players; add the rows so the placeholders can play.
         while (handoff && players.Count < Handoffs.MinPlayers) players.Add(new PlayerRow());
     }
 
     /// <summary>The kind of deck the chosen game plays.</summary>
-    private DeckStyle ModeStyle => blitz ? DeckStyle.Blitz : handoff ? DeckStyle.Handoff : DeckStyle.Questions;
+    private DeckStyle ModeStyle => blitz ? DeckStyle.Blitz : handoff ? DeckStyle.Handoff : Facts ? DeckStyle.Facts : DeckStyle.Questions;
     private bool storyBlind = true;
     private bool storyLong;
     private string storyTheme = "random";
@@ -329,7 +379,7 @@
     private readonly HashSet<int> depths = [1, 2, 3];
 
     /// <summary>Players pick topics or bring decks in the lobby, so no decks, order or card count are chosen here.</summary>
-    private bool PicksInLobby => Online && source != DeckSource.Chosen;
+    private bool PicksInLobby => Online && Questions && source != DeckSource.Chosen;
 
     protected override async Task OnInitializedAsync()
     {
@@ -389,7 +439,9 @@
         get
         {
             var parts = new List<string>();
-            if (!Online) parts.Add(stories ? T["Setup_StoriesLine"] : handoff ? T[handoffSecret ? "Setup_HandoffLine" : "Setup_HandoffAloudLine"] : blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
+            if (oneTruth) parts.Add(T[Online ? "Facts_OneTruthOnlineLine" : "Facts_OneTruthLine"]);
+            else if (whoseFact) parts.Add(T["Facts_WhoseFactLine"]);
+            else if (!Online) parts.Add(stories ? T["Setup_StoriesLine"] : handoff ? T[handoffSecret ? "Setup_HandoffLine" : "Setup_HandoffAloudLine"] : blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
             if (Questions && (Online || passThePhone))
             {
                 parts.Add(mode == AnswerMode.Written ? T["Setup_WriteLine"] : T["Setup_TalkLine"]);
@@ -405,16 +457,16 @@
     /// <summary>Cards in a deck everyone can read: blitz lists only blitz decks, other games only question decks.</summary>
     /// <remarks>Blitz shows each player cards in their own language, so a card counts if any player reads it.</remarks>
     private int Readable(Deck deck) => deck.Cards.IsEmpty || deck.Style != ModeStyle ? 0
-        : blitz ? deck.Cards.Count(c => TableLanguages.Any(c.Supports))
+        : blitz || Facts ? deck.Cards.Count(c => TableLanguages.Any(c.Supports))
         : handoff ? deck.CountReadableBy(TableLanguages, CardKinds.OfStyle(DeckStyle.Handoff))
         : deck.CountReadableBy(TableLanguages);
 
-    private int MatchingCards => blitz || handoff
+    private int MatchingCards => blitz || handoff || Facts
         ? decks.Where(d => deckIds.Contains(d.Id)).Sum(Readable)
         :
         Game.BuildPool(decks.Where(d => deckIds.Contains(d.Id)), Settings, NamedPlayers.IsEmpty ? [new Player("x", "x", Text.UiLang)] : NamedPlayers).Length;
 
-    private int NeededPlayers => Online ? 1 : handoff ? Handoffs.MinPlayers : Game.MinPlayers;
+    private int NeededPlayers => Online ? 1 : handoff ? Handoffs.MinPlayers : oneTruth ? FactGame.MinPlayers(FactGameKind.OneTruth) : Game.MinPlayers;
 
     private bool CanStart => NamedPlayers.Length >= NeededPlayers && (stories || (PicksInLobby ? !decks.IsEmpty : MatchingCards > 0));
 
@@ -452,6 +504,12 @@
                 Nav.NavigateTo("handoff");
                 return;
             }
+            if (oneTruth)
+            {
+                FactGames.Start(NamedPlayers, decks.Where(d => deckIds.Contains(d.Id)), findTheLie);
+                Nav.NavigateTo("facts");
+                return;
+            }
             if (blitz)
             {
                 Blitzes.Start(NamedPlayers, [.. decks.Where(d => deckIds.Contains(d.Id))]);
@@ -469,7 +527,11 @@
         {
             var me = NamedPlayers[0] with { Lang = Text.UiLang };
             await JS.InvokeVoidAsync("mingle.set", "mingle.name", me.Name);
-            var room = await Rooms.CreateRoom(me.Name, me.Lang, new RoomSettings(Settings, [.. deckIds], source, [.. depths.Order()]));
+            var factSettings = oneTruth ? new FactSettings(FactGameKind.OneTruth, findTheLie)
+                : whoseFact ? new FactSettings(FactGameKind.WhoseFact, FactsEach: factsEach, RevealEachFact: revealEach)
+                : null;
+            var room = await Rooms.CreateRoom(me.Name, me.Lang,
+                new RoomSettings(Settings, [.. deckIds], factSettings is null ? source : DeckSource.Chosen, [.. depths.Order()], factSettings));
             Nav.NavigateTo($"room/{room.RoomCode}");
         }
         catch (Exception ex) when (ex is HttpRequestException or Microsoft.AspNetCore.SignalR.HubException or InvalidOperationException)

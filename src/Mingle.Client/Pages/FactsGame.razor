@@ -1,0 +1,111 @@
+@page "/facts"
+@inject Text T
+@inject FactSession Session
+
+<PageTitle>@T["Facts_OneTruth"] · Mingle</PageTitle>
+
+@if (Session.Game is not { } game)
+{
+    <main class="main center-screen">
+        <p class="muted">@T["Handoff_NotStarted"]</p>
+        <a class="btn" href="setup">@T["Home_NewGame"]</a>
+    </main>
+}
+else if (game.Stage == FactStage.Writing && Session.NextWriter is { } writer)
+{
+    @if (writing != writer.Id)
+    {
+        @* The phone goes round: everyone writes in secret. *@
+        <main class="main center-screen">
+            <p class="muted">@T["Facts_PassTo"]</p>
+            <p class="blitz-name">@writer.Name</p>
+            <p class="muted center"><Icon Name="secret" Size="18" /> @T["Facts_WriteSecretly"]</p>
+            <p class="muted small">@T["Facts_Written", game.WrittenIds.Length, Session.Players.Length]</p>
+        </main>
+        <footer class="foot">
+            <button class="btn" @onclick="() => writing = writer.Id">@T["Facts_ImReady", writer.Name]</button>
+        </footer>
+    }
+    else
+    {
+        <header class="top">
+            <h1 class="h1">@writer.Name</h1>
+        </header>
+        <main class="main">
+            <FactWriter @key="@($"{writer.Id}-{promptVersion}")" OneTruth="true" FindTheLie="Session.FindTheLie" Lang="writer.Lang"
+                        Prompts="@([.. game.PromptsFor(writer.Id).Select(id => game.PromptText(id, writer.Lang) ?? "")])"
+                        CanSwap="true" OnSwap="() => Swap(writer)" OnDone="r => Write(writer, r)" />
+        </main>
+    }
+}
+else if (game.Stage is FactStage.Showing or FactStage.Revealed && game.Current is { } item)
+{
+    var author = Session.PlayerById(item.AuthorId);
+    var revealed = game.Stage == FactStage.Revealed;
+    <header class="top spread">
+        <span class="muted">@T["Facts_ItemOf", game.Index + 1, game.Items.Count]</span>
+        <a class="text-btn" href="">@T["Play_End"]</a>
+    </header>
+    <main class="main">
+        <p class="label">@T["Facts_FactsOf"]</p>
+        <h1 class="h1 big">@author.Name</h1>
+        @if (game.PromptText(item.PromptId, Text.UiLang) is { } prompt)
+        {
+            <p class="muted">@prompt</p>
+        }
+        <FactList Texts="item.Texts" FindTheLie="Session.FindTheLie" Answer="@(revealed ? item.Marked.ToString() : null)" />
+        @if (!revealed)
+        {
+            <div class="talk">
+                <p class="h2">@T[Session.FindTheLie ? "Facts_DiscussLie" : "Facts_DiscussTruth"]</p>
+                <p class="muted small">@T["Facts_DiscussHint", author.Name]</p>
+            </div>
+        }
+    </main>
+    <footer class="foot">
+        @if (!revealed)
+        {
+            <button class="btn" @onclick="game.Reveal">@T["Facts_Reveal"]</button>
+        }
+        else
+        {
+            <button class="btn" @onclick="game.Next">@(game.Index + 1 < game.Items.Count ? T["Facts_Next"] : T["Facts_Finish"])</button>
+        }
+    </footer>
+}
+else
+{
+    <main class="main center-screen">
+        <h1 class="h1 big">@T["Facts_AllDone"]</h1>
+        <p class="muted">@T["Facts_AllDoneHint"]</p>
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="Again">@T["Handoff_Again"]</button>
+        <a class="btn2" href="">@T["End_Home"]</a>
+    </footer>
+}
+
+@code {
+    /// <summary>The player who said they have the phone and is writing now.</summary>
+    private string? writing;
+    private int promptVersion;
+
+    private void Swap(Player writer)
+    {
+        Session.Game!.SwapPrompt(writer.Id);
+        // The writer keeps their texts: the component is kept, only its prompt changes.
+    }
+
+    private void Write(Player writer, (ImmutableArray<string> Texts, int Marked) facts)
+    {
+        Session.Game!.Write(writer.Id, facts.Texts, facts.Marked);
+        writing = null;
+        promptVersion++;
+    }
+
+    private void Again()
+    {
+        Session.Restart();
+        writing = null;
+    }
+}

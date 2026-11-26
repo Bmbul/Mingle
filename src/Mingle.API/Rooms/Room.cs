@@ -19,6 +19,8 @@ public sealed class Room(string code, TimeProvider clock)
     private string? hostId;
     private RoomSettings settings = new(new GameSettings(), []);
     private GameState? game;
+    /// <summary>A fact game, when the settings ask for one; then <see cref="game"/> stays null.</summary>
+    private FactGame? facts;
     private ImmutableArray<TopicInfo> topicPool = [];
     private Random topicRandom = new(0);
     private bool libraryCards;
@@ -219,6 +221,11 @@ public sealed class Room(string code, TimeProvider clock)
         {
             RequireHost(playerId);
             if (Stage != RoomStage.Lobby) throw new RoomException("The game has already started.");
+            if (settings.Facts is { } factSettings)
+            {
+                StartFacts(factSettings, decks, seed);
+                return;
+            }
             if (members.Count < Game.MinPlayers) throw new RoomException($"At least {Game.MinPlayers} players are needed.");
             if (settings.Source == DeckSource.Topics) throw new RoomException("Topics games start by writing cards.");
 
@@ -256,11 +263,61 @@ public sealed class Room(string code, TimeProvider clock)
         }
     }
 
+    /// <summary>Called under the lock: a fact game with prompts from the chosen fact decks.</summary>
+    private void StartFacts(FactSettings factSettings, IEnumerable<Deck> decks, int seed)
+    {
+        var min = FactGame.MinPlayers(factSettings.Kind);
+        if (members.Count < min) throw new RoomException($"At least {min} players are needed.");
+        var ids = settings.DeckIds.IsDefault ? [] : settings.DeckIds;
+        var prompts = decks
+            .Where(d => d.Style == DeckStyle.Facts && (ids.IsEmpty || ids.Contains(d.Id)))
+            .SelectMany(d => d.Cards)
+            .Where(c => c.Kind.Style == DeckStyle.Facts)
+            .ToList();
+        if (prompts.Count == 0) throw new RoomException("Pick a deck of prompts.");
+        try
+        {
+            facts = new FactGame(members.Select(m => m.ToPlayer()), factSettings, prompts, seed);
+        }
+        catch (FactRuleException ex)
+        {
+            throw new RoomException(ex.Message);
+        }
+        Stage = RoomStage.Playing;
+        Touch();
+    }
+
+    /// <summary>One move in the fact game; <paramref name="hostOnly"/> for moves only the host may make.</summary>
+    public void ActOnFacts(string playerId, Action<FactGame> move, bool hostOnly = false)
+    {
+        lock (gate)
+        {
+            if (Stage != RoomStage.Playing || facts is null) throw new RoomException("No game is in progress.");
+            Member(playerId);
+            if (hostOnly) RequireHost(playerId);
+            try
+            {
+                move(facts);
+            }
+            catch (FactRuleException ex)
+            {
+                throw new RoomException(ex.Message);
+            }
+            if (facts.Stage == FactStage.Ended) Stage = RoomStage.Ended;
+            Touch();
+        }
+    }
+
     /// <summary>Applies one game action for the calling player. The player id always comes from the server.</summary>
     public void Act(string playerId, GameAction action)
     {
         lock (gate)
         {
+            if (facts is not null && action is EndGame)
+            {
+                EndFacts(playerId);
+                return;
+            }
             if (Stage != RoomStage.Playing || game is null) throw new RoomException("No game is in progress.");
             if (action.PlayerId != playerId) throw new RoomException("Players can only act for themselves.");
             try
@@ -274,6 +331,15 @@ public sealed class Room(string code, TimeProvider clock)
             if (game.Phase == GamePhase.Ended) Stage = RoomStage.Ended;
             Touch();
         }
+    }
+
+    private void EndFacts(string playerId)
+    {
+        if (Stage != RoomStage.Playing) throw new RoomException("No game is in progress.");
+        Member(playerId);
+        facts!.End();
+        Stage = RoomStage.Ended;
+        Touch();
     }
 
     /// <summary>Every open connection with the view that belongs to it.</summary>
@@ -310,7 +376,8 @@ public sealed class Room(string code, TimeProvider clock)
                 TopicDeal.MaxPicks);
         }
 
-        return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary, topics, libraryCards);
+        var factView = Stage is RoomStage.Playing or RoomStage.Ended ? facts?.ForPlayer(viewer.Id, viewer.Lang) : null;
+        return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary, topics, libraryCards, factView);
     }
 
     private static GameSummary Summarize(GameState state, Lang lang, ImmutableArray<TopicInfo> topics)

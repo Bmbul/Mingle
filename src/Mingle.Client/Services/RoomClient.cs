@@ -69,6 +69,12 @@ public sealed class RoomClient(NavigationManager nav, IJSRuntime js) : IAsyncDis
     public Task Next() => Send(nameof(IGameHub.Next));
     public Task React(bool? liked) => Send(nameof(IGameHub.React), liked);
     public Task EndGame() => Send(nameof(IGameHub.EndGame));
+    public Task WriteFacts(ImmutableArray<string> facts, int marked) => Send(nameof(IGameHub.WriteFacts), facts, marked);
+    public Task SwapPrompt() => Send(nameof(IGameHub.SwapPrompt));
+    public Task BeginFacts() => Send(nameof(IGameHub.BeginFacts));
+    public Task VoteFact(string choice) => Send(nameof(IGameHub.VoteFact), choice);
+    public Task RevealFact() => Send(nameof(IGameHub.RevealFact));
+    public Task NextFact() => Send(nameof(IGameHub.NextFact));
 
     public async Task Leave()
     {

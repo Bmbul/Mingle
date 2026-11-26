@@ -355,4 +355,72 @@
   <data name="Setup_Questions" xml:space="preserve"><value>Questions</value></data>
   <data name="Setup_HowToAnswer" xml:space="preserve"><value>How to answer</value></data>
   <data name="Setup_SecretAnswers" xml:space="preserve"><value>Secret answers</value></data>
+  <data name="Facts_OneTruth" xml:space="preserve"><value>One truth</value></data>
+  <data name="Facts_WhoseFact" xml:space="preserve"><value>Whose fact?</value></data>
+  <data name="Editor_Game_Facts" xml:space="preserve"><value>Facts</value></data>
+  <data name="Kind_fact" xml:space="preserve"><value>Fact prompt</value></data>
+  <data name="Lobby_NeedThree" xml:space="preserve"><value>At least 3 players are needed.</value></data>
+  <data name="Facts_Find" xml:space="preserve"><value>What to find</value></data>
+  <data name="Facts_FindTruth" xml:space="preserve"><value>Find the truth</value></data>
+  <data name="Facts_FindLie" xml:space="preserve"><value>Find the lie</value></data>
+  <data name="Facts_FindTruthHint" xml:space="preserve"><value>Three facts each: one true, two made up.</value></data>
+  <data name="Facts_FindLieHint" xml:space="preserve"><value>Three facts each: two true, one made up.</value></data>
+  <data name="Facts_Each" xml:space="preserve"><value>Facts per player</value></data>
+  <data name="Facts_ShowAuthor" xml:space="preserve"><value>Show who wrote it</value></data>
+  <data name="Facts_AfterEach" xml:space="preserve"><value>After each fact</value></data>
+  <data name="Facts_AtTheEnd" xml:space="preserve"><value>At the end</value></data>
+  <data name="Facts_AfterEachHint" xml:space="preserve"><value>After everyone votes you see who wrote it and the scores.</value></data>
+  <data name="Facts_AtTheEndHint" xml:space="preserve"><value>Nothing is given away until the last fact: every author comes out at the end.</value></data>
+  <data name="Facts_OneTruthLine" xml:space="preserve"><value>Everyone writes 3 facts in secret, then you read them and argue which is which</value></data>
+  <data name="Facts_OneTruthOnlineLine" xml:space="preserve"><value>Everyone writes 3 facts, then votes on everyone else's</value></data>
+  <data name="Facts_WhoseFactLine" xml:space="preserve"><value>Everyone writes a fact about themselves; guess whose each one is</value></data>
+  <data name="Facts_Prompt" xml:space="preserve"><value>Write about</value></data>
+  <data name="Facts_OtherPrompt" xml:space="preserve"><value>Another prompt</value></data>
+  <data name="Facts_WriteTruthHint" xml:space="preserve"><value>Write three facts about yourself: one true, two made up. Mark the true one.</value></data>
+  <data name="Facts_WriteLieHint" xml:space="preserve"><value>Write three facts about yourself: two true, one made up. Mark the lie.</value></data>
+  <data name="Facts_FactN" xml:space="preserve"><value>Fact {0}</value></data>
+  <data name="Facts_ThisIsTrue" xml:space="preserve"><value>This one is true</value></data>
+  <data name="Facts_ThisIsTheLie" xml:space="preserve"><value>This one is the lie</value></data>
+  <data name="Facts_Done" xml:space="preserve"><value>Done</value></data>
+  <data name="Facts_MarkTrue" xml:space="preserve"><value>Mark the true fact.</value></data>
+  <data name="Facts_MarkLie" xml:space="preserve"><value>Mark the lie.</value></data>
+  <data name="Facts_WriteAll" xml:space="preserve"><value>Fill in every fact.</value></data>
+  <data name="Facts_TheTruth" xml:space="preserve"><value>True</value></data>
+  <data name="Facts_TheLie" xml:space="preserve"><value>The lie</value></data>
+  <data name="Facts_PassTo" xml:space="preserve"><value>Pass the phone to</value></data>
+  <data name="Facts_WriteSecretly" xml:space="preserve"><value>Write your facts so nobody sees</value></data>
+  <data name="Facts_Written" xml:space="preserve"><value>Written: {0} of {1}</value></data>
+  <data name="Facts_ImReady" xml:space="preserve"><value>I'm {0}, show me</value></data>
+  <data name="Facts_ItemOf" xml:space="preserve"><value>{0} of {1}</value></data>
+  <data name="Facts_FactsOf" xml:space="preserve"><value>Facts of</value></data>
+  <data name="Facts_DiscussTruth" xml:space="preserve"><value>Which one is true?</value></data>
+  <data name="Facts_DiscussLie" xml:space="preserve"><value>Which one is the lie?</value></data>
+  <data name="Facts_DiscussHint" xml:space="preserve"><value>Read them out, ask {0} questions, argue. Then reveal.</value></data>
+  <data name="Facts_Reveal" xml:space="preserve"><value>Reveal</value></data>
+  <data name="Facts_Next" xml:space="preserve"><value>Next</value></data>
+  <data name="Facts_Finish" xml:space="preserve"><value>Finish</value></data>
+  <data name="Facts_AllDone" xml:space="preserve"><value>That's everyone!</value></data>
+  <data name="Facts_AllDoneHint" xml:space="preserve"><value>Play again and everyone writes new facts.</value></data>
+  <data name="Facts_YoursAreIn" xml:space="preserve"><value>Your facts are in</value></data>
+  <data name="Facts_StillWriting" xml:space="preserve"><value>Still writing: {0}</value></data>
+  <data name="Facts_StartNow" xml:space="preserve"><value>Start now</value></data>
+  <data name="Facts_StartNowHint" xml:space="preserve"><value>Start with those who have written, without waiting for the rest.</value></data>
+  <data name="Facts_TheyAreGuessing" xml:space="preserve"><value>Everyone is guessing your facts. Keep a straight face!</value></data>
+  <data name="Facts_PickTruth" xml:space="preserve"><value>Tap the fact you think is true.</value></data>
+  <data name="Facts_PickLie" xml:space="preserve"><value>Tap the fact you think is the lie.</value></data>
+  <data name="Facts_CanChange" xml:space="preserve"><value>You can change your vote until everyone is in.</value></data>
+  <data name="Facts_WhoWroteIt" xml:space="preserve"><value>Who wrote it?</value></data>
+  <data name="Facts_Bluff" xml:space="preserve"><value>It's yours! Vote for someone else to throw them off.</value></data>
+  <data name="Facts_WrittenBy" xml:space="preserve"><value>Written by {0}</value></data>
+  <data name="Facts_Voted" xml:space="preserve"><value>Voted: {0} of {1}</value></data>
+  <data name="Facts_RevealNow" xml:space="preserve"><value>Reveal now</value></data>
+  <data name="Facts_NextNow" xml:space="preserve"><value>Next fact now</value></data>
+  <data name="Facts_Recap" xml:space="preserve"><value>Who wrote what</value></data>
+  <data name="Facts_FoundBy" xml:space="preserve"><value>guessed by {0}</value></data>
+  <data name="Facts_AwardDetective" xml:space="preserve"><value>🕵️ Detective</value></data>
+  <data name="Facts_AwardLiar" xml:space="preserve"><value>🎭 Best liar</value></data>
+  <data name="Facts_AwardKnowsAll" xml:space="preserve"><value>🧠 Knows everyone best</value></data>
+  <data name="Facts_AwardMystery" xml:space="preserve"><value>🫣 Most mysterious</value></data>
+  <data name="Facts_Scores" xml:space="preserve"><value>Scores</value></data>
+  <data name="Facts_ScoreParts" xml:space="preserve"><value>{0} guessed · {1} fooled</value></data>
 </root>

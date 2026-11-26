@@ -1,0 +1,48 @@
+@inject Text T
+
+@* One truth: the three facts. While voting they are buttons; once revealed the answer is marked, with who picked what. *@
+<div class="fact-list">
+    @for (var i = 0; i < Texts.Length; i++)
+    {
+        var index = i;
+        var key = index.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        var isAnswer = Answer == key;
+        var picked = MyVote == key;
+        var voters = Votes.Where(v => v.Choice == key).Select(v => NameOf(v.VoterId)).ToList();
+        var css = $"fact-item {(Answer is null ? "" : isAnswer ? "answer" : "other")} {(picked ? "picked" : "")}";
+        @if (CanVote)
+        {
+            <button class="@css" aria-pressed="@(picked ? "true" : "false")" @onclick="() => OnVote.InvokeAsync(key)">
+                <span class="fact-no">@(index + 1)</span><span class="grow">@Texts[index]</span>
+            </button>
+        }
+        else
+        {
+            <div class="@css">
+                <span class="fact-no">@(index + 1)</span>
+                <span class="grow stack-tight">
+                    <span>@Texts[index]</span>
+                    @if (isAnswer)
+                    {
+                        <span class="fact-tag">@T[FindTheLie ? "Facts_TheLie" : "Facts_TheTruth"]</span>
+                    }
+                    @if (voters.Count > 0)
+                    {
+                        <span class="muted small">@string.Join(", ", voters)</span>
+                    }
+                </span>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    [Parameter] public ImmutableArray<string> Texts { get; set; } = [];
+    [Parameter] public string? Answer { get; set; }
+    [Parameter] public bool FindTheLie { get; set; }
+    [Parameter] public bool CanVote { get; set; }
+    [Parameter] public string? MyVote { get; set; }
+    [Parameter] public ImmutableArray<FactVote> Votes { get; set; } = [];
+    [Parameter] public Func<string, string> NameOf { get; set; } = id => id;
+    [Parameter] public EventCallback<string> OnVote { get; set; }
+}

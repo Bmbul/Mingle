@@ -1,0 +1,196 @@
+@inject Text T
+@inject RoomClient Rooms
+
+@* A fact game in an online room: write in secret, vote on your own phone, see the scores. *@
+@{
+    var view = Facts;
+    var settings = view.Settings;
+    var oneTruth = settings.Kind == FactGameKind.OneTruth;
+    var myLang = Room.You?.Lang ?? Text.UiLang;
+}
+
+@if (view.Stage != FactStage.Ended)
+{
+    <header class="top spread">
+        <span class="muted">@(view.Stage == FactStage.Writing ? T[oneTruth ? "Facts_OneTruth" : "Facts_WhoseFact"] : T["Facts_ItemOf", view.ItemNumber, view.ItemCount])</span>
+        <button class="text-btn" aria-expanded="@(confirmEnd ? "true" : "false")" @onclick="() => confirmEnd = !confirmEnd">@T["Play_End"]</button>
+    </header>
+    @if (confirmEnd)
+    {
+        <div class="confirm" role="alertdialog" aria-labelledby="confirm-end-title">
+            <span id="confirm-end-title" class="h2">@T["Play_EndConfirm"]</span>
+            <div class="row gap">
+                <button class="btn2 grow" @onclick="() => confirmEnd = false">@T["Play_KeepPlaying"]</button>
+                <button class="btn grow" @onclick="EndNow">@T["Play_End"]</button>
+            </div>
+        </div>
+    }
+}
+
+@if (view.Stage == FactStage.Writing)
+{
+    <main class="main">
+        @if (!view.YouWrote)
+        {
+            <FactWriter OneTruth="oneTruth" FindTheLie="settings.FindTheLie" FactsEach="settings.FactsEach" Lang="myLang"
+                        Prompts="view.MyPrompts" CanSwap="view.CanSwapPrompt" OnSwap="Rooms.SwapPrompt"
+                        OnDone="r => Rooms.WriteFacts(r.Texts, r.Marked)" />
+        }
+        else
+        {
+            var waiting = Room.Players.Where(p => !view.WroteIds.Contains(p.Id)).Select(p => p.Name).ToList();
+            <div class="card waiting" role="status">
+                <span class="h2">@T["Facts_YoursAreIn"]</span>
+                <span class="muted">@T["Facts_Written", view.WroteIds.Length, Room.Players.Length]</span>
+                @if (waiting.Count > 0)
+                {
+                    <span class="muted small">@T["Facts_StillWriting", string.Join(", ", waiting)]</span>
+                }
+            </div>
+        }
+    </main>
+    @if (Room.YouAreHost && view.WroteIds.Length >= FactGame.MinPlayers(settings.Kind) && view.WroteIds.Length < Room.Players.Length)
+    {
+        <footer class="foot">
+            <p class="muted small center">@T["Facts_StartNowHint"]</p>
+            <button class="btn2" @onclick="Rooms.BeginFacts">@T["Facts_StartNow"]</button>
+        </footer>
+    }
+}
+else if (view.Item is { } item && view.Stage is FactStage.Showing or FactStage.Revealed)
+{
+    var revealed = view.Stage == FactStage.Revealed;
+    var iVote = !item.YouWrote || !oneTruth;
+    <main class="main">
+        @if (oneTruth)
+        {
+            <p class="label">@T["Facts_FactsOf"]</p>
+            <h1 class="h1 big">@NameOf(item.AuthorId!)</h1>
+            @if (item.Prompt is { } prompt)
+            {
+                <p class="muted">@prompt</p>
+            }
+            <FactList Texts="item.Texts" FindTheLie="settings.FindTheLie" Answer="item.Answer" Votes="item.Votes" NameOf="NameOf"
+                      CanVote="@(!revealed && !item.YouWrote)" MyVote="item.MyVote" OnVote="Rooms.VoteFact" />
+            @if (!revealed)
+            {
+                <p class="muted center">@(item.YouWrote ? T["Facts_TheyAreGuessing"] : item.MyVote is null ? T[settings.FindTheLie ? "Facts_PickLie" : "Facts_PickTruth"] : T["Facts_CanChange"])</p>
+            }
+        }
+        else
+        {
+            @if (item.Prompt is { } prompt)
+            {
+                <p class="label">@prompt</p>
+            }
+            <div class="card fact-big"><span>@item.Texts[0]</span></div>
+            @if (!revealed)
+            {
+                <p class="h2 center">@T["Facts_WhoWroteIt"]</p>
+                @if (item.YouWrote)
+                {
+                    <p class="muted small center">@T["Facts_Bluff"]</p>
+                }
+                <div class="handoff-players">
+                    @foreach (var player in Room.Players.Where(p => p.Id != Room.YouId && item.VoterIds.Contains(p.Id)))
+                    {
+                        var id = player.Id;
+                        <button class="btn2 @(item.MyVote == id ? "on" : "")" aria-pressed="@(item.MyVote == id ? "true" : "false")"
+                                @onclick="() => Rooms.VoteFact(id)">@player.Name</button>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="h2 center">@T["Facts_WrittenBy", NameOf(item.Answer!)]</p>
+                <div class="stack-tight">
+                    @foreach (var vote in item.Votes.Where(v => v.VoterId != item.Answer))
+                    {
+                        <p class="vote-line @(vote.Right ? "right" : "")">@NameOf(vote.VoterId) → @NameOf(vote.Choice) @(vote.Right ? "✓" : "")</p>
+                    }
+                </div>
+            }
+        }
+
+        @if (!revealed)
+        {
+            <p class="muted small center" role="status">@T["Facts_Voted", item.VotedIds.Count(item.VoterIds.Contains), item.VoterIds.Length]</p>
+        }
+        @if (revealed && !view.Scores.IsEmpty)
+        {
+            <Scoreboard Scores="view.Scores" NameOf="NameOf" />
+        }
+    </main>
+    <footer class="foot">
+        @if (!revealed && Room.YouAreHost && item.VotedIds.Length > 0)
+        {
+            <button class="btn2" @onclick="Rooms.RevealFact">@T[!oneTruth && !settings.RevealEachFact ? "Facts_NextNow" : "Facts_RevealNow"]</button>
+        }
+        @if (revealed)
+        {
+            <button class="btn" @onclick="Rooms.NextFact">@(view.ItemNumber < view.ItemCount ? T["Facts_Next"] : T["Facts_Finish"])</button>
+        }
+    </footer>
+}
+else
+{
+    <main class="main">
+        <h1 class="h1 big">@T["End_Title"]</h1>
+        @foreach (var (title, who) in Awards(view))
+        {
+            <div class="card award">
+                <span class="label">@title</span>
+                <span class="h2">@who</span>
+            </div>
+        }
+        @if (!view.Scores.IsEmpty)
+        {
+            <Scoreboard Scores="view.Scores" NameOf="NameOf" />
+        }
+        @if (!view.Recap.IsEmpty)
+        {
+            <h2 class="label">@T["Facts_Recap"]</h2>
+            @foreach (var fact in view.Recap)
+            {
+                <div class="card">
+                    <span class="row-title">@fact.Text</span>
+                    <span class="muted small">@NameOf(fact.AuthorId) · @T["Facts_FoundBy", fact.RightGuesses]</span>
+                </div>
+            }
+        }
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="OnHome">@T["End_Home"]</button>
+    </footer>
+}
+
+@code {
+    [Parameter, EditorRequired] public RoomView Room { get; set; } = default!;
+    [Parameter, EditorRequired] public FactView Facts { get; set; } = default!;
+    [Parameter] public EventCallback OnHome { get; set; }
+
+    private bool confirmEnd;
+
+    private string NameOf(string id) => Room.Players.FirstOrDefault(p => p.Id == id)?.Name ?? "?";
+
+    private async Task EndNow()
+    {
+        confirmEnd = false;
+        await Rooms.EndGame();
+    }
+
+    /// <summary>Who did best: in One truth the best liar and the detective, in Whose fact who knows everyone and the mystery.</summary>
+    private IEnumerable<(string Title, string Who)> Awards(FactView view)
+    {
+        if (view.Scores.IsEmpty) yield break;
+        var oneTruth = view.Settings.Kind == FactGameKind.OneTruth;
+        var fooled = view.Scores.Max(s => s.Fooled);
+        var right = view.Scores.Max(s => s.RightGuesses);
+        if (right > 0)
+            yield return (T[oneTruth ? "Facts_AwardDetective" : "Facts_AwardKnowsAll"],
+                          string.Join(", ", view.Scores.Where(s => s.RightGuesses == right).Select(s => NameOf(s.PlayerId))));
+        if (fooled > 0)
+            yield return (T[oneTruth ? "Facts_AwardLiar" : "Facts_AwardMystery"],
+                          string.Join(", ", view.Scores.Where(s => s.Fooled == fooled).Select(s => NameOf(s.PlayerId))));
+    }
+}

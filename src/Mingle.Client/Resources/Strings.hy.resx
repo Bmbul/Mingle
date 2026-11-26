@@ -355,4 +355,72 @@
   <data name="Setup_Questions" xml:space="preserve"><value>Հարցեր</value></data>
   <data name="Setup_HowToAnswer" xml:space="preserve"><value>Ինչպես պատասխանել</value></data>
   <data name="Setup_SecretAnswers" xml:space="preserve"><value>Գաղտնի պատասխաններ</value></data>
+  <data name="Facts_OneTruth" xml:space="preserve"><value>Մեկը ճիշտ է</value></data>
+  <data name="Facts_WhoseFact" xml:space="preserve"><value>Ո՞ւմ փաստն է</value></data>
+  <data name="Editor_Game_Facts" xml:space="preserve"><value>Փաստեր</value></data>
+  <data name="Kind_fact" xml:space="preserve"><value>Փաստի թեմա</value></data>
+  <data name="Lobby_NeedThree" xml:space="preserve"><value>Անհրաժեշտ է առնվազն 3 խաղացող։</value></data>
+  <data name="Facts_Find" xml:space="preserve"><value>Ինչ գտնել</value></data>
+  <data name="Facts_FindTruth" xml:space="preserve"><value>Գտիր ճշմարտությունը</value></data>
+  <data name="Facts_FindLie" xml:space="preserve"><value>Գտիր սուտը</value></data>
+  <data name="Facts_FindTruthHint" xml:space="preserve"><value>Ամեն մեկը գրում է 3 փաստ՝ մեկը ճիշտ, երկուսը հորինված։</value></data>
+  <data name="Facts_FindLieHint" xml:space="preserve"><value>Ամեն մեկը գրում է 3 փաստ՝ երկուսը ճիշտ, մեկը հորինված։</value></data>
+  <data name="Facts_Each" xml:space="preserve"><value>Փաստ ամեն խաղացողից</value></data>
+  <data name="Facts_ShowAuthor" xml:space="preserve"><value>Ցույց տալ, թե ով է գրել</value></data>
+  <data name="Facts_AfterEach" xml:space="preserve"><value>Ամեն փաստից հետո</value></data>
+  <data name="Facts_AtTheEnd" xml:space="preserve"><value>Վերջում</value></data>
+  <data name="Facts_AfterEachHint" xml:space="preserve"><value>Քվեարկությունից հետո երևում է հեղինակը և միավորները։</value></data>
+  <data name="Facts_AtTheEndHint" xml:space="preserve"><value>Մինչև վերջին փաստը ոչինչ չի բացահայտվում. բոլոր հեղինակները երևում են վերջում։</value></data>
+  <data name="Facts_OneTruthLine" xml:space="preserve"><value>Ամեն մեկը գաղտնի գրում է 3 փաստ, հետո կարդում եք ու վիճում՝ որն է ճիշտ</value></data>
+  <data name="Facts_OneTruthOnlineLine" xml:space="preserve"><value>Ամեն մեկը գրում է 3 փաստ, հետո քվեարկում է մյուսների փաստերի համար</value></data>
+  <data name="Facts_WhoseFactLine" xml:space="preserve"><value>Ամեն մեկը գրում է փաստ իր մասին, դուք գուշակում եք՝ ումն է</value></data>
+  <data name="Facts_Prompt" xml:space="preserve"><value>Գրիր այս մասին</value></data>
+  <data name="Facts_OtherPrompt" xml:space="preserve"><value>Ուրիշ թեմա</value></data>
+  <data name="Facts_WriteTruthHint" xml:space="preserve"><value>Գրիր 3 փաստ քո մասին՝ մեկը ճիշտ, երկուսը հորինված։ Նշիր ճիշտը։</value></data>
+  <data name="Facts_WriteLieHint" xml:space="preserve"><value>Գրիր 3 փաստ քո մասին՝ երկուսը ճիշտ, մեկը հորինված։ Նշիր սուտը։</value></data>
+  <data name="Facts_FactN" xml:space="preserve"><value>Փաստ {0}</value></data>
+  <data name="Facts_ThisIsTrue" xml:space="preserve"><value>Սա է ճիշտը</value></data>
+  <data name="Facts_ThisIsTheLie" xml:space="preserve"><value>Սա է սուտը</value></data>
+  <data name="Facts_Done" xml:space="preserve"><value>Պատրաստ է</value></data>
+  <data name="Facts_MarkTrue" xml:space="preserve"><value>Նշիր ճիշտ փաստը։</value></data>
+  <data name="Facts_MarkLie" xml:space="preserve"><value>Նշիր սուտը։</value></data>
+  <data name="Facts_WriteAll" xml:space="preserve"><value>Լրացրու բոլոր փաստերը։</value></data>
+  <data name="Facts_TheTruth" xml:space="preserve"><value>Ճիշտ է</value></data>
+  <data name="Facts_TheLie" xml:space="preserve"><value>Սուտ է</value></data>
+  <data name="Facts_PassTo" xml:space="preserve"><value>Հեռախոսը տուր</value></data>
+  <data name="Facts_WriteSecretly" xml:space="preserve"><value>Գրիր փաստերդ այնպես, որ ոչ ոք չտեսնի</value></data>
+  <data name="Facts_Written" xml:space="preserve"><value>Գրել են՝ {0}-ը {1}-ից</value></data>
+  <data name="Facts_ImReady" xml:space="preserve"><value>Պատրաստ եմ՝ {0}</value></data>
+  <data name="Facts_ItemOf" xml:space="preserve"><value>{0} / {1}</value></data>
+  <data name="Facts_FactsOf" xml:space="preserve"><value>Փաստերը՝</value></data>
+  <data name="Facts_DiscussTruth" xml:space="preserve"><value>Ո՞րն է ճիշտը</value></data>
+  <data name="Facts_DiscussLie" xml:space="preserve"><value>Ո՞րն է սուտը</value></data>
+  <data name="Facts_DiscussHint" xml:space="preserve"><value>Կարդացեք, հարցեր տվեք, վիճեք։ Հետո բացեք։</value></data>
+  <data name="Facts_Reveal" xml:space="preserve"><value>Բացել</value></data>
+  <data name="Facts_Next" xml:space="preserve"><value>Հաջորդը</value></data>
+  <data name="Facts_Finish" xml:space="preserve"><value>Ավարտել</value></data>
+  <data name="Facts_AllDone" xml:space="preserve"><value>Բոլորի փաստերը կարդացիք</value></data>
+  <data name="Facts_AllDoneHint" xml:space="preserve"><value>Նորից խաղալիս ամեն մեկը նոր փաստեր կգրի։</value></data>
+  <data name="Facts_YoursAreIn" xml:space="preserve"><value>Փաստերդ ընդունված են</value></data>
+  <data name="Facts_StillWriting" xml:space="preserve"><value>Դեռ գրում են՝ {0}</value></data>
+  <data name="Facts_StartNow" xml:space="preserve"><value>Սկսել հիմա</value></data>
+  <data name="Facts_StartNowHint" xml:space="preserve"><value>Սկսել նրանցով, ովքեր արդեն գրել են, առանց սպասելու մյուսներին։</value></data>
+  <data name="Facts_TheyAreGuessing" xml:space="preserve"><value>Բոլորը գուշակում են քո փաստերը։ Մի՛ մատնիր քեզ։</value></data>
+  <data name="Facts_PickTruth" xml:space="preserve"><value>Սեղմիր այն փաստը, որը կարծում ես՝ ճիշտ է։</value></data>
+  <data name="Facts_PickLie" xml:space="preserve"><value>Սեղմիր այն փաստը, որը կարծում ես՝ սուտ է։</value></data>
+  <data name="Facts_CanChange" xml:space="preserve"><value>Կարող ես փոխել քվեդ, մինչև բոլորը քվեարկեն։</value></data>
+  <data name="Facts_WhoWroteIt" xml:space="preserve"><value>Ո՞վ է գրել</value></data>
+  <data name="Facts_Bluff" xml:space="preserve"><value>Սա քոնն է։ Քվեարկիր ուրիշի օգտին, որ շփոթեցնես մյուսներին։</value></data>
+  <data name="Facts_WrittenBy" xml:space="preserve"><value>Հեղինակ՝ {0}</value></data>
+  <data name="Facts_Voted" xml:space="preserve"><value>Քվեարկել են՝ {0}-ը {1}-ից</value></data>
+  <data name="Facts_RevealNow" xml:space="preserve"><value>Բացել հիմա</value></data>
+  <data name="Facts_NextNow" xml:space="preserve"><value>Անցնել հաջորդին</value></data>
+  <data name="Facts_Recap" xml:space="preserve"><value>Ով ինչ է գրել</value></data>
+  <data name="Facts_FoundBy" xml:space="preserve"><value>գուշակել են՝ {0}</value></data>
+  <data name="Facts_AwardDetective" xml:space="preserve"><value>🕵️ Խուզարկու</value></data>
+  <data name="Facts_AwardLiar" xml:space="preserve"><value>🎭 Լավագույն ստախոս</value></data>
+  <data name="Facts_AwardKnowsAll" xml:space="preserve"><value>🧠 Բոլորին ամենալավն է ճանաչում</value></data>
+  <data name="Facts_AwardMystery" xml:space="preserve"><value>🫣 Ամենաառեղծվածայինը</value></data>
+  <data name="Facts_Scores" xml:space="preserve"><value>Միավորներ</value></data>
+  <data name="Facts_ScoreParts" xml:space="preserve"><value>{0} գուշակել · {1} խաբել</value></data>
 </root>

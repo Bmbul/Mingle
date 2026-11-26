@@ -94,6 +94,7 @@ public sealed record CardRequest(
     {
         DeckStyle.Blitz => Kinds.IsDefaultOrEmpty ? CardPrompt.BlitzKinds : [.. Kinds],
         DeckStyle.Handoff => [CardKinds.Handoff.Id],
+        DeckStyle.Facts => [CardKinds.FactPrompt.Id],
         _ => Kinds.IsDefaultOrEmpty ? CardPrompt.Kinds : [.. Kinds],
     };
 

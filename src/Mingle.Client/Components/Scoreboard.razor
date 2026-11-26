@@ -1,0 +1,18 @@
+@inject Text T
+
+<section class="stack-tight scoreboard" aria-label="@T["Facts_Scores"]">
+    <h2 class="label">@T["Facts_Scores"]</h2>
+    @foreach (var score in Scores)
+    {
+        <div class="score-line">
+            <span class="grow">@NameOf(score.PlayerId)</span>
+            <span class="muted small">@T["Facts_ScoreParts", score.RightGuesses, score.Fooled]</span>
+            <span class="score-points">@score.Points</span>
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter] public ImmutableArray<FactScore> Scores { get; set; } = [];
+    [Parameter] public Func<string, string> NameOf { get; set; } = id => id;
+}

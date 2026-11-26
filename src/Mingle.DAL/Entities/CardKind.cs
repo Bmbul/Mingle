@@ -25,6 +25,7 @@ public sealed class CardKind
         ["cringe"] = 9,
         ["name3"] = 10,
         ["letter"] = 11,
+        ["fact"] = 12,
     };
 
     public static IEnumerable<CardKind> All() =>

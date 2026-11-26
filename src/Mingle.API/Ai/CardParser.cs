@@ -97,6 +97,12 @@ public static class CardParser
                     if (!tidy.EndsWith('…') || tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 60
                         || tidy.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length > 8) return null;
                 }
+                if (kind == CardKinds.FactPrompt.Id)
+                {
+                    // A kind of fact to write about: short, not a question.
+                    tidy = tidy.TrimEnd('.', '։', '!', ':');
+                    if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 80) return null;
+                }
                 if (kind is "handoff" or "cringe")
                 {
                     // "Give it to…" follows "Give the phone to"; "cringe or fine" is a situation: never a question, nothing long.
@@ -104,7 +110,7 @@ public static class CardParser
                     if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 100) return null;
                 }
                 // Every kind but "finish the sentence", associations, "Give it to…" and "cringe or fine" is a question.
-                if (lang == Lang.Hy && kind is not ("finish" or "word" or "name3" or "letter" or "handoff" or "cringe")) tidy = ArmenianQuestions.Fix(tidy);
+                if (lang == Lang.Hy && kind is not ("finish" or "word" or "name3" or "letter" or "handoff" or "cringe" or "fact")) tidy = ArmenianQuestions.Fix(tidy);
                 texts[lang] = new CardText(tidy);
             }
         }

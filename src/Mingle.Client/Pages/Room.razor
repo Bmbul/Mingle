@@ -34,6 +34,10 @@ else if (room.Stage == RoomStage.Lobby)
             }
         </div>
 
+        @if (room.Settings.Facts is { } factGame)
+        {
+            <p class="muted center"><Icon Name="idea" Size="16" /> @T[factGame.Kind == FactGameKind.OneTruth ? "Facts_OneTruth" : "Facts_WhoseFact"]</p>
+        }
         <h2 class="label">@T["Setup_Players"] · @room.Players.Length</h2>
         @foreach (var player in room.Players)
         {
@@ -48,7 +52,7 @@ else if (room.Stage == RoomStage.Lobby)
                 <span class="lang-tag">@player.Lang.Code().ToUpperInvariant()</span>
             </div>
         }
-        @if (room.Players.Length < Game.MinPlayers)
+        @if (room.Players.Length < MinPlayers(room))
         {
             <p class="muted">@T["Lobby_Waiting"]</p>
         }
@@ -92,8 +96,9 @@ else if (room.Stage == RoomStage.Lobby)
         {
             var noDecks = EveryoneBrings(room) && room.Players.All(p => p.DeckId is null);
             var noTopics = room.Settings.Source == DeckSource.Topics && room.Players.All(p => !p.PickedTopics);
-            <p class="muted center" role="status">@(room.Players.Length < Game.MinPlayers ? T["Lobby_NeedTwo"] : noDecks ? T["Lobby_PickDecks"] : noTopics ? T["Lobby_PickTopics"] : T["Lobby_EveryoneIn"])</p>
-            <button class="btn" disabled="@(room.Players.Length < Game.MinPlayers || noDecks || noTopics)" @onclick="Rooms.StartGame">@T["Setup_Start"]</button>
+            var tooFew = room.Players.Length < MinPlayers(room);
+            <p class="muted center" role="status">@(tooFew ? (MinPlayers(room) > 2 ? T["Lobby_NeedThree"] : T["Lobby_NeedTwo"]) : noDecks ? T["Lobby_PickDecks"] : noTopics ? T["Lobby_PickTopics"] : T["Lobby_EveryoneIn"])</p>
+            <button class="btn" disabled="@(tooFew || noDecks || noTopics)" @onclick="Rooms.StartGame">@T["Setup_Start"]</button>
         }
         else
         {
@@ -108,6 +113,10 @@ else if (room.Stage == RoomStage.Writing)
         <p class="h2 center">@T["Writing_Title"]</p>
         <p class="muted center">@T["Writing_Hint"]</p>
     </main>
+}
+else if (room.Facts is { } facts)
+{
+    <FactsRoom Room="room" Facts="facts" OnHome="LeaveRoom" />
 }
 else if (room.Stage == RoomStage.Playing && room.Game is { } game)
 {
@@ -273,6 +282,9 @@ else if (room.Summary is { } summary)
 
     private Task ToggleTopic(TopicChoice topics, string code) =>
         Rooms.PickTopics(topics.Picked.Contains(code) ? topics.Picked.Remove(code) : topics.Picked.Add(code));
+
+    private static int MinPlayers(RoomView room) =>
+        room.Settings.Facts is { } facts ? FactGame.MinPlayers(facts.Kind) : Game.MinPlayers;
 
     private static Lang[] RoomLanguages(RoomView room) => [.. room.Players.Select(p => p.Lang).Distinct()];
 

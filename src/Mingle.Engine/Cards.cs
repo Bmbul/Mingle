@@ -60,7 +60,7 @@ public enum InputMode { Spoken, Text, Choice, PlayerVote, Scale }
 /// Which game a card belongs to. Question games play only question cards; blitz and "Give it to…" have their own
 /// cards and their own decks, and a deck never mixes styles.
 /// </summary>
-public enum DeckStyle { Questions, Blitz, Handoff }
+public enum DeckStyle { Questions, Blitz, Handoff, Facts }
 
 /// <param name="Style">The game the kind belongs to: normal games, mixes and fallbacks use only question kinds.</param>
 /// <param name="FixedOptions">Two answers the kind always offers ("Cringe" / "Fine"), so its cards hold only a text.</param>
@@ -97,10 +97,12 @@ public static class CardKinds
     public static readonly CardKind LetterCategory = new("letter", ResponseType.Free, Audience.FollowTurnStyle, DeckStyle.Blitz);
     /// <summary>"Give the phone to…": who it describes, written to follow those words ("the best cook here").</summary>
     public static readonly CardKind Handoff = new("handoff", ResponseType.PlayerVote, Audience.Everyone, DeckStyle.Handoff);
+    /// <summary>The fact games: a prompt for a fact about yourself ("Something about your childhood").</summary>
+    public static readonly CardKind FactPrompt = new("fact", ResponseType.Free, Audience.Everyone, DeckStyle.Facts);
 
     public static ImmutableArray<CardKind> All { get; } =
         [OpenQuestion, FinishSentence, WouldYouRather, MostLikelyTo, GuessMyAnswer, RateIt, CringeOrFine,
-         Association, NameThree, LetterCategory, Handoff];
+         Association, NameThree, LetterCategory, Handoff, FactPrompt];
 
     /// <summary>The kinds normal games play.</summary>
     public static ImmutableArray<CardKind> Regular { get; } = [.. All.Where(k => k.IsQuestion)];

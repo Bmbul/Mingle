@@ -361,4 +361,72 @@
   <data name="Setup_Questions" xml:space="preserve"><value>Вопросы</value></data>
   <data name="Setup_HowToAnswer" xml:space="preserve"><value>Как отвечать</value></data>
   <data name="Setup_SecretAnswers" xml:space="preserve"><value>Тайные ответы</value></data>
+  <data name="Facts_OneTruth" xml:space="preserve"><value>Одна правда</value></data>
+  <data name="Facts_WhoseFact" xml:space="preserve"><value>Чей факт?</value></data>
+  <data name="Editor_Game_Facts" xml:space="preserve"><value>Факты</value></data>
+  <data name="Kind_fact" xml:space="preserve"><value>Тема факта</value></data>
+  <data name="Lobby_NeedThree" xml:space="preserve"><value>Нужно минимум три игрока.</value></data>
+  <data name="Facts_Find" xml:space="preserve"><value>Что искать</value></data>
+  <data name="Facts_FindTruth" xml:space="preserve"><value>Найди правду</value></data>
+  <data name="Facts_FindLie" xml:space="preserve"><value>Найди ложь</value></data>
+  <data name="Facts_FindTruthHint" xml:space="preserve"><value>Каждый пишет 3 факта: один правдивый, два выдуманных.</value></data>
+  <data name="Facts_FindLieHint" xml:space="preserve"><value>Каждый пишет 3 факта: два правдивых, один выдуманный.</value></data>
+  <data name="Facts_Each" xml:space="preserve"><value>Фактов от каждого</value></data>
+  <data name="Facts_ShowAuthor" xml:space="preserve"><value>Показывать автора</value></data>
+  <data name="Facts_AfterEach" xml:space="preserve"><value>После каждого факта</value></data>
+  <data name="Facts_AtTheEnd" xml:space="preserve"><value>В конце</value></data>
+  <data name="Facts_AfterEachHint" xml:space="preserve"><value>После голосования видно автора и очки.</value></data>
+  <data name="Facts_AtTheEndHint" xml:space="preserve"><value>До последнего факта ничего не раскрывается: все авторы видны в конце.</value></data>
+  <data name="Facts_OneTruthLine" xml:space="preserve"><value>Каждый тайно пишет 3 факта, потом читаете и спорите, где правда</value></data>
+  <data name="Facts_OneTruthOnlineLine" xml:space="preserve"><value>Каждый пишет 3 факта, потом голосует за чужие</value></data>
+  <data name="Facts_WhoseFactLine" xml:space="preserve"><value>Каждый пишет факт о себе, остальные угадывают, чей он</value></data>
+  <data name="Facts_Prompt" xml:space="preserve"><value>Напиши про</value></data>
+  <data name="Facts_OtherPrompt" xml:space="preserve"><value>Другая тема</value></data>
+  <data name="Facts_WriteTruthHint" xml:space="preserve"><value>Напиши 3 факта о себе: один правдивый, два выдуманных. Отметь правдивый.</value></data>
+  <data name="Facts_WriteLieHint" xml:space="preserve"><value>Напиши 3 факта о себе: два правдивых, один выдуманный. Отметь ложь.</value></data>
+  <data name="Facts_FactN" xml:space="preserve"><value>Факт {0}</value></data>
+  <data name="Facts_ThisIsTrue" xml:space="preserve"><value>Это правда</value></data>
+  <data name="Facts_ThisIsTheLie" xml:space="preserve"><value>Это ложь</value></data>
+  <data name="Facts_Done" xml:space="preserve"><value>Готово</value></data>
+  <data name="Facts_MarkTrue" xml:space="preserve"><value>Отметь правдивый факт.</value></data>
+  <data name="Facts_MarkLie" xml:space="preserve"><value>Отметь ложь.</value></data>
+  <data name="Facts_WriteAll" xml:space="preserve"><value>Заполни все факты.</value></data>
+  <data name="Facts_TheTruth" xml:space="preserve"><value>Правда</value></data>
+  <data name="Facts_TheLie" xml:space="preserve"><value>Ложь</value></data>
+  <data name="Facts_PassTo" xml:space="preserve"><value>Передай телефон</value></data>
+  <data name="Facts_WriteSecretly" xml:space="preserve"><value>Пиши факты так, чтобы никто не видел</value></data>
+  <data name="Facts_Written" xml:space="preserve"><value>Написали: {0} из {1}</value></data>
+  <data name="Facts_ImReady" xml:space="preserve"><value>Я {0}, показывай</value></data>
+  <data name="Facts_ItemOf" xml:space="preserve"><value>{0} из {1}</value></data>
+  <data name="Facts_FactsOf" xml:space="preserve"><value>Факты игрока</value></data>
+  <data name="Facts_DiscussTruth" xml:space="preserve"><value>Что из этого правда?</value></data>
+  <data name="Facts_DiscussLie" xml:space="preserve"><value>Что из этого ложь?</value></data>
+  <data name="Facts_DiscussHint" xml:space="preserve"><value>Прочитайте, позадавайте вопросы, поспорьте. Потом откройте.</value></data>
+  <data name="Facts_Reveal" xml:space="preserve"><value>Открыть</value></data>
+  <data name="Facts_Next" xml:space="preserve"><value>Дальше</value></data>
+  <data name="Facts_Finish" xml:space="preserve"><value>Завершить</value></data>
+  <data name="Facts_AllDone" xml:space="preserve"><value>Факты всех прочитаны</value></data>
+  <data name="Facts_AllDoneHint" xml:space="preserve"><value>В новой игре каждый напишет новые факты.</value></data>
+  <data name="Facts_YoursAreIn" xml:space="preserve"><value>Твои факты приняты</value></data>
+  <data name="Facts_StillWriting" xml:space="preserve"><value>Ещё пишут: {0}</value></data>
+  <data name="Facts_StartNow" xml:space="preserve"><value>Начать сейчас</value></data>
+  <data name="Facts_StartNowHint" xml:space="preserve"><value>Начать с теми, кто уже написал, не дожидаясь остальных.</value></data>
+  <data name="Facts_TheyAreGuessing" xml:space="preserve"><value>Все угадывают твои факты. Не выдай себя!</value></data>
+  <data name="Facts_PickTruth" xml:space="preserve"><value>Нажми на факт, который считаешь правдой.</value></data>
+  <data name="Facts_PickLie" xml:space="preserve"><value>Нажми на факт, который считаешь ложью.</value></data>
+  <data name="Facts_CanChange" xml:space="preserve"><value>Можно передумать, пока не проголосовали все.</value></data>
+  <data name="Facts_WhoWroteIt" xml:space="preserve"><value>Кто это написал?</value></data>
+  <data name="Facts_Bluff" xml:space="preserve"><value>Это твой! Проголосуй за другого, чтобы запутать остальных.</value></data>
+  <data name="Facts_WrittenBy" xml:space="preserve"><value>Автор: {0}</value></data>
+  <data name="Facts_Voted" xml:space="preserve"><value>Проголосовали: {0} из {1}</value></data>
+  <data name="Facts_RevealNow" xml:space="preserve"><value>Открыть сейчас</value></data>
+  <data name="Facts_NextNow" xml:space="preserve"><value>Следующий факт</value></data>
+  <data name="Facts_Recap" xml:space="preserve"><value>Кто что написал</value></data>
+  <data name="Facts_FoundBy" xml:space="preserve"><value>угадали: {0}</value></data>
+  <data name="Facts_AwardDetective" xml:space="preserve"><value>🕵️ Детектив</value></data>
+  <data name="Facts_AwardLiar" xml:space="preserve"><value>🎭 Мастер обмана</value></data>
+  <data name="Facts_AwardKnowsAll" xml:space="preserve"><value>🧠 Знает всех лучше всех</value></data>
+  <data name="Facts_AwardMystery" xml:space="preserve"><value>🫣 Главная загадка</value></data>
+  <data name="Facts_Scores" xml:space="preserve"><value>Очки</value></data>
+  <data name="Facts_ScoreParts" xml:space="preserve"><value>угадано: {0} · обмануто: {1}</value></data>
 </root>

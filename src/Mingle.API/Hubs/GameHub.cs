@@ -115,6 +115,14 @@ public sealed class GameHub(RoomRegistry rooms, IDeckSource decks, UserDeckStore
     public Task React(bool? liked) => Change((room, me) => room.Act(me, new ReactToCard(me, liked)));
     public Task EndGame() => Change((room, me) => room.Act(me, new EndGame(me)));
 
+    public Task WriteFacts(ImmutableArray<string> facts, int marked) =>
+        Change((room, me) => room.ActOnFacts(me, f => f.Write(me, facts.IsDefault ? [] : facts, marked)));
+    public Task SwapPrompt() => Change((room, me) => room.ActOnFacts(me, f => f.SwapPrompt(me)));
+    public Task BeginFacts() => Change((room, me) => room.ActOnFacts(me, f => f.Begin(), hostOnly: true));
+    public Task VoteFact(string choice) => Change((room, me) => room.ActOnFacts(me, f => f.Vote(me, choice ?? "")));
+    public Task RevealFact() => Change((room, me) => room.ActOnFacts(me, f => f.Reveal(), hostOnly: true));
+    public Task NextFact() => Change((room, me) => room.ActOnFacts(me, f => f.Next()));
+
     public async Task Leave()
     {
         var (room, me) = Seat();

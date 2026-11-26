@@ -57,7 +57,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
     /// <param name="Depths">Any of 1, 2, 3; none or all three mixes light to deep.</param>
     /// <param name="Setting">Who plays: couple, friends, family, party or colleagues.</param>
     /// <param name="Languages">Language codes (hy, ru, en) to write the cards in; none means all three.</param>
-    /// <param name="Style">"associations" for one-word blitz cards, "handoff" for "Give it to…"; anything else writes normal cards.</param>
+    /// <param name="Style">"associations" for blitz cards, "handoff" for "Give it to…", "facts" for fact-game prompts; anything else writes normal cards.</param>
     /// <param name="Moods">"Give it to…" only, instead of topics: flattering, funny, situations, bold.</param>
     /// <param name="Kinds">Questions only: the card kinds to write (open, finish, wyr, likely, guess, rate); none means all.</param>
     public sealed record WriteRequest(string[]? Topics, string? Theme, int[]? Depths, string? Setting, string[]? Languages, int Count = 20,
@@ -77,6 +77,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
         {
             "associations" => DeckStyle.Blitz,
             "handoff" => DeckStyle.Handoff,
+            "facts" => DeckStyle.Facts,
             _ => DeckStyle.Questions,
         };
         if (style == DeckStyle.Handoff) return await WriteHandoff(request, theme, ct);
@@ -85,7 +86,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
         if (codes.Count > CardRequest.MaxTopics) return BadRequest(new { error = $"Pick up to {CardRequest.MaxTopics} topics." });
         if (request.Setting is { } setting && !CardRequest.Settings.ContainsKey(setting)) return BadRequest(new { error = "Unknown setting." });
         if ((request.Depths ?? []).Any(d => d is < 1 or > 3)) return BadRequest(new { error = "Depth is 1, 2 or 3." });
-        var validKinds = style == DeckStyle.Blitz ? CardPrompt.BlitzKinds : CardPrompt.Kinds;
+        var validKinds = style switch { DeckStyle.Blitz => CardPrompt.BlitzKinds, DeckStyle.Facts => [], _ => CardPrompt.Kinds };
         if ((request.Kinds ?? []).Any(k => !validKinds.Contains(k))) return BadRequest(new { error = "Unknown card kind." });
         var languages = new List<Lang>();
         foreach (var code in request.Languages ?? [])
@@ -190,7 +191,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
     {
         if (deck.Names.Values.Any(n => n.Length > MaxNameLength)) return $"Deck names can be up to {MaxNameLength} characters.";
         if (deck.Cards.Length > UserDeckStore.MaxCards) return $"A deck can hold up to {UserDeckStore.MaxCards} cards.";
-        if (deck.MixesStyles) return "A deck holds cards for one game only: questions, blitz or \"Give it to…\".";
+        if (deck.MixesStyles) return "A deck holds cards for one game only: questions, blitz, \"Give it to…\" or facts.";
         foreach (var card in deck.Cards)
             foreach (var (lang, text) in card.Texts)
             {

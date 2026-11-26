@@ -16,6 +16,7 @@ namespace Mingle.Contracts;
 [JsonSerializable(typeof(Answer))]
 [JsonSerializable(typeof(Lang))]
 [JsonSerializable(typeof(bool))]
+[JsonSerializable(typeof(int))]
 [JsonSerializable(typeof(bool?))]
 [JsonSerializable(typeof(string))]
 [JsonSerializable(typeof(System.Collections.Immutable.ImmutableArray<string>))]
