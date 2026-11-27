@@ -113,12 +113,13 @@ else if (game.Stage is FactStage.Showing or FactStage.Revealed && game.Current i
             </div>
         </SwipeCard>
     </main>
-    @if (!CanGoOn(game))
-    {
-        <footer class="foot">
+    @* Always there (empty once revealed), so the card above keeps its size. *@
+    <footer class="foot">
+        @if (!CanGoOn(game))
+        {
             <button class="btn" @onclick="game.Reveal">@T["Facts_Reveal"]</button>
-        </footer>
-    }
+        }
+    </footer>
 }
 else
 {

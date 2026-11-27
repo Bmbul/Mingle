@@ -627,3 +627,17 @@ html.swipe-page .main { touch-action: manipulation; }
 .swipe-deck .swipe-next .card-face.swipe-panel { padding: 22px 20px; justify-content: flex-start; gap: 14px; }
 .swipe-next .swipe-panel .prompt { font-size: 26px; }
 .swipe-next .handoff-players .btn2 { display: flex; align-items: center; justify-content: center; }
+/* Every swipe card is the same size: it fills the free space on the screen (up to a playing-card height on big
+   screens), so it never grows or shrinks between cards or when an answer is revealed. Shorter content sits in the
+   middle of the same box; only content taller than the screen makes it grow. */
+.swipe-deck { justify-content: center; min-height: 0; }
+.swipe-stack { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 320px; max-height: 640px; }
+.swipe-stack .swipe-card { flex: 1 1 auto; display: flex; flex-direction: column; }
+.swipe-stack .swipe-card > .card-face { flex: 1 1 auto; }
+.swipe-deck .card-face:not(.compact) { min-height: 0; }
+.swipe-deck .card-face.swipe-panel, .swipe-deck .swipe-next .card-face.swipe-panel { justify-content: center; }
+.swipe-deck .card-face.compact { justify-content: center; }
+/* On a swipe screen the footer keeps the room of one button even when it has none (a "Done" or "Reveal" button
+   that goes away after the reveal), so the card above never changes size. */
+html.swipe-page .foot { min-height: calc(12px + 54px + 20px + env(safe-area-inset-bottom) + 1px); }
+html.swipe-page .foot:not(:has(*)) { display: flex; border-top-color: transparent; }
