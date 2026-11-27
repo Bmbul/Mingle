@@ -1,0 +1,335 @@
+{
+ "id": "facts-travel",
+ "name": {
+  "en": "Facts: trips and places",
+  "hy": "Փաստեր՝ ճամփորդություններ ու վայրեր",
+  "ru": "Факты: поездки и места"
+ },
+ "cards": [
+  {
+   "id": "facts-travel-01",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A city you've been to",
+    "hy": "Քաղաք, որտեղ եղել ես",
+    "ru": "Город, где удалось побывать"
+   }
+  },
+  {
+   "id": "facts-travel-02",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "The longest trip of your life",
+    "hy": "Քո կյանքի ամենաերկար ճամփորդությունը",
+    "ru": "Самая долгая поездка в жизни"
+   }
+  },
+  {
+   "id": "facts-travel-03",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Something that went wrong on a trip",
+    "hy": "Ինչ-որ բան, որ ճամփորդության ժամանակ սխալ գնաց",
+    "ru": "Что-то, что пошло не так в поездке"
+   }
+  },
+  {
+   "id": "facts-travel-04",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A souvenir you brought home",
+    "hy": "Հուշանվեր, որ բերել ես տուն",
+    "ru": "Сувенир, привезённый домой"
+   }
+  },
+  {
+   "id": "facts-travel-05",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A place you'd go back to",
+    "hy": "Վայր, ուր կվերադառնայիր",
+    "ru": "Место, куда хочется вернуться"
+   }
+  },
+  {
+   "id": "facts-travel-06",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A night train or a long bus ride",
+    "hy": "Գիշերային գնացք կամ երկար ճանապարհ ավտոբուսով",
+    "ru": "Ночной поезд или долгая дорога на автобусе"
+   }
+  },
+  {
+   "id": "facts-travel-07",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A flight you remember",
+    "hy": "Թռիչք, որ հիշում ես",
+    "ru": "Запомнившийся перелёт"
+   }
+  },
+  {
+   "id": "facts-travel-08",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Food you tried abroad",
+    "hy": "Ուտելիք, որ փորձել ես արտասահմանում",
+    "ru": "Еда, попробованная за границей"
+   }
+  },
+  {
+   "id": "facts-travel-09",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A hotel or place you stayed",
+    "hy": "Հյուրանոց կամ վայր, որտեղ գիշերել ես",
+    "ru": "Отель или место для ночёвки в поездке"
+   }
+  },
+  {
+   "id": "facts-travel-10",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A language you tried to speak abroad",
+    "hy": "Լեզու, որով փորձել ես խոսել արտասահմանում",
+    "ru": "Язык, на котором пришлось объясняться за границей"
+   }
+  },
+  {
+   "id": "facts-travel-11",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A mountain or a hike",
+    "hy": "Սար կամ արշավ",
+    "ru": "Гора или поход"
+   }
+  },
+  {
+   "id": "facts-travel-12",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A beach you remember",
+    "hy": "Ծովափ, որ հիշում ես",
+    "ru": "Запомнившийся пляж"
+   }
+  },
+  {
+   "id": "facts-travel-13",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "A trip with friends",
+    "hy": "Ճամփորդություն ընկերների հետ",
+    "ru": "Поездка с друзьями"
+   }
+  },
+  {
+   "id": "facts-travel-14",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A village or a small town",
+    "hy": "Գյուղ կամ փոքր քաղաք",
+    "ru": "Деревня или маленький город"
+   }
+  },
+  {
+   "id": "facts-travel-15",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A place in Armenia you love",
+    "hy": "Հայաստանում մի վայր, որ սիրում ես",
+    "ru": "Любимое место в Армении"
+   }
+  },
+  {
+   "id": "facts-travel-16",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Something you lost while travelling",
+    "hy": "Բան, որ կորցրել ես ճամփորդության ժամանակ",
+    "ru": "Вещь, потерянная в поездке"
+   }
+  },
+  {
+   "id": "facts-travel-17",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A road trip",
+    "hy": "Ճամփորդություն մեքենայով",
+    "ru": "Поездка на машине"
+   }
+  },
+  {
+   "id": "facts-travel-18",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A famous sight you saw",
+    "hy": "Հայտնի տեսարժան վայր, որ տեսել ես",
+    "ru": "Знаменитая достопримечательность, которую удалось увидеть"
+   }
+  },
+  {
+   "id": "facts-travel-19",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Your worst holiday",
+    "hy": "Քո ամենավատ արձակուրդը",
+    "ru": "Худший отпуск"
+   }
+  },
+  {
+   "id": "facts-travel-20",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A stranger you met on a trip",
+    "hy": "Անծանոթ, որին հանդիպել ես ճամփորդելիս",
+    "ru": "Незнакомец, встреченный в поездке"
+   }
+  },
+  {
+   "id": "facts-travel-21",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "Somewhere you slept in a tent",
+    "hy": "Վայր, որտեղ վրանում ես գիշերել",
+    "ru": "Место, где пришлось ночевать в палатке"
+   }
+  },
+  {
+   "id": "facts-travel-22",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A country you'd never visit",
+    "hy": "Երկիր, ուր երբեք չէիր գնա",
+    "ru": "Страна, куда точно не хочется"
+   }
+  },
+  {
+   "id": "facts-travel-23",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "dreams"
+   ],
+   "text": {
+    "en": "Your dream trip",
+    "hy": "Քո երազանքի ճամփորդությունը",
+    "ru": "Поездка мечты"
+   }
+  },
+  {
+   "id": "facts-travel-24",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A story from a border or an airport",
+    "hy": "Պատմություն սահմանի կամ օդանավակայանի մասին",
+    "ru": "История на границе или в аэропорту"
+   }
+  },
+  {
+   "id": "facts-travel-25",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Weather that surprised you on a trip",
+    "hy": "Եղանակ, որ զարմացրել է քեզ ճամփորդության ժամանակ",
+    "ru": "Погода, удивившая в поездке"
+   }
+  }
+ ]
+}

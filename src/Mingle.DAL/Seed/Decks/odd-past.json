@@ -1,0 +1,610 @@
+{
+ "id": "odd-past",
+ "name": {
+  "en": "Odd question: childhood and memories",
+  "hy": "Այլ հարց՝ մանկություն ու հիշողություններ",
+  "ru": "Другой вопрос: детство и воспоминания"
+ },
+ "cards": [
+  {
+   "id": "odd-past-01",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What was your favourite cartoon?",
+    "hy": "Ո՞րն էր քո սիրած մուլտֆիլմը։",
+    "ru": "Какой мультфильм был любимым?"
+   },
+   "options": {
+    "en": [
+     "Which cartoon scared you?"
+    ],
+    "hy": [
+     "Ո՞ր մուլտֆիլմն էր քեզ վախեցնում։"
+    ],
+    "ru": [
+     "Какой мультфильм пугал тебя?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-02",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which toy do you remember?",
+    "hy": "Ո՞ր խաղալիքն ես հիշում։",
+    "ru": "Какую игрушку ты помнишь?"
+   },
+   "options": {
+    "en": [
+     "Which toy got broken?"
+    ],
+    "hy": [
+     "Ո՞ր խաղալիքն ես կոտրել։"
+    ],
+    "ru": [
+     "Какая игрушка оказалась сломанной?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-03",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Where did you spend summers as a kid?",
+    "hy": "Որտե՞ղ էիր անցկացնում ամառները փոքր ժամանակ։",
+    "ru": "Где проходило твоё лето в детстве?"
+   },
+   "options": {
+    "en": [
+     "Where did you celebrate New Year as a kid?"
+    ],
+    "hy": [
+     "Որտե՞ղ էիր դիմավորում Ամանորը փոքր ժամանակ։"
+    ],
+    "ru": [
+     "Где проходил твой Новый год в детстве?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-04",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What did you collect?",
+    "hy": "Ի՞նչ էիր հավաքում փոքր ժամանակ։",
+    "ru": "Что было в твоей детской коллекции?"
+   },
+   "options": {
+    "en": [
+     "What did you hide from your parents?"
+    ],
+    "hy": [
+     "Ի՞նչ էիր թաքցնում ծնողներիցդ։"
+    ],
+    "ru": [
+     "Что приходилось прятать от родителей?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-05",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "memories"
+   ],
+   "text": {
+    "en": "What's your earliest memory?",
+    "hy": "Ո՞րն է քո ամենավաղ հիշողությունը։",
+    "ru": "Какое твоё самое раннее воспоминание?"
+   },
+   "options": {
+    "en": [
+     "What's your best school memory?"
+    ],
+    "hy": [
+     "Ո՞րն է քո ամենալավ դպրոցական հիշողությունը։"
+    ],
+    "ru": [
+     "Какое твоё лучшее школьное воспоминание?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-06",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "How old were you when you learned to swim?",
+    "hy": "Քանի՞ տարեկանում ես սովորել լողալ։",
+    "ru": "В каком возрасте удалось научиться плавать?"
+   },
+   "options": {
+    "en": [
+     "How old were you when you learned to ride a bike?"
+    ],
+    "hy": [
+     "Քանի՞ տարեկանում ես սովորել հեծանիվ քշել։"
+    ],
+    "ru": [
+     "В каком возрасте удалось научиться кататься на велосипеде?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-07",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which game did you play in the yard?",
+    "hy": "Ո՞ր խաղն էիր խաղում բակում։",
+    "ru": "В какую игру играли во дворе?"
+   },
+   "options": {
+    "en": [
+     "Which game did you play in school breaks?"
+    ],
+    "hy": [
+     "Ո՞ր խաղն էիր խաղում դպրոցական դադարներին։"
+    ],
+    "ru": [
+     "В какую игру играли на переменах?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-08",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "Who was your first crush?",
+    "hy": "Ո՞վ էր քո առաջին սերը։",
+    "ru": "Кто был твоей первой любовью?"
+   },
+   "options": {
+    "en": [
+     "Who was your first best friend?"
+    ],
+    "hy": [
+     "Ո՞վ էր քո առաջին լավագույն ընկերը։"
+    ],
+    "ru": [
+     "Кто был твоим первым лучшим другом?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-09",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Which song reminds you of school?",
+    "hy": "Ո՞ր երգն է քեզ հիշեցնում դպրոցը։",
+    "ru": "Какая песня напоминает тебе школу?"
+   },
+   "options": {
+    "en": [
+     "Which song reminds you of your first love?"
+    ],
+    "hy": [
+     "Ո՞ր երգն է քեզ հիշեցնում առաջին սերը։"
+    ],
+    "ru": [
+     "Какая песня напоминает тебе первую любовь?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-10",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "What did you eat at your grandma's?",
+    "hy": "Ի՞նչ էիր ուտում տատիկիդ մոտ։",
+    "ru": "Чем кормили у бабушки?"
+   },
+   "options": {
+    "en": [
+     "What did you eat at school?"
+    ],
+    "hy": [
+     "Ի՞նչ էիր ուտում դպրոցում։"
+    ],
+    "ru": [
+     "Чем кормили в школе?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-11",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "fears"
+   ],
+   "text": {
+    "en": "What scared you as a kid?",
+    "hy": "Ինչի՞ց էիր վախենում փոքր ժամանակ։",
+    "ru": "Что пугало в детстве?"
+   },
+   "options": {
+    "en": [
+     "What scares you now?"
+    ],
+    "hy": [
+     "Ինչի՞ց ես վախենում հիմա։"
+    ],
+    "ru": [
+     "Что пугает тебя сейчас?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-12",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which present from childhood do you remember?",
+    "hy": "Մանկության ո՞ր նվերն ես հիշում։",
+    "ru": "Какой подарок из детства ты помнишь?"
+   },
+   "options": {
+    "en": [
+     "Which present did you want but never get?"
+    ],
+    "hy": [
+     "Ո՞ր նվերն էիր ուզում, բայց այդպես էլ չստացար։"
+    ],
+    "ru": [
+     "Какой подарок хотелось, но он так и не достался?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-13",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What did you do on summer evenings?",
+    "hy": "Ի՞նչ էիր անում ամառային երեկոներին։",
+    "ru": "Чем были заняты летние вечера в детстве?"
+   },
+   "options": {
+    "en": [
+     "What did you do on winter evenings?"
+    ],
+    "hy": [
+     "Ի՞նչ էիր անում ձմեռային երեկոներին։"
+    ],
+    "ru": [
+     "Чем были заняты зимние вечера в детстве?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-14",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "How many friends did you have in your yard?",
+    "hy": "Քանի՞ ընկեր ունեիր բակում։",
+    "ru": "Сколько друзей было во дворе?"
+   },
+   "options": {
+    "en": [
+     "How many pupils were in your class?"
+    ],
+    "hy": [
+     "Քանի՞ աշակերտ կար քո դասարանում։"
+    ],
+    "ru": [
+     "Сколько учеников было в твоём классе?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-15",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "What did your mum cook best?",
+    "hy": "Ի՞նչն էր մայրիկդ ամենալավը պատրաստում։",
+    "ru": "Что у мамы получалось лучше всего?"
+   },
+   "options": {
+    "en": [
+     "What did your grandma cook best?"
+    ],
+    "hy": [
+     "Ի՞նչն էր տատիկդ ամենալավը պատրաստում։"
+    ],
+    "ru": [
+     "Что у бабушки получалось лучше всего?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-16",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which teacher do you remember best?",
+    "hy": "Ո՞ր ուսուցչին ես ամենալավը հիշում։",
+    "ru": "Какого учителя ты помнишь лучше всех?"
+   },
+   "options": {
+    "en": [
+     "Which teacher do you remember with fear?"
+    ],
+    "hy": [
+     "Ո՞ր ուսուցչին ես հիշում վախով։"
+    ],
+    "ru": [
+     "Какого учителя ты вспоминаешь со страхом?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-17",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What did you watch on TV after school?",
+    "hy": "Ի՞նչ էիր դիտում հեռուստացույցով դասերից հետո։",
+    "ru": "Что смотрели по телевизору после школы?"
+   },
+   "options": {
+    "en": [
+     "What did you watch on TV on Sunday mornings?"
+    ],
+    "hy": [
+     "Ի՞նչ էիր դիտում հեռուստացույցով կիրակի առավոտյան։"
+    ],
+    "ru": [
+     "Что смотрели по телевизору в воскресенье утром?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-18",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which punishment do you remember?",
+    "hy": "Ո՞ր պատիժն ես հիշում։",
+    "ru": "Какое наказание из детства ты помнишь?"
+   },
+   "options": {
+    "en": [
+     "Which reward do you remember?"
+    ],
+    "hy": [
+     "Ո՞ր պարգևն ես հիշում։"
+    ],
+    "ru": [
+     "Какую награду из детства ты помнишь?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-19",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Where did you hide as a kid?",
+    "hy": "Որտե՞ղ էիր թաքնվում փոքր ժամանակ։",
+    "ru": "Где было твоё детское укрытие?"
+   },
+   "options": {
+    "en": [
+     "Where did you hide sweets?"
+    ],
+    "hy": [
+     "Որտե՞ղ էիր թաքցնում քաղցրավենիքը։"
+    ],
+    "ru": [
+     "Где были спрятаны сладости?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-20",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "firsts"
+   ],
+   "text": {
+    "en": "What was your first phone?",
+    "hy": "Ո՞րն էր քո առաջին հեռախոսը։",
+    "ru": "Какой был твой первый телефон?"
+   },
+   "options": {
+    "en": [
+     "What was your first computer?"
+    ],
+    "hy": [
+     "Ո՞րն էր քո առաջին համակարգիչը։"
+    ],
+    "ru": [
+     "Какой был твой первый компьютер?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-21",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which school year was the best?",
+    "hy": "Դպրոցական ո՞ր տարին էր ամենալավը։",
+    "ru": "Какой школьный год был лучшим?"
+   },
+   "options": {
+    "en": [
+     "Which school year was the hardest?"
+    ],
+    "hy": [
+     "Դպրոցական ո՞ր տարին էր ամենադժվարը։"
+    ],
+    "ru": [
+     "Какой школьный год был самым трудным?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-22",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "memories"
+   ],
+   "text": {
+    "en": "How did you spend your last birthday?",
+    "hy": "Ինչպե՞ս ես նշել վերջին ծննդյանդ օրը։",
+    "ru": "Как прошёл твой последний день рождения?"
+   },
+   "options": {
+    "en": [
+     "How did you spend your 18th birthday?"
+    ],
+    "hy": [
+     "Ինչպե՞ս ես նշել քո 18-ամյակը։"
+    ],
+    "ru": [
+     "Как прошло твоё 18-летие?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-23",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "What's the best trip of your childhood?",
+    "hy": "Ո՞րն է քո մանկության ամենալավ ճամփորդությունը։",
+    "ru": "Какая поездка детства самая лучшая?"
+   },
+   "options": {
+    "en": [
+     "What's the best trip of last year?"
+    ],
+    "hy": [
+     "Ո՞րն է անցյալ տարվա ամենալավ ճամփորդությունը։"
+    ],
+    "ru": [
+     "Какая поездка прошлого года самая лучшая?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-24",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "growth"
+   ],
+   "text": {
+    "en": "Who did you look up to as a kid?",
+    "hy": "Ո՞վ էր քո օրինակը փոքր ժամանակ։",
+    "ru": "Кто был примером в детстве?"
+   },
+   "options": {
+    "en": [
+     "Who do you look up to now?"
+    ],
+    "hy": [
+     "Ո՞վ է քո օրինակը հիմա։"
+    ],
+    "ru": [
+     "Кто пример для тебя сейчас?"
+    ]
+   }
+  },
+  {
+   "id": "odd-past-25",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "dreams"
+   ],
+   "text": {
+    "en": "What did you dream of at 10?",
+    "hy": "Ինչի՞ մասին էիր երազում 10 տարեկանում։",
+    "ru": "О чём мечталось в 10 лет?"
+   },
+   "options": {
+    "en": [
+     "What did you dream of at 18?"
+    ],
+    "hy": [
+     "Ինչի՞ մասին էիր երազում 18 տարեկանում։"
+    ],
+    "ru": [
+     "О чём мечталось в 18 лет?"
+    ]
+   }
+  }
+ ]
+}

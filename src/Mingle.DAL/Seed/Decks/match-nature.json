@@ -1,0 +1,335 @@
+{
+ "id": "match-nature",
+ "name": {
+  "en": "Same wavelength: nature and animals",
+  "hy": "Նույն ալիքի վրա՝ բնություն ու կենդանիներ",
+  "ru": "На одной волне: природа и животные"
+ },
+ "cards": [
+  {
+   "id": "match-nature-01",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A farm animal",
+    "hy": "Ագարակի կենդանի",
+    "ru": "Животное на ферме"
+   }
+  },
+  {
+   "id": "match-nature-02",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "An insect",
+    "hy": "Միջատ",
+    "ru": "Насекомое"
+   }
+  },
+  {
+   "id": "match-nature-03",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "An animal in a zoo",
+    "hy": "Կենդանի կենդանաբանական այգում",
+    "ru": "Животное в зоопарке"
+   }
+  },
+  {
+   "id": "match-nature-04",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A tree",
+    "hy": "Ծառ",
+    "ru": "Дерево"
+   }
+  },
+  {
+   "id": "match-nature-05",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "An animal with stripes",
+    "hy": "Գծավոր կենդանի",
+    "ru": "Животное в полоску"
+   }
+  },
+  {
+   "id": "match-nature-06",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "Something in a forest",
+    "hy": "Բան անտառում",
+    "ru": "Что есть в лесу"
+   }
+  },
+  {
+   "id": "match-nature-07",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A type of weather",
+    "hy": "Եղանակի տեսակ",
+    "ru": "Погода"
+   }
+  },
+  {
+   "id": "match-nature-08",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "An animal that can fly",
+    "hy": "Թռչող կենդանի",
+    "ru": "Животное, которое летает"
+   }
+  },
+  {
+   "id": "match-nature-09",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "Something at the seaside",
+    "hy": "Բան ծովափին",
+    "ru": "Что есть на море"
+   }
+  },
+  {
+   "id": "match-nature-10",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A dangerous animal",
+    "hy": "Վտանգավոր կենդանի",
+    "ru": "Опасное животное"
+   }
+  },
+  {
+   "id": "match-nature-11",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A dog breed",
+    "hy": "Շան ցեղատեսակ",
+    "ru": "Порода собак"
+   }
+  },
+  {
+   "id": "match-nature-12",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "An animal in a cartoon",
+    "hy": "Կենդանի մուլտֆիլմում",
+    "ru": "Животное из мультфильма"
+   }
+  },
+  {
+   "id": "match-nature-13",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "Something in space",
+    "hy": "Բան տիեզերքում",
+    "ru": "Что есть в космосе"
+   }
+  },
+  {
+   "id": "match-nature-14",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A small animal",
+    "hy": "Փոքրիկ կենդանի",
+    "ru": "Маленькое животное"
+   }
+  },
+  {
+   "id": "match-nature-15",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "Something in a garden",
+    "hy": "Բան այգում",
+    "ru": "Что растёт в саду"
+   }
+  },
+  {
+   "id": "match-nature-16",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "An animal that lives in water",
+    "hy": "Ջրում ապրող կենդանի",
+    "ru": "Животное, которое живёт в воде"
+   }
+  },
+  {
+   "id": "match-nature-17",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "Something white in nature",
+    "hy": "Սպիտակ բան բնության մեջ",
+    "ru": "Что-то белое в природе"
+   }
+  },
+  {
+   "id": "match-nature-18",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "Something you see in autumn",
+    "hy": "Բան, որ տեսնում ես աշնանը",
+    "ru": "Что видно осенью"
+   }
+  },
+  {
+   "id": "match-nature-19",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "An animal that is slow",
+    "hy": "Դանդաղ կենդանի",
+    "ru": "Медленное животное"
+   }
+  },
+  {
+   "id": "match-nature-20",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A natural disaster",
+    "hy": "Բնական աղետ",
+    "ru": "Стихийное бедствие"
+   }
+  },
+  {
+   "id": "match-nature-21",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "Something you find on a mountain",
+    "hy": "Բան, որ գտնում ես սարում",
+    "ru": "Что можно найти в горах"
+   }
+  },
+  {
+   "id": "match-nature-22",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "An animal sound",
+    "hy": "Կենդանու ձայն",
+    "ru": "Звук животного"
+   }
+  },
+  {
+   "id": "match-nature-23",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A pet that isn't a cat or a dog",
+    "hy": "Ընտանի կենդանի, որ ոչ կատու է, ոչ շուն",
+    "ru": "Домашний питомец, но не кошка и не собака"
+   }
+  },
+  {
+   "id": "match-nature-24",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "Something that grows",
+    "hy": "Բան, որ աճում է",
+    "ru": "Что-то, что растёт"
+   }
+  },
+  {
+   "id": "match-nature-25",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A famous animal",
+    "hy": "Հայտնի կենդանի",
+    "ru": "Знаменитое животное"
+   }
+  }
+ ]
+}

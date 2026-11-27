@@ -1,0 +1,335 @@
+{
+ "id": "facts-weird",
+ "name": {
+  "en": "Facts: strange and funny",
+  "hy": "Փաստեր՝ տարօրինակ ու զվարճալի",
+  "ru": "Факты: странное и смешное"
+ },
+ "cards": [
+  {
+   "id": "facts-weird-01",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "The weirdest dream you've had",
+    "hy": "Քո ամենատարօրինակ երազը",
+    "ru": "Самый странный сон"
+   }
+  },
+  {
+   "id": "facts-weird-02",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "stories"
+   ],
+   "text": {
+    "en": "A strange coincidence",
+    "hy": "Տարօրինակ զուգադիպություն",
+    "ru": "Странное совпадение"
+   }
+  },
+  {
+   "id": "facts-weird-03",
+   "kind": "fact",
+   "depth": 2,
+   "topics": [
+    "values"
+   ],
+   "text": {
+    "en": "Something you believe and others don't",
+    "hy": "Բան, որին հավատում ես, իսկ ուրիշները՝ ոչ",
+    "ru": "То, во что веришь, а другие нет"
+   }
+  },
+  {
+   "id": "facts-weird-04",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "A weird habit",
+    "hy": "Տարօրինակ սովորություն",
+    "ru": "Странная привычка"
+   }
+  },
+  {
+   "id": "facts-weird-05",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "fears"
+   ],
+   "text": {
+    "en": "Something you're silly scared of",
+    "hy": "Բան, որից անտրամաբանորեն վախենում ես",
+    "ru": "Нелепый страх"
+   }
+  },
+  {
+   "id": "facts-weird-06",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "A famous person you look like",
+    "hy": "Հայտնի մարդ, ում նման ես",
+    "ru": "Знаменитость, с которой есть сходство"
+   }
+  },
+  {
+   "id": "facts-weird-07",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Something funny you said as a kid",
+    "hy": "Զվարճալի բան, որ ասել ես փոքր ժամանակ",
+    "ru": "Смешная фраза из детства"
+   }
+  },
+  {
+   "id": "facts-weird-08",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "An embarrassing moment in public",
+    "hy": "Ամոթալի պահ մարդկանց առաջ",
+    "ru": "Неловкий момент на людях"
+   }
+  },
+  {
+   "id": "facts-weird-09",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "A superstition you follow",
+    "hy": "Սնահավատություն, որին հետևում ես",
+    "ru": "Примета, в которую веришь"
+   }
+  },
+  {
+   "id": "facts-weird-10",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "Something you did for a bet",
+    "hy": "Բան, որ արել ես գրազով",
+    "ru": "Что-то сделанное на спор"
+   }
+  },
+  {
+   "id": "facts-weird-11",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A strange thing in your bag",
+    "hy": "Տարօրինակ բան քո պայուսակում",
+    "ru": "Странная вещь в твоей сумке"
+   }
+  },
+  {
+   "id": "facts-weird-12",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A close encounter with an animal",
+    "hy": "Հանդիպում կենդանու հետ",
+    "ru": "Встреча с животным"
+   }
+  },
+  {
+   "id": "facts-weird-13",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "Something you've done in your sleep",
+    "hy": "Բան, որ արել ես քնած ժամանակ",
+    "ru": "Что-то, сделанное во сне"
+   }
+  },
+  {
+   "id": "facts-weird-14",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "A song you know all the words to",
+    "hy": "Երգ, որի բոլոր բառերը գիտես",
+    "ru": "Песня, которую знаешь наизусть"
+   }
+  },
+  {
+   "id": "facts-weird-15",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Your hidden skill",
+    "hy": "Քո թաքնված հմտությունը",
+    "ru": "Скрытое умение"
+   }
+  },
+  {
+   "id": "facts-weird-16",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "A time you laughed at the wrong moment",
+    "hy": "Դեպք, երբ սխալ պահին ես ծիծաղել",
+    "ru": "Смех не к месту"
+   }
+  },
+  {
+   "id": "facts-weird-17",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "stories"
+   ],
+   "text": {
+    "en": "A ghost story you believe",
+    "hy": "Ուրվականի պատմություն, որին հավատում ես",
+    "ru": "История о привидениях, в которую веришь"
+   }
+  },
+  {
+   "id": "facts-weird-18",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Something you're strangely good at",
+    "hy": "Բան, որում տարօրինակ լավ ես",
+    "ru": "То, что странно хорошо получается"
+   }
+  },
+  {
+   "id": "facts-weird-19",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "A call or message to the wrong person",
+    "hy": "Սխալ համարից զանգ կամ նամակ",
+    "ru": "Звонок или сообщение не по адресу"
+   }
+  },
+  {
+   "id": "facts-weird-20",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "The strangest present you've received",
+    "hy": "Ամենատարօրինակ նվերը, որ ստացել ես",
+    "ru": "Самый странный подарок"
+   }
+  },
+  {
+   "id": "facts-weird-21",
+   "kind": "fact",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "A rumour about you",
+    "hy": "Բամբասանք քո մասին",
+    "ru": "Слух о тебе"
+   }
+  },
+  {
+   "id": "facts-weird-22",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "An April Fools' joke",
+    "hy": "Ապրիլմեկյան կատակ",
+    "ru": "Розыгрыш на первое апреля"
+   }
+  },
+  {
+   "id": "facts-weird-23",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A time you got stuck somewhere",
+    "hy": "Դեպք, երբ ինչ-որ տեղ խրվել ես",
+    "ru": "Случай, когда пришлось где-то застрять"
+   }
+  },
+  {
+   "id": "facts-weird-24",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "Something you gave a name to",
+    "hy": "Բան, որին անուն ես տվել",
+    "ru": "Вещь с собственным именем"
+   }
+  },
+  {
+   "id": "facts-weird-25",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "The most useless thing you know",
+    "hy": "Ամենաանօգուտ բանը, որ գիտես",
+    "ru": "Самый бесполезный факт, который знаешь"
+   }
+  }
+ ]
+}

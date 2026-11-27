@@ -1,0 +1,610 @@
+{
+ "id": "odd-love",
+ "name": {
+  "en": "Odd question: love and dates",
+  "hy": "Այլ հարց՝ սեր ու ժամադրություններ",
+  "ru": "Другой вопрос: любовь и свидания"
+ },
+ "cards": [
+  {
+   "id": "odd-love-01",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "What's the perfect first date?",
+    "hy": "Ո՞րն է կատարյալ առաջին ժամադրությունը։",
+    "ru": "Каким должно быть идеальное первое свидание?"
+   },
+   "options": {
+    "en": [
+     "What's the worst first date?"
+    ],
+    "hy": [
+     "Ո՞րն է ամենավատ առաջին ժամադրությունը։"
+    ],
+    "ru": [
+     "Каким бывает худшее первое свидание?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-02",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "What do you notice first in a person?",
+    "hy": "Ի՞նչ ես առաջինը նկատում մարդու մեջ։",
+    "ru": "Что ты замечаешь в человеке первым?"
+   },
+   "options": {
+    "en": [
+     "What can put you off a person?"
+    ],
+    "hy": [
+     "Ի՞նչը կարող է քեզ հիասթափեցնել մարդու մեջ։"
+    ],
+    "ru": [
+     "Что может разочаровать тебя в человеке?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-03",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "Where would you propose?",
+    "hy": "Որտե՞ղ կանեիր ամուսնության առաջարկ։",
+    "ru": "Где ты сделаешь предложение?"
+   },
+   "options": {
+    "en": [
+     "Where would you hold your wedding?"
+    ],
+    "hy": [
+     "Որտե՞ղ կանեիր քո հարսանիքը։"
+    ],
+    "ru": [
+     "Где ты устроишь свадьбу?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-04",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "What's the best present for a partner?",
+    "hy": "Ո՞րն է զուգընկերոջ համար ամենալավ նվերը։",
+    "ru": "Какой подарок для второй половинки самый лучший?"
+   },
+   "options": {
+    "en": [
+     "What's the worst present for a partner?"
+    ],
+    "hy": [
+     "Ո՞րն է զուգընկերոջ համար ամենավատ նվերը։"
+    ],
+    "ru": [
+     "Какой подарок для второй половинки самый худший?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-05",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "After how many dates is a first kiss?",
+    "hy": "Քանի՞ ժամադրությունից հետո է առաջին համբույրը։",
+    "ru": "Через сколько свиданий первый поцелуй?"
+   },
+   "options": {
+    "en": [
+     "After how many dates do you meet the parents?"
+    ],
+    "hy": [
+     "Քանի՞ ժամադրությունից հետո է ծանոթությունը ծնողների հետ։"
+    ],
+    "ru": [
+     "Через сколько свиданий знакомство с родителями?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-06",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Which song is the most romantic?",
+    "hy": "Ո՞ր երգն է ամենառոմանտիկը։",
+    "ru": "Какая песня самая романтичная?"
+   },
+   "options": {
+    "en": [
+     "Which song would you sing to someone you love?"
+    ],
+    "hy": [
+     "Ո՞ր երգը կերգեիր սիրելիիդ։"
+    ],
+    "ru": [
+     "Какую песню ты споёшь любимому человеку?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-07",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "What would you cook for a date?",
+    "hy": "Ի՞նչ կպատրաստեիր ժամադրության համար։",
+    "ru": "Что ты приготовишь для свидания?"
+   },
+   "options": {
+    "en": [
+     "What would you order on a date?"
+    ],
+    "hy": [
+     "Ի՞նչ կպատվիրեիր ժամադրության ժամանակ։"
+    ],
+    "ru": [
+     "Что ты закажешь на свидании?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-08",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "Which city is the most romantic?",
+    "hy": "Ո՞ր քաղաքն է ամենառոմանտիկը։",
+    "ru": "Какой город самый романтичный?"
+   },
+   "options": {
+    "en": [
+     "Which city is best to visit after a break-up?"
+    ],
+    "hy": [
+     "Ո՞ր քաղաքն է լավագույնը բաժանումից հետո ճամփորդելու համար։"
+    ],
+    "ru": [
+     "В какой город лучше всего поехать после расставания?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-09",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "How do you say “I love you” without words?",
+    "hy": "Ինչպե՞ս ես ասում «սիրում եմ» առանց բառերի։",
+    "ru": "Как ты говоришь «люблю» без слов?"
+   },
+   "options": {
+    "en": [
+     "How do you say sorry without words?"
+    ],
+    "hy": [
+     "Ինչպե՞ս ես ներողություն խնդրում առանց բառերի։"
+    ],
+    "ru": [
+     "Как ты просишь прощения без слов?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-10",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "future"
+   ],
+   "text": {
+    "en": "What's the best age to get married?",
+    "hy": "Ո՞րն է ամուսնանալու լավագույն տարիքը։",
+    "ru": "Какой возраст лучше всего для свадьбы?"
+   },
+   "options": {
+    "en": [
+     "What's the best age to have children?"
+    ],
+    "hy": [
+     "Ո՞րն է երեխա ունենալու լավագույն տարիքը։"
+    ],
+    "ru": [
+     "Какой возраст лучше всего для детей?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-11",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "What do you text after a great date?",
+    "hy": "Ի՞նչ ես գրում հիանալի ժամադրությունից հետո։",
+    "ru": "Что ты пишешь после отличного свидания?"
+   },
+   "options": {
+    "en": [
+     "What do you text after a bad date?"
+    ],
+    "hy": [
+     "Ի՞նչ ես գրում վատ ժամադրությունից հետո։"
+    ],
+    "ru": [
+     "Что ты пишешь после неудачного свидания?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-12",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "Which film is the most romantic?",
+    "hy": "Ո՞ր ֆիլմն է ամենառոմանտիկը։",
+    "ru": "Какой фильм самый романтичный?"
+   },
+   "options": {
+    "en": [
+     "Which film is good to watch after a break-up?"
+    ],
+    "hy": [
+     "Ո՞ր ֆիլմն է լավ դիտել բաժանումից հետո։"
+    ],
+    "ru": [
+     "Какой фильм хорошо смотреть после расставания?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-13",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "What's a perfect evening for two?",
+    "hy": "Ո՞րն է կատարյալ երեկոն երկուսով։",
+    "ru": "Каким бывает идеальный вечер вдвоём?"
+   },
+   "options": {
+    "en": [
+     "What's a perfect evening on your own?"
+    ],
+    "hy": [
+     "Ո՞րն է կատարյալ երեկոն մենակ։"
+    ],
+    "ru": [
+     "Каким бывает идеальный вечер наедине с собой?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-14",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "values"
+   ],
+   "text": {
+    "en": "What would you never forgive?",
+    "hy": "Ի՞նչ երբեք չէիր ների։",
+    "ru": "Что ты никогда не простишь?"
+   },
+   "options": {
+    "en": [
+     "What would you forgive quickly?"
+    ],
+    "hy": [
+     "Ի՞նչ կներեիր արագ։"
+    ],
+    "ru": [
+     "Что ты простишь быстро?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-15",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "Which flowers would you give?",
+    "hy": "Ի՞նչ ծաղիկներ կնվիրեիր։",
+    "ru": "Какие цветы ты подаришь?"
+   },
+   "options": {
+    "en": [
+     "Which flowers would you like to get?"
+    ],
+    "hy": [
+     "Ի՞նչ ծաղիկներ կուզեիր ստանալ։"
+    ],
+    "ru": [
+     "Какие цветы ты хочешь получить?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-16",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "How long should a first date last?",
+    "hy": "Որքա՞ն պետք է տևի առաջին ժամադրությունը։",
+    "ru": "Сколько должно длиться первое свидание?"
+   },
+   "options": {
+    "en": [
+     "How long should a phone call with a partner last?"
+    ],
+    "hy": [
+     "Որքա՞ն պետք է տևի հեռախոսազրույցը զուգընկերոջ հետ։"
+    ],
+    "ru": [
+     "Сколько должен длиться звонок второй половинке?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-17",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "Where do people meet the love of their life?",
+    "hy": "Որտե՞ղ են մարդիկ հանդիպում իրենց կյանքի սիրուն։",
+    "ru": "Где люди встречают любовь всей жизни?"
+   },
+   "options": {
+    "en": [
+     "Where do people meet their best friends?"
+    ],
+    "hy": [
+     "Որտե՞ղ են մարդիկ հանդիպում իրենց լավագույն ընկերներին։"
+    ],
+    "ru": [
+     "Где люди встречают лучших друзей?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-18",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "What's the best anniversary present?",
+    "hy": "Ո՞րն է տարեդարձի ամենալավ նվերը։",
+    "ru": "Какой подарок на годовщину лучше всего?"
+   },
+   "options": {
+    "en": [
+     "What's the best birthday surprise?"
+    ],
+    "hy": [
+     "Ո՞րն է ծննդյան ամենալավ անակնկալը։"
+    ],
+    "ru": [
+     "Какой сюрприз на день рождения лучше всего?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-19",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "conflict"
+   ],
+   "text": {
+    "en": "What do couples argue about most?",
+    "hy": "Ինչի՞ մասին են զույգերը ամենաշատը վիճում։",
+    "ru": "О чём пары спорят чаще всего?"
+   },
+   "options": {
+    "en": [
+     "What do friends argue about most?"
+    ],
+    "hy": [
+     "Ինչի՞ մասին են ընկերները ամենաշատը վիճում։"
+    ],
+    "ru": [
+     "О чём друзья спорят чаще всего?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-20",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "What makes someone attractive?",
+    "hy": "Ի՞նչն է մարդուն գրավիչ դարձնում։",
+    "ru": "Что делает человека привлекательным?"
+   },
+   "options": {
+    "en": [
+     "What makes someone a good friend?"
+    ],
+    "hy": [
+     "Ի՞նչն է մարդուն լավ ընկեր դարձնում։"
+    ],
+    "ru": [
+     "Что делает человека хорошим другом?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-21",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "How many messages a day is normal for a couple?",
+    "hy": "Օրական քանի՞ նամակն է նորմալ զույգի համար։",
+    "ru": "Сколько сообщений в день нормально для пары?"
+   },
+   "options": {
+    "en": [
+     "How many messages a day is normal for friends?"
+    ],
+    "hy": [
+     "Օրական քանի՞ նամակն է նորմալ ընկերների համար։"
+    ],
+    "ru": [
+     "Сколько сообщений в день нормально для друзей?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-22",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "What's the sweetest pet name for a partner?",
+    "hy": "Ո՞րն է զուգընկերոջ ամենասիրուն մականունը։",
+    "ru": "Какое ласковое прозвище для второй половинки самое милое?"
+   },
+   "options": {
+    "en": [
+     "What's the most annoying pet name?"
+    ],
+    "hy": [
+     "Ո՞րն է ամենանյարդայնացնող մականունը։"
+    ],
+    "ru": [
+     "Какое ласковое прозвище самое раздражающее?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-23",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "What do you wear on a first date?",
+    "hy": "Ի՞նչ ես հագնում առաջին ժամադրությանը։",
+    "ru": "Что ты надеваешь на первое свидание?"
+   },
+   "options": {
+    "en": [
+     "What do you wear to meet the parents?"
+    ],
+    "hy": [
+     "Ի՞նչ ես հագնում ծնողների հետ ծանոթանալիս։"
+    ],
+    "ru": [
+     "Что ты надеваешь на знакомство с родителями?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-24",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "Who should pay on a first date?",
+    "hy": "Ո՞վ պետք է վճարի առաջին ժամադրության ժամանակ։",
+    "ru": "Кто должен платить на первом свидании?"
+   },
+   "options": {
+    "en": [
+     "Who should cook at home?"
+    ],
+    "hy": [
+     "Ո՞վ պետք է ճաշ պատրաստի տանը։"
+    ],
+    "ru": [
+     "Кто должен готовить дома?"
+    ]
+   }
+  },
+  {
+   "id": "odd-love-25",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "What's the sweetest thing someone can do?",
+    "hy": "Ո՞րն է ամենաքնքուշ բանը, որ մարդը կարող է անել։",
+    "ru": "Какой поступок самый трогательный?"
+   },
+   "options": {
+    "en": [
+     "What's the bravest thing someone can do for love?"
+    ],
+    "hy": [
+     "Ո՞րն է ամենահամարձակ բանը, որ մարդը կարող է անել սիրո համար։"
+    ],
+    "ru": [
+     "Какой поступок ради любви самый смелый?"
+    ]
+   }
+  }
+ ]
+}

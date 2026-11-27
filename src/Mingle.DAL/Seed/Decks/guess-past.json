@@ -1,0 +1,395 @@
+{
+ "id": "guess-past",
+ "name": {
+  "en": "Guess: childhood and memories",
+  "hy": "Գուշակիր՝ մանկություն ու հիշողություններ",
+  "ru": "Угадай: детство и воспоминания"
+ },
+ "cards": [
+  {
+   "id": "guess-past-01",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What did {@} want for New Year as a kid?",
+    "hy": "Ի՞նչ էր ուզում {@ը} Ամանորին փոքր ժամանակ։",
+    "ru": "{@}: какой подарок хотелось на Новый год в детстве?"
+   }
+  },
+  {
+   "id": "guess-past-02",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which school subject did {@} hate?",
+    "hy": "Ո՞ր առարկան էր {@ը} ատում դպրոցում։",
+    "ru": "{@}: какой предмет в школе был ненавистным?"
+   }
+  },
+  {
+   "id": "guess-past-03",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What was {@}'s favourite toy?",
+    "hy": "Ո՞րն էր {@ի} սիրած խաղալիքը։",
+    "ru": "{@}: какая игрушка была любимой?"
+   }
+  },
+  {
+   "id": "guess-past-04",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "fears"
+   ],
+   "text": {
+    "en": "What was {@} afraid of as a kid?",
+    "hy": "Ինչի՞ց էր {@ը} վախենում փոքր ժամանակ։",
+    "ru": "{@}: чего было страшно в детстве?"
+   }
+  },
+  {
+   "id": "guess-past-05",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which sport did {@} do as a kid?",
+    "hy": "Ո՞ր մարզաձևով էր {@ը} զբաղվում փոքր ժամանակ։",
+    "ru": "{@}: каким спортом приходилось заниматься в детстве?"
+   }
+  },
+  {
+   "id": "guess-past-06",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "money"
+   ],
+   "text": {
+    "en": "What did {@} spend pocket money on?",
+    "hy": "Ինչի՞ վրա էր {@ը} ծախսում գրպանի փողը։",
+    "ru": "{@}: на что уходили карманные деньги?"
+   }
+  },
+  {
+   "id": "guess-past-07",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "Who was {@}'s best friend at school?",
+    "hy": "Ո՞վ էր {@ի} լավագույն ընկերը դպրոցում։",
+    "ru": "{@}: кто был лучшим другом в школе?"
+   }
+  },
+  {
+   "id": "guess-past-08",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "firsts"
+   ],
+   "text": {
+    "en": "What was {@}'s first phone?",
+    "hy": "Ո՞րն էր {@ի} առաջին հեռախոսը։",
+    "ru": "{@}: какой был первый телефон?"
+   }
+  },
+  {
+   "id": "guess-past-09",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What marks did {@} usually get in maths?",
+    "hy": "Մաթեմատիկայից սովորաբար ի՞նչ գնահատական էր ստանում {@ը}։",
+    "ru": "{@}: какие оценки были по математике?"
+   }
+  },
+  {
+   "id": "guess-past-10",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Where did {@} spend summers as a kid?",
+    "hy": "Որտե՞ղ էր անցկացնում ամառները {@ը} փոքր ժամանակ։",
+    "ru": "{@}: где проходило лето в детстве?"
+   }
+  },
+  {
+   "id": "guess-past-11",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which outdoor game did {@} love most?",
+    "hy": "Ո՞րն էր {@ի} սիրած բակային խաղը։",
+    "ru": "{@}: какая дворовая игра была любимой?"
+   }
+  },
+  {
+   "id": "guess-past-12",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What did {@} get told off for most?",
+    "hy": "Ինչի՞ համար էր {@ը} ամենահաճախը նկատողություն ստանում։",
+    "ru": "{@}: за что чаще всего попадало в детстве?"
+   }
+  },
+  {
+   "id": "guess-past-13",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which cartoon character was {@} like as a kid?",
+    "hy": "Ո՞ր մուլտհերոսի նման էր {@ը} փոքր ժամանակ։",
+    "ru": "{@}: на какого мультгероя было больше всего сходства в детстве?"
+   }
+  },
+  {
+   "id": "guess-past-14",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Which band did {@} love as a teenager?",
+    "hy": "Ո՞րն էր {@ի} սիրած խումբը դեռահաս տարիքում։",
+    "ru": "{@}: какая группа была любимой в юности?"
+   }
+  },
+  {
+   "id": "guess-past-15",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "dreams"
+   ],
+   "text": {
+    "en": "What did {@} dream about at 15?",
+    "hy": "Ինչի՞ մասին էր երազում {@ը} 15 տարեկանում։",
+    "ru": "{@}: о чём мечталось в 15 лет?"
+   }
+  },
+  {
+   "id": "guess-past-16",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "firsts"
+   ],
+   "text": {
+    "en": "What was the first film {@} saw in a cinema?",
+    "hy": "Ո՞րն էր առաջին ֆիլմը, որ {@ը} դիտել է կինոթատրոնում։",
+    "ru": "{@}: какой фильм был первым в кинотеатре?"
+   }
+  },
+  {
+   "id": "guess-past-17",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which teacher was {@} afraid of?",
+    "hy": "Ո՞ր ուսուցչից էր {@ը} վախենում։",
+    "ru": "{@}: какого учителя было страшно?"
+   }
+  },
+  {
+   "id": "guess-past-18",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What did {@} eat at school?",
+    "hy": "Ի՞նչ էր {@ը} ուտում դպրոցում։",
+    "ru": "{@}: что приходилось есть в школе?"
+   }
+  },
+  {
+   "id": "guess-past-19",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which subject was {@} strongest in?",
+    "hy": "Ո՞ր առարկայից էր {@ը} ամենաուժեղը։",
+    "ru": "{@}: какой предмет давался лучше всего?"
+   }
+  },
+  {
+   "id": "guess-past-20",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "firsts"
+   ],
+   "text": {
+    "en": "What was {@}'s first trip without parents?",
+    "hy": "Ո՞րն էր {@ի} առաջին ճամփորդությունն առանց ծնողների։",
+    "ru": "{@}: какая поездка была первой без родителей?"
+   }
+  },
+  {
+   "id": "guess-past-21",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "How many times did {@} change school?",
+    "hy": "Քանի՞ անգամ է {@ը} դպրոց փոխել։",
+    "ru": "{@}: сколько раз пришлось менять школу?"
+   }
+  },
+  {
+   "id": "guess-past-22",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "What hairstyle did {@} have at school?",
+    "hy": "Ինչպիսի՞ սանրվածք ուներ {@ը} դպրոցում։",
+    "ru": "{@}: какая причёска была в школе?"
+   }
+  },
+  {
+   "id": "guess-past-23",
+   "kind": "rank",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Childhood games: how would {@} rank them, favourite first?",
+    "hy": "Մանկության խաղեր. ինչպե՞ս կդասավորեր {@ը} դրանք՝ սկսած ամենասիրածից։",
+    "ru": "Детские игры: как {@} расставит их, начиная с любимого?"
+   },
+   "options": {
+    "en": [
+     "Hide and seek",
+     "Football",
+     "Tag",
+     "Video games"
+    ],
+    "hy": [
+     "Պահմտոցի",
+     "Ֆուտբոլ",
+     "Բռնոցի",
+     "Համակարգչային խաղեր"
+    ],
+    "ru": [
+     "Прятки",
+     "Футбол",
+     "Догонялки",
+     "Компьютерные игры"
+    ]
+   }
+  },
+  {
+   "id": "guess-past-24",
+   "kind": "rank",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Cartoons: how would {@} rank them, favourite first?",
+    "hy": "Մուլտֆիլմեր. ինչպե՞ս կդասավորեր {@ը} դրանք՝ սկսած ամենասիրածից։",
+    "ru": "Мультфильмы: как {@} расставит их, начиная с любимого?"
+   },
+   "options": {
+    "en": [
+     "Tom and Jerry",
+     "Shrek",
+     "The Lion King",
+     "Masha and the Bear"
+    ],
+    "hy": [
+     "Թոմ և Ջերի",
+     "Շրեկ",
+     "Առյուծ արքա",
+     "Մաշան ու արջը"
+    ],
+    "ru": [
+     "Том и Джерри",
+     "Шрек",
+     "Король Лев",
+     "Маша и Медведь"
+    ]
+   }
+  },
+  {
+   "id": "guess-past-25",
+   "kind": "rank",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "School years: how would {@} rank them, favourite first?",
+    "hy": "Դպրոցական տարիներ. ինչպե՞ս կդասավորեր {@ը} դրանք՝ սկսած ամենասիրածից։",
+    "ru": "Школьные годы: как {@} расставит их, начиная с любимого?"
+   },
+   "options": {
+    "en": [
+     "1st grade",
+     "5th grade",
+     "9th grade",
+     "The last year"
+    ],
+    "hy": [
+     "1-ին դասարան",
+     "5-րդ դասարան",
+     "9-րդ դասարան",
+     "Ավարտական տարի"
+    ],
+    "ru": [
+     "1-й класс",
+     "5-й класс",
+     "9-й класс",
+     "Выпускной год"
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,335 @@
+{
+ "id": "never-oops",
+ "name": {
+  "en": "Never have I ever: oops",
+  "hy": "Ես երբեք…՝ ամոթալի պահեր",
+  "ru": "Я никогда не…: неловко вышло"
+ },
+ "cards": [
+  {
+   "id": "never-oops-01",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never called someone by the wrong name",
+    "hy": "Ես երբեք որևէ մեկին սխալ անունով չեմ կանչել",
+    "ru": "Мне ни разу не доводилось называть кого-то чужим именем"
+   }
+  },
+  {
+   "id": "never-oops-02",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never tripped on stairs in front of people",
+    "hy": "Ես երբեք մարդկանց աչքի առաջ աստիճաններին չեմ սայթաքել",
+    "ru": "Мне ни разу не доводилось спотыкаться на лестнице у всех на глазах"
+   }
+  },
+  {
+   "id": "never-oops-03",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never had food in my teeth all day",
+    "hy": "Ես երբեք ամբողջ օրը ատամներիս մեջ ուտելիքի կտոր չեմ ունեցել",
+    "ru": "Мне ни разу не доводилось проходить весь день с едой в зубах"
+   }
+  },
+  {
+   "id": "never-oops-04",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never said “you too” when a waiter said “enjoy your meal”",
+    "hy": "Ես երբեք մատուցողին «բարի ախորժակ»-ի պատասխան «ձեզ էլ» չեմ ասել",
+    "ru": "Мне ни разу не доводилось отвечать официанту «и вам» на «приятного аппетита»"
+   }
+  },
+  {
+   "id": "never-oops-05",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never walked into the wrong toilet",
+    "hy": "Ես երբեք սխալ զուգարան չեմ մտել",
+    "ru": "Мне ни разу не доводилось заходить не в тот туалет"
+   }
+  },
+  {
+   "id": "never-oops-06",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never laughed at a funeral or a serious moment",
+    "hy": "Ես երբեք չեմ ծիծաղել լուրջ պահին",
+    "ru": "Мне ни разу не доводилось смеяться в самый серьёзный момент"
+   }
+  },
+  {
+   "id": "never-oops-07",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never waved at a stranger thinking they were a friend",
+    "hy": "Ես երբեք ձեռքով չեմ արել անծանոթին՝ կարծելով, թե ընկերս է",
+    "ru": "Мне ни разу не доводилось махать незнакомцу, приняв его за друга"
+   }
+  },
+  {
+   "id": "never-oops-08",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never sent a voice message to the wrong chat",
+    "hy": "Ես երբեք ձայնային հաղորդագրություն չեմ ուղարկել սխալ զրույցում",
+    "ru": "Мне ни разу не доводилось отправлять голосовое не в тот чат"
+   }
+  },
+  {
+   "id": "never-oops-09",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never had my trousers split in public",
+    "hy": "Ես երբեք մարդկանց մեջ տաբատս չեմ պատռել",
+    "ru": "Мне ни разу не доводилось рвать брюки на людях"
+   }
+  },
+  {
+   "id": "never-oops-10",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never sung the wrong words loudly",
+    "hy": "Ես երբեք բարձրաձայն չեմ երգել սխալ բառերով",
+    "ru": "Мне ни разу не доводилось громко петь песню с перепутанными словами"
+   }
+  },
+  {
+   "id": "never-oops-11",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never got stuck in a revolving door",
+    "hy": "Ես երբեք պտտվող դռան մեջ չեմ խրվել",
+    "ru": "Мне ни разу не доводилось застревать во вращающейся двери"
+   }
+  },
+  {
+   "id": "never-oops-12",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never tried to pull a door that said push",
+    "hy": "Ես երբեք չեմ քաշել դուռը, որի վրա գրված էր «հրել»",
+    "ru": "Мне ни разу не доводилось тянуть дверь с надписью «от себя»"
+   }
+  },
+  {
+   "id": "never-oops-13",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never said something rude thinking the mic was off",
+    "hy": "Ես երբեք կոպիտ բան չեմ ասել՝ կարծելով, թե խոսափողն անջատված է",
+    "ru": "Мне ни разу не доводилось говорить что-то грубое, думая, что микрофон выключен"
+   }
+  },
+  {
+   "id": "never-oops-14",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never been caught talking to myself",
+    "hy": "Ես երբեք չեմ բռնվել ինքս ինձ հետ խոսելիս",
+    "ru": "Мне ни разу не доводилось попадаться на том, что разговариваю вслух в одиночестве"
+   }
+  },
+  {
+   "id": "never-oops-15",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never been caught singing in the car at a red light",
+    "hy": "Ես երբեք չեմ բռնվել կարմիր լույսի տակ մեքենայում երգելիս",
+    "ru": "Мне ни разу не доводилось попадаться, распевая в машине на красном свете"
+   }
+  },
+  {
+   "id": "never-oops-16",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never asked a woman when her baby is due when she wasn't pregnant",
+    "hy": "Ես երբեք կնոջը չեմ հարցրել, թե երբ է ծննդաբերելու, երբ նա հղի չէր",
+    "ru": "Мне ни разу не доводилось спрашивать у женщины про срок, когда она не беременна"
+   }
+  },
+  {
+   "id": "never-oops-17",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never laughed so hard I couldn't breathe in a lesson or meeting",
+    "hy": "Ես երբեք դասի կամ հանդիպման ժամանակ այնքան չեմ ծիծաղել, որ շունչս կտրվի",
+    "ru": "Мне ни разу не доводилось смеяться на уроке или совещании до потери дыхания"
+   }
+  },
+  {
+   "id": "never-oops-18",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never forgotten my lines on stage",
+    "hy": "Ես երբեք բեմում խոսքս չեմ մոռացել",
+    "ru": "Мне ни разу не доводилось забывать слова на сцене"
+   }
+  },
+  {
+   "id": "never-oops-19",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never been caught pretending to know a song",
+    "hy": "Ես երբեք չեմ բռնվել, որ ձևացնում եմ, թե երգը գիտեմ",
+    "ru": "Мне ни разу не доводилось попадаться на том, что делаю вид, будто знаю песню"
+   }
+  },
+  {
+   "id": "never-oops-20",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never said “I love you” to someone by accident",
+    "hy": "Ես երբեք պատահաբար որևէ մեկին «սիրում եմ» չեմ ասել",
+    "ru": "Мне ни разу не доводилось случайно сказать кому-то «люблю»"
+   }
+  },
+  {
+   "id": "never-oops-21",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never replied to a message meant for someone else",
+    "hy": "Ես երբեք չեմ պատասխանել ուրիշին ուղղված նամակին",
+    "ru": "Мне ни разу не доводилось отвечать на сообщение, которое предназначалось другому"
+   }
+  },
+  {
+   "id": "never-oops-22",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never been caught picking my nose",
+    "hy": "Ես երբեք չեմ բռնվել քիթս քչփորելիս",
+    "ru": "Мне ни разу не доводилось попадаться за ковырянием в носу"
+   }
+  },
+  {
+   "id": "never-oops-23",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never been caught gossiping by the person I was talking about",
+    "hy": "Ես երբեք չեմ բռնվել բամբասելիս հենց այն մարդու կողմից, ում մասին խոսում էի",
+    "ru": "Мне ни разу не доводилось попадаться на сплетнях тому самому человеку, о котором шла речь"
+   }
+  },
+  {
+   "id": "never-oops-24",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never accidentally liked my ex's new partner's photo",
+    "hy": "Ես երբեք պատահաբար չեմ հավանել նախկինիս նոր զուգընկերոջ լուսանկարը",
+    "ru": "Мне ни разу не доводилось случайно лайкнуть фото нового партнёра бывших"
+   }
+  },
+  {
+   "id": "never-oops-25",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never cried in front of my boss",
+    "hy": "Ես երբեք լաց չեմ եղել ղեկավարիս առաջ",
+    "ru": "Мне ни разу не доводилось плакать перед начальником"
+   }
+  }
+ ]
+}

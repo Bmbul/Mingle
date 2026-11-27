@@ -1,0 +1,335 @@
+{
+ "id": "match-things",
+ "name": {
+  "en": "Same wavelength: everyday things",
+  "hy": "Նույն ալիքի վրա՝ առօրյա իրեր",
+  "ru": "На одной волне: вещи вокруг"
+ },
+ "cards": [
+  {
+   "id": "match-things-01",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something in your pocket",
+    "hy": "Բան գրպանում",
+    "ru": "Что лежит в кармане"
+   }
+  },
+  {
+   "id": "match-things-02",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something with a battery",
+    "hy": "Մարտկոցով բան",
+    "ru": "Что-то на батарейках"
+   }
+  },
+  {
+   "id": "match-things-03",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something people forget at home",
+    "hy": "Բան, որ մարդիկ մոռանում են տանը",
+    "ru": "Что забывают дома"
+   }
+  },
+  {
+   "id": "match-things-04",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something you wear in winter",
+    "hy": "Բան, որ հագնում ես ձմռանը",
+    "ru": "Что носят зимой"
+   }
+  },
+  {
+   "id": "match-things-05",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something made of paper",
+    "hy": "Թղթից բան",
+    "ru": "Что-то из бумаги"
+   }
+  },
+  {
+   "id": "match-things-06",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something sharp",
+    "hy": "Սուր բան",
+    "ru": "Что-то острое на ощупь"
+   }
+  },
+  {
+   "id": "match-things-07",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something that opens and closes",
+    "hy": "Բան, որ բացվում ու փակվում է",
+    "ru": "Что открывается и закрывается"
+   }
+  },
+  {
+   "id": "match-things-08",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something you give as a present",
+    "hy": "Բան, որ նվիրում են",
+    "ru": "Что дарят"
+   }
+  },
+  {
+   "id": "match-things-09",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something heavy",
+    "hy": "Ծանր բան",
+    "ru": "Что-то тяжёлое"
+   }
+  },
+  {
+   "id": "match-things-10",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something on a desk",
+    "hy": "Բան գրասեղանին",
+    "ru": "Что лежит на письменном столе"
+   }
+  },
+  {
+   "id": "match-things-11",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something you charge every day",
+    "hy": "Բան, որ ամեն օր լիցքավորում ես",
+    "ru": "Что заряжают каждый день"
+   }
+  },
+  {
+   "id": "match-things-12",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "An accessory",
+    "hy": "Աքսեսուար",
+    "ru": "Аксессуар"
+   }
+  },
+  {
+   "id": "match-things-13",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Something for a long road trip",
+    "hy": "Բան երկար ճանապարհի համար",
+    "ru": "Что взять в долгую дорогу"
+   }
+  },
+  {
+   "id": "match-things-14",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something people collect",
+    "hy": "Բան, որ մարդիկ հավաքում են",
+    "ru": "Что коллекционируют"
+   }
+  },
+  {
+   "id": "match-things-15",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something black",
+    "hy": "Սև բան",
+    "ru": "Что-то чёрное"
+   }
+  },
+  {
+   "id": "match-things-16",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something with buttons",
+    "hy": "Կոճակներով բան",
+    "ru": "Что-то с кнопками"
+   }
+  },
+  {
+   "id": "match-things-17",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something you buy every week",
+    "hy": "Բան, որ գնում ես ամեն շաբաթ",
+    "ru": "Что покупают каждую неделю"
+   }
+  },
+  {
+   "id": "match-things-18",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something that rings",
+    "hy": "Բան, որ զնգում է",
+    "ru": "Что звенит"
+   }
+  },
+  {
+   "id": "match-things-19",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A type of shoe",
+    "hy": "Կոշիկի տեսակ",
+    "ru": "Вид обуви"
+   }
+  },
+  {
+   "id": "match-things-20",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something in a wallet",
+    "hy": "Բան դրամապանակում",
+    "ru": "Что лежит в кошельке"
+   }
+  },
+  {
+   "id": "match-things-21",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something that can break",
+    "hy": "Բան, որ կարող է կոտրվել",
+    "ru": "Что может разбиться"
+   }
+  },
+  {
+   "id": "match-things-22",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something you take to the gym",
+    "hy": "Բան, որ տանում ես մարզասրահ",
+    "ru": "Что берут в спортзал"
+   }
+  },
+  {
+   "id": "match-things-23",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something in a classroom",
+    "hy": "Բան դասարանում",
+    "ru": "Что есть в классе"
+   }
+  },
+  {
+   "id": "match-things-24",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something that has a screen",
+    "hy": "Էկրանով բան",
+    "ru": "Что-то с экраном"
+   }
+  },
+  {
+   "id": "match-things-25",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something you can't live without",
+    "hy": "Բան, առանց որի չես կարող ապրել",
+    "ru": "Без чего невозможно жить"
+   }
+  }
+ ]
+}

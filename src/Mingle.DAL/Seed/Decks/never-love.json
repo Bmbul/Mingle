@@ -1,0 +1,335 @@
+{
+ "id": "never-love",
+ "name": {
+  "en": "Never have I ever: love and dating",
+  "hy": "Ես երբեք…՝ սեր ու ժամադրություններ",
+  "ru": "Я никогда не…: любовь и свидания"
+ },
+ "cards": [
+  {
+   "id": "never-love-01",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never been on a date that lasted all night",
+    "hy": "Ես երբեք չեմ ունեցել ժամադրություն, որ տևել է ամբողջ գիշեր",
+    "ru": "Мне ни разу не доводилось ходить на свидание, которое длилось всю ночь"
+   }
+  },
+  {
+   "id": "never-love-02",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never fallen in love at first sight",
+    "hy": "Ես երբեք առաջին հայացքից չեմ սիրահարվել",
+    "ru": "Мне ни разу не доводилось влюбиться с первого взгляда"
+   }
+  },
+  {
+   "id": "never-love-03",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never got ready for a date in under ten minutes",
+    "hy": "Ես երբեք տաս րոպեում չեմ պատրաստվել ժամադրության",
+    "ru": "Мне ни разу не доводилось собраться на свидание за десять минут"
+   }
+  },
+  {
+   "id": "never-love-04",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never dedicated a song to someone",
+    "hy": "Ես երբեք որևէ մեկին երգ չեմ նվիրել",
+    "ru": "Мне ни разу не доводилось посвящать кому-то песню"
+   }
+  },
+  {
+   "id": "never-love-05",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never written someone's name in a notebook over and over",
+    "hy": "Ես երբեք տետրում անընդհատ չեմ գրել մեկի անունը",
+    "ru": "Мне ни разу не доводилось снова и снова писать чьё-то имя в тетради"
+   }
+  },
+  {
+   "id": "never-love-06",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never gone on a date to the cinema",
+    "hy": "Ես երբեք ժամադրության ժամանակ կինո չեմ գնացել",
+    "ru": "Мне ни разу не доводилось ходить на свидание в кино"
+   }
+  },
+  {
+   "id": "never-love-07",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never given someone flowers for no reason",
+    "hy": "Ես երբեք առանց պատճառի ծաղիկ չեմ նվիրել",
+    "ru": "Мне ни разу не доводилось дарить цветы просто так"
+   }
+  },
+  {
+   "id": "never-love-08",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never forgotten the name of my date",
+    "hy": "Ես երբեք չեմ մոռացել անունը նրա, ում հետ ժամադրության էի",
+    "ru": "Мне ни разу не доводилось забыть имя человека, с которым на свидании"
+   }
+  },
+  {
+   "id": "never-love-09",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never planned a surprise for someone I love",
+    "hy": "Ես երբեք անակնկալ չեմ պատրաստել սիրելիիս համար",
+    "ru": "Мне ни разу не доводилось устраивать сюрприз любимому человеку"
+   }
+  },
+  {
+   "id": "never-love-10",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never laughed so hard on a date that I snorted",
+    "hy": "Ես երբեք ժամադրության ժամանակ այնքան չեմ ծիծաղել, որ խռմփացնեմ",
+    "ru": "Мне ни разу не доводилось смеяться на свидании так, что вырвалось хрюканье"
+   }
+  },
+  {
+   "id": "never-love-11",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never had a crush on a celebrity",
+    "hy": "Ես երբեք չեմ սիրահարվել հայտնի մարդու",
+    "ru": "Мне ни разу не доводилось влюбиться в знаменитость"
+   }
+  },
+  {
+   "id": "never-love-12",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never been friend-zoned",
+    "hy": "Ես երբեք չեմ մնացել «պարզապես ընկեր»",
+    "ru": "Мне ни разу не доводилось оказаться во «френдзоне»"
+   }
+  },
+  {
+   "id": "never-love-13",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never stalked someone's profile before a first date",
+    "hy": "Ես երբեք մինչև առաջին ժամադրությունը չեմ ուսումնասիրել մեկի ամբողջ էջը",
+    "ru": "Мне ни разу не доводилось изучать чей-то профиль до самого дна перед первым свиданием"
+   }
+  },
+  {
+   "id": "never-love-14",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never left a date early with a fake excuse",
+    "hy": "Ես երբեք կեղծ պատրվակով շուտ չեմ հեռացել ժամադրությունից",
+    "ru": "Мне ни разу не доводилось уйти со свидания пораньше под выдуманным предлогом"
+   }
+  },
+  {
+   "id": "never-love-15",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never been jealous of a partner's friend",
+    "hy": "Ես երբեք չեմ խանդել զուգընկերոջս ընկերոջը",
+    "ru": "Мне ни разу не доводилось ревновать к другу второй половинки"
+   }
+  },
+  {
+   "id": "never-love-16",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never liked someone and never told them",
+    "hy": "Ես երբեք չեմ սիրել մեկին ու այդպես էլ չասել նրան",
+    "ru": "Мне ни разу не доводилось любить кого-то и так и не признаться"
+   }
+  },
+  {
+   "id": "never-love-17",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never been asked out by a friend's ex",
+    "hy": "Ես երբեք ժամադրության հրավեր չեմ ստացել ընկերոջս նախկինից",
+    "ru": "Мне ни разу не доводилось получать приглашение на свидание от бывших друга"
+   }
+  },
+  {
+   "id": "never-love-18",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never broken up with someone by text",
+    "hy": "Ես երբեք հաղորդագրությամբ չեմ բաժանվել",
+    "ru": "Мне ни разу не доводилось расставаться по переписке"
+   }
+  },
+  {
+   "id": "never-love-19",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never stayed friends with an ex",
+    "hy": "Ես երբեք ընկեր չեմ մնացել նախկինիս հետ",
+    "ru": "Мне ни разу не доводилось остаться друзьями с бывшими"
+   }
+  },
+  {
+   "id": "never-love-20",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never kept a present from an ex",
+    "hy": "Ես երբեք չեմ պահել նախկինիս նվերը",
+    "ru": "Мне ни разу не доводилось хранить подарок от бывших"
+   }
+  },
+  {
+   "id": "never-love-21",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never been set up by my family",
+    "hy": "Ես երբեք չեմ ունեցել ընտանիքիս կազմակերպած ծանոթություն",
+    "ru": "Мне ни разу не доводилось знакомиться с кем-то через родственников"
+   }
+  },
+  {
+   "id": "never-love-22",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never kissed someone on the first date",
+    "hy": "Ես երբեք առաջին ժամադրությանը չեմ համբուրվել",
+    "ru": "Мне ни разу не доводилось целоваться на первом свидании"
+   }
+  },
+  {
+   "id": "never-love-23",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never been in love with two people at once",
+    "hy": "Ես երբեք միաժամանակ երկու հոգու չեմ սիրահարվել",
+    "ru": "Мне ни разу не доводилось влюбиться в двоих сразу"
+   }
+  },
+  {
+   "id": "never-love-24",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never made someone jealous on purpose",
+    "hy": "Ես երբեք դիտմամբ չեմ խանդեցրել որևէ մեկին",
+    "ru": "Мне ни разу не доводилось специально вызывать чью-то ревность"
+   }
+  },
+  {
+   "id": "never-love-25",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never pretended to be someone else online",
+    "hy": "Ես երբեք ինտերնետում ուրիշ մարդ չեմ ձևացել",
+    "ru": "Мне ни разу не доводилось выдавать себя в интернете за другого человека"
+   }
+  }
+ ]
+}

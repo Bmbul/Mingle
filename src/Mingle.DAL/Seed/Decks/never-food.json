@@ -1,0 +1,335 @@
+{
+ "id": "never-food",
+ "name": {
+  "en": "Never have I ever: food",
+  "hy": "Ես երբեք…՝ ուտելիք",
+  "ru": "Я никогда не…: еда"
+ },
+ "cards": [
+  {
+   "id": "never-food-01",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten snails",
+    "hy": "Ես երբեք խխունջ չեմ կերել",
+    "ru": "Мне ни разу не доводилось есть улиток"
+   }
+  },
+  {
+   "id": "never-food-02",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten sushi with my hands",
+    "hy": "Ես երբեք սուշին ձեռքով չեմ կերել",
+    "ru": "Мне ни разу не доводилось есть суши руками"
+   }
+  },
+  {
+   "id": "never-food-03",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never drunk coffee after midnight",
+    "hy": "Ես երբեք կեսգիշերից հետո սուրճ չեմ խմել",
+    "ru": "Мне ни разу не доводилось пить кофе после полуночи"
+   }
+  },
+  {
+   "id": "never-food-04",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten cereal for dinner",
+    "hy": "Ես երբեք ընթրիքին փաթիլներ չեմ կերել",
+    "ru": "Мне ни разу не доводилось ужинать хлопьями"
+   }
+  },
+  {
+   "id": "never-food-05",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never cooked a whole dinner for guests on my own",
+    "hy": "Ես երբեք մենակ չեմ պատրաստել ամբողջ ընթրիքը հյուրերի համար",
+    "ru": "Мне ни разу не доводилось готовить в одиночку целый ужин для гостей"
+   }
+  },
+  {
+   "id": "never-food-06",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten pineapple on pizza and liked it",
+    "hy": "Ես երբեք արքայախնձորով պիցցա չեմ կերել ու հավանել",
+    "ru": "Мне ни разу не доводилось есть пиццу с ананасом и остаться довольным"
+   }
+  },
+  {
+   "id": "never-food-07",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never ordered food twice in one day",
+    "hy": "Ես երբեք մեկ օրում երկու անգամ ուտելիք չեմ պատվիրել",
+    "ru": "Мне ни разу не доводилось заказывать доставку дважды за день"
+   }
+  },
+  {
+   "id": "never-food-08",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten something spicy enough to cry",
+    "hy": "Ես երբեք այնքան կծու բան չեմ կերել, որ լաց լինեմ",
+    "ru": "Мне ни разу не доводилось есть что-то настолько острое, что текли слёзы"
+   }
+  },
+  {
+   "id": "never-food-09",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten straight from the pan",
+    "hy": "Ես երբեք ուղիղ տապակից չեմ կերել",
+    "ru": "Мне ни разу не доводилось есть прямо со сковородки"
+   }
+  },
+  {
+   "id": "never-food-10",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never made lavash",
+    "hy": "Ես երբեք լավաշ չեմ թխել",
+    "ru": "Мне ни разу не доводилось печь лаваш"
+   }
+  },
+  {
+   "id": "never-food-11",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never tried a food challenge",
+    "hy": "Ես երբեք ուտելու մրցույթի չեմ մասնակցել",
+    "ru": "Мне ни разу не доводилось участвовать в соревновании по поеданию"
+   }
+  },
+  {
+   "id": "never-food-12",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never put salt in tea instead of sugar",
+    "hy": "Ես երբեք թեյի մեջ շաքարի փոխարեն աղ չեմ գցել",
+    "ru": "Мне ни разу не доводилось положить в чай соль вместо сахара"
+   }
+  },
+  {
+   "id": "never-food-13",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten a meal in under five minutes",
+    "hy": "Ես երբեք հինգ րոպեից պակաս ժամանակում ճաշ չեմ կերել",
+    "ru": "Мне ни разу не доводилось съесть обед меньше чем за пять минут"
+   }
+  },
+  {
+   "id": "never-food-14",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never pretended to like someone's cooking",
+    "hy": "Ես երբեք չեմ ձևացրել, թե ինձ դուր է եկել ինչ-որ մեկի պատրաստածը",
+    "ru": "Мне ни разу не доводилось делать вид, что понравилась чья-то стряпня"
+   }
+  },
+  {
+   "id": "never-food-15",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never hidden sweets from my family",
+    "hy": "Ես երբեք քաղցրավենիք չեմ թաքցրել ընտանիքիցս",
+    "ru": "Мне ни разу не доводилось прятать сладкое от семьи"
+   }
+  },
+  {
+   "id": "never-food-16",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never thrown away food someone cooked for me",
+    "hy": "Ես երբեք չեմ թափել այն ուտելիքը, որ ինձ համար պատրաստել էին",
+    "ru": "Мне ни разу не доводилось выбрасывать еду, которую для меня приготовили"
+   }
+  },
+  {
+   "id": "never-food-17",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never sent food back in a restaurant",
+    "hy": "Ես երբեք ռեստորանում ուտելիքը հետ չեմ ուղարկել",
+    "ru": "Мне ни разу не доводилось возвращать блюдо в ресторане"
+   }
+  },
+  {
+   "id": "never-food-18",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never left without paying by accident",
+    "hy": "Ես երբեք պատահաբար դուրս չեմ եկել առանց վճարելու",
+    "ru": "Мне ни разу не доводилось случайно уйти, не заплатив"
+   }
+  },
+  {
+   "id": "never-food-19",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten something that was out of date",
+    "hy": "Ես երբեք ժամկետանց բան չեմ կերել",
+    "ru": "Мне ни разу не доводилось есть что-то просроченное"
+   }
+  },
+  {
+   "id": "never-food-20",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never started a diet and given up the same day",
+    "hy": "Ես երբեք չեմ սկսել դիետա ու նույն օրը թողել",
+    "ru": "Мне ни разу не доводилось сесть на диету и бросить в тот же день"
+   }
+  },
+  {
+   "id": "never-food-21",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never bought a cake and said I baked it",
+    "hy": "Ես երբեք տորթ չեմ գնել ու ասել, թե ինքս եմ թխել",
+    "ru": "Мне ни разу не доводилось купить торт и сказать, что испечено своими руками"
+   }
+  },
+  {
+   "id": "never-food-22",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten my friend's food when they weren't looking",
+    "hy": "Ես երբեք ընկերոջս ուտելիքը չեմ կերել, երբ նա չէր նայում",
+    "ru": "Мне ни разу не доводилось таскать еду из тарелки друга, пока никто не видит"
+   }
+  },
+  {
+   "id": "never-food-23",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never drunk so much I couldn't find my way home",
+    "hy": "Ես երբեք այնքան չեմ խմել, որ տան ճանապարհը չգտնեմ",
+    "ru": "Мне ни разу не доводилось выпить столько, что не найти дорогу домой"
+   }
+  },
+  {
+   "id": "never-food-24",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten food from a stranger's plate",
+    "hy": "Ես երբեք անծանոթի ափսեից չեմ կերել",
+    "ru": "Мне ни разу не доводилось есть из тарелки незнакомого человека"
+   }
+  },
+  {
+   "id": "never-food-25",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten a whole pack of something in bed at 3 a.m.",
+    "hy": "Ես երբեք գիշերվա ժամը երեքին անկողնում մի ամբողջ տուփ բան չեմ կերել",
+    "ru": "Мне ни разу не доводилось съесть целую пачку чего-то в постели в три часа ночи"
+   }
+  }
+ ]
+}

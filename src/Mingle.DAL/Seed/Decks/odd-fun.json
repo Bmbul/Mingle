@@ -1,0 +1,610 @@
+{
+ "id": "odd-fun",
+ "name": {
+  "en": "Odd question: films, music and games",
+  "hy": "Այլ հարց՝ ֆիլմեր, երաժշտություն ու խաղեր",
+  "ru": "Другой вопрос: кино, музыка и игры"
+ },
+ "cards": [
+  {
+   "id": "odd-fun-01",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "What's the best film of all time?",
+    "hy": "Ո՞րն է բոլոր ժամանակների լավագույն ֆիլմը։",
+    "ru": "Какой фильм лучший всех времён?"
+   },
+   "options": {
+    "en": [
+     "What's the most overrated film?"
+    ],
+    "hy": [
+     "Ո՞ր ֆիլմն է չափազանց գովաբանված։"
+    ],
+    "ru": [
+     "Какой фильм сильно переоценён?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-02",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Which series would you recommend?",
+    "hy": "Ո՞ր սերիալը խորհուրդ կտայիր։",
+    "ru": "Какой сериал ты посоветуешь?"
+   },
+   "options": {
+    "en": [
+     "Which series did you stop watching halfway?"
+    ],
+    "hy": [
+     "Ո՞ր սերիալի դիտումն ես կիսատ թողել։"
+    ],
+    "ru": [
+     "Какой сериал брошен на середине?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-03",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Which singer would you see live?",
+    "hy": "Ո՞ր երգչի համերգին կգնայիր։",
+    "ru": "На концерт какого певца ты пойдёшь?"
+   },
+   "options": {
+    "en": [
+     "Which singer would you sing a duet with?"
+    ],
+    "hy": [
+     "Ո՞ր երգչի հետ կերգեիր դուետով։"
+    ],
+    "ru": [
+     "С каким певцом ты споёшь дуэтом?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-04",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Which song do you dance to?",
+    "hy": "Ո՞ր երգի տակ ես պարում։",
+    "ru": "Под какую песню ты танцуешь?"
+   },
+   "options": {
+    "en": [
+     "Which song do you clean the house to?"
+    ],
+    "hy": [
+     "Ո՞ր երգի տակ ես տունը մաքրում։"
+    ],
+    "ru": [
+     "Под какую песню ты убираешь дом?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-05",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "Which actor would play you in a film?",
+    "hy": "Ո՞ր դերասանը կխաղար քեզ ֆիլմում։",
+    "ru": "Какой актёр сыграет тебя в фильме?"
+   },
+   "options": {
+    "en": [
+     "Which actor should never play you?"
+    ],
+    "hy": [
+     "Ո՞ր դերասանը երբեք չպետք է խաղա քեզ։"
+    ],
+    "ru": [
+     "Какой актёр ни за что не должен играть тебя?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-06",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "What's the best board game?",
+    "hy": "Ո՞րն է ամենալավ սեղանի խաղը։",
+    "ru": "Какая настольная игра самая лучшая?"
+   },
+   "options": {
+    "en": [
+     "What's the best card game?"
+    ],
+    "hy": [
+     "Ո՞րն է ամենալավ թղթախաղը։"
+    ],
+    "ru": [
+     "Какая карточная игра самая лучшая?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-07",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which cartoon is the funniest?",
+    "hy": "Ո՞ր մուլտֆիլմն է ամենազվարճալին։",
+    "ru": "Какой мультфильм самый смешной?"
+   },
+   "options": {
+    "en": [
+     "Which cartoon is the saddest?"
+    ],
+    "hy": [
+     "Ո՞ր մուլտֆիլմն է ամենատխուրը։"
+    ],
+    "ru": [
+     "Какой мультфильм самый грустный?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-08",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Which book should everyone read?",
+    "hy": "Ո՞ր գիրքը պետք է բոլորը կարդան։",
+    "ru": "Какую книгу должен прочитать каждый?"
+   },
+   "options": {
+    "en": [
+     "Which book on the school list was the most boring?"
+    ],
+    "hy": [
+     "Դպրոցական ցանկի ո՞ր գիրքն էր ամենաձանձրալին։"
+    ],
+    "ru": [
+     "Какая книга из школьной программы была самой скучной?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-09",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "What do you watch on a Friday night?",
+    "hy": "Ի՞նչ ես դիտում ուրբաթ երեկոյան։",
+    "ru": "Что ты смотришь в пятницу вечером?"
+   },
+   "options": {
+    "en": [
+     "What do you watch when you're ill?"
+    ],
+    "hy": [
+     "Ի՞նչ ես դիտում, երբ հիվանդ ես։"
+    ],
+    "ru": [
+     "Что ты смотришь, когда болеешь?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-10",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Which video game is the best?",
+    "hy": "Ո՞ր համակարգչային խաղն է ամենալավը։",
+    "ru": "Какая компьютерная игра самая лучшая?"
+   },
+   "options": {
+    "en": [
+     "Which video game has eaten most of your time?"
+    ],
+    "hy": [
+     "Ո՞ր համակարգչային խաղն է ամենաշատը խլել քո ժամանակը։"
+    ],
+    "ru": [
+     "Какая компьютерная игра отняла у тебя больше всего времени?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-11",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which superhero is the coolest?",
+    "hy": "Ո՞ր սուպերհերոսն է ամենաթույնը։",
+    "ru": "Какой супергерой самый крутой?"
+   },
+   "options": {
+    "en": [
+     "Which superhero is the most useless?"
+    ],
+    "hy": [
+     "Ո՞ր սուպերհերոսն է ամենաանօգուտը։"
+    ],
+    "ru": [
+     "Какой супергерой самый бесполезный?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-12",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Which Armenian song does everyone know?",
+    "hy": "Ո՞ր հայկական երգը գիտեն բոլորը։",
+    "ru": "Какую армянскую песню знают все?"
+   },
+   "options": {
+    "en": [
+     "Which Armenian song is sung at weddings?"
+    ],
+    "hy": [
+     "Ո՞ր հայկական երգն են երգում հարսանիքներին։"
+    ],
+    "ru": [
+     "Какую армянскую песню поют на свадьбах?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-13",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Which film would you watch again tonight?",
+    "hy": "Ո՞ր ֆիլմը կդիտեիր նորից այս երեկո։",
+    "ru": "Какой фильм ты пересмотришь сегодня вечером?"
+   },
+   "options": {
+    "en": [
+     "Which film would you never watch again?"
+    ],
+    "hy": [
+     "Ո՞ր ֆիլմը երբեք նորից չէիր դիտի։"
+    ],
+    "ru": [
+     "Какой фильм ты больше никогда не пересмотришь?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-14",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Which TV show would you take part in?",
+    "hy": "Ո՞ր հեռուստաշոուին կմասնակցեիր։",
+    "ru": "В каком телешоу ты поучаствуешь?"
+   },
+   "options": {
+    "en": [
+     "Which TV show would you host?"
+    ],
+    "hy": [
+     "Ո՞ր հեռուստաշոուն կվարեիր։"
+    ],
+    "ru": [
+     "Какое телешоу ты будешь вести?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-15",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "What's the best horror film?",
+    "hy": "Ո՞րն է ամենալավ սարսափ ֆիլմը։",
+    "ru": "Какой фильм ужасов самый лучший?"
+   },
+   "options": {
+    "en": [
+     "What's the best comedy?"
+    ],
+    "hy": [
+     "Ո՞րն է ամենալավ կատակերգությունը։"
+    ],
+    "ru": [
+     "Какая комедия самая лучшая?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-16",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Which concert would you go to again?",
+    "hy": "Ո՞ր համերգին կգնայիր նորից։",
+    "ru": "На какой концерт ты пойдёшь снова?"
+   },
+   "options": {
+    "en": [
+     "Which festival would you go to?"
+    ],
+    "hy": [
+     "Ո՞ր փառատոնին կգնայիր։"
+    ],
+    "ru": [
+     "На какой фестиваль ты поедешь?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-17",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "Which film character is most like you?",
+    "hy": "Ֆիլմի ո՞ր հերոսն է ամենաշատը քեզ նման։",
+    "ru": "Какой герой фильма больше всего похож на тебя?"
+   },
+   "options": {
+    "en": [
+     "Which film character would you date?"
+    ],
+    "hy": [
+     "Ֆիլմի ո՞ր հերոսի հետ ժամադրության կգնայիր։"
+    ],
+    "ru": [
+     "С каким героем фильма ты пойдёшь на свидание?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-18",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "What do you listen to in the morning?",
+    "hy": "Ի՞նչ ես լսում առավոտյան։",
+    "ru": "Что ты слушаешь утром?"
+   },
+   "options": {
+    "en": [
+     "What do you listen to at the gym?"
+    ],
+    "hy": [
+     "Ի՞նչ ես լսում մարզասրահում։"
+    ],
+    "ru": [
+     "Что ты слушаешь в спортзале?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-19",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Which sport is the most fun to watch?",
+    "hy": "Ո՞ր մարզաձևն է ամենահետաքրքիրը դիտելու համար։",
+    "ru": "Какой спорт интереснее всего смотреть?"
+   },
+   "options": {
+    "en": [
+     "Which sport is the most fun to play?"
+    ],
+    "hy": [
+     "Ո՞ր մարզաձևն է ամենահետաքրքիրը խաղալու համար։"
+    ],
+    "ru": [
+     "Каким спортом интереснее всего заниматься?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-20",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "Which video would you show everyone?",
+    "hy": "Ո՞ր տեսանյութը ցույց կտայիր բոլորին։",
+    "ru": "Какое видео ты покажешь всем?"
+   },
+   "options": {
+    "en": [
+     "Which meme describes your week?"
+    ],
+    "hy": [
+     "Ո՞ր մեմն է նկարագրում քո շաբաթը։"
+    ],
+    "ru": [
+     "Какой мем описывает твою неделю?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-21",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Which song is perfect for a road trip?",
+    "hy": "Ո՞ր երգն է կատարյալ մեքենայով ճամփորդության համար։",
+    "ru": "Какая песня идеальна для поездки на машине?"
+   },
+   "options": {
+    "en": [
+     "Which song is perfect for a wedding?"
+    ],
+    "hy": [
+     "Ո՞ր երգն է կատարյալ հարսանիքի համար։"
+    ],
+    "ru": [
+     "Какая песня идеальна для свадьбы?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-22",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "what-if"
+   ],
+   "text": {
+    "en": "Which famous person would you invite to a party?",
+    "hy": "Ո՞ր հայտնի մարդուն կհրավիրեիր խնջույքի։",
+    "ru": "Какую знаменитость ты позовёшь на вечеринку?"
+   },
+   "options": {
+    "en": [
+     "Which famous person would you invite to dinner with your parents?"
+    ],
+    "hy": [
+     "Ո՞ր հայտնի մարդուն կհրավիրեիր ընթրիքի ծնողներիդ հետ։"
+    ],
+    "ru": [
+     "Какую знаменитость ты позовёшь на ужин с родителями?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-23",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "What's the best Disney film?",
+    "hy": "Ո՞րն է Դիսնեյի ամենալավ ֆիլմը։",
+    "ru": "Какой фильм Disney лучший?"
+   },
+   "options": {
+    "en": [
+     "What's the best Soviet film?"
+    ],
+    "hy": [
+     "Ո՞րն է ամենալավ սովետական ֆիլմը։"
+    ],
+    "ru": [
+     "Какой советский фильм лучший?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-24",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Which instrument sounds the best?",
+    "hy": "Ո՞ր գործիքն է ամենալավ հնչում։",
+    "ru": "Какой инструмент звучит лучше всех?"
+   },
+   "options": {
+    "en": [
+     "Which instrument is the hardest to play?"
+    ],
+    "hy": [
+     "Ո՞ր գործիքն է ամենադժվարը նվագելու համար։"
+    ],
+    "ru": [
+     "На каком инструменте сложнее всего играть?"
+    ]
+   }
+  },
+  {
+   "id": "odd-fun-25",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "What would you sing at karaoke?",
+    "hy": "Ի՞նչ կերգեիր կարաոկեում։",
+    "ru": "Что ты споёшь в караоке?"
+   },
+   "options": {
+    "en": [
+     "What would you never sing at karaoke?"
+    ],
+    "hy": [
+     "Ի՞նչ երբեք չէիր երգի կարաոկեում։"
+    ],
+    "ru": [
+     "Что ты ни за что не споёшь в караоке?"
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,335 @@
+{
+ "id": "match-people",
+ "name": {
+  "en": "Same wavelength: people and jobs",
+  "hy": "Նույն ալիքի վրա՝ մարդիկ ու մասնագիտություններ",
+  "ru": "На одной волне: люди и профессии"
+ },
+ "cards": [
+  {
+   "id": "match-people-01",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A job that pays well",
+    "hy": "Լավ վարձատրվող աշխատանք",
+    "ru": "Хорошо оплачиваемая работа"
+   }
+  },
+  {
+   "id": "match-people-02",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A dangerous job",
+    "hy": "Վտանգավոր աշխատանք",
+    "ru": "Опасная профессия"
+   }
+  },
+  {
+   "id": "match-people-03",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A job children dream of",
+    "hy": "Մասնագիտություն, որի մասին երազում են երեխաները",
+    "ru": "Профессия мечты в детстве"
+   }
+  },
+  {
+   "id": "match-people-04",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "Someone who works at night",
+    "hy": "Մեկը, ով աշխատում է գիշերը",
+    "ru": "Кто работает ночью"
+   }
+  },
+  {
+   "id": "match-people-05",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "Something in an office",
+    "hy": "Բան գրասենյակում",
+    "ru": "Что есть в офисе"
+   }
+  },
+  {
+   "id": "match-people-06",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A job in a hospital",
+    "hy": "Աշխատանք հիվանդանոցում",
+    "ru": "Работа в больнице"
+   }
+  },
+  {
+   "id": "match-people-07",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A job at an airport",
+    "hy": "Աշխատանք օդանավակայանում",
+    "ru": "Работа в аэропорту"
+   }
+  },
+  {
+   "id": "match-people-08",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A job you do outside",
+    "hy": "Աշխատանք բացօթյա",
+    "ru": "Работа на улице"
+   }
+  },
+  {
+   "id": "match-people-09",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A boring job",
+    "hy": "Ձանձրալի աշխատանք",
+    "ru": "Скучная работа"
+   }
+  },
+  {
+   "id": "match-people-10",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A job with a hat",
+    "hy": "Աշխատանք, որտեղ գլխարկ են կրում",
+    "ru": "Профессия, где носят шапку или шлем"
+   }
+  },
+  {
+   "id": "match-people-11",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "A family member",
+    "hy": "Ընտանիքի անդամ",
+    "ru": "Член семьи"
+   }
+  },
+  {
+   "id": "match-people-12",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A job in a film studio",
+    "hy": "Աշխատանք կինոստուդիայում",
+    "ru": "Работа на киностудии"
+   }
+  },
+  {
+   "id": "match-people-13",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "Something a teacher says",
+    "hy": "Բան, որ ասում է ուսուցիչը",
+    "ru": "Что говорит учитель"
+   }
+  },
+  {
+   "id": "match-people-14",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "Something a boss says",
+    "hy": "Բան, որ ասում է ղեկավարը",
+    "ru": "Что говорит начальник"
+   }
+  },
+  {
+   "id": "match-people-15",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "Something a mum says",
+    "hy": "Բան, որ ասում է մայրիկը",
+    "ru": "Что говорит мама"
+   }
+  },
+  {
+   "id": "match-people-16",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A job that needs patience",
+    "hy": "Աշխատանք, որ համբերություն է պահանջում",
+    "ru": "Профессия, где нужно терпение"
+   }
+  },
+  {
+   "id": "match-people-17",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A famous scientist",
+    "hy": "Հայտնի գիտնական",
+    "ru": "Знаменитый учёный"
+   }
+  },
+  {
+   "id": "match-people-18",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A famous artist",
+    "hy": "Հայտնի նկարիչ",
+    "ru": "Знаменитый художник"
+   }
+  },
+  {
+   "id": "match-people-19",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A famous leader in history",
+    "hy": "Պատմության հայտնի առաջնորդ",
+    "ru": "Знаменитый правитель в истории"
+   }
+  },
+  {
+   "id": "match-people-20",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A job with a uniform you'd wear",
+    "hy": "Համազգեստով աշխատանք, որ կանեիր",
+    "ru": "Профессия в форме, которая нравится"
+   }
+  },
+  {
+   "id": "match-people-21",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A job robots will take",
+    "hy": "Աշխատանք, որ կխլեն ռոբոտները",
+    "ru": "Работа, которую заберут роботы"
+   }
+  },
+  {
+   "id": "match-people-22",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Someone you call when something breaks",
+    "hy": "Մեկը, ում զանգում ես, երբ ինչ-որ բան փչանում է",
+    "ru": "Кому звонят, когда что-то сломалось"
+   }
+  },
+  {
+   "id": "match-people-23",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A job in a restaurant",
+    "hy": "Աշխատանք ռեստորանում",
+    "ru": "Работа в ресторане"
+   }
+  },
+  {
+   "id": "match-people-24",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A famous inventor",
+    "hy": "Հայտնի գյուտարար",
+    "ru": "Знаменитый изобретатель"
+   }
+  },
+  {
+   "id": "match-people-25",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A creative job",
+    "hy": "Ստեղծագործական աշխատանք",
+    "ru": "Творческая профессия"
+   }
+  }
+ ]
+}

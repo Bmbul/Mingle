@@ -1,0 +1,335 @@
+{
+ "id": "never-travel",
+ "name": {
+  "en": "Never have I ever: travel",
+  "hy": "Ես երբեք…՝ ճամփորդություն",
+  "ru": "Я никогда не…: путешествия"
+ },
+ "cards": [
+  {
+   "id": "never-travel-01",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never missed a flight",
+    "hy": "Ես երբեք չեմ ուշացել ինքնաթիռից",
+    "ru": "Мне ни разу не доводилось опоздать на самолёт"
+   }
+  },
+  {
+   "id": "never-travel-02",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never fallen asleep on a stranger's shoulder on a bus",
+    "hy": "Ես երբեք չեմ քնել անծանոթի ուսին ավտոբուսում",
+    "ru": "Мне ни разу не доводилось уснуть в автобусе на плече у незнакомца"
+   }
+  },
+  {
+   "id": "never-travel-03",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never travelled alone",
+    "hy": "Ես երբեք մենակ չեմ ճամփորդել",
+    "ru": "Мне ни разу не доводилось путешествовать в одиночку"
+   }
+  },
+  {
+   "id": "never-travel-04",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never lost my luggage",
+    "hy": "Ես երբեք ճամպրուկս չեմ կորցրել",
+    "ru": "Мне ни разу не доводилось терять багаж"
+   }
+  },
+  {
+   "id": "never-travel-05",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never been to Lake Sevan in winter",
+    "hy": "Ես երբեք ձմռանը Սևան չեմ գնացել",
+    "ru": "Мне ни разу не доводилось побывать на Севане зимой"
+   }
+  },
+  {
+   "id": "never-travel-06",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never slept in a tent",
+    "hy": "Ես երբեք վրանում չեմ քնել",
+    "ru": "Мне ни разу не доводилось ночевать в палатке"
+   }
+  },
+  {
+   "id": "never-travel-07",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never taken a night train",
+    "hy": "Ես երբեք գիշերային գնացքով չեմ գնացել",
+    "ru": "Мне ни разу не доводилось ехать ночным поездом"
+   }
+  },
+  {
+   "id": "never-travel-08",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never got on the wrong bus",
+    "hy": "Ես երբեք սխալ ավտոբուս չեմ նստել",
+    "ru": "Мне ни разу не доводилось сесть не на тот автобус"
+   }
+  },
+  {
+   "id": "never-travel-09",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never packed the night before and forgotten half",
+    "hy": "Ես երբեք ճամպրուկը նախորդ գիշերը չեմ հավաքել ու կեսը մոռացել",
+    "ru": "Мне ни разу не доводилось собираться в ночь перед поездкой и забыть половину вещей"
+   }
+  },
+  {
+   "id": "never-travel-10",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never seen snow in summer",
+    "hy": "Ես երբեք ամռանը ձյուն չեմ տեսել",
+    "ru": "Мне ни разу не доводилось видеть снег летом"
+   }
+  },
+  {
+   "id": "never-travel-11",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never hitchhiked",
+    "hy": "Ես երբեք ավտոստոպով չեմ ճամփորդել",
+    "ru": "Мне ни разу не доводилось ездить автостопом"
+   }
+  },
+  {
+   "id": "never-travel-12",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never pretended to understand a foreign language",
+    "hy": "Ես երբեք չեմ ձևացրել, թե հասկանում եմ օտար լեզուն",
+    "ru": "Мне ни разу не доводилось делать вид, что понимаю иностранный язык"
+   }
+  },
+  {
+   "id": "never-travel-13",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never been on a cruise",
+    "hy": "Ես երբեք նավով կրուիզի չեմ գնացել",
+    "ru": "Мне ни разу не доводилось плавать в круиз"
+   }
+  },
+  {
+   "id": "never-travel-14",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never cried at an airport",
+    "hy": "Ես երբեք լաց չեմ եղել օդանավակայանում",
+    "ru": "Мне ни разу не доводилось плакать в аэропорту"
+   }
+  },
+  {
+   "id": "never-travel-15",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never booked a trip on impulse",
+    "hy": "Ես երբեք ճամփորդություն չեմ ամրագրել հանկարծակի որոշմամբ",
+    "ru": "Мне ни разу не доводилось покупать путёвку под влиянием момента"
+   }
+  },
+  {
+   "id": "never-travel-16",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never lied to get a better seat",
+    "hy": "Ես երբեք չեմ ստել ավելի լավ տեղ ստանալու համար",
+    "ru": "Мне ни разу не доводилось врать, чтобы получить место получше"
+   }
+  },
+  {
+   "id": "never-travel-17",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never run out of money on holiday",
+    "hy": "Ես երբեք արձակուրդում առանց փողի չեմ մնացել",
+    "ru": "Мне ни разу не доводилось остаться без денег в отпуске"
+   }
+  },
+  {
+   "id": "never-travel-18",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never argued with a friend on a trip",
+    "hy": "Ես երբեք ճամփորդության ժամանակ չեմ վիճել ընկերոջս հետ",
+    "ru": "Мне ни разу не доводилось поссориться с другом в поездке"
+   }
+  },
+  {
+   "id": "never-travel-19",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never stayed somewhere much worse than the photos",
+    "hy": "Ես երբեք չեմ մնացել մի տեղ, որ լուսանկարներից շատ ավելի վատն էր",
+    "ru": "Мне ни разу не доводилось жить в отеле, который на деле оказался намного хуже, чем на фото"
+   }
+  },
+  {
+   "id": "never-travel-20",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never missed home so much I came back early",
+    "hy": "Ես երբեք տան այնքան չեմ կարոտել, որ շուտ վերադառնամ",
+    "ru": "Мне ни разу не доводилось так соскучиться по дому, что вернуться раньше"
+   }
+  },
+  {
+   "id": "never-travel-21",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never got completely lost abroad",
+    "hy": "Ես երբեք արտասահմանում լրիվ չեմ մոլորվել",
+    "ru": "Мне ни разу не доводилось полностью заблудиться за границей"
+   }
+  },
+  {
+   "id": "never-travel-22",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "I have never jumped into cold water from a height",
+    "hy": "Ես երբեք բարձրությունից սառը ջուրը չեմ ցատկել",
+    "ru": "Мне ни разу не доводилось прыгать с высоты в холодную воду"
+   }
+  },
+  {
+   "id": "never-travel-23",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never snuck into a hotel pool",
+    "hy": "Ես երբեք գաղտագողի չեմ մտել հյուրանոցի լողավազան",
+    "ru": "Мне ни разу не доводилось пробраться в бассейн чужого отеля"
+   }
+  },
+  {
+   "id": "never-travel-24",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never travelled without telling my parents",
+    "hy": "Ես երբեք չեմ ճամփորդել առանց ծնողներիս ասելու",
+    "ru": "Мне ни разу не доводилось уехать в поездку, не сказав родителям"
+   }
+  },
+  {
+   "id": "never-travel-25",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never stayed up all night in a foreign city",
+    "hy": "Ես երբեք ամբողջ գիշեր չեմ զբոսնել օտար քաղաքում",
+    "ru": "Мне ни разу не доводилось гулять всю ночь в чужом городе"
+   }
+  }
+ ]
+}

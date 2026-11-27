@@ -1,0 +1,395 @@
+{
+ "id": "guess-travel",
+ "name": {
+  "en": "Guess: trips and places",
+  "hy": "Գուշակիր՝ ճամփորդություններ ու վայրեր",
+  "ru": "Угадай: поездки и места"
+ },
+ "cards": [
+  {
+   "id": "guess-travel-01",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Which country would {@} visit next?",
+    "hy": "Ո՞ր երկիր կգնար {@ը} հաջորդը։",
+    "ru": "Какую страну {@} посетит следующей?"
+   }
+  },
+  {
+   "id": "guess-travel-02",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "How many suitcases would {@} take for a week away?",
+    "hy": "Քանի՞ ճամպրուկ կվերցներ {@ը} մեկ շաբաթվա ճամփորդության։",
+    "ru": "Сколько чемоданов {@} возьмёт в поездку на неделю?"
+   }
+  },
+  {
+   "id": "guess-travel-03",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "How early does {@} get to the airport?",
+    "hy": "Թռիչքից որքա՞ն առաջ է {@ը} հասնում օդանավակայան։",
+    "ru": "За сколько до вылета {@} приезжает в аэропорт?"
+   }
+  },
+  {
+   "id": "guess-travel-04",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "What does {@} always forget to pack?",
+    "hy": "Ի՞նչ է {@ը} միշտ մոռանում դնել ճամպրուկը։",
+    "ru": "Что {@} всегда забывает положить в чемодан?"
+   }
+  },
+  {
+   "id": "guess-travel-05",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Beach or city: what kind of holiday does {@} choose?",
+    "hy": "Ի՞նչ կընտրի {@ը}՝ ծովափնյա հանգիստ, թե՞ քաղաքային ճամփորդություն։",
+    "ru": "Что {@} выберет: пляж или прогулки по городу?"
+   }
+  },
+  {
+   "id": "guess-travel-06",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Which town in Armenia, besides Yerevan, would {@} live in?",
+    "hy": "Երևանից բացի Հայաստանի ո՞ր քաղաքում կապրեր {@ը}։",
+    "ru": "В каком городе Армении, кроме Еревана, {@} хочет жить?"
+   }
+  },
+  {
+   "id": "guess-travel-07",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "How many hours can {@} drive without a break?",
+    "hy": "Քանի՞ ժամ կարող է {@ը} վարել առանց կանգառի։",
+    "ru": "Сколько часов {@} может вести машину без остановки?"
+   }
+  },
+  {
+   "id": "guess-travel-08",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "What does {@} buy as a souvenir?",
+    "hy": "Ի՞նչ է {@ը} գնում որպես հուշանվեր։",
+    "ru": "Что {@} покупает на память из поездки?"
+   }
+  },
+  {
+   "id": "guess-travel-09",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "Hotel or tent: where would {@} rather sleep?",
+    "hy": "Որտե՞ղ կնախընտրեր քնել {@ը}՝ հյուրանոցում, թե՞ վրանում։",
+    "ru": "Где {@} предпочтёт ночевать: в отеле или в палатке?"
+   }
+  },
+  {
+   "id": "guess-travel-10",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Which continent would {@} explore first?",
+    "hy": "Ո՞ր մայրցամաքը կուսումնասիրեր {@ը} առաջինը։",
+    "ru": "Какой континент {@} исследует первым?"
+   }
+  },
+  {
+   "id": "guess-travel-11",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "How many photos does {@} take on one trip?",
+    "hy": "Քանի՞ լուսանկար է անում {@ը} մեկ ճամփորդության ընթացքում։",
+    "ru": "Сколько фото {@} делает за одну поездку?"
+   }
+  },
+  {
+   "id": "guess-travel-12",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "On a plane, does {@} sleep or look out of the window?",
+    "hy": "Ինքնաթիռում {@ը} քնո՞ւմ է, թե՞ նայում է պատուհանից։",
+    "ru": "В самолёте {@} спит или смотрит в окно?"
+   }
+  },
+  {
+   "id": "guess-travel-13",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "What's the farthest place {@} has been to?",
+    "hy": "Ո՞րն է ամենահեռու վայրը, որտեղ եղել է {@ը}։",
+    "ru": "{@}: какое место самое далёкое из всех, где удалось побывать?"
+   }
+  },
+  {
+   "id": "guess-travel-14",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "growth"
+   ],
+   "text": {
+    "en": "Which language would {@} learn for a trip?",
+    "hy": "Ճամփորդության համար ո՞ր լեզուն կսովորեր {@ը}։",
+    "ru": "Какой язык {@} выучит ради поездки?"
+   }
+  },
+  {
+   "id": "guess-travel-15",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Lake Sevan or the Black Sea: where would {@} go this summer?",
+    "hy": "Ուր կգնար {@ը} այս ամառ՝ Սևան, թե՞ Սև ծով։",
+    "ru": "Куда {@} поедет этим летом: на Севан или на Чёрное море?"
+   }
+  },
+  {
+   "id": "guess-travel-16",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "What music does {@} put on during a long drive?",
+    "hy": "Ի՞նչ երաժշտություն է միացնում {@ը} երկար ճանապարհին։",
+    "ru": "Какую музыку {@} включает в долгой дороге?"
+   }
+  },
+  {
+   "id": "guess-travel-17",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "What does {@} do first in a new city?",
+    "hy": "Ի՞նչ է {@ը} անում առաջինը նոր քաղաքում։",
+    "ru": "Что {@} делает первым делом в новом городе?"
+   }
+  },
+  {
+   "id": "guess-travel-18",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "Would {@} travel alone?",
+    "hy": "Կճամփորդե՞ր {@ը} մենակ։",
+    "ru": "{@} поедет путешествовать в одиночку?"
+   }
+  },
+  {
+   "id": "guess-travel-19",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Which Armenian monastery would {@} show a guest?",
+    "hy": "Հայկական ո՞ր վանքը ցույց կտար {@ը} հյուրին։",
+    "ru": "Какой армянский монастырь {@} покажет гостю?"
+   }
+  },
+  {
+   "id": "guess-travel-20",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "money"
+   ],
+   "text": {
+    "en": "How much does {@} spend on souvenirs?",
+    "hy": "Որքա՞ն գումար է ծախսում {@ը} հուշանվերների վրա։",
+    "ru": "Сколько {@} тратит на сувениры?"
+   }
+  },
+  {
+   "id": "guess-travel-21",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "What would {@} miss most abroad?",
+    "hy": "Արտասահմանում ինչի՞ն ամենաշատը կկարոտեր {@ը}։",
+    "ru": "По чему {@} будет больше всего скучать за границей?"
+   }
+  },
+  {
+   "id": "guess-travel-22",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Which season would {@} travel in?",
+    "hy": "Տարվա ո՞ր եղանակին կճամփորդեր {@ը}։",
+    "ru": "В какое время года {@} поедет путешествовать?"
+   }
+  },
+  {
+   "id": "guess-travel-23",
+   "kind": "rank",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Countries: how would {@} rank them, favourite first?",
+    "hy": "Երկրներ. ինչպե՞ս կդասավորեր {@ը} դրանք՝ սկսած ամենասիրածից։",
+    "ru": "Страны: как {@} расставит их, начиная с любимого?"
+   },
+   "options": {
+    "en": [
+     "Italy",
+     "Japan",
+     "Georgia",
+     "Egypt"
+    ],
+    "hy": [
+     "Իտալիա",
+     "Ճապոնիա",
+     "Վրաստան",
+     "Եգիպտոս"
+    ],
+    "ru": [
+     "Италия",
+     "Япония",
+     "Грузия",
+     "Египет"
+    ]
+   }
+  },
+  {
+   "id": "guess-travel-24",
+   "kind": "rank",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Ways to travel: how would {@} rank them, favourite first?",
+    "hy": "Ճամփորդելու ձևեր. ինչպե՞ս կդասավորեր {@ը} դրանք՝ սկսած ամենասիրածից։",
+    "ru": "Способы путешествовать: как {@} расставит их, начиная с любимого?"
+   },
+   "options": {
+    "en": [
+     "Plane",
+     "Train",
+     "Car",
+     "Ship"
+    ],
+    "hy": [
+     "Ինքնաթիռ",
+     "Գնացք",
+     "Մեքենա",
+     "Նավ"
+    ],
+    "ru": [
+     "Самолёт",
+     "Поезд",
+     "Машина",
+     "Корабль"
+    ]
+   }
+  },
+  {
+   "id": "guess-travel-25",
+   "kind": "rank",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Places in Armenia: how would {@} rank them, favourite first?",
+    "hy": "Վայրեր Հայաստանում. ինչպե՞ս կդասավորեր {@ը} դրանք՝ սկսած ամենասիրածից։",
+    "ru": "Места в Армении: как {@} расставит их, начиная с любимого?"
+   },
+   "options": {
+    "en": [
+     "Sevan",
+     "Dilijan",
+     "Tatev",
+     "Garni"
+    ],
+    "hy": [
+     "Սևան",
+     "Դիլիջան",
+     "Տաթև",
+     "Գառնի"
+    ],
+    "ru": [
+     "Севан",
+     "Дилижан",
+     "Татев",
+     "Гарни"
+    ]
+   }
+  }
+ ]
+}

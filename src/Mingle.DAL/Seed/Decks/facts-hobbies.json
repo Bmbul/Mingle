@@ -1,0 +1,335 @@
+{
+ "id": "facts-hobbies",
+ "name": {
+  "en": "Facts: hobbies and free time",
+  "hy": "Փաստեր՝ հոբբի ու ազատ ժամանակ",
+  "ru": "Факты: хобби и свободное время"
+ },
+ "cards": [
+  {
+   "id": "facts-hobbies-01",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A sport you've tried",
+    "hy": "Մարզաձև, որ փորձել ես",
+    "ru": "Вид спорта, который довелось попробовать"
+   }
+  },
+  {
+   "id": "facts-hobbies-02",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A book you couldn't put down",
+    "hy": "Գիրք, որից չէիր կարողանում կտրվել",
+    "ru": "Книга, от которой невозможно оторваться"
+   }
+  },
+  {
+   "id": "facts-hobbies-03",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "A concert you went to",
+    "hy": "Համերգ, որին գնացել ես",
+    "ru": "Концерт, на котором удалось побывать"
+   }
+  },
+  {
+   "id": "facts-hobbies-04",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "An instrument in your life",
+    "hy": "Երաժշտական գործիք քո կյանքում",
+    "ru": "Музыкальный инструмент в твоей жизни"
+   }
+  },
+  {
+   "id": "facts-hobbies-05",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A game you can't stop playing",
+    "hy": "Խաղ, որից չես կարողանում կտրվել",
+    "ru": "Игра, от которой не оторваться"
+   }
+  },
+  {
+   "id": "facts-hobbies-06",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Something you made with your hands",
+    "hy": "Բան, որ ձեռքով ես սարքել",
+    "ru": "Что-то сделанное своими руками"
+   }
+  },
+  {
+   "id": "facts-hobbies-07",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A film you've watched many times",
+    "hy": "Ֆիլմ, որ շատ անգամ ես դիտել",
+    "ru": "Фильм, пересмотренный много раз"
+   }
+  },
+  {
+   "id": "facts-hobbies-08",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A hobby you gave up",
+    "hy": "Հոբբի, որից հրաժարվել ես",
+    "ru": "Брошенное хобби"
+   }
+  },
+  {
+   "id": "facts-hobbies-09",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A competition you took part in",
+    "hy": "Մրցույթ, որին մասնակցել ես",
+    "ru": "Соревнование или конкурс с твоим участием"
+   }
+  },
+  {
+   "id": "facts-hobbies-10",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "A dance you can do",
+    "hy": "Պար, որ կարող ես պարել",
+    "ru": "Танец, который умеешь танцевать"
+   }
+  },
+  {
+   "id": "facts-hobbies-11",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Something you can draw",
+    "hy": "Բան, որ կարող ես նկարել",
+    "ru": "То, что умеешь рисовать"
+   }
+  },
+  {
+   "id": "facts-hobbies-12",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A series you binge-watched",
+    "hy": "Սերիալ, որ մի շնչով ես դիտել",
+    "ru": "Сериал, просмотренный залпом"
+   }
+  },
+  {
+   "id": "facts-hobbies-13",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A channel or podcast you love",
+    "hy": "Ալիք կամ փոդքասթ, որ սիրում ես",
+    "ru": "Любимый канал или подкаст"
+   }
+  },
+  {
+   "id": "facts-hobbies-14",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "growth"
+   ],
+   "text": {
+    "en": "A skill you want to learn",
+    "hy": "Հմտություն, որ ուզում ես սովորել",
+    "ru": "Навык, который хочется освоить"
+   }
+  },
+  {
+   "id": "facts-hobbies-15",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Your record in something",
+    "hy": "Քո ռեկորդը ինչ-որ բանում",
+    "ru": "Твой личный рекорд в чём-то"
+   }
+  },
+  {
+   "id": "facts-hobbies-16",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "A plant or a garden",
+    "hy": "Բույս կամ այգի",
+    "ru": "Растение или сад"
+   }
+  },
+  {
+   "id": "facts-hobbies-17",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A collection you have",
+    "hy": "Հավաքածու, որ ունես",
+    "ru": "Твоя коллекция"
+   }
+  },
+  {
+   "id": "facts-hobbies-18",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A puzzle or board game",
+    "hy": "Գլուխկոտրուկ կամ սեղանի խաղ",
+    "ru": "Головоломка или настольная игра"
+   }
+  },
+  {
+   "id": "facts-hobbies-19",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A photo you're proud of",
+    "hy": "Լուսանկար, որով հպարտանում ես",
+    "ru": "Фото, которым гордишься"
+   }
+  },
+  {
+   "id": "facts-hobbies-20",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A team you support",
+    "hy": "Թիմ, որի երկրպագուն ես",
+    "ru": "Команда, за которую болеешь"
+   }
+  },
+  {
+   "id": "facts-hobbies-21",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "A video game memory",
+    "hy": "Համակարգչային խաղի հիշողություն",
+    "ru": "Воспоминание о компьютерной игре"
+   }
+  },
+  {
+   "id": "facts-hobbies-22",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Something you wrote",
+    "hy": "Բան, որ գրել ես",
+    "ru": "Что-то написанное тобой"
+   }
+  },
+  {
+   "id": "facts-hobbies-23",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A class you took for fun",
+    "hy": "Դասընթաց, որ անցել ես հաճույքի համար",
+    "ru": "Курс, пройденный ради удовольствия"
+   }
+  },
+  {
+   "id": "facts-hobbies-24",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "A morning or evening ritual",
+    "hy": "Առավոտյան կամ երեկոյան ծես",
+    "ru": "Утренний или вечерний ритуал"
+   }
+  },
+  {
+   "id": "facts-hobbies-25",
+   "kind": "fact",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "A festival you went to",
+    "hy": "Փառատոն, որին գնացել ես",
+    "ru": "Фестиваль, где удалось побывать"
+   }
+  }
+ ]
+}

@@ -1,0 +1,335 @@
+{
+ "id": "match-armenia",
+ "name": {
+  "en": "Same wavelength: Armenia",
+  "hy": "Նույն ալիքի վրա՝ Հայաստան",
+  "ru": "На одной волне: Армения"
+ },
+ "cards": [
+  {
+   "id": "match-armenia-01",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A place to visit in Armenia",
+    "hy": "Վայր Հայաստանում, որ պետք է այցելել",
+    "ru": "Место в Армении, которое стоит увидеть"
+   }
+  },
+  {
+   "id": "match-armenia-02",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A street in Yerevan",
+    "hy": "Երևանի փողոց",
+    "ru": "Улица в Ереване"
+   }
+  },
+  {
+   "id": "match-armenia-03",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A mountain",
+    "hy": "Լեռ",
+    "ru": "Гора"
+   }
+  },
+  {
+   "id": "match-armenia-04",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "An Armenian name for a boy",
+    "hy": "Հայկական տղայի անուն",
+    "ru": "Армянское мужское имя"
+   }
+  },
+  {
+   "id": "match-armenia-05",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "An Armenian name for a girl",
+    "hy": "Հայկական աղջկա անուն",
+    "ru": "Армянское женское имя"
+   }
+  },
+  {
+   "id": "match-armenia-06",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "An Armenian dessert",
+    "hy": "Հայկական աղանդեր",
+    "ru": "Армянский десерт"
+   }
+  },
+  {
+   "id": "match-armenia-07",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "An Armenian singer",
+    "hy": "Հայ երգիչ",
+    "ru": "Армянский певец"
+   }
+  },
+  {
+   "id": "match-armenia-08",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A monastery or church",
+    "hy": "Վանք կամ եկեղեցի",
+    "ru": "Монастырь или церковь"
+   }
+  },
+  {
+   "id": "match-armenia-09",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Something on an Armenian table",
+    "hy": "Բան հայկական սեղանին",
+    "ru": "Что есть на армянском столе"
+   }
+  },
+  {
+   "id": "match-armenia-10",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "An Armenian surname",
+    "hy": "Հայկական ազգանուն",
+    "ru": "Армянская фамилия"
+   }
+  },
+  {
+   "id": "match-armenia-11",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "An Armenian word every foreigner learns",
+    "hy": "Հայերեն բառ, որ սովորում է ամեն օտարերկրացի",
+    "ru": "Армянское слово, которое знает каждый иностранец"
+   }
+  },
+  {
+   "id": "match-armenia-12",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "An Armenian holiday",
+    "hy": "Հայկական տոն",
+    "ru": "Армянский праздник"
+   }
+  },
+  {
+   "id": "match-armenia-13",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A district of Yerevan",
+    "hy": "Երևանի թաղամաս",
+    "ru": "Район Еревана"
+   }
+  },
+  {
+   "id": "match-armenia-14",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "An Armenian fruit",
+    "hy": "Հայկական միրգ",
+    "ru": "Армянский фрукт"
+   }
+  },
+  {
+   "id": "match-armenia-15",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A famous Armenian film",
+    "hy": "Հայտնի հայկական ֆիլմ",
+    "ru": "Знаменитый армянский фильм"
+   }
+  },
+  {
+   "id": "match-armenia-16",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A symbol of Armenia",
+    "hy": "Հայաստանի խորհրդանիշ",
+    "ru": "Символ Армении"
+   }
+  },
+  {
+   "id": "match-armenia-17",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A river or lake in Armenia",
+    "hy": "Գետ կամ լիճ Հայաստանում",
+    "ru": "Река или озеро в Армении"
+   }
+  },
+  {
+   "id": "match-armenia-18",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Something from a Yerevan market",
+    "hy": "Բան Երևանի շուկայից",
+    "ru": "Что купить на ереванском рынке"
+   }
+  },
+  {
+   "id": "match-armenia-19",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "An Armenian writer or poet",
+    "hy": "Հայ գրող կամ բանաստեղծ",
+    "ru": "Армянский писатель или поэт"
+   }
+  },
+  {
+   "id": "match-armenia-20",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A souvenir from Armenia",
+    "hy": "Հուշանվեր Հայաստանից",
+    "ru": "Сувенир из Армении"
+   }
+  },
+  {
+   "id": "match-armenia-21",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "An Armenian instrument",
+    "hy": "Հայկական նվագարան",
+    "ru": "Армянский музыкальный инструмент"
+   }
+  },
+  {
+   "id": "match-armenia-22",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "An Armenian athlete",
+    "hy": "Հայ մարզիկ",
+    "ru": "Армянский спортсмен"
+   }
+  },
+  {
+   "id": "match-armenia-23",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "A drink in Armenia",
+    "hy": "Խմիչք Հայաստանում",
+    "ru": "Напиток в Армении"
+   }
+  },
+  {
+   "id": "match-armenia-24",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A word grandma always says",
+    "hy": "Բառ, որ տատիկը միշտ ասում է",
+    "ru": "Слово, которое всегда говорит бабушка"
+   }
+  },
+  {
+   "id": "match-armenia-25",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A town in Armenia",
+    "hy": "Հայաստանի քաղաք կամ գյուղ",
+    "ru": "Город или село в Армении"
+   }
+  }
+ ]
+}

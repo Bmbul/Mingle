@@ -1,0 +1,335 @@
+{
+ "id": "match-home",
+ "name": {
+  "en": "Same wavelength: at home",
+  "hy": "Նույն ալիքի վրա՝ տանը",
+  "ru": "На одной волне: дома"
+ },
+ "cards": [
+  {
+   "id": "match-home-01",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something in the living room",
+    "hy": "Բան հյուրասենյակում",
+    "ru": "Что есть в гостиной"
+   }
+  },
+  {
+   "id": "match-home-02",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "A piece of furniture",
+    "hy": "Կահույք",
+    "ru": "Предмет мебели"
+   }
+  },
+  {
+   "id": "match-home-03",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something in the bedroom",
+    "hy": "Բան ննջասենյակում",
+    "ru": "Что есть в спальне"
+   }
+  },
+  {
+   "id": "match-home-04",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "A household chore",
+    "hy": "Տնային գործ",
+    "ru": "Домашнее дело"
+   }
+  },
+  {
+   "id": "match-home-05",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something on a balcony",
+    "hy": "Բան պատշգամբում",
+    "ru": "Что есть на балконе"
+   }
+  },
+  {
+   "id": "match-home-06",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something on the wall",
+    "hy": "Բան պատին",
+    "ru": "Что висит на стене"
+   }
+  },
+  {
+   "id": "match-home-07",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "A cleaning product",
+    "hy": "Մաքրող միջոց",
+    "ru": "Средство для уборки"
+   }
+  },
+  {
+   "id": "match-home-08",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something under the bed",
+    "hy": "Բան մահճակալի տակ",
+    "ru": "Что лежит под кроватью"
+   }
+  },
+  {
+   "id": "match-home-09",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something in a drawer",
+    "hy": "Բան դարակում",
+    "ru": "Что лежит в ящике стола"
+   }
+  },
+  {
+   "id": "match-home-10",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "A houseplant",
+    "hy": "Տնային բույս",
+    "ru": "Комнатное растение"
+   }
+  },
+  {
+   "id": "match-home-11",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something that makes noise at night",
+    "hy": "Բան, որ գիշերը աղմկում է",
+    "ru": "Что шумит ночью"
+   }
+  },
+  {
+   "id": "match-home-12",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "An electric appliance",
+    "hy": "Էլեկտրական սարք",
+    "ru": "Бытовой прибор"
+   }
+  },
+  {
+   "id": "match-home-13",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something in the hallway",
+    "hy": "Բան միջանցքում",
+    "ru": "Что есть в прихожей"
+   }
+  },
+  {
+   "id": "match-home-14",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something soft",
+    "hy": "Փափուկ բան",
+    "ru": "Что-то мягкое"
+   }
+  },
+  {
+   "id": "match-home-15",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something made of glass",
+    "hy": "Ապակյա բան",
+    "ru": "Что-то стеклянное"
+   }
+  },
+  {
+   "id": "match-home-16",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something in a first-aid kit",
+    "hy": "Բան դեղատուփում",
+    "ru": "Что есть в аптечке"
+   }
+  },
+  {
+   "id": "match-home-17",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something you need when the power goes off",
+    "hy": "Բան, որ պետք է, երբ հոսանքն անջատվում է",
+    "ru": "Что нужно, когда отключили свет"
+   }
+  },
+  {
+   "id": "match-home-18",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something on the kitchen table",
+    "hy": "Բան խոհանոցի սեղանին",
+    "ru": "Что стоит на кухонном столе"
+   }
+  },
+  {
+   "id": "match-home-19",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something in the garage",
+    "hy": "Բան ավտոտնակում",
+    "ru": "Что лежит в гараже"
+   }
+  },
+  {
+   "id": "match-home-20",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something you lose at home",
+    "hy": "Բան, որ տանը միշտ կորչում է",
+    "ru": "Что дома вечно теряется"
+   }
+  },
+  {
+   "id": "match-home-21",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something with a remote control",
+    "hy": "Բան, որ ունի հեռակառավարման վահանակ",
+    "ru": "Что включают пультом"
+   }
+  },
+  {
+   "id": "match-home-22",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something in a toolbox",
+    "hy": "Բան գործիքների արկղում",
+    "ru": "Что лежит в ящике с инструментами"
+   }
+  },
+  {
+   "id": "match-home-23",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "A room in a house",
+    "hy": "Սենյակ տանը",
+    "ru": "Комната в доме"
+   }
+  },
+  {
+   "id": "match-home-24",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something on the windowsill",
+    "hy": "Բան պատուհանագոգին",
+    "ru": "Что стоит на подоконнике"
+   }
+  },
+  {
+   "id": "match-home-25",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something you do on a lazy Sunday",
+    "hy": "Բան, որ անում ես ծույլ կիրակի օրը",
+    "ru": "Чем заняться в ленивое воскресенье"
+   }
+  }
+ ]
+}

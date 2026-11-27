@@ -1,0 +1,610 @@
+{
+ "id": "odd-food",
+ "name": {
+  "en": "Odd question: food",
+  "hy": "Այլ հարց՝ ուտելիք",
+  "ru": "Другой вопрос: еда"
+ },
+ "cards": [
+  {
+   "id": "odd-food-01",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What do you eat when you're ill?",
+    "hy": "Ի՞նչ ես ուտում, երբ հիվանդ ես։",
+    "ru": "Что ты ешь, когда болеешь?"
+   },
+   "options": {
+    "en": [
+     "What do you eat after a party?"
+    ],
+    "hy": [
+     "Ի՞նչ ես ուտում խնջույքից հետո։"
+    ],
+    "ru": [
+     "Что ты ешь после вечеринки?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-02",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What's the best pizza topping?",
+    "hy": "Ո՞րն է պիցցայի ամենալավ լցոնը։",
+    "ru": "Какая начинка для пиццы самая лучшая?"
+   },
+   "options": {
+    "en": [
+     "What would you never put on a pizza?"
+    ],
+    "hy": [
+     "Ի՞նչ երբեք չէիր դնի պիցցայի վրա։"
+    ],
+    "ru": [
+     "Что ты никогда не положишь на пиццу?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-03",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What do you drink in summer?",
+    "hy": "Ի՞նչ ես խմում ամռանը։",
+    "ru": "Что ты пьёшь летом?"
+   },
+   "options": {
+    "en": [
+     "What do you drink in winter?"
+    ],
+    "hy": [
+     "Ի՞նչ ես խմում ձմռանը։"
+    ],
+    "ru": [
+     "Что ты пьёшь зимой?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-04",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Which dish do you cook best?",
+    "hy": "Ո՞ր ուտեստն ես ամենալավը պատրաստում։",
+    "ru": "Какое блюдо у тебя получается лучше всего?"
+   },
+   "options": {
+    "en": [
+     "Which dish do you always burn?"
+    ],
+    "hy": [
+     "Ո՞ր ուտեստն ես միշտ այրում։"
+    ],
+    "ru": [
+     "Какое блюдо у тебя всегда подгорает?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-05",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What do you order at a fast-food place?",
+    "hy": "Ի՞նչ ես պատվիրում արագ սննդի կետում։",
+    "ru": "Что ты заказываешь в фастфуде?"
+   },
+   "options": {
+    "en": [
+     "What do you order at a fancy restaurant?"
+    ],
+    "hy": [
+     "Ի՞նչ ես պատվիրում թանկ ռեստորանում։"
+    ],
+    "ru": [
+     "Что ты заказываешь в дорогом ресторане?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-06",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "What's always on your New Year table?",
+    "hy": "Ի՞նչ կա միշտ քո ամանորյա սեղանին։",
+    "ru": "Что всегда есть на твоём новогоднем столе?"
+   },
+   "options": {
+    "en": [
+     "What's always on your birthday table?"
+    ],
+    "hy": [
+     "Ի՞նչ կա միշտ քո ծննդյան սեղանին։"
+    ],
+    "ru": [
+     "Что всегда есть на твоём столе в день рождения?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-07",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Which fruit do you buy most?",
+    "hy": "Ո՞ր միրգն ես ամենաշատը գնում։",
+    "ru": "Какой фрукт ты покупаешь чаще всего?"
+   },
+   "options": {
+    "en": [
+     "Which fruit reminds you of summer?"
+    ],
+    "hy": [
+     "Ո՞ր միրգն է քեզ հիշեցնում ամառը։"
+    ],
+    "ru": [
+     "Какой фрукт напоминает тебе лето?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-08",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What's your favourite soup?",
+    "hy": "Ո՞րն է քո սիրած ապուրը։",
+    "ru": "Какой твой любимый суп?"
+   },
+   "options": {
+    "en": [
+     "Which soup can't you stand?"
+    ],
+    "hy": [
+     "Ո՞ր ապուրը տանել չես կարողանում։"
+    ],
+    "ru": [
+     "Какой суп ты терпеть не можешь?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-09",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What do you eat at the cinema?",
+    "hy": "Ի՞նչ ես ուտում կինոթատրոնում։",
+    "ru": "Что ты ешь в кино?"
+   },
+   "options": {
+    "en": [
+     "What do you eat on a long journey?"
+    ],
+    "hy": [
+     "Ի՞նչ ես ուտում երկար ճանապարհին։"
+    ],
+    "ru": [
+     "Что ты ешь в долгой дороге?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-10",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What's your favourite cheese?",
+    "hy": "Ո՞րն է քո սիրած պանիրը։",
+    "ru": "Какой твой любимый сыр?"
+   },
+   "options": {
+    "en": [
+     "What's your favourite sauce?"
+    ],
+    "hy": [
+     "Ո՞րն է քո սիրած սոուսը։"
+    ],
+    "ru": [
+     "Какой твой любимый соус?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-11",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What do you cook when you're home alone?",
+    "hy": "Ի՞նչ ես պատրաստում, երբ տանը մենակ ես։",
+    "ru": "Что ты готовишь, когда никого нет дома?"
+   },
+   "options": {
+    "en": [
+     "What do you cook for a date?"
+    ],
+    "hy": [
+     "Ի՞նչ ես պատրաստում ժամադրության համար։"
+    ],
+    "ru": [
+     "Что ты готовишь для свидания?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-12",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What's the best breakfast?",
+    "hy": "Ո՞րն է ամենալավ նախաճաշը։",
+    "ru": "Какой завтрак самый лучший?"
+   },
+   "options": {
+    "en": [
+     "What's the best late-night snack?"
+    ],
+    "hy": [
+     "Ո՞րն է ամենալավ գիշերային խորտիկը։"
+    ],
+    "ru": [
+     "Какой ночной перекус самый лучший?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-13",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Which vegetable do you love?",
+    "hy": "Ո՞ր բանջարեղենն ես սիրում։",
+    "ru": "Какой овощ ты любишь?"
+   },
+   "options": {
+    "en": [
+     "Which vegetable do you pick out of your food?"
+    ],
+    "hy": [
+     "Ո՞ր բանջարեղենն ես հանում ուտելիքից։"
+    ],
+    "ru": [
+     "Какой овощ ты выбираешь из тарелки?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-14",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "How many sugars do you take in tea?",
+    "hy": "Քանի՞ գդալ շաքար ես գցում թեյի մեջ։",
+    "ru": "Сколько ложек сахара ты кладёшь в чай?"
+   },
+   "options": {
+    "en": [
+     "How many cups of tea do you drink a day?"
+    ],
+    "hy": [
+     "Օրական քանի՞ բաժակ թեյ ես խմում։"
+    ],
+    "ru": [
+     "Сколько чашек чая ты пьёшь в день?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-15",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Which dessert would you order right now?",
+    "hy": "Ո՞ր աղանդերը կպատվիրեիր հիմա։",
+    "ru": "Какой десерт ты закажешь прямо сейчас?"
+   },
+   "options": {
+    "en": [
+     "Which dessert would you make for a party?"
+    ],
+    "hy": [
+     "Ո՞ր աղանդերը կպատրաստեիր խնջույքի համար։"
+    ],
+    "ru": [
+     "Какой десерт ты приготовишь для вечеринки?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-16",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What's your favourite Armenian dish?",
+    "hy": "Ո՞րն է քո սիրած հայկական ուտեստը։",
+    "ru": "Какое армянское блюдо твоё любимое?"
+   },
+   "options": {
+    "en": [
+     "Which Armenian dish do foreigners love most?"
+    ],
+    "hy": [
+     "Հայկական ո՞ր ուտեստն են ամենաշատը սիրում օտարերկրացիները։"
+    ],
+    "ru": [
+     "Какое армянское блюдо больше всего любят иностранцы?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-17",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What do you eat with your hands?",
+    "hy": "Ի՞նչ ես ուտում ձեռքով։",
+    "ru": "Что ты ешь руками?"
+   },
+   "options": {
+    "en": [
+     "What do you eat with a spoon?"
+    ],
+    "hy": [
+     "Ի՞նչ ես ուտում գդալով։"
+    ],
+    "ru": [
+     "Что ты ешь ложкой?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-18",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What's in your lunch box?",
+    "hy": "Ի՞նչ կա քո ճաշի տուփում։",
+    "ru": "Что лежит в твоём ланч-боксе?"
+   },
+   "options": {
+    "en": [
+     "What's in your picnic basket?"
+    ],
+    "hy": [
+     "Ի՞նչ կա քո պիկնիկի զամբյուղում։"
+    ],
+    "ru": [
+     "Что лежит в твоей корзине для пикника?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-19",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Which drink do you order at a bar?",
+    "hy": "Ո՞ր խմիչքն ես պատվիրում բարում։",
+    "ru": "Какой напиток ты заказываешь в баре?"
+   },
+   "options": {
+    "en": [
+     "Which drink do you make at home?"
+    ],
+    "hy": [
+     "Ո՞ր խմիչքն ես պատրաստում տանը։"
+    ],
+    "ru": [
+     "Какой напиток ты делаешь дома?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-20",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What's best to eat with bread?",
+    "hy": "Ի՞նչն է ամենալավը ուտել հացի հետ։",
+    "ru": "Что лучше всего есть с хлебом?"
+   },
+   "options": {
+    "en": [
+     "What's best to eat with rice?"
+    ],
+    "hy": [
+     "Ի՞նչն է ամենալավը ուտել բրնձի հետ։"
+    ],
+    "ru": [
+     "Что лучше всего есть с рисом?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-21",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "How long could you go without sweets?",
+    "hy": "Որքա՞ն կդիմանաս առանց քաղցրի։",
+    "ru": "Сколько ты продержишься без сладкого?"
+   },
+   "options": {
+    "en": [
+     "How long could you go without meat?"
+    ],
+    "hy": [
+     "Որքա՞ն կդիմանաս առանց մսի։"
+    ],
+    "ru": [
+     "Сколько ты продержишься без мяса?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-22",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What's your favourite street food?",
+    "hy": "Ո՞րն է քո սիրած փողոցային ուտելիքը։",
+    "ru": "Какая уличная еда твоя любимая?"
+   },
+   "options": {
+    "en": [
+     "What's your favourite food at a wedding?"
+    ],
+    "hy": [
+     "Հարսանիքին ո՞ր ուտելիքն ես ամենաշատը սիրում։"
+    ],
+    "ru": [
+     "Какое блюдо на свадьбе ты любишь больше всего?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-23",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "memories"
+   ],
+   "text": {
+    "en": "What does a bakery smell of?",
+    "hy": "Ի՞նչ հոտ է գալիս հացատնից։",
+    "ru": "Чем пахнет в пекарне?"
+   },
+   "options": {
+    "en": [
+     "What does the kitchen smell of on a holiday?"
+    ],
+    "hy": [
+     "Ի՞նչ հոտ է գալիս խոհանոցից տոն օրերին։"
+    ],
+    "ru": [
+     "Чем пахнет на кухне в праздник?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-24",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Which nuts do you love?",
+    "hy": "Ո՞ր ընկույզն ես սիրում։",
+    "ru": "Какие орехи ты любишь?"
+   },
+   "options": {
+    "en": [
+     "Which dried fruit do you love?"
+    ],
+    "hy": [
+     "Ո՞ր չիրն ես սիրում։"
+    ],
+    "ru": [
+     "Какие сухофрукты ты любишь?"
+    ]
+   }
+  },
+  {
+   "id": "odd-food-25",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "what-if"
+   ],
+   "text": {
+    "en": "What food would you take to space?",
+    "hy": "Ի՞նչ ուտելիք կվերցնեիր տիեզերք։",
+    "ru": "Какую еду ты возьмёшь в космос?"
+   },
+   "options": {
+    "en": [
+     "What food would you take to a desert island?"
+    ],
+    "hy": [
+     "Ի՞նչ ուտելիք կվերցնեիր անմարդաբնակ կղզի։"
+    ],
+    "ru": [
+     "Какую еду ты возьмёшь на необитаемый остров?"
+    ]
+   }
+  }
+ ]
+}
