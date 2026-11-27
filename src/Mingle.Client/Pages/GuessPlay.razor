@@ -21,51 +21,52 @@ else if (game.Stage != GuessStage.Ended)
         <button class="text-btn" @onclick="game.End">@T["Play_End"]</button>
     </header>
     <main class="main">
-        <p class="who">@T["Play_Subject", turn.Name]</p>
-        <div class="card-face">
-            <p class="kind">@T["Guess_Game"]</p>
-            <p class="prompt" lang="@turn.Lang.Code()">@prompt</p>
-            @if (game.IsRank)
-            {
-                <ul class="options" lang="@turn.Lang.Code()">
-                    @foreach (var item in game.Card!.TextFor(turn.Lang).Options)
+        @* Once the answer is out, swipe the card to go on. *@
+        <SwipeCard OnSwipe="@((game.Stage == GuessStage.Marking) ? EventCallback.Factory.Create(this, game.Next) : default)" Last="@(game.Index + 1 >= game.Count)">
+            <div class="card-face swipe-panel">
+                <p class="who">@T["Play_Subject", turn.Name]</p>
+                <div class="card-face">
+                    <p class="kind">@T["Guess_Game"]</p>
+                    <p class="prompt" lang="@turn.Lang.Code()">@prompt</p>
+                    @if (game.IsRank)
                     {
-                        <li>@item</li>
+                        <ul class="options" lang="@turn.Lang.Code()">
+                            @foreach (var item in game.Card!.TextFor(turn.Lang).Options)
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
                     }
-                </ul>
-            }
-        </div>
-        @if (game.Stage == GuessStage.Asking)
-        {
-            <div class="talk">
-                <p class="h2">@T[game.IsRank ? "Rank_SayOrder" : "Guess_SayYourGuess"]</p>
-                <p class="muted small">@T[prompt.StartsWith("📱") ? "Guess_ThenProve" : "Guess_ThenAnswer", turn.Name]</p>
-            </div>
-        }
-        else
-        {
-            <h2 class="label">@T["Guess_WhoGotIt", turn.Name]</h2>
-            <div class="handoff-players">
-                @foreach (var id in game.Guessers)
+                </div>
+                @if (game.Stage == GuessStage.Asking)
                 {
-                    var guesser = id;
-                    var on = game.RightIds.Contains(guesser);
-                    <button class="btn2 @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" @onclick="() => game.Mark(guesser, !on)">
-                        @(on ? "✓ " : "")@Session.PlayerById(guesser).Name
-                    </button>
+                    <div class="talk">
+                        <p class="h2">@T[game.IsRank ? "Rank_SayOrder" : "Guess_SayYourGuess"]</p>
+                        <p class="muted small">@T[prompt.StartsWith("📱") ? "Guess_ThenProve" : "Guess_ThenAnswer", turn.Name]</p>
+                    </div>
+                }
+                else
+                {
+                    <h2 class="label">@T["Guess_WhoGotIt", turn.Name]</h2>
+                    <div class="handoff-players">
+                        @foreach (var id in game.Guessers)
+                        {
+                            var guesser = id;
+                            var on = game.RightIds.Contains(guesser);
+                            <button class="btn2 @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" @onclick="() => game.Mark(guesser, !on)">
+                                @(on ? "✓ " : "")@Session.PlayerById(guesser).Name
+                            </button>
+                        }
+                    </div>
+                    <p class="muted small center">@T["Guess_WhoGotItHint"]</p>
                 }
             </div>
-            <p class="muted small center">@T["Guess_WhoGotItHint"]</p>
-        }
+        </SwipeCard>
     </main>
     <footer class="foot">
         @if (game.Stage == GuessStage.Asking)
         {
             <button class="btn" @onclick="game.Reveal">@T["Guess_Answered", turn.Name]</button>
-        }
-        else
-        {
-            <button class="btn" @onclick="game.Next">@(last ? T["Facts_Finish"] : T["Facts_Next"])</button>
         }
     </footer>
 }

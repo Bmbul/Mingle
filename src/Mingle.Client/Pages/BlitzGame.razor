@@ -65,21 +65,20 @@ else if (stage == Stage.Running && card is { } current)
         <span class="muted">@Game.Current!.Name</span>
         <span class="blitz-clock">@TurnLeft</span>
     </header>
-    <main class="main center-screen">
-        <p class="blitz-card" lang="@Game.Current!.Lang.Code()">@CardText(current)</p>
-        @if (letter is not null)
-        {
-            <p class="blitz-letter" lang="@Game.Current!.Lang.Code()">@letter</p>
-        }
-        <p class="blitz-hint">@T[$"Blitz_Hint_{current.KindId}"]</p>
-        <p class="muted small">@T["Blitz_Answered", answered]</p>
+    @* Swipe right when the player got it, left to skip. *@
+    <main class="main">
+        <SwipeCard OnLeft="Skip" OnRight="Answered">
+            <div class="card-face blitz-face">
+                <p class="blitz-card" lang="@Game.Current!.Lang.Code()">@CardText(current)</p>
+                @if (letter is not null)
+                {
+                    <p class="blitz-letter" lang="@Game.Current!.Lang.Code()">@letter</p>
+                }
+                <p class="blitz-hint">@T[$"Blitz_Hint_{current.KindId}"]</p>
+            </div>
+        </SwipeCard>
+        <p class="muted small center">← @T["Blitz_Skip"] · @T["Blitz_Got"] → · @T["Blitz_Answered", answered]</p>
     </main>
-    <footer class="foot">
-        <div class="row gap">
-            <button class="btn2 grow" @onclick="Skip">@T["Blitz_Skip"]</button>
-            <button class="btn grow blitz-yes" @onclick="Answered"><Icon Name="check" Size="22" Stroke="3" />@T["Blitz_Got"]</button>
-        </div>
-    </footer>
 }
 
 @code {

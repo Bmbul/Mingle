@@ -7,13 +7,13 @@
 *@
 @* A deck: the card in the middle of the screen with two more peeking out behind it, so it looks swipeable. *@
 <div class="swipe-deck">
-    <div class="swipe-stack @(Next is null ? "" : "has-next")">
+    <div class="swipe-stack @(Next is null ? "" : "has-next") @(Last ? "last" : "")">
         @if (Next is not null)
         {
             @* The next card, under the top one, so a swipe uncovers it. *@
             <div class="swipe-next" aria-hidden="true">@Next</div>
         }
-        <div class="swipe-card" @ref="element" data-enabled="@Flag">
+        <div class="swipe-card" @ref="element" data-enabled="@Flag" data-mode="@(Sides ? "sides" : "any")">
             @ChildContent
         </div>
     </div>
@@ -23,14 +23,21 @@
     [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>The card underneath (the next one); without it, the back of a card shows.</summary>
     [Parameter] public RenderFragment? Next { get; set; }
+    /// <summary>The last card: nothing underneath.</summary>
+    [Parameter] public bool Last { get; set; }
     /// <summary>What a swipe does, whichever way it goes.</summary>
     [Parameter] public EventCallback OnSwipe { get; set; }
+    /// <summary>When set, only left and right count, each with its own meaning (Blitz: right = got it, left = skip).</summary>
+    [Parameter] public EventCallback OnLeft { get; set; }
+    [Parameter] public EventCallback OnRight { get; set; }
+
+    private bool Sides => OnLeft.HasDelegate || OnRight.HasDelegate;
 
     private ElementReference element;
     private DotNetObjectReference<SwipeCard>? self;
     private IJSObjectReference? handle;
 
-    private string Flag => OnSwipe.HasDelegate ? "true" : "false";
+    private string Flag => OnSwipe.HasDelegate || Sides ? "true" : "false";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -42,7 +49,11 @@
     }
 
     [JSInvokable]
-    public Task Swiped() => OnSwipe.InvokeAsync();
+    public Task Swiped(string side) =>
+        !Sides ? OnSwipe.InvokeAsync()
+        : side == "right" ? OnRight.InvokeAsync()
+        : side == "left" ? OnLeft.InvokeAsync()
+        : Task.CompletedTask;
 
     public async ValueTask DisposeAsync()
     {

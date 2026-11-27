@@ -60,7 +60,7 @@
             <main class="main">
                 <p class="who">@WhoLine.For(T, table, state.Settings.TurnStyle)</p>
                 @* Swiping the card any way moves on to the next one. *@
-                <SwipeCard OnSwipe="() => Do(new PassCard(Me(state)))" Next="@NextFace(table)">
+                <SwipeCard OnSwipe="() => Do(new PassCard(Me(state)))" Next="@NextFace(table)" Last="@(table.Next is null)">
                     <CardFace View="table" ShowOptions="true" />
                 </SwipeCard>
                 <div class="card handoff">
@@ -76,7 +76,7 @@
             @* Swiping the card any way moves on to the next one. *@
             <main class="main">
                 <p class="who">@WhoLine.For(T, table, state.Settings.TurnStyle)</p>
-                <SwipeCard OnSwipe="() => Do(new NextCard(Me(state)))" Next="@NextFace(table)">
+                <SwipeCard OnSwipe="() => Do(new NextCard(Me(state)))" Next="@NextFace(table)" Last="@(table.Next is null)">
                     <CardFace View="table" Compact="@(!table.RevealedAnswers.IsEmpty)" ShowOptions="@table.RevealedAnswers.IsEmpty" />
                     <RevealList View="table" />
                 </SwipeCard>

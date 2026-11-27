@@ -176,7 +176,7 @@ else if (room.Stage == RoomStage.Playing && room.Game is { } game)
         <p class="who">@WhoLine.For(T, game, room.Settings.Game.TurnStyle)</p>
         @if (game.Phase == GamePhase.Answering)
         {
-            <SwipeCard OnSwipe="Rooms.Pass" Next="@NextFace(game)">
+            <SwipeCard OnSwipe="Rooms.Pass" Next="@NextFace(game)" Last="@(game.Next is null)">
                 <CardFace View="game" Lang="myLang" ShowOptions="@(!game.MustAnswer)" />
             </SwipeCard>
             @if (game.MustAnswer && game.MyAnswer is null)
@@ -194,7 +194,7 @@ else if (room.Stage == RoomStage.Playing && room.Game is { } game)
         else
         {
             @* Swiping the card any way moves on to the next one. *@
-            <SwipeCard OnSwipe="Rooms.Next" Next="@NextFace(game)">
+            <SwipeCard OnSwipe="Rooms.Next" Next="@NextFace(game)" Last="@(game.Next is null)">
                 <CardFace View="game" Lang="myLang" Compact="@(!game.RevealedAnswers.IsEmpty)" ShowOptions="@game.RevealedAnswers.IsEmpty" />
                 <RevealList View="game" />
             </SwipeCard>

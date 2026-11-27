@@ -86,13 +86,15 @@ else
     else
     {
         <main class="main">
-            <p class="handoff-verdict @(game.Caught ? "right" : "wrong") center">@T[game.Caught ? "Odd_Caught" : "Odd_Escaped"]</p>
-            <OddReveal MainQuestion="@game.MainQuestion(Text.UiLang)" OddQuestion="@game.OddQuestion(Text.UiLang)"
-                       OddNames="@([.. game.OddIds.Select(id => Session.PlayerById(id).Name)])" />
+            @* Once the answer is out, swipe the card to go on. *@
+            <SwipeCard OnSwipe="@((true) ? EventCallback.Factory.Create(this, NextRound) : default)" Last="@(game.Index + 1 >= game.Count)">
+                <div class="card-face swipe-panel">
+                    <p class="handoff-verdict @(game.Caught ? "right" : "wrong") center">@T[game.Caught ? "Odd_Caught" : "Odd_Escaped"]</p>
+                    <OddReveal MainQuestion="@game.MainQuestion(Text.UiLang)" OddQuestion="@game.OddQuestion(Text.UiLang)"
+                               OddNames="@([.. game.OddIds.Select(id => Session.PlayerById(id).Name)])" />
+                </div>
+            </SwipeCard>
         </main>
-        <footer class="foot">
-            <button class="btn" @onclick="NextRound">@(game.Index + 1 < game.Count ? T["Odd_NextRound"] : T["Facts_Finish"])</button>
-        </footer>
     }
 }
 

@@ -23,63 +23,64 @@
         </div>
     }
     <main class="main">
-        <div class="card-face">
-            <p class="kind">@T["Match_Game"]</p>
-            <p class="prompt">@view.Prompt</p>
-        </div>
-        @if (view.Stage == MatchStage.Answering)
-        {
-            @if (!view.YouAnswered)
-            {
-                <p class="muted small">@T["Match_WriteHint"]</p>
-                <input class="field" maxlength="@MatchGame.MaxAnswerLength" autocomplete="off" @bind="text" @bind:event="oninput" />
-                <button class="btn" disabled="@(text.Trim().Length == 0)" @onclick="() => Rooms.AnswerMatch(text.Trim())">@T["Guess_Send"]</button>
-            }
-            else
-            {
-                var waiting = Room.Players.Where(p => !view.AnsweredIds.Contains(p.Id)).Select(p => p.Name).ToList();
-                <div class="card waiting" role="status">
-                    <span class="h2">@T["Match_YouWrote", view.MyAnswer ?? ""]</span>
-                    <span class="muted">@T["Facts_Written", view.AnsweredIds.Length, Room.Players.Length]</span>
-                    @if (waiting.Count > 0)
-                    {
-                        <span class="muted small">@T["Facts_StillWriting", string.Join(", ", waiting)]</span>
-                    }
+        @* Once the answer is out, swipe the card to go on. *@
+        <SwipeCard OnSwipe="@((view.Stage == MatchStage.Revealed) ? EventCallback.Factory.Create(this, Rooms.NextMatch) : default)" Last="@(view.Round >= view.Rounds)">
+            <div class="card-face swipe-panel">
+                <div class="card-face">
+                    <p class="kind">@T["Match_Game"]</p>
+                    <p class="prompt">@view.Prompt</p>
                 </div>
-            }
-        }
-        else
-        {
-            @if (Room.YouAreHost)
-            {
-                <p class="muted small">@T[joining is null ? "Match_JoinHint" : "Match_JoinPick"]</p>
-            }
-            <div class="stack-tight">
-                @foreach (var group in view.Groups)
+                @if (view.Stage == MatchStage.Answering)
                 {
-                    var key = group.Key;
-                    var size = group.PlayerIds.Length;
-                    var picked = joining == key;
-                    <button class="guess-answer @(size > 1 ? "real" : "") @(picked ? "right" : "")" disabled="@(!Room.YouAreHost)" @onclick="() => Tap(key)">
-                        <span class="row gap"><span class="h2 grow">@group.Text</span><span class="score-points">@(size > 1 ? $"+{size - 1}" : "0")</span></span>
-                        <span class="muted small">@string.Join(", ", group.PlayerIds.Select(NameOf))</span>
-                    </button>
+                    @if (!view.YouAnswered)
+                    {
+                        <p class="muted small">@T["Match_WriteHint"]</p>
+                        <input class="field" maxlength="@MatchGame.MaxAnswerLength" autocomplete="off" @bind="text" @bind:event="oninput" />
+                        <button class="btn" disabled="@(text.Trim().Length == 0)" @onclick="() => Rooms.AnswerMatch(text.Trim())">@T["Guess_Send"]</button>
+                    }
+                    else
+                    {
+                        var waiting = Room.Players.Where(p => !view.AnsweredIds.Contains(p.Id)).Select(p => p.Name).ToList();
+                        <div class="card waiting" role="status">
+                            <span class="h2">@T["Match_YouWrote", view.MyAnswer ?? ""]</span>
+                            <span class="muted">@T["Facts_Written", view.AnsweredIds.Length, Room.Players.Length]</span>
+                            @if (waiting.Count > 0)
+                            {
+                                <span class="muted small">@T["Facts_StillWriting", string.Join(", ", waiting)]</span>
+                            }
+                        </div>
+                    }
+                }
+                else
+                {
+                    @if (Room.YouAreHost)
+                    {
+                        <p class="muted small">@T[joining is null ? "Match_JoinHint" : "Match_JoinPick"]</p>
+                    }
+                    <div class="stack-tight">
+                        @foreach (var group in view.Groups)
+                        {
+                            var key = group.Key;
+                            var size = group.PlayerIds.Length;
+                            var picked = joining == key;
+                            <button class="guess-answer @(size > 1 ? "real" : "") @(picked ? "right" : "")" disabled="@(!Room.YouAreHost)" @onclick="() => Tap(key)">
+                                <span class="row gap"><span class="h2 grow">@group.Text</span><span class="score-points">@(size > 1 ? $"+{size - 1}" : "0")</span></span>
+                                <span class="muted small">@string.Join(", ", group.PlayerIds.Select(NameOf))</span>
+                            </button>
+                        }
+                    </div>
+                }
+                @if (!view.Scores.IsEmpty)
+                {
+                    <MatchScores Scores="view.Scores" NameOf="NameOf" />
                 }
             </div>
-        }
-        @if (!view.Scores.IsEmpty)
-        {
-            <MatchScores Scores="view.Scores" NameOf="NameOf" />
-        }
+        </SwipeCard>
     </main>
     <footer class="foot">
         @if (view.Stage == MatchStage.Answering && Room.YouAreHost && view.AnsweredIds.Length > 0)
         {
             <button class="btn2" @onclick="Rooms.RevealMatch">@T["Guess_ShowNow"]</button>
-        }
-        @if (view.Stage == MatchStage.Revealed)
-        {
-            <button class="btn" @onclick="Rooms.NextMatch">@(view.Round < view.Rounds ? T["Facts_Next"] : T["Facts_Finish"])</button>
         }
     </footer>
 }

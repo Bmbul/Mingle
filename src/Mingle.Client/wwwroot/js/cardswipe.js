@@ -4,6 +4,8 @@
 // A drag that starts mostly downward scrolls the page instead, when the page is long enough to scroll.
 // Touch uses touch events and stops the page from scrolling once the card is being dragged (the only reliable way on
 // iPhone); a mouse uses pointer events. data-enabled="false" turns swiping off.
+// data-mode="sides": only left and right count (Blitz: right = got it, left = skip); the card shows data-dir while
+// dragged, and the page is told which side.
 (function () {
     const threshold = 100;
 
@@ -11,6 +13,7 @@
         let startX = 0, startY = 0, dx = 0, dy = 0, active = false, dragging = false, busy = false;
 
         const enabled = () => el.dataset.enabled !== 'false';
+        const sides = () => el.dataset.mode === 'sides';
         const pageScrolls = () => document.scrollingElement.scrollHeight > window.innerHeight + 8;
 
         function begin(x, y) {
@@ -33,6 +36,7 @@
             dx = mx; dy = my;
             el.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx / 22}deg)`;
             pull(Math.min(1, Math.hypot(dx, dy) / (threshold * 1.6)));
+            if (sides()) el.dataset.dir = dx > 40 ? 'right' : dx < -40 ? 'left' : '';
             return true;
         }
 
@@ -41,7 +45,8 @@
             active = false;
             if (!dragging) return;
             el.classList.remove('dragging');
-            if (Math.hypot(dx, dy) > threshold) fly(dx, dy);
+            const far = sides() ? Math.abs(dx) > threshold && Math.abs(dx) > Math.abs(dy) : Math.hypot(dx, dy) > threshold;
+            if (far) fly(dx, sides() ? dy / 3 : dy);
             else springBack();
         }
 
@@ -51,6 +56,7 @@
         function springBack() {
             el.style.transition = 'transform 0.2s ease-out';
             el.style.transform = '';
+            el.dataset.dir = '';
             pull(0);
         }
 
@@ -66,11 +72,13 @@
             el.style.opacity = '0';
             pull(1);
             await new Promise(r => setTimeout(r, 200));
-            try { await ref.invokeMethodAsync('Swiped'); } catch { /* the page moved on */ }
+            const side = Math.abs(vx) >= Math.abs(vy) ? (vx > 0 ? 'right' : 'left') : (vy > 0 ? 'down' : 'up');
+            try { await ref.invokeMethodAsync('Swiped', side); } catch { /* the page moved on */ }
             // The next card (Blazor reuses the element) comes in from below.
             el.style.transition = '';
             el.style.transform = '';
             el.style.opacity = '';
+            el.dataset.dir = '';
             pull(0);
             el.classList.remove('entering');
             void el.offsetWidth;
@@ -94,6 +102,7 @@
         const onKey = e => {
             if (busy || !enabled() || e.target.closest?.('input, textarea, select')) return;
             const way = keys[e.key];
+            if (way && sides() && way[0] === 0) return;
             if (way) { e.preventDefault(); fly(way[0], way[1]); }
         };
 

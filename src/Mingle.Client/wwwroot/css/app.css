@@ -591,3 +591,15 @@ button.guess-answer { cursor: pointer; }
 .swipe-stack.has-next::after { content: none; }
 /* The new top card is the one that was already showing underneath: no slide-in. */
 .swipe-stack.has-next > .swipe-card.entering { animation: none; }
+/* A panel of results to swipe on (fact games, guesses, votes): a card that sizes to its content. */
+.swipe-deck .card-face.swipe-panel { min-height: 0; padding: 22px 20px; justify-content: flex-start; gap: 14px; }
+.swipe-deck .card-face.swipe-panel .kind { position: static; }
+.swipe-deck .card-face.swipe-panel .prompt { font-size: 24px; }
+/* Blitz: right is "got it" (green edge), left is "skip" (grey). */
+.swipe-card[data-dir="right"] .card-face { border-color: #3fbf6f; box-shadow: 0 0 0 2px #3fbf6f inset, 0 12px 32px rgba(0, 0, 0, 0.35); }
+.swipe-card[data-dir="left"] .card-face { border-color: var(--border-dashed); opacity: 0.85; }
+.card-face.blitz-face { align-items: center; text-align: center; }
+/* The last card: nothing underneath. */
+.swipe-stack.last::before, .swipe-stack.last::after { content: none; }
+/* A footer whose buttons are all hidden takes no room. */
+.foot:not(:has(*)) { display: none; }

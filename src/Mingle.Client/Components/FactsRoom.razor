@@ -62,111 +62,112 @@ else if (view.Item is { } item && view.Stage is FactStage.Showing or FactStage.R
 {
     var revealed = view.Stage == FactStage.Revealed;
     <main class="main">
-        @if (oneTruth)
-        {
-            <p class="label">@T["Facts_FactsOf"]</p>
-            <h1 class="h1 big">@NameOf(item.AuthorId!)</h1>
-            @if (item.Prompt is { } prompt)
-            {
-                <p class="muted">@prompt</p>
-            }
-            <FactList Texts="item.Texts" FindTheLie="settings.FindTheLie" Answer="@item.Answer" Votes="item.Votes" NameOf="NameOf"
-                      CanVote="@(!revealed && !item.YouWrote)" MyVote="@item.MyVote" OnVote="Rooms.VoteFact" />
-            @if (!revealed)
-            {
-                <p class="muted center">@(item.YouWrote ? T["Facts_TheyAreGuessing"] : item.MyVote is null ? T[settings.FindTheLie ? "Facts_PickLie" : "Facts_PickTruth"] : T["Facts_CanChange"])</p>
-            }
-        }
-        else if (trueOrFalse)
-        {
-            <p class="label">@T["Facts_FactOf"]</p>
-            <h1 class="h1 big">@NameOf(item.AuthorId!)</h1>
-            @if (item.Prompt is { } prompt)
-            {
-                <p class="muted">@prompt</p>
-            }
-            <div class="card fact-big"><span>@item.Texts[0]</span></div>
-            @if (!revealed)
-            {
-                @if (item.YouWrote)
+        @* Once the answer is out, swipe the card to go on. *@
+        <SwipeCard OnSwipe="@((view.Stage == FactStage.Revealed) ? EventCallback.Factory.Create(this, Rooms.NextFact) : default)" Last="@(view.ItemNumber >= view.ItemCount)">
+            <div class="card-face swipe-panel">
+                @if (oneTruth)
                 {
-                    <p class="muted center">@T["Facts_TheyAreGuessing"]</p>
+                    <p class="label">@T["Facts_FactsOf"]</p>
+                    <h1 class="h1 big">@NameOf(item.AuthorId!)</h1>
+                    @if (item.Prompt is { } prompt)
+                    {
+                        <p class="muted">@prompt</p>
+                    }
+                    <FactList Texts="item.Texts" FindTheLie="settings.FindTheLie" Answer="@item.Answer" Votes="item.Votes" NameOf="NameOf"
+                              CanVote="@(!revealed && !item.YouWrote)" MyVote="@item.MyVote" OnVote="Rooms.VoteFact" />
+                    @if (!revealed)
+                    {
+                        <p class="muted center">@(item.YouWrote ? T["Facts_TheyAreGuessing"] : item.MyVote is null ? T[settings.FindTheLie ? "Facts_PickLie" : "Facts_PickTruth"] : T["Facts_CanChange"])</p>
+                    }
+                }
+                else if (trueOrFalse)
+                {
+                    <p class="label">@T["Facts_FactOf"]</p>
+                    <h1 class="h1 big">@NameOf(item.AuthorId!)</h1>
+                    @if (item.Prompt is { } prompt)
+                    {
+                        <p class="muted">@prompt</p>
+                    }
+                    <div class="card fact-big"><span>@item.Texts[0]</span></div>
+                    @if (!revealed)
+                    {
+                        @if (item.YouWrote)
+                        {
+                            <p class="muted center">@T["Facts_TheyAreGuessing"]</p>
+                        }
+                        else
+                        {
+                            <div class="handoff-players">
+                                @foreach (var (choice, label) in new[] { (FactItem.True, "Facts_IsTrue"), (FactItem.False, "Facts_IsMadeUp") })
+                                {
+                                    var c = choice;
+                                    <button class="btn2 @(item.MyVote == c ? "on" : "")" aria-pressed="@(item.MyVote == c ? "true" : "false")"
+                                            @onclick="() => Rooms.VoteFact(c)">@T[label]</button>
+                                }
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="handoff-verdict right center">@T[item.Answer == FactItem.True ? "Facts_ItWasTrue" : "Facts_ItWasMadeUp"]</p>
+                        <div class="stack-tight">
+                            @foreach (var vote in item.Votes)
+                            {
+                                <p class="vote-line @(vote.Right ? "right" : "")">@NameOf(vote.VoterId) → @T[vote.Choice == FactItem.True ? "Facts_IsTrue" : "Facts_IsMadeUp"] @(vote.Right ? "✓" : "")</p>
+                            }
+                        </div>
+                    }
                 }
                 else
                 {
-                    <div class="handoff-players">
-                        @foreach (var (choice, label) in new[] { (FactItem.True, "Facts_IsTrue"), (FactItem.False, "Facts_IsMadeUp") })
+                    @if (item.Prompt is { } prompt)
+                    {
+                        <p class="label">@prompt</p>
+                    }
+                    <div class="card fact-big"><span>@item.Texts[0]</span></div>
+                    @if (!revealed)
+                    {
+                        <p class="h2 center">@T["Facts_WhoWroteIt"]</p>
+                        @if (item.YouWrote)
                         {
-                            var c = choice;
-                            <button class="btn2 @(item.MyVote == c ? "on" : "")" aria-pressed="@(item.MyVote == c ? "true" : "false")"
-                                    @onclick="() => Rooms.VoteFact(c)">@T[label]</button>
+                            <p class="muted small center">@T["Facts_Bluff"]</p>
                         }
-                    </div>
+                        <div class="handoff-players">
+                            @foreach (var player in Room.Players.Where(p => p.Id != Room.YouId && item.VoterIds.Contains(p.Id)))
+                            {
+                                var id = player.Id;
+                                <button class="btn2 @(item.MyVote == id ? "on" : "")" aria-pressed="@(item.MyVote == id ? "true" : "false")"
+                                        @onclick="() => Rooms.VoteFact(id)">@player.Name</button>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="h2 center">@T["Facts_WrittenBy", NameOf(item.Answer!)]</p>
+                        <div class="stack-tight">
+                            @foreach (var vote in item.Votes.Where(v => v.VoterId != item.Answer))
+                            {
+                                <p class="vote-line @(vote.Right ? "right" : "")">@NameOf(vote.VoterId) → @NameOf(vote.Choice) @(vote.Right ? "✓" : "")</p>
+                            }
+                        </div>
+                    }
                 }
-            }
-            else
-            {
-                <p class="handoff-verdict right center">@T[item.Answer == FactItem.True ? "Facts_ItWasTrue" : "Facts_ItWasMadeUp"]</p>
-                <div class="stack-tight">
-                    @foreach (var vote in item.Votes)
-                    {
-                        <p class="vote-line @(vote.Right ? "right" : "")">@NameOf(vote.VoterId) → @T[vote.Choice == FactItem.True ? "Facts_IsTrue" : "Facts_IsMadeUp"] @(vote.Right ? "✓" : "")</p>
-                    }
-                </div>
-            }
-        }
-        else
-        {
-            @if (item.Prompt is { } prompt)
-            {
-                <p class="label">@prompt</p>
-            }
-            <div class="card fact-big"><span>@item.Texts[0]</span></div>
-            @if (!revealed)
-            {
-                <p class="h2 center">@T["Facts_WhoWroteIt"]</p>
-                @if (item.YouWrote)
-                {
-                    <p class="muted small center">@T["Facts_Bluff"]</p>
-                }
-                <div class="handoff-players">
-                    @foreach (var player in Room.Players.Where(p => p.Id != Room.YouId && item.VoterIds.Contains(p.Id)))
-                    {
-                        var id = player.Id;
-                        <button class="btn2 @(item.MyVote == id ? "on" : "")" aria-pressed="@(item.MyVote == id ? "true" : "false")"
-                                @onclick="() => Rooms.VoteFact(id)">@player.Name</button>
-                    }
-                </div>
-            }
-            else
-            {
-                <p class="h2 center">@T["Facts_WrittenBy", NameOf(item.Answer!)]</p>
-                <div class="stack-tight">
-                    @foreach (var vote in item.Votes.Where(v => v.VoterId != item.Answer))
-                    {
-                        <p class="vote-line @(vote.Right ? "right" : "")">@NameOf(vote.VoterId) → @NameOf(vote.Choice) @(vote.Right ? "✓" : "")</p>
-                    }
-                </div>
-            }
-        }
 
-        @if (!revealed)
-        {
-            <p class="muted small center" role="status">@T["Facts_Voted", item.VotedIds.Count(item.VoterIds.Contains), item.VoterIds.Length]</p>
-        }
-        @if (revealed && !view.Scores.IsEmpty)
-        {
-            <Scoreboard Scores="view.Scores" NameOf="NameOf" />
-        }
+                @if (!revealed)
+                {
+                    <p class="muted small center" role="status">@T["Facts_Voted", item.VotedIds.Count(item.VoterIds.Contains), item.VoterIds.Length]</p>
+                }
+                @if (revealed && !view.Scores.IsEmpty)
+                {
+                    <Scoreboard Scores="view.Scores" NameOf="NameOf" />
+                }
+            </div>
+        </SwipeCard>
     </main>
     <footer class="foot">
         @if (!revealed && Room.YouAreHost && item.VotedIds.Length > 0)
         {
             <button class="btn2" @onclick="Rooms.RevealFact">@T[!oneTruth && !settings.RevealEachFact ? "Facts_NextNow" : "Facts_RevealNow"]</button>
-        }
-        @if (revealed)
-        {
-            <button class="btn" @onclick="Rooms.NextFact">@(view.ItemNumber < view.ItemCount ? T["Facts_Next"] : T["Facts_Finish"])</button>
         }
     </footer>
 }

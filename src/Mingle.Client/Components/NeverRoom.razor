@@ -23,62 +23,63 @@
         </div>
     }
     <main class="main">
-        <div class="card-face">
-            <p class="kind">@T[$"Never_Depth_{view.Depth}"]</p>
-            <p class="prompt">@view.Statement</p>
-        </div>
+        @* Once the answer is out, swipe the card to go on. *@
+        <SwipeCard OnSwipe="@((view.Stage == NeverStage.Revealed) ? EventCallback.Factory.Create(this, Rooms.NextNever) : default)" Last="@(view.Number >= view.Count)">
+            <div class="card-face swipe-panel">
+                <div class="card-face">
+                    <p class="kind">@T[$"Never_Depth_{view.Depth}"]</p>
+                    <p class="prompt">@view.Statement</p>
+                </div>
 
-        @if (view.Stage == NeverStage.Answering)
-        {
-            <p class="muted small center">@T["Never_Secret"]</p>
-            <div class="handoff-players">
-                <button class="btn2 @(view.MyAnswer == true ? "on" : "")" aria-pressed="@(view.MyAnswer == true ? "true" : "false")" @onclick="() => Rooms.AnswerNever(true)">@T["Never_IHave"]</button>
-                <button class="btn2 @(view.MyAnswer == false ? "on" : "")" aria-pressed="@(view.MyAnswer == false ? "true" : "false")" @onclick="() => Rooms.AnswerNever(false)">@T["Never_IHaveNot"]</button>
-            </div>
-            <p class="muted small center" role="status">@T["Facts_Written", view.AnsweredIds.Length, Room.Players.Length]</p>
-        }
-        else if (view.Stage == NeverStage.Guessing)
-        {
-            <p class="handoff-verdict right center">@T.Plural("Never_Have", view.HaveCount)</p>
-            @if (view.PicksNeeded > 0 && view.MyPicks.IsEmpty)
-            {
-                <h2 class="label">@T.Plural(view.MyAnswer == true ? "Never_PickOthers" : "Never_Pick", view.PicksNeeded)</h2>
-                <div class="handoff-players">
-                    @foreach (var player in Room.Players.Where(p => p.Id != Room.YouId))
+                @if (view.Stage == NeverStage.Answering)
+                {
+                    <p class="muted small center">@T["Never_Secret"]</p>
+                    <div class="handoff-players">
+                        <button class="btn2 @(view.MyAnswer == true ? "on" : "")" aria-pressed="@(view.MyAnswer == true ? "true" : "false")" @onclick="() => Rooms.AnswerNever(true)">@T["Never_IHave"]</button>
+                        <button class="btn2 @(view.MyAnswer == false ? "on" : "")" aria-pressed="@(view.MyAnswer == false ? "true" : "false")" @onclick="() => Rooms.AnswerNever(false)">@T["Never_IHaveNot"]</button>
+                    </div>
+                    <p class="muted small center" role="status">@T["Facts_Written", view.AnsweredIds.Length, Room.Players.Length]</p>
+                }
+                else if (view.Stage == NeverStage.Guessing)
+                {
+                    <p class="handoff-verdict right center">@T.Plural("Never_Have", view.HaveCount)</p>
+                    @if (view.PicksNeeded > 0 && view.MyPicks.IsEmpty)
                     {
-                        var id = player.Id;
-                        var on = picked.Contains(id);
-                        <button class="btn2 @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" @onclick="() => Toggle(id, view.PicksNeeded)">@player.Name</button>
+                        <h2 class="label">@T.Plural(view.MyAnswer == true ? "Never_PickOthers" : "Never_Pick", view.PicksNeeded)</h2>
+                        <div class="handoff-players">
+                            @foreach (var player in Room.Players.Where(p => p.Id != Room.YouId))
+                            {
+                                var id = player.Id;
+                                var on = picked.Contains(id);
+                                <button class="btn2 @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" @onclick="() => Toggle(id, view.PicksNeeded)">@player.Name</button>
+                            }
+                        </div>
+                        <button class="btn" disabled="@(picked.Count != view.PicksNeeded)" @onclick="SendPicks">@T["Guess_Send"]</button>
                     }
-                </div>
-                <button class="btn" disabled="@(picked.Count != view.PicksNeeded)" @onclick="SendPicks">@T["Guess_Send"]</button>
-            }
-            else
-            {
-                <div class="card waiting" role="status">
-                    <span class="h2">@T["Online_WaitingOthers"]</span>
-                    <span class="muted small">@T[view.PicksNeeded > 0 ? "Never_YourGuessIn" : "Never_NothingToGuess"]</span>
-                </div>
-            }
-        }
-        else
-        {
-            <NeverResult HaveIds="view.HaveIds" Storyteller="@view.Storyteller" NameOf="NameOf" />
-            @if (!view.MyPicks.IsEmpty)
-            {
-                <p class="muted small center">@T["Never_YouPicked", string.Join(", ", view.MyPicks.Select(id => NameOf(id) + (view.HaveIds.Contains(id) ? " ✓" : " ✗")))]</p>
-            }
-            <NeverScores Scores="view.Scores" NameOf="NameOf" />
-        }
+                    else
+                    {
+                        <div class="card waiting" role="status">
+                            <span class="h2">@T["Online_WaitingOthers"]</span>
+                            <span class="muted small">@T[view.PicksNeeded > 0 ? "Never_YourGuessIn" : "Never_NothingToGuess"]</span>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <NeverResult HaveIds="view.HaveIds" Storyteller="@view.Storyteller" NameOf="NameOf" />
+                    @if (!view.MyPicks.IsEmpty)
+                    {
+                        <p class="muted small center">@T["Never_YouPicked", string.Join(", ", view.MyPicks.Select(id => NameOf(id) + (view.HaveIds.Contains(id) ? " ✓" : " ✗")))]</p>
+                    }
+                    <NeverScores Scores="view.Scores" NameOf="NameOf" />
+                }
+            </div>
+        </SwipeCard>
     </main>
     <footer class="foot">
         @if (view.Stage != NeverStage.Revealed && Room.YouAreHost && (view.Stage == NeverStage.Guessing || view.AnsweredIds.Length > 0))
         {
             <button class="btn2" @onclick="Rooms.MoveNeverOn">@T[view.Stage == NeverStage.Answering ? "Never_GuessNow" : "Facts_RevealNow"]</button>
-        }
-        @if (view.Stage == NeverStage.Revealed)
-        {
-            <button class="btn" @onclick="Rooms.NextNever">@(view.Number < view.Count ? T["Facts_Next"] : T["Facts_Finish"])</button>
         }
     </footer>
 }

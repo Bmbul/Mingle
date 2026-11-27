@@ -25,127 +25,128 @@
         </div>
     }
     <main class="main">
-        <p class="who">@(view.YourTurn ? T["Guess_YourTurn"] : T["Play_Subject", turnName])</p>
-        <div class="card-face">
-            <p class="kind">@T["Guess_Game"]</p>
-            <p class="prompt">@view.Prompt</p>
-        </div>
+        @* Once the answer is out, swipe the card to go on. *@
+        <SwipeCard OnSwipe="@((view.Stage == GuessStage.Marking && (view.YourTurn || Room.YouAreHost)) ? EventCallback.Factory.Create(this, Rooms.NextGuess) : default)" Last="@(view.Number >= view.Count)">
+            <div class="card-face swipe-panel">
+                <p class="who">@(view.YourTurn ? T["Guess_YourTurn"] : T["Play_Subject", turnName])</p>
+                <div class="card-face">
+                    <p class="kind">@T["Guess_Game"]</p>
+                    <p class="prompt">@view.Prompt</p>
+                </div>
 
-        @if (view.Stage == GuessStage.Asking)
-        {
-            @if (!view.YouWrote && IsRank)
-            {
-                @* "Rank it": tap the items in order, first to last. *@
-                <p class="label">@T[view.YourTurn ? "Rank_YourOrder" : "Rank_YourGuess"]</p>
-                <div class="stack-tight">
-                    @for (var i = 0; i < view.Items.Length; i++)
-                    {
-                        var item = i;
-                        var place = order.IndexOf(item);
-                        <button class="guess-answer rank-item @(place >= 0 ? "right" : "")" disabled="@(place >= 0)" @onclick="() => order.Add(item)">
-                            <span class="row gap"><span class="fact-no">@(place >= 0 ? place + 1 : "·")</span><span class="grow">@view.Items[item]</span></span>
-                        </button>
-                    }
-                </div>
-                <div class="row gap">
-                    <button class="btn2 grow" disabled="@(order.Count == 0)" @onclick="order.Clear">@T["Rank_StartOver"]</button>
-                    <button class="btn grow" disabled="@(order.Count < view.Items.Length)" @onclick="SendOrder">@T["Guess_Send"]</button>
-                </div>
-            }
-            else if (!view.YouWrote)
-            {
-                <label class="label" for="guess-text">@T[view.YourTurn ? "Guess_YourAnswer" : "Guess_YourGuess"]</label>
-                <textarea id="guess-text" class="field area" maxlength="@GuessGame.MaxAnswerLength" @bind="text" @bind:event="oninput"></textarea>
-                <button class="btn" disabled="@(text.Trim().Length == 0)" @onclick="Send">@T["Guess_Send"]</button>
-            }
-            else
-            {
-                var waiting = Room.Players.Where(p => !view.WrittenIds.Contains(p.Id)).Select(p => p.Name).ToList();
-                <div class="card waiting" role="status">
-                    <span class="h2">@T["Online_WaitingOthers"]</span>
-                    <span class="muted">@T["Facts_Written", view.WrittenIds.Length, Room.Players.Length]</span>
-                    @if (waiting.Count > 0)
-                    {
-                        <span class="muted small">@T["Facts_StillWriting", string.Join(", ", waiting)]</span>
-                    }
-                </div>
-            }
-        }
-        else if (IsRank)
-        {
-            <p class="muted small">@T["Rank_PointsHint"]</p>
-            <div class="stack-tight">
-                @foreach (var answer in view.Answers)
+                @if (view.Stage == GuessStage.Asking)
                 {
-                    <div class="guess-answer @(answer.IsTurnPlayer ? "real" : "")">
-                        <span class="row gap">
-                            <span class="label grow">@(answer.IsTurnPlayer ? T["Guess_RealAnswer", NameOf(answer.PlayerId)] : NameOf(answer.PlayerId))</span>
-                            @if (!answer.IsTurnPlayer)
+                    @if (!view.YouWrote && IsRank)
+                    {
+                        @* "Rank it": tap the items in order, first to last. *@
+                        <p class="label">@T[view.YourTurn ? "Rank_YourOrder" : "Rank_YourGuess"]</p>
+                        <div class="stack-tight">
+                            @for (var i = 0; i < view.Items.Length; i++)
                             {
-                                <span class="score-points">+@answer.Matches</span>
+                                var item = i;
+                                var place = order.IndexOf(item);
+                                <button class="guess-answer rank-item @(place >= 0 ? "right" : "")" disabled="@(place >= 0)" @onclick="() => order.Add(item)">
+                                    <span class="row gap"><span class="fact-no">@(place >= 0 ? place + 1 : "·")</span><span class="grow">@view.Items[item]</span></span>
+                                </button>
                             }
-                        </span>
-                        <span>@string.Join(" · ", answer.Order.Select((item, place) => $"{place + 1}. {view.Items.ElementAtOrDefault(item)}"))</span>
-                    </div>
-                }
-            </div>
-        }
-        else
-        {
-            <h2 class="label">@(canMark ? T["Guess_WhoGotIt", turnName] : T["Guess_Choosing", turnName])</h2>
-            <div class="stack-tight">
-                @foreach (var answer in view.Answers)
-                {
-                    var id = answer.PlayerId;
-                    var right = view.RightIds.Contains(id);
-                    @if (answer.IsTurnPlayer)
-                    {
-                        <div class="guess-answer real">
-                            <span class="label">@T["Guess_RealAnswer", NameOf(id)]</span>
-                            <span class="h2">@answer.Text</span>
+                        </div>
+                        <div class="row gap">
+                            <button class="btn2 grow" disabled="@(order.Count == 0)" @onclick="order.Clear">@T["Rank_StartOver"]</button>
+                            <button class="btn grow" disabled="@(order.Count < view.Items.Length)" @onclick="SendOrder">@T["Guess_Send"]</button>
                         </div>
                     }
-                    else if (canMark)
+                    else if (!view.YouWrote)
                     {
-                        <button class="guess-answer @(right ? "right" : "")" aria-pressed="@(right ? "true" : "false")" @onclick="() => Rooms.MarkGuess(id, !right)">
-                            <span class="muted small">@NameOf(id)</span>
-                            <span>@(right ? "✓ " : "")@answer.Text</span>
-                        </button>
+                        <label class="label" for="guess-text">@T[view.YourTurn ? "Guess_YourAnswer" : "Guess_YourGuess"]</label>
+                        <textarea id="guess-text" class="field area" maxlength="@GuessGame.MaxAnswerLength" @bind="text" @bind:event="oninput"></textarea>
+                        <button class="btn" disabled="@(text.Trim().Length == 0)" @onclick="Send">@T["Guess_Send"]</button>
                     }
                     else
                     {
-                        <div class="guess-answer @(right ? "right" : "")">
-                            <span class="muted small">@NameOf(id)</span>
-                            <span>@(right ? "✓ " : "")@answer.Text</span>
+                        var waiting = Room.Players.Where(p => !view.WrittenIds.Contains(p.Id)).Select(p => p.Name).ToList();
+                        <div class="card waiting" role="status">
+                            <span class="h2">@T["Online_WaitingOthers"]</span>
+                            <span class="muted">@T["Facts_Written", view.WrittenIds.Length, Room.Players.Length]</span>
+                            @if (waiting.Count > 0)
+                            {
+                                <span class="muted small">@T["Facts_StillWriting", string.Join(", ", waiting)]</span>
+                            }
                         </div>
                     }
                 }
-                @* Someone who never wrote can still have said the right thing. *@
-                @foreach (var id in view.GuesserIds.Where(g => view.Answers.All(a => a.PlayerId != g)))
+                else if (IsRank)
                 {
-                    var guesser = id;
-                    var right = view.RightIds.Contains(guesser);
-                    <button class="guess-answer @(right ? "right" : "")" disabled="@(!canMark)" @onclick="() => Rooms.MarkGuess(guesser, !right)">
-                        <span class="muted small">@NameOf(guesser)</span>
-                        <span class="muted">@(right ? "✓ " : "")@T["Guess_NoGuess"]</span>
-                    </button>
+                    <p class="muted small">@T["Rank_PointsHint"]</p>
+                    <div class="stack-tight">
+                        @foreach (var answer in view.Answers)
+                        {
+                            <div class="guess-answer @(answer.IsTurnPlayer ? "real" : "")">
+                                <span class="row gap">
+                                    <span class="label grow">@(answer.IsTurnPlayer ? T["Guess_RealAnswer", NameOf(answer.PlayerId)] : NameOf(answer.PlayerId))</span>
+                                    @if (!answer.IsTurnPlayer)
+                                    {
+                                        <span class="score-points">+@answer.Matches</span>
+                                    }
+                                </span>
+                                <span>@string.Join(" · ", answer.Order.Select((item, place) => $"{place + 1}. {view.Items.ElementAtOrDefault(item)}"))</span>
+                            </div>
+                        }
+                    </div>
                 }
+                else
+                {
+                    <h2 class="label">@(canMark ? T["Guess_WhoGotIt", turnName] : T["Guess_Choosing", turnName])</h2>
+                    <div class="stack-tight">
+                        @foreach (var answer in view.Answers)
+                        {
+                            var id = answer.PlayerId;
+                            var right = view.RightIds.Contains(id);
+                            @if (answer.IsTurnPlayer)
+                            {
+                                <div class="guess-answer real">
+                                    <span class="label">@T["Guess_RealAnswer", NameOf(id)]</span>
+                                    <span class="h2">@answer.Text</span>
+                                </div>
+                            }
+                            else if (canMark)
+                            {
+                                <button class="guess-answer @(right ? "right" : "")" aria-pressed="@(right ? "true" : "false")" @onclick="() => Rooms.MarkGuess(id, !right)">
+                                    <span class="muted small">@NameOf(id)</span>
+                                    <span>@(right ? "✓ " : "")@answer.Text</span>
+                                </button>
+                            }
+                            else
+                            {
+                                <div class="guess-answer @(right ? "right" : "")">
+                                    <span class="muted small">@NameOf(id)</span>
+                                    <span>@(right ? "✓ " : "")@answer.Text</span>
+                                </div>
+                            }
+                        }
+                        @* Someone who never wrote can still have said the right thing. *@
+                        @foreach (var id in view.GuesserIds.Where(g => view.Answers.All(a => a.PlayerId != g)))
+                        {
+                            var guesser = id;
+                            var right = view.RightIds.Contains(guesser);
+                            <button class="guess-answer @(right ? "right" : "")" disabled="@(!canMark)" @onclick="() => Rooms.MarkGuess(guesser, !right)">
+                                <span class="muted small">@NameOf(guesser)</span>
+                                <span class="muted">@(right ? "✓ " : "")@T["Guess_NoGuess"]</span>
+                            </button>
+                        }
+                    </div>
+                    @if (canMark)
+                    {
+                        <p class="muted small center">@T["Guess_WhoGotItHint"]</p>
+                    }
+                }
+                <GuessScores Scores="view.Scores" NameOf="NameOf" />
             </div>
-            @if (canMark)
-            {
-                <p class="muted small center">@T["Guess_WhoGotItHint"]</p>
-            }
-        }
-        <GuessScores Scores="view.Scores" NameOf="NameOf" />
+        </SwipeCard>
     </main>
     <footer class="foot">
         @if (view.Stage == GuessStage.Asking && Room.YouAreHost && view.WrittenIds.Length > 0)
         {
             <button class="btn2" @onclick="Rooms.RevealGuesses">@T["Guess_ShowNow"]</button>
-        }
-        @if (view.Stage == GuessStage.Marking && canMark)
-        {
-            <button class="btn" @onclick="Rooms.NextGuess">@(view.Number < view.Count ? T["Facts_Next"] : T["Facts_Finish"])</button>
         }
     </footer>
 }
