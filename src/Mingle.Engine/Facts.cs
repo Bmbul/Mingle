@@ -318,7 +318,9 @@ public sealed class FactGame
         }
 
         var recap = Stage == FactStage.Ended && Settings.Kind == FactGameKind.WhoseFact
-            ? items.Select((it, i) => new FactRecap(it.AuthorId, it.Texts[0], PromptText(it.PromptId, lang), VotesOn(i).Count(v => v.Right))).ToImmutableArray()
+            // A game ended early lists only the facts that came up.
+            ? items.Select((it, i) => (it, i)).Where(x => x.i < Index || votes[x.i].Count > 0)
+                .Select(x => new FactRecap(x.it.AuthorId, x.it.Texts[0], PromptText(x.it.PromptId, lang), VotesOn(x.i).Count(v => v.Right))).ToImmutableArray()
             : [];
 
         return new FactView(

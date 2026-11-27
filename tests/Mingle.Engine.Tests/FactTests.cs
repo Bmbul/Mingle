@@ -127,7 +127,7 @@ public class FactTests
 
         game.End();
         var end = game.ForPlayer("a", Lang.En);
-        Assert.Equal(3, end.Recap.Length);
+        Assert.Single(end.Recap); // only the fact that came up before the game ended
         Assert.NotEmpty(end.Scores);
     }
 

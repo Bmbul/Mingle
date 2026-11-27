@@ -70,8 +70,8 @@ else if (view.Item is { } item && view.Stage is FactStage.Showing or FactStage.R
             {
                 <p class="muted">@prompt</p>
             }
-            <FactList Texts="item.Texts" FindTheLie="settings.FindTheLie" Answer="item.Answer" Votes="item.Votes" NameOf="NameOf"
-                      CanVote="@(!revealed && !item.YouWrote)" MyVote="item.MyVote" OnVote="Rooms.VoteFact" />
+            <FactList Texts="item.Texts" FindTheLie="settings.FindTheLie" Answer="@item.Answer" Votes="item.Votes" NameOf="NameOf"
+                      CanVote="@(!revealed && !item.YouWrote)" MyVote="@item.MyVote" OnVote="Rooms.VoteFact" />
             @if (!revealed)
             {
                 <p class="muted center">@(item.YouWrote ? T["Facts_TheyAreGuessing"] : item.MyVote is null ? T[settings.FindTheLie ? "Facts_PickLie" : "Facts_PickTruth"] : T["Facts_CanChange"])</p>
