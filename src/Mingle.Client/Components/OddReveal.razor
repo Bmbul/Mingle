@@ -1,0 +1,19 @@
+@inject Text T
+
+@* The reveal: the question most players had, the different one, and who had it. *@
+<div class="stack">
+    <div class="card stack-tight">
+        <span class="label">@T["Odd_MainQuestion"]</span>
+        <span class="h2">@MainQuestion</span>
+    </div>
+    <div class="card stack-tight odd-card">
+        <span class="label">@T["Odd_OddQuestion", string.Join(", ", OddNames)]</span>
+        <span class="h2">@OddQuestion</span>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string? MainQuestion { get; set; }
+    [Parameter] public string? OddQuestion { get; set; }
+    [Parameter] public ImmutableArray<string> OddNames { get; set; } = [];
+}

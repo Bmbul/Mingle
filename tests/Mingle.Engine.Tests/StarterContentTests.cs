@@ -46,7 +46,7 @@ public class StarterContentTests
         var deck = Load(file);
         Assert.All(deck.Cards, card =>
         {
-            var guess = card.KindId == CardKinds.GuessMyAnswer.Id;
+            var guess = card.KindId == CardKinds.GuessMyAnswer.Id || card.KindId == CardKinds.RankIt.Id;
             foreach (var (lang, text) in card.Texts)
             {
                 Assert.Equal(guess, PlayerSlot.In(text.Text));

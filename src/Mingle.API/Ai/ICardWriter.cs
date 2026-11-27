@@ -95,7 +95,9 @@ public sealed record CardRequest(
         DeckStyle.Blitz => Kinds.IsDefaultOrEmpty ? CardPrompt.BlitzKinds : [.. Kinds],
         DeckStyle.Handoff => [CardKinds.Handoff.Id],
         DeckStyle.Facts => [CardKinds.FactPrompt.Id],
-        DeckStyle.Guess => [CardKinds.GuessMyAnswer.Id],
+        DeckStyle.Guess => Kinds.IsDefaultOrEmpty ? [CardKinds.GuessMyAnswer.Id, CardKinds.RankIt.Id] : [.. Kinds],
+        DeckStyle.Odd => [CardKinds.OddPair.Id],
+        DeckStyle.Match => [CardKinds.MatchPrompt.Id],
         _ => Kinds.IsDefaultOrEmpty ? CardPrompt.Kinds : [.. Kinds],
     };
 

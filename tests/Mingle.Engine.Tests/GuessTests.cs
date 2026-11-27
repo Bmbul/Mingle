@@ -84,3 +84,42 @@ public class GuessTests
         Assert.Throws<GuessRuleException>(() => new GuessGame([Ani], Cards(2), new GuessSettings(), 1));
     }
 }
+
+public class RankTests
+{
+    private static Card Rank(string id) => new(id, CardKinds.RankIt.Id, 1, [],
+        System.Collections.Immutable.ImmutableDictionary<Lang, CardText>.Empty.Add(Lang.En,
+            new CardText("How would {@} rank these, favourite first?", ["Pizza", "Dolma", "Sushi", "Khorovats"])));
+
+    [Fact]
+    public void Online_rank_cards_score_a_point_per_item_in_the_right_place()
+    {
+        var game = new GuessGame(TestData.Trio, [Rank("r1"), Rank("r2")], new GuessSettings(2), seed: 1);
+        Assert.True(game.IsRank);
+        Assert.Equal(["Pizza", "Dolma", "Sushi", "Khorovats"], game.ForPlayer(TestData.Arman.Id, Lang.En).Items.ToArray());
+        Assert.Throws<GuessRuleException>(() => game.Write(TestData.Ani.Id, "0,0,1,2"));
+
+        game.Write(TestData.Ani.Id, "3,0,1,2");    // the player's real order
+        game.Write(TestData.Arman.Id, "3,0,2,1");  // two in place
+        game.Write(TestData.Lilit.Id, "3,0,1,2");  // all four
+        var answers = game.ForPlayer(TestData.Arman.Id, Lang.En).Answers;
+        Assert.Equal(2, answers.Single(a => a.PlayerId == TestData.Arman.Id).Matches);
+        Assert.Throws<GuessRuleException>(() => game.Mark(TestData.Arman.Id, true));
+
+        game.Next();
+        var scores = game.Scores.ToDictionary(s => s.PlayerId);
+        Assert.Equal(2, scores[TestData.Arman.Id].Points);
+        Assert.Equal(4, scores[TestData.Lilit.Id].Points);
+        Assert.Equal(1, scores[TestData.Ani.Id].Missed);
+    }
+
+    [Fact]
+    public void On_one_phone_rank_cards_are_marked_like_the_others()
+    {
+        var game = new GuessGame(TestData.Couple, [Rank("r1")], new GuessSettings(1), seed: 1, written: false);
+        game.Reveal();
+        game.Mark(TestData.Arman.Id, true);
+        game.Next();
+        Assert.Equal(1, game.Scores.Single(s => s.PlayerId == TestData.Arman.Id).Points);
+    }
+}

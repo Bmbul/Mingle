@@ -41,7 +41,8 @@ public sealed record TopicChoice(ImmutableArray<TopicOption> Offer, ImmutableArr
 /// come from the chosen decks.</param>
 /// <param name="Guess">Set when the room plays "Guess the answer", with cards from the chosen decks.</param>
 public sealed record RoomSettings(GameSettings Game, ImmutableArray<string> DeckIds, DeckSource Source = DeckSource.Chosen,
-    ImmutableArray<int> Depths = default, FactSettings? Facts = null, GuessSettings? Guess = null)
+    ImmutableArray<int> Depths = default, FactSettings? Facts = null, GuessSettings? Guess = null, OddSettings? Odd = null,
+    MatchSettings? Match = null)
 {
     // Missing from older clients: an empty list, since a default ImmutableArray cannot be serialized.
     public ImmutableArray<int> Depths { get; init; } = Depths.IsDefault ? [] : Depths;
@@ -73,7 +74,9 @@ public sealed record RoomView(
     TopicChoice? Topics = null,
     bool LibraryCards = false,
     FactView? Facts = null,
-    GuessView? Guess = null)
+    GuessView? Guess = null,
+    OddView? Odd = null,
+    MatchView? Match = null)
 {
     [JsonIgnore] public RoomPlayer? You => Players.FirstOrDefault(p => p.Id == YouId);
     [JsonIgnore] public bool YouAreHost => You?.IsHost == true;
@@ -120,6 +123,23 @@ public interface IGameHub
     Task MarkGuess(string playerId, bool right);
     /// <summary>The turn player (or the host): on to the next card.</summary>
     Task NextGuess();
+
+    // "Who got a different question?".
+    Task AnswerOdd(string text);
+    /// <summary>Host: on to the vote without waiting for a missing answer.</summary>
+    Task StartOddVote();
+    Task VoteOdd(string playerId);
+    /// <summary>Host: show the answer before everyone has voted.</summary>
+    Task RevealOdd();
+    Task NextOdd();
+
+    // "Same wavelength".
+    Task AnswerMatch(string text);
+    /// <summary>Host: show the answers before everyone has written.</summary>
+    Task RevealMatch();
+    /// <summary>Host: count one answer as the same as another.</summary>
+    Task JoinMatch(string key, string intoKey);
+    Task NextMatch();
 }
 
 /// <summary>Messages the server sends to a player.</summary>

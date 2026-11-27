@@ -90,6 +90,13 @@
                                 {
                                     <textarea class="field area" lang="@l.Code()" maxlength="300" placeholder="@T[$"Editor_Hint_{c.KindId}"]"
                                               value="@c.Text(l)" @oninput="e => c.SetText(l, e.Value as string)"></textarea>
+                                    @* A question pair's different question, or the things to rank. *@
+                                    @for (var x = 0; x < c.Extras; x++)
+                                    {
+                                        var i = x;
+                                        <input class="field" lang="@l.Code()" maxlength="120" placeholder="@T[$"Editor_Extra_{c.KindId}", i + 1]"
+                                               value="@c.Option(l, i)" @oninput="e => c.SetOption(l, i, e.Value as string)" />
+                                    }
                                 }
                             </div>
                         }
@@ -387,19 +394,30 @@
         public Dictionary<Lang, string[]> Options { get; } = [];
 
         public bool IsChoice => KindId == CardKinds.WouldYouRather.Id;
+        /// <summary>Texts besides the main one: a pair's different question, or the four things to rank.</summary>
+        public int Extras => CardKinds.TryGet(KindId, out var kind) ? kind.Extras : 0;
+        private int OptionCount => IsChoice ? 2 : Extras;
         public string Text(Lang l) => Texts.GetValueOrDefault(l, "");
         public void SetText(Lang l, string? v) => Texts[l] = v ?? "";
-        public string Option(Lang l, int i) => Options.TryGetValue(l, out var o) ? o[i] : "";
+        public string Option(Lang l, int i) => Options.TryGetValue(l, out var o) && i < o.Length ? o[i] : "";
         public void SetOption(Lang l, int i, string? v)
         {
-            if (!Options.TryGetValue(l, out var o)) Options[l] = o = ["", ""];
+            if (!Options.TryGetValue(l, out var o) || o.Length < OptionCount)
+            {
+                var grown = new string[OptionCount];
+                for (var k = 0; k < grown.Length; k++) grown[k] = o is not null && k < o.Length ? o[k] : "";
+                Options[l] = o = grown;
+            }
             o[i] = v ?? "";
         }
 
-        /// <summary>A language counts once its text (or both options) is filled in.</summary>
+        private bool OptionsFilled(Lang l) =>
+            Options.TryGetValue(l, out var o) && o.Length >= OptionCount && o.Take(OptionCount).All(x => !string.IsNullOrWhiteSpace(x));
+
+        /// <summary>A language counts once its text (or both options) is filled in, and any extra texts too.</summary>
         public IEnumerable<Lang> Languages => Langs.All.Where(l => IsChoice
-            ? Options.TryGetValue(l, out var o) && o.All(x => !string.IsNullOrWhiteSpace(x))
-            : !string.IsNullOrWhiteSpace(Text(l)));
+            ? OptionsFilled(l)
+            : !string.IsNullOrWhiteSpace(Text(l)) && (Extras == 0 || OptionsFilled(l)));
 
         public bool IsComplete => Languages.Any();
 
@@ -416,7 +434,7 @@
             foreach (var (lang, text) in card.Texts)
             {
                 edit.Texts[lang] = text.Text;
-                if (text.Options.Length == 2) edit.Options[lang] = [text.Options[0], text.Options[1]];
+                if (text.Options.Length > 0 && text.Options.Length == card.Kind.OptionCount) edit.Options[lang] = [.. text.Options];
             }
             return edit;
         }
@@ -425,7 +443,9 @@
         {
             var texts = Languages.ToImmutableDictionary(l => l, l => IsChoice
                 ? new CardText(WouldYouRather(l), [Options[l][0].Trim(), Options[l][1].Trim()])
-                : new CardText(Text(l).Trim()));
+                : Extras > 0
+                    ? new CardText(Text(l).Trim(), [.. Options[l].Take(Extras).Select(o => o.Trim())])
+                    : new CardText(Text(l).Trim()));
             return new Card(Id.Length > 0 ? Id : $"new-{position}", KindId, Depth, [], texts);
         }
 
@@ -658,6 +678,8 @@
                 DeckStyle.Handoff => CardKinds.Handoff.Id,
                 DeckStyle.Facts => CardKinds.FactPrompt.Id,
                 DeckStyle.Guess => CardKinds.GuessMyAnswer.Id,
+                DeckStyle.Odd => CardKinds.OddPair.Id,
+                DeckStyle.Match => CardKinds.MatchPrompt.Id,
                 _ => CardKinds.OpenQuestion.Id,
             },
         };

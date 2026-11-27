@@ -1,0 +1,132 @@
+@inject Text T
+@inject RoomClient Rooms
+
+@* "Same wavelength" in an online room: everyone answers the same prompt and scores for each player who wrote the same. *@
+@{
+    var view = Match;
+}
+
+@if (view.Stage != MatchStage.Ended)
+{
+    <header class="top spread">
+        <span class="muted">@T["Odd_RoundOf", view.Round, view.Rounds]</span>
+        <button class="text-btn" aria-expanded="@(confirmEnd ? "true" : "false")" @onclick="() => confirmEnd = !confirmEnd">@T["Play_End"]</button>
+    </header>
+    @if (confirmEnd)
+    {
+        <div class="confirm" role="alertdialog" aria-labelledby="confirm-end-title">
+            <span id="confirm-end-title" class="h2">@T["Play_EndConfirm"]</span>
+            <div class="row gap">
+                <button class="btn2 grow" @onclick="() => confirmEnd = false">@T["Play_KeepPlaying"]</button>
+                <button class="btn grow" @onclick="EndNow">@T["Play_End"]</button>
+            </div>
+        </div>
+    }
+    <main class="main">
+        <div class="card-face">
+            <p class="kind">@T["Match_Game"]</p>
+            <p class="prompt">@view.Prompt</p>
+        </div>
+        @if (view.Stage == MatchStage.Answering)
+        {
+            @if (!view.YouAnswered)
+            {
+                <p class="muted small">@T["Match_WriteHint"]</p>
+                <input class="field" maxlength="@MatchGame.MaxAnswerLength" autocomplete="off" @bind="text" @bind:event="oninput" />
+                <button class="btn" disabled="@(text.Trim().Length == 0)" @onclick="() => Rooms.AnswerMatch(text.Trim())">@T["Guess_Send"]</button>
+            }
+            else
+            {
+                var waiting = Room.Players.Where(p => !view.AnsweredIds.Contains(p.Id)).Select(p => p.Name).ToList();
+                <div class="card waiting" role="status">
+                    <span class="h2">@T["Match_YouWrote", view.MyAnswer ?? ""]</span>
+                    <span class="muted">@T["Facts_Written", view.AnsweredIds.Length, Room.Players.Length]</span>
+                    @if (waiting.Count > 0)
+                    {
+                        <span class="muted small">@T["Facts_StillWriting", string.Join(", ", waiting)]</span>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            @if (Room.YouAreHost)
+            {
+                <p class="muted small">@T[joining is null ? "Match_JoinHint" : "Match_JoinPick"]</p>
+            }
+            <div class="stack-tight">
+                @foreach (var group in view.Groups)
+                {
+                    var key = group.Key;
+                    var size = group.PlayerIds.Length;
+                    var picked = joining == key;
+                    <button class="guess-answer @(size > 1 ? "real" : "") @(picked ? "right" : "")" disabled="@(!Room.YouAreHost)" @onclick="() => Tap(key)">
+                        <span class="row gap"><span class="h2 grow">@group.Text</span><span class="score-points">@(size > 1 ? $"+{size - 1}" : "0")</span></span>
+                        <span class="muted small">@string.Join(", ", group.PlayerIds.Select(NameOf))</span>
+                    </button>
+                }
+            </div>
+        }
+        @if (!view.Scores.IsEmpty)
+        {
+            <MatchScores Scores="view.Scores" NameOf="NameOf" />
+        }
+    </main>
+    <footer class="foot">
+        @if (view.Stage == MatchStage.Answering && Room.YouAreHost && view.AnsweredIds.Length > 0)
+        {
+            <button class="btn2" @onclick="Rooms.RevealMatch">@T["Guess_ShowNow"]</button>
+        }
+        @if (view.Stage == MatchStage.Revealed)
+        {
+            <button class="btn" @onclick="Rooms.NextMatch">@(view.Round < view.Rounds ? T["Facts_Next"] : T["Facts_Finish"])</button>
+        }
+    </footer>
+}
+else
+{
+    <main class="main">
+        <h1 class="h1 big">@T["End_Title"]</h1>
+        <MatchScores Scores="view.Scores" NameOf="NameOf" Awards="true" />
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="OnHome">@T["End_Home"]</button>
+    </footer>
+}
+
+@code {
+    [Parameter, EditorRequired] public RoomView Room { get; set; } = default!;
+    [Parameter, EditorRequired] public MatchView Match { get; set; } = default!;
+    [Parameter] public EventCallback OnHome { get; set; }
+
+    private bool confirmEnd;
+    private string text = "";
+    private int textFor = -1;
+    /// <summary>The host's first tap when joining two answers.</summary>
+    private string? joining;
+
+    protected override void OnParametersSet()
+    {
+        if (textFor != Match.Round)
+        {
+            textFor = Match.Round;
+            text = "";
+            joining = null;
+        }
+    }
+
+    private async Task Tap(string key)
+    {
+        if (joining is null) { joining = key; return; }
+        if (joining != key) await Rooms.JoinMatch(joining, key);
+        joining = null;
+    }
+
+    private string NameOf(string id) => Room.Players.FirstOrDefault(p => p.Id == id)?.Name ?? "?";
+
+    private async Task EndNow()
+    {
+        confirmEnd = false;
+        await Rooms.EndGame();
+    }
+}

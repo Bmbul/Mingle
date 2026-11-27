@@ -459,4 +459,59 @@
   <data name="Guess_NoGuess" xml:space="preserve"><value>no guess written</value></data>
   <data name="Guess_AwardKnowsAll" xml:space="preserve"><value>🧠 Knows everyone best</value></data>
   <data name="Guess_AwardHardest" xml:space="preserve"><value>🫣 Hardest to read</value></data>
+  <data name="Odd_Game" xml:space="preserve"><value>Odd question</value></data>
+  <data name="Editor_Game_Odd" xml:space="preserve"><value>Odd question</value></data>
+  <data name="Kind_odd" xml:space="preserve"><value>Question pair</value></data>
+  <data name="Editor_Hint_odd" xml:space="preserve"><value>The question most players get…</value></data>
+  <data name="Editor_Extra_odd" xml:space="preserve"><value>The different question (similar, but not the same)</value></data>
+  <data name="Odd_Line" xml:space="preserve"><value>Everyone gets a question in secret, but one player's is different; answer out loud and find who</value></data>
+  <data name="Odd_OnlineLine" xml:space="preserve"><value>Everyone gets a question, but one player's is different; answer, then vote who</value></data>
+  <data name="Odd_Rounds" xml:space="preserve"><value>Rounds</value></data>
+  <data name="Odd_HowMany" xml:space="preserve"><value>Different questions per round</value></data>
+  <data name="Odd_One" xml:space="preserve"><value>One</value></data>
+  <data name="Odd_Two" xml:space="preserve"><value>Two</value></data>
+  <data name="Odd_TwoHint" xml:space="preserve"><value>Two players get the different question when there are {0} or more of you.</value></data>
+  <data name="Odd_RoundOf" xml:space="preserve"><value>Round {0} of {1}</value></data>
+  <data name="Odd_ReadSecretly" xml:space="preserve"><value>Read your question so nobody sees it</value></data>
+  <data name="Odd_ShowMine" xml:space="preserve"><value>I'm {0}, show my question</value></data>
+  <data name="Odd_YourQuestion" xml:space="preserve"><value>Your question</value></data>
+  <data name="Odd_Remember" xml:space="preserve"><value>Remember it and don't say it out loud. Your question might be the different one!</value></data>
+  <data name="Odd_HideIt" xml:space="preserve"><value>Got it, hide it</value></data>
+  <data name="Odd_AnswerAloud" xml:space="preserve"><value>Answer out loud, one by one</value></data>
+  <data name="Odd_StartsWith" xml:space="preserve"><value>{0} starts.</value></data>
+  <data name="Odd_AnswerHint" xml:space="preserve"><value>Only the answer, never the question. Then talk: whose answer didn't fit?</value></data>
+  <data name="Odd_TimeToVote" xml:space="preserve"><value>Time to vote</value></data>
+  <data name="Odd_Who" xml:space="preserve"><value>Who got a different question?</value></data>
+  <data name="Odd_WhoTwo" xml:space="preserve"><value>Which two got a different question?</value></data>
+  <data name="Odd_AccuseHint" xml:space="preserve"><value>Agree together, then tap who you accuse.</value></data>
+  <data name="Odd_Caught" xml:space="preserve"><value>Caught!</value></data>
+  <data name="Odd_Escaped" xml:space="preserve"><value>Got away with it!</value></data>
+  <data name="Odd_MainQuestion" xml:space="preserve"><value>Everyone's question</value></data>
+  <data name="Odd_OddQuestion" xml:space="preserve"><value>The different question: {0}</value></data>
+  <data name="Odd_NextRound" xml:space="preserve"><value>Next round</value></data>
+  <data name="Odd_EndHint" xml:space="preserve"><value>Play again for new questions.</value></data>
+  <data name="Odd_OnlineAnswerHint" xml:space="preserve"><value>Your answer only, not the question. Someone has a different question, maybe you.</value></data>
+  <data name="Odd_YourQuestionWas" xml:space="preserve"><value>Your question: {0}</value></data>
+  <data name="Odd_Votes" xml:space="preserve"><value>Votes</value></data>
+  <data name="Odd_VoteNow" xml:space="preserve"><value>Vote now</value></data>
+  <data name="Odd_AwardDisguise" xml:space="preserve"><value>🎭 Master of disguise</value></data>
+  <data name="Match_Game" xml:space="preserve"><value>Same wavelength</value></data>
+  <data name="Editor_Game_Match" xml:space="preserve"><value>Same wavelength</value></data>
+  <data name="Kind_match" xml:space="preserve"><value>Prompt</value></data>
+  <data name="Editor_Hint_match" xml:space="preserve"><value>A red fruit…</value></data>
+  <data name="Match_Line" xml:space="preserve"><value>Everyone answers the same prompt; score for every player who wrote the same thing</value></data>
+  <data name="Match_WriteHint" xml:space="preserve"><value>Write what you think most of the others will write. One or two words.</value></data>
+  <data name="Match_YouWrote" xml:space="preserve"><value>You wrote: {0}</value></data>
+  <data name="Match_JoinHint" xml:space="preserve"><value>Two answers mean the same? Tap one, then the other, to count them together.</value></data>
+  <data name="Match_JoinPick" xml:space="preserve"><value>Now tap the answer to join it with.</value></data>
+  <data name="Match_AwardSync" xml:space="preserve"><value>🧠 Most in sync</value></data>
+  <data name="Match_AwardOriginal" xml:space="preserve"><value>🦄 Most original</value></data>
+  <data name="Kind_rank" xml:space="preserve"><value>Rank it</value></data>
+  <data name="Editor_Hint_rank" xml:space="preserve"><value>How would {@} rank these, favourite first?</value></data>
+  <data name="Editor_Extra_rank" xml:space="preserve"><value>Item {0}</value></data>
+  <data name="Rank_SayOrder" xml:space="preserve"><value>Everyone, say the order you think!</value></data>
+  <data name="Rank_YourOrder" xml:space="preserve"><value>Your order, favourite first</value></data>
+  <data name="Rank_YourGuess" xml:space="preserve"><value>Your guess: tap them in order</value></data>
+  <data name="Rank_StartOver" xml:space="preserve"><value>Start over</value></data>
+  <data name="Rank_PointsHint" xml:space="preserve"><value>A point for each item in the same place as the real order.</value></data>
 </root>

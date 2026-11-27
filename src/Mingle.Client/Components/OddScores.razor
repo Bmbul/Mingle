@@ -1,0 +1,40 @@
+@inject Text T
+
+@if (Awards && !Scores.IsEmpty)
+{
+    var found = Scores.Max(s => s.Found);
+    var escaped = Scores.Max(s => s.Escaped);
+    @if (found > 0)
+    {
+        <div class="card award">
+            <span class="label">@T["Facts_AwardDetective"]</span>
+            <span class="h2">@string.Join(", ", Scores.Where(s => s.Found == found).Select(s => NameOf(s.PlayerId)))</span>
+        </div>
+    }
+    @if (escaped > 0)
+    {
+        <div class="card award">
+            <span class="label">@T["Odd_AwardDisguise"]</span>
+            <span class="h2">@string.Join(", ", Scores.Where(s => s.Escaped == escaped).Select(s => NameOf(s.PlayerId)))</span>
+        </div>
+    }
+}
+@if (!Scores.IsEmpty)
+{
+    <section class="stack-tight scoreboard" aria-label="@T["Facts_Scores"]">
+        <h2 class="label">@T["Facts_Scores"]</h2>
+        @foreach (var score in Scores)
+        {
+            <div class="score-line">
+                <span class="grow">@NameOf(score.PlayerId)</span>
+                <span class="score-points">@score.Points</span>
+            </div>
+        }
+    </section>
+}
+
+@code {
+    [Parameter] public ImmutableArray<OddScore> Scores { get; set; } = [];
+    [Parameter] public Func<string, string> NameOf { get; set; } = id => id;
+    [Parameter] public bool Awards { get; set; }
+}

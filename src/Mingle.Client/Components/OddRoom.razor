@@ -1,0 +1,143 @@
+@inject Text T
+@inject RoomClient Rooms
+
+@* "Who got a different question?" in an online room: answer your question, vote, see who had the different one. *@
+@{
+    var view = Odd;
+}
+
+@if (view.Stage != OddStage.Ended)
+{
+    <header class="top spread">
+        <span class="muted">@T["Odd_RoundOf", view.Round, view.Rounds]</span>
+        <button class="text-btn" aria-expanded="@(confirmEnd ? "true" : "false")" @onclick="() => confirmEnd = !confirmEnd">@T["Play_End"]</button>
+    </header>
+    @if (confirmEnd)
+    {
+        <div class="confirm" role="alertdialog" aria-labelledby="confirm-end-title">
+            <span id="confirm-end-title" class="h2">@T["Play_EndConfirm"]</span>
+            <div class="row gap">
+                <button class="btn2 grow" @onclick="() => confirmEnd = false">@T["Play_KeepPlaying"]</button>
+                <button class="btn grow" @onclick="EndNow">@T["Play_End"]</button>
+            </div>
+        </div>
+    }
+    <main class="main">
+        @if (view.Stage == OddStage.Answering)
+        {
+            <div class="card-face">
+                <p class="kind">@T["Odd_YourQuestion"]</p>
+                <p class="prompt">@view.MyQuestion</p>
+            </div>
+            @if (!view.YouAnswered)
+            {
+                <label class="label" for="odd-text">@T["Guess_YourAnswer"]</label>
+                <textarea id="odd-text" class="field area" maxlength="@OddGame.MaxAnswerLength" @bind="text" @bind:event="oninput"></textarea>
+                <button class="btn" disabled="@(text.Trim().Length == 0)" @onclick="() => Rooms.AnswerOdd(text.Trim())">@T["Guess_Send"]</button>
+                <p class="muted small center">@T["Odd_OnlineAnswerHint"]</p>
+            }
+            else
+            {
+                var waiting = Room.Players.Where(p => !view.AnsweredIds.Contains(p.Id)).Select(p => p.Name).ToList();
+                <div class="card waiting" role="status">
+                    <span class="h2">@T["Online_WaitingOthers"]</span>
+                    <span class="muted">@T["Facts_Written", view.AnsweredIds.Length, Room.Players.Length]</span>
+                    @if (waiting.Count > 0)
+                    {
+                        <span class="muted small">@T["Facts_StillWriting", string.Join(", ", waiting)]</span>
+                    }
+                </div>
+            }
+        }
+        else if (view.Stage == OddStage.Voting)
+        {
+            <h1 class="h2">@T[view.OddCount > 1 ? "Odd_WhoTwo" : "Odd_Who"]</h1>
+            <p class="muted small">@T["Odd_YourQuestionWas", view.MyQuestion ?? ""]</p>
+            <div class="stack-tight">
+                @foreach (var answer in view.Answers)
+                {
+                    var id = answer.PlayerId;
+                    var mine = id == Room.YouId;
+                    var on = view.MyVote == id;
+                    <button class="guess-answer @(on ? "right" : "")" disabled="@mine" aria-pressed="@(on ? "true" : "false")" @onclick="() => Rooms.VoteOdd(id)">
+                        <span class="muted small">@NameOf(id)@(mine ? $" ({T["Online_You"]})" : "")</span>
+                        <span>@answer.Text</span>
+                    </button>
+                }
+            </div>
+            <p class="muted small center" role="status">@T["Facts_Voted", view.VotedIds.Length, Room.Players.Length]</p>
+        }
+        else
+        {
+            <p class="handoff-verdict @(view.Caught ? "right" : "wrong") center">@T[view.Caught ? "Odd_Caught" : "Odd_Escaped"]</p>
+            <OddReveal MainQuestion="@view.MainQuestion" OddQuestion="@view.OddQuestion" OddNames="@([.. view.OddIds.Select(NameOf)])" />
+            <div class="stack-tight">
+                @foreach (var answer in view.Answers)
+                {
+                    var odd = view.OddIds.Contains(answer.PlayerId);
+                    <p class="vote-line @(odd ? "right" : "")">@NameOf(answer.PlayerId): @answer.Text</p>
+                }
+            </div>
+            <h2 class="label">@T["Odd_Votes"]</h2>
+            <div class="stack-tight">
+                @foreach (var vote in view.Votes)
+                {
+                    var hit = view.OddIds.Contains(vote.ForId);
+                    <p class="vote-line @(hit ? "right" : "")">@NameOf(vote.VoterId) → @NameOf(vote.ForId) @(hit ? "✓" : "")</p>
+                }
+            </div>
+            <OddScores Scores="view.Scores" NameOf="NameOf" />
+        }
+    </main>
+    <footer class="foot">
+        @if (view.Stage == OddStage.Answering && Room.YouAreHost && view.AnsweredIds.Length > 0)
+        {
+            <button class="btn2" @onclick="Rooms.StartOddVote">@T["Odd_VoteNow"]</button>
+        }
+        @if (view.Stage == OddStage.Voting && Room.YouAreHost && view.VotedIds.Length > 0)
+        {
+            <button class="btn2" @onclick="Rooms.RevealOdd">@T["Facts_RevealNow"]</button>
+        }
+        @if (view.Stage == OddStage.Revealed)
+        {
+            <button class="btn" @onclick="Rooms.NextOdd">@(view.Round < view.Rounds ? T["Odd_NextRound"] : T["Facts_Finish"])</button>
+        }
+    </footer>
+}
+else
+{
+    <main class="main">
+        <h1 class="h1 big">@T["End_Title"]</h1>
+        <OddScores Scores="view.Scores" NameOf="NameOf" Awards="true" />
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="OnHome">@T["End_Home"]</button>
+    </footer>
+}
+
+@code {
+    [Parameter, EditorRequired] public RoomView Room { get; set; } = default!;
+    [Parameter, EditorRequired] public OddView Odd { get; set; } = default!;
+    [Parameter] public EventCallback OnHome { get; set; }
+
+    private bool confirmEnd;
+    private string text = "";
+    private int textFor = -1;
+
+    protected override void OnParametersSet()
+    {
+        if (textFor != Odd.Round)
+        {
+            textFor = Odd.Round;
+            text = "";
+        }
+    }
+
+    private string NameOf(string id) => Room.Players.FirstOrDefault(p => p.Id == id)?.Name ?? "?";
+
+    private async Task EndNow()
+    {
+        confirmEnd = false;
+        await Rooms.EndGame();
+    }
+}

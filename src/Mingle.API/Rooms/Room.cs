@@ -23,6 +23,10 @@ public sealed class Room(string code, TimeProvider clock)
     private FactGame? facts;
     /// <summary>"Guess the answer", when the settings ask for it.</summary>
     private GuessGame? guess;
+    /// <summary>"Who got a different question?", when the settings ask for it.</summary>
+    private OddGame? odd;
+    /// <summary>"Same wavelength", when the settings ask for it.</summary>
+    private MatchGame? match;
     private ImmutableArray<TopicInfo> topicPool = [];
     private Random topicRandom = new(0);
     private bool libraryCards;
@@ -233,6 +237,40 @@ public sealed class Room(string code, TimeProvider clock)
                 StartGuess(guessSettings, decks, seed);
                 return;
             }
+            if (settings.Match is { } matchSettings)
+            {
+                var ids = settings.DeckIds.IsDefault ? [] : settings.DeckIds;
+                try
+                {
+                    match = new MatchGame(members.Select(m => m.ToPlayer()),
+                        decks.Where(d => d.Style == DeckStyle.Match && (ids.IsEmpty || ids.Contains(d.Id))).SelectMany(d => d.Cards),
+                        matchSettings, seed);
+                }
+                catch (MatchRuleException ex)
+                {
+                    throw new RoomException(ex.Message);
+                }
+                Stage = RoomStage.Playing;
+                Touch();
+                return;
+            }
+            if (settings.Odd is { } oddSettings)
+            {
+                var ids = settings.DeckIds.IsDefault ? [] : settings.DeckIds;
+                try
+                {
+                    odd = new OddGame(members.Select(m => m.ToPlayer()),
+                        decks.Where(d => d.Style == DeckStyle.Odd && (ids.IsEmpty || ids.Contains(d.Id))).SelectMany(d => d.Cards),
+                        oddSettings, seed);
+                }
+                catch (OddRuleException ex)
+                {
+                    throw new RoomException(ex.Message);
+                }
+                Stage = RoomStage.Playing;
+                Touch();
+                return;
+            }
             if (members.Count < Game.MinPlayers) throw new RoomException($"At least {Game.MinPlayers} players are needed.");
             if (settings.Source == DeckSource.Topics) throw new RoomException("Topics games start by writing cards.");
 
@@ -338,6 +376,48 @@ public sealed class Room(string code, TimeProvider clock)
         }
     }
 
+    /// <summary>One move in "Who got a different question?"; <paramref name="hostOnly"/> for the host's moves.</summary>
+    public void ActOnOdd(string playerId, Action<OddGame> move, bool hostOnly = false)
+    {
+        lock (gate)
+        {
+            if (Stage != RoomStage.Playing || odd is null) throw new RoomException("No game is in progress.");
+            Member(playerId);
+            if (hostOnly) RequireHost(playerId);
+            try
+            {
+                move(odd);
+            }
+            catch (OddRuleException ex)
+            {
+                throw new RoomException(ex.Message);
+            }
+            if (odd.Stage == OddStage.Ended) Stage = RoomStage.Ended;
+            Touch();
+        }
+    }
+
+    /// <summary>One move in "Same wavelength"; <paramref name="hostOnly"/> for the host's moves.</summary>
+    public void ActOnMatch(string playerId, Action<MatchGame> move, bool hostOnly = false)
+    {
+        lock (gate)
+        {
+            if (Stage != RoomStage.Playing || match is null) throw new RoomException("No game is in progress.");
+            Member(playerId);
+            if (hostOnly) RequireHost(playerId);
+            try
+            {
+                move(match);
+            }
+            catch (MatchRuleException ex)
+            {
+                throw new RoomException(ex.Message);
+            }
+            if (match.Stage == MatchStage.Ended) Stage = RoomStage.Ended;
+            Touch();
+        }
+    }
+
     /// <summary>One move in the fact game; <paramref name="hostOnly"/> for moves only the host may make.</summary>
     public void ActOnFacts(string playerId, Action<FactGame> move, bool hostOnly = false)
     {
@@ -364,7 +444,7 @@ public sealed class Room(string code, TimeProvider clock)
     {
         lock (gate)
         {
-            if ((facts is not null || guess is not null) && action is EndGame)
+            if ((facts is not null || guess is not null || odd is not null || match is not null) && action is EndGame)
             {
                 EndSideGame(playerId);
                 return;
@@ -390,6 +470,8 @@ public sealed class Room(string code, TimeProvider clock)
         Member(playerId);
         facts?.End();
         guess?.End();
+        odd?.End();
+        match?.End();
         Stage = RoomStage.Ended;
         Touch();
     }
@@ -430,7 +512,9 @@ public sealed class Room(string code, TimeProvider clock)
 
         var factView = Stage is RoomStage.Playing or RoomStage.Ended ? facts?.ForPlayer(viewer.Id, viewer.Lang) : null;
         var guessView = Stage is RoomStage.Playing or RoomStage.Ended ? guess?.ForPlayer(viewer.Id, viewer.Lang) : null;
-        return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary, topics, libraryCards, factView, guessView);
+        var oddView = Stage is RoomStage.Playing or RoomStage.Ended ? odd?.ForPlayer(viewer.Id, viewer.Lang) : null;
+        var matchView = Stage is RoomStage.Playing or RoomStage.Ended ? match?.ForPlayer(viewer.Id, viewer.Lang) : null;
+        return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary, topics, libraryCards, factView, guessView, oddView, matchView);
     }
 
     private static GameSummary Summarize(GameState state, Lang lang, ImmutableArray<TopicInfo> topics)

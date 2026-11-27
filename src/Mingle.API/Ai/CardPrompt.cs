@@ -115,6 +115,26 @@ public static class CardPrompt
                 player whose turn it is, written as described for "guess" above, and everyone else guesses the answer
                 before that player says it. Spread the cards over quick checks on the phone (start with "📱 "),
                 numbers, habits, favourites, choices between a few things and the player's past.
+                Make about a quarter of them kind "rank": the text asks how the player would order four things, with
+                {@} for the name ("How would {@} rank these, favourite first?"), and the options hold exactly four
+                short, comparable things in every language (four dishes, four holidays, four chores).
+                """);
+        if (request.Style == DeckStyle.Odd)
+            text.AppendLine("""
+                These are question pairs for "Who got a different question?" (kind "odd"): everyone secretly gets the
+                text, except one player who gets the single option, without knowing it. Then everyone answers out loud
+                and the group guesses who had the different question. So the two questions must be about the same
+                subject and have answers that sound alike at first but drift apart: "What's your favourite food?" /
+                "What would you eat on a diet?", "Where would you go on holiday?" / "Where would you never go back to?".
+                Not too obvious (no yes/no against a number), not identical. Both are questions to "you", short, in every
+                language; the options hold exactly one question per language.
+                """);
+        if (request.Style == DeckStyle.Match)
+            text.AppendLine("""
+                These are prompts for "Same wavelength" (kind "match"): everyone writes one answer and scores for every
+                other player who wrote the same, so the prompt is a short category with a few obvious answers and many
+                possible ones: "A red fruit", "Something you take to the beach", "A famous Armenian". Not a question,
+                at most 7 words, no options. Answers should be one or two words.
                 """);
         if (request.Style == DeckStyle.Facts)
             text.AppendLine("""

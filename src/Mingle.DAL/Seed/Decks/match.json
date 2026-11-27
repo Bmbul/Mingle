@@ -1,0 +1,790 @@
+{
+ "id": "match",
+ "name": {
+  "en": "Same wavelength: classics",
+  "hy": "Նույն ալիքի վրա՝ դասական",
+  "ru": "На одной волне: классика"
+ },
+ "cards": [
+  {
+   "id": "mt-01",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "A red fruit",
+    "hy": "Կարմիր միրգ",
+    "ru": "Красный фрукт"
+   }
+  },
+  {
+   "id": "mt-02",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Something you take to the beach",
+    "hy": "Բան, որ վերցնում ես ծովափ",
+    "ru": "Что берут на пляж"
+   }
+  },
+  {
+   "id": "mt-03",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A famous Armenian",
+    "hy": "Հայտնի հայ",
+    "ru": "Знаменитый армянин"
+   }
+  },
+  {
+   "id": "mt-04",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A pet's name",
+    "hy": "Ընտանի կենդանու անուն",
+    "ru": "Кличка питомца"
+   }
+  },
+  {
+   "id": "mt-05",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A city in Europe",
+    "hy": "Եվրոպական քաղաք",
+    "ru": "Город в Европе"
+   }
+  },
+  {
+   "id": "mt-06",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something in the fridge",
+    "hy": "Բան սառնարանում",
+    "ru": "Что-то в холодильнике"
+   }
+  },
+  {
+   "id": "mt-07",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "A New Year dish",
+    "hy": "Ամանորյա ուտեստ",
+    "ru": "Новогоднее блюдо"
+   }
+  },
+  {
+   "id": "mt-08",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A sport with a ball",
+    "hy": "Մարզաձև՝ գնդակով",
+    "ru": "Спорт с мячом"
+   }
+  },
+  {
+   "id": "mt-09",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something yellow",
+    "hy": "Ինչ-որ դեղին բան",
+    "ru": "Что-то жёлтое"
+   }
+  },
+  {
+   "id": "mt-10",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "A breakfast food",
+    "hy": "Նախաճաշի ուտելիք",
+    "ru": "Еда на завтрак"
+   }
+  },
+  {
+   "id": "mt-11",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "A superhero",
+    "hy": "Սուպերհերոս",
+    "ru": "Супергерой"
+   }
+  },
+  {
+   "id": "mt-12",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "A musical instrument",
+    "hy": "Երաժշտական գործիք",
+    "ru": "Музыкальный инструмент"
+   }
+  },
+  {
+   "id": "mt-13",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "A cartoon character",
+    "hy": "Մուլտհերոս",
+    "ru": "Мультяшный герой"
+   }
+  },
+  {
+   "id": "mt-14",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A wild animal",
+    "hy": "Վայրի կենդանի",
+    "ru": "Дикое животное"
+   }
+  },
+  {
+   "id": "mt-15",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "A drink at a party",
+    "hy": "Խմիչք խնջույքին",
+    "ru": "Напиток на вечеринке"
+   }
+  },
+  {
+   "id": "mt-16",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A country to travel to",
+    "hy": "Երկիր՝ ճամփորդելու համար",
+    "ru": "Страна для путешествия"
+   }
+  },
+  {
+   "id": "mt-17",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something in a handbag",
+    "hy": "Բան պայուսակում",
+    "ru": "Что-то в сумке"
+   }
+  },
+  {
+   "id": "mt-18",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "A school subject",
+    "hy": "Դպրոցական առարկա",
+    "ru": "Школьный предмет"
+   }
+  },
+  {
+   "id": "mt-19",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "A hot drink",
+    "hy": "Տաք խմիչք",
+    "ru": "Горячий напиток"
+   }
+  },
+  {
+   "id": "mt-20",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "A vegetable",
+    "hy": "Բանջարեղեն",
+    "ru": "Овощ"
+   }
+  },
+  {
+   "id": "mt-21",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "A dessert",
+    "hy": "Աղանդեր",
+    "ru": "Десерт"
+   }
+  },
+  {
+   "id": "mt-22",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "A job with a uniform",
+    "hy": "Մասնագիտություն՝ համազգեստով",
+    "ru": "Профессия в форме"
+   }
+  },
+  {
+   "id": "mt-23",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A board game",
+    "hy": "Սեղանի խաղ",
+    "ru": "Настольная игра"
+   }
+  },
+  {
+   "id": "mt-24",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something round",
+    "hy": "Ինչ-որ կլոր բան",
+    "ru": "Что-то круглое"
+   }
+  },
+  {
+   "id": "mt-25",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "A holiday",
+    "hy": "Տոն",
+    "ru": "Праздник"
+   }
+  },
+  {
+   "id": "mt-26",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "A social network",
+    "hy": "Սոցիալական ցանց",
+    "ru": "Соцсеть"
+   }
+  },
+  {
+   "id": "mt-27",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A car brand",
+    "hy": "Մեքենայի մակնիշ",
+    "ru": "Марка машины"
+   }
+  },
+  {
+   "id": "mt-28",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A flower",
+    "hy": "Ծաղիկ",
+    "ru": "Цветок"
+   }
+  },
+  {
+   "id": "mt-29",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something in the sky",
+    "hy": "Բան երկնքում",
+    "ru": "Что-то в небе"
+   }
+  },
+  {
+   "id": "mt-30",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "Another word for “great”",
+    "hy": "«Հիանալի» բառի հոմանիշ",
+    "ru": "Синоним слова «отлично»"
+   }
+  },
+  {
+   "id": "mt-31",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "Something people often lose",
+    "hy": "Բան, որ հաճախ են կորցնում",
+    "ru": "То, что часто теряют"
+   }
+  },
+  {
+   "id": "mt-32",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "A place for a first date",
+    "hy": "Առաջին ժամադրության վայր",
+    "ru": "Место для первого свидания"
+   }
+  },
+  {
+   "id": "mt-33",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "A fast food",
+    "hy": "Արագ սնունդ",
+    "ru": "Фастфуд"
+   }
+  },
+  {
+   "id": "mt-34",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something cold",
+    "hy": "Ինչ-որ սառը բան",
+    "ru": "Что-то холодное"
+   }
+  },
+  {
+   "id": "mt-35",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "A fairy-tale character",
+    "hy": "Հեքիաթի հերոս",
+    "ru": "Сказочный персонаж"
+   }
+  },
+  {
+   "id": "mt-36",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "A city in Armenia",
+    "hy": "Քաղաք Հայաստանում",
+    "ru": "Город в Армении"
+   }
+  },
+  {
+   "id": "mt-37",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something you plug in",
+    "hy": "Բան, որ միացնում ես հոսանքին",
+    "ru": "Что-то, что включают в розетку"
+   }
+  },
+  {
+   "id": "mt-38",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "A kitchen tool",
+    "hy": "Խոհանոցային պարագա",
+    "ru": "Кухонная утварь"
+   }
+  },
+  {
+   "id": "mt-39",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "A dance",
+    "hy": "Պար",
+    "ru": "Танец"
+   }
+  },
+  {
+   "id": "mt-40",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A sea animal",
+    "hy": "Ծովային կենդանի",
+    "ru": "Морское животное"
+   }
+  },
+  {
+   "id": "mt-41",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something with wheels",
+    "hy": "Ինչ-որ բան՝ անիվներով",
+    "ru": "Что-то с колёсами"
+   }
+  },
+  {
+   "id": "mt-42",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Something in the bathroom",
+    "hy": "Բան լոգարանում",
+    "ru": "Что-то в ванной"
+   }
+  },
+  {
+   "id": "mt-43",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "A present for a mum",
+    "hy": "Նվեր մայրիկին",
+    "ru": "Подарок маме"
+   }
+  },
+  {
+   "id": "mt-44",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A famous footballer",
+    "hy": "Հայտնի ֆուտբոլիստ",
+    "ru": "Известный футболист"
+   }
+  },
+  {
+   "id": "mt-45",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "An Armenian dish",
+    "hy": "Հայկական ուտեստ",
+    "ru": "Армянское блюдо"
+   }
+  },
+  {
+   "id": "mt-46",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something green",
+    "hy": "Ինչ-որ կանաչ բան",
+    "ru": "Что-то зелёное"
+   }
+  },
+  {
+   "id": "mt-47",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "A bird",
+    "hy": "Թռչուն",
+    "ru": "Птица"
+   }
+  },
+  {
+   "id": "mt-48",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "An excuse for being late",
+    "hy": "Ուշանալու պատրվակ",
+    "ru": "Отговорка за опоздание"
+   }
+  },
+  {
+   "id": "mt-49",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "A spice",
+    "hy": "Համեմունք",
+    "ru": "Специя"
+   }
+  },
+  {
+   "id": "mt-50",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Something in a school bag",
+    "hy": "Բան դպրոցական պայուսակում",
+    "ru": "Что-то в школьном рюкзаке"
+   }
+  },
+  {
+   "id": "mt-51",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "A film genre",
+    "hy": "Ֆիլմի ժանր",
+    "ru": "Жанр фильма"
+   }
+  },
+  {
+   "id": "mt-52",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Something that smells good",
+    "hy": "Բան, որ լավ է բուրում",
+    "ru": "Что-то, что хорошо пахнет"
+   }
+  },
+  {
+   "id": "mt-53",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A month of the year",
+    "hy": "Տարվա ամիս",
+    "ru": "Месяц года"
+   }
+  },
+  {
+   "id": "mt-54",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "A fruit for a pie",
+    "hy": "Միրգ կարկանդակի համար",
+    "ru": "Фрукт для пирога"
+   }
+  },
+  {
+   "id": "mt-55",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "A number from 1 to 10",
+    "hy": "Թիվ 1-ից 10",
+    "ru": "Число от 1 до 10"
+   }
+  },
+  {
+   "id": "mt-56",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "A famous band",
+    "hy": "Հայտնի խումբ",
+    "ru": "Известная группа"
+   }
+  },
+  {
+   "id": "mt-57",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "An app on your phone",
+    "hy": "Հավելված հեռախոսում",
+    "ru": "Приложение в телефоне"
+   }
+  },
+  {
+   "id": "mt-58",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Something you pack first",
+    "hy": "Բան, որ առաջինն ես դնում ճամպրուկը",
+    "ru": "То, что кладут в чемодан первым"
+   }
+  },
+  {
+   "id": "mt-59",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "A colour",
+    "hy": "Գույն",
+    "ru": "Цвет"
+   }
+  },
+  {
+   "id": "mt-60",
+   "kind": "match",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "A word you shout at a football match",
+    "hy": "Բառ, որ գոռում ես ֆուտբոլի ժամանակ",
+    "ru": "Слово, которое кричат на футболе"
+   }
+  }
+ ]
+}

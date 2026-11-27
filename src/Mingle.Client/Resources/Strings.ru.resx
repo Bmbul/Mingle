@@ -465,4 +465,59 @@
   <data name="Guess_NoGuess" xml:space="preserve"><value>без догадки</value></data>
   <data name="Guess_AwardKnowsAll" xml:space="preserve"><value>🧠 Знает всех лучше всех</value></data>
   <data name="Guess_AwardHardest" xml:space="preserve"><value>🫣 Загадка для всех</value></data>
+  <data name="Odd_Game" xml:space="preserve"><value>Другой вопрос</value></data>
+  <data name="Editor_Game_Odd" xml:space="preserve"><value>Другой вопрос</value></data>
+  <data name="Kind_odd" xml:space="preserve"><value>Пара вопросов</value></data>
+  <data name="Editor_Hint_odd" xml:space="preserve"><value>Вопрос, который получают почти все…</value></data>
+  <data name="Editor_Extra_odd" xml:space="preserve"><value>Другой вопрос (похожий, но не такой же)</value></data>
+  <data name="Odd_Line" xml:space="preserve"><value>Все тайно получают вопрос, но у одного он другой; отвечайте вслух и найдите, у кого</value></data>
+  <data name="Odd_OnlineLine" xml:space="preserve"><value>Все получают вопрос, но у одного он другой; ответьте и проголосуйте, у кого</value></data>
+  <data name="Odd_Rounds" xml:space="preserve"><value>Раунды</value></data>
+  <data name="Odd_HowMany" xml:space="preserve"><value>Других вопросов в раунде</value></data>
+  <data name="Odd_One" xml:space="preserve"><value>Один</value></data>
+  <data name="Odd_Two" xml:space="preserve"><value>Два</value></data>
+  <data name="Odd_TwoHint" xml:space="preserve"><value>Другой вопрос получают двое, если вас {0} или больше.</value></data>
+  <data name="Odd_RoundOf" xml:space="preserve"><value>Раунд {0} из {1}</value></data>
+  <data name="Odd_ReadSecretly" xml:space="preserve"><value>Прочитай вопрос так, чтобы никто не видел</value></data>
+  <data name="Odd_ShowMine" xml:space="preserve"><value>Я {0}, покажи вопрос</value></data>
+  <data name="Odd_YourQuestion" xml:space="preserve"><value>Твой вопрос</value></data>
+  <data name="Odd_Remember" xml:space="preserve"><value>Запомни и не говори вслух. Может, именно у тебя другой вопрос!</value></data>
+  <data name="Odd_HideIt" xml:space="preserve"><value>Понятно, скрыть</value></data>
+  <data name="Odd_AnswerAloud" xml:space="preserve"><value>Отвечайте вслух по очереди</value></data>
+  <data name="Odd_StartsWith" xml:space="preserve"><value>Начинает {0}.</value></data>
+  <data name="Odd_AnswerHint" xml:space="preserve"><value>Только ответ, не вопрос. Потом обсудите: чей ответ не подходит?</value></data>
+  <data name="Odd_TimeToVote" xml:space="preserve"><value>Пора голосовать</value></data>
+  <data name="Odd_Who" xml:space="preserve"><value>У кого был другой вопрос?</value></data>
+  <data name="Odd_WhoTwo" xml:space="preserve"><value>У каких двоих был другой вопрос?</value></data>
+  <data name="Odd_AccuseHint" xml:space="preserve"><value>Договоритесь вместе и отметьте, кого обвиняете.</value></data>
+  <data name="Odd_Caught" xml:space="preserve"><value>Попался!</value></data>
+  <data name="Odd_Escaped" xml:space="preserve"><value>Ушёл от ответа!</value></data>
+  <data name="Odd_MainQuestion" xml:space="preserve"><value>Вопрос у всех</value></data>
+  <data name="Odd_OddQuestion" xml:space="preserve"><value>Другой вопрос: {0}</value></data>
+  <data name="Odd_NextRound" xml:space="preserve"><value>Следующий раунд</value></data>
+  <data name="Odd_EndHint" xml:space="preserve"><value>Сыграйте снова с новыми вопросами.</value></data>
+  <data name="Odd_OnlineAnswerHint" xml:space="preserve"><value>Только ответ, не вопрос. У кого-то другой вопрос — может, у тебя.</value></data>
+  <data name="Odd_YourQuestionWas" xml:space="preserve"><value>Твой вопрос: {0}</value></data>
+  <data name="Odd_Votes" xml:space="preserve"><value>Голоса</value></data>
+  <data name="Odd_VoteNow" xml:space="preserve"><value>Голосовать сейчас</value></data>
+  <data name="Odd_AwardDisguise" xml:space="preserve"><value>🎭 Мастер маскировки</value></data>
+  <data name="Match_Game" xml:space="preserve"><value>На одной волне</value></data>
+  <data name="Editor_Game_Match" xml:space="preserve"><value>На одной волне</value></data>
+  <data name="Kind_match" xml:space="preserve"><value>Тема</value></data>
+  <data name="Editor_Hint_match" xml:space="preserve"><value>Красный фрукт…</value></data>
+  <data name="Match_Line" xml:space="preserve"><value>Все отвечают на одну тему; очко за каждого, кто написал то же самое</value></data>
+  <data name="Match_WriteHint" xml:space="preserve"><value>Напиши то, что, по-твоему, напишет большинство. Одно-два слова.</value></data>
+  <data name="Match_YouWrote" xml:space="preserve"><value>Твой ответ: {0}</value></data>
+  <data name="Match_JoinHint" xml:space="preserve"><value>Два ответа значат одно и то же? Нажми один, потом другой, чтобы объединить.</value></data>
+  <data name="Match_JoinPick" xml:space="preserve"><value>Теперь нажми ответ, с которым объединить.</value></data>
+  <data name="Match_AwardSync" xml:space="preserve"><value>🧠 Лучше всех на одной волне</value></data>
+  <data name="Match_AwardOriginal" xml:space="preserve"><value>🦄 Самый оригинальный ответ</value></data>
+  <data name="Kind_rank" xml:space="preserve"><value>Расставь по местам</value></data>
+  <data name="Editor_Hint_rank" xml:space="preserve"><value>Как {@} расставит это, начиная с любимого?</value></data>
+  <data name="Editor_Extra_rank" xml:space="preserve"><value>Вариант {0}</value></data>
+  <data name="Rank_SayOrder" xml:space="preserve"><value>Все, назовите порядок, который вы думаете!</value></data>
+  <data name="Rank_YourOrder" xml:space="preserve"><value>Твой порядок, начиная с любимого</value></data>
+  <data name="Rank_YourGuess" xml:space="preserve"><value>Твоя догадка: нажимай по порядку</value></data>
+  <data name="Rank_StartOver" xml:space="preserve"><value>Сначала</value></data>
+  <data name="Rank_PointsHint" xml:space="preserve"><value>Очко за каждый вариант на том же месте, что и в настоящем порядке.</value></data>
 </root>

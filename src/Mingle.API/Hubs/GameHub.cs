@@ -128,6 +128,17 @@ public sealed class GameHub(RoomRegistry rooms, IDeckSource decks, UserDeckStore
     public Task MarkGuess(string playerId, bool right) => Change((room, me) => room.ActOnGuess(me, g => g.Mark(playerId ?? "", right), turnOrHost: true));
     public Task NextGuess() => Change((room, me) => room.ActOnGuess(me, g => g.Next(), turnOrHost: true));
 
+    public Task AnswerOdd(string text) => Change((room, me) => room.ActOnOdd(me, g => g.Answer(me, text ?? "")));
+    public Task StartOddVote() => Change((room, me) => room.ActOnOdd(me, g => g.StartVoting(), hostOnly: true));
+    public Task VoteOdd(string playerId) => Change((room, me) => room.ActOnOdd(me, g => g.Vote(me, playerId ?? "")));
+    public Task RevealOdd() => Change((room, me) => room.ActOnOdd(me, g => g.Reveal(), hostOnly: true));
+    public Task NextOdd() => Change((room, me) => room.ActOnOdd(me, g => g.Next()));
+
+    public Task AnswerMatch(string text) => Change((room, me) => room.ActOnMatch(me, g => g.Answer(me, text ?? "")));
+    public Task RevealMatch() => Change((room, me) => room.ActOnMatch(me, g => g.Reveal(), hostOnly: true));
+    public Task JoinMatch(string key, string intoKey) => Change((room, me) => room.ActOnMatch(me, g => g.Join(key ?? "", intoKey ?? ""), hostOnly: true));
+    public Task NextMatch() => Change((room, me) => room.ActOnMatch(me, g => g.Next()));
+
     public async Task Leave()
     {
         var (room, me) = Seat();

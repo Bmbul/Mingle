@@ -60,17 +60,22 @@ public enum InputMode { Spoken, Text, Choice, PlayerVote, Scale }
 /// Which game a card belongs to. Question games play only question cards; blitz and "Give it to…" have their own
 /// cards and their own decks, and a deck never mixes styles.
 /// </summary>
-public enum DeckStyle { Questions, Blitz, Handoff, Facts, Guess }
+public enum DeckStyle { Questions, Blitz, Handoff, Facts, Guess, Odd, Match }
 
 /// <param name="Style">The game the kind belongs to: normal games, mixes and fallbacks use only question kinds.</param>
 /// <param name="FixedOptions">Two answers the kind always offers ("Cringe" / "Fine"), so its cards hold only a text.</param>
+/// <param name="Extras">How many more texts a card of this kind holds besides its text, in its options: the different
+/// question of a pair (1), the things to rank (4). Not choices: "would you rather" has its own two options.</param>
 public sealed record CardKind(string Id, ResponseType Response, Audience Audience, DeckStyle Style = DeckStyle.Questions,
-    ImmutableDictionary<Lang, ImmutableArray<string>>? FixedOptions = null)
+    ImmutableDictionary<Lang, ImmutableArray<string>>? FixedOptions = null, int Extras = 0)
 {
     public bool IsQuestion => Style == DeckStyle.Questions;
 
     /// <summary>Cards of this kind carry their own two options (would you rather).</summary>
     public bool CardsHaveOptions => Response == ResponseType.Choice && FixedOptions is null;
+
+    /// <summary>How many options every card of this kind must have: two choices, its extra texts, or none.</summary>
+    public int OptionCount => CardsHaveOptions ? 2 : Extras;
 }
 
 public static class CardKinds
@@ -100,10 +105,16 @@ public static class CardKinds
     public static readonly CardKind Handoff = new("handoff", ResponseType.PlayerVote, Audience.Everyone, DeckStyle.Handoff);
     /// <summary>The fact games: a prompt for a fact about yourself ("Something about your childhood").</summary>
     public static readonly CardKind FactPrompt = new("fact", ResponseType.Free, Audience.Everyone, DeckStyle.Facts);
+    /// <summary>"Guess the answer", ranked: four things the turn player puts in order ("favourite first"); the others guess the order.</summary>
+    public static readonly CardKind RankIt = new("rank", ResponseType.Free, Audience.AboutTurnPlayer, DeckStyle.Guess, Extras: 4);
+    /// <summary>"Who got a different question?": the question most players get; its one option is the different question.</summary>
+    public static readonly CardKind OddPair = new("odd", ResponseType.Free, Audience.Everyone, DeckStyle.Odd, Extras: 1);
+    /// <summary>"Same wavelength": a prompt everyone answers, hoping to write what the others write ("A red fruit").</summary>
+    public static readonly CardKind MatchPrompt = new("match", ResponseType.Free, Audience.Everyone, DeckStyle.Match);
 
     public static ImmutableArray<CardKind> All { get; } =
         [OpenQuestion, FinishSentence, WouldYouRather, MostLikelyTo, GuessMyAnswer, RateIt, CringeOrFine,
-         Association, NameThree, LetterCategory, Handoff, FactPrompt];
+         Association, NameThree, LetterCategory, Handoff, FactPrompt, RankIt, OddPair, MatchPrompt];
 
     /// <summary>The kinds normal games play.</summary>
     public static ImmutableArray<CardKind> Regular { get; } = [.. All.Where(k => k.IsQuestion)];

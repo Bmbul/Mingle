@@ -77,7 +77,8 @@ public static class CardParser
             else
             {
                 // "Guess my answer" names the player with {@}, checked below; nothing else may hold a placeholder.
-                if (Str(text, lang.Code()) is not { } value || !Clean(kind == CardKinds.GuessMyAnswer.Id ? PlayerSlot.Fill(value, lang, "X") : value, MaxTextLength)) return null;
+                var aboutPlayer = kind == CardKinds.GuessMyAnswer.Id || kind == CardKinds.RankIt.Id;
+                if (Str(text, lang.Code()) is not { } value || !Clean(aboutPlayer ? PlayerSlot.Fill(value, lang, "X") : value, MaxTextLength)) return null;
                 var tidy = Tidy(value);
                 if (kind == CardKinds.NameThree.Id)
                 {
@@ -98,10 +99,16 @@ public static class CardParser
                     if (!tidy.EndsWith('…') || tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 60
                         || tidy.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length > 8) return null;
                 }
-                if (kind == CardKinds.GuessMyAnswer.Id)
+                if (aboutPlayer)
                 {
                     // About the player, by name: the slot must be there, in a form the app can fill.
                     if (!PlayerSlot.In(tidy) || PlayerSlot.Fill(tidy, lang, "X").Contains('{')) return null;
+                }
+                if (kind == CardKinds.MatchPrompt.Id)
+                {
+                    // "Same wavelength": a short category with many answers, not a question.
+                    tidy = tidy.TrimEnd('.', '։', '!', ':');
+                    if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 70) return null;
                 }
                 if (kind == CardKinds.FactPrompt.Id)
                 {
@@ -116,8 +123,17 @@ public static class CardParser
                     if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 100) return null;
                 }
                 // Every kind but "finish the sentence", associations, "Give it to…" and "cringe or fine" is a question.
-                if (lang == Lang.Hy && kind is not ("finish" or "word" or "name3" or "letter" or "handoff" or "cringe" or "fact")) tidy = ArmenianQuestions.Fix(tidy);
-                texts[lang] = new CardText(tidy);
+                if (lang == Lang.Hy && kind is not ("finish" or "word" or "name3" or "letter" or "handoff" or "cringe" or "fact" or "match")) tidy = ArmenianQuestions.Fix(tidy);
+                // A question pair's different question, or the four things to rank.
+                var extras = CardKinds.Get(kind).Extras;
+                ImmutableArray<string> more = [];
+                if (extras > 0)
+                {
+                    if (optionList is not { } list || list.Length != extras || list.Any(o => !Clean(o, MaxOptionLength))) return null;
+                    more = kind == CardKinds.OddPair.Id && lang == Lang.Hy ? [.. list.Select(o => ArmenianQuestions.Fix(Tidy(o)))] : [.. list.Select(Tidy)];
+                    if (more.Distinct(StringComparer.OrdinalIgnoreCase).Count() != more.Length || more.Contains(tidy)) return null;
+                }
+                texts[lang] = new CardText(tidy, more);
             }
         }
 

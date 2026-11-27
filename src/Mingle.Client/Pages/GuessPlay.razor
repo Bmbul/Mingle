@@ -25,11 +25,20 @@ else if (game.Stage != GuessStage.Ended)
         <div class="card-face">
             <p class="kind">@T["Guess_Game"]</p>
             <p class="prompt" lang="@turn.Lang.Code()">@prompt</p>
+            @if (game.IsRank)
+            {
+                <ul class="options" lang="@turn.Lang.Code()">
+                    @foreach (var item in game.Card!.TextFor(turn.Lang).Options)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            }
         </div>
         @if (game.Stage == GuessStage.Asking)
         {
             <div class="talk">
-                <p class="h2">@T["Guess_SayYourGuess"]</p>
+                <p class="h2">@T[game.IsRank ? "Rank_SayOrder" : "Guess_SayYourGuess"]</p>
                 <p class="muted small">@T[prompt.StartsWith("📱") ? "Guess_ThenProve" : "Guess_ThenAnswer", turn.Name]</p>
             </div>
         }

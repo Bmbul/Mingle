@@ -33,7 +33,26 @@
 
         @if (view.Stage == GuessStage.Asking)
         {
-            @if (!view.YouWrote)
+            @if (!view.YouWrote && IsRank)
+            {
+                @* "Rank it": tap the items in order, first to last. *@
+                <p class="label">@T[view.YourTurn ? "Rank_YourOrder" : "Rank_YourGuess"]</p>
+                <div class="stack-tight">
+                    @for (var i = 0; i < view.Items.Length; i++)
+                    {
+                        var item = i;
+                        var place = order.IndexOf(item);
+                        <button class="guess-answer rank-item @(place >= 0 ? "right" : "")" disabled="@(place >= 0)" @onclick="() => order.Add(item)">
+                            <span class="row gap"><span class="fact-no">@(place >= 0 ? place + 1 : "·")</span><span class="grow">@view.Items[item]</span></span>
+                        </button>
+                    }
+                </div>
+                <div class="row gap">
+                    <button class="btn2 grow" disabled="@(order.Count == 0)" @onclick="order.Clear">@T["Rank_StartOver"]</button>
+                    <button class="btn grow" disabled="@(order.Count < view.Items.Length)" @onclick="SendOrder">@T["Guess_Send"]</button>
+                </div>
+            }
+            else if (!view.YouWrote)
             {
                 <label class="label" for="guess-text">@T[view.YourTurn ? "Guess_YourAnswer" : "Guess_YourGuess"]</label>
                 <textarea id="guess-text" class="field area" maxlength="@GuessGame.MaxAnswerLength" @bind="text" @bind:event="oninput"></textarea>
@@ -51,6 +70,25 @@
                     }
                 </div>
             }
+        }
+        else if (IsRank)
+        {
+            <p class="muted small">@T["Rank_PointsHint"]</p>
+            <div class="stack-tight">
+                @foreach (var answer in view.Answers)
+                {
+                    <div class="guess-answer @(answer.IsTurnPlayer ? "real" : "")">
+                        <span class="row gap">
+                            <span class="label grow">@(answer.IsTurnPlayer ? T["Guess_RealAnswer", NameOf(answer.PlayerId)] : NameOf(answer.PlayerId))</span>
+                            @if (!answer.IsTurnPlayer)
+                            {
+                                <span class="score-points">+@answer.Matches</span>
+                            }
+                        </span>
+                        <span>@string.Join(" · ", answer.Order.Select((item, place) => $"{place + 1}. {view.Items.ElementAtOrDefault(item)}"))</span>
+                    </div>
+                }
+            </div>
         }
         else
         {
@@ -138,10 +176,17 @@ else
         {
             textFor = Guess.Number;
             text = "";
+            order.Clear();
         }
     }
 
     private string NameOf(string id) => Room.Players.FirstOrDefault(p => p.Id == id)?.Name ?? "?";
+
+    private bool IsRank => !Guess.Items.IsDefaultOrEmpty;
+    /// <summary>"Rank it": the items tapped so far, first to last.</summary>
+    private readonly List<int> order = [];
+
+    private async Task SendOrder() => await Rooms.WriteGuess(string.Join(",", order));
 
     private async Task Send() => await Rooms.WriteGuess(text.Trim());
 

@@ -459,4 +459,59 @@
   <data name="Guess_NoGuess" xml:space="preserve"><value>կռահում չի գրել</value></data>
   <data name="Guess_AwardKnowsAll" xml:space="preserve"><value>🧠 Բոլորին ամենալավն է ճանաչում</value></data>
   <data name="Guess_AwardHardest" xml:space="preserve"><value>🫣 Ամենադժվար գուշակվողը</value></data>
+  <data name="Odd_Game" xml:space="preserve"><value>Այլ հարց</value></data>
+  <data name="Editor_Game_Odd" xml:space="preserve"><value>Այլ հարց</value></data>
+  <data name="Kind_odd" xml:space="preserve"><value>Հարցերի զույգ</value></data>
+  <data name="Editor_Hint_odd" xml:space="preserve"><value>Հարցը, որ ստանում են գրեթե բոլորը…</value></data>
+  <data name="Editor_Extra_odd" xml:space="preserve"><value>Այլ հարցը (նման, բայց ոչ նույնը)</value></data>
+  <data name="Odd_Line" xml:space="preserve"><value>Բոլորը գաղտնի հարց են ստանում, բայց մեկինը այլ է. պատասխանեք բարձրաձայն ու գտեք՝ ում</value></data>
+  <data name="Odd_OnlineLine" xml:space="preserve"><value>Բոլորը հարց են ստանում, բայց մեկինը այլ է. պատասխանեք, հետո քվեարկեք՝ ում</value></data>
+  <data name="Odd_Rounds" xml:space="preserve"><value>Ռաունդներ</value></data>
+  <data name="Odd_HowMany" xml:space="preserve"><value>Այլ հարցեր ամեն ռաունդում</value></data>
+  <data name="Odd_One" xml:space="preserve"><value>Մեկ</value></data>
+  <data name="Odd_Two" xml:space="preserve"><value>Երկու</value></data>
+  <data name="Odd_TwoHint" xml:space="preserve"><value>Երկու խաղացող է այլ հարց ստանում, եթե դուք {0} կամ ավելի եք։</value></data>
+  <data name="Odd_RoundOf" xml:space="preserve"><value>Ռաունդ {0} / {1}</value></data>
+  <data name="Odd_ReadSecretly" xml:space="preserve"><value>Կարդա հարցդ այնպես, որ ոչ ոք չտեսնի</value></data>
+  <data name="Odd_ShowMine" xml:space="preserve"><value>Պատրաստ եմ՝ {0}</value></data>
+  <data name="Odd_YourQuestion" xml:space="preserve"><value>Քո հարցը</value></data>
+  <data name="Odd_Remember" xml:space="preserve"><value>Հիշիր այն ու բարձրաձայն մի՛ ասա։ Գուցե հենց քո հարցն է այլ։</value></data>
+  <data name="Odd_HideIt" xml:space="preserve"><value>Հիշեցի, թաքցնել</value></data>
+  <data name="Odd_AnswerAloud" xml:space="preserve"><value>Պատասխանեք բարձրաձայն, հերթով</value></data>
+  <data name="Odd_StartsWith" xml:space="preserve"><value>Սկսում է՝ {0}։</value></data>
+  <data name="Odd_AnswerHint" xml:space="preserve"><value>Միայն պատասխանը, ոչ թե հարցը։ Հետո քննարկեք. ո՞ւմ պատասխանը չէր սազում</value></data>
+  <data name="Odd_TimeToVote" xml:space="preserve"><value>Քվեարկության ժամն է</value></data>
+  <data name="Odd_Who" xml:space="preserve"><value>Ո՞վ է այլ հարց ստացել</value></data>
+  <data name="Odd_WhoTwo" xml:space="preserve"><value>Ո՞ր երկուսն են այլ հարց ստացել</value></data>
+  <data name="Odd_AccuseHint" xml:space="preserve"><value>Համաձայնեցեք միասին, հետո նշեք, թե ում եք մեղադրում։</value></data>
+  <data name="Odd_Caught" xml:space="preserve"><value>Բռնվեց։</value></data>
+  <data name="Odd_Escaped" xml:space="preserve"><value>Չբռնվեց։</value></data>
+  <data name="Odd_MainQuestion" xml:space="preserve"><value>Բոլորի հարցը</value></data>
+  <data name="Odd_OddQuestion" xml:space="preserve"><value>Այլ հարցը՝ {0}</value></data>
+  <data name="Odd_NextRound" xml:space="preserve"><value>Հաջորդ ռաունդ</value></data>
+  <data name="Odd_EndHint" xml:space="preserve"><value>Նորից խաղացեք՝ նոր հարցերով։</value></data>
+  <data name="Odd_OnlineAnswerHint" xml:space="preserve"><value>Միայն պատասխանդ, ոչ թե հարցը։ Ինչ-որ մեկը այլ հարց ունի, գուցե հենց դու։</value></data>
+  <data name="Odd_YourQuestionWas" xml:space="preserve"><value>Քո հարցը՝ {0}</value></data>
+  <data name="Odd_Votes" xml:space="preserve"><value>Քվեներ</value></data>
+  <data name="Odd_VoteNow" xml:space="preserve"><value>Քվեարկել հիմա</value></data>
+  <data name="Odd_AwardDisguise" xml:space="preserve"><value>🎭 Քողարկման վարպետ</value></data>
+  <data name="Match_Game" xml:space="preserve"><value>Նույն ալիքի վրա</value></data>
+  <data name="Editor_Game_Match" xml:space="preserve"><value>Նույն ալիքի վրա</value></data>
+  <data name="Kind_match" xml:space="preserve"><value>Թեմա</value></data>
+  <data name="Editor_Hint_match" xml:space="preserve"><value>Կարմիր միրգ…</value></data>
+  <data name="Match_Line" xml:space="preserve"><value>Բոլորը պատասխանում են նույն թեմային. միավոր ամեն խաղացողի համար, ով գրել է նույնը</value></data>
+  <data name="Match_WriteHint" xml:space="preserve"><value>Գրիր այն, ինչ կարծում ես՝ մյուսների մեծ մասը կգրի։ Մեկ-երկու բառ։</value></data>
+  <data name="Match_YouWrote" xml:space="preserve"><value>Դու գրեցիր՝ {0}</value></data>
+  <data name="Match_JoinHint" xml:space="preserve"><value>Երկու պատասխան նույնն են նշանակում։ Սեղմիր մեկը, հետո մյուսը՝ միավորելու համար։</value></data>
+  <data name="Match_JoinPick" xml:space="preserve"><value>Հիմա սեղմիր այն պատասխանը, որի հետ միավորել։</value></data>
+  <data name="Match_AwardSync" xml:space="preserve"><value>🧠 Ամենաներդաշնակը</value></data>
+  <data name="Match_AwardOriginal" xml:space="preserve"><value>🦄 Ամենաինքնատիպը</value></data>
+  <data name="Kind_rank" xml:space="preserve"><value>Դասավորիր</value></data>
+  <data name="Editor_Hint_rank" xml:space="preserve"><value>Ինչպե՞ս կդասավորեր {@ը} սրանք՝ սկսած ամենասիրածից։</value></data>
+  <data name="Editor_Extra_rank" xml:space="preserve"><value>Տարբերակ {0}</value></data>
+  <data name="Rank_SayOrder" xml:space="preserve"><value>Ամեն մեկդ ասեք, թե ինչ հերթականությամբ կդասավորի</value></data>
+  <data name="Rank_YourOrder" xml:space="preserve"><value>Քո հերթականությունը՝ սկսած ամենասիրածից</value></data>
+  <data name="Rank_YourGuess" xml:space="preserve"><value>Քո կռահումը. սեղմիր ըստ հերթականության</value></data>
+  <data name="Rank_StartOver" xml:space="preserve"><value>Սկսել նորից</value></data>
+  <data name="Rank_PointsHint" xml:space="preserve"><value>Մեկ միավոր ամեն տարբերակի համար, որ նույն տեղում է, ինչ իրական հերթականության մեջ։</value></data>
 </root>

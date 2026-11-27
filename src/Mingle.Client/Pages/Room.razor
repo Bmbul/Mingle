@@ -42,6 +42,14 @@ else if (room.Stage == RoomStage.Lobby)
         {
             <p class="muted center"><Icon Name="target" Size="16" /> @T["Guess_Game"]</p>
         }
+        @if (room.Settings.Odd is not null)
+        {
+            <p class="muted center"><Icon Name="eye" Size="16" /> @T["Odd_Game"]</p>
+        }
+        @if (room.Settings.Match is not null)
+        {
+            <p class="muted center"><Icon Name="layers" Size="16" /> @T["Match_Game"]</p>
+        }
         <h2 class="label">@T["Setup_Players"] · @room.Players.Length</h2>
         @foreach (var player in room.Players)
         {
@@ -117,6 +125,14 @@ else if (room.Stage == RoomStage.Writing)
         <p class="h2 center">@T["Writing_Title"]</p>
         <p class="muted center">@T["Writing_Hint"]</p>
     </main>
+}
+else if (room.Odd is { } oddView)
+{
+    <OddRoom Room="room" Odd="oddView" OnHome="LeaveRoom" />
+}
+else if (room.Match is { } matchView)
+{
+    <MatchRoom Room="room" Match="matchView" OnHome="LeaveRoom" />
 }
 else if (room.Guess is { } guessView)
 {
@@ -292,7 +308,10 @@ else if (room.Summary is { } summary)
         Rooms.PickTopics(topics.Picked.Contains(code) ? topics.Picked.Remove(code) : topics.Picked.Add(code));
 
     private static int MinPlayers(RoomView room) =>
-        room.Settings.Facts is { } facts ? FactGame.MinPlayers(facts.Kind) : Game.MinPlayers;
+        room.Settings.Facts is { } facts ? FactGame.MinPlayers(facts.Kind)
+        : room.Settings.Odd is not null ? OddGame.MinPlayers
+        : room.Settings.Match is not null ? MatchGame.MinPlayers
+        : Game.MinPlayers;
 
     private static Lang[] RoomLanguages(RoomView room) => [.. room.Players.Select(p => p.Lang).Distinct()];
 

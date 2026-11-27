@@ -79,6 +79,8 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
             "handoff" => DeckStyle.Handoff,
             "facts" => DeckStyle.Facts,
             "guess" => DeckStyle.Guess,
+            "odd" => DeckStyle.Odd,
+            "match" => DeckStyle.Match,
             _ => DeckStyle.Questions,
         };
         if (style == DeckStyle.Handoff) return await WriteHandoff(request, theme, ct);
@@ -87,7 +89,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
         if (codes.Count > CardRequest.MaxTopics) return BadRequest(new { error = $"Pick up to {CardRequest.MaxTopics} topics." });
         if (request.Setting is { } setting && !CardRequest.Settings.ContainsKey(setting)) return BadRequest(new { error = "Unknown setting." });
         if ((request.Depths ?? []).Any(d => d is < 1 or > 3)) return BadRequest(new { error = "Depth is 1, 2 or 3." });
-        var validKinds = style switch { DeckStyle.Blitz => CardPrompt.BlitzKinds, DeckStyle.Facts or DeckStyle.Guess => [], _ => CardPrompt.Kinds };
+        var validKinds = style switch { DeckStyle.Blitz => CardPrompt.BlitzKinds, DeckStyle.Facts or DeckStyle.Guess or DeckStyle.Odd or DeckStyle.Match => [], _ => CardPrompt.Kinds };
         if ((request.Kinds ?? []).Any(k => !validKinds.Contains(k))) return BadRequest(new { error = "Unknown card kind." });
         var languages = new List<Lang>();
         foreach (var code in request.Languages ?? [])

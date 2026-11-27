@@ -132,15 +132,15 @@ public static class DeckJson
                 p => p.Value.EnumerateArray().Select(x => x.GetString() ?? "").ToImmutableArray())
             : ImmutableDictionary<Lang, ImmutableArray<string>>.Empty;
 
-        var needsOptions = kind.CardsHaveOptions;
+        var needsOptions = kind.OptionCount;
         var result = ImmutableDictionary.CreateBuilder<Lang, CardText>();
         foreach (var (lang, text) in texts)
         {
             var opts = options.GetValueOrDefault(lang, []);
-            if (needsOptions && (opts.Length != 2 || opts.Any(string.IsNullOrWhiteSpace)))
-                throw new FormatException($"{where}: '{lang.Code()}' needs exactly 2 options.");
-            if (!needsOptions && opts.Length > 0)
-                throw new FormatException($"{where}: only 'wyr' cards have options.");
+            if (needsOptions > 0 && (opts.Length != needsOptions || opts.Any(string.IsNullOrWhiteSpace)))
+                throw new FormatException($"{where}: '{lang.Code()}' needs exactly {needsOptions} options.");
+            if (needsOptions == 0 && opts.Length > 0)
+                throw new FormatException($"{where}: '{kindId}' cards have no options.");
             result[lang] = new CardText(text, opts);
         }
 

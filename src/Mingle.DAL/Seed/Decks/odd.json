@@ -1,0 +1,970 @@
+{
+ "id": "odd",
+ "name": {
+  "en": "Odd question: classics",
+  "hy": "Այլ հարց՝ դասական",
+  "ru": "Другой вопрос: классика"
+ },
+ "cards": [
+  {
+   "id": "odd-01",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What's your favourite food?",
+    "hy": "Ո՞րն է քո սիրած ուտելիքը։",
+    "ru": "Какая твоя любимая еда?"
+   },
+   "options": {
+    "en": [
+     "What would you eat on a diet?"
+    ],
+    "hy": [
+     "Ի՞նչ կուտեիր դիետայի ժամանակ։"
+    ],
+    "ru": [
+     "Что ты ешь на диете?"
+    ]
+   }
+  },
+  {
+   "id": "odd-02",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Where would you go on holiday?",
+    "hy": "Ո՞ւր կգնայիր արձակուրդի։",
+    "ru": "Куда ты поедешь в отпуск?"
+   },
+   "options": {
+    "en": [
+     "Where would you never go again?"
+    ],
+    "hy": [
+     "Ո՞ւր երբեք նորից չէիր գնա։"
+    ],
+    "ru": [
+     "Куда ты больше никогда не поедешь?"
+    ]
+   }
+  },
+  {
+   "id": "odd-03",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "How many hours do you sleep?",
+    "hy": "Քանի՞ ժամ ես քնում։",
+    "ru": "Сколько часов ты спишь?"
+   },
+   "options": {
+    "en": [
+     "How many hours a day are you on your phone?"
+    ],
+    "hy": [
+     "Օրական քանի՞ ժամ ես անցկացնում հեռախոսում։"
+    ],
+    "ru": [
+     "Сколько часов в день ты сидишь в телефоне?"
+    ]
+   }
+  },
+  {
+   "id": "odd-04",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "What's your favourite film?",
+    "hy": "Ո՞րն է քո սիրած ֆիլմը։",
+    "ru": "Какой твой любимый фильм?"
+   },
+   "options": {
+    "en": [
+     "Which film did you fall asleep during?"
+    ],
+    "hy": [
+     "Ո՞ր ֆիլմի ժամանակ ես քնել։"
+    ],
+    "ru": [
+     "На каком фильме тебя сморил сон?"
+    ]
+   }
+  },
+  {
+   "id": "odd-05",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Who's your favourite singer?",
+    "hy": "Ո՞վ է քո սիրած երգիչը։",
+    "ru": "Кто твой любимый певец?"
+   },
+   "options": {
+    "en": [
+     "Which singer can't you stand?"
+    ],
+    "hy": [
+     "Ո՞ր երգչին տանել չես կարողանում։"
+    ],
+    "ru": [
+     "Какого певца ты терпеть не можешь?"
+    ]
+   }
+  },
+  {
+   "id": "odd-06",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What do you drink in the morning?",
+    "hy": "Ի՞նչ ես խմում առավոտյան։",
+    "ru": "Что ты пьёшь по утрам?"
+   },
+   "options": {
+    "en": [
+     "What do you drink at a party?"
+    ],
+    "hy": [
+     "Ի՞նչ ես խմում խնջույքին։"
+    ],
+    "ru": [
+     "Что ты пьёшь на вечеринке?"
+    ]
+   }
+  },
+  {
+   "id": "odd-07",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "firsts"
+   ],
+   "text": {
+    "en": "How old were you when you first fell in love?",
+    "hy": "Քանի՞ տարեկանում ես առաջին անգամ սիրահարվել։",
+    "ru": "В каком возрасте случилась первая любовь?"
+   },
+   "options": {
+    "en": [
+     "How old were you when you got your first phone?"
+    ],
+    "hy": [
+     "Քանի՞ տարեկանում ես ունեցել առաջին հեռախոսը։"
+    ],
+    "ru": [
+     "В каком возрасте появился первый телефон?"
+    ]
+   }
+  },
+  {
+   "id": "odd-08",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "what-if"
+   ],
+   "text": {
+    "en": "What would you take to a desert island?",
+    "hy": "Ի՞նչ կվերցնեիր անմարդաբնակ կղզի։",
+    "ru": "Что ты возьмёшь на необитаемый остров?"
+   },
+   "options": {
+    "en": [
+     "What would you take to a job interview?"
+    ],
+    "hy": [
+     "Ի՞նչ կվերցնեիր աշխատանքային հարցազրույցի։"
+    ],
+    "ru": [
+     "Что ты возьмёшь на собеседование?"
+    ]
+   }
+  },
+  {
+   "id": "odd-09",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Which animal would you keep as a pet?",
+    "hy": "Ո՞ր կենդանուն կպահեիր տանը։",
+    "ru": "Какое животное ты заведёшь дома?"
+   },
+   "options": {
+    "en": [
+     "Which animal are you afraid of?"
+    ],
+    "hy": [
+     "Ո՞ր կենդանուց ես վախենում։"
+    ],
+    "ru": [
+     "Какого животного ты боишься?"
+    ]
+   }
+  },
+  {
+   "id": "odd-10",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "dreams"
+   ],
+   "text": {
+    "en": "What's your dream car?",
+    "hy": "Ո՞րն է քո երազանքի մեքենան։",
+    "ru": "Какая машина твоей мечты?"
+   },
+   "options": {
+    "en": [
+     "What car did your family have when you were a kid?"
+    ],
+    "hy": [
+     "Ի՞նչ մեքենա ուներ ձեր ընտանիքը, երբ փոքր էիր։"
+    ],
+    "ru": [
+     "Какая машина была у твоей семьи в детстве?"
+    ]
+   }
+  },
+  {
+   "id": "odd-11",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "What do you do on Sundays?",
+    "hy": "Ի՞նչ ես անում կիրակի օրերին։",
+    "ru": "Что ты делаешь по воскресеньям?"
+   },
+   "options": {
+    "en": [
+     "What do you do when you're bored at work?"
+    ],
+    "hy": [
+     "Ի՞նչ ես անում, երբ աշխատանքի ժամանակ ձանձրանում ես։"
+    ],
+    "ru": [
+     "Что ты делаешь, когда скучно на работе?"
+    ]
+   }
+  },
+  {
+   "id": "odd-12",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Which city would you live in?",
+    "hy": "Ո՞ր քաղաքում կուզեիր ապրել։",
+    "ru": "В каком городе ты хочешь жить?"
+   },
+   "options": {
+    "en": [
+     "Which city is worth only one day?"
+    ],
+    "hy": [
+     "Ո՞ր քաղաքը կայցելեիր ընդամենը մեկ օրով։"
+    ],
+    "ru": [
+     "Какой город достаточно увидеть за один день?"
+    ]
+   }
+  },
+  {
+   "id": "odd-13",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "money"
+   ],
+   "text": {
+    "en": "What would you buy with a million?",
+    "hy": "Ի՞նչ կգնեիր մեկ միլիոնով։",
+    "ru": "Что ты купишь на миллион?"
+   },
+   "options": {
+    "en": [
+     "What would you buy with your last 1000 dram?"
+    ],
+    "hy": [
+     "Ի՞նչ կգնեիր քո վերջին հազար դրամով։"
+    ],
+    "ru": [
+     "Что ты купишь на последнюю тысячу драмов?"
+    ]
+   }
+  },
+  {
+   "id": "odd-14",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "What's your favourite season?",
+    "hy": "Տարվա ո՞ր եղանակն ես սիրում։",
+    "ru": "Какое твоё любимое время года?"
+   },
+   "options": {
+    "en": [
+     "Which season is your birthday in?"
+    ],
+    "hy": [
+     "Տարվա ո՞ր եղանակին է քո ծննդյան օրը։"
+    ],
+    "ru": [
+     "В какое время года твой день рождения?"
+    ]
+   }
+  },
+  {
+   "id": "odd-15",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "How many children would you like?",
+    "hy": "Քանի՞ երեխա կուզեիր ունենալ։",
+    "ru": "Сколько детей ты хочешь?"
+   },
+   "options": {
+    "en": [
+     "How many cousins do you have?"
+    ],
+    "hy": [
+     "Քանի՞ զարմիկ ու զարմուհի ունես։"
+    ],
+    "ru": [
+     "Сколько у тебя двоюродных братьев и сестёр?"
+    ]
+   }
+  },
+  {
+   "id": "odd-16",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What's your favourite dessert?",
+    "hy": "Ո՞րն է քո սիրած աղանդերը։",
+    "ru": "Какой твой любимый десерт?"
+   },
+   "options": {
+    "en": [
+     "What sweet do you eat when you're sad?"
+    ],
+    "hy": [
+     "Ի՞նչ քաղցր ես ուտում, երբ տխուր ես։"
+    ],
+    "ru": [
+     "Какую сладость ты ешь, когда грустно?"
+    ]
+   }
+  },
+  {
+   "id": "odd-17",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "what-if"
+   ],
+   "text": {
+    "en": "Which superpower would you choose?",
+    "hy": "Ո՞ր գերուժը կընտրեիր։",
+    "ru": "Какую суперсилу ты выберешь?"
+   },
+   "options": {
+    "en": [
+     "What's your hidden talent?"
+    ],
+    "hy": [
+     "Ո՞րն է քո թաքնված տաղանդը։"
+    ],
+    "ru": [
+     "Какой у тебя скрытый талант?"
+    ]
+   }
+  },
+  {
+   "id": "odd-18",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Which sport do you like to watch?",
+    "hy": "Ո՞ր մարզաձևն ես սիրում դիտել։",
+    "ru": "Какой спорт ты любишь смотреть?"
+   },
+   "options": {
+    "en": [
+     "Which sport did you do at school?"
+    ],
+    "hy": [
+     "Ո՞ր մարզաձևով ես զբաղվել դպրոցում։"
+    ],
+    "ru": [
+     "Какой спорт был у тебя в школе?"
+    ]
+   }
+  },
+  {
+   "id": "odd-19",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "memories"
+   ],
+   "text": {
+    "en": "What's the best present you've ever got?",
+    "hy": "Ո՞րն է քո ստացած ամենալավ նվերը։",
+    "ru": "Какой лучший подарок тебе дарили?"
+   },
+   "options": {
+    "en": [
+     "What's the worst present you've ever got?"
+    ],
+    "hy": [
+     "Ո՞րն է քո ստացած ամենավատ նվերը։"
+    ],
+    "ru": [
+     "Какой худший подарок тебе дарили?"
+    ]
+   }
+  },
+  {
+   "id": "odd-20",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "What time do you wake up at weekends?",
+    "hy": "Հանգստյան օրերին ժամը քանիսի՞ն ես արթնանում։",
+    "ru": "Во сколько ты встаёшь в выходные?"
+   },
+   "options": {
+    "en": [
+     "What time do you usually go to bed?"
+    ],
+    "hy": [
+     "Ժամը քանիսի՞ն ես սովորաբար քնում։"
+    ],
+    "ru": [
+     "Во сколько ты обычно ложишься спать?"
+    ]
+   }
+  },
+  {
+   "id": "odd-21",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "what-if"
+   ],
+   "text": {
+    "en": "Which famous person would you have dinner with?",
+    "hy": "Ո՞ր հայտնի մարդու հետ կընթրեիր։",
+    "ru": "С какой знаменитостью ты поужинаешь?"
+   },
+   "options": {
+    "en": [
+     "Which famous person would you never want to meet?"
+    ],
+    "hy": [
+     "Ո՞ր հայտնի մարդու հետ երբեք չէիր ուզենա հանդիպել։"
+    ],
+    "ru": [
+     "С какой знаменитостью ты никогда не захочешь встретиться?"
+    ]
+   }
+  },
+  {
+   "id": "odd-22",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "What's your favourite word?",
+    "hy": "Ո՞րն է քո սիրած բառը։",
+    "ru": "Какое твоё любимое слово?"
+   },
+   "options": {
+    "en": [
+     "Which word do you say too often?"
+    ],
+    "hy": [
+     "Ո՞ր բառն ես չափազանց հաճախ ասում։"
+    ],
+    "ru": [
+     "Какое слово ты говоришь слишком часто?"
+    ]
+   }
+  },
+  {
+   "id": "odd-23",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What do you order at a café?",
+    "hy": "Ի՞նչ ես պատվիրում սրճարանում։",
+    "ru": "Что ты заказываешь в кафе?"
+   },
+   "options": {
+    "en": [
+     "What do you cook when guests turn up unexpectedly?"
+    ],
+    "hy": [
+     "Ի՞նչ ես պատրաստում, երբ անսպասելի հյուրեր են գալիս։"
+    ],
+    "ru": [
+     "Что ты готовишь, когда внезапно приходят гости?"
+    ]
+   }
+  },
+  {
+   "id": "odd-24",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "Where was your best date?",
+    "hy": "Որտե՞ղ է եղել քո ամենալավ ժամադրությունը։",
+    "ru": "Где прошло твоё лучшее свидание?"
+   },
+   "options": {
+    "en": [
+     "Where would you take someone on a first date?"
+    ],
+    "hy": [
+     "Ո՞ւր կտանեիր մեկին առաջին ժամադրության։"
+    ],
+    "ru": [
+     "Куда ты поведёшь кого-то на первое свидание?"
+    ]
+   }
+  },
+  {
+   "id": "odd-25",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "What colour is your phone case?",
+    "hy": "Ի՞նչ գույնի է քո հեռախոսի պատյանը։",
+    "ru": "Какого цвета чехол твоего телефона?"
+   },
+   "options": {
+    "en": [
+     "What's your favourite colour?"
+    ],
+    "hy": [
+     "Ո՞րն է քո սիրած գույնը։"
+    ],
+    "ru": [
+     "Какой твой любимый цвет?"
+    ]
+   }
+  },
+  {
+   "id": "odd-26",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "money"
+   ],
+   "text": {
+    "en": "What's the last thing you bought?",
+    "hy": "Ո՞րն է քո վերջին գնումը։",
+    "ru": "Какая твоя последняя покупка?"
+   },
+   "options": {
+    "en": [
+     "What do you want to buy next?"
+    ],
+    "hy": [
+     "Ի՞նչ ես ուզում գնել հաջորդը։"
+    ],
+    "ru": [
+     "Что ты хочешь купить следующим?"
+    ]
+   }
+  },
+  {
+   "id": "odd-27",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "money"
+   ],
+   "text": {
+    "en": "How much would you pay for a concert ticket?",
+    "hy": "Ինչքա՞ն կվճարեիր համերգի տոմսի համար։",
+    "ru": "Сколько ты заплатишь за билет на концерт?"
+   },
+   "options": {
+    "en": [
+     "How much do you spend on coffee a month?"
+    ],
+    "hy": [
+     "Ամսական ինչքա՞ն ես ծախսում սուրճի վրա։"
+    ],
+    "ru": [
+     "Сколько ты тратишь на кофе в месяц?"
+    ]
+   }
+  },
+  {
+   "id": "odd-28",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "Which app do you use most?",
+    "hy": "Ո՞ր հավելվածն ես ամենաշատն օգտագործում։",
+    "ru": "Каким приложением ты пользуешься чаще всего?"
+   },
+   "options": {
+    "en": [
+     "Which app would you delete first?"
+    ],
+    "hy": [
+     "Ո՞ր հավելվածը կջնջեիր առաջինը։"
+    ],
+    "ru": [
+     "Какое приложение ты удалишь первым?"
+    ]
+   }
+  },
+  {
+   "id": "odd-29",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "dreams"
+   ],
+   "text": {
+    "en": "Which language would you like to learn?",
+    "hy": "Ո՞ր լեզուն կուզեիր սովորել։",
+    "ru": "Какой язык ты хочешь выучить?"
+   },
+   "options": {
+    "en": [
+     "Which language do you speak worst?"
+    ],
+    "hy": [
+     "Ո՞ր լեզուն ես ամենավատը խոսում։"
+    ],
+    "ru": [
+     "На каком языке ты говоришь хуже всего?"
+    ]
+   }
+  },
+  {
+   "id": "odd-30",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "Which holiday do you love most?",
+    "hy": "Ո՞ր տոնն ես ամենաշատը սիրում։",
+    "ru": "Какой праздник ты любишь больше всего?"
+   },
+   "options": {
+    "en": [
+     "Which holiday do you find boring?"
+    ],
+    "hy": [
+     "Ո՞ր տոնն է քեզ համար ձանձրալի։"
+    ],
+    "ru": [
+     "Какой праздник кажется тебе скучным?"
+    ]
+   }
+  },
+  {
+   "id": "odd-31",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "What did you want to be as a kid?",
+    "hy": "Ո՞վ էիր ուզում դառնալ փոքր ժամանակ։",
+    "ru": "Кем мечталось стать в детстве?"
+   },
+   "options": {
+    "en": [
+     "Which job would you never do?"
+    ],
+    "hy": [
+     "Ո՞ր աշխատանքով երբեք չէիր զբաղվի։"
+    ],
+    "ru": [
+     "Кем ты никогда не будешь работать?"
+    ]
+   }
+  },
+  {
+   "id": "odd-32",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "memories"
+   ],
+   "text": {
+    "en": "What's the best smell in the world?",
+    "hy": "Ո՞րն է աշխարհի ամենալավ հոտը։",
+    "ru": "Какой запах самый лучший?"
+   },
+   "options": {
+    "en": [
+     "Which smell reminds you of your childhood?"
+    ],
+    "hy": [
+     "Ո՞ր հոտն է քեզ հիշեցնում մանկությունը։"
+    ],
+    "ru": [
+     "Какой запах напоминает тебе детство?"
+    ]
+   }
+  },
+  {
+   "id": "odd-33",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "What's the first thing you do when you wake up?",
+    "hy": "Ի՞նչ ես անում առաջինը, երբ արթնանում ես։",
+    "ru": "Что ты делаешь первым делом утром?"
+   },
+   "options": {
+    "en": [
+     "What's the last thing you do before you sleep?"
+    ],
+    "hy": [
+     "Ի՞նչ ես անում վերջինը, նախքան քնելը։"
+    ],
+    "ru": [
+     "Что ты делаешь последним перед сном?"
+    ]
+   }
+  },
+  {
+   "id": "odd-34",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "what-if"
+   ],
+   "text": {
+    "en": "How long could you last without your phone?",
+    "hy": "Որքա՞ն կդիմանաս առանց հեռախոսի։",
+    "ru": "Сколько ты продержишься без телефона?"
+   },
+   "options": {
+    "en": [
+     "How long could you last without sleep?"
+    ],
+    "hy": [
+     "Որքա՞ն կդիմանաս առանց քնի։"
+    ],
+    "ru": [
+     "Сколько ты продержишься без сна?"
+    ]
+   }
+  },
+  {
+   "id": "odd-35",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Which fruit do you love most?",
+    "hy": "Ո՞ր միրգն ես ամենաշատը սիրում։",
+    "ru": "Какой фрукт ты любишь больше всего?"
+   },
+   "options": {
+    "en": [
+     "Which fruit do you never buy?"
+    ],
+    "hy": [
+     "Ո՞ր միրգը երբեք չես գնում։"
+    ],
+    "ru": [
+     "Какой фрукт ты никогда не покупаешь?"
+    ]
+   }
+  },
+  {
+   "id": "odd-36",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "Who do you call with good news?",
+    "hy": "Ո՞ւմ ես զանգում, երբ լավ նորություն ունես։",
+    "ru": "Кому ты звонишь с хорошей новостью?"
+   },
+   "options": {
+    "en": [
+     "Who do you call when you need help?"
+    ],
+    "hy": [
+     "Ո՞ւմ ես զանգում, երբ օգնության կարիք ունես։"
+    ],
+    "ru": [
+     "Кому ты звонишь, когда нужна помощь?"
+    ]
+   }
+  },
+  {
+   "id": "odd-37",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "What's your favourite series?",
+    "hy": "Ո՞րն է քո սիրած սերիալը։",
+    "ru": "Какой твой любимый сериал?"
+   },
+   "options": {
+    "en": [
+     "Which series did you never finish?"
+    ],
+    "hy": [
+     "Ո՞ր սերիալը այդպես էլ չես ավարտել։"
+    ],
+    "ru": [
+     "Какой сериал так и не досмотрен?"
+    ]
+   }
+  },
+  {
+   "id": "odd-38",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "What's the most beautiful place in Armenia?",
+    "hy": "Ո՞րն է Հայաստանի ամենագեղեցիկ վայրը։",
+    "ru": "Какое самое красивое место в Армении?"
+   },
+   "options": {
+    "en": [
+     "Where in Armenia would you take a foreigner first?"
+    ],
+    "hy": [
+     "Հայաստանում ո՞ւր կտանեիր օտարերկրացուն առաջինը։"
+    ],
+    "ru": [
+     "Куда в Армении ты первым делом повезёшь иностранца?"
+    ]
+   }
+  },
+  {
+   "id": "odd-39",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "What would you name a dog?",
+    "hy": "Ի՞նչ անուն կդնեիր շանը։",
+    "ru": "Как ты назовёшь собаку?"
+   },
+   "options": {
+    "en": [
+     "What would you name your child?"
+    ],
+    "hy": [
+     "Ի՞նչ անուն կդնեիր երեխայիդ։"
+    ],
+    "ru": [
+     "Как ты назовёшь ребёнка?"
+    ]
+   }
+  },
+  {
+   "id": "odd-40",
+   "kind": "odd",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Which song do you sing in the shower?",
+    "hy": "Ո՞ր երգն ես երգում լոգանքի տակ։",
+    "ru": "Какую песню ты поёшь в душе?"
+   },
+   "options": {
+    "en": [
+     "Which song makes you cry?"
+    ],
+    "hy": [
+     "Ո՞ր երգն է քեզ լացացնում։"
+    ],
+    "ru": [
+     "От какой песни ты плачешь?"
+    ]
+   }
+  }
+ ]
+}

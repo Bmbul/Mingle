@@ -535,3 +535,9 @@ button.fact-item { cursor: pointer; }
 button.guess-answer { cursor: pointer; }
 .guess-answer.real { border-color: var(--accent); background: var(--accent-soft); }
 .guess-answer.right { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+
+/* Who got a different question? */
+.deck-badge.odd { background: rgba(255, 120, 160, 0.16); color: #ff9dbb; }
+.deck-badge.match { background: rgba(140, 230, 140, 0.16); color: #9be79b; }
+.odd-question { font-size: 30px; }
+.odd-card { border-color: var(--accent); }

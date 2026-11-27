@@ -1,0 +1,129 @@
+@page "/odd"
+@inject Text T
+@inject OddSession Session
+
+<PageTitle>@T["Odd_Game"] · Mingle</PageTitle>
+
+@if (Session.Game is not { } game)
+{
+    <main class="main center-screen">
+        <p class="muted">@T["Handoff_NotStarted"]</p>
+        <a class="btn" href="setup">@T["Home_NewGame"]</a>
+    </main>
+}
+else if (game.Stage == OddStage.Ended)
+{
+    <main class="main center-screen">
+        <h1 class="h1 big">@T["End_Title"]</h1>
+        <p class="muted">@T["Odd_EndHint"]</p>
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="Session.Restart">@T["Handoff_Again"]</button>
+        <a class="btn2" href="">@T["End_Home"]</a>
+    </footer>
+}
+else
+{
+    <header class="top spread">
+        <span class="muted">@T["Odd_RoundOf", game.Index + 1, game.Count]</span>
+        <button class="text-btn" @onclick="game.End">@T["Play_End"]</button>
+    </header>
+    @if (game.Stage == OddStage.Answering && Session.Read < Session.Players.Length)
+    {
+        var reader = Session.Players[Session.Read];
+        @if (!showing)
+        {
+            <main class="main center-screen">
+                <p class="muted">@T["Facts_PassTo"]</p>
+                <p class="blitz-name">@reader.Name</p>
+                <p class="muted center"><Icon Name="secret" Size="18" /> @T["Odd_ReadSecretly"]</p>
+            </main>
+            <footer class="foot">
+                <button class="btn" @onclick="() => showing = true">@T["Odd_ShowMine", reader.Name]</button>
+            </footer>
+        }
+        else
+        {
+            <main class="main center-screen">
+                <p class="muted">@T["Odd_YourQuestion"]</p>
+                <p class="blitz-card odd-question" lang="@reader.Lang.Code()">@game.QuestionFor(reader.Id, reader.Lang)</p>
+                <p class="muted small center">@T["Odd_Remember"]</p>
+            </main>
+            <footer class="foot">
+                <button class="btn" @onclick="Hide">@T["Odd_HideIt"]</button>
+            </footer>
+        }
+    }
+    else if (game.Stage == OddStage.Answering)
+    {
+        <main class="main center-screen">
+            <h1 class="h1 center">@T["Odd_AnswerAloud"]</h1>
+            <p class="muted center">@T["Odd_StartsWith", game.FirstToAnswer.Name]</p>
+            <p class="muted small center">@T["Odd_AnswerHint"]</p>
+        </main>
+        <footer class="foot">
+            <button class="btn" @onclick="game.StartVoting">@T["Odd_TimeToVote"]</button>
+        </footer>
+    }
+    else if (game.Stage == OddStage.Voting)
+    {
+        <main class="main">
+            <h1 class="h1">@T[game.OddCount > 1 ? "Odd_WhoTwo" : "Odd_Who"]</h1>
+            <p class="muted small">@T["Odd_AccuseHint"]</p>
+            <div class="handoff-players">
+                @foreach (var player in Session.Players)
+                {
+                    var id = player.Id;
+                    var on = accused.Contains(id);
+                    <button class="btn2 @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" @onclick="() => Toggle(id, game.OddCount)">@player.Name</button>
+                }
+            </div>
+        </main>
+        <footer class="foot">
+            <button class="btn" disabled="@(accused.Count == 0)" @onclick="() => Accuse(game)">@T["Facts_Reveal"]</button>
+        </footer>
+    }
+    else
+    {
+        <main class="main">
+            <p class="handoff-verdict @(game.Caught ? "right" : "wrong") center">@T[game.Caught ? "Odd_Caught" : "Odd_Escaped"]</p>
+            <OddReveal MainQuestion="@game.MainQuestion(Text.UiLang)" OddQuestion="@game.OddQuestion(Text.UiLang)"
+                       OddNames="@([.. game.OddIds.Select(id => Session.PlayerById(id).Name)])" />
+        </main>
+        <footer class="foot">
+            <button class="btn" @onclick="NextRound">@(game.Index + 1 < game.Count ? T["Odd_NextRound"] : T["Facts_Finish"])</button>
+        </footer>
+    }
+}
+
+@code {
+    private bool showing;
+    private readonly HashSet<string> accused = [];
+
+    private void Hide()
+    {
+        showing = false;
+        Session.Read++;
+    }
+
+    private void Toggle(string id, int max)
+    {
+        if (!accused.Remove(id))
+        {
+            if (accused.Count >= max) accused.Clear();
+            accused.Add(id);
+        }
+    }
+
+    private void Accuse(OddGame game)
+    {
+        game.Accuse([.. accused]);
+        accused.Clear();
+    }
+
+    private void NextRound()
+    {
+        Session.Game!.Next();
+        Session.Read = 0;
+    }
+}

@@ -12,7 +12,9 @@ public sealed record GuessSettings(int Rounds = 20);
 public sealed record GuessScore(string PlayerId, int Points, int Missed);
 
 /// <summary>A written answer, shown once the answer is out: the player's own first, then the guesses.</summary>
-public sealed record GuessAnswer(string PlayerId, string Text, bool IsTurnPlayer);
+/// <param name="Order">"Rank it": the order given, as positions into the card's items.</param>
+/// <param name="Matches">"Rank it": how many items the guess put in the player's place (a point each).</param>
+public sealed record GuessAnswer(string PlayerId, string Text, bool IsTurnPlayer, ImmutableArray<int> Order = default, int Matches = 0);
 
 /// <summary>Everything one player's screen needs; built per player, so nobody sees a guess before the reveal.</summary>
 /// <param name="Prompt">The card, with the turn player's name filled in, in the viewer's language.</param>
@@ -31,7 +33,8 @@ public sealed record GuessView(
     ImmutableArray<string> WrittenIds,
     ImmutableArray<GuessAnswer> Answers,
     ImmutableArray<string> RightIds,
-    ImmutableArray<GuessScore> Scores);
+    ImmutableArray<GuessScore> Scores,
+    ImmutableArray<string> Items = default);
 
 /// <summary>"Guess the answer" breaks a rule (wrong stage, someone marking for another player…).</summary>
 public sealed class GuessRuleException(string message) : Exception(message);
@@ -67,7 +70,7 @@ public sealed class GuessGame
         this.players = [.. players];
         if (this.players.Length < MinPlayers) throw new GuessRuleException($"At least {MinPlayers} players are needed.");
         var random = new Random(seed);
-        cards = [.. pool.Where(c => c.KindId == CardKinds.GuessMyAnswer.Id).DistinctBy(c => c.Id)
+        cards = [.. pool.Where(c => c.KindId == CardKinds.GuessMyAnswer.Id || c.KindId == CardKinds.RankIt.Id).DistinctBy(c => c.Id)
             .OrderBy(_ => random.Next()).Take(Math.Max(1, settings.Rounds))];
         if (cards.IsEmpty) throw new GuessRuleException("The chosen decks have no cards for this game.");
         Written = written;
@@ -76,6 +79,34 @@ public sealed class GuessGame
     }
 
     public Card? Card => Stage == GuessStage.Ended ? null : cards[Index];
+
+    /// <summary>"Rank it": the turn player puts the card's items in order and the others guess the order.</summary>
+    public bool IsRank => Card?.KindId == CardKinds.RankIt.Id;
+
+    /// <summary>Online "Rank it" scores itself: a point for every item in the same place as the player's order.</summary>
+    private bool AutoScored => IsRank && Written;
+
+    /// <summary>"Rank it" answers are orders written as positions: "2,0,3,1".</summary>
+    public static ImmutableArray<int>? ParseOrder(string text, int count)
+    {
+        var parts = (text ?? "").Split(',', StringSplitOptions.TrimEntries);
+        if (parts.Length != count) return null;
+        var order = new List<int>();
+        foreach (var part in parts)
+            if (int.TryParse(part, out var n) && n >= 0 && n < count && !order.Contains(n)) order.Add(n);
+            else return null;
+        return [.. order];
+    }
+
+    private int ItemCount => Card?.TextFor(Lang.En).Options.Length ?? 0;
+
+    private int Matches(string guesserId)
+    {
+        if (!written.TryGetValue(TurnPlayer.Id, out var real) || !written.TryGetValue(guesserId, out var guess)) return 0;
+        var a = ParseOrder(real, ItemCount);
+        var b = ParseOrder(guess, ItemCount);
+        return a is { } x && b is { } y ? x.Zip(y).Count(p => p.First == p.Second) : 0;
+    }
 
     /// <summary>The turn goes round in seat order.</summary>
     public Player TurnPlayer => players[Index % players.Length];
@@ -93,6 +124,7 @@ public sealed class GuessGame
         Require(playerId);
         var clean = (text ?? "").Trim();
         if (clean.Length == 0) throw new GuessRuleException("Write something.");
+        if (IsRank && ParseOrder(clean, ItemCount) is null) throw new GuessRuleException("Put every item in order.");
         if (clean.Length > MaxAnswerLength) clean = clean[..MaxAnswerLength];
         written[playerId] = clean;
         if (players.All(p => written.ContainsKey(p.Id))) Reveal();
@@ -111,6 +143,7 @@ public sealed class GuessGame
     public void Mark(string guesserId, bool isRight)
     {
         RequireStage(GuessStage.Marking);
+        if (AutoScored) throw new GuessRuleException("Ranked cards score themselves.");
         if (!Guessers.Contains(guesserId)) throw new GuessRuleException("Only the others' guesses can be right.");
         if (isRight) right.Add(guesserId);
         else right.Remove(guesserId);
@@ -138,6 +171,16 @@ public sealed class GuessGame
 
     private void Score()
     {
+        if (AutoScored)
+        {
+            foreach (var id in Guessers)
+            {
+                var matches = Matches(id);
+                points[id] += matches;
+                if (matches < ItemCount) missed[TurnPlayer.Id]++;
+            }
+            return;
+        }
         foreach (var id in right) points[id]++;
         missed[TurnPlayer.Id] += Guessers.Length - right.Count;
     }
@@ -153,7 +196,9 @@ public sealed class GuessGame
         var turn = ended ? null : TurnPlayer;
         var answers = Stage == GuessStage.Marking && Written
             ? players.Where(p => written.ContainsKey(p.Id))
-                .Select(p => new GuessAnswer(p.Id, written[p.Id], p.Id == turn!.Id))
+                .Select(p => new GuessAnswer(p.Id, written[p.Id], p.Id == turn!.Id,
+                    IsRank ? ParseOrder(written[p.Id], ItemCount) ?? [] : [],
+                    IsRank && p.Id != turn.Id ? Matches(p.Id) : 0))
                 .OrderByDescending(a => a.IsTurnPlayer)
                 .ToImmutableArray()
             : [];
@@ -169,7 +214,8 @@ public sealed class GuessGame
             [.. players.Where(p => written.ContainsKey(p.Id)).Select(p => p.Id)],
             answers,
             ended ? [] : RightIds,
-            Scores);
+            Scores,
+            IsRank ? Card!.TextFor(lang).Options : []);
     }
 
     private void RequireStage(GuessStage stage)
