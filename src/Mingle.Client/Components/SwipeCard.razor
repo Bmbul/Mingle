@@ -2,13 +2,13 @@
 @inject IJSRuntime JS
 
 @*
-    A card you swipe instead of tapping a button (js/cardswipe.js): swiping it up, left or right does the same thing,
-    usually "next card". A short drag springs back.
+    A card you swipe instead of tapping a button (js/cardswipe.js): it follows the finger any way, and a swipe in any
+    direction does the same thing, usually "next card". A short drag springs back.
 *@
 @* A deck: the card in the middle of the screen with two more peeking out behind it, so it looks swipeable. *@
 <div class="swipe-deck">
     <div class="swipe-stack">
-        <div class="swipe-card" @ref="element" data-up="@Flag" data-left="@Flag" data-right="@Flag">
+        <div class="swipe-card" @ref="element" data-enabled="@Flag">
             @ChildContent
         </div>
     </div>
@@ -35,7 +35,7 @@
     }
 
     [JSInvokable]
-    public Task Swiped(string direction) => OnSwipe.InvokeAsync();
+    public Task Swiped() => OnSwipe.InvokeAsync();
 
     public async ValueTask DisposeAsync()
     {

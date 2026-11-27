@@ -1,20 +1,21 @@
-// Cards you swipe instead of tapping buttons: drag a ".swipe-card" left, right or up past a threshold and it flies
-// off, then the page is told which way ("left" / "right" / "up") and the next card slides in. The card tilts while
-// dragged. Arrow keys do the same on a computer. Dragging down
-// still scrolls the page; dragging up scrolls it too when "up" is not allowed.
-// Touch uses touch events and stops the page from scrolling once the finger clearly moves sideways (the only reliable
-// way on iPhone); a mouse uses pointer events. A side that is not allowed (data-left / data-right empty) springs back.
+// Cards you swipe instead of tapping a button: drag a ".swipe-card" any way and it follows the finger, tilting as it
+// goes; let go far enough from where it started and it flies off the way it was thrown, then the page is told (the
+// next card slides in). A short drag springs back. Arrow keys do the same on a computer.
+// A drag that starts mostly downward scrolls the page instead, when the page is long enough to scroll.
+// Touch uses touch events and stops the page from scrolling once the card is being dragged (the only reliable way on
+// iPhone); a mouse uses pointer events. data-enabled="false" turns swiping off.
 (function () {
-    const threshold = 90;
+    const threshold = 100;
 
     function attach(el, ref) {
-        let startX = 0, startY = 0, dx = 0, dy = 0, axis = null, active = false, dragging = false, busy = false;
+        let startX = 0, startY = 0, dx = 0, dy = 0, active = false, dragging = false, busy = false;
 
-        const allowed = dir => el.dataset[dir] === 'true';
+        const enabled = () => el.dataset.enabled !== 'false';
+        const pageScrolls = () => document.scrollingElement.scrollHeight > window.innerHeight + 8;
 
         function begin(x, y) {
-            if (busy) return;
-            startX = x; startY = y; dx = 0; dy = 0; axis = null; active = true; dragging = false;
+            if (busy || !enabled()) return;
+            startX = x; startY = y; dx = 0; dy = 0; active = true; dragging = false;
             el.classList.remove('hint');
             el.style.transition = '';
         }
@@ -23,26 +24,14 @@
             if (!active) return false;
             const mx = x - startX, my = y - startY;
             if (!dragging) {
-                if (Math.abs(mx) < 10 && Math.abs(my) < 10) return false;
-                if (Math.abs(my) > Math.abs(mx)) {
-                    // Up is a swipe when allowed; down (or up when not allowed) is a scroll.
-                    if (my > 0 || !allowed('up')) { active = false; return false; }
-                    axis = 'y';
-                } else {
-                    axis = 'x';
-                }
+                if (Math.hypot(mx, my) < 10) return false;
+                // Mostly downward on a page that scrolls: that is a scroll, not a swipe.
+                if (my > 0 && my > Math.abs(mx) && pageScrolls()) { active = false; return false; }
                 dragging = true;
                 el.classList.add('dragging');
             }
-            if (axis === 'x') {
-                dx = mx;
-                el.style.transform = `translateX(${dx}px) rotate(${dx / 22}deg)`;
-            } else {
-                dy = Math.min(0, my);
-                el.style.transform = `translateY(${dy}px)`;
-            }
-            const dir = axis === 'x' ? (dx > 40 ? 'right' : dx < -40 ? 'left' : '') : (dy < -40 ? 'up' : '');
-            el.dataset.dir = dir && allowed(dir) ? dir : '';
+            dx = mx; dy = my;
+            el.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx / 22}deg)`;
             return true;
         }
 
@@ -51,32 +40,31 @@
             active = false;
             if (!dragging) return;
             el.classList.remove('dragging');
-            const dir = axis === 'x' ? (dx > threshold ? 'right' : dx < -threshold ? 'left' : null) : (dy < -threshold ? 'up' : null);
-            if (dir && allowed(dir)) fly(dir);
+            if (Math.hypot(dx, dy) > threshold) fly(dx, dy);
             else springBack();
         }
 
         function springBack() {
             el.style.transition = 'transform 0.2s ease-out';
             el.style.transform = '';
-            el.dataset.dir = '';
         }
 
-        async function fly(dir) {
+        // Off the screen along the way it was thrown (vx, vy), then tell the page.
+        async function fly(vx, vy) {
             busy = true;
             el.classList.remove('hint');
             try { localStorage.setItem('mingle.swiped', '1'); } catch { }
-            el.dataset.dir = dir;
-            el.style.transition = 'transform 0.2s ease-in, opacity 0.2s ease-in';
-            el.style.transform = dir === 'up' ? 'translateY(-120vh)' : `translateX(${dir === 'right' ? 140 : -140}%) rotate(${dir === 'right' ? 18 : -18}deg)`;
+            const length = Math.hypot(vx, vy) || 1;
+            const far = Math.max(window.innerWidth, window.innerHeight) * 1.3;
+            el.style.transition = 'transform 0.22s ease-in, opacity 0.22s ease-in';
+            el.style.transform = `translate(${vx / length * far}px, ${vy / length * far}px) rotate(${vx / length * 18}deg)`;
             el.style.opacity = '0';
-            await new Promise(r => setTimeout(r, 190));
-            try { await ref.invokeMethodAsync('Swiped', dir); } catch { /* the page moved on */ }
+            await new Promise(r => setTimeout(r, 200));
+            try { await ref.invokeMethodAsync('Swiped'); } catch { /* the page moved on */ }
             // The next card (Blazor reuses the element) comes in from below.
             el.style.transition = '';
             el.style.transform = '';
             el.style.opacity = '';
-            el.dataset.dir = '';
             el.classList.remove('entering');
             void el.offsetWidth;
             el.classList.add('entering');
@@ -95,10 +83,11 @@
         };
         const onPointerMove = e => { if (e.pointerType !== 'touch' && move(e.clientX, e.clientY)) e.preventDefault(); };
         const onPointerUp = e => { if (e.pointerType !== 'touch') finish(); };
+        const keys = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1] };
         const onKey = e => {
-            if (busy || e.target.closest?.('input, textarea, select')) return;
-            const dir = e.key === 'ArrowLeft' ? 'left' : e.key === 'ArrowRight' ? 'right' : e.key === 'ArrowUp' ? 'up' : null;
-            if (dir && allowed(dir)) { e.preventDefault(); fly(dir); }
+            if (busy || !enabled() || e.target.closest?.('input, textarea, select')) return;
+            const way = keys[e.key];
+            if (way) { e.preventDefault(); fly(way[0], way[1]); }
         };
 
         // The first time on this phone, the card nudges side to side to show it can be swiped.
