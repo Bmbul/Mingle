@@ -450,7 +450,7 @@
   <data name="Guess_ThenProve" xml:space="preserve"><value>Потом {0} показывает ответ в телефоне.</value></data>
   <data name="Guess_Answered" xml:space="preserve"><value>{0}: ответ готов</value></data>
   <data name="Guess_WhoGotIt" xml:space="preserve"><value>{0}, кто угадал?</value></data>
-  <data name="Guess_WhoGotItHint" xml:space="preserve"><value>Отметь всех, кто угадал или был ближе всех: каждому по очку.</value></data>
+  <data name="Guess_WhoGotItHint" xml:space="preserve"><value>Отметь, кто угадал, и смахни. Никто? Просто смахни.</value></data>
   <data name="Guess_Choosing" xml:space="preserve"><value>{0} выбирает, кто угадал</value></data>
   <data name="Guess_YourTurn" xml:space="preserve"><value>Этот вопрос о тебе: ответь, остальные угадывают</value></data>
   <data name="Guess_YourAnswer" xml:space="preserve"><value>Твой ответ</value></data>

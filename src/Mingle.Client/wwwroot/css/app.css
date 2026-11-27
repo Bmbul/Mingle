@@ -50,6 +50,8 @@
 
 html, body {
     margin: 0;
+    /* No double-tap zoom (a quick double tap while playing zoomed the page in); pinch to zoom still works. */
+    touch-action: manipulation;
     background: var(--bg);
     color: var(--text);
     font-family: 'Mingle Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -610,4 +612,12 @@ button.guess-answer { cursor: pointer; }
 /* While a swipe card is on screen the page holds still: no rubber-band bounce or pull-to-refresh, and touches
    outside the card don't drag the page around (html.swipe-page is set by js/cardswipe.js). */
 html.swipe-page, html.swipe-page body { overscroll-behavior: none; }
-html.swipe-page .main { touch-action: pan-x pan-y; }
+html.swipe-page .main { touch-action: manipulation; }
+/* A card inside a swipe panel (the question in Guess the answer, the statement in Ես երբեք…) is part of the panel,
+   not a second card: flat, and never stretched to fill the screen. */
+.swipe-deck .swipe-panel .card-face {
+    min-height: 0; padding: 0; gap: 10px; background: transparent; border: 0; box-shadow: none; justify-content: flex-start;
+}
+.swipe-deck .swipe-panel .card-face .kind { position: static; }
+.swipe-deck .swipe-panel .card-face .prompt { font-size: 26px; }
+.handoff-players .btn2 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 10px; padding-right: 10px; }

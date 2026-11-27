@@ -117,7 +117,8 @@
         holders++;
         document.documentElement.classList.add('swipe-page');
         const onOutsideMove = e => {
-            if (el.contains(e.target) || pageScrolls() || !e.cancelable) return;
+            // Two fingers are a pinch: always let the page zoom.
+            if (e.touches.length > 1 || el.contains(e.target) || pageScrolls() || !e.cancelable) return;
             if (e.target.closest?.('input, textarea, select, .sheet, .confirm')) return;
             e.preventDefault();
         };

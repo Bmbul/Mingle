@@ -444,7 +444,7 @@
   <data name="Guess_ThenProve" xml:space="preserve"><value>Հետո պատասխանը հեռախոսում ցույց է տալիս՝ {0}։</value></data>
   <data name="Guess_Answered" xml:space="preserve"><value>Պատասխանեց՝ {0}</value></data>
   <data name="Guess_WhoGotIt" xml:space="preserve"><value>{0}, ո՞վ գուշակեց</value></data>
-  <data name="Guess_WhoGotItHint" xml:space="preserve"><value>Նշիր բոլոր նրանց, ովքեր ճիշտ կամ ամենամոտ գուշակեցին՝ ամեն մեկին մեկ միավոր։</value></data>
+  <data name="Guess_WhoGotItHint" xml:space="preserve"><value>Սեղմիր, թե ով գուշակեց, հետո սահեցրու։ Ոչ ոք չգուշակե՞ց՝ պարզապես սահեցրու։</value></data>
   <data name="Guess_Choosing" xml:space="preserve"><value>Ո՞վ գուշակեց. ընտրում է՝ {0}</value></data>
   <data name="Guess_YourTurn" xml:space="preserve"><value>Այս հարցը քո մասին է. պատասխանիր, մյուսները գուշակում են</value></data>
   <data name="Guess_YourAnswer" xml:space="preserve"><value>Քո պատասխանը</value></data>

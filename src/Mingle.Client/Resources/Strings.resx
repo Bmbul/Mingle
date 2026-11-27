@@ -444,7 +444,7 @@
   <data name="Guess_ThenProve" xml:space="preserve"><value>Then {0} shows the answer on the phone.</value></data>
   <data name="Guess_Answered" xml:space="preserve"><value>{0} answered</value></data>
   <data name="Guess_WhoGotIt" xml:space="preserve"><value>{0}, who got it right?</value></data>
-  <data name="Guess_WhoGotItHint" xml:space="preserve"><value>Tap everyone who guessed right or closest: a point each.</value></data>
+  <data name="Guess_WhoGotItHint" xml:space="preserve"><value>Tap who got it, then swipe. Nobody? Just swipe.</value></data>
   <data name="Guess_Choosing" xml:space="preserve"><value>{0} is choosing who got it</value></data>
   <data name="Guess_YourTurn" xml:space="preserve"><value>This one is about you: answer it, the others guess</value></data>
   <data name="Guess_YourAnswer" xml:space="preserve"><value>Your answer</value></data>
