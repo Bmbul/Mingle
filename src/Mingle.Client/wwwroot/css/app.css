@@ -382,10 +382,14 @@ a.check-row { text-decoration: none; color: inherit; }
 .pager-dot.on { background: var(--accent); width: 20px; border-radius: 4px; }
 
 /* Theme tabs above the topic pages; every page keeps the height of the tallest */
-.pager-tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; margin-bottom: 10px; border-bottom: 1px solid var(--border); }
+/* Only sideways scrolling: on iPhone a row that can also scroll a pixel up and down ends up showing half its labels. */
+.pager-tabs {
+    display: flex; gap: 4px; overflow-x: auto; overflow-y: hidden; flex-shrink: 0; scrollbar-width: none;
+    touch-action: pan-x; overscroll-behavior: contain; margin-bottom: 10px; box-shadow: inset 0 -1px 0 var(--border);
+}
 .pager-tabs::-webkit-scrollbar { display: none; }
 .pager-tab {
-    flex: none; padding: 8px 10px; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    flex: none; padding: 8px 10px 9px; border: 0; border-bottom: 2px solid transparent; white-space: nowrap; line-height: 1.3;
     background: transparent; color: var(--muted); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
 }
 .pager-tab.on { color: var(--accent); border-bottom-color: var(--accent); }
@@ -567,7 +571,7 @@ button.guess-answer { cursor: pointer; }
 .swipe-stack::before { transform: translateY(26px) scale(0.9); opacity: 0.45; color: transparent; }
 .swipe-stack .swipe-card { position: relative; z-index: 1; }
 .swipe-deck .card-face { position: relative; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35); }
-.swipe-deck .card-face:not(.compact) { min-height: min(62vh, 520px); justify-content: center; padding: 56px 24px 28px; gap: 18px; }
+.swipe-deck .card-face:not(.compact) { min-height: min(56dvh, 520px); justify-content: center; padding: 56px 24px 28px; gap: 18px; }
 .swipe-deck .card-face:not(.compact) .kind { position: absolute; top: 24px; left: 24px; right: 24px; }
 .swipe-deck .card-face:not(.compact) .prompt { font-size: 30px; }
 /* The first card ever: a gentle side-to-side nudge, until the first real swipe. */
@@ -603,3 +607,7 @@ button.guess-answer { cursor: pointer; }
 .swipe-stack.last::before, .swipe-stack.last::after { content: none; }
 /* A footer whose buttons are all hidden takes no room. */
 .foot:not(:has(*)) { display: none; }
+/* While a swipe card is on screen the page holds still: no rubber-band bounce or pull-to-refresh, and touches
+   outside the card don't drag the page around (html.swipe-page is set by js/cardswipe.js). */
+html.swipe-page, html.swipe-page body { overscroll-behavior: none; }
+html.swipe-page .main { touch-action: pan-x pan-y; }

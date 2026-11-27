@@ -8,6 +8,7 @@
 // dragged, and the page is told which side.
 (function () {
     const threshold = 100;
+    let holders = 0; // swipe cards on screen; the page holds still while there is one
 
     function attach(el, ref) {
         let startX = 0, startY = 0, dx = 0, dy = 0, active = false, dragging = false, busy = false;
@@ -111,6 +112,17 @@
         try { seen = localStorage.getItem('mingle.swiped') === '1'; } catch { }
         if (!seen) el.classList.add('hint');
 
+        // Hold the page still while this card is on screen; outside the card, a drag on a page that fits the
+        // screen would only bounce it or pull it down to reload.
+        holders++;
+        document.documentElement.classList.add('swipe-page');
+        const onOutsideMove = e => {
+            if (el.contains(e.target) || pageScrolls() || !e.cancelable) return;
+            if (e.target.closest?.('input, textarea, select, .sheet, .confirm')) return;
+            e.preventDefault();
+        };
+        document.addEventListener('touchmove', onOutsideMove, { passive: false });
+
         el.addEventListener('touchstart', onTouchStart, { passive: true });
         el.addEventListener('touchmove', onTouchMove, { passive: false });
         el.addEventListener('touchend', finish);
@@ -122,6 +134,8 @@
 
         return {
             detach() {
+                if (--holders <= 0) { holders = 0; document.documentElement.classList.remove('swipe-page'); }
+                document.removeEventListener('touchmove', onOutsideMove);
                 window.removeEventListener('pointermove', onPointerMove);
                 window.removeEventListener('pointerup', onPointerUp);
                 document.removeEventListener('keydown', onKey);
