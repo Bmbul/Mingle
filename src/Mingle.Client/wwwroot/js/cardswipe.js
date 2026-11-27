@@ -32,6 +32,7 @@
             }
             dx = mx; dy = my;
             el.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx / 22}deg)`;
+            pull(Math.min(1, Math.hypot(dx, dy) / (threshold * 1.6)));
             return true;
         }
 
@@ -44,9 +45,13 @@
             else springBack();
         }
 
+        // How far the next card (the stack behind) has grown into place, from 0 to 1.
+        function pull(amount) { el.parentElement?.style.setProperty('--pull', amount); }
+
         function springBack() {
             el.style.transition = 'transform 0.2s ease-out';
             el.style.transform = '';
+            pull(0);
         }
 
         // Off the screen along the way it was thrown (vx, vy), then tell the page.
@@ -59,12 +64,14 @@
             el.style.transition = 'transform 0.22s ease-in, opacity 0.22s ease-in';
             el.style.transform = `translate(${vx / length * far}px, ${vy / length * far}px) rotate(${vx / length * 18}deg)`;
             el.style.opacity = '0';
+            pull(1);
             await new Promise(r => setTimeout(r, 200));
             try { await ref.invokeMethodAsync('Swiped'); } catch { /* the page moved on */ }
             // The next card (Blazor reuses the element) comes in from below.
             el.style.transition = '';
             el.style.transform = '';
             el.style.opacity = '';
+            pull(0);
             el.classList.remove('entering');
             void el.offsetWidth;
             el.classList.add('entering');
