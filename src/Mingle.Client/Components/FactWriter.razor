@@ -1,8 +1,11 @@
 @inject Text T
 
-@* Writing your facts: one prompt and three facts with one marked (One truth), or one fact per prompt (Whose fact). *@
+@*
+    Writing your facts. One truth: one prompt and three facts, one of them marked. Whose fact: one fact per prompt.
+    True or false: one fact per prompt, each marked true or made up.
+*@
 <div class="stack">
-    @if (OneTruth)
+    @if (Kind == FactGameKind.OneTruth)
     {
         <div class="card fact-prompt">
             <span class="label">@T["Facts_Prompt"]</span>
@@ -14,60 +17,103 @@
         </div>
         <p class="muted small">@T[FindTheLie ? "Facts_WriteLieHint" : "Facts_WriteTruthHint"]</p>
     }
+    else if (Kind == FactGameKind.TrueOrFalse)
+    {
+        <p class="muted small">@T["Facts_WriteTrueOrFalseHint"]</p>
+        @if (CanSwap)
+        {
+            <button class="text-btn" @onclick="OnSwap"><Icon Name="refresh" Size="16" /> @T["Facts_OtherPrompt"]</button>
+        }
+    }
     @for (var i = 0; i < Count; i++)
     {
         var index = i;
-        <div class="fact-input @(marked == index ? "marked" : "")">
-            @if (!OneTruth)
+        var on = Kind == FactGameKind.OneTruth ? marked == index : truth[index] is not null;
+        <div class="fact-input @(on ? "marked" : "")">
+            @if (Kind != FactGameKind.OneTruth)
             {
                 <span class="label" lang="@Lang.Code()">@Prompts.ElementAtOrDefault(index)</span>
             }
             <label class="visually-hidden" for="fact-@index">@T["Facts_FactN", index + 1]</label>
             <textarea id="fact-@index" class="field area" maxlength="@FactGame.MaxFactLength" placeholder="@T["Facts_FactN", index + 1]"
                       @bind="texts[index]" @bind:event="oninput"></textarea>
-            @if (OneTruth)
+            @if (Kind == FactGameKind.OneTruth)
             {
                 <button class="chip @(marked == index ? "on" : "")" aria-pressed="@(marked == index ? "true" : "false")" @onclick="() => marked = index">
                     @(marked == index ? "✓ " : "")@T[FindTheLie ? "Facts_ThisIsTheLie" : "Facts_ThisIsTrue"]
                 </button>
+            }
+            else if (Kind == FactGameKind.TrueOrFalse)
+            {
+                <div class="chips" role="group" aria-label="@T["Facts_FactN", index + 1]">
+                    <button class="chip @(truth[index] == true ? "on" : "")" aria-pressed="@(truth[index] == true ? "true" : "false")"
+                            @onclick="() => truth[index] = true">@T["Facts_IsTrue"]</button>
+                    <button class="chip @(truth[index] == false ? "on" : "")" aria-pressed="@(truth[index] == false ? "true" : "false")"
+                            @onclick="() => truth[index] = false">@T["Facts_IsMadeUp"]</button>
+                </div>
             }
         </div>
     }
     <button class="btn" disabled="@(!Complete || busy)" @onclick="Done">@T["Facts_Done"]</button>
     @if (!Complete)
     {
-        <p class="muted small center">@T[OneTruth && marked < 0 && texts.All(t => t.Trim().Length > 0) ? (FindTheLie ? "Facts_MarkLie" : "Facts_MarkTrue") : "Facts_WriteAll"]</p>
+        <p class="muted small center">@T[MissingNote]</p>
     }
 </div>
 
 @code {
+    [Parameter] public FactGameKind Kind { get; set; }
     [Parameter] public ImmutableArray<string> Prompts { get; set; } = [];
-    [Parameter] public bool OneTruth { get; set; }
     [Parameter] public bool FindTheLie { get; set; }
-    /// <summary>Whose fact: how many facts (one per prompt).</summary>
+    /// <summary>Whose fact and True or false: how many facts (one per prompt).</summary>
     [Parameter] public int FactsEach { get; set; } = 1;
     [Parameter] public bool CanSwap { get; set; }
     [Parameter] public EventCallback OnSwap { get; set; }
+    /// <summary>The facts and what is marked: One truth, the true fact's position (or the lie's); True or false, one bit per true fact.</summary>
     [Parameter] public EventCallback<(ImmutableArray<string> Texts, int Marked)> OnDone { get; set; }
     [Parameter] public Lang Lang { get; set; }
 
-    private int Count => OneTruth ? FactGame.FactsInOneTruth : FactsEach;
+    private int Count => Kind == FactGameKind.OneTruth ? FactGame.FactsInOneTruth : FactsEach;
     private string[] texts = [];
+    private bool?[] truth = [];
     private int marked = -1;
     private bool busy;
 
     protected override void OnParametersSet()
     {
-        if (texts.Length != Count) texts = [.. Enumerable.Repeat("", Count)];
+        if (texts.Length != Count)
+        {
+            texts = [.. Enumerable.Repeat("", Count)];
+            truth = new bool?[Count];
+        }
     }
 
-    private bool Complete => texts.All(t => t.Trim().Length > 0) && (!OneTruth || marked >= 0);
+    private bool AllWritten => texts.All(t => t.Trim().Length > 0);
+
+    private bool AllMarked => Kind switch
+    {
+        FactGameKind.OneTruth => marked >= 0,
+        FactGameKind.TrueOrFalse => truth.All(t => t is not null),
+        _ => true,
+    };
+
+    private bool Complete => AllWritten && AllMarked;
+
+    private string MissingNote => !AllWritten ? "Facts_WriteAll"
+        : Kind == FactGameKind.TrueOrFalse ? "Facts_MarkEach"
+        : FindTheLie ? "Facts_MarkLie" : "Facts_MarkTrue";
 
     private async Task Done()
     {
         if (!Complete) return;
+        var mark = Kind switch
+        {
+            FactGameKind.OneTruth => marked,
+            FactGameKind.TrueOrFalse => truth.Select((t, i) => t == true ? 1 << i : 0).Sum(),
+            _ => 0,
+        };
         busy = true;
-        try { await OnDone.InvokeAsync(([.. texts.Select(t => t.Trim())], OneTruth ? marked : 0)); }
+        try { await OnDone.InvokeAsync(([.. texts.Select(t => t.Trim())], mark)); }
         finally { busy = false; }
     }
 }

@@ -427,4 +427,15 @@
   <data name="Facts_WhoseFactLocalLine" xml:space="preserve"><value>Ամեն մեկը գաղտնի գրում է փաստեր իր մասին, դուք բարձրաձայն գուշակում եք՝ ումն է</value></data>
   <data name="Facts_GuessAloud" xml:space="preserve"><value>Գուշակեք բարձրաձայն, վիճեք, հետո բացեք։ Հեղինակը թող չմատնի իրեն։</value></data>
   <data name="Facts_GuessAloudKeep" xml:space="preserve"><value>Գուշակեք բարձրաձայն։ Ով ինչ է գրել՝ կերևա վերջում։</value></data>
+  <data name="Facts_TrueOrFalse" xml:space="preserve"><value>Ճիշտ է, թե՞ սուտ</value></data>
+  <data name="Facts_TrueOrFalseLine" xml:space="preserve"><value>Ամեն մեկը գրում է փաստեր իր մասին՝ ճիշտ կամ հորինված, կարդում եք ու վիճում</value></data>
+  <data name="Facts_TrueOrFalseOnlineLine" xml:space="preserve"><value>Ամեն մեկը գրում է փաստեր իր մասին՝ ճիշտ կամ հորինված, մյուսները քվեարկում են</value></data>
+  <data name="Facts_WriteTrueOrFalseHint" xml:space="preserve"><value>Գրիր փաստեր քո մասին։ Ամեն մեկը կարող է ճիշտ լինել կամ հորինված. նշիր՝ որն է որը։</value></data>
+  <data name="Facts_IsTrue" xml:space="preserve"><value>Ճիշտ է</value></data>
+  <data name="Facts_IsMadeUp" xml:space="preserve"><value>Հորինված է</value></data>
+  <data name="Facts_MarkEach" xml:space="preserve"><value>Նշիր՝ ամեն փաստը ճիշտ է, թե հորինված։</value></data>
+  <data name="Facts_FactOf" xml:space="preserve"><value>Փաստը՝</value></data>
+  <data name="Facts_TrueOrMadeUp" xml:space="preserve"><value>Ճիշտ է, թե՞ հորինված</value></data>
+  <data name="Facts_ItWasTrue" xml:space="preserve"><value>Ճիշտ է։</value></data>
+  <data name="Facts_ItWasMadeUp" xml:space="preserve"><value>Հորինված է։</value></data>
 </root>

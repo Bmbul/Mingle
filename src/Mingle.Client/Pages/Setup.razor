@@ -80,7 +80,7 @@
         </section>
     }
 
-    @if (whoseFact)
+    @if (whoseFact || trueOrFalse)
     {
         <section class="stack">
             <h2 class="label">@T["Facts_Each"]</h2>
@@ -92,6 +92,9 @@
                 }
             </div>
         </section>
+    }
+    @if (whoseFact)
+    {
         <section class="stack">
             <h2 class="label">@T["Facts_ShowAuthor"]</h2>
             <div class="chips" role="group" aria-label="@T["Facts_ShowAuthor"]">
@@ -335,25 +338,29 @@
     /// <summary>The fact games, on one phone or online: "One truth" and "Whose fact?".</summary>
     private bool oneTruth;
     private bool whoseFact;
+    private bool trueOrFalse;
     private bool findTheLie;
     private int factsEach = 1;
     private bool revealEach = true;
-    private bool Facts => oneTruth || whoseFact;
+    private bool Facts => oneTruth || whoseFact || trueOrFalse;
 
     private FactSettings? FactChoice => oneTruth ? new FactSettings(FactGameKind.OneTruth, findTheLie)
         : whoseFact ? new FactSettings(FactGameKind.WhoseFact, FactsEach: factsEach, RevealEachFact: revealEach)
+        : trueOrFalse ? new FactSettings(FactGameKind.TrueOrFalse, FactsEach: factsEach)
         : null;
 
     /// <summary>The questions game: out loud or with secret answers (passThePhone), and always online.</summary>
     private bool Questions => !blitz && !stories && !handoff && !Facts;
 
-    private string GameId => blitz ? "blitz" : stories ? "stories" : handoff ? "handoff" : oneTruth ? "onetruth" : whoseFact ? "whosefact" : "questions";
+    private string GameId => blitz ? "blitz" : stories ? "stories" : handoff ? "handoff" : oneTruth ? "onetruth" : whoseFact ? "whosefact" : trueOrFalse ? "trueorfalse" : "questions";
 
     /// <summary>One phone has every game; online has the games where everyone uses their own phone.</summary>
     private IEnumerable<(string Id, string Icon, string Label)> GameChoices => Online
-        ? [("questions", "chat", "Setup_Questions"), ("onetruth", "idea", "Facts_OneTruth"), ("whosefact", "people", "Facts_WhoseFact")]
+        ? [("questions", "chat", "Setup_Questions"), ("onetruth", "idea", "Facts_OneTruth"), ("whosefact", "people", "Facts_WhoseFact"),
+           ("trueorfalse", "check", "Facts_TrueOrFalse")]
         : [("questions", "chat", "Setup_Questions"), ("blitz", "bolt", "Setup_Blitz"), ("stories", "book", "Setup_Stories"),
-           ("handoff", "secret", "Setup_Handoff"), ("onetruth", "idea", "Facts_OneTruth"), ("whosefact", "people", "Facts_WhoseFact")];
+           ("handoff", "secret", "Setup_Handoff"), ("onetruth", "idea", "Facts_OneTruth"), ("whosefact", "people", "Facts_WhoseFact"),
+           ("trueorfalse", "check", "Facts_TrueOrFalse")];
 
     private void PickMode(string which)
     {
@@ -362,6 +369,7 @@
         handoff = which == "handoff";
         oneTruth = which == "onetruth";
         whoseFact = which == "whosefact";
+        trueOrFalse = which == "trueorfalse";
         // A deck picked for one game is no use in another.
         deckIds.RemoveWhere(id => decks.FirstOrDefault(d => d.Id == id)?.Style != ModeStyle);
         // "Give it to…" needs three players; add the rows so the placeholders can play.
@@ -445,6 +453,7 @@
         {
             var parts = new List<string>();
             if (oneTruth) parts.Add(T[Online ? "Facts_OneTruthOnlineLine" : "Facts_OneTruthLine"]);
+            else if (trueOrFalse) parts.Add(T[Online ? "Facts_TrueOrFalseOnlineLine" : "Facts_TrueOrFalseLine"]);
             else if (whoseFact) parts.Add(T[Online ? "Facts_WhoseFactLine" : "Facts_WhoseFactLocalLine"]);
             else if (!Online) parts.Add(stories ? T["Setup_StoriesLine"] : handoff ? T[handoffSecret ? "Setup_HandoffLine" : "Setup_HandoffAloudLine"] : blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
             if (Questions && (Online || passThePhone))
@@ -471,7 +480,7 @@
         :
         Game.BuildPool(decks.Where(d => deckIds.Contains(d.Id)), Settings, NamedPlayers.IsEmpty ? [new Player("x", "x", Text.UiLang)] : NamedPlayers).Length;
 
-    private int NeededPlayers => Online ? 1 : handoff ? Handoffs.MinPlayers : oneTruth ? FactGame.MinPlayers(FactGameKind.OneTruth) : whoseFact ? FactGame.MinPlayers(FactGameKind.WhoseFact) : Game.MinPlayers;
+    private int NeededPlayers => Online ? 1 : handoff ? Handoffs.MinPlayers : oneTruth || trueOrFalse ? FactGame.MinPlayers(FactGameKind.OneTruth) : whoseFact ? FactGame.MinPlayers(FactGameKind.WhoseFact) : Game.MinPlayers;
 
     private bool CanStart => NamedPlayers.Length >= NeededPlayers && (stories || (PicksInLobby ? !decks.IsEmpty : MatchingCards > 0));
 

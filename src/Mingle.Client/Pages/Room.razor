@@ -36,7 +36,7 @@ else if (room.Stage == RoomStage.Lobby)
 
         @if (room.Settings.Facts is { } factGame)
         {
-            <p class="muted center"><Icon Name="idea" Size="16" /> @T[factGame.Kind == FactGameKind.OneTruth ? "Facts_OneTruth" : "Facts_WhoseFact"]</p>
+            <p class="muted center"><Icon Name="idea" Size="16" /> @T[$"Facts_{factGame.Kind}"]</p>
         }
         <h2 class="label">@T["Setup_Players"] · @room.Players.Length</h2>
         @foreach (var player in room.Players)

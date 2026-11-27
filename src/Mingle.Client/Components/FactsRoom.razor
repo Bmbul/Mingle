@@ -6,13 +6,14 @@
     var view = Facts;
     var settings = view.Settings;
     var oneTruth = settings.Kind == FactGameKind.OneTruth;
+    var trueOrFalse = settings.Kind == FactGameKind.TrueOrFalse;
     var myLang = Room.You?.Lang ?? Text.UiLang;
 }
 
 @if (view.Stage != FactStage.Ended)
 {
     <header class="top spread">
-        <span class="muted">@(view.Stage == FactStage.Writing ? T[oneTruth ? "Facts_OneTruth" : "Facts_WhoseFact"] : T["Facts_ItemOf", view.ItemNumber, view.ItemCount])</span>
+        <span class="muted">@(view.Stage == FactStage.Writing ? T[$"Facts_{settings.Kind}"] : T["Facts_ItemOf", view.ItemNumber, view.ItemCount])</span>
         <button class="text-btn" aria-expanded="@(confirmEnd ? "true" : "false")" @onclick="() => confirmEnd = !confirmEnd">@T["Play_End"]</button>
     </header>
     @if (confirmEnd)
@@ -32,7 +33,7 @@
     <main class="main">
         @if (!view.YouWrote)
         {
-            <FactWriter OneTruth="oneTruth" FindTheLie="settings.FindTheLie" FactsEach="settings.FactsEach" Lang="myLang"
+            <FactWriter Kind="settings.Kind" FindTheLie="settings.FindTheLie" FactsEach="settings.FactsEach" Lang="myLang"
                         Prompts="view.MyPrompts" CanSwap="view.CanSwapPrompt" OnSwap="Rooms.SwapPrompt"
                         OnDone="r => Rooms.WriteFacts(r.Texts, r.Marked)" />
         }
@@ -60,7 +61,6 @@
 else if (view.Item is { } item && view.Stage is FactStage.Showing or FactStage.Revealed)
 {
     var revealed = view.Stage == FactStage.Revealed;
-    var iVote = !item.YouWrote || !oneTruth;
     <main class="main">
         @if (oneTruth)
         {
@@ -75,6 +75,44 @@ else if (view.Item is { } item && view.Stage is FactStage.Showing or FactStage.R
             @if (!revealed)
             {
                 <p class="muted center">@(item.YouWrote ? T["Facts_TheyAreGuessing"] : item.MyVote is null ? T[settings.FindTheLie ? "Facts_PickLie" : "Facts_PickTruth"] : T["Facts_CanChange"])</p>
+            }
+        }
+        else if (trueOrFalse)
+        {
+            <p class="label">@T["Facts_FactOf"]</p>
+            <h1 class="h1 big">@NameOf(item.AuthorId!)</h1>
+            @if (item.Prompt is { } prompt)
+            {
+                <p class="muted">@prompt</p>
+            }
+            <div class="card fact-big"><span>@item.Texts[0]</span></div>
+            @if (!revealed)
+            {
+                @if (item.YouWrote)
+                {
+                    <p class="muted center">@T["Facts_TheyAreGuessing"]</p>
+                }
+                else
+                {
+                    <div class="handoff-players">
+                        @foreach (var (choice, label) in new[] { (FactItem.True, "Facts_IsTrue"), (FactItem.False, "Facts_IsMadeUp") })
+                        {
+                            var c = choice;
+                            <button class="btn2 @(item.MyVote == c ? "on" : "")" aria-pressed="@(item.MyVote == c ? "true" : "false")"
+                                    @onclick="() => Rooms.VoteFact(c)">@T[label]</button>
+                        }
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="handoff-verdict right center">@T[item.Answer == FactItem.True ? "Facts_ItWasTrue" : "Facts_ItWasMadeUp"]</p>
+                <div class="stack-tight">
+                    @foreach (var vote in item.Votes)
+                    {
+                        <p class="vote-line @(vote.Right ? "right" : "")">@NameOf(vote.VoterId) → @T[vote.Choice == FactItem.True ? "Facts_IsTrue" : "Facts_IsMadeUp"] @(vote.Right ? "✓" : "")</p>
+                    }
+                </div>
             }
         }
         else
@@ -183,7 +221,8 @@ else
     private IEnumerable<(string Title, string Who)> Awards(FactView view)
     {
         if (view.Scores.IsEmpty) yield break;
-        var oneTruth = view.Settings.Kind == FactGameKind.OneTruth;
+        // One truth and True or false reward spotting lies and telling them; Whose fact, knowing the group.
+        var oneTruth = view.Settings.Kind != FactGameKind.WhoseFact;
         var fooled = view.Scores.Max(s => s.Fooled);
         var right = view.Scores.Max(s => s.RightGuesses);
         if (right > 0)

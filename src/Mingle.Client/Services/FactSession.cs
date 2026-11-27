@@ -16,6 +16,7 @@ public sealed class FactSession
     public FactSettings Settings { get; private set; } = new();
     public bool FindTheLie => Settings.FindTheLie;
     public bool OneTruth => Settings.Kind == FactGameKind.OneTruth;
+    public FactGameKind Kind => Settings.Kind;
     public FactGame? Game { get; private set; }
 
     public bool Ready => Game is not null;

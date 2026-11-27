@@ -427,4 +427,15 @@
   <data name="Facts_WhoseFactLocalLine" xml:space="preserve"><value>Everyone writes facts about themselves in secret; guess out loud whose each one is</value></data>
   <data name="Facts_GuessAloud" xml:space="preserve"><value>Guess out loud, argue, then reveal. The author keeps a straight face!</value></data>
   <data name="Facts_GuessAloudKeep" xml:space="preserve"><value>Guess out loud. Who wrote what comes out at the end.</value></data>
+  <data name="Facts_TrueOrFalse" xml:space="preserve"><value>True or false?</value></data>
+  <data name="Facts_TrueOrFalseLine" xml:space="preserve"><value>Everyone writes facts about themselves, true or made up; read each one out and argue</value></data>
+  <data name="Facts_TrueOrFalseOnlineLine" xml:space="preserve"><value>Everyone writes facts about themselves, true or made up; the others vote</value></data>
+  <data name="Facts_WriteTrueOrFalseHint" xml:space="preserve"><value>Write facts about yourself. Each one can be true or made up: mark which.</value></data>
+  <data name="Facts_IsTrue" xml:space="preserve"><value>True</value></data>
+  <data name="Facts_IsMadeUp" xml:space="preserve"><value>Made up</value></data>
+  <data name="Facts_MarkEach" xml:space="preserve"><value>Mark each fact true or made up.</value></data>
+  <data name="Facts_FactOf" xml:space="preserve"><value>Fact of</value></data>
+  <data name="Facts_TrueOrMadeUp" xml:space="preserve"><value>True or made up?</value></data>
+  <data name="Facts_ItWasTrue" xml:space="preserve"><value>It's true!</value></data>
+  <data name="Facts_ItWasMadeUp" xml:space="preserve"><value>Made up!</value></data>
 </root>

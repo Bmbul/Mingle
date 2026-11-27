@@ -433,4 +433,15 @@
   <data name="Facts_WhoseFactLocalLine" xml:space="preserve"><value>Каждый тайно пишет факты о себе, остальные вслух угадывают, чей он</value></data>
   <data name="Facts_GuessAloud" xml:space="preserve"><value>Угадывайте вслух, спорьте, потом откройте. Автор, не выдай себя!</value></data>
   <data name="Facts_GuessAloudKeep" xml:space="preserve"><value>Угадывайте вслух. Кто что написал, станет видно в конце.</value></data>
+  <data name="Facts_TrueOrFalse" xml:space="preserve"><value>Правда или ложь?</value></data>
+  <data name="Facts_TrueOrFalseLine" xml:space="preserve"><value>Каждый пишет факты о себе, правдивые или выдуманные; читаете и спорите</value></data>
+  <data name="Facts_TrueOrFalseOnlineLine" xml:space="preserve"><value>Каждый пишет факты о себе, правдивые или выдуманные; остальные голосуют</value></data>
+  <data name="Facts_WriteTrueOrFalseHint" xml:space="preserve"><value>Напиши факты о себе. Каждый может быть правдой или выдумкой: отметь, что есть что.</value></data>
+  <data name="Facts_IsTrue" xml:space="preserve"><value>Правда</value></data>
+  <data name="Facts_IsMadeUp" xml:space="preserve"><value>Выдумка</value></data>
+  <data name="Facts_MarkEach" xml:space="preserve"><value>Отметь у каждого факта: правда или выдумка.</value></data>
+  <data name="Facts_FactOf" xml:space="preserve"><value>Факт игрока</value></data>
+  <data name="Facts_TrueOrMadeUp" xml:space="preserve"><value>Правда или выдумка?</value></data>
+  <data name="Facts_ItWasTrue" xml:space="preserve"><value>Это правда!</value></data>
+  <data name="Facts_ItWasMadeUp" xml:space="preserve"><value>Выдумка!</value></data>
 </root>

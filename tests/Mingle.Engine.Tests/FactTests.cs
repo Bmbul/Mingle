@@ -152,4 +152,41 @@ public class FactTests
         Assert.Throws<FactRuleException>(() => game.Write("a", ["1", "2", "3"], 3));
         Assert.Throws<FactRuleException>(() => game.Write("a", ["1", "2", new string('x', FactGame.MaxFactLength + 1)], 0));
     }
+
+    [Fact]
+    public void True_or_false_names_the_author_and_scores_like_the_others()
+    {
+        var game = new FactGame(Three, new FactSettings(FactGameKind.TrueOrFalse, FactsEach: 2), Prompts(8), seed: 5);
+        // Everyone has their own two prompts.
+        Assert.All(Three, p => Assert.Equal(2, game.PromptsFor(p.Id).Length));
+        Assert.Throws<FactRuleException>(() => game.Write("a", ["x", "y"], 4)); // a bit for a third fact
+        // Bit 0: first fact true; second made up.
+        foreach (var p in Three) game.Write(p.Id, [$"{p.Id} true", $"{p.Id} made up"], 0b01);
+        Assert.Equal(6, game.Items.Count);
+        Assert.All(game.Items, item => Assert.Equal(item.Texts[0].EndsWith("true") ? 1 : 0, item.Marked));
+
+        var current = game.Current!;
+        Assert.Equal(current.AuthorId, game.ForPlayer("a", Lang.En).Item!.AuthorId);
+        var voters = game.VotersFor(current);
+        Assert.DoesNotContain(current.AuthorId, voters);
+        Assert.Throws<FactRuleException>(() => game.Vote(voters[0], "maybe"));
+        var answer = current.Answer(FactGameKind.TrueOrFalse);
+        game.Vote(voters[0], answer);
+        game.Vote(voters[1], answer == FactItem.True ? FactItem.False : FactItem.True);
+        Assert.Equal(FactStage.Revealed, game.Stage);
+        var scores = game.Scores().ToDictionary(s => s.PlayerId);
+        Assert.Equal(1, scores[voters[0]].RightGuesses);
+        Assert.Equal(1, scores[current.AuthorId].Fooled);
+        Assert.NotEmpty(game.ForPlayer("a", Lang.En).Scores);
+    }
+
+    [Fact]
+    public void True_or_false_can_swap_a_players_prompts()
+    {
+        var game = new FactGame(Three, new FactSettings(FactGameKind.TrueOrFalse), Prompts(6), seed: 2);
+        var before = game.PromptsFor("a").Single();
+        Assert.True(game.ForPlayer("a", Lang.En).CanSwapPrompt);
+        game.SwapPrompt("a");
+        Assert.NotEqual(before, game.PromptsFor("a").Single());
+    }
 }
