@@ -1,0 +1,20 @@
+@inject Text T
+
+@* The next card as it will look, for under the top card. *@
+<div class="card-face">
+    <p class="kind">@T.KindName(Card.KindId) · @T[$"Depth_{Card.Depth}"]</p>
+    <p class="prompt">@Card.Prompt</p>
+    @if (!Card.Options.IsEmpty)
+    {
+        <ul class="options">
+            @foreach (var option in Card.Options)
+            {
+                <li>@option</li>
+            }
+        </ul>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public UpcomingCard Card { get; set; } = default!;
+}

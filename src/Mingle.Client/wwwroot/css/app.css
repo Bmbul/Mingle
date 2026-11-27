@@ -578,3 +578,16 @@ button.guess-answer { cursor: pointer; }
     55% { transform: translateX(20px) rotate(1.5deg); }
     80% { transform: translateX(-6px); }
 }
+/* The real next card under the top one (instead of the back of a card), growing into place while dragged. */
+.swipe-next {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden; border-radius: 24px;
+    transform: translateY(calc(14px * (1 - var(--pull)))) scale(calc(0.95 + 0.05 * var(--pull)));
+    opacity: calc(0.6 + 0.4 * var(--pull));
+}
+.swipe-next .card-face { height: 100%; box-sizing: border-box; }
+.swipe-deck .swipe-next .card-face { min-height: 0; justify-content: center; padding: 56px 24px 28px; gap: 18px; }
+.swipe-deck .swipe-next .card-face .kind { position: absolute; top: 24px; left: 24px; right: 24px; }
+.swipe-next .prompt { font-size: 30px; }
+.swipe-stack.has-next::after { content: none; }
+/* The new top card is the one that was already showing underneath: no slide-in. */
+.swipe-stack.has-next > .swipe-card.entering { animation: none; }

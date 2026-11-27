@@ -166,6 +166,19 @@ public static class Game
         return state with { Phase = GamePhase.Ended, Current = null, History = history };
     }
 
+    /// <summary>
+    /// The card that comes after the current one, whether it is played or passed: the selector is deterministic (seed,
+    /// card number, cards played), so this is exactly the card <see cref="Deal"/> will pick. Shown under the top card.
+    /// </summary>
+    public static Card? Upcoming(GameState state, ICardSelector? selector = null)
+    {
+        if (state.Current is null || state.Phase == GamePhase.Ended) return null;
+        var number = state.History.Count + 2;
+        if (number > state.Settings.CardCount) return null;
+        var played = state.History.Select(h => h.Card.Id).Append(state.Current.Card.Id).ToHashSet();
+        return (selector ?? CardSelector.Instance).Pick(new SelectionContext(state.Pool, played, number, state.Settings, state.Seed));
+    }
+
     private static GameState Deal(GameState state, ICardSelector selector)
     {
         var number = state.History.Count + 1;

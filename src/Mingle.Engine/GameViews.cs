@@ -31,7 +31,11 @@ public sealed record GameView(
     bool MustAnswer,
     Answer? MyAnswer,
     ImmutableArray<AnswerView> RevealedAnswers,
-    bool? MyReaction);
+    bool? MyReaction,
+    UpcomingCard? Next = null);
+
+/// <summary>The next card, shown under the top one so a swipe uncovers it. Null on the last card.</summary>
+public sealed record UpcomingCard(string KindId, int Depth, string Prompt, ImmutableArray<string> Options);
 
 public static class GameViews
 {
@@ -90,7 +94,10 @@ public static class GameViews
             viewerId is not null && state.Phase == GamePhase.Answering && round.Answerers.Contains(viewerId),
             mine,
             revealed,
-            reaction);
+            reaction,
+            Game.Upcoming(state) is { } next
+                ? new UpcomingCard(next.KindId, next.Depth, next.TextFor(lang).Text, next.TextFor(lang).Options)
+                : null);
     }
 
     private static AnswerView Describe(GameState state, Round round, string playerId, Answer answer, CardText text) =>

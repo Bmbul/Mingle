@@ -7,7 +7,12 @@
 *@
 @* A deck: the card in the middle of the screen with two more peeking out behind it, so it looks swipeable. *@
 <div class="swipe-deck">
-    <div class="swipe-stack">
+    <div class="swipe-stack @(Next is null ? "" : "has-next")">
+        @if (Next is not null)
+        {
+            @* The next card, under the top one, so a swipe uncovers it. *@
+            <div class="swipe-next" aria-hidden="true">@Next</div>
+        }
         <div class="swipe-card" @ref="element" data-enabled="@Flag">
             @ChildContent
         </div>
@@ -16,6 +21,8 @@
 
 @code {
     [Parameter] public RenderFragment? ChildContent { get; set; }
+    /// <summary>The card underneath (the next one); without it, the back of a card shows.</summary>
+    [Parameter] public RenderFragment? Next { get; set; }
     /// <summary>What a swipe does, whichever way it goes.</summary>
     [Parameter] public EventCallback OnSwipe { get; set; }
 
