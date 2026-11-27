@@ -176,7 +176,9 @@ else if (room.Stage == RoomStage.Playing && room.Game is { } game)
         <p class="who">@WhoLine.For(T, game, room.Settings.Game.TurnStyle)</p>
         @if (game.Phase == GamePhase.Answering)
         {
-            <CardFace View="game" Lang="myLang" ShowOptions="@(!game.MustAnswer)" />
+            <SwipeCard OnLeft="Rooms.Pass" LeftLabel="@T["Swipe_Skip"]">
+                <CardFace View="game" Lang="myLang" ShowOptions="@(!game.MustAnswer)" />
+            </SwipeCard>
             @if (game.MustAnswer && game.MyAnswer is null)
             {
                 <AnswerInput @key="@game.CardNumber" View="game" Players="Players(room)" Lang="myLang" OnAnswer="Rooms.SubmitAnswer" />
@@ -191,8 +193,12 @@ else if (room.Stage == RoomStage.Playing && room.Game is { } game)
         }
         else
         {
-            <CardFace View="game" Lang="myLang" Compact="@(!game.RevealedAnswers.IsEmpty)" ShowOptions="@game.RevealedAnswers.IsEmpty" />
-            <RevealList View="game" />
+            @* Swipe the card: up for the next one, left to skip it, right to like it and go on. *@
+            <SwipeCard OnUp="Rooms.Next" OnLeft="Rooms.Pass" OnRight="LikeAndNext"
+                       UpLabel="@T["Swipe_Next"]" LeftLabel="@T["Swipe_Skip"]" RightLabel="@T["Swipe_Like"]">
+                <CardFace View="game" Lang="myLang" Compact="@(!game.RevealedAnswers.IsEmpty)" ShowOptions="@game.RevealedAnswers.IsEmpty" />
+                <RevealList View="game" />
+            </SwipeCard>
             <div class="talk">
                 <p class="h2">@T["Play_TalkAboutIt"]</p>
                 <p class="muted small">@T["Play_TakeYourTime"]</p>
@@ -200,20 +206,6 @@ else if (room.Stage == RoomStage.Playing && room.Game is { } game)
         }
     </main>
 
-    <footer class="foot row">
-        @if (game.Phase == GamePhase.Answering)
-        {
-            <button class="btn2 grow" @onclick="Rooms.Pass">@T["Play_Pass"]</button>
-        }
-        else
-        {
-            <button class="react @(game.MyReaction == true ? "on" : "")" aria-label="@T["Play_Like"]" aria-pressed="@(game.MyReaction == true ? "true" : "false")"
-                    @onclick="() => Rooms.React(game.MyReaction == true ? null : true)"><Icon Name="like" Size="22" /></button>
-            <button class="react @(game.MyReaction == false ? "on" : "")" aria-label="@T["Play_Dislike"]" aria-pressed="@(game.MyReaction == false ? "true" : "false")"
-                    @onclick="() => Rooms.React(game.MyReaction == false ? null : false)"><Icon Name="dislike" Size="22" /></button>
-            <button class="btn grow" @onclick="Rooms.Next">@T["Play_Next"]</button>
-        }
-    </footer>
 }
 else if (room.Summary is { } summary)
 {
@@ -348,6 +340,12 @@ else if (room.Summary is { } summary)
             "failed" => url,
             _ => null,
         };
+    }
+
+    private async Task LikeAndNext()
+    {
+        await Rooms.React(true);
+        await Rooms.Next();
     }
 
     private async Task EndNow()

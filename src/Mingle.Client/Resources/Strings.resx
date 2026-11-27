@@ -548,4 +548,7 @@
   <data name="Never_Pick_Other" xml:space="preserve"><value>Who are they? Pick {0}</value></data>
   <data name="Never_PickOthers_One" xml:space="preserve"><value>You, and who else? Pick {0}</value></data>
   <data name="Never_PickOthers_Other" xml:space="preserve"><value>You, and who else? Pick {0}</value></data>
+  <data name="Swipe_Next" xml:space="preserve"><value>Next</value></data>
+  <data name="Swipe_Like" xml:space="preserve"><value>👍 Like</value></data>
+  <data name="Swipe_Skip" xml:space="preserve"><value>Skip</value></data>
 </root>

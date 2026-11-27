@@ -79,7 +79,9 @@
             var next = round.Answerers.First(id => !round.Answers.ContainsKey(id));
             <main class="main">
                 <p class="who">@WhoLine.For(T, table, state.Settings.TurnStyle)</p>
-                <CardFace View="table" ShowOptions="true" />
+                <SwipeCard OnLeft="() => Do(new PassCard(Me(state)))" LeftLabel="@T["Swipe_Skip"]">
+                    <CardFace View="table" ShowOptions="true" />
+                </SwipeCard>
                 <div class="card handoff">
                     <span class="h2">@T["Play_HandTo", state.Player(next).Name]</span>
                     <span class="muted small">@T["Play_HandToHint"]</span>
@@ -87,29 +89,22 @@
                 </div>
                 <p class="muted center" role="status">@T["Play_Answered", table.AnsweredCount, table.AnswererIds.Length]</p>
             </main>
-            <footer class="foot row">
-                <button class="btn2 grow" @onclick="() => Do(new PassCard(Me(state)))">@T["Play_Pass"]</button>
-            </footer>
         }
         else
         {
-            var reaction = round.Reactions.TryGetValue(Me(state), out var liked) ? liked : (bool?)null;
+            @* Swipe the card: up for the next one, left to skip it, right to like it and go on. *@
             <main class="main">
                 <p class="who">@WhoLine.For(T, table, state.Settings.TurnStyle)</p>
-                <CardFace View="table" Compact="@(!table.RevealedAnswers.IsEmpty)" ShowOptions="@table.RevealedAnswers.IsEmpty" />
-                <RevealList View="table" />
+                <SwipeCard OnUp="() => Do(new NextCard(Me(state)))" OnLeft="() => Do(new PassCard(Me(state)))" OnRight="() => LikeAndNext(state)"
+                           UpLabel="@T["Swipe_Next"]" LeftLabel="@T["Swipe_Skip"]" RightLabel="@T["Swipe_Like"]">
+                    <CardFace View="table" Compact="@(!table.RevealedAnswers.IsEmpty)" ShowOptions="@table.RevealedAnswers.IsEmpty" />
+                    <RevealList View="table" />
+                </SwipeCard>
                 <div class="talk">
                     <p class="h2">@T["Play_TalkAboutIt"]</p>
                     <p class="muted small">@T["Play_TakeYourTime"]</p>
                 </div>
             </main>
-            <footer class="foot row">
-                <button class="react @(reaction == true ? "on" : "")" aria-label="@T["Play_Like"]" aria-pressed="@(reaction == true ? "true" : "false")"
-                        @onclick="() => Do(new ReactToCard(Me(state), reaction == true ? null : true))"><Icon Name="like" Size="22" /></button>
-                <button class="react @(reaction == false ? "on" : "")" aria-label="@T["Play_Dislike"]" aria-pressed="@(reaction == false ? "true" : "false")"
-                        @onclick="() => Do(new ReactToCard(Me(state), reaction == false ? null : false))"><Icon Name="dislike" Size="22" /></button>
-                <button class="btn grow" @onclick="() => Do(new NextCard(Me(state)))">@T["Play_Next"]</button>
-            </footer>
         }
 
         @if (error is not null)
@@ -171,4 +166,10 @@
     private void OnChanged() => InvokeAsync(StateHasChanged);
 
     public void Dispose() => Session.Changed -= OnChanged;
+
+    private void LikeAndNext(GameState state)
+    {
+        Do(new ReactToCard(Me(state), true));
+        if (Session.State is { Phase: GamePhase.Discussing } now) Do(new NextCard(Me(now)));
+    }
 }

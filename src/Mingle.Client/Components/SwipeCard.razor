@@ -1,0 +1,72 @@
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@inject Text T
+
+@*
+    A card you swipe instead of tapping buttons (js/cardswipe.js): up, left and right each do one thing, shown while
+    dragging and in the hint under the card. A way without a handler springs back.
+*@
+<div class="swipe-card" @ref="element" data-up="@Flag(OnUp)" data-left="@Flag(OnLeft)" data-right="@Flag(OnRight)">
+    <span class="swipe-label up" aria-hidden="true">@UpLabel</span>
+    <span class="swipe-label left" aria-hidden="true">@LeftLabel</span>
+    <span class="swipe-label right" aria-hidden="true">@RightLabel</span>
+    @ChildContent
+</div>
+<p class="swipe-hint muted small center">@string.Join(" · ", Hints)</p>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public EventCallback OnUp { get; set; }
+    [Parameter] public EventCallback OnLeft { get; set; }
+    [Parameter] public EventCallback OnRight { get; set; }
+    [Parameter] public string UpLabel { get; set; } = "";
+    [Parameter] public string LeftLabel { get; set; } = "";
+    [Parameter] public string RightLabel { get; set; } = "";
+
+    private ElementReference element;
+
+    private static string Flag(EventCallback callback) => callback.HasDelegate ? "true" : "false";
+
+    private IEnumerable<string> Hints
+    {
+        get
+        {
+            if (OnUp.HasDelegate) yield return $"↑ {UpLabel}";
+            if (OnLeft.HasDelegate) yield return $"← {LeftLabel}";
+            if (OnRight.HasDelegate) yield return $"{RightLabel} →";
+        }
+    }
+    private DotNetObjectReference<SwipeCard>? self;
+    private IJSObjectReference? handle;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+        self = DotNetObjectReference.Create(this);
+        // An old cached page without js/cardswipe.js keeps working: the card just can't be swiped until it reloads.
+        try { handle = await JS.InvokeAsync<IJSObjectReference>("mingleCards.attach", element, self); }
+        catch (JSException) { handle = null; }
+    }
+
+    [JSInvokable]
+    public async Task Swiped(string direction)
+    {
+        if (direction == "up") await OnUp.InvokeAsync();
+        else if (direction == "left") await OnLeft.InvokeAsync();
+        else if (direction == "right") await OnRight.InvokeAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            if (handle is not null)
+            {
+                await handle.InvokeVoidAsync("detach");
+                await handle.DisposeAsync();
+            }
+        }
+        catch (JSDisconnectedException) { }
+        self?.Dispose();
+    }
+}

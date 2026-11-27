@@ -548,4 +548,7 @@
   <data name="Never_Pick_Other" xml:space="preserve"><value>Ովքե՞ր են։ Ընտրիր {0}-ին</value></data>
   <data name="Never_PickOthers_One" xml:space="preserve"><value>Դու և էլ ո՞վ։ Ընտրիր {0}-ին</value></data>
   <data name="Never_PickOthers_Other" xml:space="preserve"><value>Դու և էլ ովքե՞ր։ Ընտրիր {0}-ին</value></data>
+  <data name="Swipe_Next" xml:space="preserve"><value>Հաջորդը</value></data>
+  <data name="Swipe_Like" xml:space="preserve"><value>👍 Հավանել</value></data>
+  <data name="Swipe_Skip" xml:space="preserve"><value>Բաց թողնել</value></data>
 </root>
