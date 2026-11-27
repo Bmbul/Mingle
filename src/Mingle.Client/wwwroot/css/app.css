@@ -623,3 +623,7 @@ html.swipe-page .main { touch-action: manipulation; }
 .handoff-players .btn2 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 10px; padding-right: 10px; }
 .options.compact { gap: 6px; }
 .options.compact li { padding: 8px 12px; font-size: 15px; }
+/* A results panel as the next card underneath: laid out like the panel on top. */
+.swipe-deck .swipe-next .card-face.swipe-panel { padding: 22px 20px; justify-content: flex-start; gap: 14px; }
+.swipe-next .swipe-panel .prompt { font-size: 26px; }
+.swipe-next .handoff-players .btn2 { display: flex; align-items: center; justify-content: center; }

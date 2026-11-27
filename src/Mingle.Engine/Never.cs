@@ -83,6 +83,9 @@ public sealed class NeverGame
 
     public string? Statement(Lang lang) => Card?.TextFor(lang).Text;
 
+    /// <summary>The statement after this one, shown under the top card; null on the last.</summary>
+    public Card? NextCard => Stage != NeverStage.Ended && Index + 1 < cards.Length ? cards[Index + 1] : null;
+
     public bool? AnswerOf(string playerId) => answers.TryGetValue(playerId, out var has) ? has : null;
 
     public ImmutableArray<string> HaveIds => [.. players.Where(p => answers.GetValueOrDefault(p.Id)).Select(p => p.Id)];

@@ -25,7 +25,7 @@ else if (game.Stage != GuessStage.Ended)
             One card: the question about the player, and who got it. Everyone guesses out loud, the player answers,
             the phone holder taps who got it (or nobody) and swipes the card to go on.
         *@
-        <SwipeCard OnSwipe="game.Next" Last="@last">
+        <SwipeCard OnSwipe="game.Next" Last="@last" Next="@NextFace(game)">
             <div class="card-face swipe-panel">
                 <p class="prompt" lang="@turn.Lang.Code()">@prompt</p>
                 @if (game.IsRank)
@@ -62,4 +62,32 @@ else
         <button class="btn" @onclick="Session.Restart">@T["Handoff_Again"]</button>
         <a class="btn2" href="">@T["End_Home"]</a>
     </footer>
+}
+
+@code {
+    /// <summary>The next card as it will look, under the top one: its question and the next guessers.</summary>
+    private RenderFragment? NextFace(GuessGame game)
+    {
+        if (game.NextCard is not { } next) return null;
+        var turn = game.NextTurnPlayer;
+        return @<div class="card-face swipe-panel">
+            <p class="prompt" lang="@turn.Lang.Code()">@game.NextPrompt(turn.Lang)</p>
+            @if (next.KindId == CardKinds.RankIt.Id)
+            {
+                <ul class="options compact">
+                    @foreach (var item in next.TextFor(turn.Lang).Options)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            }
+            <h2 class="label">@T["Guess_WhoGotIt", turn.Name]</h2>
+            <div class="handoff-players">
+                @foreach (var player in Session.Players.Where(p => p.Id != turn.Id))
+                {
+                    <span class="btn2">@player.Name</span>
+                }
+            </div>
+        </div>;
+    }
 }

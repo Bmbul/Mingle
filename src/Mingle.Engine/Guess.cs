@@ -119,6 +119,15 @@ public sealed class GuessGame
     /// <summary>The card in a language, with the turn player's name in it.</summary>
     public string? Prompt(Lang lang) => Card?.TextFor(lang, TurnPlayer.Name).Text;
 
+    /// <summary>The card after this one (already shuffled in), shown under the top card; null on the last.</summary>
+    public Card? NextCard => Stage != GuessStage.Ended && Index + 1 < cards.Length ? cards[Index + 1] : null;
+
+    /// <summary>Whose turn the next card is.</summary>
+    public Player NextTurnPlayer => players[(Index + 1) % players.Length];
+
+    /// <summary>The next card in a language, with the next turn player's name in it.</summary>
+    public string? NextPrompt(Lang lang) => NextCard?.TextFor(lang, NextTurnPlayer.Name).Text;
+
     /// <summary>Online: the player's answer or a guess. When everyone has written, the answers come out.</summary>
     public void Write(string playerId, string text)
     {

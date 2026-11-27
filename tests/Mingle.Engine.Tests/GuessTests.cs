@@ -122,3 +122,21 @@ public class RankTests
         Assert.Equal(1, game.Scores.Single(s => s.PlayerId == TestData.Arman.Id).Points);
     }
 }
+
+public class NextCardTests
+{
+    [Fact]
+    public void The_card_underneath_is_the_one_that_comes_next()
+    {
+        var cards = Enumerable.Range(1, 4).Select(i => new Card($"g{i}", CardKinds.GuessMyAnswer.Id, 1, [],
+            System.Collections.Immutable.ImmutableDictionary<Lang, CardText>.Empty.Add(Lang.En, new CardText($"Q{i} about {{@}}?")))).ToArray();
+        var game = new GuessGame(TestData.Trio, cards, new GuessSettings(4), seed: 9, written: false);
+        for (var i = 0; i < 3; i++)
+        {
+            var shown = game.NextPrompt(Lang.En);
+            game.Next();
+            Assert.Equal(shown, game.Prompt(Lang.En));
+        }
+        Assert.Null(game.NextCard);
+    }
+}

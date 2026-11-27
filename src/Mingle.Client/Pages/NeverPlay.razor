@@ -31,7 +31,7 @@ else
     </header>
     <main class="main">
         @* Once the answer is out, swipe the card to go on. *@
-        <SwipeCard OnSwipe="@((game.Stage == NeverStage.Revealed) ? EventCallback.Factory.Create(this, game.Next) : default)" Last="@(game.Index + 1 >= game.Count)">
+        <SwipeCard OnSwipe="@((game.Stage == NeverStage.Revealed) ? EventCallback.Factory.Create(this, game.Next) : default)" Last="@(game.Index + 1 >= game.Count)" Next="@NextFace(game)">
             <div class="card-face swipe-panel">
                 <div class="card-face">
                     <p class="kind">@T[$"Never_Depth_{game.Card!.Depth}"]</p>
@@ -64,4 +64,25 @@ else
             <button class="btn" @onclick="game.StartGuessing">@T["Never_Done"]</button>
         }
     </footer>
+}
+
+@code {
+    /// <summary>The next statement as it will look, under the top one.</summary>
+    private RenderFragment? NextFace(NeverGame game)
+    {
+        if (game.NextCard is not { } next) return null;
+        return @<div class="card-face swipe-panel">
+            <div class="card-face">
+                <p class="kind">@T[$"Never_Depth_{next.Depth}"]</p>
+                <p class="prompt">@next.TextFor(Text.UiLang).Text</p>
+            </div>
+            <h2 class="label">@T["Never_WhoHas"]</h2>
+            <div class="handoff-players">
+                @foreach (var player in Session.Players)
+                {
+                    <span class="btn2">@player.Name</span>
+                }
+            </div>
+        </div>;
+    }
 }
