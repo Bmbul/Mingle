@@ -74,7 +74,10 @@
             pull(1);
             await new Promise(r => setTimeout(r, 200));
             const side = Math.abs(vx) >= Math.abs(vy) ? (vx > 0 ? 'right' : 'left') : (vy > 0 ? 'down' : 'up');
-            try { await ref.invokeMethodAsync('Swiped', side); } catch { /* the page moved on */ }
+            // Never leave the card flown off: if the page does not answer within a second (busy, or the swipe was not
+            // taken), the card comes back anyway and can be swiped again.
+            const answered = ref.invokeMethodAsync('Swiped', side).catch(() => { /* the page moved on */ });
+            await Promise.race([answered, new Promise(r => setTimeout(r, 1000))]);
             // The next card (Blazor reuses the element) comes in from below.
             el.style.transition = '';
             el.style.transform = '';
