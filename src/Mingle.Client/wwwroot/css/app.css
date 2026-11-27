@@ -621,3 +621,5 @@ html.swipe-page .main { touch-action: manipulation; }
 .swipe-deck .swipe-panel .card-face .kind { position: static; }
 .swipe-deck .swipe-panel .card-face .prompt { font-size: 26px; }
 .handoff-players .btn2 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 10px; padding-right: 10px; }
+.options.compact { gap: 6px; }
+.options.compact li { padding: 8px 12px; font-size: 15px; }

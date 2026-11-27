@@ -53,12 +53,13 @@ public class GuessTests
     {
         var game = new GuessGame(Trio, Cards(3), new GuessSettings(3), seed: 3, written: false);
         Assert.Throws<GuessRuleException>(() => game.Write(Arman.Id, "x"));
-        game.Reveal();
+        Assert.Equal(GuessStage.Marking, game.Stage); // one phone: straight to tapping who got it
         Assert.Throws<GuessRuleException>(() => game.Mark(Ani.Id, true)); // the player cannot be right about themselves
         game.Mark(Arman.Id, true);
         game.Mark(Lilit.Id, true);
         game.Mark(Lilit.Id, false);
         game.Next();
+        Assert.Equal(GuessStage.Marking, game.Stage);
 
         var scores = game.Scores.ToDictionary(s => s.PlayerId);
         Assert.Equal(1, scores[Arman.Id].Points);
@@ -70,7 +71,6 @@ public class GuessTests
     public void Ending_early_counts_the_card_being_marked()
     {
         var game = new GuessGame(Couple, Cards(5), new GuessSettings(5), seed: 4, written: false);
-        game.Reveal();
         game.Mark(Arman.Id, true);
         game.End();
         Assert.Equal(GuessStage.Ended, game.Stage);
@@ -117,7 +117,6 @@ public class RankTests
     public void On_one_phone_rank_cards_are_marked_like_the_others()
     {
         var game = new GuessGame(TestData.Couple, [Rank("r1")], new GuessSettings(1), seed: 1, written: false);
-        game.Reveal();
         game.Mark(TestData.Arman.Id, true);
         game.Next();
         Assert.Equal(1, game.Scores.Single(s => s.PlayerId == TestData.Arman.Id).Points);

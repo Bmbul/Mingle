@@ -1,7 +1,7 @@
 // Cards you swipe instead of tapping a button: drag a ".swipe-card" any way and it follows the finger, tilting as it
 // goes; let go far enough from where it started and it flies off the way it was thrown, then the page is told (the
 // next card slides in). A short drag springs back. Arrow keys do the same on a computer.
-// A drag that starts mostly downward scrolls the page instead, when the page is long enough to scroll.
+// When the card is taller than the screen, a drag that starts mostly up or down scrolls the page instead.
 // Touch uses touch events and stops the page from scrolling once the card is being dragged (the only reliable way on
 // iPhone); a mouse uses pointer events. data-enabled="false" turns swiping off.
 // data-mode="sides": only left and right count (Blitz: right = got it, left = skip); the card shows data-dir while
@@ -29,8 +29,8 @@
             const mx = x - startX, my = y - startY;
             if (!dragging) {
                 if (Math.hypot(mx, my) < 10) return false;
-                // Mostly downward on a page that scrolls: that is a scroll, not a swipe.
-                if (my > 0 && my > Math.abs(mx) && pageScrolls()) { active = false; return false; }
+                // On a card taller than the screen, up and down scroll it; only sideways swipes go on.
+                if (Math.abs(my) > Math.abs(mx) && pageScrolls()) { active = false; return false; }
                 dragging = true;
                 el.classList.add('dragging');
             }
@@ -45,6 +45,7 @@
             if (!active) return;
             active = false;
             if (!dragging) return;
+            dragging = false;
             el.classList.remove('dragging');
             const far = sides() ? Math.abs(dx) > threshold && Math.abs(dx) > Math.abs(dy) : Math.hypot(dx, dy) > threshold;
             if (far) fly(dx, sides() ? dy / 3 : dy);
@@ -92,9 +93,21 @@
 
         const onTouchStart = e => { if (e.touches.length === 1) begin(e.touches[0].clientX, e.touches[0].clientY); };
         const onTouchMove = e => {
-            if (e.touches.length !== 1) return;
+            if (!active || e.touches.length !== 1) return;
+            // The browser has already taken this gesture as a scroll: the card goes back rather than hang mid-drag.
+            if (dragging && !e.cancelable) { abandon(); return; }
             if (move(e.touches[0].clientX, e.touches[0].clientY) && e.cancelable) e.preventDefault();
         };
+        // A drag that lost its end (a scroll took over, the touched element was redrawn): put the card back.
+        function abandon() {
+            if (!active && !dragging) return;
+            active = false;
+            dragging = false;
+            el.classList.remove('dragging');
+            springBack();
+        }
+        const onAnyTouchStart = () => { if (active && dragging) abandon(); };
+        const onScroll = () => { if (dragging) abandon(); };
         const onPointerDown = e => {
             if (e.pointerType === 'touch' || e.button !== 0) return;
             if (e.target.closest('input, textarea, select, button')) return;
@@ -121,16 +134,21 @@
         document.documentElement.classList.add('swipe-page');
         const onOutsideMove = e => {
             // Two fingers are a pinch: always let the page zoom.
-            if (e.touches.length > 1 || el.contains(e.target) || pageScrolls() || !e.cancelable) return;
+            if (active || e.touches.length > 1 || el.contains(e.target) || pageScrolls() || !e.cancelable) return;
             if (e.target.closest?.('input, textarea, select, .sheet, .confirm')) return;
             e.preventDefault();
         };
         document.addEventListener('touchmove', onOutsideMove, { passive: false });
 
+        // The drag starts on the card, but moves and the lift are heard on the whole page: on iPhone they go to the
+        // element first touched, and if the page redraws it mid-drag they never reach the card, leaving it hanging.
+        const onTouchEnd = () => finish();
+        document.addEventListener('touchstart', onAnyTouchStart, { capture: true, passive: true });
         el.addEventListener('touchstart', onTouchStart, { passive: true });
-        el.addEventListener('touchmove', onTouchMove, { passive: false });
-        el.addEventListener('touchend', finish);
-        el.addEventListener('touchcancel', finish);
+        document.addEventListener('touchmove', onTouchMove, { passive: false });
+        window.addEventListener('scroll', onScroll, { passive: true });
+        document.addEventListener('touchend', onTouchEnd);
+        document.addEventListener('touchcancel', onTouchEnd);
         el.addEventListener('pointerdown', onPointerDown);
         window.addEventListener('pointermove', onPointerMove);
         window.addEventListener('pointerup', onPointerUp);
@@ -140,6 +158,11 @@
             detach() {
                 if (--holders <= 0) { holders = 0; document.documentElement.classList.remove('swipe-page'); }
                 document.removeEventListener('touchmove', onOutsideMove);
+                document.removeEventListener('touchmove', onTouchMove);
+                document.removeEventListener('touchstart', onAnyTouchStart, { capture: true });
+                window.removeEventListener('scroll', onScroll);
+                document.removeEventListener('touchend', onTouchEnd);
+                document.removeEventListener('touchcancel', onTouchEnd);
                 window.removeEventListener('pointermove', onPointerMove);
                 window.removeEventListener('pointerup', onPointerUp);
                 document.removeEventListener('keydown', onKey);

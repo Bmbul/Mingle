@@ -43,7 +43,8 @@ public sealed class GuessRuleException(string message) : Exception(message);
 /// "Guess the answer": the turn goes round; each card asks about the player whose turn it is ("How many countries has
 /// Ani been to?"). Everyone else guesses, the player answers, then taps who got it right (or closest): a point each.
 /// On one phone the guesses are said out loud (<c>written: false</c>); online everyone types, and the answers show
-/// side by side. Not thread-safe: an online room calls it under its lock.
+/// side by side. On one phone each card opens ready for marking: there is nothing to collect first.
+/// Not thread-safe: an online room calls it under its lock.
 /// </summary>
 public sealed class GuessGame
 {
@@ -74,6 +75,8 @@ public sealed class GuessGame
             .OrderBy(_ => random.Next()).Take(Math.Max(1, settings.Rounds))];
         if (cards.IsEmpty) throw new GuessRuleException("The chosen decks have no cards for this game.");
         Written = written;
+        // On one phone the guesses are said out loud: each card goes straight to tapping who got it.
+        Stage = written ? GuessStage.Asking : GuessStage.Marking;
         points = this.players.ToDictionary(p => p.Id, _ => 0);
         missed = this.players.ToDictionary(p => p.Id, _ => 0);
     }
@@ -158,7 +161,7 @@ public sealed class GuessGame
         Index++;
         written.Clear();
         right.Clear();
-        Stage = Index < cards.Length ? GuessStage.Asking : GuessStage.Ended;
+        Stage = Index >= cards.Length ? GuessStage.Ended : Written ? GuessStage.Asking : GuessStage.Marking;
     }
 
     /// <summary>Ends early; the marks on the card being played still count.</summary>

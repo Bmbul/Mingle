@@ -439,12 +439,7 @@
   <data name="Editor_Game_Guess" xml:space="preserve"><value>Գուշակիր պատասխանը</value></data>
   <data name="Guess_Line" xml:space="preserve"><value>Հարց մեկ խաղացողի մասին. բոլորը բարձրաձայն գուշակում են, խաղացողը պատասխանում է ու նշում, թե ով գուշակեց</value></data>
   <data name="Guess_OnlineLine" xml:space="preserve"><value>Հարց մեկ խաղացողի մասին. բոլորը գրում են իրենց կռահումը, խաղացողը պատասխանում է ու նշում, թե ով գուշակեց</value></data>
-  <data name="Guess_SayYourGuess" xml:space="preserve"><value>Ամեն մեկդ ասեք ձեր կռահումը</value></data>
-  <data name="Guess_ThenAnswer" xml:space="preserve"><value>Հետո պատասխանում է՝ {0}։</value></data>
-  <data name="Guess_ThenProve" xml:space="preserve"><value>Հետո պատասխանը հեռախոսում ցույց է տալիս՝ {0}։</value></data>
-  <data name="Guess_Answered" xml:space="preserve"><value>Պատասխանեց՝ {0}</value></data>
   <data name="Guess_WhoGotIt" xml:space="preserve"><value>{0}, ո՞վ գուշակեց</value></data>
-  <data name="Guess_WhoGotItHint" xml:space="preserve"><value>Սեղմիր, թե ով գուշակեց, հետո սահեցրու։ Ոչ ոք չգուշակե՞ց՝ պարզապես սահեցրու։</value></data>
   <data name="Guess_Choosing" xml:space="preserve"><value>Ո՞վ գուշակեց. ընտրում է՝ {0}</value></data>
   <data name="Guess_YourTurn" xml:space="preserve"><value>Այս հարցը քո մասին է. պատասխանիր, մյուսները գուշակում են</value></data>
   <data name="Guess_YourAnswer" xml:space="preserve"><value>Քո պատասխանը</value></data>
@@ -505,7 +500,6 @@
   <data name="Kind_rank" xml:space="preserve"><value>Դասավորիր</value></data>
   <data name="Editor_Hint_rank" xml:space="preserve"><value>Ինչպե՞ս կդասավորեր {@ը} սրանք՝ սկսած ամենասիրածից։</value></data>
   <data name="Editor_Extra_rank" xml:space="preserve"><value>Տարբերակ {0}</value></data>
-  <data name="Rank_SayOrder" xml:space="preserve"><value>Ամեն մեկդ ասեք, թե ինչ հերթականությամբ կդասավորի</value></data>
   <data name="Rank_YourOrder" xml:space="preserve"><value>Քո հերթականությունը՝ սկսած ամենասիրածից</value></data>
   <data name="Rank_YourGuess" xml:space="preserve"><value>Քո կռահումը. սեղմիր ըստ հերթականության</value></data>
   <data name="Rank_StartOver" xml:space="preserve"><value>Սկսել նորից</value></data>
@@ -522,7 +516,6 @@
   <data name="Never_Depth_2" xml:space="preserve"><value>Անձնական</value></data>
   <data name="Never_Depth_3" xml:space="preserve"><value>Համարձակ</value></data>
   <data name="Never_WhoHas" xml:space="preserve"><value>Ո՞վ է արել</value></data>
-  <data name="Never_TapHint" xml:space="preserve"><value>Խոստովանելը խաղի կեսն է։ Նշիր բոլոր նրանց, ովքեր արել են։</value></data>
   <data name="Never_Done" xml:space="preserve"><value>Պատրաստ է</value></data>
   <data name="Never_Nobody" xml:space="preserve"><value>Ոչ ոք։ 😇</value></data>
   <data name="Never_Story" xml:space="preserve"><value>Պատմիր՝ {0}։</value></data>

@@ -439,12 +439,7 @@
   <data name="Editor_Game_Guess" xml:space="preserve"><value>Guess the answer</value></data>
   <data name="Guess_Line" xml:space="preserve"><value>A question about one player; everyone guesses out loud, the player answers and taps who got it</value></data>
   <data name="Guess_OnlineLine" xml:space="preserve"><value>A question about one player; everyone writes a guess, the player answers and taps who got it</value></data>
-  <data name="Guess_SayYourGuess" xml:space="preserve"><value>Everyone, say your guess!</value></data>
-  <data name="Guess_ThenAnswer" xml:space="preserve"><value>Then {0} answers.</value></data>
-  <data name="Guess_ThenProve" xml:space="preserve"><value>Then {0} shows the answer on the phone.</value></data>
-  <data name="Guess_Answered" xml:space="preserve"><value>{0} answered</value></data>
   <data name="Guess_WhoGotIt" xml:space="preserve"><value>{0}, who got it right?</value></data>
-  <data name="Guess_WhoGotItHint" xml:space="preserve"><value>Tap who got it, then swipe. Nobody? Just swipe.</value></data>
   <data name="Guess_Choosing" xml:space="preserve"><value>{0} is choosing who got it</value></data>
   <data name="Guess_YourTurn" xml:space="preserve"><value>This one is about you: answer it, the others guess</value></data>
   <data name="Guess_YourAnswer" xml:space="preserve"><value>Your answer</value></data>
@@ -505,7 +500,6 @@
   <data name="Kind_rank" xml:space="preserve"><value>Rank it</value></data>
   <data name="Editor_Hint_rank" xml:space="preserve"><value>How would {@} rank these, favourite first?</value></data>
   <data name="Editor_Extra_rank" xml:space="preserve"><value>Item {0}</value></data>
-  <data name="Rank_SayOrder" xml:space="preserve"><value>Everyone, say the order you think!</value></data>
   <data name="Rank_YourOrder" xml:space="preserve"><value>Your order, favourite first</value></data>
   <data name="Rank_YourGuess" xml:space="preserve"><value>Your guess: tap them in order</value></data>
   <data name="Rank_StartOver" xml:space="preserve"><value>Start over</value></data>
@@ -522,7 +516,6 @@
   <data name="Never_Depth_2" xml:space="preserve"><value>Personal</value></data>
   <data name="Never_Depth_3" xml:space="preserve"><value>Bold</value></data>
   <data name="Never_WhoHas" xml:space="preserve"><value>Who has done it?</value></data>
-  <data name="Never_TapHint" xml:space="preserve"><value>Owning up is half the fun. Tap everyone who has.</value></data>
   <data name="Never_Done" xml:space="preserve"><value>Done</value></data>
   <data name="Never_Nobody" xml:space="preserve"><value>Nobody! 😇</value></data>
   <data name="Never_Story" xml:space="preserve"><value>{0}, tell us the story!</value></data>
