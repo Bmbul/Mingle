@@ -527,3 +527,11 @@ button.fact-item { cursor: pointer; }
 .score-line { display: flex; gap: 10px; align-items: center; padding: 10px 14px; border-radius: 12px; background: var(--surface); }
 .score-points { font-weight: 800; font-size: 18px; min-width: 2ch; text-align: right; }
 .card.award { gap: 4px; }
+
+/* Guess the answer */
+.deck-badge.guess { background: rgba(102, 214, 255, 0.16); color: #7fdcff; }
+.guess-answer { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; text-align: left; width: 100%; padding: 12px 16px;
+    border-radius: 14px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--text); font: inherit; font-size: 17px; }
+button.guess-answer { cursor: pointer; }
+.guess-answer.real { border-color: var(--accent); background: var(--accent-soft); }
+.guess-answer.right { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }

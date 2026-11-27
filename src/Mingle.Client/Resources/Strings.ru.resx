@@ -445,4 +445,24 @@
   <data name="Facts_ItWasTrue" xml:space="preserve"><value>Это правда!</value></data>
   <data name="Facts_ItWasMadeUp" xml:space="preserve"><value>Выдумка!</value></data>
   <data name="Editor_GuessHint" xml:space="preserve"><value>Напиши вопрос об игроке и поставь {@} на место имени: игра подставит его. Имя ставь в начальной форме, без прошедшего времени. Начни с 📱, если ответ можно проверить в телефоне.</value></data>
+  <data name="Guess_Game" xml:space="preserve"><value>Угадай ответ</value></data>
+  <data name="Editor_Game_Guess" xml:space="preserve"><value>Угадай ответ</value></data>
+  <data name="Guess_Line" xml:space="preserve"><value>Вопрос об одном игроке: все угадывают вслух, игрок отвечает и отмечает, кто угадал</value></data>
+  <data name="Guess_OnlineLine" xml:space="preserve"><value>Вопрос об одном игроке: все пишут догадку, игрок отвечает и отмечает, кто угадал</value></data>
+  <data name="Guess_SayYourGuess" xml:space="preserve"><value>Все, скажите свою догадку!</value></data>
+  <data name="Guess_ThenAnswer" xml:space="preserve"><value>Потом отвечает {0}.</value></data>
+  <data name="Guess_ThenProve" xml:space="preserve"><value>Потом {0} показывает ответ в телефоне.</value></data>
+  <data name="Guess_Answered" xml:space="preserve"><value>{0}: ответ готов</value></data>
+  <data name="Guess_WhoGotIt" xml:space="preserve"><value>{0}, кто угадал?</value></data>
+  <data name="Guess_WhoGotItHint" xml:space="preserve"><value>Отметь всех, кто угадал или был ближе всех: каждому по очку.</value></data>
+  <data name="Guess_Choosing" xml:space="preserve"><value>{0} выбирает, кто угадал</value></data>
+  <data name="Guess_YourTurn" xml:space="preserve"><value>Этот вопрос о тебе: ответь, остальные угадывают</value></data>
+  <data name="Guess_YourAnswer" xml:space="preserve"><value>Твой ответ</value></data>
+  <data name="Guess_YourGuess" xml:space="preserve"><value>Твоя догадка</value></data>
+  <data name="Guess_Send" xml:space="preserve"><value>Отправить</value></data>
+  <data name="Guess_ShowNow" xml:space="preserve"><value>Показать ответы сейчас</value></data>
+  <data name="Guess_RealAnswer" xml:space="preserve"><value>Ответ: {0}</value></data>
+  <data name="Guess_NoGuess" xml:space="preserve"><value>без догадки</value></data>
+  <data name="Guess_AwardKnowsAll" xml:space="preserve"><value>🧠 Знает всех лучше всех</value></data>
+  <data name="Guess_AwardHardest" xml:space="preserve"><value>🫣 Загадка для всех</value></data>
 </root>

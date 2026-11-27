@@ -21,6 +21,8 @@ public sealed class Room(string code, TimeProvider clock)
     private GameState? game;
     /// <summary>A fact game, when the settings ask for one; then <see cref="game"/> stays null.</summary>
     private FactGame? facts;
+    /// <summary>"Guess the answer", when the settings ask for it.</summary>
+    private GuessGame? guess;
     private ImmutableArray<TopicInfo> topicPool = [];
     private Random topicRandom = new(0);
     private bool libraryCards;
@@ -226,6 +228,11 @@ public sealed class Room(string code, TimeProvider clock)
                 StartFacts(factSettings, decks, seed);
                 return;
             }
+            if (settings.Guess is { } guessSettings)
+            {
+                StartGuess(guessSettings, decks, seed);
+                return;
+            }
             if (members.Count < Game.MinPlayers) throw new RoomException($"At least {Game.MinPlayers} players are needed.");
             if (settings.Source == DeckSource.Topics) throw new RoomException("Topics games start by writing cards.");
 
@@ -287,6 +294,50 @@ public sealed class Room(string code, TimeProvider clock)
         Touch();
     }
 
+    /// <summary>Called under the lock: "Guess the answer" with the guess cards of the chosen decks.</summary>
+    private void StartGuess(GuessSettings guessSettings, IEnumerable<Deck> decks, int seed)
+    {
+        var ids = settings.DeckIds.IsDefault ? [] : settings.DeckIds;
+        try
+        {
+            guess = new GuessGame(members.Select(m => m.ToPlayer()),
+                decks.Where(d => d.Style == DeckStyle.Guess && (ids.IsEmpty || ids.Contains(d.Id))).SelectMany(d => d.Cards),
+                guessSettings, seed);
+        }
+        catch (GuessRuleException ex)
+        {
+            throw new RoomException(ex.Message);
+        }
+        Stage = RoomStage.Playing;
+        Touch();
+    }
+
+    /// <summary>
+    /// One move in "Guess the answer". <paramref name="turnOrHost"/>: only the player whose turn it is may make it, or
+    /// the host (so a game goes on when that player drops).
+    /// </summary>
+    public void ActOnGuess(string playerId, Action<GuessGame> move, bool turnOrHost = false, bool hostOnly = false)
+    {
+        lock (gate)
+        {
+            if (Stage != RoomStage.Playing || guess is null) throw new RoomException("No game is in progress.");
+            Member(playerId);
+            if (hostOnly) RequireHost(playerId);
+            if (turnOrHost && guess.TurnPlayer.Id != playerId && hostId != playerId)
+                throw new RoomException("Only the player whose turn it is can do that.");
+            try
+            {
+                move(guess);
+            }
+            catch (GuessRuleException ex)
+            {
+                throw new RoomException(ex.Message);
+            }
+            if (guess.Stage == GuessStage.Ended) Stage = RoomStage.Ended;
+            Touch();
+        }
+    }
+
     /// <summary>One move in the fact game; <paramref name="hostOnly"/> for moves only the host may make.</summary>
     public void ActOnFacts(string playerId, Action<FactGame> move, bool hostOnly = false)
     {
@@ -313,9 +364,9 @@ public sealed class Room(string code, TimeProvider clock)
     {
         lock (gate)
         {
-            if (facts is not null && action is EndGame)
+            if ((facts is not null || guess is not null) && action is EndGame)
             {
-                EndFacts(playerId);
+                EndSideGame(playerId);
                 return;
             }
             if (Stage != RoomStage.Playing || game is null) throw new RoomException("No game is in progress.");
@@ -333,11 +384,12 @@ public sealed class Room(string code, TimeProvider clock)
         }
     }
 
-    private void EndFacts(string playerId)
+    private void EndSideGame(string playerId)
     {
         if (Stage != RoomStage.Playing) throw new RoomException("No game is in progress.");
         Member(playerId);
-        facts!.End();
+        facts?.End();
+        guess?.End();
         Stage = RoomStage.Ended;
         Touch();
     }
@@ -377,7 +429,8 @@ public sealed class Room(string code, TimeProvider clock)
         }
 
         var factView = Stage is RoomStage.Playing or RoomStage.Ended ? facts?.ForPlayer(viewer.Id, viewer.Lang) : null;
-        return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary, topics, libraryCards, factView);
+        var guessView = Stage is RoomStage.Playing or RoomStage.Ended ? guess?.ForPlayer(viewer.Id, viewer.Lang) : null;
+        return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary, topics, libraryCards, factView, guessView);
     }
 
     private static GameSummary Summarize(GameState state, Lang lang, ImmutableArray<TopicInfo> topics)

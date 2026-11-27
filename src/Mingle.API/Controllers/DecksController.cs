@@ -78,6 +78,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
             "associations" => DeckStyle.Blitz,
             "handoff" => DeckStyle.Handoff,
             "facts" => DeckStyle.Facts,
+            "guess" => DeckStyle.Guess,
             _ => DeckStyle.Questions,
         };
         if (style == DeckStyle.Handoff) return await WriteHandoff(request, theme, ct);
@@ -86,7 +87,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
         if (codes.Count > CardRequest.MaxTopics) return BadRequest(new { error = $"Pick up to {CardRequest.MaxTopics} topics." });
         if (request.Setting is { } setting && !CardRequest.Settings.ContainsKey(setting)) return BadRequest(new { error = "Unknown setting." });
         if ((request.Depths ?? []).Any(d => d is < 1 or > 3)) return BadRequest(new { error = "Depth is 1, 2 or 3." });
-        var validKinds = style switch { DeckStyle.Blitz => CardPrompt.BlitzKinds, DeckStyle.Facts => [], _ => CardPrompt.Kinds };
+        var validKinds = style switch { DeckStyle.Blitz => CardPrompt.BlitzKinds, DeckStyle.Facts or DeckStyle.Guess => [], _ => CardPrompt.Kinds };
         if ((request.Kinds ?? []).Any(k => !validKinds.Contains(k))) return BadRequest(new { error = "Unknown card kind." });
         var languages = new List<Lang>();
         foreach (var code in request.Languages ?? [])
@@ -191,7 +192,7 @@ public sealed class DecksController(IDeckSource starterDecks, UserDeckStore user
     {
         if (deck.Names.Values.Any(n => n.Length > MaxNameLength)) return $"Deck names can be up to {MaxNameLength} characters.";
         if (deck.Cards.Length > UserDeckStore.MaxCards) return $"A deck can hold up to {UserDeckStore.MaxCards} cards.";
-        if (deck.MixesStyles) return "A deck holds cards for one game only: questions, blitz, \"Give it to…\" or facts.";
+        if (deck.MixesStyles) return "A deck holds cards for one game only: questions, blitz, \"Give it to…\", facts or \"Guess the answer\".";
         foreach (var card in deck.Cards)
             foreach (var (lang, text) in card.Texts)
             {

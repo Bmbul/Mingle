@@ -123,6 +123,11 @@ public sealed class GameHub(RoomRegistry rooms, IDeckSource decks, UserDeckStore
     public Task RevealFact() => Change((room, me) => room.ActOnFacts(me, f => f.Reveal(), hostOnly: true));
     public Task NextFact() => Change((room, me) => room.ActOnFacts(me, f => f.Next()));
 
+    public Task WriteGuess(string text) => Change((room, me) => room.ActOnGuess(me, g => g.Write(me, text ?? "")));
+    public Task RevealGuesses() => Change((room, me) => room.ActOnGuess(me, g => g.Reveal(), hostOnly: true));
+    public Task MarkGuess(string playerId, bool right) => Change((room, me) => room.ActOnGuess(me, g => g.Mark(playerId ?? "", right), turnOrHost: true));
+    public Task NextGuess() => Change((room, me) => room.ActOnGuess(me, g => g.Next(), turnOrHost: true));
+
     public async Task Leave()
     {
         var (room, me) = Seat();

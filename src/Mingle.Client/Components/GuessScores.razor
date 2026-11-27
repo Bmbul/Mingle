@@ -1,0 +1,38 @@
+@inject Text T
+
+@* "Guess the answer" scores, and at the end who knows everyone best and who is hardest to read. *@
+@if (Awards)
+{
+    var best = Scores.Max(s => s.Points);
+    var hardest = Scores.Max(s => s.Missed);
+    @if (best > 0)
+    {
+        <div class="card award">
+            <span class="label">@T["Guess_AwardKnowsAll"]</span>
+            <span class="h2">@string.Join(", ", Scores.Where(s => s.Points == best).Select(s => NameOf(s.PlayerId)))</span>
+        </div>
+    }
+    @if (hardest > 0)
+    {
+        <div class="card award">
+            <span class="label">@T["Guess_AwardHardest"]</span>
+            <span class="h2">@string.Join(", ", Scores.Where(s => s.Missed == hardest).Select(s => NameOf(s.PlayerId)))</span>
+        </div>
+    }
+}
+<section class="stack-tight scoreboard" aria-label="@T["Facts_Scores"]">
+    <h2 class="label">@T["Facts_Scores"]</h2>
+    @foreach (var score in Scores)
+    {
+        <div class="score-line">
+            <span class="grow">@NameOf(score.PlayerId)</span>
+            <span class="score-points">@score.Points</span>
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter] public ImmutableArray<GuessScore> Scores { get; set; } = [];
+    [Parameter] public Func<string, string> NameOf { get; set; } = id => id;
+    [Parameter] public bool Awards { get; set; }
+}

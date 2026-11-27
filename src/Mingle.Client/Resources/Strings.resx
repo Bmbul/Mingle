@@ -439,4 +439,24 @@
   <data name="Facts_ItWasTrue" xml:space="preserve"><value>It's true!</value></data>
   <data name="Facts_ItWasMadeUp" xml:space="preserve"><value>Made up!</value></data>
   <data name="Editor_GuessHint" xml:space="preserve"><value>Write the question about the player and put {@} where their name goes: the game fills it in. Start with 📱 if the answer can be checked on the phone.</value></data>
+  <data name="Guess_Game" xml:space="preserve"><value>Guess the answer</value></data>
+  <data name="Editor_Game_Guess" xml:space="preserve"><value>Guess the answer</value></data>
+  <data name="Guess_Line" xml:space="preserve"><value>A question about one player; everyone guesses out loud, the player answers and taps who got it</value></data>
+  <data name="Guess_OnlineLine" xml:space="preserve"><value>A question about one player; everyone writes a guess, the player answers and taps who got it</value></data>
+  <data name="Guess_SayYourGuess" xml:space="preserve"><value>Everyone, say your guess!</value></data>
+  <data name="Guess_ThenAnswer" xml:space="preserve"><value>Then {0} answers.</value></data>
+  <data name="Guess_ThenProve" xml:space="preserve"><value>Then {0} shows the answer on the phone.</value></data>
+  <data name="Guess_Answered" xml:space="preserve"><value>{0} answered</value></data>
+  <data name="Guess_WhoGotIt" xml:space="preserve"><value>{0}, who got it right?</value></data>
+  <data name="Guess_WhoGotItHint" xml:space="preserve"><value>Tap everyone who guessed right or closest: a point each.</value></data>
+  <data name="Guess_Choosing" xml:space="preserve"><value>{0} is choosing who got it</value></data>
+  <data name="Guess_YourTurn" xml:space="preserve"><value>This one is about you: answer it, the others guess</value></data>
+  <data name="Guess_YourAnswer" xml:space="preserve"><value>Your answer</value></data>
+  <data name="Guess_YourGuess" xml:space="preserve"><value>Your guess</value></data>
+  <data name="Guess_Send" xml:space="preserve"><value>Send</value></data>
+  <data name="Guess_ShowNow" xml:space="preserve"><value>Show the answers now</value></data>
+  <data name="Guess_RealAnswer" xml:space="preserve"><value>{0}'s answer</value></data>
+  <data name="Guess_NoGuess" xml:space="preserve"><value>no guess written</value></data>
+  <data name="Guess_AwardKnowsAll" xml:space="preserve"><value>🧠 Knows everyone best</value></data>
+  <data name="Guess_AwardHardest" xml:space="preserve"><value>🫣 Hardest to read</value></data>
 </root>

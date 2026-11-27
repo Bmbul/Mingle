@@ -439,4 +439,24 @@
   <data name="Facts_ItWasTrue" xml:space="preserve"><value>Ճիշտ է։</value></data>
   <data name="Facts_ItWasMadeUp" xml:space="preserve"><value>Հորինված է։</value></data>
   <data name="Editor_GuessHint" xml:space="preserve"><value>Գրիր հարցը խաղացողի մասին, իսկ անվան տեղում դիր {@}՝ խաղը կլրացնի անունը։ Վերջավորության համար՝ {@ը} (Անին), {@ի} (Անիի), {@ին} (Անիին)։ Սկսիր 📱-ով, եթե պատասխանը կարելի է ստուգել հեռախոսում։</value></data>
+  <data name="Guess_Game" xml:space="preserve"><value>Գուշակիր պատասխանը</value></data>
+  <data name="Editor_Game_Guess" xml:space="preserve"><value>Գուշակիր պատասխանը</value></data>
+  <data name="Guess_Line" xml:space="preserve"><value>Հարց մեկ խաղացողի մասին. բոլորը բարձրաձայն գուշակում են, խաղացողը պատասխանում է ու նշում, թե ով գուշակեց</value></data>
+  <data name="Guess_OnlineLine" xml:space="preserve"><value>Հարց մեկ խաղացողի մասին. բոլորը գրում են իրենց կռահումը, խաղացողը պատասխանում է ու նշում, թե ով գուշակեց</value></data>
+  <data name="Guess_SayYourGuess" xml:space="preserve"><value>Ամեն մեկդ ասեք ձեր կռահումը</value></data>
+  <data name="Guess_ThenAnswer" xml:space="preserve"><value>Հետո պատասխանում է՝ {0}։</value></data>
+  <data name="Guess_ThenProve" xml:space="preserve"><value>Հետո պատասխանը հեռախոսում ցույց է տալիս՝ {0}։</value></data>
+  <data name="Guess_Answered" xml:space="preserve"><value>Պատասխանեց՝ {0}</value></data>
+  <data name="Guess_WhoGotIt" xml:space="preserve"><value>{0}, ո՞վ գուշակեց</value></data>
+  <data name="Guess_WhoGotItHint" xml:space="preserve"><value>Նշիր բոլոր նրանց, ովքեր ճիշտ կամ ամենամոտ գուշակեցին՝ ամեն մեկին մեկ միավոր։</value></data>
+  <data name="Guess_Choosing" xml:space="preserve"><value>Ո՞վ գուշակեց. ընտրում է՝ {0}</value></data>
+  <data name="Guess_YourTurn" xml:space="preserve"><value>Այս հարցը քո մասին է. պատասխանիր, մյուսները գուշակում են</value></data>
+  <data name="Guess_YourAnswer" xml:space="preserve"><value>Քո պատասխանը</value></data>
+  <data name="Guess_YourGuess" xml:space="preserve"><value>Քո կռահումը</value></data>
+  <data name="Guess_Send" xml:space="preserve"><value>Ուղարկել</value></data>
+  <data name="Guess_ShowNow" xml:space="preserve"><value>Ցույց տալ պատասխանները հիմա</value></data>
+  <data name="Guess_RealAnswer" xml:space="preserve"><value>Պատասխանը՝ {0}</value></data>
+  <data name="Guess_NoGuess" xml:space="preserve"><value>կռահում չի գրել</value></data>
+  <data name="Guess_AwardKnowsAll" xml:space="preserve"><value>🧠 Բոլորին ամենալավն է ճանաչում</value></data>
+  <data name="Guess_AwardHardest" xml:space="preserve"><value>🫣 Ամենադժվար գուշակվողը</value></data>
 </root>

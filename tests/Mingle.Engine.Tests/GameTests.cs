@@ -87,7 +87,6 @@ public class GameTests
     [InlineData("open")]
     [InlineData("wyr")]
     [InlineData("likely")]
-    [InlineData("guess")]
     [InlineData("rate")]
     public void Out_loud_mode_never_asks_for_input(string kindId)
     {
@@ -120,13 +119,6 @@ public class GameTests
     {
         var state = Start(Only(CardKinds.MostLikelyTo, turn: TurnStyle.TakeTurns), Trio);
         Assert.Equal(["ani", "arman", "lilit"], state.Current!.Answerers.ToArray());
-    }
-
-    [Fact]
-    public void Guess_my_answer_asks_the_subject_and_everyone_else()
-    {
-        var state = Start(Only(CardKinds.GuessMyAnswer, turn: TurnStyle.TakeTurns), Trio);
-        Assert.Equal(3, state.Current!.Answerers.Length);
     }
 
     [Fact]

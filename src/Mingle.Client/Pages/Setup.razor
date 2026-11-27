@@ -5,6 +5,7 @@
 @inject HandoffSession HandoffGames
 @inject StorySession StorySessions
 @inject FactSession FactGames
+@inject GuessSession GuessGames
 @inject ContentService Content
 @inject NavigationManager Nav
 @inject RoomClient Rooms
@@ -339,6 +340,8 @@
     private bool oneTruth;
     private bool whoseFact;
     private bool trueOrFalse;
+    /// <summary>"Guess the answer": cards about the player whose turn it is; the others guess, with points.</summary>
+    private bool guessGame;
     private bool findTheLie;
     private int factsEach = 1;
     private bool revealEach = true;
@@ -350,17 +353,17 @@
         : null;
 
     /// <summary>The questions game: out loud or with secret answers (passThePhone), and always online.</summary>
-    private bool Questions => !blitz && !stories && !handoff && !Facts;
+    private bool Questions => !blitz && !stories && !handoff && !Facts && !guessGame;
 
-    private string GameId => blitz ? "blitz" : stories ? "stories" : handoff ? "handoff" : oneTruth ? "onetruth" : whoseFact ? "whosefact" : trueOrFalse ? "trueorfalse" : "questions";
+    private string GameId => blitz ? "blitz" : stories ? "stories" : handoff ? "handoff" : oneTruth ? "onetruth" : whoseFact ? "whosefact" : trueOrFalse ? "trueorfalse" : guessGame ? "guess" : "questions";
 
     /// <summary>One phone has every game; online has the games where everyone uses their own phone.</summary>
     private IEnumerable<(string Id, string Icon, string Label)> GameChoices => Online
         ? [("questions", "chat", "Setup_Questions"), ("onetruth", "idea", "Facts_OneTruth"), ("whosefact", "people", "Facts_WhoseFact"),
-           ("trueorfalse", "check", "Facts_TrueOrFalse")]
+           ("trueorfalse", "check", "Facts_TrueOrFalse"), ("guess", "target", "Guess_Game")]
         : [("questions", "chat", "Setup_Questions"), ("blitz", "bolt", "Setup_Blitz"), ("stories", "book", "Setup_Stories"),
            ("handoff", "secret", "Setup_Handoff"), ("onetruth", "idea", "Facts_OneTruth"), ("whosefact", "people", "Facts_WhoseFact"),
-           ("trueorfalse", "check", "Facts_TrueOrFalse")];
+           ("trueorfalse", "check", "Facts_TrueOrFalse"), ("guess", "target", "Guess_Game")];
 
     private void PickMode(string which)
     {
@@ -370,6 +373,7 @@
         oneTruth = which == "onetruth";
         whoseFact = which == "whosefact";
         trueOrFalse = which == "trueorfalse";
+        guessGame = which == "guess";
         // A deck picked for one game is no use in another.
         deckIds.RemoveWhere(id => decks.FirstOrDefault(d => d.Id == id)?.Style != ModeStyle);
         // "Give it to…" needs three players; add the rows so the placeholders can play.
@@ -378,7 +382,7 @@
     }
 
     /// <summary>The kind of deck the chosen game plays.</summary>
-    private DeckStyle ModeStyle => blitz ? DeckStyle.Blitz : handoff ? DeckStyle.Handoff : Facts ? DeckStyle.Facts : DeckStyle.Questions;
+    private DeckStyle ModeStyle => blitz ? DeckStyle.Blitz : handoff ? DeckStyle.Handoff : Facts ? DeckStyle.Facts : guessGame ? DeckStyle.Guess : DeckStyle.Questions;
     private bool storyBlind = true;
     private bool storyLong;
     private string storyTheme = "random";
@@ -452,7 +456,8 @@
         get
         {
             var parts = new List<string>();
-            if (oneTruth) parts.Add(T[Online ? "Facts_OneTruthOnlineLine" : "Facts_OneTruthLine"]);
+            if (guessGame) parts.Add(T[Online ? "Guess_OnlineLine" : "Guess_Line"]);
+            else if (oneTruth) parts.Add(T[Online ? "Facts_OneTruthOnlineLine" : "Facts_OneTruthLine"]);
             else if (trueOrFalse) parts.Add(T[Online ? "Facts_TrueOrFalseOnlineLine" : "Facts_TrueOrFalseLine"]);
             else if (whoseFact) parts.Add(T[Online ? "Facts_WhoseFactLine" : "Facts_WhoseFactLocalLine"]);
             else if (!Online) parts.Add(stories ? T["Setup_StoriesLine"] : handoff ? T[handoffSecret ? "Setup_HandoffLine" : "Setup_HandoffAloudLine"] : blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
@@ -471,11 +476,11 @@
     /// <summary>Cards in a deck everyone can read: blitz lists only blitz decks, other games only question decks.</summary>
     /// <remarks>Blitz shows each player cards in their own language, so a card counts if any player reads it.</remarks>
     private int Readable(Deck deck) => deck.Cards.IsEmpty || deck.Style != ModeStyle ? 0
-        : blitz || Facts ? deck.Cards.Count(c => TableLanguages.Any(c.Supports))
+        : blitz || Facts || guessGame ? deck.Cards.Count(c => TableLanguages.Any(c.Supports))
         : handoff ? deck.CountReadableBy(TableLanguages, CardKinds.OfStyle(DeckStyle.Handoff))
         : deck.CountReadableBy(TableLanguages);
 
-    private int MatchingCards => blitz || handoff || Facts
+    private int MatchingCards => blitz || handoff || Facts || guessGame
         ? decks.Where(d => deckIds.Contains(d.Id)).Sum(Readable)
         :
         Game.BuildPool(decks.Where(d => deckIds.Contains(d.Id)), Settings, NamedPlayers.IsEmpty ? [new Player("x", "x", Text.UiLang)] : NamedPlayers).Length;
@@ -518,6 +523,12 @@
                 Nav.NavigateTo("handoff");
                 return;
             }
+            if (guessGame)
+            {
+                GuessGames.Start(NamedPlayers, decks.Where(d => deckIds.Contains(d.Id)), cardCount);
+                Nav.NavigateTo("guess");
+                return;
+            }
             if (Facts)
             {
                 FactGames.Start(NamedPlayers, decks.Where(d => deckIds.Contains(d.Id)), FactChoice!);
@@ -542,8 +553,9 @@
             var me = NamedPlayers[0] with { Lang = Text.UiLang };
             await JS.InvokeVoidAsync("mingle.set", "mingle.name", me.Name);
             var factSettings = FactChoice;
+            var guessSettings = guessGame ? new GuessSettings(cardCount) : null;
             var room = await Rooms.CreateRoom(me.Name, me.Lang,
-                new RoomSettings(Settings, [.. deckIds], factSettings is null ? source : DeckSource.Chosen, [.. depths.Order()], factSettings));
+                new RoomSettings(Settings, [.. deckIds], Questions ? source : DeckSource.Chosen, [.. depths.Order()], factSettings, guessSettings));
             Nav.NavigateTo($"room/{room.RoomCode}");
         }
         catch (Exception ex) when (ex is HttpRequestException or Microsoft.AspNetCore.SignalR.HubException or InvalidOperationException)

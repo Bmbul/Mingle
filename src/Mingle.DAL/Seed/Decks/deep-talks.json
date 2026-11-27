@@ -90,16 +90,6 @@
         "en": "From 1 to 10, how happy are you with where your life is right now?",
         "hy": "1-ից 10, որքա՞ն ես գոհ, թե որտեղ է հիմա քո կյանքը։",
         "ru": "От 1 до 10: насколько тебя устраивает твоя жизнь сейчас?" } },
-    { "id": "dt-18", "kind": "guess", "depth": 2, "topics": ["dreams"],
-      "text": {
-        "en": "Which dream from their bucket list will {@} definitely make come true?",
-        "hy": "Երազանքների ցուցակից ո՞ր բանը {@ը} անպայման կանի։",
-        "ru": "Какую мечту из своего списка {@} обязательно исполнит?" } },
-    { "id": "dt-19", "kind": "guess", "depth": 2, "topics": ["family", "childhood"],
-      "text": {
-        "en": "Which family member is {@} most like?",
-        "hy": "Ընտանիքի ո՞ր անդամին է {@ը} ամենաշատը նման։",
-        "ru": "{@}: кто из родственников самый похожий?" } },
     { "id": "dt-20", "kind": "open", "depth": 3, "topics": ["growth"],
       "text": {
         "en": "What part of yourself are you still learning to accept?",

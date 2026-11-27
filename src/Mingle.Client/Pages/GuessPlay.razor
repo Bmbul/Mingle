@@ -1,0 +1,73 @@
+@page "/guess"
+@inject Text T
+@inject GuessSession Session
+
+<PageTitle>@T["Guess_Game"] · Mingle</PageTitle>
+
+@if (Session.Game is not { } game)
+{
+    <main class="main center-screen">
+        <p class="muted">@T["Handoff_NotStarted"]</p>
+        <a class="btn" href="setup">@T["Home_NewGame"]</a>
+    </main>
+}
+else if (game.Stage != GuessStage.Ended)
+{
+    var turn = game.TurnPlayer;
+    var prompt = game.Prompt(turn.Lang) ?? "";
+    var last = game.Index + 1 >= game.Count;
+    <header class="top spread">
+        <span class="muted">@T["Facts_ItemOf", game.Index + 1, game.Count]</span>
+        <button class="text-btn" @onclick="game.End">@T["Play_End"]</button>
+    </header>
+    <main class="main">
+        <p class="who">@T["Play_Subject", turn.Name]</p>
+        <div class="card-face">
+            <p class="kind">@T["Guess_Game"]</p>
+            <p class="prompt" lang="@turn.Lang.Code()">@prompt</p>
+        </div>
+        @if (game.Stage == GuessStage.Asking)
+        {
+            <div class="talk">
+                <p class="h2">@T["Guess_SayYourGuess"]</p>
+                <p class="muted small">@T[prompt.StartsWith("📱") ? "Guess_ThenProve" : "Guess_ThenAnswer", turn.Name]</p>
+            </div>
+        }
+        else
+        {
+            <h2 class="label">@T["Guess_WhoGotIt", turn.Name]</h2>
+            <div class="handoff-players">
+                @foreach (var id in game.Guessers)
+                {
+                    var guesser = id;
+                    var on = game.RightIds.Contains(guesser);
+                    <button class="btn2 @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" @onclick="() => game.Mark(guesser, !on)">
+                        @(on ? "✓ " : "")@Session.PlayerById(guesser).Name
+                    </button>
+                }
+            </div>
+            <p class="muted small center">@T["Guess_WhoGotItHint"]</p>
+        }
+    </main>
+    <footer class="foot">
+        @if (game.Stage == GuessStage.Asking)
+        {
+            <button class="btn" @onclick="game.Reveal">@T["Guess_Answered", turn.Name]</button>
+        }
+        else
+        {
+            <button class="btn" @onclick="game.Next">@(last ? T["Facts_Finish"] : T["Facts_Next"])</button>
+        }
+    </footer>
+}
+else
+{
+    <main class="main">
+        <h1 class="h1 big">@T["End_Title"]</h1>
+        <GuessScores Scores="game.Scores" NameOf="id => Session.PlayerById(id).Name" Awards="true" />
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="Session.Restart">@T["Handoff_Again"]</button>
+        <a class="btn2" href="">@T["End_Home"]</a>
+    </footer>
+}

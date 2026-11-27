@@ -1305,6 +1305,86 @@
     "hy": "Ո՞րն է {@ի} երազանքի մեքենան։",
     "ru": "{@}: какая машина мечты?"
    }
+  },
+  {
+   "id": "dt-18",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "dreams"
+   ],
+   "text": {
+    "en": "Which dream from their bucket list will {@} definitely make come true?",
+    "hy": "Երազանքների ցուցակից ո՞ր բանը {@ը} անպայման կանի։",
+    "ru": "Какую мечту из своего списка {@} обязательно исполнит?"
+   }
+  },
+  {
+   "id": "dt-19",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "family",
+    "childhood"
+   ],
+   "text": {
+    "en": "Which family member is {@} most like?",
+    "hy": "Ընտանիքի ո՞ր անդամին է {@ը} ամենաշատը նման։",
+    "ru": "{@}: кто из родственников самый похожий?"
+   }
+  },
+  {
+   "id": "ice-13",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What's {@}'s go-to comfort food?",
+    "hy": "Ո՞ր ուտելիքն է միշտ մխիթարում {@ին}։",
+    "ru": "{@}: какая еда всегда утешает?"
+   }
+  },
+  {
+   "id": "ice-14",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "travel",
+    "dreams"
+   ],
+   "text": {
+    "en": "Which city in the world would {@} move to tomorrow?",
+    "hy": "Աշխարհի ո՞ր քաղաք կտեղափոխվեր {@ը} վաղը, եթե հնարավորություն ունենար։",
+    "ru": "В какой город мира {@} переедет хоть завтра?"
+   }
+  },
+  {
+   "id": "pty-19",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "How does {@} order their shawarma?",
+    "hy": "Ինչպիսի՞ շաուրմա է պատվիրում {@ը}։",
+    "ru": "Какую шаурму {@} заказывает?"
+   }
+  },
+  {
+   "id": "pty-20",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "What would {@} do with a completely free Saturday?",
+    "hy": "Ի՞նչ կաներ {@ը} լրիվ ազատ շաբաթ օրը։",
+    "ru": "Чем {@} займётся в совершенно свободную субботу?"
+   }
   }
  ]
 }

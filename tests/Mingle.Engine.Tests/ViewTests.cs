@@ -55,18 +55,6 @@ public class ViewTests
     }
 
     [Fact]
-    public void The_subjects_real_answer_is_listed_first_in_guess_my_answer()
-    {
-        var state = Start(Only(CardKinds.GuessMyAnswer), Trio);
-        var subject = state.Current!.TurnPlayerId;
-        state = AnswerAll(state);
-
-        var first = GameViews.ForTable(state, Lang.En).RevealedAnswers[0];
-        Assert.Equal(subject, first.PlayerId);
-        Assert.True(first.IsTurnPlayer);
-    }
-
-    [Fact]
     public void The_card_total_is_capped_by_the_matching_cards()
     {
         var deck = Deck(Card("a", CardKinds.OpenQuestion), Card("b", CardKinds.OpenQuestion));

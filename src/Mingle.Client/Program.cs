@@ -19,6 +19,7 @@ builder.Services.AddScoped<GameSession>();
 builder.Services.AddScoped<BlitzSession>();
 builder.Services.AddScoped<HandoffSession>();
 builder.Services.AddScoped<FactSession>();
+builder.Services.AddScoped<GuessSession>();
 builder.Services.AddScoped<StorySession>();
 builder.Services.AddScoped<RoomClient>();
 

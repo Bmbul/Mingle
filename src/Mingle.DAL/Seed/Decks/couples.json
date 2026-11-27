@@ -34,21 +34,6 @@
         "en": ["Plan every detail of a trip", "Book a ticket and improvise"],
         "hy": ["Ճամփորդությունը մանրամասն պլանավորել", "Տոմս գնել ու իմպրովիզ անել"],
         "ru": ["Продумать поездку до мелочей", "Купить билет и импровизировать"] } },
-    { "id": "cpl-07", "kind": "guess", "depth": 1, "topics": ["us", "dates", "food"],
-      "text": {
-        "en": "What would {@} order on our perfect date?",
-        "hy": "Ի՞նչ կպատվիրեր {@ը} մեր կատարյալ ժամադրության ժամանակ։",
-        "ru": "Что {@} закажет на нашем идеальном свидании?" } },
-    { "id": "cpl-08", "kind": "guess", "depth": 2, "topics": ["us", "future", "travel"],
-      "text": {
-        "en": "If we could live anywhere for a year, where would {@} choose?",
-        "hy": "Եթե կարողանայինք մեկ տարի ապրել ցանկացած վայրում, ո՞ր վայրը կընտրեր {@ը}։",
-        "ru": "Целый год где угодно: какое место {@} выберет?" } },
-    { "id": "cpl-09", "kind": "guess", "depth": 2, "topics": ["us", "music"],
-      "text": {
-        "en": "Which song does {@} think of as our song?",
-        "hy": "Ո՞ր երգն է {@ը} համարում մեր երգը։",
-        "ru": "Какую песню {@} считает нашей?" } },
     { "id": "cpl-10", "kind": "rate", "depth": 2, "topics": ["us"],
       "text": {
         "en": "From 1 to 10, how well do you think I know you?",
@@ -84,11 +69,6 @@
         "en": "I'm grateful we went through…",
         "hy": "Շնորհակալ եմ, որ միասին անցանք…",
         "ru": "Я рад, что мы вместе прошли через…" } },
-    { "id": "cpl-17", "kind": "guess", "depth": 3, "topics": ["us", "conflict"],
-      "text": {
-        "en": "What would {@} change about how we argue?",
-        "hy": "Ի՞նչ կուզեր {@ը} փոխել մեր վեճերում։",
-        "ru": "Что {@} хочет изменить в том, как мы ссоримся?" } },
     { "id": "cpl-18", "kind": "likely", "depth": 1, "topics": ["us", "funny"],
       "text": {
         "en": "Who is most likely to fall asleep during a movie?",

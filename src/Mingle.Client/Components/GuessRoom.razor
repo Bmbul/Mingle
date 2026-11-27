@@ -1,0 +1,153 @@
+@inject Text T
+@inject RoomClient Rooms
+
+@* "Guess the answer" in an online room: everyone types, the answers show side by side, the player taps who got it. *@
+@{
+    var view = Guess;
+    var turnName = view.TurnPlayerId is { } t ? NameOf(t) : "";
+    var canMark = view.YourTurn || Room.YouAreHost;
+}
+
+@if (view.Stage != GuessStage.Ended)
+{
+    <header class="top spread">
+        <span class="muted">@T["Facts_ItemOf", view.Number, view.Count]</span>
+        <button class="text-btn" aria-expanded="@(confirmEnd ? "true" : "false")" @onclick="() => confirmEnd = !confirmEnd">@T["Play_End"]</button>
+    </header>
+    @if (confirmEnd)
+    {
+        <div class="confirm" role="alertdialog" aria-labelledby="confirm-end-title">
+            <span id="confirm-end-title" class="h2">@T["Play_EndConfirm"]</span>
+            <div class="row gap">
+                <button class="btn2 grow" @onclick="() => confirmEnd = false">@T["Play_KeepPlaying"]</button>
+                <button class="btn grow" @onclick="EndNow">@T["Play_End"]</button>
+            </div>
+        </div>
+    }
+    <main class="main">
+        <p class="who">@(view.YourTurn ? T["Guess_YourTurn"] : T["Play_Subject", turnName])</p>
+        <div class="card-face">
+            <p class="kind">@T["Guess_Game"]</p>
+            <p class="prompt">@view.Prompt</p>
+        </div>
+
+        @if (view.Stage == GuessStage.Asking)
+        {
+            @if (!view.YouWrote)
+            {
+                <label class="label" for="guess-text">@T[view.YourTurn ? "Guess_YourAnswer" : "Guess_YourGuess"]</label>
+                <textarea id="guess-text" class="field area" maxlength="@GuessGame.MaxAnswerLength" @bind="text" @bind:event="oninput"></textarea>
+                <button class="btn" disabled="@(text.Trim().Length == 0)" @onclick="Send">@T["Guess_Send"]</button>
+            }
+            else
+            {
+                var waiting = Room.Players.Where(p => !view.WrittenIds.Contains(p.Id)).Select(p => p.Name).ToList();
+                <div class="card waiting" role="status">
+                    <span class="h2">@T["Online_WaitingOthers"]</span>
+                    <span class="muted">@T["Facts_Written", view.WrittenIds.Length, Room.Players.Length]</span>
+                    @if (waiting.Count > 0)
+                    {
+                        <span class="muted small">@T["Facts_StillWriting", string.Join(", ", waiting)]</span>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <h2 class="label">@(canMark ? T["Guess_WhoGotIt", turnName] : T["Guess_Choosing", turnName])</h2>
+            <div class="stack-tight">
+                @foreach (var answer in view.Answers)
+                {
+                    var id = answer.PlayerId;
+                    var right = view.RightIds.Contains(id);
+                    @if (answer.IsTurnPlayer)
+                    {
+                        <div class="guess-answer real">
+                            <span class="label">@T["Guess_RealAnswer", NameOf(id)]</span>
+                            <span class="h2">@answer.Text</span>
+                        </div>
+                    }
+                    else if (canMark)
+                    {
+                        <button class="guess-answer @(right ? "right" : "")" aria-pressed="@(right ? "true" : "false")" @onclick="() => Rooms.MarkGuess(id, !right)">
+                            <span class="muted small">@NameOf(id)</span>
+                            <span>@(right ? "✓ " : "")@answer.Text</span>
+                        </button>
+                    }
+                    else
+                    {
+                        <div class="guess-answer @(right ? "right" : "")">
+                            <span class="muted small">@NameOf(id)</span>
+                            <span>@(right ? "✓ " : "")@answer.Text</span>
+                        </div>
+                    }
+                }
+                @* Someone who never wrote can still have said the right thing. *@
+                @foreach (var id in view.GuesserIds.Where(g => view.Answers.All(a => a.PlayerId != g)))
+                {
+                    var guesser = id;
+                    var right = view.RightIds.Contains(guesser);
+                    <button class="guess-answer @(right ? "right" : "")" disabled="@(!canMark)" @onclick="() => Rooms.MarkGuess(guesser, !right)">
+                        <span class="muted small">@NameOf(guesser)</span>
+                        <span class="muted">@(right ? "✓ " : "")@T["Guess_NoGuess"]</span>
+                    </button>
+                }
+            </div>
+            @if (canMark)
+            {
+                <p class="muted small center">@T["Guess_WhoGotItHint"]</p>
+            }
+        }
+        <GuessScores Scores="view.Scores" NameOf="NameOf" />
+    </main>
+    <footer class="foot">
+        @if (view.Stage == GuessStage.Asking && Room.YouAreHost && view.WrittenIds.Length > 0)
+        {
+            <button class="btn2" @onclick="Rooms.RevealGuesses">@T["Guess_ShowNow"]</button>
+        }
+        @if (view.Stage == GuessStage.Marking && canMark)
+        {
+            <button class="btn" @onclick="Rooms.NextGuess">@(view.Number < view.Count ? T["Facts_Next"] : T["Facts_Finish"])</button>
+        }
+    </footer>
+}
+else
+{
+    <main class="main">
+        <h1 class="h1 big">@T["End_Title"]</h1>
+        <GuessScores Scores="view.Scores" NameOf="NameOf" Awards="true" />
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="OnHome">@T["End_Home"]</button>
+    </footer>
+}
+
+@code {
+    [Parameter, EditorRequired] public RoomView Room { get; set; } = default!;
+    [Parameter, EditorRequired] public GuessView Guess { get; set; } = default!;
+    [Parameter] public EventCallback OnHome { get; set; }
+
+    private bool confirmEnd;
+    private string text = "";
+    private int textFor = -1;
+
+    protected override void OnParametersSet()
+    {
+        // A new card starts with an empty box.
+        if (textFor != Guess.Number)
+        {
+            textFor = Guess.Number;
+            text = "";
+        }
+    }
+
+    private string NameOf(string id) => Room.Players.FirstOrDefault(p => p.Id == id)?.Name ?? "?";
+
+    private async Task Send() => await Rooms.WriteGuess(text.Trim());
+
+    private async Task EndNow()
+    {
+        confirmEnd = false;
+        await Rooms.EndGame();
+    }
+}

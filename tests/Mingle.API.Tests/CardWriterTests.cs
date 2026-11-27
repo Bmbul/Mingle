@@ -144,7 +144,7 @@ public class CardWriterTests
         var cards = CardParser.Parse(Json(
             Guess("Which country would you pick?", "Ո՞ր երկիրը կընտրեիր։"),                      // asks "you"
             Guess("Which country would {@} pick?", "Ո՞ր երկիրը կընտրեր {@ս}։"),                  // an ending the app cannot fill
-            Guess("Which country would {@} pick?", "Ո՞ր երկիրը կընտրեր {@ը}։")), Request);
+            Guess("Which country would {@} pick?", "Ո՞ր երկիրը կընտրեր {@ը}։")), Request with { Style = DeckStyle.Guess });
 
         Assert.Equal(["Which country would {@} pick?"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
         Assert.Equal("Ո՞ր երկիրը կընտրեր Անին։", cards[0].TextFor(Lang.Hy, "Անի").Text);

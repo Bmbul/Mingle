@@ -65,16 +65,6 @@
         "en": "From 1 to 10, how good are you at keeping secrets?",
         "hy": "1-ից 10, որքա՞ն լավ ես գաղտնիք պահում։",
         "ru": "От 1 до 10: насколько хорошо ты хранишь секреты?" } },
-    { "id": "ice-13", "kind": "guess", "depth": 1, "topics": ["food"],
-      "text": {
-        "en": "What's {@}'s go-to comfort food?",
-        "hy": "Ո՞ր ուտելիքն է միշտ մխիթարում {@ին}։",
-        "ru": "{@}: какая еда всегда утешает?" } },
-    { "id": "ice-14", "kind": "guess", "depth": 2, "topics": ["travel", "dreams"],
-      "text": {
-        "en": "Which city in the world would {@} move to tomorrow?",
-        "hy": "Աշխարհի ո՞ր քաղաք կտեղափոխվեր {@ը} վաղը, եթե հնարավորություն ունենար։",
-        "ru": "В какой город мира {@} переедет хоть завтра?" } },
     { "id": "ice-15", "kind": "open", "depth": 2, "topics": ["values"],
       "text": {
         "en": "What's something you changed your mind about in the last few years?",

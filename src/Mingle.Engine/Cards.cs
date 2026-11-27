@@ -60,7 +60,7 @@ public enum InputMode { Spoken, Text, Choice, PlayerVote, Scale }
 /// Which game a card belongs to. Question games play only question cards; blitz and "Give it to…" have their own
 /// cards and their own decks, and a deck never mixes styles.
 /// </summary>
-public enum DeckStyle { Questions, Blitz, Handoff, Facts }
+public enum DeckStyle { Questions, Blitz, Handoff, Facts, Guess }
 
 /// <param name="Style">The game the kind belongs to: normal games, mixes and fallbacks use only question kinds.</param>
 /// <param name="FixedOptions">Two answers the kind always offers ("Cringe" / "Fine"), so its cards hold only a text.</param>
@@ -79,7 +79,8 @@ public static class CardKinds
     public static readonly CardKind FinishSentence = new("finish", ResponseType.Free, Audience.FollowTurnStyle);
     public static readonly CardKind WouldYouRather = new("wyr", ResponseType.Choice, Audience.Everyone);
     public static readonly CardKind MostLikelyTo = new("likely", ResponseType.PlayerVote, Audience.Everyone);
-    public static readonly CardKind GuessMyAnswer = new("guess", ResponseType.Free, Audience.AboutTurnPlayer);
+    /// <summary>"Guess the answer", a game of its own: a question about the turn player by name ({@}); the others guess.</summary>
+    public static readonly CardKind GuessMyAnswer = new("guess", ResponseType.Free, Audience.AboutTurnPlayer, DeckStyle.Guess);
     public static readonly CardKind RateIt = new("rate", ResponseType.Scale, Audience.FollowTurnStyle);
     /// <summary>A situation everyone judges: cringe, or totally fine? The two answers come with the kind.</summary>
     public static readonly CardKind CringeOrFine = new("cringe", ResponseType.Choice, Audience.Everyone, DeckStyle.Questions,

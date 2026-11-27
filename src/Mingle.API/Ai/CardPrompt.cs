@@ -7,7 +7,7 @@ namespace Mingle.API.Ai;
 /// <summary>The instructions and output schema for writing cards. Pure, so it can be tested.</summary>
 public static class CardPrompt
 {
-    public static readonly string[] Kinds = ["open", "finish", "wyr", "likely", "guess", "rate", "cringe"];
+    public static readonly string[] Kinds = ["open", "finish", "wyr", "likely", "rate", "cringe"];
 
     /// <summary>The blitz formats the AI can write: sentences to finish, "name 3", a category for a drawn letter.</summary>
     public static readonly string[] BlitzKinds = ["word", "name3", "letter"];
@@ -108,6 +108,13 @@ public static class CardPrompt
                 that would hurt the one chosen. No question marks, no options, at most 12 words.
                 The topics below are moods: spread the cards over them. Depth 1 for flattering, funny and situations;
                 depth 3 for bold.
+                """);
+        if (request.Style == DeckStyle.Guess)
+            text.AppendLine("""
+                These are cards for "Guess the answer" (kind "guess" only): a game of its own. Each card is about the
+                player whose turn it is, written as described for "guess" above, and everyone else guesses the answer
+                before that player says it. Spread the cards over quick checks on the phone (start with "📱 "),
+                numbers, habits, favourites, choices between a few things and the player's past.
                 """);
         if (request.Style == DeckStyle.Facts)
             text.AppendLine("""
