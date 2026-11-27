@@ -190,3 +190,22 @@ public class FactTests
         Assert.NotEqual(before, game.PromptsFor("a").Single());
     }
 }
+
+public class PlayerSlotTests
+{
+    [Theory]
+    [InlineData("Ի՞նչ է {@ը} սովորաբար պատվիրում սրճարանում։", "Անի", "Ի՞նչ է Անին սովորաբար պատվիրում սրճարանում։")]
+    [InlineData("Ի՞նչ է {@ը} սովորաբար պատվիրում սրճարանում։", "Արամ", "Ի՞նչ է Արամը սովորաբար պատվիրում սրճարանում։")]
+    [InlineData("Ո՞րն է {@ի} պատկերասրահի վերջին լուսանկարը։", "Անի", "Ո՞րն է Անիի պատկերասրահի վերջին լուսանկարը։")]
+    [InlineData("Ո՞րն է {@ի} պատկերասրահի վերջին լուսանկարը։", "Ani", "Ո՞րն է Ani-ի պատկերասրահի վերջին լուսանկարը։")]
+    [InlineData("Ի՞նչ է {@ը} անում առաջինը։", "Գոռ", "Ի՞նչ է Գոռն անում առաջինը։")]
+    public void Armenian_names_get_their_endings(string text, string name, string expected) =>
+        Assert.Equal(expected, PlayerSlot.Fill(text, Lang.Hy, name));
+
+    [Fact]
+    public void Other_languages_just_take_the_name()
+    {
+        Assert.Equal("What does Ani usually order at a café?", PlayerSlot.Fill("What does {@} usually order at a café?", Lang.En, "Ani"));
+        Assert.Equal("Что Аня обычно заказывает в кафе?", PlayerSlot.Fill("Что {@} обычно заказывает в кафе?", Lang.Ru, "Аня"));
+    }
+}

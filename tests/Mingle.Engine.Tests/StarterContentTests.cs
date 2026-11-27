@@ -39,11 +39,20 @@ public class StarterContentTests
 
     [Theory]
     [MemberData(nameof(DeckFiles))]
-    public void Free_answer_cards_do_not_use_name_placeholders(string file)
+    public void Only_guess_cards_name_the_player_and_every_slot_fills(string file)
     {
-        // Armenian and Russian change names by grammatical case, so starter cards avoid {player} entirely.
+        // "Guess my answer" cards are about the player, with {@} (and an Armenian ending) for the name; no other
+        // card uses a placeholder, and every slot must be one the game can fill.
         var deck = Load(file);
-        Assert.All(deck.Cards, card => Assert.All(card.Texts.Values, t => Assert.DoesNotContain("{", t.Text)));
+        Assert.All(deck.Cards, card =>
+        {
+            var guess = card.KindId == CardKinds.GuessMyAnswer.Id;
+            foreach (var (lang, text) in card.Texts)
+            {
+                Assert.Equal(guess, PlayerSlot.In(text.Text));
+                Assert.DoesNotContain("{", card.TextFor(lang, "Անի").Text);
+            }
+        });
     }
 
     [Fact]

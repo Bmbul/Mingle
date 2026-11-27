@@ -32,9 +32,23 @@ public static class CardPrompt
           hy: Կորցնել բոլոր լուսանկարներդ / Կորցնել բոլոր նամակագրություններդ
           ru: Потерять все фотографии / Потерять всю переписку
         - likely: "who is most likely to…"; players vote for someone at the table.
-        - guess: a question asked directly to the person whose turn it is, as "you"; the app tells the others to
-          guess the answer. Never write "Guess…", "this player" or "their": write "Which country would you pick
-          for a trip with no plan?", not "Guess which country this player would pick".
+        - guess: everyone else guesses first how the person whose turn it is will answer, then that person answers.
+          So write the question about that person, with {@} where their name goes (the app fills it in), never
+          as "you". Pick answers that are short and can be checked or settled: a number (closest guess wins), a
+          name, a habit, a favourite, a choice between a few things. Never something nobody could guess, like a
+          secret only they know. Start with "📱 " when the answer can be checked on their phone right away.
+          Armenian adds the ending after @: {@ը} as the subject, {@ի} for "of", {@ին} for "to".
+          Russian: {@} only as the subject in the nominative, present or future tense (never past: it shows
+          gender), or start with "{@}:" and an impersonal phrase.
+          en: How many countries has {@} been to?
+          hy: Քանի՞ երկրում է եղել {@ը}։
+          ru: {@}: в скольких странах уже удалось побывать?
+          en: 📱 What's the last photo in {@}'s gallery?
+          hy: 📱 Ո՞րն է {@ի} պատկերասրահի վերջին լուսանկարը։
+          ru: 📱 {@}: какое фото последнее в галерее?
+          en: What does {@} usually order at a café?
+          hy: Ի՞նչ է {@ը} սովորաբար պատվիրում սրճարանում։
+          ru: Что {@} обычно заказывает в кафе?
         - rate: a question answered on a scale from 1 to 10, starting with "From 1 to 10," or its translation.
         - cringe: "cringe or fine?" A short everyday situation or habit, as a statement, not a question; everyone
           votes «Cringe» or «Fine» (the app adds the two answers). Pick things people really disagree about:
@@ -50,7 +64,8 @@ public static class CardPrompt
         Rules:
         - Write every card in every requested language. Each translation must read as if written natively
           in that language, not translated word for word.
-        - Address the player as "you" (Armenian: դու, Russian: ты). Never use names or placeholders like {player}.
+        - Address the player as "you" (Armenian: դու, Russian: ты), except in "guess" cards (see above). Never use
+          names or other placeholders like {player}; "guess" cards use only {@}.
         - Russian: never reveal the player's gender. Avoid past-tense verbs and adjectives that agree with
           the person addressed; rephrase instead (not "ты хотел(а)").
         - Armenian: Eastern Armenian, Armenian script, the question mark (՞) on the stressed vowel of the

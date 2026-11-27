@@ -76,7 +76,8 @@ public static class CardParser
             }
             else
             {
-                if (Str(text, lang.Code()) is not { } value || !Clean(value, MaxTextLength)) return null;
+                // "Guess my answer" names the player with {@}, checked below; nothing else may hold a placeholder.
+                if (Str(text, lang.Code()) is not { } value || !Clean(kind == CardKinds.GuessMyAnswer.Id ? PlayerSlot.Fill(value, lang, "X") : value, MaxTextLength)) return null;
                 var tidy = Tidy(value);
                 if (kind == CardKinds.NameThree.Id)
                 {
@@ -96,6 +97,11 @@ public static class CardParser
                     if (tidy.EndsWith("...", StringComparison.Ordinal)) tidy = tidy[..^3].TrimEnd() + "…";
                     if (!tidy.EndsWith('…') || tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 60
                         || tidy.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length > 8) return null;
+                }
+                if (kind == CardKinds.GuessMyAnswer.Id)
+                {
+                    // About the player, by name: the slot must be there, in a form the app can fill.
+                    if (!PlayerSlot.In(tidy) || PlayerSlot.Fill(tidy, lang, "X").Contains('{')) return null;
                 }
                 if (kind == CardKinds.FactPrompt.Id)
                 {

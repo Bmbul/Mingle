@@ -1,0 +1,1310 @@
+{
+ "id": "guess",
+ "name": {
+  "en": "Guess the answer",
+  "hy": "Գուշակիր պատասխանը",
+  "ru": "Угадай ответ"
+ },
+ "cards": [
+  {
+   "id": "gss-001",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "📱 How many unread messages does {@} have right now?",
+    "hy": "📱 Քանի՞ չկարդացված նամակ ունի {@ը} հիմա։",
+    "ru": "📱 {@}: сколько сейчас непрочитанных сообщений?"
+   }
+  },
+  {
+   "id": "gss-002",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "📱 What's the last photo in {@}'s gallery?",
+    "hy": "📱 Ո՞րն է {@ի} պատկերասրահի վերջին լուսանկարը։",
+    "ru": "📱 {@}: какое фото последнее в галерее?"
+   }
+  },
+  {
+   "id": "gss-003",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "📱 Which emoji does {@} use the most?",
+    "hy": "📱 Ո՞ր էմոջին է {@ը} ամենաշատն օգտագործում։",
+    "ru": "📱 Какой эмодзи {@} использует чаще всего?"
+   }
+  },
+  {
+   "id": "gss-004",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "📱 What's the last song {@} listened to?",
+    "hy": "📱 Ո՞ր երգն է {@ը} վերջին անգամ լսել։",
+    "ru": "📱 {@}: какая песня играла последней?"
+   }
+  },
+  {
+   "id": "gss-005",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "📱 What's {@}'s phone battery at right now?",
+    "hy": "📱 Քանի՞ տոկոս է հիմա {@ի} հեռախոսի լիցքը։",
+    "ru": "📱 {@}: сколько сейчас процентов заряда в телефоне?"
+   }
+  },
+  {
+   "id": "gss-006",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "📱 How many apps are on {@}'s home screen?",
+    "hy": "📱 Քանի՞ հավելված կա {@ի} հեռախոսի գլխավոր էկրանին։",
+    "ru": "📱 {@}: сколько приложений на главном экране телефона?"
+   }
+  },
+  {
+   "id": "gss-007",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "📱 What's on {@}'s phone wallpaper?",
+    "hy": "📱 Ի՞նչ նկար է դրված {@ի} հեռախոսի էկրանին։",
+    "ru": "📱 {@}: что стоит на заставке телефона?"
+   }
+  },
+  {
+   "id": "gss-008",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "📱 Who did {@} call last?",
+    "hy": "📱 Ո՞ւմ է {@ը} վերջին անգամ զանգել։",
+    "ru": "📱 {@}: кому был последний звонок?"
+   }
+  },
+  {
+   "id": "gss-009",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "memories"
+   ],
+   "text": {
+    "en": "📱 How many photos are in {@}'s gallery?",
+    "hy": "📱 Քանի՞ լուսանկար կա {@ի} պատկերասրահում։",
+    "ru": "📱 {@}: сколько фото в галерее?"
+   }
+  },
+  {
+   "id": "gss-010",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "📱 What did {@} last search for online?",
+    "hy": "📱 Ի՞նչ է {@ը} վերջին անգամ որոնել համացանցում։",
+    "ru": "📱 {@}: что было последним запросом в поиске?"
+   }
+  },
+  {
+   "id": "gss-011",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "📱 Which app does {@} spend the most time in?",
+    "hy": "📱 Ո՞ր հավելվածում է {@ը} ամենաշատ ժամանակն անցկացնում։",
+    "ru": "📱 В каком приложении {@} проводит больше всего времени?"
+   }
+  },
+  {
+   "id": "gss-012",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "📱 How many hours of screen time did {@} have yesterday?",
+    "hy": "📱 Քանի՞ ժամ է եղել {@ի} էկրանային ժամանակը երեկ։",
+    "ru": "📱 {@}: сколько часов экранного времени было вчера?"
+   }
+  },
+  {
+   "id": "gss-013",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "📱 Whose chat is at the top of {@}'s list right now?",
+    "hy": "📱 Ո՞ւմ նամակագրությունն է հիմա առաջինը {@ի} ցուցակում։",
+    "ru": "📱 {@}: чей чат сейчас первый в списке?"
+   }
+  },
+  {
+   "id": "gss-014",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "📱 How many alarms does {@} have set?",
+    "hy": "📱 Քանի՞ զարթուցիչ է դրված {@ի} հեռախոսում։",
+    "ru": "📱 {@}: сколько будильников стоит в телефоне?"
+   }
+  },
+  {
+   "id": "gss-015",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "📱 How many contacts does {@} have?",
+    "hy": "📱 Քանի՞ կոնտակտ կա {@ի} հեռախոսում։",
+    "ru": "📱 {@}: сколько контактов в телефоне?"
+   }
+  },
+  {
+   "id": "gss-016",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "📱 How many tabs does {@} have open in the browser?",
+    "hy": "📱 Քանի՞ ներդիր է բաց {@ի} բրաուզերում։",
+    "ru": "📱 {@}: сколько вкладок открыто в браузере?"
+   }
+  },
+  {
+   "id": "gss-017",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "How many countries has {@} been to?",
+    "hy": "Քանի՞ երկրում է եղել {@ը}։",
+    "ru": "{@}: в скольких странах уже удалось побывать?"
+   }
+  },
+  {
+   "id": "gss-018",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "How many minutes late is {@} usually?",
+    "hy": "Քանի՞ րոպե է {@ը} սովորաբար ուշանում։",
+    "ru": "На сколько минут {@} обычно опаздывает?"
+   }
+  },
+  {
+   "id": "gss-019",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "How long does {@} need to get ready to go out?",
+    "hy": "Որքա՞ն ժամանակ է պետք {@ին}՝ դուրս գալուն պատրաստվելու համար։",
+    "ru": "Сколько времени {@} собирается перед выходом из дома?"
+   }
+  },
+  {
+   "id": "gss-020",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "How many hours does {@} usually sleep?",
+    "hy": "Քանի՞ ժամ է {@ը} սովորաբար քնում։",
+    "ru": "Сколько часов {@} обычно спит?"
+   }
+  },
+  {
+   "id": "gss-021",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "How many cups of coffee or tea does {@} drink a day?",
+    "hy": "Օրական քանի՞ բաժակ սուրճ կամ թեյ է խմում {@ը}։",
+    "ru": "Сколько чашек кофе или чая {@} выпивает за день?"
+   }
+  },
+  {
+   "id": "gss-022",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "How many pairs of shoes does {@} own?",
+    "hy": "Քանի՞ զույգ կոշիկ ունի {@ը}։",
+    "ru": "{@}: сколько пар обуви в шкафу?"
+   }
+  },
+  {
+   "id": "gss-023",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "firsts"
+   ],
+   "text": {
+    "en": "How old was {@} when they got their first phone?",
+    "hy": "Քանի՞ տարեկանում է {@ը} ունեցել առաջին հեռախոսը։",
+    "ru": "{@}: в каком возрасте появился первый телефон?"
+   }
+  },
+  {
+   "id": "gss-024",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "How many times has {@} moved home?",
+    "hy": "Քանի՞ անգամ է {@ը} տուն փոխել։",
+    "ru": "{@}: сколько раз уже приходилось переезжать?"
+   }
+  },
+  {
+   "id": "gss-025",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "How many cousins does {@} have?",
+    "hy": "Քանի՞ զարմիկ ու զարմուհի ունի {@ը}։",
+    "ru": "{@}: сколько всего двоюродных братьев и сестёр?"
+   }
+  },
+  {
+   "id": "gss-026",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "How many books has {@} read this year?",
+    "hy": "Քանի՞ գիրք է {@ը} կարդացել այս տարի։",
+    "ru": "{@}: сколько книг прочитано за этот год?"
+   }
+  },
+  {
+   "id": "gss-027",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "How many minutes does it take {@} to get home from here?",
+    "hy": "Քանի՞ րոպեի ճանապարհ է {@ի} տունն այստեղից։",
+    "ru": "{@}: сколько минут ехать отсюда до дома?"
+   }
+  },
+  {
+   "id": "gss-028",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "money"
+   ],
+   "text": {
+    "en": "What's the most {@} has ever spent on one piece of clothing?",
+    "hy": "Ամենաշատը որքա՞ն գումար է {@ը} ծախսել մեկ հագուստի վրա։",
+    "ru": "{@}: какая самая большая сумма, потраченная на одну вещь из одежды?"
+   }
+  },
+  {
+   "id": "gss-029",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "How many people does {@} text every day?",
+    "hy": "Քանի՞ մարդու հետ է {@ը} ամեն օր նամակագրվում։",
+    "ru": "Со сколькими людьми {@} переписывается каждый день?"
+   }
+  },
+  {
+   "id": "gss-030",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "How many times a week does {@} work out?",
+    "hy": "Շաբաթը քանի՞ անգամ է {@ը} մարզվում։",
+    "ru": "Сколько раз в неделю {@} занимается спортом?"
+   }
+  },
+  {
+   "id": "gss-031",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "What time does {@} usually go to bed?",
+    "hy": "Ժամը քանիսի՞ն է {@ը} սովորաբար պառկում քնելու։",
+    "ru": "Во сколько {@} обычно ложится спать?"
+   }
+  },
+  {
+   "id": "gss-032",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "What's the first thing {@} does after waking up?",
+    "hy": "Ի՞նչ է {@ը} անում առաջինը, երբ արթնանում է։",
+    "ru": "Что {@} делает первым делом после пробуждения?"
+   }
+  },
+  {
+   "id": "gss-033",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "What does {@} do when they can't fall asleep?",
+    "hy": "Ի՞նչ է անում {@ը}, երբ չի կարողանում քնել։",
+    "ru": "Что {@} делает, когда не может уснуть?"
+   }
+  },
+  {
+   "id": "gss-034",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "What does {@} always carry in their bag or pockets?",
+    "hy": "Ի՞նչ է {@ը} միշտ իր հետ կրում պայուսակում կամ գրպանում։",
+    "ru": "Что {@} всегда носит с собой в сумке или карманах?"
+   }
+  },
+  {
+   "id": "gss-035",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "needs"
+   ],
+   "text": {
+    "en": "What does {@} do when stressed?",
+    "hy": "Ի՞նչ է անում {@ը}, երբ սթրես ունի։",
+    "ru": "Что {@} делает в стрессе?"
+   }
+  },
+  {
+   "id": "gss-036",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "What does {@} do on a long drive?",
+    "hy": "Ի՞նչ է անում {@ը} երկար ճանապարհին։",
+    "ru": "Чем {@} занимается в долгой дороге?"
+   }
+  },
+  {
+   "id": "gss-037",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Which household chore does {@} hate most?",
+    "hy": "Տնային ո՞ր գործն է {@ը} ամենաշատն ատում։",
+    "ru": "Какое домашнее дело {@} ненавидит больше всего?"
+   }
+  },
+  {
+   "id": "gss-038",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "Does {@} make the bed every morning?",
+    "hy": "Ամեն առավոտ {@ը} հավաքո՞ւմ է անկողինը։",
+    "ru": "{@} заправляет кровать каждое утро?"
+   }
+  },
+  {
+   "id": "gss-039",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "What does {@} forget most often?",
+    "hy": "Ի՞նչն է {@ը} ամենահաճախը մոռանում։",
+    "ru": "Что {@} забывает чаще всего?"
+   }
+  },
+  {
+   "id": "gss-040",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "What's {@}'s go-to excuse for being late?",
+    "hy": "Ո՞րն է {@ի} սովորական արդարացումը, երբ ուշանում է։",
+    "ru": "{@}: какая любимая отговорка при опоздании?"
+   }
+  },
+  {
+   "id": "gss-041",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Which song does {@} sing in the shower?",
+    "hy": "Ո՞ր երգն է {@ը} երգում լոգանքի տակ։",
+    "ru": "Какую песню {@} поёт в душе?"
+   }
+  },
+  {
+   "id": "gss-042",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "Which app does {@} open first in the morning?",
+    "hy": "Առավոտյան ո՞ր հավելվածն է {@ը} առաջինը բացում։",
+    "ru": "Какое приложение {@} открывает первым утром?"
+   }
+  },
+  {
+   "id": "gss-043",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "How does {@} take their coffee?",
+    "hy": "Ինչպիսի՞ սուրճ է խմում {@ը}։",
+    "ru": "Какой кофе {@} пьёт?"
+   }
+  },
+  {
+   "id": "gss-044",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "On a plane, does {@} take the window or the aisle?",
+    "hy": "Ինքնաթիռում {@ը} պատուհանի՞ մոտ է նստում, թե՞ միջանցքի։",
+    "ru": "В самолёте {@} садится у окна или у прохода?"
+   }
+  },
+  {
+   "id": "gss-045",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "What's the first thing {@} does on getting home?",
+    "hy": "Ի՞նչ է {@ը} անում առաջինը, երբ տուն է գալիս։",
+    "ru": "Что {@} делает первым делом, когда приходит домой?"
+   }
+  },
+  {
+   "id": "gss-046",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "Does {@} answer calls from unknown numbers?",
+    "hy": "Անծանոթ համարից զանգերին {@ը} պատասխանո՞ւմ է։",
+    "ru": "{@} отвечает на звонки с незнакомых номеров?"
+   }
+  },
+  {
+   "id": "gss-047",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "What does {@} watch or listen to before sleep?",
+    "hy": "Ի՞նչ է {@ը} դիտում կամ լսում քնելուց առաջ։",
+    "ru": "Что {@} смотрит или слушает перед сном?"
+   }
+  },
+  {
+   "id": "gss-048",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "Who does {@} call first with big news?",
+    "hy": "Ո՞ւմ է {@ը} առաջինը զանգում, երբ մեծ նորություն ունի։",
+    "ru": "Кому {@} звонит первым с большой новостью?"
+   }
+  },
+  {
+   "id": "gss-049",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "What does {@} do when hungry?",
+    "hy": "Ի՞նչ է անում {@ը}, երբ սոված է։",
+    "ru": "Что {@} делает, когда хочет есть?"
+   }
+  },
+  {
+   "id": "gss-050",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "Does {@} get up with the first alarm?",
+    "hy": "Առաջին զարթուցիչի՞ց է {@ը} արթնանում։",
+    "ru": "{@} встаёт по первому будильнику?"
+   }
+  },
+  {
+   "id": "gss-051",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What does {@} usually order at a café?",
+    "hy": "Ի՞նչ է {@ը} սովորաբար պատվիրում սրճարանում։",
+    "ru": "Что {@} обычно заказывает в кафе?"
+   }
+  },
+  {
+   "id": "gss-052",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Which pizza does {@} order?",
+    "hy": "Ի՞նչ պիցցա է պատվիրում {@ը}։",
+    "ru": "Какую пиццу {@} заказывает?"
+   }
+  },
+  {
+   "id": "gss-053",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Which food can {@} not stand?",
+    "hy": "Ո՞ր ուտելիքը {@ը} տանել չի կարողանում։",
+    "ru": "Какую еду {@} терпеть не может?"
+   }
+  },
+  {
+   "id": "gss-054",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What does {@} buy at the cinema?",
+    "hy": "Ի՞նչ է {@ը} գնում կինոթատրոնում։",
+    "ru": "Что {@} берёт с собой в кино?"
+   }
+  },
+  {
+   "id": "gss-055",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What's always in {@}'s fridge?",
+    "hy": "Ի՞նչ կա միշտ {@ի} սառնարանում։",
+    "ru": "{@}: что всегда есть в холодильнике?"
+   }
+  },
+  {
+   "id": "gss-056",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "At midnight, does {@} go for something sweet or salty?",
+    "hy": "Կեսգիշերին {@ը} քաղցր բան կուտի՞, թե՞ աղի։",
+    "ru": "Ночью {@} выберет сладкое или солёное?"
+   }
+  },
+  {
+   "id": "gss-057",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Which dish does {@} cook best?",
+    "hy": "Ո՞ր ուտեստն է {@ը} ամենալավը պատրաստում։",
+    "ru": "Какое блюдо {@} готовит лучше всего?"
+   }
+  },
+  {
+   "id": "gss-058",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "What does {@} drink at a party?",
+    "hy": "Ի՞նչ է {@ը} խմում խնջույքին։",
+    "ru": "Что {@} пьёт на вечеринке?"
+   }
+  },
+  {
+   "id": "gss-059",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "Which Armenian dish could {@} eat every day?",
+    "hy": "Հայկական ո՞ր ուտեստը {@ը} կուտեր ամեն օր։",
+    "ru": "{@}: какое армянское блюдо можно есть хоть каждый день?"
+   }
+  },
+  {
+   "id": "gss-060",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "At a new restaurant, does {@} order a favourite or something new?",
+    "hy": "Նոր ռեստորանում {@ը} իր սիրածն է պատվիրում, թե՞ նոր բան։",
+    "ru": "В новом ресторане {@} заказывает любимое или что-то новое?"
+   }
+  },
+  {
+   "id": "gss-061",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What did {@} want to be at age 7?",
+    "hy": "Ո՞վ էր ուզում դառնալ {@ը} 7 տարեկանում։",
+    "ru": "{@}: кем мечталось стать в 7 лет?"
+   }
+  },
+  {
+   "id": "gss-062",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "What was {@}'s first concert?",
+    "hy": "Ո՞րն էր {@ի} առաջին համերգը։",
+    "ru": "{@}: какой концерт был самым первым?"
+   }
+  },
+  {
+   "id": "gss-063",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What was {@}'s favourite cartoon as a kid?",
+    "hy": "Ո՞րն էր {@ի} սիրած մուլտֆիլմը մանկությունում։",
+    "ru": "{@}: какой мультфильм был любимым в детстве?"
+   }
+  },
+  {
+   "id": "gss-064",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What was {@}'s favourite subject at school?",
+    "hy": "Ո՞րն էր {@ի} սիրած առարկան դպրոցում։",
+    "ru": "{@}: какой предмет был любимым в школе?"
+   }
+  },
+  {
+   "id": "gss-065",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "What was {@}'s first job?",
+    "hy": "Ո՞րն էր {@ի} առաջին աշխատանքը։",
+    "ru": "{@}: какой была первая работа?"
+   }
+  },
+  {
+   "id": "gss-066",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What was {@} like as a kid: quiet or naughty?",
+    "hy": "Ինչպիսի՞ երեխա էր {@ը}՝ հանգիստ, թե՞ չարաճճի։",
+    "ru": "{@} в детстве: тихий ребёнок или озорной?"
+   }
+  },
+  {
+   "id": "gss-067",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What nickname did {@} have as a kid?",
+    "hy": "Ի՞նչ մականուն ուներ {@ը} փոքր ժամանակ։",
+    "ru": "{@}: какое прозвище было в детстве?"
+   }
+  },
+  {
+   "id": "gss-068",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Where was {@}'s best holiday?",
+    "hy": "Որտե՞ղ էր {@ի} ամենալավ արձակուրդը։",
+    "ru": "{@}: где был лучший отпуск?"
+   }
+  },
+  {
+   "id": "gss-069",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "What's the scariest thing {@} has ever done?",
+    "hy": "Ո՞րն է ամենավախենալու բանը, որ {@ը} արել է։",
+    "ru": "{@}: что было самым страшным поступком в жизни?"
+   }
+  },
+  {
+   "id": "gss-070",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "Which teacher does {@} still remember?",
+    "hy": "Ո՞ր ուսուցչին է {@ը} մինչև հիմա հիշում։",
+    "ru": "Какого учителя {@} помнит до сих пор?"
+   }
+  },
+  {
+   "id": "gss-071",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "What did {@} collect as a kid?",
+    "hy": "Ի՞նչ էր {@ը} հավաքում փոքր ժամանակ։",
+    "ru": "{@}: что было в детской коллекции?"
+   }
+  },
+  {
+   "id": "gss-072",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "What's the craziest haircut {@} has ever had?",
+    "hy": "Ո՞րն է եղել {@ի} ամենախենթ սանրվածքը։",
+    "ru": "{@}: какая стрижка была самой безумной?"
+   }
+  },
+  {
+   "id": "gss-073",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "what-if"
+   ],
+   "text": {
+    "en": "In a fire, what would {@} save first: the phone, the photos or the documents?",
+    "hy": "Կրակի դեպքում ի՞նչը կփրկեր {@ը} առաջինը՝ հեռախոսը, լուսանկարները, թե՞ փաստաթղթերը։",
+    "ru": "При пожаре что {@} спасёт первым: телефон, фотографии или документы?"
+   }
+  },
+  {
+   "id": "gss-074",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "With a free ticket anywhere, where would {@} go?",
+    "hy": "Ո՞ւր կգնար {@ը}, եթե ստանար անվճար տոմս ցանկացած վայր։",
+    "ru": "Куда {@} полетит с бесплатным билетом куда угодно?"
+   }
+  },
+  {
+   "id": "gss-075",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "money"
+   ],
+   "text": {
+    "en": "What would {@} buy first after winning the lottery?",
+    "hy": "Ի՞նչ կգներ {@ը} առաջինը, եթե վիճակախաղ շահեր։",
+    "ru": "Что {@} купит первым делом после выигрыша в лотерею?"
+   }
+  },
+  {
+   "id": "gss-076",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "Mountains or sea: where does {@} rest best?",
+    "hy": "Սա՞ր, թե՞ ծով. որտե՞ղ է {@ը} ավելի լավ հանգստանում։",
+    "ru": "Горы или море: где {@} лучше отдыхает?"
+   }
+  },
+  {
+   "id": "gss-077",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "what-if"
+   ],
+   "text": {
+    "en": "Which superpower would {@} choose?",
+    "hy": "Ո՞ր գերուժը կընտրեր {@ը}։",
+    "ru": "Какую суперсилу {@} выберет?"
+   }
+  },
+  {
+   "id": "gss-078",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "what-if"
+   ],
+   "text": {
+    "en": "Which famous person would {@} like to have dinner with?",
+    "hy": "Ո՞ր հայտնի մարդու հետ կուզեր ընթրել {@ը}։",
+    "ru": "С какой знаменитостью {@} хочет поужинать?"
+   }
+  },
+  {
+   "id": "gss-079",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Does {@} like dogs or cats more?",
+    "hy": "{@ը} շներին է ավելի շատ սիրում, թե՞ կատուներին։",
+    "ru": "{@} больше любит собак или кошек?"
+   }
+  },
+  {
+   "id": "gss-080",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "Which holiday of the year does {@} love most?",
+    "hy": "Տարվա ո՞ր տոնն է {@ը} ամենաշատը սիրում։",
+    "ru": "Какой праздник {@} любит больше всего?"
+   }
+  },
+  {
+   "id": "gss-081",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "what-if"
+   ],
+   "text": {
+    "en": "What would {@} do with a whole free day and no phone?",
+    "hy": "Ի՞նչ կաներ {@ը} մի ամբողջ ազատ օր՝ առանց հեռախոսի։",
+    "ru": "Чем {@} займётся в свободный день без телефона?"
+   }
+  },
+  {
+   "id": "gss-082",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "what-if"
+   ],
+   "text": {
+    "en": "Which era of history would {@} like to live in?",
+    "hy": "Պատմության ո՞ր ժամանակաշրջանում կուզեր ապրել {@ը}։",
+    "ru": "В какой исторической эпохе {@} хочет пожить?"
+   }
+  },
+  {
+   "id": "gss-083",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Tonight: a book, a film or a series for {@}?",
+    "hy": "Այս երեկո {@ը} գի՞րք կընտրի, ֆի՞լմ, թե՞ սերիալ։",
+    "ru": "Сегодня вечером {@} выберет книгу, фильм или сериал?"
+   }
+  },
+  {
+   "id": "gss-084",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "What job would {@} do if money didn't matter?",
+    "hy": "Ի՞նչ աշխատանքով կզբաղվեր {@ը}, եթե փողը նշանակություն չունենար։",
+    "ru": "Кем {@} будет работать, если деньги не важны?"
+   }
+  },
+  {
+   "id": "gss-085",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "Which film has {@} watched the most times?",
+    "hy": "Ո՞ր ֆիլմն է {@ը} ամենաշատ անգամ դիտել։",
+    "ru": "{@}: какой фильм пересмотрен больше всего раз?"
+   }
+  },
+  {
+   "id": "gss-086",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "Which season does {@} love most?",
+    "hy": "Տարվա ո՞ր եղանակն է {@ը} ամենաշատը սիրում։",
+    "ru": "Какое время года {@} любит больше всего?"
+   }
+  },
+  {
+   "id": "gss-087",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Which song would {@} pick at karaoke?",
+    "hy": "Ո՞ր երգը կընտրեր {@ը} կարաոկեում։",
+    "ru": "Какую песню {@} выберет в караоке?"
+   }
+  },
+  {
+   "id": "gss-088",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "Who in this room does {@} text the most?",
+    "hy": "Այս սենյակում ո՞ւմ հետ է {@ը} ամենաշատը նամակագրվում։",
+    "ru": "С кем из присутствующих {@} переписывается чаще всего?"
+   }
+  },
+  {
+   "id": "gss-089",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "What makes {@} laugh every time?",
+    "hy": "Ի՞նչն է {@ին} միշտ ծիծաղեցնում։",
+    "ru": "{@}: что всегда смешит?"
+   }
+  },
+  {
+   "id": "gss-090",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "needs"
+   ],
+   "text": {
+    "en": "What makes {@} angry fastest?",
+    "hy": "Ի՞նչն է {@ին} ամենաարագը բարկացնում։",
+    "ru": "{@}: что выводит из себя быстрее всего?"
+   }
+  },
+  {
+   "id": "gss-091",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "What would {@} never wear?",
+    "hy": "Ի՞նչ {@ը} երբեք չէր հագնի։",
+    "ru": "Что {@} никогда не наденет?"
+   }
+  },
+  {
+   "id": "gss-092",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "What's {@}'s guilty pleasure?",
+    "hy": "Ո՞րն է {@ի} գաղտնի թուլությունը։",
+    "ru": "{@}: какая тайная слабость?"
+   }
+  },
+  {
+   "id": "gss-093",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "money"
+   ],
+   "text": {
+    "en": "What does {@} secretly spend too much money on?",
+    "hy": "Ինչի՞ վրա է {@ը} գաղտնի շատ գումար ծախսում։",
+    "ru": "На что {@} втайне тратит слишком много денег?"
+   }
+  },
+  {
+   "id": "gss-094",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "Which word or phrase does {@} say all the time?",
+    "hy": "Ո՞ր բառն է {@ը} անընդհատ ասում։",
+    "ru": "Какое слово {@} повторяет постоянно?"
+   }
+  },
+  {
+   "id": "gss-095",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "values"
+   ],
+   "text": {
+    "en": "What is {@} proudest of?",
+    "hy": "Ինչո՞վ է {@ը} ամենաշատը հպարտանում։",
+    "ru": "Чем {@} гордится больше всего?"
+   }
+  },
+  {
+   "id": "gss-096",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "fears"
+   ],
+   "text": {
+    "en": "What is {@} afraid of?",
+    "hy": "Ինչի՞ց է {@ը} վախենում։",
+    "ru": "Чего {@} боится?"
+   }
+  },
+  {
+   "id": "gss-097",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "Who is {@}'s favourite singer?",
+    "hy": "Ո՞վ է {@ի} սիրած երգիչը։",
+    "ru": "{@}: кто любимый исполнитель?"
+   }
+  },
+  {
+   "id": "gss-098",
+   "kind": "guess",
+   "depth": 2,
+   "topics": [
+    "growth"
+   ],
+   "text": {
+    "en": "How would {@} describe themselves in one word?",
+    "hy": "Ինչպե՞ս կնկարագրեր {@ը} իրեն մեկ բառով։",
+    "ru": "Каким одним словом {@} опишет себя?"
+   }
+  },
+  {
+   "id": "gss-099",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "Does {@} plan everything or go with the flow?",
+    "hy": "{@ը} ամեն ինչ պլանավորո՞ւմ է, թե՞ անում է պահի տակ։",
+    "ru": "{@} всё планирует или действует спонтанно?"
+   }
+  },
+  {
+   "id": "gss-100",
+   "kind": "guess",
+   "depth": 1,
+   "topics": [
+    "dreams"
+   ],
+   "text": {
+    "en": "What's {@}'s dream car?",
+    "hy": "Ո՞րն է {@ի} երազանքի մեքենան։",
+    "ru": "{@}: какая машина мечты?"
+   }
+  }
+ ]
+}

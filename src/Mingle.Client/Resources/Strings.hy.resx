@@ -42,12 +42,12 @@
   <data name="Kind_finish" xml:space="preserve"><value>Ավարտիր նախադասությունը</value></data>
   <data name="Kind_wyr" xml:space="preserve"><value>Ո՞րն ես նախընտրում</value></data>
   <data name="Kind_likely" xml:space="preserve"><value>Ո՞վ ավելի շուտ</value></data>
-  <data name="Kind_guess" xml:space="preserve"><value>Գուշակիր պատասխանս</value></data>
+  <data name="Kind_guess" xml:space="preserve"><value>Գուշակիր պատասխանը</value></data>
   <data name="Kind_rate" xml:space="preserve"><value>Գնահատիր 1–10</value></data>
   <data name="Play_CardOf" xml:space="preserve"><value>Քարտ {0}/{1}</value></data>
   <data name="Play_EveryoneAnswers" xml:space="preserve"><value>Բոլորն են պատասխանում</value></data>
   <data name="Play_Turn" xml:space="preserve"><value>Հերթը՝ {0}</value></data>
-  <data name="Play_Subject" xml:space="preserve"><value>Պատասխանում է՝ {0}։ Մյուսները գուշակում են</value></data>
+  <data name="Play_Subject" xml:space="preserve"><value>Նախ մյուսներն են գուշակում, հետո պատասխանում է՝ {0}</value></data>
   <data name="Play_OutLoudOne" xml:space="preserve"><value>Բարձրաձայն պատասխանում է՝ {0}</value></data>
   <data name="Play_OutLoudAll" xml:space="preserve"><value>Բոլորը պատասխանում են բարձրաձայն</value></data>
   <data name="Play_HandTo" xml:space="preserve"><value>Փոխանցեք հեռախոսը՝ {0}</value></data>
@@ -160,7 +160,7 @@
   <data name="Editor_Hint_open" xml:space="preserve"><value>Գրիր բաց հարց…</value></data>
   <data name="Editor_Hint_finish" xml:space="preserve"><value>Գրիր նախադասության սկիզբը…</value></data>
   <data name="Editor_Hint_likely" xml:space="preserve"><value>Ո՞վ ավելի շուտ…</value></data>
-  <data name="Editor_Hint_guess" xml:space="preserve"><value>Հարց, որի պատասխանը մյուսները կգուշակեն…</value></data>
+  <data name="Editor_Hint_guess" xml:space="preserve"><value>Ի՞նչ է {@ը} սովորաբար պատվիրում սրճարանում։</value></data>
   <data name="Editor_Hint_rate" xml:space="preserve"><value>1-ից 10, որքա՞ն…</value></data>
   <data name="Editor_LangHint" xml:space="preserve"><value>Լրացրու առնվազն մեկ լեզու։ Խաղացողները ստանում են միայն իրենց կարդացած լեզուներով քարտեր։</value></data>
   <data name="Editor_RemoveCard" xml:space="preserve"><value>Հեռացնել քարտը</value></data>
@@ -438,4 +438,5 @@
   <data name="Facts_TrueOrMadeUp" xml:space="preserve"><value>Ճիշտ է, թե՞ հորինված</value></data>
   <data name="Facts_ItWasTrue" xml:space="preserve"><value>Ճիշտ է։</value></data>
   <data name="Facts_ItWasMadeUp" xml:space="preserve"><value>Հորինված է։</value></data>
+  <data name="Editor_GuessHint" xml:space="preserve"><value>Գրիր հարցը խաղացողի մասին, իսկ անվան տեղում դիր {@}՝ խաղը կլրացնի անունը։ Վերջավորության համար՝ {@ը} (Անին), {@ի} (Անիի), {@ին} (Անիին)։ Սկսիր 📱-ով, եթե պատասխանը կարելի է ստուգել հեռախոսում։</value></data>
 </root>

@@ -57,7 +57,7 @@ public static class GameViews
                 null, null, InputMode.Spoken, [], 0, false, null, [], null);
         }
 
-        var text = round.Card.TextFor(lang);
+        var text = round.Card.TextFor(lang, state.Player(round.TurnPlayerId).Name);
         var revealed = state.Phase == GamePhase.Discussing
             ? round.Answerers
                 .Where(round.Answers.ContainsKey)

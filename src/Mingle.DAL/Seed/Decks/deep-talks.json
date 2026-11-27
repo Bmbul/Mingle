@@ -92,14 +92,14 @@
         "ru": "От 1 до 10: насколько тебя устраивает твоя жизнь сейчас?" } },
     { "id": "dt-18", "kind": "guess", "depth": 2, "topics": ["dreams"],
       "text": {
-        "en": "What's one thing on your bucket list you'll definitely do?",
-        "hy": "Քո երազանքների ցուցակից ո՞ր բանն անպայման կանես։",
-        "ru": "Что из твоего списка желаний обязательно сбудется?" } },
+        "en": "Which dream from their bucket list will {@} definitely make come true?",
+        "hy": "Երազանքների ցուցակից ո՞ր բանը {@ը} անպայման կանի։",
+        "ru": "Какую мечту из своего списка {@} обязательно исполнит?" } },
     { "id": "dt-19", "kind": "guess", "depth": 2, "topics": ["family", "childhood"],
       "text": {
-        "en": "Which family member are you most like?",
-        "hy": "Ընտանիքի ո՞ր անդամին ես ամենաշատը նման։",
-        "ru": "Кто из родных больше всего на тебя похож?" } },
+        "en": "Which family member is {@} most like?",
+        "hy": "Ընտանիքի ո՞ր անդամին է {@ը} ամենաշատը նման։",
+        "ru": "{@}: кто из родственников самый похожий?" } },
     { "id": "dt-20", "kind": "open", "depth": 3, "topics": ["growth"],
       "text": {
         "en": "What part of yourself are you still learning to accept?",

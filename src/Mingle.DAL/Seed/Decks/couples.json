@@ -36,19 +36,19 @@
         "ru": ["Продумать поездку до мелочей", "Купить билет и импровизировать"] } },
     { "id": "cpl-07", "kind": "guess", "depth": 1, "topics": ["us", "dates", "food"],
       "text": {
-        "en": "What would you order on our perfect date?",
-        "hy": "Ի՞նչ կպատվիրեիր մեր կատարյալ ժամադրության ժամանակ։",
-        "ru": "Что ты закажешь на нашем идеальном свидании?" } },
+        "en": "What would {@} order on our perfect date?",
+        "hy": "Ի՞նչ կպատվիրեր {@ը} մեր կատարյալ ժամադրության ժամանակ։",
+        "ru": "Что {@} закажет на нашем идеальном свидании?" } },
     { "id": "cpl-08", "kind": "guess", "depth": 2, "topics": ["us", "future", "travel"],
       "text": {
-        "en": "If we could live anywhere for one year, where would you choose?",
-        "hy": "Եթե կարողանայինք մեկ տարի ապրել ցանկացած վայրում, ո՞ր վայրը կընտրեիր։",
-        "ru": "Если бы мы могли прожить год где угодно, какое место ты бы выбрал?" } },
+        "en": "If we could live anywhere for a year, where would {@} choose?",
+        "hy": "Եթե կարողանայինք մեկ տարի ապրել ցանկացած վայրում, ո՞ր վայրը կընտրեր {@ը}։",
+        "ru": "Целый год где угодно: какое место {@} выберет?" } },
     { "id": "cpl-09", "kind": "guess", "depth": 2, "topics": ["us", "music"],
       "text": {
-        "en": "What song reminds you of us right now?",
-        "hy": "Ո՞ր երգն է հիմա քեզ հիշեցնում մեր մասին։",
-        "ru": "Какая песня сейчас напоминает тебе о нас?" } },
+        "en": "Which song does {@} think of as our song?",
+        "hy": "Ո՞ր երգն է {@ը} համարում մեր երգը։",
+        "ru": "Какую песню {@} считает нашей?" } },
     { "id": "cpl-10", "kind": "rate", "depth": 2, "topics": ["us"],
       "text": {
         "en": "From 1 to 10, how well do you think I know you?",
@@ -86,9 +86,9 @@
         "ru": "Я рад, что мы вместе прошли через…" } },
     { "id": "cpl-17", "kind": "guess", "depth": 3, "topics": ["us", "conflict"],
       "text": {
-        "en": "What would you change about how we handle arguments?",
-        "hy": "Ի՞նչ կփոխեիր այն բանում, թե ինչպես ենք վիճում։",
-        "ru": "Что стоит изменить в том, как мы ссоримся?" } },
+        "en": "What would {@} change about how we argue?",
+        "hy": "Ի՞նչ կուզեր {@ը} փոխել մեր վեճերում։",
+        "ru": "Что {@} хочет изменить в том, как мы ссоримся?" } },
     { "id": "cpl-18", "kind": "likely", "depth": 1, "topics": ["us", "funny"],
       "text": {
         "en": "Who is most likely to fall asleep during a movie?",

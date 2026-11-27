@@ -137,14 +137,17 @@ public class CardWriterTests
     }
 
     [Fact]
-    public void Guess_cards_written_as_instructions_are_dropped()
+    public void Guess_cards_must_name_the_player()
     {
-        var instruction = new { kind = "guess", depth = 1, topic = "travel", text = new { en = "Guess which country this player would pick.", hy = "Գուշակեք՝ ո՞ր երկիրը։" }, options = new { } };
-        var question = new { kind = "guess", depth = 1, topic = "travel", text = new { en = "Which country would you pick?", hy = "Ո՞ր երկիրը կընտրեիր։" }, options = new { } };
+        object Guess(string en, string hy) => new { kind = "guess", depth = 1, topic = "travel", text = new { en, hy }, options = new { } };
 
-        var cards = CardParser.Parse(Json(instruction, question), Request);
+        var cards = CardParser.Parse(Json(
+            Guess("Which country would you pick?", "Ո՞ր երկիրը կընտրեիր։"),                      // asks "you"
+            Guess("Which country would {@} pick?", "Ո՞ր երկիրը կընտրեր {@ս}։"),                  // an ending the app cannot fill
+            Guess("Which country would {@} pick?", "Ո՞ր երկիրը կընտրեր {@ը}։")), Request);
 
-        Assert.Equal(["Which country would you pick?"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
+        Assert.Equal(["Which country would {@} pick?"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
+        Assert.Equal("Ո՞ր երկիրը կընտրեր Անին։", cards[0].TextFor(Lang.Hy, "Անի").Text);
     }
 
     [Fact]

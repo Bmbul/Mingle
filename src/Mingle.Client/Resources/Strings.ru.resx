@@ -44,12 +44,12 @@
   <data name="Kind_finish" xml:space="preserve"><value>Закончи фразу</value></data>
   <data name="Kind_wyr" xml:space="preserve"><value>Что ты выберешь</value></data>
   <data name="Kind_likely" xml:space="preserve"><value>Кто скорее всего</value></data>
-  <data name="Kind_guess" xml:space="preserve"><value>Угадай мой ответ</value></data>
+  <data name="Kind_guess" xml:space="preserve"><value>Угадай ответ</value></data>
   <data name="Kind_rate" xml:space="preserve"><value>Оцени от 1 до 10</value></data>
   <data name="Play_CardOf" xml:space="preserve"><value>Карточка {0} из {1}</value></data>
   <data name="Play_EveryoneAnswers" xml:space="preserve"><value>Отвечают все</value></data>
   <data name="Play_Turn" xml:space="preserve"><value>Ход: {0}</value></data>
-  <data name="Play_Subject" xml:space="preserve"><value>Отвечает: {0}. Остальные угадывают</value></data>
+  <data name="Play_Subject" xml:space="preserve"><value>Сначала угадывают остальные, потом отвечает {0}</value></data>
   <data name="Play_OutLoudOne" xml:space="preserve"><value>Отвечает вслух: {0}</value></data>
   <data name="Play_OutLoudAll" xml:space="preserve"><value>Все отвечают вслух</value></data>
   <data name="Play_HandTo" xml:space="preserve"><value>Передайте телефон: {0}</value></data>
@@ -164,7 +164,7 @@
   <data name="Editor_Hint_open" xml:space="preserve"><value>Напиши открытый вопрос…</value></data>
   <data name="Editor_Hint_finish" xml:space="preserve"><value>Напиши начало фразы…</value></data>
   <data name="Editor_Hint_likely" xml:space="preserve"><value>Кто скорее всего…</value></data>
-  <data name="Editor_Hint_guess" xml:space="preserve"><value>Вопрос, ответ на который остальные будут угадывать…</value></data>
+  <data name="Editor_Hint_guess" xml:space="preserve"><value>Что {@} обычно заказывает в кафе?</value></data>
   <data name="Editor_Hint_rate" xml:space="preserve"><value>От 1 до 10: насколько…</value></data>
   <data name="Editor_LangHint" xml:space="preserve"><value>Заполни хотя бы один язык. Игроки получают карточки только на языках, которые они читают.</value></data>
   <data name="Editor_RemoveCard" xml:space="preserve"><value>Удалить карточку</value></data>
@@ -444,4 +444,5 @@
   <data name="Facts_TrueOrMadeUp" xml:space="preserve"><value>Правда или выдумка?</value></data>
   <data name="Facts_ItWasTrue" xml:space="preserve"><value>Это правда!</value></data>
   <data name="Facts_ItWasMadeUp" xml:space="preserve"><value>Выдумка!</value></data>
+  <data name="Editor_GuessHint" xml:space="preserve"><value>Напиши вопрос об игроке и поставь {@} на место имени: игра подставит его. Имя ставь в начальной форме, без прошедшего времени. Начни с 📱, если ответ можно проверить в телефоне.</value></data>
 </root>

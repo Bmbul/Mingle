@@ -94,6 +94,10 @@
                             </div>
                         }
                         <p class="muted small">@T["Editor_LangHint"]</p>
+                        @if (c.KindId == CardKinds.GuessMyAnswer.Id)
+                        {
+                            <p class="muted small">@T["Editor_GuessHint"]</p>
+                        }
                         <div class="row gap">
                             <button class="btn2 grow" @onclick="() => Remove(c)">@T["Editor_RemoveCard"]</button>
                             <button class="btn grow" @onclick="() => open = null">@T["Editor_Done"]</button>

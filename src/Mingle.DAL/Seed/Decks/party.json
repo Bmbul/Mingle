@@ -99,14 +99,14 @@
         "ru": "От 1 до 10: насколько тебе нравится пробовать незнакомую еду?" } },
     { "id": "pty-19", "kind": "guess", "depth": 1, "topics": ["food"],
       "text": {
-        "en": "What would you order at a restaurant you've never been to?",
-        "hy": "Ի՞նչ կպատվիրեիր ռեստորանում, որտեղ երբեք չես եղել։",
-        "ru": "Что ты закажешь в незнакомом ресторане?" } },
+        "en": "How does {@} order their shawarma?",
+        "hy": "Ինչպիսի՞ շաուրմա է պատվիրում {@ը}։",
+        "ru": "Какую шаурму {@} заказывает?" } },
     { "id": "pty-20", "kind": "guess", "depth": 1, "topics": ["hobbies"],
       "text": {
-        "en": "What would you do with a completely free Saturday?",
-        "hy": "Ի՞նչ կանեիր լրիվ ազատ շաբաթ օրը։",
-        "ru": "Чем ты займёшься в совершенно свободную субботу?" } },
+        "en": "What would {@} do with a completely free Saturday?",
+        "hy": "Ի՞նչ կաներ {@ը} լրիվ ազատ շաբաթ օրը։",
+        "ru": "Чем {@} займётся в совершенно свободную субботу?" } },
     { "id": "pty-21", "kind": "cringe", "depth": 1, "topics": ["habits"],
       "text": {
         "en": "Replying to a long message with just \"ok\"",

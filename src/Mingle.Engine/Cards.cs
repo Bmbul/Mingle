@@ -138,11 +138,14 @@ public sealed record Card(
     public bool Supports(Lang lang) => Texts.ContainsKey(lang);
 
     /// <summary>The card in the requested language, falling back to English, then to any language it has.</summary>
-    public CardText TextFor(Lang lang)
+    /// <param name="player">Who the card is about ("Guess my answer"): fills <c>{@}</c> in the text; without it a stand-in.</param>
+    public CardText TextFor(Lang lang, string? player = null)
     {
         var text = Texts.TryGetValue(lang, out var own) ? own
             : Texts.TryGetValue(Lang.En, out var en) ? en
             : Texts.Values.First();
+        if (PlayerSlot.In(text.Text))
+            text = text with { Text = PlayerSlot.Fill(text.Text, lang, player ?? PlayerSlot.StandIn) };
         // A kind with fixed answers ("Cringe" / "Fine") supplies them in the reader's language.
         return Kind.FixedOptions is { } fixedOptions && text.Options.IsEmpty
             ? text with { Options = fixedOptions.GetValueOrDefault(lang, fixedOptions[Lang.En]) }
@@ -175,4 +178,26 @@ public sealed record Deck(string Id, ImmutableDictionary<Lang, string> Names, Im
         var ids = kinds.Select(k => k.Id).ToHashSet();
         return Cards.Count(c => ids.Contains(c.KindId) && languages.All(c.Supports));
     }
+}
+
+/// <summary>
+/// Where a card names the player it is about: <c>{@}</c>, and in Armenian with the ending the sentence needs
+/// (<c>{@ը}</c> subject, <c>{@ի}</c> "of", <c>{@ին}</c> "to", <c>{@ից}</c>, <c>{@ով}</c>), as in
+/// «Ի՞նչ է {@ը} սովորաբար պատվիրում սրճարանում։» → «Ի՞նչ է Անին սովորաբար պատվիրում սրճարանում։».
+/// "Guess my answer" cards are written this way, so the people guessing read a question about the player.
+/// </summary>
+public static class PlayerSlot
+{
+    /// <summary>Shown where no player is known (deck lists, the end of the game).</summary>
+    public const string StandIn = "X";
+
+    private static readonly System.Text.RegularExpressions.Regex Slot =
+        new(@"\{@(ում|ին|ից|ով|ը|ն|ի)?\}", System.Text.RegularExpressions.RegexOptions.Compiled);
+
+    public static bool In(string text) => text.Contains("{@", StringComparison.Ordinal);
+
+    public static string Fill(string text, Lang lang, string name) =>
+        Slot.Replace(text, m => lang == Lang.Hy
+            ? ArmenianNames.WithEnding(name, m.Groups[1].Value, text[(m.Index + m.Length)..].TrimStart())
+            : name);
 }

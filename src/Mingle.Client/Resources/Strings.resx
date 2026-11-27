@@ -42,12 +42,12 @@
   <data name="Kind_finish" xml:space="preserve"><value>Finish the sentence</value></data>
   <data name="Kind_wyr" xml:space="preserve"><value>Would you rather</value></data>
   <data name="Kind_likely" xml:space="preserve"><value>Most likely to</value></data>
-  <data name="Kind_guess" xml:space="preserve"><value>Guess my answer</value></data>
+  <data name="Kind_guess" xml:space="preserve"><value>Guess the answer</value></data>
   <data name="Kind_rate" xml:space="preserve"><value>Rate it 1–10</value></data>
   <data name="Play_CardOf" xml:space="preserve"><value>Card {0} of {1}</value></data>
   <data name="Play_EveryoneAnswers" xml:space="preserve"><value>Everyone answers</value></data>
   <data name="Play_Turn" xml:space="preserve"><value>{0}'s turn</value></data>
-  <data name="Play_Subject" xml:space="preserve"><value>{0} answers, everyone else guesses</value></data>
+  <data name="Play_Subject" xml:space="preserve"><value>Everyone else guesses first, then {0} answers</value></data>
   <data name="Play_OutLoudOne" xml:space="preserve"><value>{0} answers out loud</value></data>
   <data name="Play_OutLoudAll" xml:space="preserve"><value>Everyone answers out loud</value></data>
   <data name="Play_HandTo" xml:space="preserve"><value>Hand the phone to {0}</value></data>
@@ -160,7 +160,7 @@
   <data name="Editor_Hint_open" xml:space="preserve"><value>Write an open question…</value></data>
   <data name="Editor_Hint_finish" xml:space="preserve"><value>Write the start of a sentence…</value></data>
   <data name="Editor_Hint_likely" xml:space="preserve"><value>Who is most likely to…</value></data>
-  <data name="Editor_Hint_guess" xml:space="preserve"><value>A question the others will guess your answer to…</value></data>
+  <data name="Editor_Hint_guess" xml:space="preserve"><value>What does {@} usually order at a café?</value></data>
   <data name="Editor_Hint_rate" xml:space="preserve"><value>From 1 to 10, how…</value></data>
   <data name="Editor_LangHint" xml:space="preserve"><value>Fill in at least one language. Players only get cards in languages they read.</value></data>
   <data name="Editor_RemoveCard" xml:space="preserve"><value>Remove card</value></data>
@@ -438,4 +438,5 @@
   <data name="Facts_TrueOrMadeUp" xml:space="preserve"><value>True or made up?</value></data>
   <data name="Facts_ItWasTrue" xml:space="preserve"><value>It's true!</value></data>
   <data name="Facts_ItWasMadeUp" xml:space="preserve"><value>Made up!</value></data>
+  <data name="Editor_GuessHint" xml:space="preserve"><value>Write the question about the player and put {@} where their name goes: the game fills it in. Start with 📱 if the answer can be checked on the phone.</value></data>
 </root>
