@@ -139,6 +139,16 @@ public sealed class GameHub(RoomRegistry rooms, IDeckSource decks, UserDeckStore
     public Task JoinMatch(string key, string intoKey) => Change((room, me) => room.ActOnMatch(me, g => g.Join(key ?? "", intoKey ?? ""), hostOnly: true));
     public Task NextMatch() => Change((room, me) => room.ActOnMatch(me, g => g.Next()));
 
+    public Task AnswerNever(bool has) => Change((room, me) => room.ActOnNever(me, g => g.Answer(me, has)));
+    public Task GuessNever(ImmutableArray<string> playerIds) =>
+        Change((room, me) => room.ActOnNever(me, g => g.Guess(me, playerIds.IsDefault ? [] : playerIds)));
+    public Task MoveNeverOn() => Change((room, me) => room.ActOnNever(me, g =>
+    {
+        if (g.Stage == NeverStage.Answering) g.StartGuessing();
+        else g.Reveal();
+    }, hostOnly: true));
+    public Task NextNever() => Change((room, me) => room.ActOnNever(me, g => g.Next()));
+
     public async Task Leave()
     {
         var (room, me) = Seat();

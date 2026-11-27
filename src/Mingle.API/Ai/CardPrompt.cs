@@ -129,6 +129,18 @@ public static class CardPrompt
                 Not too obvious (no yes/no against a number), not identical. Both are questions to "you", short, in every
                 language; the options hold exactly one question per language.
                 """);
+        if (request.Style == DeckStyle.Never)
+            text.AppendLine("""
+                These are statements for «Ես երբեք…» / Never have I ever (kind "never"): everyone who has done it owns
+                up and tells the story. Each card is one statement about something many people have done but some
+                have not, specific and fun to confess.
+                Write each one as a full statement, not a question, no full stop:
+                en: "I have never …" (present perfect), as in "I have never fallen asleep in a cinema".
+                hy: «Ես երբեք չեմ …», as in «Ես երբեք չեմ քնել կինոթատրոնում».
+                ru: always «Мне ни разу не доводилось …» with an infinitive, so it never shows the reader's gender,
+                as in «Мне ни разу не доводилось уснуть в кинотеатре».
+                Depth 1 light and funny, 2 personal, 3 bold (dating, exes, wild nights); never sexual or cruel.
+                """);
         if (request.Style == DeckStyle.Match)
             text.AppendLine("""
                 These are prompts for "Same wavelength" (kind "match"): everyone writes one answer and scores for every

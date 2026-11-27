@@ -143,7 +143,7 @@ public sealed class ContentService(HttpClient http, IJSRuntime js, DeviceDeckSto
             ["languages"] = new System.Text.Json.Nodes.JsonArray([.. languages.Select(l => (System.Text.Json.Nodes.JsonNode?)l.Code())]),
             ["setting"] = setting,
             ["count"] = count,
-            ["style"] = style switch { DeckStyle.Blitz => "associations", DeckStyle.Handoff => "handoff", DeckStyle.Facts => "facts", DeckStyle.Guess => "guess", DeckStyle.Odd => "odd", DeckStyle.Match => "match", _ => "questions" },
+            ["style"] = style switch { DeckStyle.Blitz => "associations", DeckStyle.Handoff => "handoff", DeckStyle.Facts => "facts", DeckStyle.Guess => "guess", DeckStyle.Odd => "odd", DeckStyle.Match => "match", DeckStyle.Never => "never", _ => "questions" },
             ["moods"] = new System.Text.Json.Nodes.JsonArray([.. (moods ?? []).Select(m => (System.Text.Json.Nodes.JsonNode?)m)]),
             ["kinds"] = new System.Text.Json.Nodes.JsonArray([.. (style is DeckStyle.Questions or DeckStyle.Blitz ? kinds ?? [] : []).Select(k => (System.Text.Json.Nodes.JsonNode?)k)]),
         };

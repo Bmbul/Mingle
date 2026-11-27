@@ -1,0 +1,27 @@
+@inject Text T
+
+@* Who has done it, and who the app suggests tells the story. *@
+<div class="stack">
+    @if (HaveIds.IsEmpty)
+    {
+        <p class="handoff-verdict wrong center">@T["Never_Nobody"]</p>
+    }
+    else
+    {
+        <p class="handoff-verdict right center">@T.Plural("Never_Have", HaveIds.Length)</p>
+        <p class="center h2">@string.Join(", ", HaveIds.Select(NameOf))</p>
+        @if (Storyteller is { } teller)
+        {
+            <div class="card waiting">
+                <span class="h2">🎤 @T["Never_Story", NameOf(teller)]</span>
+                <span class="muted small">@T["Never_StoryHint"]</span>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    [Parameter] public ImmutableArray<string> HaveIds { get; set; } = [];
+    [Parameter] public string? Storyteller { get; set; }
+    [Parameter] public Func<string, string> NameOf { get; set; } = id => id;
+}

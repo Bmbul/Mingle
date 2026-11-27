@@ -258,7 +258,8 @@
         </section>
 
         @* Depth and card types are for question decks; blitz cards are all sentences to finish fast. *@
-        @if (Style == DeckStyle.Questions)
+        @* Questions and «Ես երբեք…» have levels; only questions have card types to pick. *@
+        @if (Style is DeckStyle.Questions or DeckStyle.Never)
         {
         <section class="stack">
             <h2 class="label">@T["Editor_AiDepth"]</h2>
@@ -269,11 +270,13 @@
                     var on = depths.Contains(d);
                     @* At least one depth stays on. *@
                     <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@(writing || (on && depths.Count == 1))"
-                            @onclick="() => { if (!depths.Remove(d)) depths.Add(d); }">@T[$"Depth_{d}"]</button>
+                            @onclick="() => { if (!depths.Remove(d)) depths.Add(d); }">@T[Style == DeckStyle.Never ? $"Never_Depth_{d}" : $"Depth_{d}"]</button>
                 }
             </div>
         </section>
-
+        }
+        @if (Style == DeckStyle.Questions)
+        {
         <section class="stack">
             <h2 class="label">@T["Editor_AiKinds"]</h2>
             <div class="chips" role="group" aria-label="@T["Editor_AiKinds"]">
@@ -680,6 +683,7 @@
                 DeckStyle.Guess => CardKinds.GuessMyAnswer.Id,
                 DeckStyle.Odd => CardKinds.OddPair.Id,
                 DeckStyle.Match => CardKinds.MatchPrompt.Id,
+                DeckStyle.Never => CardKinds.NeverHaveI.Id,
                 _ => CardKinds.OpenQuestion.Id,
             },
         };

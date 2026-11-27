@@ -1,0 +1,67 @@
+@page "/never"
+@inject Text T
+@inject NeverSession Session
+
+<PageTitle>@T["Never_Game"] · Mingle</PageTitle>
+
+@if (Session.Game is not { } game)
+{
+    <main class="main center-screen">
+        <p class="muted">@T["Handoff_NotStarted"]</p>
+        <a class="btn" href="setup">@T["Home_NewGame"]</a>
+    </main>
+}
+else if (game.Stage == NeverStage.Ended)
+{
+    <main class="main">
+        <h1 class="h1 big">@T["End_Title"]</h1>
+        <NeverScores Scores="game.Scores" NameOf="id => Session.PlayerById(id).Name" Awards="true" ShowPoints="false" />
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="Session.Restart">@T["Handoff_Again"]</button>
+        <a class="btn2" href="">@T["End_Home"]</a>
+    </footer>
+}
+else
+{
+    var revealed = game.Stage == NeverStage.Revealed;
+    <header class="top spread">
+        <span class="muted">@T["Facts_ItemOf", game.Index + 1, game.Count]</span>
+        <button class="text-btn" @onclick="game.End">@T["Play_End"]</button>
+    </header>
+    <main class="main">
+        <div class="card-face">
+            <p class="kind">@T[$"Never_Depth_{game.Card!.Depth}"]</p>
+            <p class="prompt" lang="@Text.UiLang.Code()">@game.Statement(Text.UiLang)</p>
+        </div>
+        @if (!revealed)
+        {
+            <h2 class="label">@T["Never_WhoHas"]</h2>
+            <div class="handoff-players">
+                @foreach (var player in Session.Players)
+                {
+                    var id = player.Id;
+                    var has = game.AnswerOf(id) == true;
+                    <button class="btn2 @(has ? "on" : "")" aria-pressed="@(has ? "true" : "false")" @onclick="() => game.Answer(id, !has)">
+                        @(has ? "✓ " : "")@player.Name
+                    </button>
+                }
+            </div>
+            <p class="muted small center">@T["Never_TapHint"]</p>
+        }
+        else
+        {
+            <NeverResult HaveIds="game.HaveIds" Storyteller="@game.Storyteller" NameOf="id => Session.PlayerById(id).Name" />
+        }
+    </main>
+    <footer class="foot">
+        @if (!revealed)
+        {
+            <button class="btn" @onclick="game.StartGuessing">@T["Never_Done"]</button>
+        }
+        else
+        {
+            <button class="btn" @onclick="game.Next">@(game.Index + 1 < game.Count ? T["Facts_Next"] : T["Facts_Finish"])</button>
+        }
+    </footer>
+}

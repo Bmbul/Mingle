@@ -104,6 +104,18 @@ public static class CardParser
                     // About the player, by name: the slot must be there, in a form the app can fill.
                     if (!PlayerSlot.In(tidy) || PlayerSlot.Fill(tidy, lang, "X").Contains('{')) return null;
                 }
+                if (kind == CardKinds.NeverHaveI.Id)
+                {
+                    // A statement in the game's own form; Russian only in the form that hides the reader's gender.
+                    tidy = tidy.TrimEnd('.', '։', '!');
+                    var form = lang switch
+                    {
+                        Lang.Hy => tidy.StartsWith("Ես երբեք", StringComparison.Ordinal),
+                        Lang.Ru => tidy.StartsWith("Мне ни разу не доводилось", StringComparison.Ordinal),
+                        _ => tidy.StartsWith("I have never", StringComparison.Ordinal) || tidy.StartsWith("I've never", StringComparison.Ordinal),
+                    };
+                    if (!form || tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 140) return null;
+                }
                 if (kind == CardKinds.MatchPrompt.Id)
                 {
                     // "Same wavelength": a short category with many answers, not a question.
@@ -123,7 +135,7 @@ public static class CardParser
                     if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 100) return null;
                 }
                 // Every kind but "finish the sentence", associations, "Give it to…" and "cringe or fine" is a question.
-                if (lang == Lang.Hy && kind is not ("finish" or "word" or "name3" or "letter" or "handoff" or "cringe" or "fact" or "match")) tidy = ArmenianQuestions.Fix(tidy);
+                if (lang == Lang.Hy && kind is not ("finish" or "word" or "name3" or "letter" or "handoff" or "cringe" or "fact" or "match" or "never")) tidy = ArmenianQuestions.Fix(tidy);
                 // A question pair's different question, or the four things to rank.
                 var extras = CardKinds.Get(kind).Extras;
                 ImmutableArray<string> more = [];

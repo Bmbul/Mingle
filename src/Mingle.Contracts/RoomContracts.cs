@@ -42,7 +42,7 @@ public sealed record TopicChoice(ImmutableArray<TopicOption> Offer, ImmutableArr
 /// <param name="Guess">Set when the room plays "Guess the answer", with cards from the chosen decks.</param>
 public sealed record RoomSettings(GameSettings Game, ImmutableArray<string> DeckIds, DeckSource Source = DeckSource.Chosen,
     ImmutableArray<int> Depths = default, FactSettings? Facts = null, GuessSettings? Guess = null, OddSettings? Odd = null,
-    MatchSettings? Match = null)
+    MatchSettings? Match = null, NeverSettings? Never = null)
 {
     // Missing from older clients: an empty list, since a default ImmutableArray cannot be serialized.
     public ImmutableArray<int> Depths { get; init; } = Depths.IsDefault ? [] : Depths;
@@ -76,7 +76,8 @@ public sealed record RoomView(
     FactView? Facts = null,
     GuessView? Guess = null,
     OddView? Odd = null,
-    MatchView? Match = null)
+    MatchView? Match = null,
+    NeverView? Never = null)
 {
     [JsonIgnore] public RoomPlayer? You => Players.FirstOrDefault(p => p.Id == YouId);
     [JsonIgnore] public bool YouAreHost => You?.IsHost == true;
@@ -140,6 +141,14 @@ public interface IGameHub
     /// <summary>Host: count one answer as the same as another.</summary>
     Task JoinMatch(string key, string intoKey);
     Task NextMatch();
+
+    // «Ես երբեք…» / Never have I ever.
+    Task AnswerNever(bool has);
+    /// <summary>The other players you think have done it.</summary>
+    Task GuessNever(ImmutableArray<string> playerIds);
+    /// <summary>Host: on to the guessing without a missing answer, or show the names without a missing guess.</summary>
+    Task MoveNeverOn();
+    Task NextNever();
 }
 
 /// <summary>Messages the server sends to a player.</summary>

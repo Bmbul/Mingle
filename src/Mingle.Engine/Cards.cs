@@ -60,7 +60,7 @@ public enum InputMode { Spoken, Text, Choice, PlayerVote, Scale }
 /// Which game a card belongs to. Question games play only question cards; blitz and "Give it to…" have their own
 /// cards and their own decks, and a deck never mixes styles.
 /// </summary>
-public enum DeckStyle { Questions, Blitz, Handoff, Facts, Guess, Odd, Match }
+public enum DeckStyle { Questions, Blitz, Handoff, Facts, Guess, Odd, Match, Never }
 
 /// <param name="Style">The game the kind belongs to: normal games, mixes and fallbacks use only question kinds.</param>
 /// <param name="FixedOptions">Two answers the kind always offers ("Cringe" / "Fine"), so its cards hold only a text.</param>
@@ -111,10 +111,12 @@ public static class CardKinds
     public static readonly CardKind OddPair = new("odd", ResponseType.Free, Audience.Everyone, DeckStyle.Odd, Extras: 1);
     /// <summary>"Same wavelength": a prompt everyone answers, hoping to write what the others write ("A red fruit").</summary>
     public static readonly CardKind MatchPrompt = new("match", ResponseType.Free, Audience.Everyone, DeckStyle.Match);
+    /// <summary>«Ես երբեք…» / Never have I ever: a statement ("I have never…") everyone who has done it owns up to.</summary>
+    public static readonly CardKind NeverHaveI = new("never", ResponseType.Free, Audience.Everyone, DeckStyle.Never);
 
     public static ImmutableArray<CardKind> All { get; } =
         [OpenQuestion, FinishSentence, WouldYouRather, MostLikelyTo, GuessMyAnswer, RateIt, CringeOrFine,
-         Association, NameThree, LetterCategory, Handoff, FactPrompt, RankIt, OddPair, MatchPrompt];
+         Association, NameThree, LetterCategory, Handoff, FactPrompt, RankIt, OddPair, MatchPrompt, NeverHaveI];
 
     /// <summary>The kinds normal games play.</summary>
     public static ImmutableArray<CardKind> Regular { get; } = [.. All.Where(k => k.IsQuestion)];

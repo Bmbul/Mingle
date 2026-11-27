@@ -29,6 +29,7 @@ public sealed class CardKind
         ["rank"] = 13,
         ["odd"] = 14,
         ["match"] = 15,
+        ["never"] = 16,
     };
 
     public static IEnumerable<CardKind> All() =>

@@ -514,4 +514,38 @@
   <data name="Rank_YourGuess" xml:space="preserve"><value>Քո կռահումը. սեղմիր ըստ հերթականության</value></data>
   <data name="Rank_StartOver" xml:space="preserve"><value>Սկսել նորից</value></data>
   <data name="Rank_PointsHint" xml:space="preserve"><value>Մեկ միավոր ամեն տարբերակի համար, որ նույն տեղում է, ինչ իրական հերթականության մեջ։</value></data>
+  <data name="Never_Game" xml:space="preserve"><value>Ես երբեք…</value></data>
+  <data name="Editor_Game_Never" xml:space="preserve"><value>Ես երբեք…</value></data>
+  <data name="Kind_never" xml:space="preserve"><value>Պնդում</value></data>
+  <data name="Editor_Hint_never" xml:space="preserve"><value>Ես երբեք չեմ քնել կինոթատրոնում</value></data>
+  <data name="Never_Line" xml:space="preserve"><value>Կարդացեք պնդումը. ով արել է, խոստովանում է ու պատմում</value></data>
+  <data name="Never_OnlineLine" xml:space="preserve"><value>Պատասխանիր գաղտնի, տես, թե քանիսն են արել, հետո գուշակիր՝ ովքեր</value></data>
+  <data name="Never_Levels" xml:space="preserve"><value>Մակարդակներ</value></data>
+  <data name="Never_LevelsHint" xml:space="preserve"><value>Համարձակը ընկերների ու խնջույքների համար է։ Խաղը թեթևից գնում է դեպի համարձակը։</value></data>
+  <data name="Never_Depth_1" xml:space="preserve"><value>Թեթև</value></data>
+  <data name="Never_Depth_2" xml:space="preserve"><value>Անձնական</value></data>
+  <data name="Never_Depth_3" xml:space="preserve"><value>Համարձակ</value></data>
+  <data name="Never_WhoHas" xml:space="preserve"><value>Ո՞վ է արել</value></data>
+  <data name="Never_TapHint" xml:space="preserve"><value>Խոստովանելը խաղի կեսն է։ Նշիր բոլոր նրանց, ովքեր արել են։</value></data>
+  <data name="Never_Done" xml:space="preserve"><value>Պատրաստ է</value></data>
+  <data name="Never_Nobody" xml:space="preserve"><value>Ոչ ոք։ 😇</value></data>
+  <data name="Never_Story" xml:space="preserve"><value>Պատմիր՝ {0}։</value></data>
+  <data name="Never_StoryHint" xml:space="preserve"><value>Կամ ցանկացած մեկը, ով արել է, եթե համարձակվում է։</value></data>
+  <data name="Never_AwardWild" xml:space="preserve"><value>🔥 Ամենաշատը արածը</value></data>
+  <data name="Never_AwardInnocent" xml:space="preserve"><value>😇 Ամենաանմեղը</value></data>
+  <data name="Never_Tally" xml:space="preserve"><value>Ով քանիսն է արել</value></data>
+  <data name="Never_DoneCount" xml:space="preserve"><value>արել է՝ {0}</value></data>
+  <data name="Never_Secret" xml:space="preserve"><value>Քո պատասխանը ոչ ոք չի տեսնի. միայն քանակը։</value></data>
+  <data name="Never_IHave" xml:space="preserve"><value>Արել եմ</value></data>
+  <data name="Never_IHaveNot" xml:space="preserve"><value>Չեմ արել</value></data>
+  <data name="Never_YourGuessIn" xml:space="preserve"><value>Քո կռահումն ընդունված է։</value></data>
+  <data name="Never_NothingToGuess" xml:space="preserve"><value>Այս անգամ գուշակելու բան չունես։</value></data>
+  <data name="Never_YouPicked" xml:space="preserve"><value>Դու ընտրեցիր՝ {0}</value></data>
+  <data name="Never_GuessNow" xml:space="preserve"><value>Գուշակել հիմա</value></data>
+  <data name="Never_Have_One" xml:space="preserve"><value>Արել է {0} հոգի</value></data>
+  <data name="Never_Have_Other" xml:space="preserve"><value>Արել է {0} հոգի</value></data>
+  <data name="Never_Pick_One" xml:space="preserve"><value>Ո՞վ է։ Ընտրիր {0}-ին</value></data>
+  <data name="Never_Pick_Other" xml:space="preserve"><value>Ովքե՞ր են։ Ընտրիր {0}-ին</value></data>
+  <data name="Never_PickOthers_One" xml:space="preserve"><value>Դու և էլ ո՞վ։ Ընտրիր {0}-ին</value></data>
+  <data name="Never_PickOthers_Other" xml:space="preserve"><value>Դու և էլ ովքե՞ր։ Ընտրիր {0}-ին</value></data>
 </root>

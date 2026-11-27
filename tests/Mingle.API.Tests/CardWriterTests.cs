@@ -151,6 +151,20 @@ public class CardWriterTests
     }
 
     [Fact]
+    public void Never_statements_must_hide_the_readers_gender_in_russian()
+    {
+        object Never(string en, string ru) => new { kind = "never", depth = 1, topic = "travel", text = new { en, ru }, options = new { } };
+        var request = Request with { Style = DeckStyle.Never, Languages = [Lang.En, Lang.Ru] };
+
+        var cards = CardParser.Parse(Json(
+            Never("I have never ridden a horse.", "Я никогда не катался на лошади"),        // shows gender
+            Never("Have you ever ridden a horse?", "Мне ни разу не доводилось кататься на лошади"), // a question
+            Never("I have never ridden a horse.", "Мне ни разу не доводилось кататься на лошади")), request);
+
+        Assert.Equal(["I have never ridden a horse"], cards.Select(c => c.Texts[Lang.En].Text).ToArray());
+    }
+
+    [Fact]
     public void Blitz_requests_accept_only_sentence_starters()
     {
         var words = Request with { Style = DeckStyle.Blitz };

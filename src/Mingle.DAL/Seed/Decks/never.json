@@ -1,0 +1,1310 @@
+{
+ "id": "never",
+ "name": {
+  "en": "Never have I ever",
+  "hy": "Ես երբեք…",
+  "ru": "Я никогда не…"
+ },
+ "cards": [
+  {
+   "id": "nev-001",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never fallen asleep in a cinema",
+    "hy": "Ես երբեք չեմ քնել կինոթատրոնում",
+    "ru": "Мне ни разу не доводилось уснуть в кинотеатре"
+   }
+  },
+  {
+   "id": "nev-002",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten food that fell on the floor",
+    "hy": "Ես երբեք չեմ կերել հատակին ընկած ուտելիք",
+    "ru": "Мне ни разу не доводилось съесть еду, упавшую на пол"
+   }
+  },
+  {
+   "id": "nev-003",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never sent a message to the wrong person",
+    "hy": "Ես երբեք նամակ չեմ ուղարկել սխալ մարդու",
+    "ru": "Мне ни разу не доводилось отправить сообщение не тому человеку"
+   }
+  },
+  {
+   "id": "nev-004",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "I have never sung karaoke",
+    "hy": "Ես երբեք կարաոկե չեմ երգել",
+    "ru": "Мне ни разу не доводилось петь в караоке"
+   }
+  },
+  {
+   "id": "nev-005",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "I have never forgotten a friend's birthday",
+    "hy": "Ես երբեք չեմ մոռացել ընկերոջս ծննդյան օրը",
+    "ru": "Мне ни разу не доводилось забыть день рождения друга"
+   }
+  },
+  {
+   "id": "nev-006",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never laughed until I cried in public",
+    "hy": "Ես երբեք այնքան չեմ ծիծաղել մարդկանց մեջ, որ լաց լինեմ",
+    "ru": "Мне ни разу не доводилось смеяться до слёз при всех"
+   }
+  },
+  {
+   "id": "nev-007",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never pretended to be on the phone to avoid someone",
+    "hy": "Ես երբեք չեմ ձևացրել, թե հեռախոսով եմ խոսում, որ մեկից խուսափեմ",
+    "ru": "Мне ни разу не доводилось делать вид, что говорю по телефону, чтобы кого-то избежать"
+   }
+  },
+  {
+   "id": "nev-008",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten a whole pizza on my own",
+    "hy": "Ես երբեք մենակ չեմ կերել մի ամբողջ պիցցա",
+    "ru": "Мне ни разу не доводилось съесть целую пиццу в одиночку"
+   }
+  },
+  {
+   "id": "nev-009",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never got lost in my own city",
+    "hy": "Ես երբեք չեմ մոլորվել իմ սեփական քաղաքում",
+    "ru": "Мне ни разу не доводилось заблудиться в своём городе"
+   }
+  },
+  {
+   "id": "nev-010",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "hobbies"
+   ],
+   "text": {
+    "en": "I have never watched a whole series in one day",
+    "hy": "Ես երբեք մեկ օրում չեմ դիտել մի ամբողջ սերիալ",
+    "ru": "Мне ни разу не доводилось посмотреть целый сериал за один день"
+   }
+  },
+  {
+   "id": "nev-011",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "home"
+   ],
+   "text": {
+    "en": "I have never talked to my pet like a person",
+    "hy": "Ես երբեք չեմ խոսել ընտանի կենդանուս հետ մարդու պես",
+    "ru": "Мне ни разу не доводилось разговаривать с питомцем как с человеком"
+   }
+  },
+  {
+   "id": "nev-012",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never burned food so badly the whole flat filled with smoke",
+    "hy": "Ես երբեք այնպես չեմ այրել ճաշը, որ ամբողջ տունը ծխով լցվի",
+    "ru": "Мне ни разу не доводилось сжечь еду так, что вся квартира была в дыму"
+   }
+  },
+  {
+   "id": "nev-013",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never waved back at someone who wasn't waving at me",
+    "hy": "Ես երբեք ձեռքով չեմ պատասխանել մեկին, ով ինձ չէր բարևում",
+    "ru": "Мне ни разу не доводилось помахать в ответ тому, кто махал не мне"
+   }
+  },
+  {
+   "id": "nev-014",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never fallen over in the street in front of everyone",
+    "hy": "Ես երբեք չեմ ընկել փողոցում բոլորի աչքի առաջ",
+    "ru": "Мне ни разу не доводилось упасть на улице у всех на глазах"
+   }
+  },
+  {
+   "id": "nev-015",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never worn my clothes inside out all day",
+    "hy": "Ես երբեք ամբողջ օրը շրջված հագուստով չեմ քայլել",
+    "ru": "Мне ни разу не доводилось проходить весь день в одежде наизнанку"
+   }
+  },
+  {
+   "id": "nev-016",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "I have never cried at a cartoon",
+    "hy": "Ես երբեք լաց չեմ եղել մուլտֆիլմ դիտելիս",
+    "ru": "Мне ни разу не доводилось плакать над мультфильмом"
+   }
+  },
+  {
+   "id": "nev-017",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never lied about my age",
+    "hy": "Ես երբեք չեմ ստել տարիքիս մասին",
+    "ru": "Мне ни разу не доводилось соврать о своём возрасте"
+   }
+  },
+  {
+   "id": "nev-018",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten someone else's food from the fridge",
+    "hy": "Ես երբեք չեմ կերել ուրիշի ուտելիքը սառնարանից",
+    "ru": "Мне ни разу не доводилось съесть чужую еду из холодильника"
+   }
+  },
+  {
+   "id": "nev-019",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "I have never forgotten someone's name right after meeting them",
+    "hy": "Ես երբեք չեմ մոռացել մեկի անունը ծանոթանալուց անմիջապես հետո",
+    "ru": "Мне ни разу не доводилось забыть чьё-то имя сразу после знакомства"
+   }
+  },
+  {
+   "id": "nev-020",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "I have never taken more than 50 selfies to get one good one",
+    "hy": "Ես երբեք 50-ից ավելի սելֆի չեմ արել, որ մեկը լավ ստացվի",
+    "ru": "Мне ни разу не доводилось сделать больше 50 селфи ради одного удачного"
+   }
+  },
+  {
+   "id": "nev-021",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never danced alone in front of the mirror",
+    "hy": "Ես երբեք մենակ չեմ պարել հայելու առաջ",
+    "ru": "Мне ни разу не доводилось танцевать в одиночку перед зеркалом"
+   }
+  },
+  {
+   "id": "nev-022",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "I have never skipped a lesson",
+    "hy": "Ես երբեք դաս չեմ փախցրել",
+    "ru": "Мне ни разу не доводилось прогулять урок"
+   }
+  },
+  {
+   "id": "nev-023",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "I have never spent a whole day without my phone",
+    "hy": "Ես երբեք մի ամբողջ օր առանց հեռախոսի չեմ անցկացրել",
+    "ru": "Мне ни разу не доводилось провести целый день без телефона"
+   }
+  },
+  {
+   "id": "nev-024",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten dessert before dinner",
+    "hy": "Ես երբեք աղանդեր չեմ կերել ճաշից առաջ",
+    "ru": "Мне ни разу не доводилось съесть десерт перед обедом"
+   }
+  },
+  {
+   "id": "nev-025",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "I have never slept more than 12 hours straight",
+    "hy": "Ես երբեք 12 ժամից ավելի անընդմեջ չեմ քնել",
+    "ru": "Мне ни разу не доводилось проспать больше 12 часов подряд"
+   }
+  },
+  {
+   "id": "nev-026",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never walked into a glass door",
+    "hy": "Ես երբեք չեմ բախվել ապակե դռանը",
+    "ru": "Мне ни разу не доводилось врезаться в стеклянную дверь"
+   }
+  },
+  {
+   "id": "nev-027",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "I have never given away a present I'd been given",
+    "hy": "Ես երբեք ինձ նվիրված նվերը չեմ նվիրել ուրիշին",
+    "ru": "Мне ни разу не доводилось передарить подарок"
+   }
+  },
+  {
+   "id": "nev-028",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "I have never sung in the shower so loudly the neighbours heard",
+    "hy": "Ես երբեք լոգանքի տակ այնքան բարձր չեմ երգել, որ հարևանները լսեն",
+    "ru": "Мне ни разу не доводилось петь в душе так громко, что слышали соседи"
+   }
+  },
+  {
+   "id": "nev-029",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "I have never been on TV",
+    "hy": "Ես երբեք հեռուստացույցով չեմ երևացել",
+    "ru": "Мне ни разу не доводилось попасть на телевидение"
+   }
+  },
+  {
+   "id": "nev-030",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "music"
+   ],
+   "text": {
+    "en": "I have never been to a concert abroad",
+    "hy": "Ես երբեք արտասահմանում համերգի չեմ գնացել",
+    "ru": "Мне ни разу не доводилось сходить на концерт за границей"
+   }
+  },
+  {
+   "id": "nev-031",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "I have never ridden a horse",
+    "hy": "Ես երբեք ձի չեմ հեծել",
+    "ru": "Мне ни разу не доводилось кататься на лошади"
+   }
+  },
+  {
+   "id": "nev-032",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never cooked a recipe from TikTok",
+    "hy": "Ես երբեք չեմ պատրաստել TikTok-ի բաղադրատոմսով",
+    "ru": "Мне ни разу не доводилось готовить по рецепту из TikTok"
+   }
+  },
+  {
+   "id": "nev-033",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "I have never fallen asleep in class",
+    "hy": "Ես երբեք դասի ժամանակ չեմ քնել",
+    "ru": "Мне ни разу не доводилось уснуть на уроке"
+   }
+  },
+  {
+   "id": "nev-034",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "I have never lost my keys twice in one week",
+    "hy": "Ես երբեք մեկ շաբաթում երկու անգամ բանալիներս չեմ կորցրել",
+    "ru": "Мне ни разу не доводилось потерять ключи дважды за одну неделю"
+   }
+  },
+  {
+   "id": "nev-035",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "I have never been stuck in a lift",
+    "hy": "Ես երբեք վերելակում չեմ խրվել",
+    "ru": "Мне ни разу не доводилось застрять в лифте"
+   }
+  },
+  {
+   "id": "nev-036",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten khorovats for breakfast",
+    "hy": "Ես երբեք նախաճաշին խորոված չեմ կերել",
+    "ru": "Мне ни разу не доводилось есть хоровац на завтрак"
+   }
+  },
+  {
+   "id": "nev-037",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "I have never pretended to like a present",
+    "hy": "Ես երբեք չեմ ձևացրել, թե նվերն ինձ դուր է եկել",
+    "ru": "Мне ни разу не доводилось делать вид, что подарок понравился"
+   }
+  },
+  {
+   "id": "nev-038",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "I have never called a teacher “Mum”",
+    "hy": "Ես երբեք ուսուցչին «մամ» չեմ ասել",
+    "ru": "Мне ни разу не доводилось назвать учительницу «мамой»"
+   }
+  },
+  {
+   "id": "nev-039",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "food"
+   ],
+   "text": {
+    "en": "I have never eaten a whole cake on my own",
+    "hy": "Ես երբեք մենակ չեմ կերել մի ամբողջ տորթ",
+    "ru": "Мне ни разу не доводилось съесть целый торт в одиночку"
+   }
+  },
+  {
+   "id": "nev-040",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "I have never forgotten why I walked into a room",
+    "hy": "Ես երբեք չեմ մոռացել, թե ինչու եմ մտել սենյակ",
+    "ru": "Мне ни разу не доводилось забыть, зачем пришлось зайти в комнату"
+   }
+  },
+  {
+   "id": "nev-041",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never laughed at my own joke before finishing it",
+    "hy": "Ես երբեք չեմ ծիծաղել սեփական կատակիս վրա, մինչև այն ավարտելը",
+    "ru": "Мне ни разу не доводилось смеяться над своей шуткой, не досказав её"
+   }
+  },
+  {
+   "id": "nev-042",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "I have never gone to the wrong address for a party",
+    "hy": "Ես երբեք խնջույքի չեմ գնացել սխալ հասցեով",
+    "ru": "Мне ни разу не доводилось прийти на вечеринку не по тому адресу"
+   }
+  },
+  {
+   "id": "nev-043",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never swum in the sea at night",
+    "hy": "Ես երբեք գիշերը ծովում չեմ լողացել",
+    "ru": "Мне ни разу не доводилось купаться в море ночью"
+   }
+  },
+  {
+   "id": "nev-044",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "I have never climbed Aragats",
+    "hy": "Ես երբեք Արագած չեմ բարձրացել",
+    "ru": "Мне ни разу не доводилось подниматься на Арагац"
+   }
+  },
+  {
+   "id": "nev-045",
+   "kind": "never",
+   "depth": 1,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "I have never cut my own hair",
+    "hy": "Ես երբեք ինքս իմ մազերը չեմ կտրել",
+    "ru": "Мне ни разу не доводилось стричь себе волосы самостоятельно"
+   }
+  },
+  {
+   "id": "nev-046",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "needs"
+   ],
+   "text": {
+    "en": "I have never cried in a public place",
+    "hy": "Ես երբեք լաց չեմ եղել հանրային վայրում",
+    "ru": "Мне ни разу не доводилось плакать в общественном месте"
+   }
+  },
+  {
+   "id": "nev-047",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "I have never pretended to be ill to skip work or school",
+    "hy": "Ես երբեք չեմ ձևացրել, թե հիվանդ եմ, որ աշխատանքի կամ դպրոց չգնամ",
+    "ru": "Мне ни разу не доводилось притвориться, что болею, чтобы не идти на работу или в школу"
+   }
+  },
+  {
+   "id": "nev-048",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "I have never read someone else's messages",
+    "hy": "Ես երբեք չեմ կարդացել ուրիշի նամակները",
+    "ru": "Мне ни разу не доводилось читать чужие сообщения"
+   }
+  },
+  {
+   "id": "nev-049",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "I have never lied to get out of plans",
+    "hy": "Ես երբեք չեմ ստել, որ հանդիպումից խուսափեմ",
+    "ru": "Мне ни разу не доводилось соврать, чтобы отменить встречу"
+   }
+  },
+  {
+   "id": "nev-050",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never secretly checked an ex's profile",
+    "hy": "Ես երբեք գաղտնի չեմ նայել նախկինիս էջը",
+    "ru": "Мне ни разу не доводилось тайком смотреть страницу бывших"
+   }
+  },
+  {
+   "id": "nev-051",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "I have never lost a job",
+    "hy": "Ես երբեք աշխատանքից չեմ ազատվել",
+    "ru": "Мне ни разу не доводилось потерять работу"
+   }
+  },
+  {
+   "id": "nev-052",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "I have never had a crush on a teacher",
+    "hy": "Ես երբեք չեմ սիրահարվել ուսուցչիս",
+    "ru": "Мне ни разу не доводилось влюбиться в учителя"
+   }
+  },
+  {
+   "id": "nev-053",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "childhood"
+   ],
+   "text": {
+    "en": "I have never cheated in an exam",
+    "hy": "Ես երբեք քննության ժամանակ չեմ արտագրել",
+    "ru": "Мне ни разу не доводилось списывать на экзамене"
+   }
+  },
+  {
+   "id": "nev-054",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "I have never broken something and blamed someone else",
+    "hy": "Ես երբեք ինչ-որ բան չեմ կոտրել ու մեղքը գցել ուրիշի վրա",
+    "ru": "Мне ни разу не доводилось разбить что-то и свалить вину на другого"
+   }
+  },
+  {
+   "id": "nev-055",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "I have never gone through someone's phone",
+    "hy": "Ես երբեք չեմ քրքրել ուրիշի հեռախոսը",
+    "ru": "Мне ни разу не доводилось копаться в чужом телефоне"
+   }
+  },
+  {
+   "id": "nev-056",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "I have never regretted a haircut or a tattoo",
+    "hy": "Ես երբեք չեմ ափսոսացել սանրվածքի կամ դաջվածքի համար",
+    "ru": "Мне ни разу не доводилось жалеть о стрижке или татуировке"
+   }
+  },
+  {
+   "id": "nev-057",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never said “I love you” first",
+    "hy": "Ես երբեք առաջինը չեմ ասել «սիրում եմ»",
+    "ru": "Мне ни разу не доводилось сказать «люблю» раньше другого человека"
+   }
+  },
+  {
+   "id": "nev-058",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never disappeared on someone without explaining",
+    "hy": "Ես երբեք չեմ անհետացել ինչ-որ մեկի կյանքից առանց բացատրության",
+    "ru": "Мне ни разу не доводилось исчезнуть из чьей-то жизни без объяснений"
+   }
+  },
+  {
+   "id": "nev-059",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "I have never been in a fight",
+    "hy": "Ես երբեք չեմ կռվել",
+    "ru": "Мне ни разу не доводилось участвовать в драке"
+   }
+  },
+  {
+   "id": "nev-060",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "I have never lied to my parents about where I was",
+    "hy": "Ես երբեք չեմ ստել ծնողներիս, թե որտեղ եմ",
+    "ru": "Мне ни разу не доводилось врать родителям, где нахожусь"
+   }
+  },
+  {
+   "id": "nev-061",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "I have never sneaked out of the house at night",
+    "hy": "Ես երբեք գիշերը գաղտնի դուրս չեմ եկել տնից",
+    "ru": "Мне ни разу не доводилось тайком уходить из дома ночью"
+   }
+  },
+  {
+   "id": "nev-062",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "I have never kept a secret from my best friend",
+    "hy": "Ես երբեք գաղտնիք չեմ պահել լավագույն ընկերոջիցս",
+    "ru": "Мне ни разу не доводилось скрывать секрет от лучшего друга"
+   }
+  },
+  {
+   "id": "nev-063",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never cried for a whole week after a break-up",
+    "hy": "Ես երբեք մի ամբողջ շաբաթ լաց չեմ եղել բաժանումից հետո",
+    "ru": "Мне ни разу не доводилось плакать целую неделю после расставания"
+   }
+  },
+  {
+   "id": "nev-064",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never said something bad about someone who was standing right behind me",
+    "hy": "Ես երբեք վատ բան չեմ ասել մեկի մասին, ով կանգնած էր հենց իմ հետևում",
+    "ru": "Мне ни разу не доводилось сказать что-то плохое о человеке, который стоял прямо за спиной"
+   }
+  },
+  {
+   "id": "nev-065",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "everyday"
+   ],
+   "text": {
+    "en": "I have never pretended not to see someone I know",
+    "hy": "Ես երբեք չեմ ձևացրել, թե չեմ տեսնում ծանոթիս",
+    "ru": "Мне ни разу не доводилось делать вид, что не замечаю знакомого"
+   }
+  },
+  {
+   "id": "nev-066",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "money"
+   ],
+   "text": {
+    "en": "I have never spent a whole salary in one day",
+    "hy": "Ես երբեք մեկ օրում չեմ ծախսել ամբողջ աշխատավարձս",
+    "ru": "Мне ни разу не доводилось потратить всю зарплату за один день"
+   }
+  },
+  {
+   "id": "nev-067",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never forgotten about a date",
+    "hy": "Ես երբեք չեմ մոռացել ժամադրության մասին",
+    "ru": "Мне ни разу не доводилось забыть о свидании"
+   }
+  },
+  {
+   "id": "nev-068",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never been on a blind date",
+    "hy": "Ես երբեք ժամադրության չեմ գնացել անծանոթ մարդու հետ",
+    "ru": "Мне ни разу не доводилось ходить на свидание вслепую"
+   }
+  },
+  {
+   "id": "nev-069",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "I have never lied in a job interview",
+    "hy": "Ես երբեք չեմ ստել աշխատանքային հարցազրույցի ժամանակ",
+    "ru": "Мне ни разу не доводилось врать на собеседовании"
+   }
+  },
+  {
+   "id": "nev-070",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never fallen in love with a friend",
+    "hy": "Ես երբեք չեմ սիրահարվել ընկերոջս",
+    "ru": "Мне ни разу не доводилось влюбиться в друга"
+   }
+  },
+  {
+   "id": "nev-071",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never written a love letter",
+    "hy": "Ես երբեք սիրային նամակ չեմ գրել",
+    "ru": "Мне ни разу не доводилось писать любовное письмо"
+   }
+  },
+  {
+   "id": "nev-072",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never sent a screenshot to the very person it was about",
+    "hy": "Ես երբեք սքրինշոթ չեմ ուղարկել հենց այն մարդուն, ում մասին էր",
+    "ru": "Мне ни разу не доводилось отправить скриншот тому самому человеку, о котором он был"
+   }
+  },
+  {
+   "id": "nev-073",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "money"
+   ],
+   "text": {
+    "en": "I have never hidden a purchase from my family",
+    "hy": "Ես երբեք գնումս չեմ թաքցրել ընտանիքիցս",
+    "ru": "Мне ни разу не доводилось прятать покупку от семьи"
+   }
+  },
+  {
+   "id": "nev-074",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "family"
+   ],
+   "text": {
+    "en": "I have never cried at a wedding",
+    "hy": "Ես երբեք լաց չեմ եղել հարսանիքի ժամանակ",
+    "ru": "Мне ни разу не доводилось плакать на свадьбе"
+   }
+  },
+  {
+   "id": "nev-075",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "fears"
+   ],
+   "text": {
+    "en": "I have never been afraid of the dark as an adult",
+    "hy": "Ես երբեք մեծ տարիքում մթից չեմ վախեցել",
+    "ru": "Мне ни разу не доводилось бояться темноты во взрослом возрасте"
+   }
+  },
+  {
+   "id": "nev-076",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "I have never eavesdropped on a conversation",
+    "hy": "Ես երբեք գաղտնի չեմ լսել ուրիշի զրույցը",
+    "ru": "Мне ни разу не доводилось подслушивать чужой разговор"
+   }
+  },
+  {
+   "id": "nev-077",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "habits"
+   ],
+   "text": {
+    "en": "I have never used someone else's Netflix",
+    "hy": "Ես երբեք չեմ օգտվել ուրիշի Netflix-ից",
+    "ru": "Мне ни разу не доводилось пользоваться чужим Netflix"
+   }
+  },
+  {
+   "id": "nev-078",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "work"
+   ],
+   "text": {
+    "en": "I have never fake-laughed at my boss's joke",
+    "hy": "Ես երբեք կեղծ չեմ ծիծաղել ղեկավարիս կատակի վրա",
+    "ru": "Мне ни разу не доводилось притворно смеяться над шуткой начальника"
+   }
+  },
+  {
+   "id": "nev-079",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "friendship"
+   ],
+   "text": {
+    "en": "I have never told a secret I'd promised to keep",
+    "hy": "Ես երբեք չեմ պատմել գաղտնիք, որը խոստացել էի պահել",
+    "ru": "Мне ни разу не доводилось выдать чужой секрет"
+   }
+  },
+  {
+   "id": "nev-080",
+   "kind": "never",
+   "depth": 2,
+   "topics": [
+    "money"
+   ],
+   "text": {
+    "en": "I have never kept something I found",
+    "hy": "Ես երբեք գտածս իրը ինձ չեմ պահել",
+    "ru": "Мне ни разу не доводилось оставить себе найденную вещь"
+   }
+  },
+  {
+   "id": "nev-081",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never kissed someone I'd only just met",
+    "hy": "Ես երբեք չեմ համբուրել մեկին, ում հետ նոր էի ծանոթացել",
+    "ru": "Мне ни разу не доводилось целоваться с человеком, с которым только что познакомились"
+   }
+  },
+  {
+   "id": "nev-082",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never texted an ex at night",
+    "hy": "Ես երբեք գիշերը չեմ գրել նախկինիս",
+    "ru": "Мне ни разу не доводилось писать бывшим ночью"
+   }
+  },
+  {
+   "id": "nev-083",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never dated two people at once",
+    "hy": "Ես երբեք միաժամանակ երկու հոգու հետ չեմ հանդիպել",
+    "ru": "Мне ни разу не доводилось встречаться с двумя людьми одновременно"
+   }
+  },
+  {
+   "id": "nev-084",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never had a crush on a friend's partner",
+    "hy": "Ես երբեք չեմ սիրահարվել ընկերոջս զուգընկերոջը",
+    "ru": "Мне ни разу не доводилось влюбиться в партнёра друга"
+   }
+  },
+  {
+   "id": "nev-085",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never been caught kissing",
+    "hy": "Ես երբեք չեմ բռնվել համբուրվելիս",
+    "ru": "Мне ни разу не доводилось попасться во время поцелуя"
+   }
+  },
+  {
+   "id": "nev-086",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never lied about being single",
+    "hy": "Ես երբեք չեմ ստել, որ ազատ եմ",
+    "ru": "Мне ни разу не доводилось врать о своём семейном положении"
+   }
+  },
+  {
+   "id": "nev-087",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never texted someone while drunk",
+    "hy": "Ես երբեք հարբած վիճակում նամակ չեմ գրել մեկին",
+    "ru": "Мне ни разу не доводилось писать кому-то в нетрезвом виде"
+   }
+  },
+  {
+   "id": "nev-088",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never woken up not remembering the night before",
+    "hy": "Ես երբեք չեմ արթնացել՝ չհիշելով նախորդ գիշերը",
+    "ru": "Мне ни разу не доводилось проснуться и не помнить прошлую ночь"
+   }
+  },
+  {
+   "id": "nev-089",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "I have never gone skinny-dipping",
+    "hy": "Ես երբեք մերկ չեմ լողացել",
+    "ru": "Мне ни разу не доводилось купаться голышом"
+   }
+  },
+  {
+   "id": "nev-090",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never flirted to get something for free",
+    "hy": "Ես երբեք ֆլիրտ չեմ արել, որ ինչ-որ բան անվճար ստանամ",
+    "ru": "Мне ни разу не доводилось флиртовать, чтобы получить что-то бесплатно"
+   }
+  },
+  {
+   "id": "nev-091",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never kissed someone in this room",
+    "hy": "Ես երբեք չեմ համբուրել այս սենյակում գտնվող որևէ մեկին",
+    "ru": "Мне ни разу не доводилось целоваться с кем-то из присутствующих"
+   }
+  },
+  {
+   "id": "nev-092",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never had a crush on someone in this room",
+    "hy": "Ես երբեք սիրահարված չեմ եղել այս սենյակում գտնվող որևէ մեկին",
+    "ru": "Мне ни разу не доводилось испытывать чувства к кому-то из присутствующих"
+   }
+  },
+  {
+   "id": "nev-093",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "dates"
+   ],
+   "text": {
+    "en": "I have never used a dating app",
+    "hy": "Ես երբեք ծանոթությունների հավելվածից չեմ օգտվել",
+    "ru": "Мне ни разу не доводилось пользоваться приложением для знакомств"
+   }
+  },
+  {
+   "id": "nev-094",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "adventure"
+   ],
+   "text": {
+    "en": "I have never stayed out all night without telling anyone",
+    "hy": "Ես երբեք ամբողջ գիշեր դրսում չեմ մնացել՝ ոչ ոքի չասելով",
+    "ru": "Мне ни разу не доводилось гулять всю ночь, никого не предупредив"
+   }
+  },
+  {
+   "id": "nev-095",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never got back together with an ex",
+    "hy": "Ես երբեք նորից չեմ միացել նախկինիս հետ",
+    "ru": "Мне ни разу не доводилось возвращаться к бывшим"
+   }
+  },
+  {
+   "id": "nev-096",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never sent a photo I regretted",
+    "hy": "Ես երբեք չեմ ուղարկել լուսանկար, որի համար հետո ափսոսացել եմ",
+    "ru": "Мне ни разу не доводилось отправить фото, о котором потом пришлось жалеть"
+   }
+  },
+  {
+   "id": "nev-097",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "funny"
+   ],
+   "text": {
+    "en": "I have never been thrown out of a club or a party",
+    "hy": "Ես երբեք դուրս չեմ հանվել ակումբից կամ խնջույքից",
+    "ru": "Мне ни разу не доводилось вылететь из клуба или с вечеринки"
+   }
+  },
+  {
+   "id": "nev-098",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never lied to my partner about where I was",
+    "hy": "Ես երբեք չեմ ստել զուգընկերոջս, թե որտեղ եմ եղել",
+    "ru": "Мне ни разу не доводилось врать своей второй половинке о том, где пришлось быть"
+   }
+  },
+  {
+   "id": "nev-099",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "love"
+   ],
+   "text": {
+    "en": "I have never confessed my love and been turned down",
+    "hy": "Ես երբեք սերս չեմ խոստովանել ու մերժում ստացել",
+    "ru": "Мне ни разу не доводилось признаться в любви и получить отказ"
+   }
+  },
+  {
+   "id": "nev-100",
+   "kind": "never",
+   "depth": 3,
+   "topics": [
+    "travel"
+   ],
+   "text": {
+    "en": "I have never had a holiday romance",
+    "hy": "Ես երբեք արձակուրդային սիրավեպ չեմ ունեցել",
+    "ru": "Мне ни разу не доводилось крутить курортный роман"
+   }
+  }
+ ]
+}

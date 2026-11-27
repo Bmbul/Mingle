@@ -46,6 +46,10 @@ else if (room.Stage == RoomStage.Lobby)
         {
             <p class="muted center"><Icon Name="eye" Size="16" /> @T["Odd_Game"]</p>
         }
+        @if (room.Settings.Never is not null)
+        {
+            <p class="muted center"><Icon Name="flame" Size="16" /> @T["Never_Game"]</p>
+        }
         @if (room.Settings.Match is not null)
         {
             <p class="muted center"><Icon Name="layers" Size="16" /> @T["Match_Game"]</p>
@@ -129,6 +133,10 @@ else if (room.Stage == RoomStage.Writing)
 else if (room.Odd is { } oddView)
 {
     <OddRoom Room="room" Odd="oddView" OnHome="LeaveRoom" />
+}
+else if (room.Never is { } neverView)
+{
+    <NeverRoom Room="room" Never="neverView" OnHome="LeaveRoom" />
 }
 else if (room.Match is { } matchView)
 {

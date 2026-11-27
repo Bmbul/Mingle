@@ -225,6 +225,13 @@ namespace Mingle.DAL.Migrations
                             Audience = "Everyone",
                             Code = "match",
                             ResponseType = "Free"
+                        },
+                        new
+                        {
+                            Id = (short)16,
+                            Audience = "Everyone",
+                            Code = "never",
+                            ResponseType = "Free"
                         });
                 });
 

@@ -514,4 +514,38 @@
   <data name="Rank_YourGuess" xml:space="preserve"><value>Your guess: tap them in order</value></data>
   <data name="Rank_StartOver" xml:space="preserve"><value>Start over</value></data>
   <data name="Rank_PointsHint" xml:space="preserve"><value>A point for each item in the same place as the real order.</value></data>
+  <data name="Never_Game" xml:space="preserve"><value>Never have I ever</value></data>
+  <data name="Editor_Game_Never" xml:space="preserve"><value>Never have I ever</value></data>
+  <data name="Kind_never" xml:space="preserve"><value>Statement</value></data>
+  <data name="Editor_Hint_never" xml:space="preserve"><value>I have never fallen asleep in a cinema</value></data>
+  <data name="Never_Line" xml:space="preserve"><value>Read the statement; whoever has done it owns up and tells the story</value></data>
+  <data name="Never_OnlineLine" xml:space="preserve"><value>Answer in secret, see how many have done it, then guess who</value></data>
+  <data name="Never_Levels" xml:space="preserve"><value>Levels</value></data>
+  <data name="Never_LevelsHint" xml:space="preserve"><value>Bold is for friends and parties. The game goes from light to bold.</value></data>
+  <data name="Never_Depth_1" xml:space="preserve"><value>Light</value></data>
+  <data name="Never_Depth_2" xml:space="preserve"><value>Personal</value></data>
+  <data name="Never_Depth_3" xml:space="preserve"><value>Bold</value></data>
+  <data name="Never_WhoHas" xml:space="preserve"><value>Who has done it?</value></data>
+  <data name="Never_TapHint" xml:space="preserve"><value>Owning up is half the fun. Tap everyone who has.</value></data>
+  <data name="Never_Done" xml:space="preserve"><value>Done</value></data>
+  <data name="Never_Nobody" xml:space="preserve"><value>Nobody! 😇</value></data>
+  <data name="Never_Story" xml:space="preserve"><value>{0}, tell us the story!</value></data>
+  <data name="Never_StoryHint" xml:space="preserve"><value>Or anyone else who has, if they dare.</value></data>
+  <data name="Never_AwardWild" xml:space="preserve"><value>🔥 Has done the most</value></data>
+  <data name="Never_AwardInnocent" xml:space="preserve"><value>😇 The most innocent</value></data>
+  <data name="Never_Tally" xml:space="preserve"><value>How many each has done</value></data>
+  <data name="Never_DoneCount" xml:space="preserve"><value>done {0}</value></data>
+  <data name="Never_Secret" xml:space="preserve"><value>Nobody sees your answer: only how many have done it.</value></data>
+  <data name="Never_IHave" xml:space="preserve"><value>I have</value></data>
+  <data name="Never_IHaveNot" xml:space="preserve"><value>I haven't</value></data>
+  <data name="Never_YourGuessIn" xml:space="preserve"><value>Your guess is in.</value></data>
+  <data name="Never_NothingToGuess" xml:space="preserve"><value>Nothing to guess for you this time.</value></data>
+  <data name="Never_YouPicked" xml:space="preserve"><value>You picked: {0}</value></data>
+  <data name="Never_GuessNow" xml:space="preserve"><value>Guess now</value></data>
+  <data name="Never_Have_One" xml:space="preserve"><value>{0} person has</value></data>
+  <data name="Never_Have_Other" xml:space="preserve"><value>{0} people have</value></data>
+  <data name="Never_Pick_One" xml:space="preserve"><value>Who is it? Pick {0}</value></data>
+  <data name="Never_Pick_Other" xml:space="preserve"><value>Who are they? Pick {0}</value></data>
+  <data name="Never_PickOthers_One" xml:space="preserve"><value>You, and who else? Pick {0}</value></data>
+  <data name="Never_PickOthers_Other" xml:space="preserve"><value>You, and who else? Pick {0}</value></data>
 </root>

@@ -541,3 +541,4 @@ button.guess-answer { cursor: pointer; }
 .deck-badge.match { background: rgba(140, 230, 140, 0.16); color: #9be79b; }
 .odd-question { font-size: 30px; }
 .odd-card { border-color: var(--accent); }
+.deck-badge.never { background: rgba(255, 150, 80, 0.18); color: #ffb37a; }

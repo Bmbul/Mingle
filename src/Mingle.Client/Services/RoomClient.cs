@@ -88,6 +88,10 @@ public sealed class RoomClient(NavigationManager nav, IJSRuntime js) : IAsyncDis
     public Task RevealMatch() => Send(nameof(IGameHub.RevealMatch));
     public Task JoinMatch(string key, string intoKey) => Send(nameof(IGameHub.JoinMatch), key, intoKey);
     public Task NextMatch() => Send(nameof(IGameHub.NextMatch));
+    public Task AnswerNever(bool has) => Send(nameof(IGameHub.AnswerNever), has);
+    public Task GuessNever(ImmutableArray<string> playerIds) => Send(nameof(IGameHub.GuessNever), playerIds);
+    public Task MoveNeverOn() => Send(nameof(IGameHub.MoveNeverOn));
+    public Task NextNever() => Send(nameof(IGameHub.NextNever));
 
     public async Task Leave()
     {

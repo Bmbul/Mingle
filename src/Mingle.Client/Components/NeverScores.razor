@@ -1,0 +1,51 @@
+@inject Text T
+
+@if (Awards && !Scores.IsEmpty)
+{
+    var best = Scores.Max(s => s.Points);
+    var most = Scores.Max(s => s.Done);
+    var least = Scores.Min(s => s.Done);
+    @if (ShowPoints && best > 0)
+    {
+        <div class="card award">
+            <span class="label">@T["Facts_AwardDetective"]</span>
+            <span class="h2">@string.Join(", ", Scores.Where(s => s.Points == best).Select(s => NameOf(s.PlayerId)))</span>
+        </div>
+    }
+    @if (most > 0)
+    {
+        <div class="card award">
+            <span class="label">@T["Never_AwardWild"]</span>
+            <span class="h2">@string.Join(", ", Scores.Where(s => s.Done == most).Select(s => NameOf(s.PlayerId)))</span>
+        </div>
+    }
+    @if (least < most)
+    {
+        <div class="card award">
+            <span class="label">@T["Never_AwardInnocent"]</span>
+            <span class="h2">@string.Join(", ", Scores.Where(s => s.Done == least).Select(s => NameOf(s.PlayerId)))</span>
+        </div>
+    }
+}
+<section class="stack-tight scoreboard" aria-label="@T["Facts_Scores"]">
+    <h2 class="label">@T[ShowPoints ? "Facts_Scores" : "Never_Tally"]</h2>
+    @foreach (var score in ShowPoints ? Scores : [.. Scores.OrderByDescending(s => s.Done)])
+    {
+        <div class="score-line">
+            <span class="grow">@NameOf(score.PlayerId)</span>
+            <span class="muted small">@T["Never_DoneCount", score.Done]</span>
+            @if (ShowPoints)
+            {
+                <span class="score-points">@score.Points</span>
+            }
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter] public ImmutableArray<NeverScore> Scores { get; set; } = [];
+    [Parameter] public Func<string, string> NameOf { get; set; } = id => id;
+    [Parameter] public bool Awards { get; set; }
+    /// <summary>Online only: points for right guesses. On one phone only the tally of what everyone has done.</summary>
+    [Parameter] public bool ShowPoints { get; set; } = true;
+}

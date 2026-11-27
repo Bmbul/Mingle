@@ -27,6 +27,8 @@ public sealed class Room(string code, TimeProvider clock)
     private OddGame? odd;
     /// <summary>"Same wavelength", when the settings ask for it.</summary>
     private MatchGame? match;
+    /// <summary>«Ես երբեք…», when the settings ask for it.</summary>
+    private NeverGame? never;
     private ImmutableArray<TopicInfo> topicPool = [];
     private Random topicRandom = new(0);
     private bool libraryCards;
@@ -237,6 +239,23 @@ public sealed class Room(string code, TimeProvider clock)
                 StartGuess(guessSettings, decks, seed);
                 return;
             }
+            if (settings.Never is { } neverSettings)
+            {
+                var ids = settings.DeckIds.IsDefault ? [] : settings.DeckIds;
+                try
+                {
+                    never = new NeverGame(members.Select(m => m.ToPlayer()),
+                        decks.Where(d => d.Style == DeckStyle.Never && (ids.IsEmpty || ids.Contains(d.Id))).SelectMany(d => d.Cards),
+                        neverSettings, seed);
+                }
+                catch (NeverRuleException ex)
+                {
+                    throw new RoomException(ex.Message);
+                }
+                Stage = RoomStage.Playing;
+                Touch();
+                return;
+            }
             if (settings.Match is { } matchSettings)
             {
                 var ids = settings.DeckIds.IsDefault ? [] : settings.DeckIds;
@@ -397,6 +416,27 @@ public sealed class Room(string code, TimeProvider clock)
         }
     }
 
+    /// <summary>One move in «Ես երբեք…»; <paramref name="hostOnly"/> for the host's moves.</summary>
+    public void ActOnNever(string playerId, Action<NeverGame> move, bool hostOnly = false)
+    {
+        lock (gate)
+        {
+            if (Stage != RoomStage.Playing || never is null) throw new RoomException("No game is in progress.");
+            Member(playerId);
+            if (hostOnly) RequireHost(playerId);
+            try
+            {
+                move(never);
+            }
+            catch (NeverRuleException ex)
+            {
+                throw new RoomException(ex.Message);
+            }
+            if (never.Stage == NeverStage.Ended) Stage = RoomStage.Ended;
+            Touch();
+        }
+    }
+
     /// <summary>One move in "Same wavelength"; <paramref name="hostOnly"/> for the host's moves.</summary>
     public void ActOnMatch(string playerId, Action<MatchGame> move, bool hostOnly = false)
     {
@@ -444,7 +484,7 @@ public sealed class Room(string code, TimeProvider clock)
     {
         lock (gate)
         {
-            if ((facts is not null || guess is not null || odd is not null || match is not null) && action is EndGame)
+            if ((facts is not null || guess is not null || odd is not null || match is not null || never is not null) && action is EndGame)
             {
                 EndSideGame(playerId);
                 return;
@@ -472,6 +512,7 @@ public sealed class Room(string code, TimeProvider clock)
         guess?.End();
         odd?.End();
         match?.End();
+        never?.End();
         Stage = RoomStage.Ended;
         Touch();
     }
@@ -514,7 +555,8 @@ public sealed class Room(string code, TimeProvider clock)
         var guessView = Stage is RoomStage.Playing or RoomStage.Ended ? guess?.ForPlayer(viewer.Id, viewer.Lang) : null;
         var oddView = Stage is RoomStage.Playing or RoomStage.Ended ? odd?.ForPlayer(viewer.Id, viewer.Lang) : null;
         var matchView = Stage is RoomStage.Playing or RoomStage.Ended ? match?.ForPlayer(viewer.Id, viewer.Lang) : null;
-        return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary, topics, libraryCards, factView, guessView, oddView, matchView);
+        var neverView = Stage is RoomStage.Playing or RoomStage.Ended ? never?.ForPlayer(viewer.Id, viewer.Lang) : null;
+        return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary, topics, libraryCards, factView, guessView, oddView, matchView, neverView);
     }
 
     private static GameSummary Summarize(GameState state, Lang lang, ImmutableArray<TopicInfo> topics)

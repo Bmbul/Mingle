@@ -7,6 +7,7 @@
 @inject FactSession FactGames
 @inject GuessSession GuessGames
 @inject OddSession OddGames
+@inject NeverSession NeverGames
 @inject ContentService Content
 @inject NavigationManager Nav
 @inject RoomClient Rooms
@@ -297,6 +298,22 @@
         </div>
     </section>
     }
+    @if (neverGame)
+    {
+    <section class="stack">
+        <h2 class="label">@T["Never_Levels"]</h2>
+        <div class="chips" role="group" aria-label="@T["Never_Levels"]">
+            @for (var level = 1; level <= 3; level++)
+            {
+                var d = level;
+                var on = neverDepths.Contains(d);
+                <button class="chip @(on ? "on" : "")" aria-pressed="@(on ? "true" : "false")" disabled="@(on && neverDepths.Count == 1)"
+                        @onclick="() => { if (!neverDepths.Remove(d)) neverDepths.Add(d); }">@T[$"Never_Depth_{d}"]</button>
+            }
+        </div>
+        <p class="muted small">@T["Never_LevelsHint"]</p>
+    </section>
+    }
     @if (oddGame)
     {
     <section class="stack">
@@ -372,6 +389,9 @@
     /// <summary>"Who got a different question?" (one phone or online) and "Same wavelength" (online only).</summary>
     private bool oddGame;
     private bool matchGame;
+    /// <summary>«Ես երբեք…»: open on one phone, secret with guessing online; levels light, personal, bold.</summary>
+    private bool neverGame;
+    private readonly HashSet<int> neverDepths = [1, 2];
     private bool twoOdd;
     private int oddRounds = 5;
     private int matchRounds = 8;
@@ -386,18 +406,19 @@
         : null;
 
     /// <summary>The questions game: out loud or with secret answers (passThePhone), and always online.</summary>
-    private bool Questions => !blitz && !stories && !handoff && !Facts && !guessGame && !oddGame && !matchGame;
+    private bool Questions => !blitz && !stories && !handoff && !Facts && !guessGame && !oddGame && !matchGame && !neverGame;
 
-    private string GameId => blitz ? "blitz" : stories ? "stories" : handoff ? "handoff" : oneTruth ? "onetruth" : whoseFact ? "whosefact" : trueOrFalse ? "trueorfalse" : guessGame ? "guess" : oddGame ? "odd" : matchGame ? "match" : "questions";
+    private string GameId => blitz ? "blitz" : stories ? "stories" : handoff ? "handoff" : oneTruth ? "onetruth" : whoseFact ? "whosefact" : trueOrFalse ? "trueorfalse" : guessGame ? "guess" : oddGame ? "odd" : matchGame ? "match" : neverGame ? "never" : "questions";
 
     /// <summary>One phone has every game; online has the games where everyone uses their own phone.</summary>
     private IEnumerable<(string Id, string Icon, string Label)> GameChoices => Online
         ? [("questions", "chat", "Setup_Questions"), ("onetruth", "idea", "Facts_OneTruth"), ("whosefact", "people", "Facts_WhoseFact"),
            ("trueorfalse", "check", "Facts_TrueOrFalse"), ("guess", "target", "Guess_Game"), ("odd", "eye", "Odd_Game"),
-           ("match", "layers", "Match_Game")]
+           ("match", "layers", "Match_Game"), ("never", "flame", "Never_Game")]
         : [("questions", "chat", "Setup_Questions"), ("blitz", "bolt", "Setup_Blitz"), ("stories", "book", "Setup_Stories"),
            ("handoff", "secret", "Setup_Handoff"), ("onetruth", "idea", "Facts_OneTruth"), ("whosefact", "people", "Facts_WhoseFact"),
-           ("trueorfalse", "check", "Facts_TrueOrFalse"), ("guess", "target", "Guess_Game"), ("odd", "eye", "Odd_Game")];
+           ("trueorfalse", "check", "Facts_TrueOrFalse"), ("guess", "target", "Guess_Game"), ("odd", "eye", "Odd_Game"),
+           ("never", "flame", "Never_Game")];
 
     private void PickMode(string which)
     {
@@ -410,6 +431,7 @@
         guessGame = which == "guess";
         oddGame = which == "odd";
         matchGame = which == "match";
+        neverGame = which == "never";
         while (oddGame && !Online && players.Count < OddGame.MinPlayers) players.Add(new PlayerRow());
         // A deck picked for one game is no use in another.
         deckIds.RemoveWhere(id => decks.FirstOrDefault(d => d.Id == id)?.Style != ModeStyle);
@@ -419,7 +441,7 @@
     }
 
     /// <summary>The kind of deck the chosen game plays.</summary>
-    private DeckStyle ModeStyle => blitz ? DeckStyle.Blitz : handoff ? DeckStyle.Handoff : Facts ? DeckStyle.Facts : guessGame ? DeckStyle.Guess : oddGame ? DeckStyle.Odd : matchGame ? DeckStyle.Match : DeckStyle.Questions;
+    private DeckStyle ModeStyle => blitz ? DeckStyle.Blitz : handoff ? DeckStyle.Handoff : Facts ? DeckStyle.Facts : guessGame ? DeckStyle.Guess : oddGame ? DeckStyle.Odd : matchGame ? DeckStyle.Match : neverGame ? DeckStyle.Never : DeckStyle.Questions;
     private bool storyBlind = true;
     private bool storyLong;
     private string storyTheme = "random";
@@ -496,6 +518,7 @@
             if (guessGame) parts.Add(T[Online ? "Guess_OnlineLine" : "Guess_Line"]);
             else if (oddGame) parts.Add(T[Online ? "Odd_OnlineLine" : "Odd_Line"]);
             else if (matchGame) parts.Add(T["Match_Line"]);
+            else if (neverGame) parts.Add(T[Online ? "Never_OnlineLine" : "Never_Line"]);
             else if (oneTruth) parts.Add(T[Online ? "Facts_OneTruthOnlineLine" : "Facts_OneTruthLine"]);
             else if (trueOrFalse) parts.Add(T[Online ? "Facts_TrueOrFalseOnlineLine" : "Facts_TrueOrFalseLine"]);
             else if (whoseFact) parts.Add(T[Online ? "Facts_WhoseFactLine" : "Facts_WhoseFactLocalLine"]);
@@ -515,11 +538,12 @@
     /// <summary>Cards in a deck everyone can read: blitz lists only blitz decks, other games only question decks.</summary>
     /// <remarks>Blitz shows each player cards in their own language, so a card counts if any player reads it.</remarks>
     private int Readable(Deck deck) => deck.Cards.IsEmpty || deck.Style != ModeStyle ? 0
+        : neverGame ? deck.Cards.Count(c => neverDepths.Contains(c.Depth) && TableLanguages.Any(c.Supports))
         : blitz || Facts || guessGame || oddGame || matchGame ? deck.Cards.Count(c => TableLanguages.Any(c.Supports))
         : handoff ? deck.CountReadableBy(TableLanguages, CardKinds.OfStyle(DeckStyle.Handoff))
         : deck.CountReadableBy(TableLanguages);
 
-    private int MatchingCards => blitz || handoff || Facts || guessGame || oddGame || matchGame
+    private int MatchingCards => blitz || handoff || Facts || guessGame || oddGame || matchGame || neverGame
         ? decks.Where(d => deckIds.Contains(d.Id)).Sum(Readable)
         :
         Game.BuildPool(decks.Where(d => deckIds.Contains(d.Id)), Settings, NamedPlayers.IsEmpty ? [new Player("x", "x", Text.UiLang)] : NamedPlayers).Length;
@@ -562,6 +586,12 @@
                 Nav.NavigateTo("handoff");
                 return;
             }
+            if (neverGame)
+            {
+                NeverGames.Start(NamedPlayers, decks.Where(d => deckIds.Contains(d.Id)), new NeverSettings(cardCount, [.. neverDepths.Order()]));
+                Nav.NavigateTo("never");
+                return;
+            }
             if (oddGame)
             {
                 OddGames.Start(NamedPlayers, decks.Where(d => deckIds.Contains(d.Id)), new OddSettings(oddRounds, twoOdd));
@@ -601,7 +631,8 @@
             var guessSettings = guessGame ? new GuessSettings(cardCount) : null;
             var room = await Rooms.CreateRoom(me.Name, me.Lang,
                 new RoomSettings(Settings, [.. deckIds], Questions ? source : DeckSource.Chosen, [.. depths.Order()], factSettings, guessSettings,
-                    oddGame ? new OddSettings(oddRounds, twoOdd) : null, matchGame ? new MatchSettings(matchRounds) : null));
+                    oddGame ? new OddSettings(oddRounds, twoOdd) : null, matchGame ? new MatchSettings(matchRounds) : null,
+                    neverGame ? new NeverSettings(cardCount, [.. neverDepths.Order()]) : null));
             Nav.NavigateTo($"room/{room.RoomCode}");
         }
         catch (Exception ex) when (ex is HttpRequestException or Microsoft.AspNetCore.SignalR.HubException or InvalidOperationException)

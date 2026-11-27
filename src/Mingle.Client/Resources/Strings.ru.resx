@@ -520,4 +520,41 @@
   <data name="Rank_YourGuess" xml:space="preserve"><value>Твоя догадка: нажимай по порядку</value></data>
   <data name="Rank_StartOver" xml:space="preserve"><value>Сначала</value></data>
   <data name="Rank_PointsHint" xml:space="preserve"><value>Очко за каждый вариант на том же месте, что и в настоящем порядке.</value></data>
+  <data name="Never_Game" xml:space="preserve"><value>Я никогда не…</value></data>
+  <data name="Editor_Game_Never" xml:space="preserve"><value>Я никогда не…</value></data>
+  <data name="Kind_never" xml:space="preserve"><value>Утверждение</value></data>
+  <data name="Editor_Hint_never" xml:space="preserve"><value>Мне ни разу не доводилось уснуть в кинотеатре</value></data>
+  <data name="Never_Line" xml:space="preserve"><value>Прочитайте утверждение: кто это делал, признаётся и рассказывает</value></data>
+  <data name="Never_OnlineLine" xml:space="preserve"><value>Ответь тайно, узнай, сколько человек это делали, и угадай кто</value></data>
+  <data name="Never_Levels" xml:space="preserve"><value>Уровни</value></data>
+  <data name="Never_LevelsHint" xml:space="preserve"><value>Смелый уровень — для друзей и вечеринок. Игра идёт от лёгкого к смелому.</value></data>
+  <data name="Never_Depth_1" xml:space="preserve"><value>Лёгкий</value></data>
+  <data name="Never_Depth_2" xml:space="preserve"><value>Личный</value></data>
+  <data name="Never_Depth_3" xml:space="preserve"><value>Смелый</value></data>
+  <data name="Never_WhoHas" xml:space="preserve"><value>Кто это делал?</value></data>
+  <data name="Never_TapHint" xml:space="preserve"><value>Признаться — половина удовольствия. Отметь всех, кто это делал.</value></data>
+  <data name="Never_Done" xml:space="preserve"><value>Готово</value></data>
+  <data name="Never_Nobody" xml:space="preserve"><value>Никто! 😇</value></data>
+  <data name="Never_Story" xml:space="preserve"><value>{0}, рассказывай!</value></data>
+  <data name="Never_StoryHint" xml:space="preserve"><value>Или любой другой, кто это делал, если решится.</value></data>
+  <data name="Never_AwardWild" xml:space="preserve"><value>🔥 Больше всех признаний</value></data>
+  <data name="Never_AwardInnocent" xml:space="preserve"><value>😇 Чистая душа</value></data>
+  <data name="Never_Tally" xml:space="preserve"><value>Кто сколько раз признался</value></data>
+  <data name="Never_DoneCount" xml:space="preserve"><value>признаний: {0}</value></data>
+  <data name="Never_Secret" xml:space="preserve"><value>Твой ответ никто не увидит — только количество.</value></data>
+  <data name="Never_IHave" xml:space="preserve"><value>Было</value></data>
+  <data name="Never_IHaveNot" xml:space="preserve"><value>Не было</value></data>
+  <data name="Never_YourGuessIn" xml:space="preserve"><value>Твоя догадка принята.</value></data>
+  <data name="Never_NothingToGuess" xml:space="preserve"><value>В этот раз угадывать нечего.</value></data>
+  <data name="Never_YouPicked" xml:space="preserve"><value>Твой выбор: {0}</value></data>
+  <data name="Never_GuessNow" xml:space="preserve"><value>Угадывать сейчас</value></data>
+  <data name="Never_Have_One" xml:space="preserve"><value>Было у {0} человека</value></data>
+  <data name="Never_Have_Few" xml:space="preserve"><value>Было у {0} человек</value></data>
+  <data name="Never_Have_Many" xml:space="preserve"><value>Было у {0} человек</value></data>
+  <data name="Never_Pick_One" xml:space="preserve"><value>Кто это? Выбери {0}</value></data>
+  <data name="Never_Pick_Few" xml:space="preserve"><value>Кто это? Выбери {0}</value></data>
+  <data name="Never_Pick_Many" xml:space="preserve"><value>Кто это? Выбери {0}</value></data>
+  <data name="Never_PickOthers_One" xml:space="preserve"><value>Ты и кто ещё? Выбери {0}</value></data>
+  <data name="Never_PickOthers_Few" xml:space="preserve"><value>Ты и кто ещё? Выбери {0}</value></data>
+  <data name="Never_PickOthers_Many" xml:space="preserve"><value>Ты и кто ещё? Выбери {0}</value></data>
 </root>
