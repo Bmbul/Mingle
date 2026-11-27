@@ -429,4 +429,8 @@
   <data name="Facts_AwardMystery" xml:space="preserve"><value>🫣 Главная загадка</value></data>
   <data name="Facts_Scores" xml:space="preserve"><value>Очки</value></data>
   <data name="Facts_ScoreParts" xml:space="preserve"><value>угадано: {0} · обмануто: {1}</value></data>
+  <data name="Facts_AfterEachLocalHint" xml:space="preserve"><value>Угадайте, потом нажмите, чтобы увидеть автора.</value></data>
+  <data name="Facts_WhoseFactLocalLine" xml:space="preserve"><value>Каждый тайно пишет факты о себе, остальные вслух угадывают, чей он</value></data>
+  <data name="Facts_GuessAloud" xml:space="preserve"><value>Угадывайте вслух, спорьте, потом откройте. Автор, не выдай себя!</value></data>
+  <data name="Facts_GuessAloudKeep" xml:space="preserve"><value>Угадывайте вслух. Кто что написал, станет видно в конце.</value></data>
 </root>

@@ -423,4 +423,8 @@
   <data name="Facts_AwardMystery" xml:space="preserve"><value>🫣 Ամենաառեղծվածայինը</value></data>
   <data name="Facts_Scores" xml:space="preserve"><value>Միավորներ</value></data>
   <data name="Facts_ScoreParts" xml:space="preserve"><value>{0} գուշակել · {1} խաբել</value></data>
+  <data name="Facts_AfterEachLocalHint" xml:space="preserve"><value>Գուշակելուց հետո սեղմեք՝ տեսնելու, թե ով է գրել։</value></data>
+  <data name="Facts_WhoseFactLocalLine" xml:space="preserve"><value>Ամեն մեկը գաղտնի գրում է փաստեր իր մասին, դուք բարձրաձայն գուշակում եք՝ ումն է</value></data>
+  <data name="Facts_GuessAloud" xml:space="preserve"><value>Գուշակեք բարձրաձայն, վիճեք, հետո բացեք։ Հեղինակը թող չմատնի իրեն։</value></data>
+  <data name="Facts_GuessAloudKeep" xml:space="preserve"><value>Գուշակեք բարձրաձայն։ Ով ինչ է գրել՝ կերևա վերջում։</value></data>
 </root>

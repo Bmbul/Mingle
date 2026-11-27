@@ -98,7 +98,7 @@
                 <button class="chip @(revealEach ? "on" : "")" aria-pressed="@(revealEach ? "true" : "false")" @onclick="() => revealEach = true">@T["Facts_AfterEach"]</button>
                 <button class="chip @(!revealEach ? "on" : "")" aria-pressed="@(!revealEach ? "true" : "false")" @onclick="() => revealEach = false">@T["Facts_AtTheEnd"]</button>
             </div>
-            <p class="muted small">@T[revealEach ? "Facts_AfterEachHint" : "Facts_AtTheEndHint"]</p>
+            <p class="muted small">@T[revealEach ? (Online ? "Facts_AfterEachHint" : "Facts_AfterEachLocalHint") : "Facts_AtTheEndHint"]</p>
         </section>
     }
 
@@ -332,7 +332,7 @@
     private bool handoffGuess = true;
     private bool handoffCoin;
 
-    /// <summary>The fact games: "One truth" (one phone or online) and "Whose fact?" (online only).</summary>
+    /// <summary>The fact games, on one phone or online: "One truth" and "Whose fact?".</summary>
     private bool oneTruth;
     private bool whoseFact;
     private bool findTheLie;
@@ -340,16 +340,20 @@
     private bool revealEach = true;
     private bool Facts => oneTruth || whoseFact;
 
+    private FactSettings? FactChoice => oneTruth ? new FactSettings(FactGameKind.OneTruth, findTheLie)
+        : whoseFact ? new FactSettings(FactGameKind.WhoseFact, FactsEach: factsEach, RevealEachFact: revealEach)
+        : null;
+
     /// <summary>The questions game: out loud or with secret answers (passThePhone), and always online.</summary>
     private bool Questions => !blitz && !stories && !handoff && !Facts;
 
     private string GameId => blitz ? "blitz" : stories ? "stories" : handoff ? "handoff" : oneTruth ? "onetruth" : whoseFact ? "whosefact" : "questions";
 
-    /// <summary>One phone has every game but "Whose fact?"; online has the games where everyone uses their own phone.</summary>
+    /// <summary>One phone has every game; online has the games where everyone uses their own phone.</summary>
     private IEnumerable<(string Id, string Icon, string Label)> GameChoices => Online
         ? [("questions", "chat", "Setup_Questions"), ("onetruth", "idea", "Facts_OneTruth"), ("whosefact", "people", "Facts_WhoseFact")]
         : [("questions", "chat", "Setup_Questions"), ("blitz", "bolt", "Setup_Blitz"), ("stories", "book", "Setup_Stories"),
-           ("handoff", "secret", "Setup_Handoff"), ("onetruth", "idea", "Facts_OneTruth")];
+           ("handoff", "secret", "Setup_Handoff"), ("onetruth", "idea", "Facts_OneTruth"), ("whosefact", "people", "Facts_WhoseFact")];
 
     private void PickMode(string which)
     {
@@ -362,6 +366,7 @@
         deckIds.RemoveWhere(id => decks.FirstOrDefault(d => d.Id == id)?.Style != ModeStyle);
         // "Give it to…" needs three players; add the rows so the placeholders can play.
         while (handoff && players.Count < Handoffs.MinPlayers) players.Add(new PlayerRow());
+        while (whoseFact && !Online && players.Count < FactGame.MinPlayers(FactGameKind.WhoseFact)) players.Add(new PlayerRow());
     }
 
     /// <summary>The kind of deck the chosen game plays.</summary>
@@ -440,7 +445,7 @@
         {
             var parts = new List<string>();
             if (oneTruth) parts.Add(T[Online ? "Facts_OneTruthOnlineLine" : "Facts_OneTruthLine"]);
-            else if (whoseFact) parts.Add(T["Facts_WhoseFactLine"]);
+            else if (whoseFact) parts.Add(T[Online ? "Facts_WhoseFactLine" : "Facts_WhoseFactLocalLine"]);
             else if (!Online) parts.Add(stories ? T["Setup_StoriesLine"] : handoff ? T[handoffSecret ? "Setup_HandoffLine" : "Setup_HandoffAloudLine"] : blitz ? T["Setup_BlitzLine", Blitz.TurnSeconds] : passThePhone ? T["Setup_PassLine"] : T["Setup_OutLoudLine"]);
             if (Questions && (Online || passThePhone))
             {
@@ -466,14 +471,14 @@
         :
         Game.BuildPool(decks.Where(d => deckIds.Contains(d.Id)), Settings, NamedPlayers.IsEmpty ? [new Player("x", "x", Text.UiLang)] : NamedPlayers).Length;
 
-    private int NeededPlayers => Online ? 1 : handoff ? Handoffs.MinPlayers : oneTruth ? FactGame.MinPlayers(FactGameKind.OneTruth) : Game.MinPlayers;
+    private int NeededPlayers => Online ? 1 : handoff ? Handoffs.MinPlayers : oneTruth ? FactGame.MinPlayers(FactGameKind.OneTruth) : whoseFact ? FactGame.MinPlayers(FactGameKind.WhoseFact) : Game.MinPlayers;
 
     private bool CanStart => NamedPlayers.Length >= NeededPlayers && (stories || (PicksInLobby ? !decks.IsEmpty : MatchingCards > 0));
 
     private string Summary =>
         loadFailed ? T["Setup_LoadFailed"]
         : createError is not null ? createError
-        : NamedPlayers.Length < NeededPlayers ? (Online ? T["Setup_NeedName"] : handoff ? T["Setup_NeedThree"] : T["Setup_NeedPlayers"])
+        : NamedPlayers.Length < NeededPlayers ? (Online ? T["Setup_NeedName"] : handoff || whoseFact ? T["Setup_NeedThree"] : T["Setup_NeedPlayers"])
         : stories ? ""
         : PicksInLobby ? T[source == DeckSource.Topics ? "Setup_SourceTopicsSummary" : "Setup_SourceEveryoneSummary"]
         : deckIds.Count == 0 ? T["Setup_PickDeck"]
@@ -504,9 +509,9 @@
                 Nav.NavigateTo("handoff");
                 return;
             }
-            if (oneTruth)
+            if (Facts)
             {
-                FactGames.Start(NamedPlayers, decks.Where(d => deckIds.Contains(d.Id)), findTheLie);
+                FactGames.Start(NamedPlayers, decks.Where(d => deckIds.Contains(d.Id)), FactChoice!);
                 Nav.NavigateTo("facts");
                 return;
             }
@@ -527,9 +532,7 @@
         {
             var me = NamedPlayers[0] with { Lang = Text.UiLang };
             await JS.InvokeVoidAsync("mingle.set", "mingle.name", me.Name);
-            var factSettings = oneTruth ? new FactSettings(FactGameKind.OneTruth, findTheLie)
-                : whoseFact ? new FactSettings(FactGameKind.WhoseFact, FactsEach: factsEach, RevealEachFact: revealEach)
-                : null;
+            var factSettings = FactChoice;
             var room = await Rooms.CreateRoom(me.Name, me.Lang,
                 new RoomSettings(Settings, [.. deckIds], factSettings is null ? source : DeckSource.Chosen, [.. depths.Order()], factSettings));
             Nav.NavigateTo($"room/{room.RoomCode}");

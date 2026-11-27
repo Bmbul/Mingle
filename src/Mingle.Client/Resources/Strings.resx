@@ -423,4 +423,8 @@
   <data name="Facts_AwardMystery" xml:space="preserve"><value>🫣 Most mysterious</value></data>
   <data name="Facts_Scores" xml:space="preserve"><value>Scores</value></data>
   <data name="Facts_ScoreParts" xml:space="preserve"><value>{0} guessed · {1} fooled</value></data>
+  <data name="Facts_AfterEachLocalHint" xml:space="preserve"><value>After you've guessed, tap to see who wrote it.</value></data>
+  <data name="Facts_WhoseFactLocalLine" xml:space="preserve"><value>Everyone writes facts about themselves in secret; guess out loud whose each one is</value></data>
+  <data name="Facts_GuessAloud" xml:space="preserve"><value>Guess out loud, argue, then reveal. The author keeps a straight face!</value></data>
+  <data name="Facts_GuessAloudKeep" xml:space="preserve"><value>Guess out loud. Who wrote what comes out at the end.</value></data>
 </root>
