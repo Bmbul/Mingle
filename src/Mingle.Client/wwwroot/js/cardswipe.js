@@ -15,6 +15,7 @@
         function begin(x, y) {
             if (busy) return;
             startX = x; startY = y; dx = 0; dy = 0; axis = null; active = true; dragging = false;
+            el.classList.remove('hint');
             el.style.transition = '';
         }
 
@@ -63,6 +64,8 @@
 
         async function fly(dir) {
             busy = true;
+            el.classList.remove('hint');
+            try { localStorage.setItem('mingle.swiped', '1'); } catch { }
             el.dataset.dir = dir;
             el.style.transition = 'transform 0.2s ease-in, opacity 0.2s ease-in';
             el.style.transform = dir === 'up' ? 'translateY(-120vh)' : `translateX(${dir === 'right' ? 140 : -140}%) rotate(${dir === 'right' ? 18 : -18}deg)`;
@@ -97,6 +100,11 @@
             const dir = e.key === 'ArrowLeft' ? 'left' : e.key === 'ArrowRight' ? 'right' : e.key === 'ArrowUp' ? 'up' : null;
             if (dir && allowed(dir)) { e.preventDefault(); fly(dir); }
         };
+
+        // The first time on this phone, the card nudges side to side to show it can be swiped.
+        let seen = false;
+        try { seen = localStorage.getItem('mingle.swiped') === '1'; } catch { }
+        if (!seen) el.classList.add('hint');
 
         el.addEventListener('touchstart', onTouchStart, { passive: true });
         el.addEventListener('touchmove', onTouchMove, { passive: false });

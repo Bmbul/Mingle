@@ -548,3 +548,26 @@ button.guess-answer { cursor: pointer; }
 .swipe-card.dragging { cursor: grabbing; }
 .swipe-card.entering { animation: card-in 0.22s ease-out; }
 @keyframes card-in { from { opacity: 0; transform: translateY(18px) scale(0.98); } to { opacity: 1; transform: none; } }
+
+/* The deck: one big card in the middle of the screen, two more peeking out behind it. */
+.swipe-deck { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 4px 0 22px; }
+.swipe-stack { position: relative; }
+.swipe-stack::before, .swipe-stack::after {
+    content: ""; position: absolute; left: 50%; height: 60px; border-radius: 24px;
+    background: var(--surface-2); border: 1px solid var(--border-strong); transform: translateX(-50%);
+}
+.swipe-stack::after { width: 93%; bottom: -10px; opacity: 0.8; }
+.swipe-stack::before { width: 86%; bottom: -20px; opacity: 0.45; }
+.swipe-stack .swipe-card { position: relative; z-index: 1; }
+.swipe-deck .card-face { position: relative; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35); }
+.swipe-deck .card-face:not(.compact) { min-height: min(62vh, 520px); justify-content: center; padding: 56px 24px 28px; gap: 18px; }
+.swipe-deck .card-face:not(.compact) .kind { position: absolute; top: 24px; left: 24px; right: 24px; }
+.swipe-deck .card-face:not(.compact) .prompt { font-size: 30px; }
+/* The first card ever: a gentle side-to-side nudge, until the first real swipe. */
+.swipe-card.hint { animation: card-nudge 1.6s ease-in-out 0.8s 2; }
+@keyframes card-nudge {
+    0%, 100% { transform: none; }
+    25% { transform: translateX(-26px) rotate(-2deg); }
+    55% { transform: translateX(20px) rotate(1.5deg); }
+    80% { transform: translateX(-6px); }
+}

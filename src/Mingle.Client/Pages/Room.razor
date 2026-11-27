@@ -198,10 +198,6 @@ else if (room.Stage == RoomStage.Playing && room.Game is { } game)
                 <CardFace View="game" Lang="myLang" Compact="@(!game.RevealedAnswers.IsEmpty)" ShowOptions="@game.RevealedAnswers.IsEmpty" />
                 <RevealList View="game" />
             </SwipeCard>
-            <div class="talk">
-                <p class="h2">@T["Play_TalkAboutIt"]</p>
-                <p class="muted small">@T["Play_TakeYourTime"]</p>
-            </div>
         }
     </main>
 
