@@ -72,9 +72,6 @@
   <data name="End_Title" xml:space="preserve"><value>Good game</value></data>
   <data name="End_Played_One" xml:space="preserve"><value>{0} card played</value></data>
   <data name="End_Played_Other" xml:space="preserve"><value>{0} cards played</value></data>
-  <data name="End_Passed" xml:space="preserve"><value>Passed: {0}</value></data>
-  <data name="End_Liked" xml:space="preserve"><value>You liked</value></data>
-  <data name="End_NoLikes" xml:space="preserve"><value>Like cards during the game to see them here.</value></data>
   <data name="End_NewGame" xml:space="preserve"><value>New game</value></data>
   <data name="End_Home" xml:space="preserve"><value>Home</value></data>
   <data name="Setup_PassPhone" xml:space="preserve"><value>Pass the phone</value></data>
@@ -204,7 +201,6 @@
   <data name="Editor_AiLanguagesHint" xml:space="preserve"><value>Players only get cards in languages they read.</value></data>
   <data name="End_SaveDeck" xml:space="preserve"><value>Save as deck</value></data>
   <data name="End_SaveAll" xml:space="preserve"><value>All cards ({0})</value></data>
-  <data name="End_SaveLiked" xml:space="preserve"><value>Liked only ({0})</value></data>
   <data name="End_Saved" xml:space="preserve"><value>Saved to My decks.</value></data>
   <data name="End_OpenDeck" xml:space="preserve"><value>Open</value></data>
   <data name="End_Close" xml:space="preserve"><value>Close</value></data>
@@ -548,7 +544,4 @@
   <data name="Never_Pick_Other" xml:space="preserve"><value>Who are they? Pick {0}</value></data>
   <data name="Never_PickOthers_One" xml:space="preserve"><value>You, and who else? Pick {0}</value></data>
   <data name="Never_PickOthers_Other" xml:space="preserve"><value>You, and who else? Pick {0}</value></data>
-  <data name="Swipe_Next" xml:space="preserve"><value>Next</value></data>
-  <data name="Swipe_Like" xml:space="preserve"><value>👍 Like</value></data>
-  <data name="Swipe_Skip" xml:space="preserve"><value>Skip</value></data>
 </root>

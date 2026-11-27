@@ -15,27 +15,7 @@
     {
         <main class="main">
             <h1 class="h1 big">@T["End_Title"]</h1>
-            <p class="muted lead">
-                @T.Plural("End_Played", state.History.Count(h => !h.Passed))
-                @if (state.History.Any(h => h.Passed))
-                {
-                    <span> · @T["End_Passed", state.History.Count(h => h.Passed)]</span>
-                }
-            </p>
-
-            <h2 class="label">@T["End_Liked"]</h2>
-            @{ var liked = state.History.Where(h => h.Likes > 0).ToList(); }
-            @if (liked.Count == 0)
-            {
-                <p class="muted">@T["End_NoLikes"]</p>
-            }
-            @foreach (var result in liked)
-            {
-                <div class="card">
-                    <span class="row-title" lang="@lang.Code()">@result.Card.TextFor(lang).Text</span>
-                    <span class="muted small">@T.KindName(result.Card.KindId) · @T[$"Depth_{result.Card.Depth}"]</span>
-                </div>
-            }
+            <p class="muted lead">@T.Plural("End_Played", state.History.Count)</p>
         </main>
         <footer class="foot">
             <a class="btn" href="setup">@T["End_NewGame"]</a>
@@ -79,7 +59,8 @@
             var next = round.Answerers.First(id => !round.Answers.ContainsKey(id));
             <main class="main">
                 <p class="who">@WhoLine.For(T, table, state.Settings.TurnStyle)</p>
-                <SwipeCard OnLeft="() => Do(new PassCard(Me(state)))" LeftLabel="@T["Swipe_Skip"]">
+                @* Swiping the card any way moves on to the next one. *@
+                <SwipeCard OnSwipe="() => Do(new PassCard(Me(state)))">
                     <CardFace View="table" ShowOptions="true" />
                 </SwipeCard>
                 <div class="card handoff">
@@ -92,11 +73,10 @@
         }
         else
         {
-            @* Swipe the card: up for the next one, left to skip it, right to like it and go on. *@
+            @* Swiping the card any way moves on to the next one. *@
             <main class="main">
                 <p class="who">@WhoLine.For(T, table, state.Settings.TurnStyle)</p>
-                <SwipeCard OnUp="() => Do(new NextCard(Me(state)))" OnLeft="() => Do(new PassCard(Me(state)))" OnRight="() => LikeAndNext(state)"
-                           UpLabel="@T["Swipe_Next"]" LeftLabel="@T["Swipe_Skip"]" RightLabel="@T["Swipe_Like"]">
+                <SwipeCard OnSwipe="() => Do(new NextCard(Me(state)))">
                     <CardFace View="table" Compact="@(!table.RevealedAnswers.IsEmpty)" ShowOptions="@table.RevealedAnswers.IsEmpty" />
                     <RevealList View="table" />
                 </SwipeCard>
@@ -167,9 +147,4 @@
 
     public void Dispose() => Session.Changed -= OnChanged;
 
-    private void LikeAndNext(GameState state)
-    {
-        Do(new ReactToCard(Me(state), true));
-        if (Session.State is { Phase: GamePhase.Discussing } now) Do(new NextCard(Me(now)));
-    }
 }

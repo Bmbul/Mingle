@@ -176,7 +176,7 @@ else if (room.Stage == RoomStage.Playing && room.Game is { } game)
         <p class="who">@WhoLine.For(T, game, room.Settings.Game.TurnStyle)</p>
         @if (game.Phase == GamePhase.Answering)
         {
-            <SwipeCard OnLeft="Rooms.Pass" LeftLabel="@T["Swipe_Skip"]">
+            <SwipeCard OnSwipe="Rooms.Pass">
                 <CardFace View="game" Lang="myLang" ShowOptions="@(!game.MustAnswer)" />
             </SwipeCard>
             @if (game.MustAnswer && game.MyAnswer is null)
@@ -193,9 +193,8 @@ else if (room.Stage == RoomStage.Playing && room.Game is { } game)
         }
         else
         {
-            @* Swipe the card: up for the next one, left to skip it, right to like it and go on. *@
-            <SwipeCard OnUp="Rooms.Next" OnLeft="Rooms.Pass" OnRight="LikeAndNext"
-                       UpLabel="@T["Swipe_Next"]" LeftLabel="@T["Swipe_Skip"]" RightLabel="@T["Swipe_Like"]">
+            @* Swiping the card any way moves on to the next one. *@
+            <SwipeCard OnSwipe="Rooms.Next">
                 <CardFace View="game" Lang="myLang" Compact="@(!game.RevealedAnswers.IsEmpty)" ShowOptions="@game.RevealedAnswers.IsEmpty" />
                 <RevealList View="game" />
             </SwipeCard>
@@ -211,25 +210,7 @@ else if (room.Summary is { } summary)
 {
     <main class="main">
         <h1 class="h1 big">@T["End_Title"]</h1>
-        <p class="muted lead">
-            @T.Plural("End_Played", summary.Played)
-            @if (summary.Passed > 0)
-            {
-                <span> · @T["End_Passed", summary.Passed]</span>
-            }
-        </p>
-        <h2 class="label">@T["End_Liked"]</h2>
-        @if (summary.Liked.IsEmpty)
-        {
-            <p class="muted">@T["End_NoLikes"]</p>
-        }
-        @foreach (var card in summary.Liked)
-        {
-            <div class="card">
-                <span class="row-title">@card.Text</span>
-                <span class="muted small">@T.KindName(card.KindId) · @T[$"Depth_{card.Depth}"]</span>
-            </div>
-        }
+        <p class="muted lead">@T.Plural("End_Played", summary.Played + summary.Passed)</p>
     </main>
     <footer class="foot">
         @if (summary.Cards is not null)
@@ -254,14 +235,7 @@ else if (room.Summary is { } summary)
             }
             else
             {
-                var likedCount = toSave.Cards.Count(c => likedIds.Contains(c.Id));
-                <div class="stack" role="radiogroup">
-                    <OptionCard Selected="@(!likedOnly)" OnSelect="() => likedOnly = false" Title="@T["End_SaveAll", toSave.Cards.Length]" />
-                    @if (likedCount > 0)
-                    {
-                        <OptionCard Selected="@likedOnly" OnSelect="() => likedOnly = true" Title="@T["End_SaveLiked", likedCount]" />
-                    }
-                </div>
+                <p class="muted">@T["End_SaveAll", toSave.Cards.Length]</p>
                 <label class="label" for="save-name">@T["Editor_Name"]</label>
                 <input id="save-name" class="field" maxlength="60" @bind="saveName" @bind:event="oninput" />
                 @if (saveError is not null)
@@ -342,12 +316,6 @@ else if (room.Summary is { } summary)
         };
     }
 
-    private async Task LikeAndNext()
-    {
-        await Rooms.React(true);
-        await Rooms.Next();
-    }
-
     private async Task EndNow()
     {
         confirmEnd = false;
@@ -356,8 +324,6 @@ else if (room.Summary is { } summary)
 
     // "Save as deck" after an "Our topics" game: each player saves their own copy.
     private Deck? saveDeck;
-    private HashSet<string> likedIds = [];
-    private bool likedOnly;
     private string saveName = "";
     private bool saving;
     private string? saveError;
@@ -367,8 +333,6 @@ else if (room.Summary is { } summary)
     {
         if (summary.Cards is null) return;
         saveDeck = DeckJson.Parse(summary.Cards);
-        likedIds = summary.LikedIds.IsDefault ? [] : [.. summary.LikedIds];
-        likedOnly = false;
         saveName = saveDeck.NameFor(Text.UiLang);
         if (saveName.Length > 60) saveName = saveName[..60];
         saveError = null;
@@ -382,7 +346,7 @@ else if (room.Summary is { } summary)
         saveError = null;
         try
         {
-            var cards = likedOnly ? saveDeck.Cards.Where(c => likedIds.Contains(c.Id)).ToImmutableArray() : saveDeck.Cards;
+            var cards = saveDeck.Cards;
             var deck = new Deck("new", ImmutableDictionary<Lang, string>.Empty.Add(Text.UiLang, saveName.Trim()), cards);
             var result = await Content.CreateAsync(deck);
             if (result.Error is null) savedId = result.Id;

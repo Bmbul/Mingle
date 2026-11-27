@@ -1,43 +1,24 @@
 @implements IAsyncDisposable
 @inject IJSRuntime JS
-@inject Text T
 
 @*
-    A card you swipe instead of tapping buttons (js/cardswipe.js): up, left and right each do one thing, shown while
-    dragging and in the hint under the card. A way without a handler springs back.
+    A card you swipe instead of tapping a button (js/cardswipe.js): swiping it up, left or right does the same thing,
+    usually "next card". A short drag springs back.
 *@
-<div class="swipe-card" @ref="element" data-up="@Flag(OnUp)" data-left="@Flag(OnLeft)" data-right="@Flag(OnRight)">
-    <span class="swipe-label up" aria-hidden="true">@UpLabel</span>
-    <span class="swipe-label left" aria-hidden="true">@LeftLabel</span>
-    <span class="swipe-label right" aria-hidden="true">@RightLabel</span>
+<div class="swipe-card" @ref="element" data-up="@Flag" data-left="@Flag" data-right="@Flag">
     @ChildContent
 </div>
-<p class="swipe-hint muted small center">@string.Join(" · ", Hints)</p>
 
 @code {
     [Parameter] public RenderFragment? ChildContent { get; set; }
-    [Parameter] public EventCallback OnUp { get; set; }
-    [Parameter] public EventCallback OnLeft { get; set; }
-    [Parameter] public EventCallback OnRight { get; set; }
-    [Parameter] public string UpLabel { get; set; } = "";
-    [Parameter] public string LeftLabel { get; set; } = "";
-    [Parameter] public string RightLabel { get; set; } = "";
+    /// <summary>What a swipe does, whichever way it goes.</summary>
+    [Parameter] public EventCallback OnSwipe { get; set; }
 
     private ElementReference element;
-
-    private static string Flag(EventCallback callback) => callback.HasDelegate ? "true" : "false";
-
-    private IEnumerable<string> Hints
-    {
-        get
-        {
-            if (OnUp.HasDelegate) yield return $"↑ {UpLabel}";
-            if (OnLeft.HasDelegate) yield return $"← {LeftLabel}";
-            if (OnRight.HasDelegate) yield return $"{RightLabel} →";
-        }
-    }
     private DotNetObjectReference<SwipeCard>? self;
     private IJSObjectReference? handle;
+
+    private string Flag => OnSwipe.HasDelegate ? "true" : "false";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -49,12 +30,7 @@
     }
 
     [JSInvokable]
-    public async Task Swiped(string direction)
-    {
-        if (direction == "up") await OnUp.InvokeAsync();
-        else if (direction == "left") await OnLeft.InvokeAsync();
-        else if (direction == "right") await OnRight.InvokeAsync();
-    }
+    public Task Swiped(string direction) => OnSwipe.InvokeAsync();
 
     public async ValueTask DisposeAsync()
     {

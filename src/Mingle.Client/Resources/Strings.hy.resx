@@ -72,9 +72,6 @@
   <data name="End_Title" xml:space="preserve"><value>Լավ խաղ էր</value></data>
   <data name="End_Played_One" xml:space="preserve"><value>{0} քարտ խաղացվեց</value></data>
   <data name="End_Played_Other" xml:space="preserve"><value>{0} քարտ խաղացվեց</value></data>
-  <data name="End_Passed" xml:space="preserve"><value>Բաց թողնված՝ {0}</value></data>
-  <data name="End_Liked" xml:space="preserve"><value>Ձեզ դուր եկավ</value></data>
-  <data name="End_NoLikes" xml:space="preserve"><value>Հավանեք քարտերը խաղի ընթացքում, և դրանք կհայտնվեն այստեղ։</value></data>
   <data name="End_NewGame" xml:space="preserve"><value>Նոր խաղ</value></data>
   <data name="End_Home" xml:space="preserve"><value>Գլխավոր</value></data>
   <data name="Setup_PassPhone" xml:space="preserve"><value>Փոխանցել հեռախոսը</value></data>
@@ -204,7 +201,6 @@
   <data name="Editor_AiLanguagesHint" xml:space="preserve"><value>Խաղացողները ստանում են միայն իրենց կարդացած լեզուներով քարտեր։</value></data>
   <data name="End_SaveDeck" xml:space="preserve"><value>Պահպանել որպես հավաքածու</value></data>
   <data name="End_SaveAll" xml:space="preserve"><value>Բոլոր քարտերը ({0})</value></data>
-  <data name="End_SaveLiked" xml:space="preserve"><value>Միայն հավանածները ({0})</value></data>
   <data name="End_Saved" xml:space="preserve"><value>Պահպանվեց «Իմ հավաքածուներում»։</value></data>
   <data name="End_OpenDeck" xml:space="preserve"><value>Բացել</value></data>
   <data name="End_Close" xml:space="preserve"><value>Փակել</value></data>
@@ -548,7 +544,4 @@
   <data name="Never_Pick_Other" xml:space="preserve"><value>Ովքե՞ր են։ Ընտրիր {0}-ին</value></data>
   <data name="Never_PickOthers_One" xml:space="preserve"><value>Դու և էլ ո՞վ։ Ընտրիր {0}-ին</value></data>
   <data name="Never_PickOthers_Other" xml:space="preserve"><value>Դու և էլ ովքե՞ր։ Ընտրիր {0}-ին</value></data>
-  <data name="Swipe_Next" xml:space="preserve"><value>Հաջորդը</value></data>
-  <data name="Swipe_Like" xml:space="preserve"><value>👍 Հավանել</value></data>
-  <data name="Swipe_Skip" xml:space="preserve"><value>Բաց թողնել</value></data>
 </root>

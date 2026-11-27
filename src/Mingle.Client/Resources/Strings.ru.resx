@@ -76,9 +76,6 @@
   <data name="End_Played_One" xml:space="preserve"><value>Сыграна {0} карточка</value></data>
   <data name="End_Played_Few" xml:space="preserve"><value>Сыграно {0} карточки</value></data>
   <data name="End_Played_Many" xml:space="preserve"><value>Сыграно {0} карточек</value></data>
-  <data name="End_Passed" xml:space="preserve"><value>Пропущено: {0}</value></data>
-  <data name="End_Liked" xml:space="preserve"><value>Вам понравилось</value></data>
-  <data name="End_NoLikes" xml:space="preserve"><value>Отмечайте понравившиеся карточки — они появятся здесь.</value></data>
   <data name="End_NewGame" xml:space="preserve"><value>Новая игра</value></data>
   <data name="End_Home" xml:space="preserve"><value>Главная</value></data>
   <data name="Setup_PassPhone" xml:space="preserve"><value>Передавать телефон</value></data>
@@ -209,7 +206,6 @@
   <data name="Editor_AiLanguagesHint" xml:space="preserve"><value>Игроки получают карточки только на языках, которые они читают.</value></data>
   <data name="End_SaveDeck" xml:space="preserve"><value>Сохранить как колоду</value></data>
   <data name="End_SaveAll" xml:space="preserve"><value>Все карточки ({0})</value></data>
-  <data name="End_SaveLiked" xml:space="preserve"><value>Только понравившиеся ({0})</value></data>
   <data name="End_Saved" xml:space="preserve"><value>Сохранено в «Мои колоды».</value></data>
   <data name="End_OpenDeck" xml:space="preserve"><value>Открыть</value></data>
   <data name="End_Close" xml:space="preserve"><value>Закрыть</value></data>
@@ -557,7 +553,4 @@
   <data name="Never_PickOthers_One" xml:space="preserve"><value>Ты и кто ещё? Выбери {0}</value></data>
   <data name="Never_PickOthers_Few" xml:space="preserve"><value>Ты и кто ещё? Выбери {0}</value></data>
   <data name="Never_PickOthers_Many" xml:space="preserve"><value>Ты и кто ещё? Выбери {0}</value></data>
-  <data name="Swipe_Next" xml:space="preserve"><value>Дальше</value></data>
-  <data name="Swipe_Like" xml:space="preserve"><value>👍 Нравится</value></data>
-  <data name="Swipe_Skip" xml:space="preserve"><value>Пропустить</value></data>
 </root>

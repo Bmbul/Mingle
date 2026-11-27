@@ -1,6 +1,6 @@
 // Cards you swipe instead of tapping buttons: drag a ".swipe-card" left, right or up past a threshold and it flies
 // off, then the page is told which way ("left" / "right" / "up") and the next card slides in. The card tilts while
-// dragged and shows the label for that way (data-dir for CSS). Arrow keys do the same on a computer. Dragging down
+// dragged. Arrow keys do the same on a computer. Dragging down
 // still scrolls the page; dragging up scrolls it too when "up" is not allowed.
 // Touch uses touch events and stops the page from scrolling once the finger clearly moves sideways (the only reliable
 // way on iPhone); a mouse uses pointer events. A side that is not allowed (data-left / data-right empty) springs back.
