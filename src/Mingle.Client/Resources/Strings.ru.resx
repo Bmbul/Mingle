@@ -553,4 +553,62 @@
   <data name="Never_PickOthers_One" xml:space="preserve"><value>Ты и кто ещё? Выбери {0}</value></data>
   <data name="Never_PickOthers_Few" xml:space="preserve"><value>Ты и кто ещё? Выбери {0}</value></data>
   <data name="Never_PickOthers_Many" xml:space="preserve"><value>Ты и кто ещё? Выбери {0}</value></data>
+  <data name="Mirror_Game" xml:space="preserve"><value>Как тебя видят</value></data>
+  <data name="Editor_Game_Mirror" xml:space="preserve"><value>Как тебя видят</value></data>
+  <data name="Kind_mirror" xml:space="preserve"><value>Шкала</value></data>
+  <data name="Editor_Hint_mirror" xml:space="preserve"><value>Один конец шкалы (1): Жаворонок…</value></data>
+  <data name="Editor_Extra_mirror" xml:space="preserve"><value>Другой конец (10): Сова…</value></data>
+  <data name="Mirror_Line" xml:space="preserve"><value>Каждый раунд один игрок на шкале: он тайно ставит себя, а все остальные ставят его</value></data>
+  <data name="Mirror_Laps" xml:space="preserve"><value>Сколько раз каждый окажется на шкале</value></data>
+  <data name="Mirror_YourTurn" xml:space="preserve"><value>Это ты! Честно: где ты на шкале?</value></data>
+  <data name="Mirror_TheirTurn" xml:space="preserve"><value>Как ты считаешь, где на шкале?</value></data>
+  <data name="Mirror_OnTheScale" xml:space="preserve"><value>На шкале</value></data>
+  <data name="Mirror_Placed" xml:space="preserve"><value>Поставили: {0} из {1}</value></data>
+  <data name="Mirror_YouPut" xml:space="preserve"><value>Твой ответ: {0}</value></data>
+  <data name="Mirror_WaitingSelf" xml:space="preserve"><value>Ждём, пока {0} поставит себя</value></data>
+  <data name="Mirror_Self" xml:space="preserve"><value>🪞 О себе</value></data>
+  <data name="Mirror_Friends" xml:space="preserve"><value>👥 Остальные</value></data>
+  <data name="Mirror_Verdict_0" xml:space="preserve"><value>🎯 В точку. Никаких секретов.</value></data>
+  <data name="Mirror_Verdict_1" xml:space="preserve"><value>🙂 Довольно близко.</value></data>
+  <data name="Mirror_Verdict_2" xml:space="preserve"><value>🤨 Хм, остальные видят иначе…</value></data>
+  <data name="Mirror_Verdict_3" xml:space="preserve"><value>🤯 Вот это поворот! Надо поговорить.</value></data>
+  <data name="Mirror_SelfBonus" xml:space="preserve"><value>Знает себя: +{0}</value></data>
+  <data name="Mirror_PointsHint" xml:space="preserve"><value>3 очка за точное число, 2 — если мимо на один, 1 — на два</value></data>
+  <data name="Mirror_AwardReader" xml:space="preserve"><value>🔮 Читает мысли</value></data>
+  <data name="Mirror_AwardSelfAware" xml:space="preserve"><value>🪞 Лучше всех знает себя</value></data>
+  <data name="Mirror_AwardMystery" xml:space="preserve"><value>🎭 Главная загадка</value></data>
+  <data name="Mirror_Moments" xml:space="preserve"><value>Самые большие сюрпризы</value></data>
+  <data name="Auction_Game" xml:space="preserve"><value>Аукцион жизни</value></data>
+  <data name="Editor_Game_Auction" xml:space="preserve"><value>Аукцион жизни</value></data>
+  <data name="Kind_lot" xml:space="preserve"><value>Лот</value></data>
+  <data name="Editor_Hint_lot" xml:space="preserve"><value>🏖️ Дом у моря…</value></data>
+  <data name="Auction_Line" xml:space="preserve"><value>У всех по 100 монет, ставки на главное в жизни тайные; побеждает самая высокая</value></data>
+  <data name="Auction_Lots" xml:space="preserve"><value>Лоты</value></data>
+  <data name="Auction_LotOf" xml:space="preserve"><value>Лот {0} из {1}</value></data>
+  <data name="Auction_LastLot" xml:space="preserve"><value>🔨 Последний лот!</value></data>
+  <data name="Auction_Wallet" xml:space="preserve"><value>Твой кошелёк</value></data>
+  <data name="Auction_BidHint" xml:space="preserve"><value>Тайная ставка. Самая высокая побеждает и платит; при ничьей лот делят, и платят оба.</value></data>
+  <data name="Auction_Bid" xml:space="preserve"><value>Ставка 🪙 {0}</value></data>
+  <data name="Auction_Pass" xml:space="preserve"><value>Пас</value></data>
+  <data name="Auction_AllIn" xml:space="preserve"><value>Ва-банк</value></data>
+  <data name="Auction_YouBid" xml:space="preserve"><value>Твоя ставка: 🪙 {0}</value></data>
+  <data name="Auction_YouPassed" xml:space="preserve"><value>Этот лот ты пропускаешь</value></data>
+  <data name="Auction_BidsIn" xml:space="preserve"><value>Ставок: {0} из {1}</value></data>
+  <data name="Auction_Waiting" xml:space="preserve"><value>Ещё думают: {0}</value></data>
+  <data name="Auction_Hammer" xml:space="preserve"><value>🔨 Ударить молотком</value></data>
+  <data name="Auction_Sold" xml:space="preserve"><value>🔨 Продано!</value></data>
+  <data name="Auction_Shared" xml:space="preserve"><value>🤝 Ничья! Делят на всех</value></data>
+  <data name="Auction_Nobody" xml:space="preserve"><value>🦗 Никому не нужно</value></data>
+  <data name="Auction_For" xml:space="preserve"><value>за 🪙 {0}</value></data>
+  <data name="Auction_Bids" xml:space="preserve"><value>Ставки</value></data>
+  <data name="Auction_Wallets" xml:space="preserve"><value>Кошельки</value></data>
+  <data name="Auction_Lives" xml:space="preserve"><value>Новая жизнь каждого</value></data>
+  <data name="Auction_Nothing" xml:space="preserve"><value>Ничего, зато 🪙 {0} в кармане</value></data>
+  <data name="Auction_Hearts" xml:space="preserve"><value>Чего каждый хотел больше всего</value></data>
+  <data name="Auction_MostWanted" xml:space="preserve"><value>🔥 Самое желанное</value></data>
+  <data name="Auction_MostWantedTotal" xml:space="preserve"><value>Всего поставили 🪙 {0}</value></data>
+  <data name="Auction_AwardSpender" xml:space="preserve"><value>💸 Транжира</value></data>
+  <data name="Auction_AwardSaver" xml:space="preserve"><value>🐷 Копилка</value></data>
+  <data name="Auction_AwardCollector" xml:space="preserve"><value>🧺 Есть всё</value></data>
+  <data name="Auction_Change" xml:space="preserve"><value>Изменить ставку</value></data>
 </root>

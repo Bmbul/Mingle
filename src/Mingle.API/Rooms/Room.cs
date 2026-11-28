@@ -29,6 +29,10 @@ public sealed class Room(string code, TimeProvider clock)
     private MatchGame? match;
     /// <summary>«Ես երբեք…», when the settings ask for it.</summary>
     private NeverGame? never;
+    /// <summary>"How you see me", when the settings ask for it.</summary>
+    private MirrorGame? mirror;
+    /// <summary>"Life auction", when the settings ask for it.</summary>
+    private AuctionGame? auction;
     private ImmutableArray<TopicInfo> topicPool = [];
     private Random topicRandom = new(0);
     private bool libraryCards;
@@ -256,6 +260,40 @@ public sealed class Room(string code, TimeProvider clock)
                 Touch();
                 return;
             }
+            if (settings.Mirror is { } mirrorSettings)
+            {
+                var ids = settings.DeckIds.IsDefault ? [] : settings.DeckIds;
+                try
+                {
+                    mirror = new MirrorGame(members.Select(m => m.ToPlayer()),
+                        decks.Where(d => d.Style == DeckStyle.Mirror && (ids.IsEmpty || ids.Contains(d.Id))).SelectMany(d => d.Cards),
+                        mirrorSettings, seed);
+                }
+                catch (MirrorRuleException ex)
+                {
+                    throw new RoomException(ex.Message);
+                }
+                Stage = RoomStage.Playing;
+                Touch();
+                return;
+            }
+            if (settings.Auction is { } auctionSettings)
+            {
+                var ids = settings.DeckIds.IsDefault ? [] : settings.DeckIds;
+                try
+                {
+                    auction = new AuctionGame(members.Select(m => m.ToPlayer()),
+                        decks.Where(d => d.Style == DeckStyle.Auction && (ids.IsEmpty || ids.Contains(d.Id))).SelectMany(d => d.Cards),
+                        auctionSettings, seed);
+                }
+                catch (AuctionRuleException ex)
+                {
+                    throw new RoomException(ex.Message);
+                }
+                Stage = RoomStage.Playing;
+                Touch();
+                return;
+            }
             if (settings.Match is { } matchSettings)
             {
                 var ids = settings.DeckIds.IsDefault ? [] : settings.DeckIds;
@@ -437,6 +475,48 @@ public sealed class Room(string code, TimeProvider clock)
         }
     }
 
+    /// <summary>One move in "How you see me"; <paramref name="hostOnly"/> for the host's moves.</summary>
+    public void ActOnMirror(string playerId, Action<MirrorGame> move, bool hostOnly = false)
+    {
+        lock (gate)
+        {
+            if (Stage != RoomStage.Playing || mirror is null) throw new RoomException("No game is in progress.");
+            Member(playerId);
+            if (hostOnly) RequireHost(playerId);
+            try
+            {
+                move(mirror);
+            }
+            catch (MirrorRuleException ex)
+            {
+                throw new RoomException(ex.Message);
+            }
+            if (mirror.Stage == MirrorStage.Ended) Stage = RoomStage.Ended;
+            Touch();
+        }
+    }
+
+    /// <summary>One move in "Life auction"; <paramref name="hostOnly"/> for the host's moves.</summary>
+    public void ActOnAuction(string playerId, Action<AuctionGame> move, bool hostOnly = false)
+    {
+        lock (gate)
+        {
+            if (Stage != RoomStage.Playing || auction is null) throw new RoomException("No game is in progress.");
+            Member(playerId);
+            if (hostOnly) RequireHost(playerId);
+            try
+            {
+                move(auction);
+            }
+            catch (AuctionRuleException ex)
+            {
+                throw new RoomException(ex.Message);
+            }
+            if (auction.Stage == AuctionStage.Ended) Stage = RoomStage.Ended;
+            Touch();
+        }
+    }
+
     /// <summary>One move in "Same wavelength"; <paramref name="hostOnly"/> for the host's moves.</summary>
     public void ActOnMatch(string playerId, Action<MatchGame> move, bool hostOnly = false)
     {
@@ -484,7 +564,7 @@ public sealed class Room(string code, TimeProvider clock)
     {
         lock (gate)
         {
-            if ((facts is not null || guess is not null || odd is not null || match is not null || never is not null) && action is EndGame)
+            if ((facts is not null || guess is not null || odd is not null || match is not null || never is not null || mirror is not null || auction is not null) && action is EndGame)
             {
                 EndSideGame(playerId);
                 return;
@@ -513,6 +593,8 @@ public sealed class Room(string code, TimeProvider clock)
         odd?.End();
         match?.End();
         never?.End();
+        mirror?.End();
+        auction?.End();
         Stage = RoomStage.Ended;
         Touch();
     }
@@ -556,7 +638,10 @@ public sealed class Room(string code, TimeProvider clock)
         var oddView = Stage is RoomStage.Playing or RoomStage.Ended ? odd?.ForPlayer(viewer.Id, viewer.Lang) : null;
         var matchView = Stage is RoomStage.Playing or RoomStage.Ended ? match?.ForPlayer(viewer.Id, viewer.Lang) : null;
         var neverView = Stage is RoomStage.Playing or RoomStage.Ended ? never?.ForPlayer(viewer.Id, viewer.Lang) : null;
-        return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary, topics, libraryCards, factView, guessView, oddView, matchView, neverView);
+        var mirrorView = Stage is RoomStage.Playing or RoomStage.Ended ? mirror?.ForPlayer(viewer.Id, viewer.Lang) : null;
+        var auctionView = Stage is RoomStage.Playing or RoomStage.Ended ? auction?.ForPlayer(viewer.Id, viewer.Lang) : null;
+        return new RoomView(Code, Stage, viewer.Id, players, settings, gameView, summary, topics, libraryCards, factView, guessView, oddView, matchView, neverView,
+            mirrorView, auctionView);
     }
 
     private static GameSummary Summarize(GameState state, Lang lang, ImmutableArray<TopicInfo> topics)

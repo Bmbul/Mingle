@@ -544,4 +544,62 @@
   <data name="Never_Pick_Other" xml:space="preserve"><value>Ովքե՞ր են։ Ընտրիր {0}-ին</value></data>
   <data name="Never_PickOthers_One" xml:space="preserve"><value>Դու և էլ ո՞վ։ Ընտրիր {0}-ին</value></data>
   <data name="Never_PickOthers_Other" xml:space="preserve"><value>Դու և էլ ովքե՞ր։ Ընտրիր {0}-ին</value></data>
+  <data name="Mirror_Game" xml:space="preserve"><value>Ինչպես ենք քեզ տեսնում</value></data>
+  <data name="Editor_Game_Mirror" xml:space="preserve"><value>Ինչպես ենք քեզ տեսնում</value></data>
+  <data name="Kind_mirror" xml:space="preserve"><value>Սանդղակ</value></data>
+  <data name="Editor_Hint_mirror" xml:space="preserve"><value>Սանդղակի մի ծայրը (1)՝ Առավոտյան մարդ…</value></data>
+  <data name="Editor_Extra_mirror" xml:space="preserve"><value>Մյուս ծայրը (10)՝ Գիշերային բու…</value></data>
+  <data name="Mirror_Line" xml:space="preserve"><value>Ամեն ռաունդ մեկ խաղացող է սանդղակի վրա. նա գաղտնի տեղադրում է ինքն իրեն, մյուսներն էլ՝ նրան</value></data>
+  <data name="Mirror_Laps" xml:space="preserve"><value>Քանի անգամ ամեն խաղացող կլինի սանդղակի վրա</value></data>
+  <data name="Mirror_YourTurn" xml:space="preserve"><value>Դու ես։ Անկեղծ եղիր. որտե՞ղ ես դու</value></data>
+  <data name="Mirror_TheirTurn" xml:space="preserve"><value>Որտե՞ղ կտեղադրեիր նրան</value></data>
+  <data name="Mirror_OnTheScale" xml:space="preserve"><value>Սանդղակի վրա</value></data>
+  <data name="Mirror_Placed" xml:space="preserve"><value>Տեղադրել են՝ {0}/{1}</value></data>
+  <data name="Mirror_YouPut" xml:space="preserve"><value>Դու դրեցիր {0}</value></data>
+  <data name="Mirror_WaitingSelf" xml:space="preserve"><value>Սպասում ենք, որ իրեն տեղադրի՝ {0}</value></data>
+  <data name="Mirror_Self" xml:space="preserve"><value>🪞 Ինքն իրեն</value></data>
+  <data name="Mirror_Friends" xml:space="preserve"><value>👥 Մյուսները</value></data>
+  <data name="Mirror_Verdict_0" xml:space="preserve"><value>🎯 Ուղիղ նշանին։ Գաղտնիքներ չկան։</value></data>
+  <data name="Mirror_Verdict_1" xml:space="preserve"><value>🙂 Բավական մոտ է։</value></data>
+  <data name="Mirror_Verdict_2" xml:space="preserve"><value>🤨 Հմմ, մյուսները այլ կերպ են տեսնում…</value></data>
+  <data name="Mirror_Verdict_3" xml:space="preserve"><value>🤯 Անսպասելի շրջադարձ։ Պետք է խոսել։</value></data>
+  <data name="Mirror_SelfBonus" xml:space="preserve"><value>Ճանաչում է իրեն՝ +{0}</value></data>
+  <data name="Mirror_PointsHint" xml:space="preserve"><value>3 միավոր՝ ճիշտ նույն թվի համար, 2՝ մեկով, 1՝ երկուսով սխալվելու համար</value></data>
+  <data name="Mirror_AwardReader" xml:space="preserve"><value>🔮 Մտքեր կարդացող</value></data>
+  <data name="Mirror_AwardSelfAware" xml:space="preserve"><value>🪞 Ամենալավն է ճանաչում իրեն</value></data>
+  <data name="Mirror_AwardMystery" xml:space="preserve"><value>🎭 Ամենամեծ հանելուկը</value></data>
+  <data name="Mirror_Moments" xml:space="preserve"><value>Ամենամեծ անակնկալները</value></data>
+  <data name="Auction_Game" xml:space="preserve"><value>Կյանքի աճուրդ</value></data>
+  <data name="Editor_Game_Auction" xml:space="preserve"><value>Կյանքի աճուրդ</value></data>
+  <data name="Kind_lot" xml:space="preserve"><value>Լոտ</value></data>
+  <data name="Editor_Hint_lot" xml:space="preserve"><value>🏖️ Տուն ծովի ափին…</value></data>
+  <data name="Auction_Line" xml:space="preserve"><value>Բոլորն ունեն 100 մետաղադրամ և գաղտնի խաղադրույք են անում կյանքի մեծ բաների վրա. ամենաբարձր խաղադրույքը հաղթում է</value></data>
+  <data name="Auction_Lots" xml:space="preserve"><value>Լոտեր</value></data>
+  <data name="Auction_LotOf" xml:space="preserve"><value>Լոտ {0}/{1}</value></data>
+  <data name="Auction_LastLot" xml:space="preserve"><value>🔨 Վերջին լոտը։</value></data>
+  <data name="Auction_Wallet" xml:space="preserve"><value>Քո դրամապանակը</value></data>
+  <data name="Auction_BidHint" xml:space="preserve"><value>Գաղտնի խաղադրույք։ Ամենաբարձրը հաղթում է ու վճարում. ոչ-ոքիի դեպքում լոտը կիսում են, ու երկուսն էլ վճարում են։</value></data>
+  <data name="Auction_Bid" xml:space="preserve"><value>Դնել 🪙 {0}</value></data>
+  <data name="Auction_Pass" xml:space="preserve"><value>Պաս</value></data>
+  <data name="Auction_AllIn" xml:space="preserve"><value>Ամբողջը</value></data>
+  <data name="Auction_YouBid" xml:space="preserve"><value>Քո խաղադրույքը՝ 🪙 {0}</value></data>
+  <data name="Auction_YouPassed" xml:space="preserve"><value>Այս մեկը բաց թողեցիր</value></data>
+  <data name="Auction_BidsIn" xml:space="preserve"><value>Խաղադրույքներ՝ {0}/{1}</value></data>
+  <data name="Auction_Waiting" xml:space="preserve"><value>Դեռ մտածում են՝ {0}</value></data>
+  <data name="Auction_Hammer" xml:space="preserve"><value>🔨 Իջեցնել մուրճը</value></data>
+  <data name="Auction_Sold" xml:space="preserve"><value>🔨 Վաճառված է։</value></data>
+  <data name="Auction_Shared" xml:space="preserve"><value>🤝 Ոչ-ոքի։ Կիսում են</value></data>
+  <data name="Auction_Nobody" xml:space="preserve"><value>🦗 Ոչ ոք չուզեց</value></data>
+  <data name="Auction_For" xml:space="preserve"><value>🪙 {0}</value></data>
+  <data name="Auction_Bids" xml:space="preserve"><value>Խաղադրույքներ</value></data>
+  <data name="Auction_Wallets" xml:space="preserve"><value>Դրամապանակներ</value></data>
+  <data name="Auction_Lives" xml:space="preserve"><value>Բոլորի նոր կյանքը</value></data>
+  <data name="Auction_Nothing" xml:space="preserve"><value>Ոչինչ, բայց 🪙 {0} գրպանում</value></data>
+  <data name="Auction_Hearts" xml:space="preserve"><value>Ինչն էր ամեն մեկն ամենաշատն ուզում</value></data>
+  <data name="Auction_MostWanted" xml:space="preserve"><value>🔥 Ամենացանկալին</value></data>
+  <data name="Auction_MostWantedTotal" xml:space="preserve"><value>Ընդհանուր՝ 🪙 {0}</value></data>
+  <data name="Auction_AwardSpender" xml:space="preserve"><value>💸 Շռայլը</value></data>
+  <data name="Auction_AwardSaver" xml:space="preserve"><value>🐷 Խնայողը</value></data>
+  <data name="Auction_AwardCollector" xml:space="preserve"><value>🧺 Ամեն ինչ ունի</value></data>
+  <data name="Auction_Change" xml:space="preserve"><value>Փոխել խաղադրույքը</value></data>
 </root>

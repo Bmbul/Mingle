@@ -232,6 +232,20 @@ namespace Mingle.DAL.Migrations
                             Audience = "Everyone",
                             Code = "never",
                             ResponseType = "Free"
+                        },
+                        new
+                        {
+                            Id = (short)17,
+                            Audience = "AboutTurnPlayer",
+                            Code = "mirror",
+                            ResponseType = "Scale"
+                        },
+                        new
+                        {
+                            Id = (short)18,
+                            Audience = "Everyone",
+                            Code = "lot",
+                            ResponseType = "Free"
                         });
                 });
 

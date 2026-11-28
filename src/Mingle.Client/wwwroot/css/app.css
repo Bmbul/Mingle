@@ -90,6 +90,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .foot {
     position: sticky;
     bottom: 0;
+    /* Above the swipe cards (z-index 1), so a long card never covers the footer's buttons. */
+    z-index: 2;
     padding: 12px 20px calc(20px + env(safe-area-inset-bottom));
     border-top: 1px solid #26262E;
     background: var(--bg);
@@ -641,3 +643,70 @@ html.swipe-page .main { touch-action: manipulation; }
    that goes away after the reveal), so the card above never changes size. */
 html.swipe-page .foot { min-height: calc(12px + 54px + 20px + env(safe-area-inset-bottom) + 1px); }
 html.swipe-page .foot:not(:has(*)) { display: flex; border-top-color: transparent; }
+
+/* How you see me: a scale from one end (1) to the other (10). */
+.deck-badge.mirror { background: rgba(170, 140, 255, 0.18); color: #c3b2ff; }
+.mirror-who { display: flex; gap: 12px; align-items: center; }
+.avatar.big { width: 48px; height: 48px; border-radius: 24px; font-size: 20px; }
+.mirror-ends { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 16px 4px;
+    font-size: 22px; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
+.mirror-ends span:last-child { text-align: right; }
+.mirror-arrow { flex: none; color: var(--accent); font-size: 26px; }
+.mirror-scale { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px; }
+.mirror-step {
+    /* From the cool end (1) to the warm end (10), so the scale reads at a glance. */
+    --c: color-mix(in srgb, #8c7bff calc((1 - var(--t)) * 100%), var(--accent));
+    min-height: 52px; padding: 0; border-radius: 10px; cursor: pointer; font: inherit; font-size: 17px; font-weight: 800;
+    color: var(--text); background: color-mix(in srgb, var(--c) 18%, var(--surface)); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent);
+    transition: transform .12s ease, background .12s ease;
+}
+.mirror-step:hover { border-color: var(--c); }
+.mirror-step.on { background: var(--c); color: var(--on-accent); transform: scale(1.12); box-shadow: 0 4px 14px color-mix(in srgb, var(--c) 45%, transparent); }
+.mirror-legend { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 13px; }
+.mirror-legend span:last-child { text-align: right; }
+.mirror-track { position: relative; height: 84px; margin: 4px 14px 0; }
+.mirror-line { position: absolute; left: 0; right: 0; top: 44px; height: 6px; border-radius: 3px;
+    background: linear-gradient(90deg, #8c7bff, var(--accent)); }
+.mirror-dot, .mirror-self, .mirror-avg { position: absolute; transform: translateX(-50%); }
+.mirror-dot { top: calc(56px + var(--row) * 18px); width: 26px; height: 26px; border-radius: 13px; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800; background: var(--surface-2); border: 1px solid var(--border-strong); color: var(--text-soft);
+    animation: mirror-pop .35s ease-out both; }
+.mirror-self { top: 0; font-size: 28px; animation: mirror-drop .5s cubic-bezier(.3, 1.6, .5, 1) both; }
+.mirror-avg { top: 2px; font-size: 22px; opacity: .9; animation: mirror-drop .5s .15s cubic-bezier(.3, 1.6, .5, 1) both; }
+@keyframes mirror-pop { from { opacity: 0; transform: translateX(-50%) scale(.4); } to { opacity: 1; transform: translateX(-50%) scale(1); } }
+@keyframes mirror-drop { from { opacity: 0; transform: translateX(-50%) translateY(-18px); } to { opacity: 1; transform: translateX(-50%); } }
+.mirror-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+.mirror-stat { align-items: center; gap: 0; padding: 8px; }
+.mirror-num { font-size: 28px; font-weight: 800; }
+.mirror-verdict { margin: 0; text-align: center; font-size: 19px; font-weight: 700; }
+.mirror-moment { gap: 2px; }
+
+/* Life auction: coins, a secret bid, and the hammer. */
+.deck-badge.auction { background: rgba(255, 205, 80, 0.18); color: #ffd666; }
+.swipe-deck .card-face.swipe-panel .prompt.auction-lot { font-size: 22px; }
+.auction-wallet { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 14px; border-radius: 12px; background: var(--surface-2); }
+.auction-coins { font-size: 20px; font-weight: 800; color: #ffd666; }
+.auction-bid { margin: 0; text-align: center; font-size: 38px; font-weight: 800; color: #ffd666; }
+.auction-of { font-size: 18px; font-weight: 600; color: var(--muted); }
+.auction-range { width: 100%; accent-color: #ffd666; height: 28px; margin: 0; }
+/* The quick amounts on one row, even on a narrow phone. */
+.auction-chips { display: flex; gap: 6px; }
+.auction-chips .chip { flex: 1 1 0; min-width: 0; padding-left: 4px; padding-right: 4px; justify-content: center; text-align: center; }
+.auction-chips .chip:last-child { flex-grow: 1.8; }
+.auction-result { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 4px 10px; padding: 12px 14px;
+    border-radius: 14px; border: 1px solid var(--border-strong); background: var(--surface-2); text-align: center; }
+.auction-result .label { margin: 0; }
+.auction-winner { font-size: 20px; font-weight: 800; }
+.auction-result.sold { border-color: #ffd666; background: rgba(255, 205, 80, 0.10); animation: auction-hammer .45s ease-out; }
+@keyframes auction-hammer { 0% { transform: scale(.85) rotate(-3deg); opacity: 0; } 60% { transform: scale(1.04) rotate(1deg); opacity: 1; } 100% { transform: none; } }
+/* One player per short line: name, bid bar, bid, coins left. */
+.auction-row { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 10px; background: var(--surface); border: 1px solid transparent; }
+.auction-row.won { border-color: #ffd666; }
+.auction-row-name { flex: 0 1 auto; min-width: 0; max-width: 40%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.auction-row-bar { flex: 1; height: 6px; border-radius: 3px; background: #2E2E36; overflow: hidden; }
+.auction-row-bar span { display: block; height: 100%; border-radius: 3px; background: var(--accent); }
+.auction-row.won .auction-row-bar span { background: #ffd666; }
+.auction-row-bid { font-weight: 800; min-width: 2ch; text-align: right; }
+.auction-row-left { color: var(--muted); font-size: 14px; white-space: nowrap; }
+.auction-purse { align-items: flex-start; }
+.auction-won { font-size: 14px; color: var(--text-soft); overflow-wrap: anywhere; }

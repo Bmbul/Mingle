@@ -99,6 +99,8 @@ public sealed record CardRequest(
         DeckStyle.Odd => [CardKinds.OddPair.Id],
         DeckStyle.Match => [CardKinds.MatchPrompt.Id],
         DeckStyle.Never => [CardKinds.NeverHaveI.Id],
+        DeckStyle.Mirror => [CardKinds.MirrorScale.Id],
+        DeckStyle.Auction => [CardKinds.AuctionLot.Id],
         _ => Kinds.IsDefaultOrEmpty ? CardPrompt.Kinds : [.. Kinds],
     };
 

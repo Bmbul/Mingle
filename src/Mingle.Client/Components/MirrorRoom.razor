@@ -1,0 +1,188 @@
+@inject Text T
+@inject RoomClient Rooms
+
+@* "How you see me" in an online room: one player on a scale places themselves, everyone else places them too. *@
+@{
+    var view = Mirror;
+    var subject = view.SubjectId;
+    var mine = subject == Room.YouId;
+}
+
+@if (view.Stage != MirrorStage.Ended)
+{
+    <header class="top spread">
+        <span class="muted">@T["Odd_RoundOf", view.Round, view.Rounds]</span>
+        <button class="text-btn" aria-expanded="@(confirmEnd ? "true" : "false")" @onclick="() => confirmEnd = !confirmEnd">@T["Play_End"]</button>
+    </header>
+    @if (confirmEnd)
+    {
+        <div class="confirm" role="alertdialog" aria-labelledby="confirm-end-title">
+            <span id="confirm-end-title" class="h2">@T["Play_EndConfirm"]</span>
+            <div class="row gap">
+                <button class="btn2 grow" @onclick="() => confirmEnd = false">@T["Play_KeepPlaying"]</button>
+                <button class="btn grow" @onclick="EndNow">@T["Play_End"]</button>
+            </div>
+        </div>
+    }
+    <main class="main">
+        <SwipeCard OnSwipe="@((view.Stage == MirrorStage.Revealed) ? EventCallback.Factory.Create(this, Rooms.NextMirror) : default)" Last="@(view.Round >= view.Rounds)">
+            <div class="card-face swipe-panel">
+                <div class="mirror-who">
+                    <span class="avatar big" aria-hidden="true">@Initial(subject)</span>
+                    <span class="stack-tight">
+                        <span class="label">@T[mine ? "Mirror_Game" : "Mirror_OnTheScale"]</span>
+                        <span class="h2">@(mine ? T["Mirror_YourTurn"] : NameOf(subject))</span>
+                    </span>
+                </div>
+                <div class="mirror-ends" aria-hidden="true">
+                    <span>@view.Left</span>
+                    <span class="mirror-arrow">⟷</span>
+                    <span>@view.Right</span>
+                </div>
+
+                @if (view.Stage == MirrorStage.Placing)
+                {
+                    @if (!mine)
+                    {
+                        <p class="muted small center">@T["Mirror_TheirTurn"]</p>
+                    }
+                    <div class="mirror-scale" role="group" aria-label="@($"{view.Left} – {view.Right}")">
+                        @for (var n = MirrorGame.Low; n <= MirrorGame.High; n++)
+                        {
+                            var value = n;
+                            var on = view.MyValue == value;
+                            <button class="mirror-step @(on ? "on" : "")" style="--t:@(((value - 1) / 9.0).ToString("0.###", System.Globalization.CultureInfo.InvariantCulture))" aria-pressed="@(on ? "true" : "false")"
+                                    aria-label="@($"{value}: {(value <= 5 ? view.Left : view.Right)}")"
+                                    @onclick="() => Rooms.PlaceMirror(value)">@value</button>
+                        }
+                    </div>
+                    @if (view.MyValue is { } placed)
+                    {
+                        var self = subject is not null && view.PlacedIds.Contains(subject);
+                        <div class="card waiting" role="status">
+                            <span class="h2">@T["Mirror_YouPut", placed]</span>
+                            <span class="muted">@T["Mirror_Placed", view.PlacedIds.Length, Room.Players.Length]</span>
+                            @if (!self && subject is not null)
+                            {
+                                <span class="muted small">@T["Mirror_WaitingSelf", NameOf(subject)]</span>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="muted small center">@T["Mirror_PointsHint"]</p>
+                    }
+                }
+                else if (view.Reveal is { } reveal)
+                {
+                    @* The scale with everyone's marks: the mirror (where they put themselves) and the group's dots. *@
+                    <div class="mirror-track" aria-hidden="true">
+                        <div class="mirror-line"></div>
+                        @foreach (var stack in reveal.Placements.GroupBy(p => p.Value))
+                        {
+                            var i = 0;
+                            @foreach (var p in stack)
+                            {
+                                <span class="mirror-dot" style="left:@Pos(p.Value); --row:@(i++)" title="@NameOf(p.PlayerId)">@Initial(p.PlayerId)</span>
+                            }
+                        }
+                        <span class="mirror-avg" style="left:@Pos(reveal.Average)">👥</span>
+                        <span class="mirror-self" style="left:@Pos(reveal.Self)">🪞</span>
+                    </div>
+                    <div class="mirror-stats">
+                        <div class="card mirror-stat">
+                            <span class="label">@T["Mirror_Self"]</span>
+                            <span class="mirror-num">@reveal.Self</span>
+                        </div>
+                        <div class="card mirror-stat">
+                            <span class="label">@T["Mirror_Friends"]</span>
+                            <span class="mirror-num">@reveal.Average.ToString("0.#")</span>
+                        </div>
+                    </div>
+                    <p class="mirror-verdict" role="status">@T[$"Mirror_Verdict_{Verdict(reveal.Gap)}"]</p>
+                    <div class="stack-tight">
+                        @foreach (var p in reveal.Placements.OrderByDescending(p => p.Points))
+                        {
+                            <div class="score-line">
+                                <span class="grow">@NameOf(p.PlayerId)</span>
+                                <span class="muted">@p.Value</span>
+                                <span class="score-points">+@p.Points</span>
+                            </div>
+                        }
+                        @if (reveal.SelfPoints > 0 && subject is not null)
+                        {
+                            <div class="score-line">
+                                <span class="grow">@NameOf(subject)</span>
+                                <span class="muted small">@T["Mirror_SelfBonus", reveal.SelfPoints]</span>
+                            </div>
+                        }
+                    </div>
+                }
+                @* The scoreboard shows between reveals; on a reveal the points are in the rows above. *@
+                @if (!view.Scores.IsEmpty && view.Stage == MirrorStage.Placing)
+                {
+                    <MirrorScores Scores="view.Scores" NameOf="NameOf" />
+                }
+            </div>
+        </SwipeCard>
+    </main>
+    <footer class="foot">
+        @if (view.Stage == MirrorStage.Placing && Room.YouAreHost && subject is not null && view.PlacedIds.Contains(subject) && view.PlacedIds.Length > 1)
+        {
+            <button class="btn2" @onclick="Rooms.RevealMirror">@T["Guess_ShowNow"]</button>
+        }
+        @if (view.Stage == MirrorStage.Revealed)
+        {
+            <button class="btn" @onclick="Rooms.NextMirror">@T["Facts_Next"]</button>
+        }
+    </footer>
+}
+else
+{
+    <main class="main">
+        <h1 class="h1 big">@T["End_Title"]</h1>
+        <MirrorScores Scores="view.Scores" NameOf="NameOf" Awards="true" />
+        @if (!view.Moments.IsEmpty)
+        {
+            <section class="stack-tight">
+                <h2 class="label">@T["Mirror_Moments"]</h2>
+                @foreach (var m in view.Moments)
+                {
+                    <div class="card mirror-moment">
+                        <span class="h2">@NameOf(m.SubjectId)</span>
+                        <span class="muted small">@m.Left ⟷ @m.Right</span>
+                        <span>🪞 @m.Self · 👥 @m.Average.ToString("0.#")</span>
+                    </div>
+                }
+            </section>
+        }
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="OnHome">@T["End_Home"]</button>
+    </footer>
+}
+
+@code {
+    [Parameter, EditorRequired] public RoomView Room { get; set; } = default!;
+    [Parameter, EditorRequired] public MirrorView Mirror { get; set; } = default!;
+    [Parameter] public EventCallback OnHome { get; set; }
+
+    private bool confirmEnd;
+
+    private string NameOf(string? id) => Room.Players.FirstOrDefault(p => p.Id == id)?.Name ?? "?";
+
+    private string Initial(string? id) => NameOf(id) is { Length: > 0 } name ? name[..1].ToUpperInvariant() : "?";
+
+    /// <summary>Where a value sits on the drawn scale, 1 at the left edge and 10 at the right.</summary>
+    private static string Pos(double value) =>
+        FormattableString.Invariant($"{(value - MirrorGame.Low) / (MirrorGame.High - MirrorGame.Low) * 100:0.##}%");
+
+    /// <summary>0 spot on … 3 a plot twist, from how far the group's view is from the player's own.</summary>
+    private static int Verdict(double gap) => Math.Abs(gap) switch { < 1 => 0, < 2.5 => 1, < 4 => 2, _ => 3 };
+
+    private async Task EndNow()
+    {
+        confirmEnd = false;
+        await Rooms.EndGame();
+    }
+}

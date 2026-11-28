@@ -122,6 +122,12 @@ public static class CardParser
                     tidy = tidy.TrimEnd('.', '։', '!', ':');
                     if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 70) return null;
                 }
+                if (kind == CardKinds.MirrorScale.Id || kind == CardKinds.AuctionLot.Id)
+                {
+                    // A scale's end or a life thing to bid on: a short phrase, not a question.
+                    tidy = tidy.TrimEnd('.', '։', '!', ':');
+                    if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > (kind == CardKinds.AuctionLot.Id ? 70 : 40)) return null;
+                }
                 if (kind == CardKinds.FactPrompt.Id)
                 {
                     // A kind of fact to write about: short, not a question.
@@ -135,7 +141,7 @@ public static class CardParser
                     if (tidy.Contains('?') || tidy.Contains('՞') || tidy.Length > 100) return null;
                 }
                 // Every kind but "finish the sentence", associations, "Give it to…" and "cringe or fine" is a question.
-                if (lang == Lang.Hy && kind is not ("finish" or "word" or "name3" or "letter" or "handoff" or "cringe" or "fact" or "match" or "never")) tidy = ArmenianQuestions.Fix(tidy);
+                if (lang == Lang.Hy && kind is not ("finish" or "word" or "name3" or "letter" or "handoff" or "cringe" or "fact" or "match" or "never" or "mirror" or "lot")) tidy = ArmenianQuestions.Fix(tidy);
                 // A question pair's different question, or the four things to rank.
                 var extras = CardKinds.Get(kind).Extras;
                 ImmutableArray<string> more = [];

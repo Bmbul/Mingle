@@ -1,0 +1,50 @@
+@inject Text T
+
+@if (Awards && !Scores.IsEmpty)
+{
+    var best = Scores.Max(s => s.Points);
+    var rated = Scores.Where(s => s.Gap is not null).ToList();
+    @if (best > 0)
+    {
+        <div class="card award">
+            <span class="label">@T["Mirror_AwardReader"]</span>
+            <span class="h2">@string.Join(", ", Scores.Where(s => s.Points == best).Select(s => NameOf(s.PlayerId)))</span>
+        </div>
+    }
+    @if (rated.Count > 1)
+    {
+        var closest = rated.Min(s => s.Gap!.Value);
+        var furthest = rated.Max(s => s.Gap!.Value);
+        @if (furthest > closest)
+        {
+            <div class="card award">
+                <span class="label">@T["Mirror_AwardSelfAware"]</span>
+                <span class="h2">@string.Join(", ", rated.Where(s => s.Gap == closest).Select(s => NameOf(s.PlayerId)))</span>
+            </div>
+            <div class="card award">
+                <span class="label">@T["Mirror_AwardMystery"]</span>
+                <span class="h2">@string.Join(", ", rated.Where(s => s.Gap == furthest).Select(s => NameOf(s.PlayerId)))</span>
+            </div>
+        }
+    }
+}
+<section class="stack-tight scoreboard" aria-label="@T["Facts_Scores"]">
+    <h2 class="label">@T["Facts_Scores"]</h2>
+    @foreach (var score in Scores)
+    {
+        <div class="score-line">
+            <span class="grow">@NameOf(score.PlayerId)</span>
+            @if (score.Bullseyes > 0)
+            {
+                <span class="muted small">🎯 @score.Bullseyes</span>
+            }
+            <span class="score-points">@score.Points</span>
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter] public ImmutableArray<MirrorScore> Scores { get; set; } = [];
+    [Parameter] public Func<string, string> NameOf { get; set; } = id => id;
+    [Parameter] public bool Awards { get; set; }
+}

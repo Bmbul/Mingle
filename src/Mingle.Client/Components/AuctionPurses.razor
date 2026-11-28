@@ -1,0 +1,99 @@
+@inject Text T
+
+@* Everyone's wallet and what they have won; at the end, the awards, the most wanted lot and what each heart wanted. *@
+@if (Final && !Purses.IsEmpty)
+{
+    var priciest = Purses.SelectMany(p => p.Won).Select(w => w.Price).DefaultIfEmpty(0).Max();
+    var richest = Purses.Max(p => p.Coins);
+    var most = Purses.Max(p => p.Won.Length);
+    @if (priciest > 0)
+    {
+        <div class="card award">
+            <span class="label">@T["Auction_AwardSpender"]</span>
+            <span class="h2">@string.Join(", ", Purses.Where(p => p.Won.Any(w => w.Price == priciest)).Select(p => NameOf(p.PlayerId)))</span>
+            <span class="muted small">@string.Join(", ", Purses.SelectMany(p => p.Won).Where(w => w.Price == priciest).Select(w => w.Lot).Distinct()) · 🪙 @priciest</span>
+        </div>
+    }
+    @if (Purses.Any(p => p.Coins < richest))
+    {
+        <div class="card award">
+            <span class="label">@T["Auction_AwardSaver"]</span>
+            <span class="h2">@string.Join(", ", Purses.Where(p => p.Coins == richest).Select(p => NameOf(p.PlayerId)))</span>
+            <span class="muted small">🪙 @richest</span>
+        </div>
+    }
+    @if (most > 1)
+    {
+        <div class="card award">
+            <span class="label">@T["Auction_AwardCollector"]</span>
+            <span class="h2">@string.Join(", ", Purses.Where(p => p.Won.Length == most).Select(p => NameOf(p.PlayerId)))</span>
+        </div>
+    }
+    @if (MostWanted is { } wanted)
+    {
+        <div class="card award">
+            <span class="label">@T["Auction_MostWanted"]</span>
+            <span class="h2">@wanted.Lot</span>
+            <span class="muted small">@T["Auction_MostWantedTotal", wanted.Price]</span>
+        </div>
+    }
+    @if (Purses.Any(p => p.Favourite is not null))
+    {
+        <section class="stack-tight">
+            <h2 class="label">@T["Auction_Hearts"]</h2>
+            @foreach (var purse in Purses.Where(p => p.Favourite is not null))
+            {
+                <div class="score-line">
+                    <span class="grow stack-tight"><strong>@NameOf(purse.PlayerId)</strong><span class="auction-won">@purse.Favourite!.Lot</span></span>
+                    <span class="muted">🪙 @purse.Favourite.Price</span>
+                </div>
+            }
+        </section>
+    }
+}
+<section class="stack-tight scoreboard" aria-label="@T[Final ? "Auction_Lives" : "Auction_Wallets"]">
+    <h2 class="label">@T[Final ? "Auction_Lives" : "Auction_Wallets"]</h2>
+    @foreach (var purse in Purses.Where(_ => !Final))
+    {
+        @* While playing: one short line each, with a tick once they have bid and how many lots they own. *@
+        <div class="auction-row">
+            <span class="auction-row-name">@(BidIds.Contains(purse.PlayerId) ? "✓ " : "")@NameOf(purse.PlayerId)</span>
+            <span class="muted small grow" title="@string.Join(", ", purse.Won.Select(w => w.Lot))">@string.Concat(purse.Won.Select(w => FirstEmoji(w.Lot)))</span>
+            <span class="auction-row-left">🪙 @purse.Coins</span>
+        </div>
+    }
+    @foreach (var purse in Purses.Where(_ => Final))
+    {
+        <div class="score-line auction-purse">
+            <span class="grow stack-tight">
+                <span>@NameOf(purse.PlayerId)</span>
+                @if (!purse.Won.IsEmpty)
+                {
+                    <span class="auction-won">@string.Join("  ", purse.Won.Select(w => w.Lot))</span>
+                }
+                else if (Final)
+                {
+                    <span class="muted small">@T["Auction_Nothing", purse.Coins]</span>
+                }
+            </span>
+            <span class="score-points">🪙 @purse.Coins</span>
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter] public ImmutableArray<AuctionPurse> Purses { get; set; } = [];
+    [Parameter] public Func<string, string> NameOf { get; set; } = id => id;
+    [Parameter] public bool Final { get; set; }
+    [Parameter] public AuctionWin? MostWanted { get; set; }
+    /// <summary>While bidding: who has bid on this lot.</summary>
+    [Parameter] public ImmutableArray<string> BidIds { get; set; } = [];
+
+    /// <summary>The emoji a lot starts with ("🏖️ A house by the sea" → "🏖️"), or a box for a lot without one.</summary>
+    private static string FirstEmoji(string lot)
+    {
+        var space = lot.IndexOf(' ');
+        var head = space > 0 ? lot[..space] : lot;
+        return head.Any(char.IsLetterOrDigit) ? "📦" : head;
+    }
+}

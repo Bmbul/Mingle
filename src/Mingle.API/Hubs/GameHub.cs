@@ -149,6 +149,14 @@ public sealed class GameHub(RoomRegistry rooms, IDeckSource decks, UserDeckStore
     }, hostOnly: true));
     public Task NextNever() => Change((room, me) => room.ActOnNever(me, g => g.Next()));
 
+    public Task PlaceMirror(int value) => Change((room, me) => room.ActOnMirror(me, g => g.Place(me, value)));
+    public Task RevealMirror() => Change((room, me) => room.ActOnMirror(me, g => g.Reveal(), hostOnly: true));
+    public Task NextMirror() => Change((room, me) => room.ActOnMirror(me, g => g.Next()));
+
+    public Task BidAuction(int amount) => Change((room, me) => room.ActOnAuction(me, g => g.Bid(me, amount)));
+    public Task RevealAuction() => Change((room, me) => room.ActOnAuction(me, g => g.Reveal(), hostOnly: true));
+    public Task NextAuction() => Change((room, me) => room.ActOnAuction(me, g => g.Next()));
+
     public async Task Leave()
     {
         var (room, me) = Seat();

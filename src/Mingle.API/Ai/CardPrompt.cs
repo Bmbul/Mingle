@@ -141,6 +141,25 @@ public static class CardPrompt
                 as in «Мне ни разу не доводилось уснуть в кинотеатре».
                 Depth 1 light and funny, 2 personal, 3 bold (dating, exes, wild nights); never sexual or cruel.
                 """);
+        if (request.Style == DeckStyle.Mirror)
+            text.AppendLine("""
+                These are scales for "How you see me" (kind "mirror"): one player places themselves on the scale from
+                1 to 10, the others place them too, and then everyone sees how far apart they are. The text is the
+                left end (1), the single option the right end (10): two opposite, recognisable sides of a personality
+                or habit, both fine to be, so nobody is insulted either way: "Morning person" / "Night owl", "Saver" /
+                "Spender", "Plans everything" / "Goes with the flow". Each end at most 4 words, no questions.
+                Russian: gender-neutral (nouns or phrases like «Жаворонок», «Всё планирует», never «спокойный»).
+                Armenian: natural short phrases («Առավոտյան մարդ» / «Գիշերային բու»).
+                Depth 1 everyday habits, 2 personality, 3 cheeky (flirting, jealousy, drama); never about looks.
+                """);
+        if (request.Style == DeckStyle.Auction)
+            text.AppendLine("""
+                These are lots for "Life auction" (kind "lot"): everyone has 100 coins and bids in secret on life
+                things; the highest bid wins. A lot is a dream, a superpower or a funny life upgrade people would
+                really fight over, and what someone bids on shows what matters to them: "A house by the sea",
+                "Never doing dishes again", "A year of travel", "Being 10 years younger", "A big family".
+                Start each one with one fitting emoji and a space. At most 8 words, no question, no options.
+                """);
         if (request.Style == DeckStyle.Match)
             text.AppendLine("""
                 These are prompts for "Same wavelength" (kind "match"): everyone writes one answer and scores for every

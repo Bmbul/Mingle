@@ -60,7 +60,7 @@ public enum InputMode { Spoken, Text, Choice, PlayerVote, Scale }
 /// Which game a card belongs to. Question games play only question cards; blitz and "Give it to…" have their own
 /// cards and their own decks, and a deck never mixes styles.
 /// </summary>
-public enum DeckStyle { Questions, Blitz, Handoff, Facts, Guess, Odd, Match, Never }
+public enum DeckStyle { Questions, Blitz, Handoff, Facts, Guess, Odd, Match, Never, Mirror, Auction }
 
 /// <param name="Style">The game the kind belongs to: normal games, mixes and fallbacks use only question kinds.</param>
 /// <param name="FixedOptions">Two answers the kind always offers ("Cringe" / "Fine"), so its cards hold only a text.</param>
@@ -113,10 +113,15 @@ public static class CardKinds
     public static readonly CardKind MatchPrompt = new("match", ResponseType.Free, Audience.Everyone, DeckStyle.Match);
     /// <summary>«Ես երբեք…» / Never have I ever: a statement ("I have never…") everyone who has done it owns up to.</summary>
     public static readonly CardKind NeverHaveI = new("never", ResponseType.Free, Audience.Everyone, DeckStyle.Never);
+    /// <summary>"How you see me": a scale; its text is the left end ("Morning person"), its one option the right end ("Night owl").</summary>
+    public static readonly CardKind MirrorScale = new("mirror", ResponseType.Scale, Audience.AboutTurnPlayer, DeckStyle.Mirror, Extras: 1);
+    /// <summary>"Life auction": a life thing to bid on ("A house by the sea").</summary>
+    public static readonly CardKind AuctionLot = new("lot", ResponseType.Free, Audience.Everyone, DeckStyle.Auction);
 
     public static ImmutableArray<CardKind> All { get; } =
         [OpenQuestion, FinishSentence, WouldYouRather, MostLikelyTo, GuessMyAnswer, RateIt, CringeOrFine,
-         Association, NameThree, LetterCategory, Handoff, FactPrompt, RankIt, OddPair, MatchPrompt, NeverHaveI];
+         Association, NameThree, LetterCategory, Handoff, FactPrompt, RankIt, OddPair, MatchPrompt, NeverHaveI,
+         MirrorScale, AuctionLot];
 
     /// <summary>The kinds normal games play.</summary>
     public static ImmutableArray<CardKind> Regular { get; } = [.. All.Where(k => k.IsQuestion)];

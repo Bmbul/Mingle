@@ -50,6 +50,14 @@ else if (room.Stage == RoomStage.Lobby)
         {
             <p class="muted center"><Icon Name="flame" Size="16" /> @T["Never_Game"]</p>
         }
+        @if (room.Settings.Mirror is not null)
+        {
+            <p class="muted center"><Icon Name="scale" Size="16" /> @T["Mirror_Game"]</p>
+        }
+        @if (room.Settings.Auction is not null)
+        {
+            <p class="muted center"><Icon Name="coin" Size="16" /> @T["Auction_Game"]</p>
+        }
         @if (room.Settings.Match is not null)
         {
             <p class="muted center"><Icon Name="layers" Size="16" /> @T["Match_Game"]</p>
@@ -137,6 +145,14 @@ else if (room.Odd is { } oddView)
 else if (room.Never is { } neverView)
 {
     <NeverRoom Room="room" Never="neverView" OnHome="LeaveRoom" />
+}
+else if (room.Mirror is { } mirrorView)
+{
+    <MirrorRoom Room="room" Mirror="mirrorView" OnHome="LeaveRoom" />
+}
+else if (room.Auction is { } auctionView)
+{
+    <AuctionRoom Room="room" Auction="auctionView" OnHome="LeaveRoom" />
 }
 else if (room.Match is { } matchView)
 {
@@ -289,6 +305,8 @@ else if (room.Summary is { } summary)
         room.Settings.Facts is { } facts ? FactGame.MinPlayers(facts.Kind)
         : room.Settings.Odd is not null ? OddGame.MinPlayers
         : room.Settings.Match is not null ? MatchGame.MinPlayers
+        : room.Settings.Mirror is not null ? MirrorGame.MinPlayers
+        : room.Settings.Auction is not null ? AuctionGame.MinPlayers
         : Game.MinPlayers;
 
     private static Lang[] RoomLanguages(RoomView room) => [.. room.Players.Select(p => p.Lang).Distinct()];

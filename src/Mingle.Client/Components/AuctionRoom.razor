@@ -1,0 +1,168 @@
+@inject Text T
+@inject RoomClient Rooms
+
+@* "Life auction" in an online room: everyone bids in secret on life things; the highest bid wins and pays. *@
+@{
+    var view = Auction;
+}
+
+@if (view.Stage != AuctionStage.Ended)
+{
+    var last = view.Number >= view.Count;
+    <header class="top spread">
+        <span class="muted">@(last ? T["Auction_LastLot"] : T["Auction_LotOf", view.Number, view.Count])</span>
+        <button class="text-btn" aria-expanded="@(confirmEnd ? "true" : "false")" @onclick="() => confirmEnd = !confirmEnd">@T["Play_End"]</button>
+    </header>
+    @if (confirmEnd)
+    {
+        <div class="confirm" role="alertdialog" aria-labelledby="confirm-end-title">
+            <span id="confirm-end-title" class="h2">@T["Play_EndConfirm"]</span>
+            <div class="row gap">
+                <button class="btn2 grow" @onclick="() => confirmEnd = false">@T["Play_KeepPlaying"]</button>
+                <button class="btn grow" @onclick="EndNow">@T["Play_End"]</button>
+            </div>
+        </div>
+    }
+    <main class="main">
+        <SwipeCard OnSwipe="@((view.Stage == AuctionStage.Revealed) ? EventCallback.Factory.Create(this, Rooms.NextAuction) : default)" Last="@last">
+            <div class="card-face swipe-panel">
+                <div class="card-face">
+                    <p class="kind">@T["Auction_Game"]</p>
+                    <p class="prompt auction-lot">@view.Lot</p>
+                </div>
+
+                @if (view.Stage == AuctionStage.Bidding)
+                {
+                    @if (view.MyBid is { } placed && !changing)
+                    {
+                        var waiting = Room.Players.Where(p => !view.BidIds.Contains(p.Id)).Select(p => p.Name).ToList();
+                        <div class="card waiting" role="status">
+                            <span class="muted small">@T["Auction_Wallet"] · 🪙 @view.MyCoins</span>
+                            <span class="h2">@(placed > 0 ? T["Auction_YouBid", placed] : T["Auction_YouPassed"])</span>
+                            <span class="muted">@T["Auction_BidsIn", view.BidIds.Length, Room.Players.Length]</span>
+                            @if (waiting.Count > 0)
+                            {
+                                <span class="muted small">@T["Auction_Waiting", string.Join(", ", waiting)]</span>
+                            }
+                            @if (view.MyCoins > 0)
+                            {
+                                <button class="text-btn" @onclick="() => { changing = true; bid = placed; }">@T["Auction_Change"]</button>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        @* The bid, big, with the wallet it comes out of beside it. *@
+                        <p class="auction-bid" aria-live="polite">🪙 @Bid<span class="auction-of"> / @view.MyCoins</span></p>
+                        <input class="auction-range" type="range" min="0" max="@view.MyCoins" step="1" value="@Bid"
+                               aria-label="@T["Auction_Bids"]" @oninput="e => bid = int.TryParse(e.Value as string, out var v) ? v : 0" />
+                        <div class="auction-chips">
+                            @foreach (var amount in new[] { 5, 10, 25, 50 }.Where(a => a < view.MyCoins))
+                            {
+                                var a = amount;
+                                <button class="chip @(Bid == a ? "on" : "")" @onclick="() => bid = a">@a</button>
+                            }
+                            <button class="chip @(Bid == view.MyCoins ? "on" : "")" @onclick="() => bid = view.MyCoins">@T["Auction_AllIn"]</button>
+                        </div>
+                        @if (view.Number == 1)
+                        {
+                            <p class="muted small center">@T["Auction_BidHint"]</p>
+                        }
+                        <div class="row gap">
+                            <button class="btn2 grow" @onclick="() => Send(0)">@T["Auction_Pass"]</button>
+                            <button class="btn grow" disabled="@(Bid == 0)" @onclick="() => Send(Bid)">@T["Auction_Bid", Bid]</button>
+                        </div>
+                    }
+                }
+                else if (view.Outcome is { } outcome)
+                {
+                    @* One line for the result, then one row per player: their bid on this lot and what they have left. *@
+                    <div class="auction-result @(outcome.WinnerIds.IsEmpty ? "" : "sold")" role="status">
+                        <span class="label">@T[outcome.WinnerIds.Length switch { 0 => "Auction_Nobody", 1 => "Auction_Sold", _ => "Auction_Shared" }]</span>
+                        @if (!outcome.WinnerIds.IsEmpty)
+                        {
+                            <span class="auction-winner">@string.Join(" + ", outcome.WinnerIds.Select(NameOf)) · 🪙 @outcome.Price</span>
+                        }
+                    </div>
+                    <section class="stack-tight" aria-label="@T["Auction_Bids"]">
+                        @{ var top = Math.Max(1, outcome.Bids.Max(b => b.Amount)); }
+                        @foreach (var b in outcome.Bids)
+                        {
+                            var won = outcome.WinnerIds.Contains(b.PlayerId);
+                            var purse = view.Purses.FirstOrDefault(p => p.PlayerId == b.PlayerId);
+                            <div class="auction-row @(won ? "won" : "")">
+                                <span class="auction-row-name">@(won ? "🔨 " : "")@NameOf(b.PlayerId)</span>
+                                <span class="auction-row-bar"><span style="width:@(b.Amount * 100 / top)%"></span></span>
+                                <span class="auction-row-bid">@(b.Amount > 0 ? b.Amount.ToString() : "—")</span>
+                                <span class="auction-row-left">🪙 @(purse?.Coins ?? 0)</span>
+                            </div>
+                        }
+                    </section>
+                }
+                @if (view.Stage == AuctionStage.Bidding)
+                {
+                    <AuctionPurses Purses="view.Purses" NameOf="NameOf" BidIds="view.BidIds" />
+                }
+            </div>
+        </SwipeCard>
+    </main>
+    <footer class="foot">
+        @if (view.Stage == AuctionStage.Bidding && Room.YouAreHost && view.BidIds.Length > 0)
+        {
+            <button class="btn2" @onclick="Rooms.RevealAuction">@T["Auction_Hammer"]</button>
+        }
+        @if (view.Stage == AuctionStage.Revealed)
+        {
+            <button class="btn" @onclick="Rooms.NextAuction">@T["Facts_Next"]</button>
+        }
+    </footer>
+}
+else
+{
+    <main class="main">
+        <h1 class="h1 big">@T["End_Title"]</h1>
+        <AuctionPurses Purses="view.Purses" NameOf="NameOf" Final="true" MostWanted="view.MostWanted" />
+    </main>
+    <footer class="foot">
+        <button class="btn" @onclick="OnHome">@T["End_Home"]</button>
+    </footer>
+}
+
+@code {
+    [Parameter, EditorRequired] public RoomView Room { get; set; } = default!;
+    [Parameter, EditorRequired] public AuctionView Auction { get; set; } = default!;
+    [Parameter] public EventCallback OnHome { get; set; }
+
+    private bool confirmEnd;
+    private int bid;
+    /// <summary>Changing a bid already sent.</summary>
+    private bool changing;
+    private int bidFor = -1;
+
+    /// <summary>The bid on the slider, never more than the wallet holds.</summary>
+    private int Bid => Math.Clamp(bid, 0, Auction.MyCoins);
+
+    protected override void OnParametersSet()
+    {
+        if (bidFor != Auction.Number)
+        {
+            bidFor = Auction.Number;
+            bid = 0;
+            changing = false;
+        }
+    }
+
+    private async Task Send(int amount)
+    {
+        changing = false;
+        await Rooms.BidAuction(amount);
+    }
+
+    private string NameOf(string id) => Room.Players.FirstOrDefault(p => p.Id == id)?.Name ?? "?";
+
+    private async Task EndNow()
+    {
+        confirmEnd = false;
+        await Rooms.EndGame();
+    }
+}

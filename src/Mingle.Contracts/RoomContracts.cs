@@ -42,7 +42,7 @@ public sealed record TopicChoice(ImmutableArray<TopicOption> Offer, ImmutableArr
 /// <param name="Guess">Set when the room plays "Guess the answer", with cards from the chosen decks.</param>
 public sealed record RoomSettings(GameSettings Game, ImmutableArray<string> DeckIds, DeckSource Source = DeckSource.Chosen,
     ImmutableArray<int> Depths = default, FactSettings? Facts = null, GuessSettings? Guess = null, OddSettings? Odd = null,
-    MatchSettings? Match = null, NeverSettings? Never = null)
+    MatchSettings? Match = null, NeverSettings? Never = null, MirrorSettings? Mirror = null, AuctionSettings? Auction = null)
 {
     // Missing from older clients: an empty list, since a default ImmutableArray cannot be serialized.
     public ImmutableArray<int> Depths { get; init; } = Depths.IsDefault ? [] : Depths;
@@ -77,7 +77,9 @@ public sealed record RoomView(
     GuessView? Guess = null,
     OddView? Odd = null,
     MatchView? Match = null,
-    NeverView? Never = null)
+    NeverView? Never = null,
+    MirrorView? Mirror = null,
+    AuctionView? Auction = null)
 {
     [JsonIgnore] public RoomPlayer? You => Players.FirstOrDefault(p => p.Id == YouId);
     [JsonIgnore] public bool YouAreHost => You?.IsHost == true;
@@ -149,6 +151,20 @@ public interface IGameHub
     /// <summary>Host: on to the guessing without a missing answer, or show the names without a missing guess.</summary>
     Task MoveNeverOn();
     Task NextNever();
+
+    // "How you see me".
+    /// <summary>Where you put the player on the scale (or yourself, on your turn), 1 to 10.</summary>
+    Task PlaceMirror(int value);
+    /// <summary>Host: show the placements before everyone has placed.</summary>
+    Task RevealMirror();
+    Task NextMirror();
+
+    // "Life auction".
+    /// <summary>Your secret bid on this lot; 0 passes.</summary>
+    Task BidAuction(int amount);
+    /// <summary>Host: the hammer falls before everyone has bid (the rest pass).</summary>
+    Task RevealAuction();
+    Task NextAuction();
 }
 
 /// <summary>Messages the server sends to a player.</summary>
