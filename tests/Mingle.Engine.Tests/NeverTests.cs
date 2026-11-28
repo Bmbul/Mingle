@@ -79,4 +79,61 @@ public class NeverTests
         game.Next();
         Assert.Equal(1, game.Scores.Single(s => s.PlayerId == Ani.Id).Done);
     }
+
+    private static readonly Player[] Two = [new("ani", "Ani", Lang.En), new("aram", "Aram", Lang.En)];
+
+    [Fact]
+    public void Online_with_two_each_guesses_the_others_answer_and_no_count_gives_it_away()
+    {
+        var game = new NeverGame(Two, Mixed, new NeverSettings(5), seed: 4);
+        Assert.True(game.Pair);
+
+        game.Answer("ani", true);
+        game.Guess("ani", ["aram"]); // "Aram has too"
+        game.Answer("aram", false);
+        var waiting = game.ForPlayer("aram", Lang.En);
+        Assert.Equal(NeverStage.Answering, waiting.Stage);
+        Assert.Equal(0, waiting.HaveCount);
+        Assert.Empty(waiting.HaveIds);
+        Assert.Equal(["ani"], waiting.AnsweredIds.ToArray()); // Aram's guess is still missing
+
+        game.Guess("aram", ["ani"]); // "Ani has"
+        Assert.Equal(NeverStage.Revealed, game.Stage);
+        var view = game.ForPlayer("ani", Lang.En);
+        Assert.True(view.Pair);
+        Assert.Equal(["ani"], view.HaveIds.ToArray());
+        Assert.Equal(["aram"], view.RightIds.ToArray()); // Ani thought Aram had; he hadn't
+        Assert.Equal("ani", view.Storyteller);
+        Assert.Equal(1, view.Scores.Single(s => s.PlayerId == "aram").Points);
+        Assert.Equal(0, view.Scores.Single(s => s.PlayerId == "ani").Points);
+    }
+
+    [Fact]
+    public void With_two_a_right_hasnt_scores_too_and_the_host_can_reveal_without_a_guess()
+    {
+        var game = new NeverGame(Two, Mixed, new NeverSettings(5), seed: 4);
+        game.Guess("ani", []); // "Aram hasn't", sent before her own answer
+        game.Answer("ani", false);
+        game.Answer("aram", false);
+        Assert.Equal(NeverStage.Answering, game.Stage);
+
+        game.StartGuessing(); // the host moves on: Aram's guess is missing
+        Assert.Equal(NeverStage.Revealed, game.Stage);
+        Assert.Equal(["ani"], game.ForPlayer("aram", Lang.En).RightIds.ToArray());
+        Assert.Null(game.Storyteller);
+        Assert.Throws<NeverRuleException>(() => game.Guess("aram", []));
+    }
+
+    [Fact]
+    public void Three_players_online_still_see_the_count_and_guess_who()
+    {
+        var game = new NeverGame(Four[..3], Mixed, new NeverSettings(5), seed: 2);
+        Assert.False(game.Pair);
+        Assert.Throws<NeverRuleException>(() => game.Guess("p1", ["p2"])); // no guessing while answering
+        game.Answer("p1", true);
+        game.Answer("p2", false);
+        game.Answer("p3", false);
+        Assert.Equal(NeverStage.Guessing, game.Stage);
+        Assert.Equal(1, game.ForPlayer("p2", Lang.En).HaveCount);
+    }
 }

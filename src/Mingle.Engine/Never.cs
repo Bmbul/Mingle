@@ -21,6 +21,8 @@ public sealed record NeverScore(string PlayerId, int Points, int Done);
 /// <param name="PicksNeeded">Online, while guessing: how many other players this player should pick.</param>
 /// <param name="HaveIds">After the reveal: who has done it.</param>
 /// <param name="Storyteller">After the reveal: who the app suggests tells the story.</param>
+/// <param name="Pair">Online with two players: each also guesses the other's answer, and no count is shown.</param>
+/// <param name="RightIds">With two players, after the reveal: who guessed the other's answer right.</param>
 public sealed record NeverView(
     NeverStage Stage,
     int Number,
@@ -35,7 +37,9 @@ public sealed record NeverView(
     ImmutableArray<string> GuessedIds,
     ImmutableArray<string> HaveIds,
     string? Storyteller,
-    ImmutableArray<NeverScore> Scores);
+    ImmutableArray<NeverScore> Scores,
+    bool Pair = false,
+    ImmutableArray<string> RightIds = default);
 
 public sealed class NeverRuleException(string message) : Exception(message);
 
@@ -43,7 +47,9 @@ public sealed class NeverRuleException(string message) : Exception(message);
 /// «Ես երբեք…» / Never have I ever: a statement ("I have never fallen asleep in a cinema") and everyone who has done
 /// it owns up. On one phone it is open (<c>secret: false</c>): the phone holder taps who has, and the app picks someone
 /// to tell the story. Online everyone answers in secret, the screen shows only how many, and everyone guesses who, a
-/// point for each right name. Not thread-safe: a room calls it under its lock.
+/// point for each right name. Online with two players a count would give the answer away, so instead each player
+/// also guesses whether the other has done it, a point for a right guess, and both answers come out together.
+/// Not thread-safe: a room calls it under its lock.
 /// </summary>
 public sealed class NeverGame
 {
@@ -59,6 +65,9 @@ public sealed class NeverGame
     private string? storyteller;
 
     public bool Secret { get; }
+
+    /// <summary>Online with two players: each guesses the other's answer while answering.</summary>
+    public bool Pair => Secret && players.Length == 2;
     public NeverStage Stage { get; private set; } = NeverStage.Answering;
     public int Index { get; private set; }
     public int Count => cards.Length;
@@ -101,7 +110,8 @@ public sealed class NeverGame
         RequireStage(NeverStage.Answering);
         Require(playerId);
         answers[playerId] = has;
-        if (Secret && players.All(p => answers.ContainsKey(p.Id))) StartGuessing();
+        if (Pair) { if (PairAllIn) Reveal(); }
+        else if (Secret && players.All(p => answers.ContainsKey(p.Id))) StartGuessing();
     }
 
     /// <summary>How many other players this one should pick: everyone who has, minus themselves.</summary>
@@ -115,23 +125,41 @@ public sealed class NeverGame
     public void StartGuessing()
     {
         RequireStage(NeverStage.Answering);
-        if (!Secret) { Reveal(); return; }
+        if (!Secret || Pair) { Reveal(); return; }
         Stage = NeverStage.Guessing;
         if (Guessers.IsEmpty) Reveal();
     }
 
     /// <summary>Online: the players this one thinks have done it. When every guesser is in, the names come out.</summary>
+    /// <remarks>With two players this is the guess about the other one, sent while answering: the other's id for
+    /// "has done it", none for "hasn't".</remarks>
     public void Guess(string playerId, IReadOnlyCollection<string> ids)
     {
-        RequireStage(NeverStage.Guessing);
+        RequireStage(Pair ? NeverStage.Answering : NeverStage.Guessing);
         Require(playerId);
         var chosen = (ids ?? []).Distinct().ToImmutableArray();
         if (chosen.Contains(playerId) || chosen.Any(id => players.All(p => p.Id != id)))
             throw new NeverRuleException("Pick other players.");
+        if (Pair)
+        {
+            picks[playerId] = chosen;
+            if (PairAllIn) Reveal();
+            return;
+        }
         if (chosen.Length != PicksNeeded(playerId)) throw new NeverRuleException($"Pick {PicksNeeded(playerId)}.");
         picks[playerId] = chosen;
         if (Guessers.All(picks.ContainsKey)) Reveal();
     }
+
+    private bool PairAllIn => players.All(p => answers.ContainsKey(p.Id) && picks.ContainsKey(p.Id));
+
+    private string Other(string playerId) => players.First(p => p.Id != playerId).Id;
+
+    /// <summary>With two players: whether this player's guess about the other was right (null without a guess or an answer).</summary>
+    private bool? GuessedRight(string playerId) =>
+        picks.TryGetValue(playerId, out var chosen) && answers.TryGetValue(Other(playerId), out var has)
+            ? chosen.Contains(Other(playerId)) == has
+            : null;
 
     /// <summary>The names come out (the host online may do it before every guess is in), with someone to tell the story.</summary>
     public void Reveal()
@@ -139,8 +167,16 @@ public sealed class NeverGame
         if (Stage is not (NeverStage.Answering or NeverStage.Guessing)) throw new NeverRuleException("Not now.");
         var have = HaveIds;
         foreach (var id in have) done[id]++;
-        foreach (var (guesser, chosen) in picks)
-            points[guesser] += chosen.Count(have.Contains);
+        if (Pair)
+        {
+            foreach (var guesser in picks.Keys)
+                if (GuessedRight(guesser) == true) points[guesser]++;
+        }
+        else
+        {
+            foreach (var (guesser, chosen) in picks)
+                points[guesser] += chosen.Count(have.Contains);
+        }
         storyteller = have.IsEmpty ? null : have[random.Next(have.Length)];
         Stage = NeverStage.Revealed;
     }
@@ -164,7 +200,7 @@ public sealed class NeverGame
     public NeverView ForPlayer(string playerId, Lang lang)
     {
         var revealed = Stage == NeverStage.Revealed;
-        var countKnown = Stage is NeverStage.Guessing or NeverStage.Revealed;
+        var countKnown = (Stage is NeverStage.Guessing or NeverStage.Revealed) && !Pair;
         return new NeverView(
             Stage,
             Math.Min(Index + 1, cards.Length),
@@ -172,14 +208,17 @@ public sealed class NeverGame
             Card?.Depth ?? 0,
             Statement(lang),
             AnswerOf(playerId),
-            [.. players.Where(p => answers.ContainsKey(p.Id)).Select(p => p.Id)],
+            // With two players "answered" means the answer and the guess are both in.
+            [.. players.Where(p => answers.ContainsKey(p.Id) && (!Pair || picks.ContainsKey(p.Id))).Select(p => p.Id)],
             countKnown ? HaveIds.Length : 0,
             Stage == NeverStage.Guessing && Guessers.Contains(playerId) ? PicksNeeded(playerId) : 0,
             picks.GetValueOrDefault(playerId, []),
             [.. players.Where(p => picks.ContainsKey(p.Id)).Select(p => p.Id)],
             revealed || !Secret ? HaveIds : [],
             revealed ? storyteller : null,
-            Scores);
+            Scores,
+            Pair,
+            revealed && Pair ? [.. players.Where(p => GuessedRight(p.Id) == true).Select(p => p.Id)] : []);
     }
 
     private void RequireStage(NeverStage stage)

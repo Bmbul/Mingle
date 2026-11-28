@@ -528,6 +528,12 @@
   <data name="Never_Secret" xml:space="preserve"><value>Nobody sees your answer: only how many have done it.</value></data>
   <data name="Never_IHave" xml:space="preserve"><value>I have</value></data>
   <data name="Never_IHaveNot" xml:space="preserve"><value>I haven't</value></data>
+  <data name="Never_PairGuess" xml:space="preserve"><value>Your guess: has {@}?</value></data>
+  <data name="Never_PairHas" xml:space="preserve"><value>Yes, has</value></data>
+  <data name="Never_PairHasNot" xml:space="preserve"><value>No, hasn't</value></data>
+  <data name="Never_PairSecret" xml:space="preserve"><value>Nobody sees your answer until you've both answered and guessed.</value></data>
+  <data name="Never_PairRight" xml:space="preserve"><value>{@} guessed right ✓</value></data>
+  <data name="Never_PairWrong" xml:space="preserve"><value>{@} guessed wrong ✗</value></data>
   <data name="Never_YourGuessIn" xml:space="preserve"><value>Your guess is in.</value></data>
   <data name="Never_NothingToGuess" xml:space="preserve"><value>Nothing to guess for you this time.</value></data>
   <data name="Never_YouPicked" xml:space="preserve"><value>You picked: {0}</value></data>

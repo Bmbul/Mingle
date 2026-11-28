@@ -33,11 +33,22 @@
 
                 @if (view.Stage == NeverStage.Answering)
                 {
-                    <p class="muted small center">@T["Never_Secret"]</p>
+                    <p class="muted small center">@T[view.Pair ? "Never_PairSecret" : "Never_Secret"]</p>
                     <div class="handoff-players">
                         <button class="btn2 @(view.MyAnswer == true ? "on" : "")" aria-pressed="@(view.MyAnswer == true ? "true" : "false")" @onclick="() => Rooms.AnswerNever(true)">@T["Never_IHave"]</button>
                         <button class="btn2 @(view.MyAnswer == false ? "on" : "")" aria-pressed="@(view.MyAnswer == false ? "true" : "false")" @onclick="() => Rooms.AnswerNever(false)">@T["Never_IHaveNot"]</button>
                     </div>
+                    @* With two players a count would give the answer away: guess the other's answer instead. *@
+                    @if (view.Pair && Other is { } other)
+                    {
+                        var guessed = view.GuessedIds.Contains(Room.YouId);
+                        var saysHas = guessed && view.MyPicks.Contains(other.Id);
+                        <h2 class="label center">@PlayerSlot.Fill(T["Never_PairGuess"], Text.UiLang, other.Name)</h2>
+                        <div class="handoff-players">
+                            <button class="btn2 @(saysHas ? "on" : "")" aria-pressed="@(saysHas ? "true" : "false")" @onclick="() => Rooms.GuessNever([other.Id])">@T["Never_PairHas"]</button>
+                            <button class="btn2 @(guessed && !saysHas ? "on" : "")" aria-pressed="@(guessed && !saysHas ? "true" : "false")" @onclick="() => Rooms.GuessNever([])">@T["Never_PairHasNot"]</button>
+                        </div>
+                    }
                     <p class="muted small center" role="status">@T["Facts_Written", view.AnsweredIds.Length, Room.Players.Length]</p>
                 }
                 else if (view.Stage == NeverStage.Guessing)
@@ -67,7 +78,14 @@
                 else
                 {
                     <NeverResult HaveIds="view.HaveIds" Storyteller="@view.Storyteller" NameOf="NameOf" />
-                    @if (!view.MyPicks.IsEmpty)
+                    @if (view.Pair)
+                    {
+                        @foreach (var id in view.GuessedIds)
+                        {
+                            <p class="muted small center">@PlayerSlot.Fill(T[view.RightIds.Contains(id) ? "Never_PairRight" : "Never_PairWrong"], Text.UiLang, NameOf(id))</p>
+                        }
+                    }
+                    else if (!view.MyPicks.IsEmpty)
                     {
                         <p class="muted small center">@T["Never_YouPicked", string.Join(", ", view.MyPicks.Select(id => NameOf(id) + (view.HaveIds.Contains(id) ? " ✓" : " ✗")))]</p>
                     }
@@ -79,7 +97,7 @@
     <footer class="foot">
         @if (view.Stage != NeverStage.Revealed && Room.YouAreHost && (view.Stage == NeverStage.Guessing || view.AnsweredIds.Length > 0))
         {
-            <button class="btn2" @onclick="Rooms.MoveNeverOn">@T[view.Stage == NeverStage.Answering ? "Never_GuessNow" : "Facts_RevealNow"]</button>
+            <button class="btn2" @onclick="Rooms.MoveNeverOn">@T[view.Stage == NeverStage.Answering && !view.Pair ? "Never_GuessNow" : "Facts_RevealNow"]</button>
         }
     </footer>
 }
@@ -120,6 +138,8 @@ else
     }
 
     private Task SendPicks() => Rooms.GuessNever([.. picked]);
+
+    private RoomPlayer? Other => Room.Players.FirstOrDefault(p => p.Id != Room.YouId);
 
     private string NameOf(string id) => Room.Players.FirstOrDefault(p => p.Id == id)?.Name ?? "?";
 

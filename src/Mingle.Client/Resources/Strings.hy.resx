@@ -528,6 +528,12 @@
   <data name="Never_Secret" xml:space="preserve"><value>Քո պատասխանը ոչ ոք չի տեսնի. միայն քանակը։</value></data>
   <data name="Never_IHave" xml:space="preserve"><value>Արել եմ</value></data>
   <data name="Never_IHaveNot" xml:space="preserve"><value>Չեմ արել</value></data>
+  <data name="Never_PairGuess" xml:space="preserve"><value>Քո կարծիքով՝ {@ը} արե՞լ է</value></data>
+  <data name="Never_PairHas" xml:space="preserve"><value>Այո, արել է</value></data>
+  <data name="Never_PairHasNot" xml:space="preserve"><value>Ոչ, չի արել</value></data>
+  <data name="Never_PairSecret" xml:space="preserve"><value>Ոչ ոք չի տեսնի քո պատասխանը, մինչև երկուսդ էլ չպատասխանեք ու չգուշակեք։</value></data>
+  <data name="Never_PairRight" xml:space="preserve"><value>{@ը} ճիշտ գուշակեց ✓</value></data>
+  <data name="Never_PairWrong" xml:space="preserve"><value>{@ը} սխալվեց ✗</value></data>
   <data name="Never_YourGuessIn" xml:space="preserve"><value>Քո կռահումն ընդունված է։</value></data>
   <data name="Never_NothingToGuess" xml:space="preserve"><value>Այս անգամ գուշակելու բան չունես։</value></data>
   <data name="Never_YouPicked" xml:space="preserve"><value>Դու ընտրեցիր՝ {0}</value></data>

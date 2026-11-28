@@ -534,6 +534,12 @@
   <data name="Never_Secret" xml:space="preserve"><value>Твой ответ никто не увидит — только количество.</value></data>
   <data name="Never_IHave" xml:space="preserve"><value>Было</value></data>
   <data name="Never_IHaveNot" xml:space="preserve"><value>Не было</value></data>
+  <data name="Never_PairGuess" xml:space="preserve"><value>Твоя догадка: {@} — было или нет?</value></data>
+  <data name="Never_PairHas" xml:space="preserve"><value>Да, было</value></data>
+  <data name="Never_PairHasNot" xml:space="preserve"><value>Нет, не было</value></data>
+  <data name="Never_PairSecret" xml:space="preserve"><value>Ответ никто не увидит, пока вы оба не ответите и не сделаете догадку.</value></data>
+  <data name="Never_PairRight" xml:space="preserve"><value>{@} угадывает ✓</value></data>
+  <data name="Never_PairWrong" xml:space="preserve"><value>{@} не угадывает ✗</value></data>
   <data name="Never_YourGuessIn" xml:space="preserve"><value>Твоя догадка принята.</value></data>
   <data name="Never_NothingToGuess" xml:space="preserve"><value>В этот раз угадывать нечего.</value></data>
   <data name="Never_YouPicked" xml:space="preserve"><value>Твой выбор: {0}</value></data>
