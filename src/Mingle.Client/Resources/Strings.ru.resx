@@ -82,6 +82,7 @@
   <data name="Setup_PassPhoneDesc" xml:space="preserve"><value>Каждый отвечает втайне и передаёт телефон дальше.</value></data>
   <data name="Setup_OutLoud" xml:space="preserve"><value>Вслух</value></data>
   <data name="Setup_OutLoudDesc" xml:space="preserve"><value>Ничего не нужно печатать или нажимать. Читайте карточку, отвечайте и обсуждайте.</value></data>
+  <data name="Setup_Loading" xml:space="preserve"><value>Загружаем колоды…</value></data>
   <data name="Setup_LoadFailed" xml:space="preserve"><value>Не удалось загрузить карточки. Проверьте подключение и попробуйте снова.</value></data>
   <data name="Play_EndConfirm" xml:space="preserve"><value>Завершить игру?</value></data>
   <data name="Play_KeepPlaying" xml:space="preserve"><value>Продолжить игру</value></data>

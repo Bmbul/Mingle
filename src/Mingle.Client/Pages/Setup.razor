@@ -1,4 +1,5 @@
 @page "/setup"
+@implements IDisposable
 @inject Text T
 @inject GameSession Session
 @inject BlitzSession Blitzes
@@ -255,6 +256,10 @@
     <section class="stack">
         <h2 class="label">@T["Setup_Decks"]</h2>
         @* Only decks with cards everyone at the table can read. *@
+        @if (loading)
+        {
+            <p class="muted">@T["Setup_Loading"]</p>
+        }
         @foreach (var deck in decks.Where(d => Readable(d) > 0))
         {
             var on = deckIds.Contains(deck.Id);
@@ -449,6 +454,7 @@
     /// <summary>Theme chips; the server picks a different premise from the chip's group for every story.</summary>
     private static readonly string[] StoryThemes = ["random", "travel", "love", "work", "family", "fairy"];
     private bool loadFailed;
+    private bool loading = true;
     private int cardCount = 20;
     private CardOrder order = CardOrder.LightToDeep;
     private DeckSource source = DeckSource.Topics;
@@ -467,6 +473,8 @@
         {
             loadFailed = true;
         }
+        loading = false;
+        Content.Updated += OnDecksUpdated;
         deckIds = []; // nothing is selected until you pick (a previous game's choice is restored below)
 
         if (Session.LastSetup is { } last)
@@ -553,7 +561,8 @@
     private bool CanStart => NamedPlayers.Length >= NeededPlayers && (stories || (PicksInLobby ? !decks.IsEmpty : MatchingCards > 0));
 
     private string Summary =>
-        loadFailed ? T["Setup_LoadFailed"]
+        loading ? T["Setup_Loading"]
+        : loadFailed ? T["Setup_LoadFailed"]
         : createError is not null ? createError
         : NamedPlayers.Length < NeededPlayers ? (Online ? T["Setup_NeedName"] : handoff || whoseFact || oddGame ? T["Setup_NeedThree"] : T["Setup_NeedPlayers"])
         : stories ? ""
@@ -561,6 +570,17 @@
         : deckIds.Count == 0 ? T["Setup_PickDeck"]
         : MatchingCards == 0 ? T["Setup_NoCards"]
         : T.Plural("Setup_Matches", MatchingCards);
+
+    /// <summary>Newer decks came from the server after the saved copy was shown.</summary>
+    private void OnDecksUpdated() => _ = InvokeAsync(async () =>
+    {
+        try { decks = await Content.GetDecksAsync(); loadFailed = false; }
+        catch (ContentUnavailableException) { return; }
+        deckIds.RemoveWhere(id => decks.All(d => d.Id != id));
+        StateHasChanged();
+    });
+
+    public void Dispose() => Content.Updated -= OnDecksUpdated;
 
     private void AddPlayer() => players.Add(new PlayerRow());
 

@@ -4,7 +4,7 @@ namespace Mingle.DAL.Entities;
 
 /// <summary>
 /// A ready-made fill-in story in one language (see <see cref="Story"/> for the template format). Curated stories
-/// come from <c>Seed/Stories/*.json</c>, with ids made from their seed keys. Table: <c>stories</c>.
+/// come from the content migrations (<c>AddStarterStories</c>), with ids made from their keys. Table: <c>stories</c>.
 /// </summary>
 public sealed class LibraryStory
 {

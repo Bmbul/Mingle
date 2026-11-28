@@ -106,7 +106,7 @@
     protected override async Task OnInitializedAsync()
     {
         foreach (var entry in await DeviceDecks.ListAsync())
-            rows.Add((entry, await Content.GetDeckAsync(entry.Id)));
+            rows.Add((entry, await Content.GetDeckAsync(entry.Id, savedFirst: true)));
         loading = false;
     }
 

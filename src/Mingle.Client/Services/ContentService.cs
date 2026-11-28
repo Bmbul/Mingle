@@ -18,62 +18,133 @@ public sealed class ContentService(HttpClient http, IJSRuntime js, DeviceDeckSto
     private ImmutableArray<Deck>? starter;
     private readonly Dictionary<string, Deck> userDecks = [];
 
+    /// <summary>
+    /// Raised when a quiet refresh brings newer decks than the saved copy shown so far; pages that list decks
+    /// load them again.
+    /// </summary>
+    public event Action? Updated;
+
+    private Task? refreshing;
+
     /// <summary>Starter decks first, then this device's decks (newest first).</summary>
     public async Task<ImmutableArray<Deck>> GetDecksAsync()
     {
         var starterDecks = await GetStarterDecksAsync();
         var mine = new List<Deck>();
         foreach (var entry in await deviceDecks.ListAsync())
-            if (await GetDeckAsync(entry.Id) is { } deck) mine.Add(deck);
+            if (await GetDeckAsync(entry.Id, savedFirst: true) is { } deck) mine.Add(deck);
         return [.. mine, .. starterDecks];
     }
 
+    /// <summary>
+    /// The starter decks. When this device has a saved copy it is returned at once and the server is asked
+    /// in the background (a sleeping server can take a while to wake up); only the very first visit waits.
+    /// </summary>
     public async Task<ImmutableArray<Deck>> GetStarterDecksAsync()
     {
         if (starter is { } cached) return cached;
 
-        try
+        var saved = await js.InvokeAsync<string?>("mingle.loadDecks");
+        if (saved is not null && TryParse(saved) is { } fromSaved)
         {
-            var json = await http.GetStringAsync("api/decks");
-            var loaded = DeckJson.ParseMany(json);
-            await js.InvokeVoidAsync("mingle.saveDecks", json);
-            starter = loaded;
-        }
-        catch (Exception ex) when (ex is HttpRequestException or JsonException or FormatException)
-        {
-            var saved = await js.InvokeAsync<string?>("mingle.loadDecks");
-            if (saved is null) throw new ContentUnavailableException(ex);
-            starter = DeckJson.ParseMany(saved);
+            starter = fromSaved;
+            refreshing ??= RefreshStarterAsync(saved);
+            return fromSaved;
         }
 
+        try
+        {
+            starter = await FetchStarterAsync();
+        }
+        catch (Exception ex) when (ex is HttpRequestException or JsonException or FormatException or TaskCanceledException)
+        {
+            throw new ContentUnavailableException(ex);
+        }
         return starter.Value;
     }
 
+    private async Task<ImmutableArray<Deck>> FetchStarterAsync()
+    {
+        var json = await http.GetStringAsync("api/decks");
+        var loaded = DeckJson.ParseMany(json);
+        await js.InvokeVoidAsync("mingle.saveDecks", json);
+        return loaded;
+    }
+
+    private async Task RefreshStarterAsync(string saved)
+    {
+        try
+        {
+            var json = await http.GetStringAsync("api/decks");
+            if (json == saved) return;
+            starter = DeckJson.ParseMany(json);
+            await js.InvokeVoidAsync("mingle.saveDecks", json);
+            Updated?.Invoke();
+        }
+        catch (Exception ex) when (ex is HttpRequestException or JsonException or FormatException or TaskCanceledException)
+        {
+            // Offline or the server is down: the saved copy stays.
+        }
+    }
+
+    private static ImmutableArray<Deck>? TryParse(string json)
+    {
+        try { return DeckJson.ParseMany(json); }
+        catch (Exception ex) when (ex is JsonException or FormatException) { return null; }
+    }
+
     /// <summary>A deck by id (from a share link or this device's list); null if it no longer exists.</summary>
-    public async Task<Deck?> GetDeckAsync(string id, bool fresh = false)
+    /// <param name="savedFirst">Return this device's saved copy at once and check the server in the background.</param>
+    public async Task<Deck?> GetDeckAsync(string id, bool fresh = false, bool savedFirst = false)
     {
         if (!fresh && userDecks.TryGetValue(id, out var cached)) return cached;
         var storageKey = $"mingle.deck.{id}";
+        if (savedFirst && !fresh && await js.InvokeAsync<string?>("mingle.get", storageKey) is { } copy)
+        {
+            try
+            {
+                var deck = userDecks[id] = DeckJson.Parse(copy);
+                _ = RefreshDeckAsync(id, copy);
+                return deck;
+            }
+            catch (Exception ex) when (ex is JsonException or FormatException) { }
+        }
         try
         {
-            using var response = await http.GetAsync($"api/decks/{Uri.EscapeDataString(id)}");
-            if (response.StatusCode == HttpStatusCode.NotFound)
-            {
-                userDecks.Remove(id);
-                await js.InvokeVoidAsync("mingle.remove", storageKey);
-                return null;
-            }
-            response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync();
-            var deck = DeckJson.Parse(json);
-            await js.InvokeVoidAsync("mingle.set", storageKey, json);
-            return userDecks[id] = deck;
+            return await FetchDeckAsync(id);
         }
-        catch (Exception ex) when (ex is HttpRequestException or JsonException or FormatException)
+        catch (Exception ex) when (ex is HttpRequestException or JsonException or FormatException or TaskCanceledException)
         {
             var saved = await js.InvokeAsync<string?>("mingle.get", storageKey);
             return saved is null ? null : userDecks[id] = DeckJson.Parse(saved);
         }
+    }
+
+    private async Task<Deck?> FetchDeckAsync(string id)
+    {
+        var storageKey = $"mingle.deck.{id}";
+        using var response = await http.GetAsync($"api/decks/{Uri.EscapeDataString(id)}");
+        if (response.StatusCode == HttpStatusCode.NotFound)
+        {
+            userDecks.Remove(id);
+            await js.InvokeVoidAsync("mingle.remove", storageKey);
+            return null;
+        }
+        response.EnsureSuccessStatusCode();
+        var json = await response.Content.ReadAsStringAsync();
+        var deck = DeckJson.Parse(json);
+        await js.InvokeVoidAsync("mingle.set", storageKey, json);
+        return userDecks[id] = deck;
+    }
+
+    private async Task RefreshDeckAsync(string id, string saved)
+    {
+        try
+        {
+            var gone = await FetchDeckAsync(id) is null;
+            if (gone || await js.InvokeAsync<string?>("mingle.get", $"mingle.deck.{id}") != saved) Updated?.Invoke();
+        }
+        catch (Exception ex) when (ex is HttpRequestException or JsonException or FormatException or TaskCanceledException) { }
     }
 
     /// <summary>Creates a deck on the server and remembers it, with its edit key, on this device.</summary>

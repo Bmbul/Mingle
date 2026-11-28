@@ -272,7 +272,15 @@ else if (room.Summary is { } summary)
 
         try { decks = await Content.GetDecksAsync(); }
         catch (ContentUnavailableException) { decks = []; }
+        Content.Updated += OnDecksUpdated;
     }
+
+    /// <summary>Newer decks came from the server after the saved copy was shown.</summary>
+    private void OnDecksUpdated() => _ = InvokeAsync(async () =>
+    {
+        try { decks = await Content.GetDecksAsync(); StateHasChanged(); }
+        catch (ContentUnavailableException) { }
+    });
 
     private Task ToggleTopic(TopicChoice topics, string code) =>
         Rooms.PickTopics(topics.Picked.Contains(code) ? topics.Picked.Remove(code) : topics.Picked.Add(code));
@@ -370,5 +378,9 @@ else if (room.Summary is { } summary)
 
     private void OnChanged() => InvokeAsync(StateHasChanged);
 
-    public void Dispose() => Rooms.Changed -= OnChanged;
+    public void Dispose()
+    {
+        Rooms.Changed -= OnChanged;
+        Content.Updated -= OnDecksUpdated;
+    }
 }

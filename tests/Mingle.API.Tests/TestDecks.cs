@@ -1,6 +1,6 @@
 using System.Collections.Immutable;
 using Mingle.DAL;
-using Mingle.DAL.Seeding;
+using Mingle.DAL.Content;
 using Mingle.Engine;
 
 namespace Mingle.API.Tests;
@@ -21,10 +21,10 @@ internal sealed class TestDecks : IDeckSource
 }
 
 /// <summary>A few topics, so "Our topics" rooms need no database.</summary>
-/// <summary>The real seed stories, picked in memory the way the database source picks them.</summary>
+/// <summary>The real built-in stories, picked in memory the way the database source picks them.</summary>
 internal sealed class TestStories : IStorySource
 {
-    public static readonly IReadOnlyList<StorySeed> Seeds = StorySeed.ReadFolder(Path.Combine(AppContext.BaseDirectory, "Seed", "Stories"));
+    public static readonly IReadOnlyList<StoryRow> Seeds = StarterContent.Current().Stories;
 
     public Task<StoryInfo?> PickAsync(Lang lang, StoryTheme? theme, bool longStory, IReadOnlySet<Guid> seen, CancellationToken ct = default)
     {

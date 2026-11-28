@@ -7,7 +7,6 @@ using Mingle.API.Hubs;
 using Mingle.API.Rooms;
 using Mingle.Contracts;
 using Mingle.DAL;
-using Mingle.DAL.Seeding;
 using Mingle.Engine;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -55,12 +54,11 @@ if (app.Environment.IsDevelopment())
     app.UseWebAssemblyDebugging();
 }
 
-// Bring the schema up to date and load the starter decks into an empty database.
+// Bring the schema and the built-in content (topics, stories, starter decks: content migrations) up to date.
 if (app.Configuration.GetValue("Database:MigrateOnStartup", true))
 {
     using var scope = app.Services.CreateScope();
     await scope.ServiceProvider.GetRequiredService<MingleDbContext>().Database.MigrateAsync();
-    await scope.ServiceProvider.GetRequiredService<DeckSeeder>().SeedAsync();
 }
 
 // Serves the Blazor WebAssembly client (framework files included) with fingerprinting and compression.

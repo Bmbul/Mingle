@@ -25,9 +25,11 @@ docker compose up -d db
 dotnet run --project src/Mingle.API --launch-profile http
 ```
 
-Open http://localhost:5243. On first start the API creates the tables and imports the
-starter content from `src/Mingle.DAL/Seed` (`topics.json` and `Decks/*.json`). It does that on
-every start: seeded rows have stable ids, so changed texts are updated and nothing is duplicated.
+Open http://localhost:5243. On start the API runs the migrations: the schema ones and the
+content ones (`ContentMigration` in `src/Mingle.DAL/Migrations`), which add the topics, stories
+and starter decks. Content rows have stable ids and the SQL is an upsert, so a later content
+migration that lists a card again updates it. To add or fix built-in cards, add a new content
+migration; never edit one that has been deployed.
 
 Tests (the database tests start their own PostgreSQL container, so Docker must be running):
 
@@ -46,11 +48,10 @@ The SDK is pinned to .NET 10 in `global.json`. EF Core migrations:
 | `src/Mingle.Client` | Blazor WebAssembly PWA: Home, New game, Play screens; UI strings in `Resources/Strings*.resx`. Loads decks from `/api/decks` and keeps the last copy for offline play. |
 | `src/Mingle.Contracts` | Messages shared by the API and the client for online rooms (`IGameHub`, `IGameClient`, `RoomView`). |
 | `src/Mingle.API` | ASP.NET Core host: serves the client, `Controllers/` (decks API), the SignalR game hub (`/hubs/game`), `Rooms/` (in-memory rooms) and `Ai/` (card writing). |
-| `src/Mingle.DAL` | Data access: EF Core + PostgreSQL. `Entities/` and `Configurations/` hold one file per table (card_kinds, topics, decks, cards, card_options, card_topics, deck_cards); texts are stored as one column per language (`text_hy`, `text_ru`, `text_en`). `Migrations/`; `Seeding/`. |
-| `src/Mingle.DAL/Seed` | Starter content: `topics.json` (21 topics in hy/ru/en) and `Decks/` (`icebreakers.json`, `couples.json`, 20 cards each). |
+| `src/Mingle.DAL` | Data access: EF Core + PostgreSQL. `Entities/` and `Configurations/` hold one file per table (card_kinds, topics, decks, cards, card_options, card_topics, deck_cards); texts are stored as one column per language (`text_hy`, `text_ru`, `text_en`). `Migrations/` holds the schema migrations and the content migrations (built-in topics, stories and decks; `Content/` has their base class and SQL). |
 | `tests/Mingle.Engine.Tests` | xUnit tests for the engine and for the seed decks. |
 | `tests/Mingle.API.Tests` | Room rules, plus end-to-end hub tests with two real SignalR clients (no database needed). |
-| `tests/Mingle.DAL.Tests` | Seed file checks, plus migration, seeding, re-seeding and constraint tests against a real PostgreSQL container (Testcontainers). |
+| `tests/Mingle.DAL.Tests` | Content checks (without a database), plus migration, content-update and constraint tests against a real PostgreSQL container (Testcontainers). |
 
 ## How the game works
 

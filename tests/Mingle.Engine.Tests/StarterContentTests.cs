@@ -1,15 +1,17 @@
+using Mingle.DAL.Content;
+
 namespace Mingle.Engine.Tests;
 
-/// <summary>Checks the decks shipped in the client, so a content mistake fails the build, not a game night.</summary>
+/// <summary>Checks the built-in decks the content migrations add, so a content mistake fails the build, not a game night.</summary>
 public class StarterContentTests
 {
-    private static List<string> FileNames() =>
-        Directory.GetFiles(Path.Combine(AppContext.BaseDirectory, "data"), "*.json").Select(Path.GetFileName).OfType<string>().ToList();
+    private static readonly IReadOnlyList<Deck> Decks = StarterContent.Current().Decks;
+
+    private static List<string> FileNames() => [.. Decks.Select(d => d.Id)];
 
     public static TheoryData<string> DeckFiles() => new(FileNames());
 
-    private static Deck Load(string file) =>
-        DeckJson.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "data", file)));
+    private static Deck Load(string id) => Decks.Single(d => d.Id == id);
 
     [Fact]
     public void Starter_decks_are_present()

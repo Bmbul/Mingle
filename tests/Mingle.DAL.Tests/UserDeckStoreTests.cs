@@ -1,8 +1,6 @@
 using System.Collections.Immutable;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging.Abstractions;
 using Mingle.DAL.Entities;
-using Mingle.DAL.Seeding;
 using Mingle.Engine;
 using GameCard = Mingle.Engine.Card;
 using GameDeck = Mingle.Engine.Deck;
@@ -27,8 +25,8 @@ public class UserDeckStoreTests(PostgresFixture postgres)
 
     private async Task<MingleDbContext> SeededAsync()
     {
+        // The migrations bring the built-in content.
         var db = await postgres.NewDatabaseAsync();
-        await new DeckSeeder(db, NullLogger<DeckSeeder>.Instance).SeedAsync();
         db.ChangeTracker.Clear();
         return db;
     }

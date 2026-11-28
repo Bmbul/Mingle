@@ -20,10 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Mingle.Engine\Mingle.Engine.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\..\src\Mingle.DAL\Seed\Decks\*.json" LinkBase="data" CopyToOutputDirectory="PreserveNewest" />
+    <!-- The built-in decks live in the DAL's content migrations. -->
+    <ProjectReference Include="..\..\src\Mingle.DAL\Mingle.DAL.csproj" />
   </ItemGroup>
 
 </Project>
